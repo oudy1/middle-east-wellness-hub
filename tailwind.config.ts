@@ -114,7 +114,8 @@ export default {
         arabic: ['Amiri', 'serif']
       },
       backgroundImage: {
-        'landmarks-pattern': "url('/src/assets/landmarks-bg.png')"
+        'landmarks-pattern': "url('/src/assets/landmarks-bg.png')",
+        'calligraphy-pattern': "var(--calligraphy-bg, url('/src/assets/landmarks-bg.png'))"
       }
 		}
 	},

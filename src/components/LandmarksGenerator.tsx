@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 const LandmarksGenerator = () => {
@@ -24,8 +23,33 @@ const LandmarksGenerator = () => {
         drawArabicArch
       ];
       
+      // Arabic words for countries and cities
+      const arabicTexts = [
+        "القاهرة", // Cairo
+        "دمشق", // Damascus
+        "بغداد", // Baghdad
+        "الرياض", // Riyadh
+        "بيروت", // Beirut
+        "مصر", // Egypt
+        "المغرب", // Morocco
+        "الجزائر", // Algeria
+        "تونس", // Tunisia
+        "عمان", // Oman
+        "الأردن", // Jordan
+        "لبنان", // Lebanon
+        "سوريا", // Syria
+        "العراق", // Iraq
+        "الكويت", // Kuwait
+        "قطر", // Qatar
+        "البحرين", // Bahrain
+        "الإمارات", // UAE
+        "السعودية", // Saudi Arabia
+        "اليمن", // Yemen
+        "فلسطين", // Palestine
+      ];
+      
       // Draw landmarks randomly across the canvas
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 20; i++) {
         const landmark = landmarks[Math.floor(Math.random() * landmarks.length)];
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
@@ -43,6 +67,25 @@ const LandmarksGenerator = () => {
         ctx.lineWidth = 1;
         
         landmark(ctx);
+        ctx.restore();
+      }
+      
+      // Draw Arabic calligraphy text
+      for (let i = 0; i < 15; i++) {
+        const text = arabicTexts[Math.floor(Math.random() * arabicTexts.length)];
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = 15 + Math.floor(Math.random() * 25);
+        const rotation = Math.random() * Math.PI * 2;
+        
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.font = `${size}px Amiri, serif`;
+        ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+        ctx.globalAlpha = 0.25 + Math.random() * 0.15;
+        ctx.textAlign = 'center';
+        ctx.fillText(text, 0, 0);
         ctx.restore();
       }
       
@@ -146,7 +189,7 @@ const LandmarksGenerator = () => {
       ctx.stroke();
     };
     
-    // This would be used to actually generate the image when needed
+    // Uncomment this to generate a new background image
     // generateLandmarksPattern();
   }, []);
 

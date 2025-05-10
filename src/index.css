@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -52,6 +51,8 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --calligraphy-bg: url('');
   }
 
   .dark {
@@ -108,5 +109,20 @@
   
   .section-description {
     @apply text-lg text-center max-w-3xl mx-auto mb-8 text-gray-600;
+  }
+
+  /* Arabic text direction */
+  .rtl {
+    direction: rtl;
+  }
+
+  /* Adding decorative calligraphy style elements */
+  .calligraphy-decoration::before,
+  .calligraphy-decoration::after {
+    content: "•";
+    display: inline-block;
+    color: theme('colors.healthGold');
+    margin: 0 0.5rem;
+    opacity: 0.7;
   }
 }
