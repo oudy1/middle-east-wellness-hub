@@ -7,12 +7,14 @@ import MissionSection from "@/components/MissionSection";
 import StatsSection from "@/components/StatsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
+import LandmarksGenerator from "@/components/LandmarksGenerator";
 
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray relative">
-      {/* This component generates the Arabic calligraphy background and stores it in localStorage */}
+      {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
       <CalligraphyBackground />
+      <LandmarksGenerator />
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
       <Header />
       <main className="flex-grow relative z-10">
