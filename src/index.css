@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +100,13 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-4 text-center;
+  }
+  
+  .section-description {
+    @apply text-lg text-center max-w-3xl mx-auto mb-8 text-gray-600;
   }
 }
