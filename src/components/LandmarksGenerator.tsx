@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 
 const LandmarksGenerator = () => {
@@ -48,6 +49,9 @@ const LandmarksGenerator = () => {
         "فلسطين", // Palestine
       ];
       
+      // Define colors from the theme
+      const colors = ['#1A9AAD', '#A82B2B', '#1F4068', '#E6C095', '#563C5C'];
+      
       // Draw landmarks randomly across the canvas
       for (let i = 0; i < 20; i++) {
         const landmark = landmarks[Math.floor(Math.random() * landmarks.length)];
@@ -61,7 +65,6 @@ const LandmarksGenerator = () => {
         ctx.globalAlpha = 0.3 + Math.random() * 0.2;
         
         // Choose a random color from the theme
-        const colors = ['#1A9AAD', '#A82B2B', '#1F4068', '#E6C095', '#563C5C'];
         ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
         ctx.lineWidth = 1;
