@@ -63,12 +63,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-        // Custom colors for the health website
-        healthTeal: "#3CA9A4",
-        healthRed: "#E14B4B",
-        healthDarkBlue: "#2B4257",
-        healthLightGray: "#F5F5F5",
-        healthGray: "#888888"
+        // Updated colors for the Arab-inspired theme
+        healthTeal: "#1A9AAD", // Turquoise blue often found in mosques
+        healthRed: "#A82B2B", // Rich burgundy/red
+        healthDarkBlue: "#1F4068", // Deep navy blue
+        healthLightGray: "#E5DCC7", // Neutral beige
+        healthGold: "#E6C095", // Sand/desert gold
+        healthPurple: "#563C5C", // Deep purple (royal color)
+        healthOlive: "#606C38" // Olive green
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -110,6 +112,9 @@ export default {
 			},
       fontFamily: {
         arabic: ['Amiri', 'serif']
+      },
+      backgroundImage: {
+        'landmarks-pattern': "url('/src/assets/landmarks-bg.png')"
       }
 		}
 	},
