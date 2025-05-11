@@ -36,6 +36,9 @@ const CalligraphyBackground = () => {
       "طرابلس", // Tripoli
       "الخرطوم", // Khartoum
       "نواكشوط", // Nouakchott
+      "الرياض", // Riyadh
+      "المنامة", // Manama
+      "الكويت", // Kuwait City
       
       // Countries
       "مصر", // Egypt
@@ -92,6 +95,11 @@ const CalligraphyBackground = () => {
       "التطور الطبي", // Medical advancement
       "الرعاية الأولية", // Primary care
       "طب المستقبل", // Future medicine
+      "صحة المجتمع", // Community health
+      "التثقيف الصحي", // Health education
+      "الطب العربي", // Arab medicine
+      "البحث الطبي", // Medical research
+      "تكنولوجيا الصحة", // Health technology
     ];
     
     // Draw calligraphy
@@ -130,15 +138,75 @@ const CalligraphyBackground = () => {
       }
     };
     
+    // Draw geometric patterns (common in Islamic art)
+    const drawGeometricPatterns = () => {
+      const patternCount = 12;
+      const patternSize = 120;
+      
+      for (let i = 0; i < patternCount; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = patternSize * (0.5 + Math.random() * 0.5);
+        const rotation = Math.random() * Math.PI * 2;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.strokeStyle = color;
+        ctx.globalAlpha = 0.05 + Math.random() * 0.05;
+        ctx.lineWidth = 1;
+        
+        // Draw star pattern (common in Islamic art)
+        ctx.beginPath();
+        for (let j = 0; j < 8; j++) {
+          const angle = (j * Math.PI / 4);
+          const innerRadius = size * 0.3;
+          const outerRadius = size * 0.5;
+          
+          // Draw point of star
+          ctx.lineTo(
+            Math.cos(angle) * outerRadius,
+            Math.sin(angle) * outerRadius
+          );
+          
+          // Draw inner point
+          ctx.lineTo(
+            Math.cos(angle + Math.PI/8) * innerRadius,
+            Math.sin(angle + Math.PI/8) * innerRadius
+          );
+        }
+        ctx.closePath();
+        ctx.stroke();
+        
+        // Draw inner geometric design
+        ctx.beginPath();
+        for (let j = 0; j < 8; j++) {
+          const angle = (j * Math.PI / 4) + Math.PI / 8;
+          ctx.moveTo(0, 0);
+          ctx.lineTo(
+            Math.cos(angle) * (size * 0.4),
+            Math.sin(angle) * (size * 0.4)
+          );
+        }
+        ctx.stroke();
+        
+        ctx.restore();
+      }
+    };
+    
     // Draw city/country names (small)
-    createHarmoniousDistribution(arabicTexts, 20, 0.15, 40);
+    createHarmoniousDistribution(arabicTexts, 20, 0.15, 60);
     
     // Draw health phrases (medium)
-    createHarmoniousDistribution(healthPhrases, 32, 0.2, 12);
+    createHarmoniousDistribution(healthPhrases, 32, 0.2, 18);
+    
+    // Add geometric patterns
+    drawGeometricPatterns();
     
     // Add a few larger featured words for visual interest (larger)
-    const featuredWords = ["الصحة", "العافية", "الطب", "العلاج"];
-    createHarmoniousDistribution(featuredWords, 48, 0.25, 6);
+    const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة"];
+    createHarmoniousDistribution(featuredWords, 48, 0.25, 10);
     
     // Export as image and set to localStorage to avoid regenerating on every reload
     const dataUrl = canvas.toDataURL('image/png');
