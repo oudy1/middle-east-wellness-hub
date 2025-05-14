@@ -32,6 +32,7 @@ const Header = () => {
             <Link to="/about" className="hover:text-healthTeal transition-colors">About</Link>
             <Link to="/services" className="hover:text-healthTeal transition-colors">Services</Link>
             <Link to="/resources" className="hover:text-healthTeal transition-colors">Resources</Link>
+            <Link to="/diseases" className="hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="hover:text-healthTeal transition-colors">Contact</Link>
           </nav>
           
@@ -63,6 +64,7 @@ const Header = () => {
             <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">About</Link>
             <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">Services</Link>
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">Resources</Link>
+            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">Contact</Link>
             <div className="pt-2">
               <Button 
