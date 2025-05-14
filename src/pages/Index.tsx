@@ -2,12 +2,16 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
 import MissionSection from "@/components/MissionSection";
+import ResourcesSection from "@/components/ResourcesSection";
 import StatsSection from "@/components/StatsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
+import UpcomingEventsSection from "@/components/UpcomingEventsSection";
+import PartnersSection from "@/components/PartnersSection";
+import ImpactSection from "@/components/ImpactSection";
+import MeetTeamButton from "@/components/MeetTeamButton";
 
 const Index = () => {
   return (
@@ -19,8 +23,12 @@ const Index = () => {
       <Header />
       <main className="flex-grow relative z-10">
         <HeroSection />
+        <UpcomingEventsSection />
         <MissionSection />
-        <ServicesSection />
+        <MeetTeamButton />
+        <ResourcesSection />
+        <ImpactSection />
+        <PartnersSection />
         <StatsSection />
         <NewsletterSection />
       </main>
