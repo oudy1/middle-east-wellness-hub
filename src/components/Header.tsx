@@ -1,14 +1,19 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [language, setLanguage] = useState('en'); // 'en' for English, 'ar' for Arabic
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+  
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'ar' : 'en');
   };
   
   return (
@@ -30,12 +35,14 @@ const Header = () => {
             <Link to="/contact" className="hover:text-healthTeal transition-colors">Contact</Link>
           </nav>
           
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-healthDarkBlue">
-              عربي
-            </Button>
-            <Button className="bg-healthRed hover:bg-red-700 text-white">
-              Donate Now
+          <div className="hidden md:flex items-center">
+            <Button 
+              variant="outline" 
+              className="text-white border-white hover:bg-white hover:text-healthDarkBlue flex items-center gap-2"
+              onClick={toggleLanguage}
+            >
+              <Globe size={16} />
+              {language === 'en' ? 'عربي' : 'English'}
             </Button>
           </div>
           
@@ -57,12 +64,15 @@ const Header = () => {
             <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">Services</Link>
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">Resources</Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">Contact</Link>
-            <div className="pt-2 flex space-x-4">
-              <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-healthDarkBlue">
-                عربي
-              </Button>
-              <Button size="sm" className="bg-healthRed hover:bg-red-700 text-white">
-                Donate Now
+            <div className="pt-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="text-white border-white hover:bg-white hover:text-healthDarkBlue flex items-center gap-2"
+                onClick={toggleLanguage}
+              >
+                <Globe size={16} />
+                {language === 'en' ? 'عربي' : 'English'}
               </Button>
             </div>
           </nav>
