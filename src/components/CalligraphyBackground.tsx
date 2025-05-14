@@ -3,85 +3,90 @@ import { useEffect } from "react";
 
 const CalligraphyBackground = () => {
   useEffect(() => {
+    // Check if we already have a stored background
+    const storedBg = localStorage.getItem('calligraphy-bg');
+    if (storedBg) {
+      document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
+      return;
+    }
+
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     
     if (!ctx) return;
     
-    canvas.width = 1500;
-    canvas.height = 1500;
+    canvas.width = 1800;
+    canvas.height = 1800;
     
     // Set background
     ctx.fillStyle = "transparent";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Expanded list of Arabic cities and capitals
+    // Expanded list of Arabic cities, capitals, and regions
     const arabicTexts = [
-      // Capitals
-      "القاهرة", // Cairo
-      "دمشق", // Damascus
-      "بغداد", // Baghdad
-      "الرياض", // Riyadh
-      "بيروت", // Beirut
-      "عمّان", // Amman
-      "الرباط", // Rabat
-      "الجزائر", // Algiers
-      "تونس", // Tunis
-      "مسقط", // Muscat
-      "صنعاء", // Sana'a
-      "الدوحة", // Doha
-      "المنامة", // Manama
-      "أبو ظبي", // Abu Dhabi
-      "الكويت", // Kuwait City
-      "طرابلس", // Tripoli
-      "الخرطوم", // Khartoum
-      "نواكشوط", // Nouakchott
-      "الرياض", // Riyadh
-      "المنامة", // Manama
-      "الكويت", // Kuwait City
+      // Saudi Arabia
+      "الرياض", "جدة", "مكة", "المدينة", "الدمام", "الطائف", "تبوك", "أبها", "حائل", "جازان",
+      "القصيم", "نجران", "الباحة", "الجوف", "عرعر", "سكاكا", "بريدة", "خميس مشيط", "ينبع", "الخبر",
+      
+      // Egypt
+      "القاهرة", "الإسكندرية", "الأقصر", "أسوان", "الغردقة", "شرم الشيخ", "بورسعيد", "طنطا", "المنصورة", "الفيوم",
+      "دمياط", "سوهاج", "المنيا", "قنا", "الإسماعيلية", "السويس", "بني سويف", "الوادي الجديد", "مطروح", "العريش",
+      
+      // UAE
+      "أبو ظبي", "دبي", "الشارقة", "عجمان", "رأس الخيمة", "الفجيرة", "أم القيوين", "العين", "خورفكان", "دبا",
+      "ليوا", "مدينة زايد", "مصفح", "جبل علي", "القصيص", "ديرة", "الحمرية", "بطين", "السلع", "غناتي",
+      
+      // Lebanon
+      "بيروت", "طرابلس", "صيدا", "صور", "جونية", "زحلة", "بعلبك", "النبطية", "بشري", "جبيل",
+      "عاليه", "بيبلوس", "حمانا", "الشوف", "كسروان", "المتن", "عكار", "بعقلين", "البترون", "المنية",
+      
+      // Jordan
+      "عمّان", "إربد", "الزرقاء", "العقبة", "السلط", "مادبا", "جرش", "عجلون", "الكرك", "المفرق",
+      "الطفيلة", "معان", "البتراء", "وادي رم", "أم قيس", "الرمثا", "الحصن", "الشونة", "ديرعلا", "الرصيفة",
+      
+      // Iraq
+      "بغداد", "البصرة", "الموصل", "أربيل", "كركوك", "النجف", "كربلاء", "السليمانية", "الفلوجة", "الناصرية",
+      "الديوانية", "الحلة", "بعقوبة", "الكوت", "العمارة", "سامراء", "الرمادي", "دهوك", "تكريت", "الخالص",
+      
+      // Syria
+      "دمشق", "حلب", "حمص", "اللاذقية", "طرطوس", "حماة", "دير الزور", "الرقة", "درعا", "السويداء",
+      "القامشلي", "الحسكة", "إدلب", "بانياس", "المالكية", "عفرين", "منبج", "جبلة", "تدمر", "دوما",
+      
+      // Morocco
+      "الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "أغادير", "وجدة", "تطوان", "الصويرة",
+      "القنيطرة", "خريبكة", "بني ملال", "سلا", "الناظور", "العرائش", "آسفي", "الجديدة", "سطات", "محمدية",
+      
+      // Tunisia
+      "تونس", "صفاقس", "سوسة", "القيروان", "بنزرت", "قابس", "المنستير", "نابل", "مدنين", "جربة",
+      "قفصة", "باجة", "سليانة", "الكاف", "توزر", "جندوبة", "سيدي بوزيد", "تطاوين", "زغوان", "بنقردان",
+      
+      // Algeria
+      "الجزائر", "وهران", "قسنطينة", "عنابة", "سطيف", "تلمسان", "باتنة", "بجاية", "سكيكدة", "البليدة",
+      "تيزي وزو", "بسكرة", "مستغانم", "الشلف", "غرداية", "الجلفة", "برج بوعريريج", "الوادي", "تبسة", "المدية",
+      
+      // Kuwait, Bahrain, Qatar, Oman
+      "الكويت", "المنامة", "الدوحة", "مسقط", "الأحمدي", "المحرق", "الريان", "صلالة",
+      "حولي", "الرفاع", "الوكرة", "نزوى", "الفروانية", "ستره", "الخور", "صحار",
+      
+      // Libya
+      "طرابلس", "بنغازي", "مصراتة", "الزاوية", "البيضاء", "سبها", "درنة", "زليتن", "الخمس", "غريان",
+      
+      // Palestine
+      "القدس", "غزة", "رام الله", "نابلس", "الخليل", "بيت لحم", "جنين", "أريحا", "طولكرم", "قلقيلية",
+      "رفح", "خان يونس", "البيرة", "بيت حانون", "سلفيت", "طوباس", "دير البلح", "حلحول", "الظاهرية", "سلواد",
+      
+      // Yemen
+      "صنعاء", "عدن", "تعز", "الحديدة", "المكلا", "ذمار", "إب", "البيضاء", "حضرموت", "المحويت",
+      
+      // Sudan
+      "الخرطوم", "أم درمان", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "نيالا", "عطبرة", "الدمازين", "الجنينة",
       
       // Countries
-      "مصر", // Egypt
-      "المغرب", // Morocco
-      "الجزائر", // Algeria
-      "تونس", // Tunisia
-      "عمان", // Oman
-      "الأردن", // Jordan
-      "لبنان", // Lebanon
-      "سوريا", // Syria
-      "العراق", // Iraq
-      "الكويت", // Kuwait
-      "قطر", // Qatar
-      "البحرين", // Bahrain
-      "الإمارات", // UAE
-      "السعودية", // Saudi Arabia
-      "اليمن", // Yemen
-      "فلسطين", // Palestine
-      "ليبيا", // Libya
-      "السودان", // Sudan
-      "موريتانيا", // Mauritania
-      "جيبوتي", // Djibouti
+      "مصر", "السعودية", "الإمارات", "الكويت", "البحرين", "قطر", "عمان", "العراق", "سوريا", "لبنان", "الأردن", 
+      "فلسطين", "اليمن", "السودان", "تونس", "الجزائر", "المغرب", "ليبيا", "موريتانيا", "جيبوتي", "الصومال", "جزر القمر",
       
-      // Major Cities
-      "الإسكندرية", // Alexandria
-      "جدة", // Jeddah
-      "مكة", // Mecca
-      "المدينة", // Medina
-      "فاس", // Fes
-      "مراكش", // Marrakech
-      "وهران", // Oran
-      "حلب", // Aleppo
-      "البصرة", // Basra
-      "دبي", // Dubai
-      "الشارقة", // Sharjah
-      "صفاقس", // Sfax
-      "طنجة", // Tangier
-      "الموصل", // Mosul
-      "أسوان", // Aswan
-      "الأقصر", // Luxor
-      "حيفا", // Haifa
-      "القدس", // Jerusalem
-      "غزة", // Gaza
+      // Canada - Arabic
+      "كندا", "تورنتو", "مونتريال", "فانكوفر", "كالجاري", "أوتاوا", "إدمونتون", "كيبيك", "هاليفاكس", "وينيبيغ"
     ];
     
     const healthPhrases = [
@@ -100,25 +105,50 @@ const CalligraphyBackground = () => {
       "الطب العربي", // Arab medicine
       "البحث الطبي", // Medical research
       "تكنولوجيا الصحة", // Health technology
+      "الرعاية المتكاملة", // Integrated care
+      "الصحة العامة", // Public health
+      "تعزيز الصحة", // Health promotion
+      "الرفاهية", // Wellbeing
+      "التشخيص المبكر", // Early diagnosis
+      "العافية الشاملة", // Holistic wellness
+      "الطب الوقائي", // Preventive medicine
+      "الصحة الجسدية", // Physical health
+      "التغذية السليمة", // Proper nutrition
+      "العلاج الطبيعي", // Physical therapy
+      "رعاية المسنين", // Elder care
+      "صحة الأطفال", // Children's health
+      "صحة المرأة", // Women's health
+      "التواصل الصحي", // Health communication
+      "الثقافة الصحية", // Health culture
     ];
     
     // Draw calligraphy
-    const colors = ['#1A9AAD', '#A82B2B', '#1F4068', '#E6C095', '#563C5C', '#8B5CF6', '#0EA5E9'];
+    const colors = ['#1A9AAD', '#A82B2B', '#1F4068', '#E6C095', '#563C5C', '#8B5CF6', '#0EA5E9', '#606C38'];
     
-    // Function to create a harmonious distribution
-    const createHarmoniousDistribution = (texts, size, opacity, count) => {
-      // Create a grid system for more pleasing arrangement
-      const gridSize = Math.sqrt(count);
+    // Function to create a more organized, grid-based distribution
+    const createOrganizedDistribution = (texts, size, opacity, count) => {
+      // Create a grid system for more structured arrangement
+      const gridSize = Math.sqrt(count * 1.5); // More cells than elements for some empty space
       const cellWidth = canvas.width / gridSize;
       const cellHeight = canvas.height / gridSize;
       
-      for (let i = 0; i < count; i++) {
-        // Get grid position with some randomness
-        const gridX = i % gridSize;
-        const gridY = Math.floor(i / gridSize);
+      let elementsPlaced = 0;
+      const occupiedCells = new Set();
+      
+      while (elementsPlaced < count) {
+        // Select a random cell
+        const gridX = Math.floor(Math.random() * gridSize);
+        const gridY = Math.floor(Math.random() * gridSize);
+        const cellKey = `${gridX}-${gridY}`;
         
-        // Add randomness within the cell, but ensure no overlap with cell boundaries
-        const cellPadding = 50;
+        // Skip if cell is already occupied
+        if (occupiedCells.has(cellKey)) continue;
+        
+        occupiedCells.add(cellKey);
+        elementsPlaced++;
+        
+        // Position within cell with some randomness but avoid overlap
+        const cellPadding = cellWidth * 0.2;
         const x = (gridX * cellWidth) + cellPadding + (Math.random() * (cellWidth - cellPadding * 2));
         const y = (gridY * cellHeight) + cellPadding + (Math.random() * (cellHeight - cellPadding * 2));
         
@@ -138,10 +168,10 @@ const CalligraphyBackground = () => {
       }
     };
     
-    // Draw geometric patterns (common in Islamic art)
+    // Draw geometric patterns (enhanced for more detail)
     const drawGeometricPatterns = () => {
-      const patternCount = 12;
-      const patternSize = 120;
+      const patternCount = 20; // Increased from 12
+      const patternSize = 150; // Increased from 120
       
       for (let i = 0; i < patternCount; i++) {
         const x = Math.random() * canvas.width;
@@ -159,8 +189,9 @@ const CalligraphyBackground = () => {
         
         // Draw star pattern (common in Islamic art)
         ctx.beginPath();
-        for (let j = 0; j < 8; j++) {
-          const angle = (j * Math.PI / 4);
+        // More complex star with 10 points instead of 8
+        for (let j = 0; j < 10; j++) {
+          const angle = (j * Math.PI / 5);
           const innerRadius = size * 0.3;
           const outerRadius = size * 0.5;
           
@@ -172,8 +203,8 @@ const CalligraphyBackground = () => {
           
           // Draw inner point
           ctx.lineTo(
-            Math.cos(angle + Math.PI/8) * innerRadius,
-            Math.sin(angle + Math.PI/8) * innerRadius
+            Math.cos(angle + Math.PI/10) * innerRadius,
+            Math.sin(angle + Math.PI/10) * innerRadius
           );
         }
         ctx.closePath();
@@ -181,8 +212,8 @@ const CalligraphyBackground = () => {
         
         // Draw inner geometric design
         ctx.beginPath();
-        for (let j = 0; j < 8; j++) {
-          const angle = (j * Math.PI / 4) + Math.PI / 8;
+        for (let j = 0; j < 10; j++) {
+          const angle = (j * Math.PI / 5) + Math.PI / 10;
           ctx.moveTo(0, 0);
           ctx.lineTo(
             Math.cos(angle) * (size * 0.4),
@@ -191,22 +222,49 @@ const CalligraphyBackground = () => {
         }
         ctx.stroke();
         
+        // Add circular patterns
+        ctx.beginPath();
+        ctx.arc(0, 0, size * 0.25, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // Add arabesque-inspired details
+        ctx.beginPath();
+        for (let j = 0; j < 20; j++) {
+          const angle = (j * Math.PI / 10);
+          const radius = size * 0.6;
+          
+          ctx.moveTo(
+            Math.cos(angle) * (radius * 0.7),
+            Math.sin(angle) * (radius * 0.7)
+          );
+          
+          ctx.bezierCurveTo(
+            Math.cos(angle + Math.PI/20) * (radius * 0.8),
+            Math.sin(angle + Math.PI/20) * (radius * 0.8),
+            Math.cos(angle + Math.PI/10) * (radius * 0.8),
+            Math.sin(angle + Math.PI/10) * (radius * 0.8),
+            Math.cos(angle + Math.PI/10) * (radius * 0.7),
+            Math.sin(angle + Math.PI/10) * (radius * 0.7)
+          );
+        }
+        ctx.stroke();
+        
         ctx.restore();
       }
     };
     
-    // Draw city/country names (small)
-    createHarmoniousDistribution(arabicTexts, 20, 0.15, 60);
+    // Draw city/country names (small) - increased count from 60 to 120
+    createOrganizedDistribution(arabicTexts, 20, 0.15, 120);
     
-    // Draw health phrases (medium)
-    createHarmoniousDistribution(healthPhrases, 32, 0.2, 18);
+    // Draw health phrases (medium) - increased from 18 to 30
+    createOrganizedDistribution(healthPhrases, 32, 0.2, 30);
     
     // Add geometric patterns
     drawGeometricPatterns();
     
-    // Add a few larger featured words for visual interest (larger)
-    const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة"];
-    createHarmoniousDistribution(featuredWords, 48, 0.25, 10);
+    // Add a few larger featured words for visual interest (larger) - increased from 10 to 15
+    const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
+    createOrganizedDistribution(featuredWords, 48, 0.25, 15);
     
     // Export as image and set to localStorage to avoid regenerating on every reload
     const dataUrl = canvas.toDataURL('image/png');

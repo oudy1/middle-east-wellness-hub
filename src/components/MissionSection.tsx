@@ -4,143 +4,267 @@ import { Card } from '@/components/ui/card';
 
 const MissionSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const addCalligraphyElements = () => {
-      if (!sectionRef.current) return;
+    // Function to create organized calligraphy background
+    const createOrganizedCalligraphy = () => {
+      if (!frameRef.current) return;
       
-      const section = sectionRef.current;
-      const sectionWidth = section.offsetWidth;
-      const sectionHeight = section.offsetHeight;
+      const frame = frameRef.current;
+      const frameWidth = frame.offsetWidth;
+      const frameHeight = frame.offsetHeight;
       
-      // Arabic words for health-related concepts and Arab cities
-      const arabicTexts = [
-        // Health terms
-        "صحة", // Health
-        "عافية", // Wellness
-        "شفاء", // Healing
-        "طب", // Medicine
-        "رعاية", // Care
-        "علاج", // Treatment
-        "وقاية", // Prevention
-        "تقدم", // Progress
-        "تعاون", // Cooperation
-        "بحث", // Research
-        // Arab cities
-        "القاهرة", // Cairo
-        "دمشق", // Damascus
-        "بغداد", // Baghdad
-        "الرياض", // Riyadh
-        "بيروت", // Beirut
-        "عمّان", // Amman
-        "دبي", // Dubai
-        "مكة", // Mecca
-        "المدينة", // Medina
-        "الإسكندرية", // Alexandria
-        "حلب", // Aleppo
-        "طنجة", // Tangier
-        "القدس", // Jerusalem
-        "مراكش", // Marrakech
-      ];
-      
-      // Colors from our theme
-      const colors = ['#1A9AAD', '#A82B2B', '#1F4068', '#E6C095', '#563C5C', '#8B5CF6', '#0EA5E9'];
-      
-      // Remove any existing calligraphy elements
-      const existingElements = section.querySelectorAll('.font-arabic');
+      // Clear existing elements
+      const existingElements = frame.querySelectorAll('.calligraphy-float');
       existingElements.forEach(el => el.remove());
       
-      // Create and append calligraphy elements
-      for (let i = 0; i < 30; i++) {
-        const text = arabicTexts[Math.floor(Math.random() * arabicTexts.length)];
-        const span = document.createElement('span');
+      // Arabic words for health-related concepts and cities
+      const arabicTexts = [
+        // Health terms
+        "صحة", "عافية", "شفاء", "طب", "رعاية", "علاج", "وقاية", "تقدم", "تعاون", "بحث", "تعليم", "مشاركة", "تمثيل", "عدالة", "مساواة",
+        "توعية", "دعم", "تمكين", "تطوير", "إبداع", "ابتكار", "تواصل", "تضامن", "أمل", "ثقة", "احترام", "كرامة", "اهتمام", "إصغاء",
+
+        // Arab cities and capitals - organized by country
+        // Saudi Arabia
+        "الرياض", "جدة", "مكة", "المدينة", "الدمام", "الطائف", "تبوك", "أبها", "حائل", "جازان",
         
-        span.className = 'font-arabic absolute pointer-events-none select-none transition-opacity duration-1000';
-        span.style.fontSize = `${Math.floor(30 + Math.random() * 20)}px`;
-        span.style.opacity = `${0.15 + Math.random() * 0.2}`;
-        span.style.color = colors[Math.floor(Math.random() * colors.length)];
-        span.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
-        span.textContent = text;
+        // Egypt
+        "القاهرة", "الإسكندرية", "الأقصر", "أسوان", "الغردقة", "شرم الشيخ", "بورسعيد", "طنطا", "المنصورة", "الفيوم",
         
-        // Position elements around the section's content
-        // Create a margin around the content
-        const marginX = sectionWidth * 0.1;
-        const marginY = sectionHeight * 0.1;
+        // UAE
+        "أبو ظبي", "دبي", "الشارقة", "عجمان", "رأس الخيمة", "الفجيرة", "أم القيوين", "العين", "خورفكان", "دبا",
         
-        // Create a more pleasing distribution
-        let posX, posY;
+        // Lebanon
+        "بيروت", "طرابلس", "صيدا", "صور", "جونية", "زحلة", "بعلبك", "النبطية", "بشري", "جبيل",
         
-        // Distribute elements evenly around the edges
-        const position = Math.floor(Math.random() * 8);
-        switch (position) {
-          case 0: // Left side - top
-            posX = Math.random() * marginX;
-            posY = Math.random() * (sectionHeight / 3);
-            break;
-          case 1: // Left side - middle
-            posX = Math.random() * marginX;
-            posY = (sectionHeight / 3) + Math.random() * (sectionHeight / 3);
-            break;
-          case 2: // Left side - bottom
-            posX = Math.random() * marginX;
-            posY = (2 * sectionHeight / 3) + Math.random() * (sectionHeight / 3);
-            break;
-          case 3: // Right side - top
-            posX = sectionWidth - Math.random() * marginX;
-            posY = Math.random() * (sectionHeight / 3);
-            break;
-          case 4: // Right side - middle
-            posX = sectionWidth - Math.random() * marginX;
-            posY = (sectionHeight / 3) + Math.random() * (sectionHeight / 3);
-            break;
-          case 5: // Right side - bottom
-            posX = sectionWidth - Math.random() * marginX;
-            posY = (2 * sectionHeight / 3) + Math.random() * (sectionHeight / 3);
-            break;
-          case 6: // Top
-            posX = marginX + Math.random() * (sectionWidth - 2 * marginX);
-            posY = Math.random() * marginY;
-            break;
-          default: // Bottom
-            posX = marginX + Math.random() * (sectionWidth - 2 * marginX);
-            posY = sectionHeight - Math.random() * marginY;
-            break;
+        // Jordan
+        "عمّان", "إربد", "الزرقاء", "العقبة", "السلط", "مادبا", "جرش", "عجلون", "الكرك", "المفرق",
+        
+        // Iraq
+        "بغداد", "البصرة", "الموصل", "أربيل", "كركوك", "النجف", "كربلاء", "السليمانية", "الفلوجة", "الناصرية",
+        
+        // Syria
+        "دمشق", "حلب", "حمص", "اللاذقية", "طرطوس", "حماة", "دير الزور", "الرقة", "درعا", "السويداء",
+        
+        // Morocco
+        "الرباط", "الدار البيضاء", "مراكش", "فاس", "طنجة", "مكناس", "أغادير", "وجدة", "تطوان", "الصويرة",
+        
+        // Tunisia
+        "تونس", "صفاقس", "سوسة", "القيروان", "بنزرت", "قابس", "المنستير", "نابل", "مدنين", "جربة",
+        
+        // Algeria
+        "الجزائر", "وهران", "قسنطينة", "عنابة", "سطيف", "تلمسان", "باتنة", "بجاية", "سكيكدة", "البليدة",
+        
+        // Kuwait
+        "الكويت", "الأحمدي", "حولي", "الفروانية", "الجهراء", "مبارك الكبير",
+        
+        // Bahrain
+        "المنامة", "المحرق", "الرفاع", "مدينة عيسى", "مدينة حمد", "سترة",
+        
+        // Qatar
+        "الدوحة", "الريان", "الوكرة", "أم صلال", "الخور", "الشمال",
+        
+        // Oman
+        "مسقط", "صلالة", "صحار", "نزوى", "صور", "البريمي",
+        
+        // Libya
+        "طرابلس", "بنغازي", "مصراتة", "الزاوية", "البيضاء", "سبها",
+        
+        // Palestine
+        "القدس", "غزة", "رام الله", "نابلس", "الخليل", "بيت لحم", "جنين", "أريحا", "طولكرم", "قلقيلية",
+        
+        // Yemen
+        "صنعاء", "عدن", "تعز", "الحديدة", "المكلا", "ذمار", "إب", "البيضاء", "حضرموت", "المحويت",
+        
+        // Sudan
+        "الخرطوم", "أم درمان", "بورتسودان", "كسلا", "الأبيض", "الفاشر", "نيالا", "عطبرة", "الدمازين", "الجنينة",
+        
+        // Countries
+        "مصر", "السعودية", "الإمارات", "الكويت", "البحرين", "قطر", "عمان", "العراق", "سوريا", "لبنان", "الأردن", 
+        "فلسطين", "اليمن", "السودان", "تونس", "الجزائر", "المغرب", "ليبيا", "موريتانيا", "جيبوتي", "الصومال", "جزر القمر",
+        
+        // Canada - Arabic
+        "كندا", "تورنتو", "مونتريال", "فانكوفر", "كالجاري", "أوتاوا", "إدمونتون", "كيبيك", "هاليفاكس", "وينيبيغ"
+      ];
+      
+      // Featured health phrases
+      const healthPhrases = [
+        "الصحة للجميع", // Health for all
+        "رعاية صحية متكاملة", // Comprehensive healthcare
+        "التعليم الطبي", // Medical education
+        "البحث العلمي", // Scientific research
+        "المشاركة المجتمعية", // Community participation
+        "الوقاية خير من العلاج", // Prevention is better than cure
+        "الصحة النفسية", // Mental health
+        "التمثيل العادل", // Fair representation
+        "العدالة الصحية", // Health equity
+        "بناء الثقة", // Building trust
+        "تمكين المجتمع", // Community empowerment
+        "كسر الحواجز", // Breaking barriers
+        "الرعاية الثقافية", // Cultural care
+        "صوت المجتمع", // Community voice
+        "التعاون الصحي", // Health cooperation
+      ];
+      
+      // Colors from our theme with opacity variations for visual layering
+      const colors = [
+        'rgba(26, 154, 173, 0.6)', // healthTeal
+        'rgba(26, 154, 173, 0.3)', 
+        'rgba(168, 43, 43, 0.6)', // healthRed
+        'rgba(168, 43, 43, 0.3)',
+        'rgba(31, 64, 104, 0.6)', // healthDarkBlue
+        'rgba(31, 64, 104, 0.3)',
+        'rgba(230, 192, 149, 0.6)', // healthGold
+        'rgba(230, 192, 149, 0.3)',
+        'rgba(86, 60, 92, 0.6)', // healthPurple
+        'rgba(86, 60, 92, 0.3)',
+        'rgba(96, 108, 56, 0.6)', // healthOlive
+        'rgba(96, 108, 56, 0.3)',
+      ];
+      
+      // Create grid-based organization for hundreds of elements
+      const elementCount = 200; // Number of calligraphy elements
+      
+      // Create frame border elements (more densely packed)
+      const borderWidth = 60; // Width of the border area
+      const createFrameBorder = () => {
+        // Top border
+        for (let i = 0; i < 60; i++) {
+          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+          const y = Math.random() * borderWidth;
+          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
         }
         
-        span.style.left = `${posX}px`;
-        span.style.top = `${posY}px`;
+        // Bottom border
+        for (let i = 0; i < 60; i++) {
+          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+          const y = frameHeight - (Math.random() * borderWidth);
+          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+        }
         
-        // Add entrance animation
+        // Left border
+        for (let i = 0; i < 40; i++) {
+          const x = Math.random() * borderWidth;
+          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+        }
+        
+        // Right border
+        for (let i = 0; i < 40; i++) {
+          const x = frameWidth - (Math.random() * borderWidth);
+          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+        }
+      };
+      
+      // Create scattered elements in the rest of the frame
+      const createInnerElements = () => {
+        // Create a grid system for more pleasing arrangement
+        const gridCols = 10;
+        const gridRows = 10;
+        const cellWidth = (frameWidth - (borderWidth * 2)) / gridCols;
+        const cellHeight = (frameHeight - (borderWidth * 2)) / gridRows;
+        
+        // Fill grid cells with elements
+        for (let row = 0; row < gridRows; row++) {
+          for (let col = 0; col < gridCols; col++) {
+            if (Math.random() < 0.4) continue; // Skip some cells for a more natural look
+            
+            const baseX = borderWidth + (col * cellWidth);
+            const baseY = borderWidth + (row * cellHeight);
+            
+            // Add randomness within the cell
+            const x = baseX + (Math.random() * cellWidth * 0.7);
+            const y = baseY + (Math.random() * cellHeight * 0.7);
+            
+            // Different types of elements based on position
+            if (row === 0 || row === gridRows - 1 || col === 0 || col === gridCols - 1) {
+              // Edges get cities
+              createCalligraphyElement(x, y, arabicTexts, 0.25, 16, 24, false);
+            } else if (Math.random() < 0.2) {
+              // Some get health phrases
+              createCalligraphyElement(x, y, healthPhrases, 0.3, 18, 30, false);
+            } else {
+              // Most get regular text
+              createCalligraphyElement(x, y, arabicTexts, 0.25, 16, 24, false);
+            }
+          }
+        }
+      };
+      
+      // Helper function to create a single calligraphy element
+      const createCalligraphyElement = (x, y, textArray, baseOpacity, minSize, maxSize, isBorder) => {
+        const text = textArray[Math.floor(Math.random() * textArray.length)];
+        const span = document.createElement('span');
+        
+        span.className = 'calligraphy-float font-arabic absolute pointer-events-none select-none';
+        const fontSize = Math.floor(minSize + Math.random() * (maxSize - minSize));
+        span.style.fontSize = `${fontSize}px`;
+        
+        // Slightly adjust opacity based on position and size
+        const opacityVariation = Math.random() * 0.15;
+        let opacity = baseOpacity + opacityVariation;
+        if (fontSize > (minSize + maxSize) / 2) opacity += 0.05; // Larger text is slightly more visible
+        
+        span.style.opacity = opacity.toString();
+        span.style.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Add rotation
+        const rotation = Math.random() * 90 - 45;
+        span.style.transform = `rotate(${rotation}deg)`;
+        
+        span.textContent = text;
+        span.style.left = `${x}px`;
+        span.style.top = `${y}px`;
+        
+        // Add animation
+        if (!isBorder && Math.random() < 0.3) {
+          span.classList.add('animate-pulse');
+          span.style.animationDuration = `${3 + Math.random() * 4}s`;
+        }
+        
+        // Start with zero opacity and fade in
         span.style.opacity = '0';
-        section.appendChild(span);
+        span.style.transition = 'opacity 0.5s ease-in-out';
         
-        // Delayed fade in for visual interest
+        frame.appendChild(span);
+        
+        // Delayed fade in - creates a nice sequential effect
         setTimeout(() => {
-          span.style.opacity = `${0.15 + Math.random() * 0.2}`;
-        }, 100 * i);
+          span.style.opacity = opacity.toString();
+        }, Math.random() * 1500);
+      };
+      
+      // Create all elements
+      createFrameBorder();
+      createInnerElements();
+      
+      // Add special featured phrases in larger size
+      for (let i = 0; i < 10; i++) {
+        const x = borderWidth + Math.random() * (frameWidth - borderWidth * 2);
+        const y = borderWidth + Math.random() * (frameHeight - borderWidth * 2);
+        createCalligraphyElement(x, y, healthPhrases, 0.35, 24, 32, false);
       }
     };
     
-    // Add a small delay to ensure the section is fully rendered
-    const timer = setTimeout(() => {
-      addCalligraphyElements();
-    }, 500);
+    // Initialize once and handle resize
+    const initializeCalligraphy = () => {
+      setTimeout(() => {
+        createOrganizedCalligraphy();
+      }, 100);
+    };
     
-    // Handle window resize
+    initializeCalligraphy();
+    
     const handleResize = () => {
-      clearTimeout(timer);
-      addCalligraphyElements();
+      initializeCalligraphy();
     };
     
     window.addEventListener('resize', handleResize);
     
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
-      if (sectionRef.current) {
-        const elements = sectionRef.current.querySelectorAll('.font-arabic');
-        elements.forEach(el => el.remove());
-      }
     };
   }, []);
   
@@ -148,7 +272,7 @@ const MissionSection = () => {
     <section className="py-16 md:py-24 relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-5"></div>
       <div className="container mx-auto px-4 relative">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="section-title">
             <span className="relative inline-block">
               <span className="relative z-10">Our Mission</span>
@@ -156,10 +280,10 @@ const MissionSection = () => {
             </span>
           </h2>
           
-          {/* Calligraphy Frame */}
-          <div className="relative p-8 md:p-12 mb-8 mt-8">
-            {/* Frame Border with Calligraphy Pattern */}
-            <div className="absolute inset-0 border-8 border-opacity-30 border-healthGold rounded-lg overflow-hidden">
+          {/* Ornate Calligraphic Frame */}
+          <div className="relative p-8 md:p-12 lg:p-16 mb-8 mt-8">
+            {/* Frame Border with Rich Calligraphy Pattern */}
+            <div ref={frameRef} className="absolute inset-0 border-8 border-opacity-30 border-healthGold rounded-lg overflow-hidden">
               <div className="absolute inset-0 calligraphy-frame-bg opacity-10"></div>
               
               {/* Calligraphy Corner Elements */}
@@ -179,26 +303,39 @@ const MissionSection = () => {
               </div>
             </div>
             
-            <Card className="shadow-lg bg-white/80 backdrop-blur-sm relative z-10">
+            <Card className="shadow-lg bg-white/90 backdrop-blur-md relative z-10">
               <div className="prose prose-lg mx-auto p-6 relative">
                 <div className="absolute -top-12 -right-16 text-healthRed opacity-20 font-arabic text-5xl rotate-12 animate-[pulse_5s_infinite]">مهمة</div>
                 <div className="absolute -bottom-12 -left-16 text-healthTeal opacity-20 font-arabic text-5xl -rotate-12 animate-[pulse_5s_infinite]">صحة</div>
                 <div className="absolute top-1/4 -left-20 text-healthPurple opacity-20 font-arabic text-4xl rotate-6 animate-[pulse_7s_infinite]">طب</div>
                 <div className="absolute top-1/3 -right-24 text-healthGold opacity-20 font-arabic text-4xl -rotate-9 animate-[pulse_6s_infinite]">الرعاية</div>
                 
+                {/* Updated Mission Statement */}
+                <h3 className="text-2xl font-bold text-center mb-6">Mission Statement</h3>
                 <p className="text-lg text-center mb-6 relative">
-                  <span className="absolute -top-6 -left-6 font-arabic text-healthRed opacity-25 text-3xl">علم</span>
-                  The Middle Eastern Health Initiative is a national research network designed to increase health education and medical research in the Middle East and enhance the healthcare quality and outcomes for communities across the region.
+                  <span className="absolute -top-6 -left-6 font-arabic text-healthRed opacity-25 text-3xl">ثقة</span>
+                  Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.
                 </p>
                 <p className="text-lg text-center mb-6 relative">
-                  <span className="absolute -top-6 -right-6 font-arabic text-healthTeal opacity-25 text-3xl">طب</span>
-                  Founded in 2023, the Initiative develops new knowledge and healthcare practices to increase the availability of quality healthcare for people in need and improve long-term outcomes for patients across the Middle East.
+                  <span className="absolute -top-6 -right-6 font-arabic text-healthTeal opacity-25 text-3xl">تعليم</span>
+                  We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.
                 </p>
-                <p className="text-lg text-center relative">
-                  <span className="absolute -bottom-6 -right-6 font-arabic text-healthGold opacity-25 text-3xl">خدمة</span>
-                  Our program is the first to bring together and integrate five research themes, overarching from creating a culture of health education to post-treatment long-term health.
-                  <span className="absolute -bottom-6 -left-6 font-arabic text-healthPurple opacity-25 text-3xl">بحث</span>
+                <p className="text-lg text-center mb-8 relative">
+                  <span className="absolute -bottom-6 -right-6 font-arabic text-healthGold opacity-25 text-3xl">مجتمع</span>
+                  Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.
+                  <span className="absolute -bottom-6 -left-6 font-arabic text-healthPurple opacity-25 text-3xl">تعاون</span>
                 </p>
+                
+                {/* Concise Arabic Mission Statement */}
+                <div className="bg-healthLightGray/30 p-6 rounded-lg rtl">
+                  <h3 className="text-2xl font-bold text-center mb-4 font-arabic">الرسالة</h3>
+                  <p className="text-lg text-center mb-4 font-arabic leading-relaxed">
+                    مهمّتنا هي نردم الفجوة بين الجاليات العربية والشرق أوسطية في كندا وبين النظام الصحي، من خلال بناء ثقة حقيقية، وتسهيل الفهم، وخلق مساحة نحكي فيها بصوتنا ونوصل أفكارنا.
+                  </p>
+                  <p className="text-lg text-center font-arabic leading-relaxed">
+                    إحنا بنحاول نكسر الحواجز اللي بتبعدنا عن البحث العلمي، الطب، والتعليم الصحّي. بنشتغل سوا كطلّاب، أهالي، دكاترة، وباحثين عشان نخلق مجتمع متعاون، واعي، وبيمثلنا، منّا ولينا.
+                  </p>
+                </div>
               </div>
             </Card>
           </div>
