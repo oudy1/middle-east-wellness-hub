@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Medicine, Virus, Thermometer, Bandage } from "lucide-react";
+import { Heart, Brain, Lungs, Activity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -10,25 +10,25 @@ const diseasesData = [
   {
     title: "Diabetes",
     description: "Diabetes is a chronic condition that affects how your body processes blood sugar. Learn about risk factors in Middle Eastern populations, symptoms, management strategies, and cultural considerations for treatment.",
-    icon: <Medicine className="h-10 w-10 text-white" />,
+    icon: <Activity className="h-10 w-10 text-white" />,
     color: "bg-healthTeal"
   },
   {
     title: "Heart Disease",
     description: "Heart disease is a leading cause of mortality worldwide. Discover specific risk factors in Middle Eastern communities, prevention strategies, early warning signs, and culturally appropriate interventions.",
-    icon: <Thermometer className="h-10 w-10 text-white" />,
+    icon: <Heart className="h-10 w-10 text-white" />,
     color: "bg-healthRed"
   },
   {
     title: "Mental Health Conditions",
     description: "Mental health conditions affect millions globally but are often stigmatized in many communities. Explore common mental health challenges, cultural perspectives, and resources for support.",
-    icon: <Bandage className="h-10 w-10 text-white" />,
+    icon: <Brain className="h-10 w-10 text-white" />,
     color: "bg-gray-400"
   },
   {
     title: "Respiratory Diseases",
     description: "Respiratory diseases like asthma and COPD can significantly impact quality of life. Learn about prevalence in Middle Eastern populations, environmental factors, and management approaches.",
-    icon: <Virus className="h-10 w-10 text-white" />,
+    icon: <Lungs className="h-10 w-10 text-white" />,
     color: "bg-healthDarkBlue"
   }
 ];
