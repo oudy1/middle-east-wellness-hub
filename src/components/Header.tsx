@@ -34,6 +34,7 @@ const Header = () => {
             <Link to="/resources" className="hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
             <Link to="/diseases" className="hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="hover:text-healthTeal transition-colors">Contact</Link>
+            <Link to="/webinars" className="hover:text-healthTeal transition-colors">Recorded Webinars</Link>
           </nav>
           
           <div className="hidden md:flex items-center">
@@ -66,6 +67,7 @@ const Header = () => {
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">Contact</Link>
+            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">Recorded Webinars</Link>
             <div className="pt-2">
               <Button 
                 variant="outline" 
