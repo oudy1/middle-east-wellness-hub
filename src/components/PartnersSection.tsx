@@ -1,36 +1,39 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Handshake } from "lucide-react";
-
-const partners = [
-  {
-    name: "Regional Health Foundation",
-    logo: "/placeholder.svg",
-    description: "Supporting healthcare initiatives across the Middle East"
-  },
-  {
-    name: "Global Medical Research",
-    logo: "/placeholder.svg", 
-    description: "Advancing medical research in underserved populations"
-  },
-  {
-    name: "Health Access Network",
-    logo: "/placeholder.svg",
-    description: "Improving healthcare access for communities in need"
-  },
-  {
-    name: "Cultural Health Alliance",
-    logo: "/placeholder.svg",
-    description: "Promoting culturally responsive healthcare practices"
-  },
-  {
-    name: "Middle Eastern Medical Society",
-    logo: "/placeholder.svg",
-    description: "Professional association for healthcare providers"
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PartnersSection = () => {
+  const { t } = useLanguage();
+
+  const partners = [
+    {
+      name: t("partners.regionalHealth"),
+      logo: "/placeholder.svg",
+      description: t("partners.regionalHealthDesc")
+    },
+    {
+      name: t("partners.globalMedical"),
+      logo: "/placeholder.svg", 
+      description: t("partners.globalMedicalDesc")
+    },
+    {
+      name: t("partners.healthAccess"),
+      logo: "/placeholder.svg",
+      description: t("partners.healthAccessDesc")
+    },
+    {
+      name: t("partners.culturalAlliance"),
+      logo: "/placeholder.svg",
+      description: t("partners.culturalAllianceDesc")
+    },
+    {
+      name: t("partners.medicalSociety"),
+      logo: "/placeholder.svg",
+      description: t("partners.medicalSocietyDesc")
+    }
+  ];
+
   return (
     <section className="py-16 bg-white relative">
       <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -40,10 +43,10 @@ const PartnersSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title flex items-center justify-center">
           <Handshake className="mr-3 text-healthTeal h-8 w-8" />
-          Our Partners
+          {t("partners.title")}
         </h2>
         <p className="section-description">
-          We collaborate with leading organizations to advance healthcare in Middle Eastern communities
+          {t("partners.subtitle")}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">

@@ -2,8 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { UsersRound } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MeetTeamButton = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-8 bg-white">
       <div className="container mx-auto px-4">
@@ -14,7 +17,7 @@ const MeetTeamButton = () => {
           >
             <Link to="/about">
               <UsersRound className="mr-2 h-6 w-6" />
-              Meet Our Team
+              {t("team.meetOurTeam")}
             </Link>
           </Button>
         </div>

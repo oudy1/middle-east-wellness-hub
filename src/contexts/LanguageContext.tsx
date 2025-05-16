@@ -62,6 +62,24 @@ const translations = {
     ar: "مهمتنا"
   },
   
+  // Team translations
+  "team.meetOurTeam": {
+    en: "Meet Our Team",
+    ar: "تعرّف على فريقنا"
+  },
+  "team.title": {
+    en: "Our Team",
+    ar: "فريقنا"
+  },
+  "team.subtitle": {
+    en: "Meet the dedicated professionals working to bridge healthcare gaps for Middle Eastern communities.",
+    ar: "تعرف على المتخصصين المتفانين الذين يعملون على سد فجوات الرعاية الصحية لمجتمعات الشرق الأوسط."
+  },
+  "team.comingSoon": {
+    en: "Team members profile content coming soon.",
+    ar: "محتوى ملفات أعضاء الفريق قريبًا."
+  },
+  
   // Resources Section
   "resources.title": {
     en: "Community Resources",
@@ -70,6 +88,92 @@ const translations = {
   "resources.subtitle": {
     en: "Explore our collection of resources to support healthcare advancement and research in Middle Eastern communities.",
     ar: "استكشف مجموعتنا من الموارد لدعم تقدم الرعاية الصحية والبحث في مجتمعات الشرق الأوسط."
+  },
+  "resources.researchPlatform": {
+    en: "Research Platform",
+    ar: "منصة البحث"
+  },
+  "resources.researchPlatformDesc": {
+    en: "Access our platform supporting high-quality research in healthcare across the Middle East.",
+    ar: "الوصول إلى منصتنا التي تدعم البحث عالي الجودة في مجال الرعاية الصحية في جميع أنحاء الشرق الأوسط."
+  },
+  "resources.educationalMaterials": {
+    en: "Educational Materials",
+    ar: "المواد التعليمية"
+  },
+  "resources.educationalMaterialsDesc": {
+    en: "Explore educational resources about health innovations and treatments specific to Middle Eastern populations.",
+    ar: "استكشف الموارد التعليمية حول الابتكارات الصحية والعلاجات الخاصة بسكان الشرق الأوسط."
+  },
+  "resources.newsletterArchive": {
+    en: "Newsletter Archive",
+    ar: "أرشيف النشرة الإخبارية"
+  },
+  "resources.newsletterArchiveDesc": {
+    en: "Browse our newsletter archive to stay informed of the latest news and events from our health community.",
+    ar: "تصفح أرشيف نشرتنا الإخبارية للبقاء على اطلاع بأحدث الأخبار والأحداث من مجتمعنا الصحي."
+  },
+  "resources.webinarLibrary": {
+    en: "Webinar Library",
+    ar: "مكتبة الندوات عبر الإنترنت"
+  },
+  "resources.webinarLibraryDesc": {
+    en: "Access our library of past webinars on important health topics relevant to Middle Eastern communities.",
+    ar: "الوصول إلى مكتبتنا من الندوات السابقة حول مواضيع صحية مهمة ذات صلة بمجتمعات الشرق الأوسط."
+  },
+  "resources.accessResource": {
+    en: "Access Resource",
+    ar: "الوصول إلى المورد"
+  },
+  
+  // Partners Section
+  "partners.title": {
+    en: "Our Partners",
+    ar: "شركاؤنا"
+  },
+  "partners.subtitle": {
+    en: "We collaborate with leading organizations to advance healthcare in Middle Eastern communities",
+    ar: "نتعاون مع المنظمات الرائدة لتطوير الرعاية الصحية في مجتمعات الشرق الأوسط"
+  },
+  "partners.regionalHealth": {
+    en: "Regional Health Foundation",
+    ar: "مؤسسة الصحة الإقليمية"
+  },
+  "partners.regionalHealthDesc": {
+    en: "Supporting healthcare initiatives across the Middle East",
+    ar: "دعم المبادرات الصحية في جميع أنحاء الشرق الأوسط"
+  },
+  "partners.globalMedical": {
+    en: "Global Medical Research",
+    ar: "البحوث الطبية العالمية"
+  },
+  "partners.globalMedicalDesc": {
+    en: "Advancing medical research in underserved populations",
+    ar: "تطوير البحوث الطبية في المجتمعات المحرومة من الخدمات"
+  },
+  "partners.healthAccess": {
+    en: "Health Access Network",
+    ar: "شبكة الوصول إلى الرعاية الصحية"
+  },
+  "partners.healthAccessDesc": {
+    en: "Improving healthcare access for communities in need",
+    ar: "تحسين الوصول إلى الرعاية الصحية للمجتمعات المحتاجة"
+  },
+  "partners.culturalAlliance": {
+    en: "Cultural Health Alliance",
+    ar: "تحالف الصحة الثقافية"
+  },
+  "partners.culturalAllianceDesc": {
+    en: "Promoting culturally responsive healthcare practices",
+    ar: "تعزيز ممارسات الرعاية الصحية المستجيبة ثقافيًا"
+  },
+  "partners.medicalSociety": {
+    en: "Middle Eastern Medical Society",
+    ar: "الجمعية الطبية للشرق الأوسط"
+  },
+  "partners.medicalSocietyDesc": {
+    en: "Professional association for healthcare providers",
+    ar: "الرابطة المهنية لمقدمي الرعاية الصحية"
   },
   
   // Impact Section
@@ -80,6 +184,68 @@ const translations = {
   "impact.subtitle": {
     en: "Making a difference in healthcare access and outcomes for Middle Eastern communities",
     ar: "إحداث فرق في الوصول إلى الرعاية الصحية والنتائج لمجتمعات الشرق الأوسط"
+  },
+  "impact.communityMembers": {
+    en: "Community members reached through health initiatives",
+    ar: "أعضاء المجتمع الذين تم الوصول إليهم من خلال المبادرات الصحية"
+  },
+  "impact.partnerOrganizations": {
+    en: "Partner organizations across the Middle East and Canada",
+    ar: "المنظمات الشريكة في جميع أنحاء الشرق الأوسط وكندا"
+  },
+  "impact.researchStudies": {
+    en: "Research studies published on Middle Eastern healthcare",
+    ar: "الدراسات البحثية المنشورة حول الرعاية الصحية في الشرق الأوسط"
+  },
+  "impact.upcomingInitiative": {
+    en: "Upcoming Initiative",
+    ar: "المبادرة القادمة"
+  },
+  "impact.upcomingInitiativeDesc": {
+    en: "Regional health assessment program launching in collaboration with local communities",
+    ar: "برنامج تقييم الصحة الإقليمي الذي يتم إطلاقه بالتعاون مع المجتمعات المحلية"
+  },
+  "impact.startingDate": {
+    en: "Starting July 2025",
+    ar: "يبدأ في يوليو 2025"
+  },
+  "impact.whatsNew": {
+    en: "What's New",
+    ar: "ما الجديد"
+  },
+  "impact.whatsNewDesc": {
+    en: "New research grant secured to study healthcare access disparities in rural areas",
+    ar: "تم تأمين منحة بحثية جديدة لدراسة التفاوتات في الوصول إلى الرعاية الصحية في المناطق الريفية"
+  },
+  "impact.whatsNewDate": {
+    en: "May 2025",
+    ar: "مايو 2025"
+  },
+  "impact.learnMore": {
+    en: "Learn More About Our Impact",
+    ar: "تعرف على المزيد حول تأثيرنا"
+  },
+  
+  // Stats Section
+  "stats.title": {
+    en: "Our Impact in Numbers",
+    ar: "تأثيرنا بالأرقام"
+  },
+  "stats.researchProjects": {
+    en: "Research Projects",
+    ar: "المشاريع البحثية"
+  },
+  "stats.partnerHospitals": {
+    en: "Partner Hospitals",
+    ar: "المستشفيات الشريكة"
+  },
+  "stats.patientsServed": {
+    en: "Patients Served",
+    ar: "المرضى الذين تم خدمتهم"
+  },
+  "stats.countries": {
+    en: "Countries",
+    ar: "الدول"
   },
   
   // Newsletter Section
@@ -95,23 +261,95 @@ const translations = {
     en: "Your email address",
     ar: "عنوان بريدك الإلكتروني"
   },
+  "newsletter.subscribing": {
+    en: "Subscribing...",
+    ar: "جاري الاشتراك..."
+  },
   "newsletter.button": {
     en: "Subscribe",
     ar: "اشترك"
   },
+  "newsletter.successTitle": {
+    en: "Success!",
+    ar: "تم بنجاح!"
+  },
+  "newsletter.successDescription": {
+    en: "Thank you for subscribing to our newsletter.",
+    ar: "شكرًا لاشتراكك في نشرتنا الإخبارية."
+  },
   
-  // Team Page
-  "team.title": {
-    en: "Our Team",
-    ar: "فريقنا"
+  // Footer
+  "footer.title": {
+    en: "Middle Eastern Health Initiative",
+    ar: "مبادرة الصحة في الشرق الأوسط"
   },
-  "team.subtitle": {
-    en: "Meet the dedicated professionals working to bridge healthcare gaps for Middle Eastern communities.",
-    ar: "تعرف على المتخصصين المتفانين الذين يعملون على سد فجوات الرعاية الصحية لمجتمعات الشرق الأوسط."
+  "footer.description": {
+    en: "Dedicated to improving healthcare access and outcomes for communities across the Middle East.",
+    ar: "مكرسة لتحسين الوصول إلى الرعاية الصحية والنتائج للمجتمعات في جميع أنحاء الشرق الأوسط."
   },
-  "team.comingSoon": {
-    en: "Team members profile content coming soon.",
-    ar: "محتوى ملفات أعضاء الفريق قريبًا."
+  "footer.quickLinks": {
+    en: "Quick Links",
+    ar: "روابط سريعة"
+  },
+  "footer.resources": {
+    en: "Resources",
+    ar: "الموارد"
+  },
+  "footer.research": {
+    en: "Research",
+    ar: "البحث"
+  },
+  "footer.publications": {
+    en: "Publications",
+    ar: "المنشورات"
+  },
+  "footer.webinars": {
+    en: "Webinars",
+    ar: "الندوات عبر الإنترنت"
+  },
+  "footer.newsletter": {
+    en: "Newsletter",
+    ar: "النشرة الإخبارية"
+  },
+  "footer.faq": {
+    en: "FAQ",
+    ar: "الأسئلة المتكررة"
+  },
+  "footer.contactUs": {
+    en: "Contact Us",
+    ar: "اتصل بنا"
+  },
+  "footer.address1": {
+    en: "123 Healthcare Avenue",
+    ar: "١٢٣ شارع الرعاية الصحية"
+  },
+  "footer.address2": {
+    en: "Dubai, UAE",
+    ar: "دبي، الإمارات العربية المتحدة"
+  },
+  "footer.email": {
+    en: "Email: info@mehealthinitiative.org",
+    ar: "البريد الإلكتروني: info@mehealthinitiative.org"
+  },
+  "footer.phone": {
+    en: "Phone: +971 4 123 4567",
+    ar: "الهاتف: +٩٧١ ٤ ١٢٣ ٤٥٦٧"
+  },
+  "footer.copyright": {
+    en: "Middle Eastern Health Initiative. All rights reserved.",
+    ar: "مبادرة الصحة في الشرق الأوسط. جميع الحقوق محفوظة."
+  },
+  "footer.privacy": {
+    en: "Privacy Policy",
+    ar: "سياسة الخصوصية"
+  },
+  "footer.terms": {
+    en: "Terms of Service",
+    ar: "شروط الخدمة"
+  },
+  "footer.cookies": {
+    en: "Cookie Policy",
+    ar: "سياسة ملفات تعريف الارتباط"
   },
   
   // Diseases Page

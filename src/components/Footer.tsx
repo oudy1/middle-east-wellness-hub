@@ -1,17 +1,19 @@
 
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   return (
     <footer className="bg-healthDarkBlue text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Middle Eastern Health Initiative</h3>
+            <h3 className="text-xl font-bold mb-4">{t("footer.title")}</h3>
             <p className="mb-4 text-gray-300">
-              Dedicated to improving healthcare access and outcomes for communities across the Middle East.
+              {t("footer.description")}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-healthTeal transition-colors">
@@ -36,47 +38,47 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-300 hover:text-healthTeal transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-gray-300 hover:text-healthTeal transition-colors">About Us</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-healthTeal transition-colors">Our Services</Link></li>
-              <li><Link to="/resources" className="text-gray-300 hover:text-healthTeal transition-colors">Resources</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-healthTeal transition-colors">Contact Us</Link></li>
+              <li><Link to="/" className="text-gray-300 hover:text-healthTeal transition-colors">{t("header.home")}</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-healthTeal transition-colors">{t("header.about")}</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link></li>
+              <li><Link to="/resources" className="text-gray-300 hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-healthTeal transition-colors">{t("header.contact")}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("footer.resources")}</h3>
             <ul className="space-y-2">
-              <li><Link to="/research" className="text-gray-300 hover:text-healthTeal transition-colors">Research</Link></li>
-              <li><Link to="/publications" className="text-gray-300 hover:text-healthTeal transition-colors">Publications</Link></li>
-              <li><Link to="/webinars" className="text-gray-300 hover:text-healthTeal transition-colors">Webinars</Link></li>
-              <li><Link to="/newsletter" className="text-gray-300 hover:text-healthTeal transition-colors">Newsletter</Link></li>
-              <li><Link to="/faq" className="text-gray-300 hover:text-healthTeal transition-colors">FAQ</Link></li>
+              <li><Link to="/research" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.research")}</Link></li>
+              <li><Link to="/publications" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.publications")}</Link></li>
+              <li><Link to="/webinars" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.webinars")}</Link></li>
+              <li><Link to="/newsletter" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.newsletter")}</Link></li>
+              <li><Link to="/faq" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.faq")}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("footer.contactUs")}</h3>
             <address className="not-italic text-gray-300">
-              <p className="mb-2">Middle Eastern Health Initiative</p>
-              <p className="mb-2">123 Healthcare Avenue</p>
-              <p className="mb-2">Dubai, UAE</p>
-              <p className="mb-2">Email: info@mehealthinitiative.org</p>
-              <p>Phone: +971 4 123 4567</p>
+              <p className="mb-2">{t("footer.title")}</p>
+              <p className="mb-2">{t("footer.address1")}</p>
+              <p className="mb-2">{t("footer.address2")}</p>
+              <p className="mb-2">{t("footer.email")}</p>
+              <p>{t("footer.phone")}</p>
             </address>
           </div>
         </div>
         
         <div className="border-t border-gray-700 pt-6 mt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400">&copy; {currentYear} Middle Eastern Health Initiative. All rights reserved.</p>
+            <p className="text-sm text-gray-400">&copy; {currentYear} {t("footer.copyright")}</p>
             <div className="mt-4 md:mt-0">
               <ul className="flex space-x-6 text-sm text-gray-400">
-                <li><Link to="/privacy" className="hover:text-healthTeal transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-healthTeal transition-colors">Terms of Service</Link></li>
-                <li><Link to="/cookies" className="hover:text-healthTeal transition-colors">Cookie Policy</Link></li>
+                <li><Link to="/privacy" className="hover:text-healthTeal transition-colors">{t("footer.privacy")}</Link></li>
+                <li><Link to="/terms" className="hover:text-healthTeal transition-colors">{t("footer.terms")}</Link></li>
+                <li><Link to="/cookies" className="hover:text-healthTeal transition-colors">{t("footer.cookies")}</Link></li>
               </ul>
             </div>
           </div>

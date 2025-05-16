@@ -9,29 +9,29 @@ const ImpactSection = () => {
 
   const initiatives = [
     {
-      title: "Upcoming Initiative",
-      content: "Regional health assessment program launching in collaboration with local communities",
-      date: "Starting July 2025"
+      title: t("impact.upcomingInitiative"),
+      content: t("impact.upcomingInitiativeDesc"),
+      date: t("impact.startingDate")
     },
     {
-      title: "What's New",
-      content: "New research grant secured to study healthcare access disparities in rural areas",
-      date: "May 2025"
+      title: t("impact.whatsNew"),
+      content: t("impact.whatsNewDesc"),
+      date: t("impact.whatsNewDate")
     }
   ];
 
   const achievements = [
     {
       metric: "12,000+",
-      description: "Community members reached through health initiatives"
+      description: t("impact.communityMembers")
     },
     {
       metric: "45+",
-      description: "Partner organizations across the Middle East and Canada"
+      description: t("impact.partnerOrganizations")
     },
     {
       metric: "28",
-      description: "Research studies published on Middle Eastern healthcare"
+      description: t("impact.researchStudies")
     }
   ];
 
@@ -73,7 +73,7 @@ const ImpactSection = () => {
         
         <div className="text-center mt-12">
           <Button className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue font-medium px-8 py-2">
-            Learn More About Our Impact
+            {t("impact.learnMore")}
           </Button>
         </div>
       </div>

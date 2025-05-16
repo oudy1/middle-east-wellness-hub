@@ -2,45 +2,48 @@
 import { Button } from "@/components/ui/button";
 import { FileText, BookOpen, Monitor, Phone } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
-const resources = [
-  {
-    title: "Research Platform",
-    description: "Access our platform supporting high-quality research in healthcare across the Middle East.",
-    icon: <FileText className="h-10 w-10 text-white" />,
-    color: "bg-healthTeal",
-    link: "/research-resources"
-  },
-  {
-    title: "Educational Materials",
-    description: "Explore educational resources about health innovations and treatments specific to Middle Eastern populations.",
-    icon: <BookOpen className="h-10 w-10 text-white" />,
-    color: "bg-healthRed",
-    link: "/educational-materials"
-  },
-  {
-    title: "Newsletter Archive",
-    description: "Browse our newsletter archive to stay informed of the latest news and events from our health community.",
-    icon: <Monitor className="h-10 w-10 text-white" />,
-    color: "bg-gray-400",
-    link: "/newsletter-archive"
-  },
-  {
-    title: "Webinar Library",
-    description: "Access our library of past webinars on important health topics relevant to Middle Eastern communities.",
-    icon: <Phone className="h-10 w-10 text-white" />,
-    color: "bg-healthDarkBlue",
-    link: "/webinar-library"
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ResourcesSection = () => {
+  const { t } = useLanguage();
+  
+  const resources = [
+    {
+      title: t("resources.researchPlatform"),
+      description: t("resources.researchPlatformDesc"),
+      icon: <FileText className="h-10 w-10 text-white" />,
+      color: "bg-healthTeal",
+      link: "/research-resources"
+    },
+    {
+      title: t("resources.educationalMaterials"),
+      description: t("resources.educationalMaterialsDesc"),
+      icon: <BookOpen className="h-10 w-10 text-white" />,
+      color: "bg-healthRed",
+      link: "/educational-materials"
+    },
+    {
+      title: t("resources.newsletterArchive"),
+      description: t("resources.newsletterArchiveDesc"),
+      icon: <Monitor className="h-10 w-10 text-white" />,
+      color: "bg-gray-400",
+      link: "/newsletter-archive"
+    },
+    {
+      title: t("resources.webinarLibrary"),
+      description: t("resources.webinarLibraryDesc"),
+      icon: <Phone className="h-10 w-10 text-white" />,
+      color: "bg-healthDarkBlue",
+      link: "/webinar-library"
+    }
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-healthLightGray">
       <div className="container mx-auto px-4">
-        <h2 className="section-title">Community Resources</h2>
+        <h2 className="section-title">{t("resources.title")}</h2>
         <p className="section-description">
-          Explore our collection of resources to support healthcare advancement and research in Middle Eastern communities.
+          {t("resources.subtitle")}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -55,7 +58,7 @@ const ResourcesSection = () => {
                 <h3 className="text-xl font-bold mb-3">{resource.title}</h3>
                 <p className="text-gray-600 mb-4">{resource.description}</p>
                 <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                  Access Resource
+                  {t("resources.accessResource")}
                 </Button>
               </CardContent>
             </Card>
