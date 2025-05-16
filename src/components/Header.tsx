@@ -30,8 +30,8 @@ const Header = () => {
           <nav className="hidden md:flex space-x-8">
             <Link to="/" className="hover:text-healthTeal transition-colors">Home</Link>
             <Link to="/about" className="hover:text-healthTeal transition-colors">About</Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors">Services</Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors">Resources</Link>
+            <Link to="/services" className="hover:text-healthTeal transition-colors">For the Community</Link>
+            <Link to="/resources" className="hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
             <Link to="/diseases" className="hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="hover:text-healthTeal transition-colors">Contact</Link>
           </nav>
@@ -62,8 +62,8 @@ const Header = () => {
           <nav className="md:hidden pt-4 pb-2 space-y-2">
             <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">Home</Link>
             <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">About</Link>
-            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">Services</Link>
-            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">Resources</Link>
+            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">For the Community</Link>
+            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">Diseases</Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">Contact</Link>
             <div className="pt-2">
