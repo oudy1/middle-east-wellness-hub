@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Heart, Brain, Lungs, Activity } from "lucide-react";
+import { Heart, Brain, Wind, Activity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -28,7 +28,7 @@ const diseasesData = [
   {
     title: "Respiratory Diseases",
     description: "Respiratory diseases like asthma and COPD can significantly impact quality of life. Learn about prevalence in Middle Eastern populations, environmental factors, and management approaches.",
-    icon: <Lungs className="h-10 w-10 text-white" />,
+    icon: <Wind className="h-10 w-10 text-white" />,
     color: "bg-healthDarkBlue"
   }
 ];
