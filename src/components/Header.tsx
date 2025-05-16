@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('en'); // 'en' for English, 'ar' for Arabic
+  const { language, setLanguage, t } = useLanguage();
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -28,13 +29,13 @@ const Header = () => {
           
           {/* Desktop Menu */}
           <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="hover:text-healthTeal transition-colors">Home</Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors">About</Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors">For the Community</Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors">Diseases</Link>
-            <Link to="/contact" className="hover:text-healthTeal transition-colors">Contact</Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors">Recorded Webinars</Link>
+            <Link to="/" className="hover:text-healthTeal transition-colors">{t("header.home")}</Link>
+            <Link to="/about" className="hover:text-healthTeal transition-colors">{t("header.about")}</Link>
+            <Link to="/services" className="hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
+            <Link to="/resources" className="hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
+            <Link to="/diseases" className="hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
+            <Link to="/contact" className="hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
+            <Link to="/webinars" className="hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
           </nav>
           
           <div className="hidden md:flex items-center">
@@ -61,13 +62,13 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <nav className="md:hidden pt-4 pb-2 space-y-2">
-            <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">Home</Link>
-            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">About</Link>
-            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">For the Community</Link>
-            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">For Clinicians/Researchers</Link>
-            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">Diseases</Link>
-            <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">Contact</Link>
-            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">Recorded Webinars</Link>
+            <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">{t("header.home")}</Link>
+            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">{t("header.about")}</Link>
+            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
+            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
+            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
+            <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
+            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
             <div className="pt-2">
               <Button 
                 variant="outline" 
