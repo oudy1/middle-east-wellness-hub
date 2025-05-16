@@ -2,36 +2,39 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award } from "lucide-react";
-
-const initiatives = [
-  {
-    title: "Upcoming Initiative",
-    content: "Regional health assessment program launching in collaboration with local communities",
-    date: "Starting July 2025"
-  },
-  {
-    title: "What's New",
-    content: "New research grant secured to study healthcare access disparities in rural areas",
-    date: "May 2025"
-  }
-];
-
-const achievements = [
-  {
-    metric: "12,000+",
-    description: "Community members reached through health initiatives"
-  },
-  {
-    metric: "45+",
-    description: "Partner organizations across the Middle East and Canada"
-  },
-  {
-    metric: "28",
-    description: "Research studies published on Middle Eastern healthcare"
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ImpactSection = () => {
+  const { t } = useLanguage();
+
+  const initiatives = [
+    {
+      title: "Upcoming Initiative",
+      content: "Regional health assessment program launching in collaboration with local communities",
+      date: "Starting July 2025"
+    },
+    {
+      title: "What's New",
+      content: "New research grant secured to study healthcare access disparities in rural areas",
+      date: "May 2025"
+    }
+  ];
+
+  const achievements = [
+    {
+      metric: "12,000+",
+      description: "Community members reached through health initiatives"
+    },
+    {
+      metric: "45+",
+      description: "Partner organizations across the Middle East and Canada"
+    },
+    {
+      metric: "28",
+      description: "Research studies published on Middle Eastern healthcare"
+    }
+  ];
+
   return (
     <section className="py-16 bg-healthDarkBlue text-white relative">
       <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -41,10 +44,10 @@ const ImpactSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center flex items-center justify-center">
           <Award className="mr-3 text-healthGold h-8 w-8" />
-          Our Impact
+          {t("impact.title")}
         </h2>
         <p className="text-lg text-center max-w-3xl mx-auto mb-12 text-healthLightGray opacity-80">
-          Making a difference in healthcare access and outcomes for Middle Eastern communities
+          {t("impact.subtitle")}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">

@@ -1,7 +1,10 @@
 
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative bg-healthDarkBlue py-16 md:py-24 overflow-hidden">
       <div className="absolute inset-0">
@@ -17,17 +20,17 @@ const HeroSection = () => {
             <span>Health For All</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
-            Advancing Middle Eastern Healthcare
+            {t("hero.title")}
           </h1>
           <p className="text-xl text-healthLightGray mb-8 animate-fade-in">
-            Our mission is to improve healthcare access, research, and outcomes for communities across the Middle East through innovative solutions and education.
+            {t("hero.subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
             <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-6 text-lg">
-              Learn About Our Mission
+              {t("hero.learnMore")}
             </Button>
             <Button variant="outline" className="border-healthGold text-healthGold hover:bg-healthGold hover:text-healthDarkBlue px-8 py-6 text-lg">
-              Support Our Work
+              {t("hero.support")}
             </Button>
           </div>
         </div>

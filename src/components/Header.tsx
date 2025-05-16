@@ -23,7 +23,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold mr-8">
-              Middle Eastern Health Initiative
+              {t("header.home") === "Home" ? "Middle Eastern Health Initiative" : "مبادرة الصحة في الشرق الأوسط"}
             </Link>
           </div>
           
@@ -41,7 +41,7 @@ const Header = () => {
           <div className="hidden md:flex items-center">
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white hover:text-healthDarkBlue flex items-center gap-2"
+              className="bg-purple-600 hover:bg-purple-700 text-white border-white hover:border-white flex items-center gap-2"
               onClick={toggleLanguage}
             >
               <Globe size={16} />
@@ -73,7 +73,7 @@ const Header = () => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="text-white border-white hover:bg-white hover:text-healthDarkBlue flex items-center gap-2"
+                className="bg-purple-600 hover:bg-purple-700 text-white border-white hover:border-white flex items-center gap-2"
                 onClick={toggleLanguage}
               >
                 <Globe size={16} />
