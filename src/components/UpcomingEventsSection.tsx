@@ -2,32 +2,35 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalendarDays, ArrowRight } from "lucide-react";
-
-const events = [
-  {
-    title: "Healthcare Symposium",
-    date: "June 15, 2025",
-    description: "Join leading healthcare professionals to discuss innovations in Middle Eastern healthcare practices.",
-    location: "Virtual Event",
-    registrationLink: "/register/healthcare-symposium"
-  },
-  {
-    title: "Community Health Workshop",
-    date: "July 2, 2025",
-    description: "Learn about cultural competency in healthcare delivery for Middle Eastern communities.",
-    location: "Toronto, Canada",
-    registrationLink: "/register/community-health-workshop"
-  },
-  {
-    title: "Research Presentation Day",
-    date: "August 10, 2025",
-    description: "Showcase of ongoing research projects focused on healthcare challenges in the Middle East.",
-    location: "Ottawa Convention Center",
-    registrationLink: "/register/research-day"
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const UpcomingEventsSection = () => {
+  const { t } = useLanguage();
+  
+  const events = [
+    {
+      title: t("events.healthcareSymposium"),
+      date: t("events.date") === "Date" ? "June 15, 2025" : "١٥ يونيو، ٢٠٢٥",
+      description: t("events.healthcareSymposiumDesc"),
+      location: t("events.virtual"),
+      registrationLink: "/register/healthcare-symposium"
+    },
+    {
+      title: t("events.communityWorkshop"),
+      date: t("events.date") === "Date" ? "July 2, 2025" : "٢ يوليو، ٢٠٢٥",
+      description: t("events.communityWorkshopDesc"),
+      location: t("events.toronto"),
+      registrationLink: "/register/community-health-workshop"
+    },
+    {
+      title: t("events.researchDay"),
+      date: t("events.date") === "Date" ? "August 10, 2025" : "١٠ أغسطس، ٢٠٢٥",
+      description: t("events.researchDayDesc"),
+      location: t("events.ottawa"),
+      registrationLink: "/register/research-day"
+    }
+  ];
+
   return (
     <section className="py-16 bg-healthLightGray relative overflow-hidden">
       <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -39,12 +42,12 @@ const UpcomingEventsSection = () => {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center">
               <CalendarDays className="mr-3 text-healthTeal h-8 w-8" />
-              Upcoming Events
+              {t("events.title")}
             </h2>
-            <p className="text-gray-600 mt-2">Join us at our upcoming events and be part of our community</p>
+            <p className="text-gray-600 mt-2">{t("events.subtitle")}</p>
           </div>
           <Button className="mt-4 md:mt-0 bg-healthTeal hover:bg-teal-600">
-            View All Events <ArrowRight className="ml-2 h-4 w-4" />
+            {t("events.viewAll")} <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
         
@@ -60,7 +63,7 @@ const UpcomingEventsSection = () => {
                 <p className="text-gray-600 mb-4">{event.description}</p>
                 <div className="text-sm text-gray-500 mb-4">{event.location}</div>
                 <Button asChild variant="outline" className="w-full border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
-                  <a href={event.registrationLink}>Register Now</a>
+                  <a href={event.registrationLink}>{t("events.register")}</a>
                 </Button>
               </CardContent>
             </Card>

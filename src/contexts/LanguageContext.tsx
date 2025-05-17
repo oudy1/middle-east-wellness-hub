@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 type LanguageContextType = {
@@ -14,7 +13,7 @@ const translations = {
     ar: "الرئيسية"
   },
   "header.about": {
-    en: "About",
+    en: "About Us",
     ar: "عن المبادرة"
   },
   "header.forCommunity": {
@@ -103,7 +102,7 @@ const translations = {
   },
   "resources.educationalMaterialsDesc": {
     en: "Explore educational resources about health innovations and treatments specific to Middle Eastern populations.",
-    ar: "استكشف الموارد التعليمية حول الابتكارات الصحية والعلاجات الخاصة بسكان الشرق الأوسط."
+    ar: "استكشف الموارد التعليمية حول الابتكارات الصحية والعلاجات الخاصة بسكان الشرق الأ��سط."
   },
   "resources.newsletterArchive": {
     en: "Newsletter Archive",
@@ -276,6 +275,68 @@ const translations = {
   "newsletter.successDescription": {
     en: "Thank you for subscribing to our newsletter.",
     ar: "شكرًا لاشتراكك في نشرتنا الإخبارية."
+  },
+  
+  // Upcoming Events Section
+  "events.title": {
+    en: "Upcoming Events",
+    ar: "الفعاليات القادمة"
+  },
+  "events.subtitle": {
+    en: "Join us at our upcoming events and be part of our community",
+    ar: "انضم إلينا في فعالياتنا القادمة وكن جزءًا من مجتمعنا"
+  },
+  "events.viewAll": {
+    en: "View All Events",
+    ar: "عرض جميع الفعاليات"
+  },
+  "events.healthcareSymposium": {
+    en: "Healthcare Symposium",
+    ar: "ندوة الرعاية الصحية"
+  },
+  "events.healthcareSymposiumDesc": {
+    en: "Join leading healthcare professionals to discuss innovations in Middle Eastern healthcare practices.",
+    ar: "انضم إلى متخصصي الرعاية الصحية الرائدين لمناقشة الابتكارات في ممارسات الرعاية الصحية في الشرق الأوسط."
+  },
+  "events.communityWorkshop": {
+    en: "Community Health Workshop",
+    ar: "ورشة عمل الصحة المجتمعية"
+  },
+  "events.communityWorkshopDesc": {
+    en: "Learn about cultural competency in healthcare delivery for Middle Eastern communities.",
+    ar: "تعرف على الكفاءة الثقافية في تقديم الرعاية الصحية للمجتمعات في الشرق الأوسط."
+  },
+  "events.researchDay": {
+    en: "Research Presentation Day",
+    ar: "يوم عرض الأبحاث"
+  },
+  "events.researchDayDesc": {
+    en: "Showcase of ongoing research projects focused on healthcare challenges in the Middle East.",
+    ar: "عرض لمشاريع البحث الجارية التي تركز على تحديات الرعاية الصحية في الشرق الأوسط."
+  },
+  "events.date": {
+    en: "Date",
+    ar: "التاريخ"
+  },
+  "events.location": {
+    en: "Location",
+    ar: "الموقع"
+  },
+  "events.virtual": {
+    en: "Virtual Event",
+    ar: "فعالية افتراضية"
+  },
+  "events.toronto": {
+    en: "Toronto, Canada",
+    ar: "تورنتو، كندا"
+  },
+  "events.ottawa": {
+    en: "Ottawa Convention Center",
+    ar: "مركز أوتاوا للمؤتمرات"
+  },
+  "events.register": {
+    en: "Register Now",
+    ar: "سجل الآن"
   },
   
   // Footer
