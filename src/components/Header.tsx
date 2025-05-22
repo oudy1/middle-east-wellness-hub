@@ -23,7 +23,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold mr-8">
-              {t("header.home") === "Home" ? "SHAMS" : "شمس"}
+              {language === 'ar' ? "شمس" : "SHAMS"}
               <span className="text-sm font-light block md:inline md:ml-2">
                 {t("header.home") === "Home" ? 
                   "Supporting Health & Advocacy for Middle Eastern Societies" : 
