@@ -12,7 +12,7 @@ const translations = {
     en: "Home",
     ar: "الرئيسية"
   },
-  "header.about": {
+  "header.aboutUs": {
     en: "About Us",
     ar: "عن المبادرة"
   },
@@ -38,6 +38,14 @@ const translations = {
   },
   
   // Hero Section
+  "hero.organizationName": {
+    en: "SHAMS",
+    ar: "شمس"
+  },
+  "hero.tagline": {
+    en: "Supporting Health & Advocacy for Middle Eastern Societies",
+    ar: "دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"
+  },
   "hero.title": {
     en: "Advancing Middle Eastern Healthcare",
     ar: "تطوير الرعاية الصحية في الشرق الأوسط"
@@ -341,8 +349,12 @@ const translations = {
   
   // Footer
   "footer.title": {
-    en: "Middle Eastern Health Initiative",
-    ar: "مبادرة الصحة في الشرق الأوسط"
+    en: "SHAMS",
+    ar: "شمس"
+  },
+  "footer.subtitle": {
+    en: "Supporting Health & Advocacy for Middle Eastern Societies",
+    ar: "دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"
   },
   "footer.description": {
     en: "Dedicated to improving healthcare access and outcomes for communities across the Middle East.",

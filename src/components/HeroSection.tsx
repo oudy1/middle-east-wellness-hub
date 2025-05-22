@@ -15,9 +15,9 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-2 text-healthGold opacity-70">
-            <span className="font-arabic text-2xl">الصحة للجميع</span>
+            <span className="font-arabic text-2xl">{t("hero.organizationName") === "SHAMS" ? "شمس" : "SHAMS"}</span>
             <span className="mx-2">•</span>
-            <span>Health For All</span>
+            <span>{t("hero.tagline")}</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
             {t("hero.title")}

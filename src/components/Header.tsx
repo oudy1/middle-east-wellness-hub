@@ -23,14 +23,19 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold mr-8">
-              {t("header.home") === "Home" ? "Middle Eastern Health Initiative" : "مبادرة الصحة في الشرق الأوسط"}
+              {t("header.home") === "Home" ? "SHAMS" : "شمس"}
+              <span className="text-sm font-light block md:inline md:ml-2">
+                {t("header.home") === "Home" ? 
+                  "Supporting Health & Advocacy for Middle Eastern Societies" : 
+                  "دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
+              </span>
             </Link>
           </div>
           
           {/* Desktop Menu */}
           <nav className="hidden md:flex space-x-8">
             <Link to="/" className="hover:text-healthTeal transition-colors">{t("header.home")}</Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors">{t("header.about")}</Link>
+            <Link to="/about" className="hover:text-healthTeal transition-colors">{t("header.aboutUs")}</Link>
             <Link to="/services" className="hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
             <Link to="/resources" className="hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
             <Link to="/diseases" className="hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
@@ -41,7 +46,7 @@ const Header = () => {
           <div className="hidden md:flex items-center">
             <Button 
               variant="outline" 
-              className="bg-purple-600 hover:bg-purple-700 text-white border-white hover:border-white flex items-center gap-2"
+              className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
               onClick={toggleLanguage}
             >
               <Globe size={16} />
@@ -63,7 +68,7 @@ const Header = () => {
         {mobileMenuOpen && (
           <nav className="md:hidden pt-4 pb-2 space-y-2">
             <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">{t("header.home")}</Link>
-            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">{t("header.about")}</Link>
+            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">{t("header.aboutUs")}</Link>
             <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
@@ -73,7 +78,7 @@ const Header = () => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="bg-purple-600 hover:bg-purple-700 text-white border-white hover:border-white flex items-center gap-2"
+                className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
                 onClick={toggleLanguage}
               >
                 <Globe size={16} />
