@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { User, BookOpen, Monitor, Phone } from "lucide-react";
+import { User, BookOpen, Monitor, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -31,6 +32,13 @@ const services = [
     icon: <Phone className="h-10 w-10 text-white" />,
     color: "bg-healthDarkBlue",
     link: "/webinars"
+  },
+  {
+    title: "Physician Directory",
+    description: "Find family physicians in your area with our interactive map directory showing providers by location.",
+    icon: <MapPin className="h-10 w-10 text-white" />,
+    color: "bg-healthPurple",
+    link: "/physician-directory"
   }
 ];
 
@@ -43,7 +51,7 @@ const ServicesSection = () => {
           We offer a range of services to support healthcare advancement and research in the Middle East.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card key={index} className="overflow-hidden border-none shadow-md">
               <div className={`${service.color} p-6`}>
@@ -54,9 +62,11 @@ const ServicesSection = () => {
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                  Learn More
-                </Button>
+                <Link to={service.link}>
+                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
+                    Learn More
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}

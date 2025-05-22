@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Diseases from "./pages/Diseases";
 import Webinars from "./pages/Webinars";
+import PhysicianDirectory from "./pages/PhysicianDirectory";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/diseases" element={<Diseases />} />
             <Route path="/webinars" element={<Webinars />} />
+            <Route path="/physician-directory" element={<PhysicianDirectory />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
