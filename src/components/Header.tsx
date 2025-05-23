@@ -34,13 +34,27 @@ const Header = () => {
           
           {/* Desktop Menu */}
           <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="hover:text-healthTeal transition-colors">{t("header.home")}</Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors">{t("header.aboutUs")}</Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
-            <Link to="/contact" className="hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
+            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.home")}
+            </Link>
+            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.aboutUs")}
+            </Link>
+            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.forCommunity")}
+            </Link>
+            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.forClinicians")}
+            </Link>
+            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.diseases")}
+            </Link>
+            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.contact")}
+            </Link>
+            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+              {t("header.webinars")}
+            </Link>
           </nav>
           
           <div className="hidden md:flex items-center">
@@ -67,13 +81,27 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <nav className="md:hidden pt-4 pb-2 space-y-2">
-            <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">{t("header.home")}</Link>
-            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">{t("header.aboutUs")}</Link>
-            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forCommunity")}</Link>
-            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">{t("header.forClinicians")}</Link>
-            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
-            <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
-            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
+            <Link to="/" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.home")}
+            </Link>
+            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.aboutUs")}
+            </Link>
+            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.forCommunity")}
+            </Link>
+            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.forClinicians")}
+            </Link>
+            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.diseases")}
+            </Link>
+            <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.contact")}
+            </Link>
+            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">
+              {t("header.webinars")}
+            </Link>
             <div className="pt-2">
               <Button 
                 variant="outline" 
