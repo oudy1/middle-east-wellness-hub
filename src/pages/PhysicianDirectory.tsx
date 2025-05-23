@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -75,7 +76,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
 ];
 
 const PhysicianDirectory = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [physicians, setPhysicians] = useState(SAMPLE_PHYSICIANS);
   const [filteredPhysicians, setFilteredPhysicians] = useState(SAMPLE_PHYSICIANS);
   const [searchTerm, setSearchTerm] = useState("");
@@ -154,12 +155,12 @@ const PhysicianDirectory = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-healthLightGray">
+    <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-healthDarkBlue">
-            Family Physician Directory
+            {t("physicians.directoryTitle")}
           </h1>
           
           <div className="flex flex-col lg:flex-row gap-6">
@@ -167,7 +168,7 @@ const PhysicianDirectory = () => {
               <div className="bg-white p-4 rounded-lg shadow-md mb-6">
                 <div className="flex gap-2 mb-4">
                   <Input
-                    placeholder="Search by name, specialty, or language..."
+                    placeholder={t("physicians.searchPlaceholder")}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="flex-1"
@@ -178,19 +179,19 @@ const PhysicianDirectory = () => {
                       className="bg-healthTeal hover:bg-healthTeal/90 flex items-center"
                     >
                       <MapPin className="mr-2 h-4 w-4" />
-                      Near Me
+                      {t("physicians.nearMe")}
                     </Button>
                   )}
                 </div>
                 
                 {locationPermission === "granted" && (
                   <p className="text-sm text-green-600 mb-2">
-                    <MapPin className="h-4 w-4 inline mr-1" /> Using your location to find nearby physicians
+                    <MapPin className="h-4 w-4 inline mr-1" /> {t("physicians.usingLocation")}
                   </p>
                 )}
                 
                 <p className="text-sm text-gray-500">
-                  Found {filteredPhysicians.length} physicians
+                  {t("physicians.found")} {filteredPhysicians.length} {t("physicians.physicians")}
                 </p>
               </div>
               
@@ -207,30 +208,30 @@ const PhysicianDirectory = () => {
                       <h3 className="font-bold text-lg text-healthDarkBlue">{physician.name}</h3>
                       <p className="text-gray-600">{physician.specialty}</p>
                       <div className="text-sm text-gray-500 mt-2">
-                        <p>Languages: {physician.languages.join(", ")}</p>
+                        <p>{t("physicians.languages")}: {physician.languages.join(", ")}</p>
                         <p>{physician.address}</p>
                         <p>{physician.phone}</p>
                       </div>
                       <div className="mt-2">
                         {physician.accepting ? (
                           <span className="text-green-600 text-sm font-medium">
-                            ✓ Accepting new patients
+                            ✓ {t("physicians.accepting")}
                           </span>
                         ) : (
                           <span className="text-red-600 text-sm font-medium">
-                            ✗ Not accepting new patients
+                            ✗ {t("physicians.notAccepting")}
                           </span>
                         )}
                       </div>
                       {userLocation && (
                         <div className="mt-2 text-sm">
-                          <span className="font-medium">Distance: </span>
+                          <span className="font-medium">{t("physicians.distance")}: </span>
                           {calculateDistance(
                             userLocation[1],
                             userLocation[0],
                             physician.coordinates[1],
                             physician.coordinates[0]
-                          ).toFixed(1)} km away
+                          ).toFixed(1)} {t("physicians.km")}
                         </div>
                       )}
                     </CardContent>
@@ -238,7 +239,7 @@ const PhysicianDirectory = () => {
                 ))}
                 {filteredPhysicians.length === 0 && (
                   <div className="text-center py-8 bg-white rounded-lg shadow-md">
-                    <p className="text-gray-500">No physicians match your search criteria.</p>
+                    <p className="text-gray-500">{t("physicians.noResults")}</p>
                   </div>
                 )}
               </div>

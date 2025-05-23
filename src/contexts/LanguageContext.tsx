@@ -36,6 +36,10 @@ const translations = {
     en: "Recorded Webinars",
     ar: "ندوات مسجلة"
   },
+  "header.physicianDirectory": {
+    en: "Find a Physician",
+    ar: "ابحث عن طبيب"
+  },
   
   // Hero Section
   "hero.organizationName": {
@@ -525,6 +529,138 @@ const translations = {
   "webinars.viewSchedule": {
     en: "View Schedule",
     ar: "عرض الجدول الزمني"
+  },
+  
+  // Services Section
+  "services.title": {
+    en: "Our Services",
+    ar: "خدماتنا"
+  },
+  "services.subtitle": {
+    en: "We offer a range of services to support healthcare advancement and research in the Middle East.",
+    ar: "نقدم مجموعة من الخدمات لدعم تقدم الرعاية الصحية والبحث في الشرق الأوسط."
+  },
+  "services.researchPlatform": {
+    en: "Research Services Platform",
+    ar: "منصة خدمات البحث"
+  },
+  "services.researchPlatformDesc": {
+    en: "A platform to support the development of high-quality research in healthcare across the Middle East.",
+    ar: "منصة لدعم تطوير البحوث عالية الجودة في الرعاية الصحية في جميع أنحاء الشرق الأوسط."
+  },
+  "services.ourResearch": {
+    en: "Our Research",
+    ar: "أبحاثنا"
+  },
+  "services.ourResearchDesc": {
+    en: "Learn about our research surrounding health innovations and treatments specific to Middle Eastern populations.",
+    ar: "تعرف على أبحاثنا حول ابتكارات الصحة والعلاجات الخاصة بسكان الشرق الأوسط."
+  },
+  "services.newsletter": {
+    en: "Newsletter",
+    ar: "النشرة الإخبارية"
+  },
+  "services.newsletterDesc": {
+    en: "Stay informed of the latest news and events from our health community and research initiatives.",
+    ar: "ابق على اطلاع بأحدث الأخبار والفعاليات من مجتمعنا الصحي ومبادرات البحث."
+  },
+  "services.webinars": {
+    en: "Webinars",
+    ar: "الندوات عبر الإنترنت"
+  },
+  "services.webinarsDesc": {
+    en: "Access past webinars and register for upcoming presentations on important health topics.",
+    ar: "الوصول إلى الندوات السابقة والتسجيل للعروض التقديمية القادمة حول مواضيع صحية مهمة."
+  },
+  "services.physicianDirectory": {
+    en: "Physician Directory",
+    ar: "دليل الأطباء"
+  },
+  "services.physicianDirectoryDesc": {
+    en: "Find family physicians in your area with our interactive map directory showing providers by location.",
+    ar: "ابحث عن أطباء الأسرة في منطقتك باستخدام دليل الخريطة التفاعلي الذي يعرض مقدمي الخدمات حسب الموقع."
+  },
+  "services.learnMore": {
+    en: "Learn More",
+    ar: "اقرأ المزيد"
+  },
+  
+  // Physician Directory Page
+  "physicians.directoryTitle": {
+    en: "Family Physician Directory",
+    ar: "دليل أطباء الأسرة"
+  },
+  "physicians.searchPlaceholder": {
+    en: "Search by name, specialty, or language...",
+    ar: "البحث حسب الاسم أو التخصص أو اللغة..."
+  },
+  "physicians.nearMe": {
+    en: "Near Me",
+    ar: "بالقرب مني"
+  },
+  "physicians.usingLocation": {
+    en: "Using your location to find nearby physicians",
+    ar: "استخدام موقعك للعثور على أطباء قريبين"
+  },
+  "physicians.found": {
+    en: "Found",
+    ar: "تم العثور على"
+  },
+  "physicians.physicians": {
+    en: "physicians",
+    ar: "طبيب"
+  },
+  "physicians.languages": {
+    en: "Languages",
+    ar: "اللغات"
+  },
+  "physicians.accepting": {
+    en: "Accepting new patients",
+    ar: "يقبل مرضى جدد"
+  },
+  "physicians.notAccepting": {
+    en: "Not accepting new patients",
+    ar: "لا يقبل مرضى جدد"
+  },
+  "physicians.distance": {
+    en: "Distance",
+    ar: "المسافة"
+  },
+  "physicians.km": {
+    en: "km away",
+    ar: "كم بعيدا"
+  },
+  "physicians.noResults": {
+    en: "No physicians match your search criteria.",
+    ar: "لا يوجد أطباء يطابقون معايير البحث."
+  },
+  "physicians.mapKeyRequired": {
+    en: "Map API Key Required",
+    ar: "مطلوب مفتاح API للخريطة"
+  },
+  "physicians.mapKeyDescription": {
+    en: "To view the physician locations on a map, please enter your Mapbox public token.",
+    ar: "لعرض مواقع الأطباء على الخريطة، يرجى إدخال رمز Mapbox العام الخاص بك."
+  },
+  "physicians.mapKeyPlaceholder": {
+    en: "Enter your Mapbox public token",
+    ar: "أدخل رمز Mapbox العام الخاص بك"
+  },
+  "physicians.saveKey": {
+    en: "Save Key",
+    ar: "حفظ المفتاح"
+  },
+  "physicians.getKey": {
+    en: "Get a Key",
+    ar: "الحصول على مفتاح"
+  },
+  "physicians.mapPlaceholder": {
+    en: "This is a placeholder map. In a real application, this would display an interactive map with physician locations.",
+    ar: "هذه خريطة توضيحية. في التطبيق الفعلي، ستعرض خريطة تفاعلية مع مواقع الأطباء."
+  },
+  "physicians.selectPhysician": {
+    en: "Select a physician from the list to see details",
+    ar: "اختر طبيبًا من القائمة لمشاهدة التفاصيل"
   },
   
   // 404 Page
