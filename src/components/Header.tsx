@@ -41,7 +41,6 @@ const Header = () => {
             <Link to="/diseases" className="hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
             <Link to="/contact" className="hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
             <Link to="/webinars" className="hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors">{t("header.physicianDirectory")}</Link>
           </nav>
           
           <div className="hidden md:flex items-center">
@@ -75,7 +74,6 @@ const Header = () => {
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">{t("header.diseases")}</Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">{t("header.contact")}</Link>
             <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">{t("header.webinars")}</Link>
-            <Link to="/physician-directory" className="block py-2 hover:text-healthTeal transition-colors">{t("header.physicianDirectory")}</Link>
             <div className="pt-2">
               <Button 
                 variant="outline" 
