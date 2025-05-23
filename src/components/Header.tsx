@@ -27,7 +27,7 @@ const Header = () => {
               <span className="text-sm font-light block md:inline md:ml-2">
                 {t("header.home") === "Home" ? 
                   "Supporting Health & Advocacy for Middle Eastern Societies" : 
-                  "دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
+                  "شمس   دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
               </span>
             </Link>
           </div>
