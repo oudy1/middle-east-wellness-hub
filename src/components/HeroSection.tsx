@@ -15,7 +15,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-2 text-healthGold opacity-70">
-            <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "ش م س" : "SHAMS"}</span>
+            <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
             <span className="mx-2">•</span>
             <span>{t("hero.tagline")}</span>
           </div>
