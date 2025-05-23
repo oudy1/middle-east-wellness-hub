@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,8 +8,20 @@ import { Input } from "@/components/ui/input";
 import { MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Define the Physician type
+type Physician = {
+  id: number;
+  name: string;
+  specialty: string;
+  languages: string[];
+  address: string;
+  phone: string;
+  accepting: boolean;
+  coordinates: [number, number]; // Explicitly define as a tuple with exactly 2 numbers
+};
+
 // Sample physician data for demonstration
-const SAMPLE_PHYSICIANS = [
+const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 1,
     name: "Dr. Layla Hassan",
@@ -19,7 +30,7 @@ const SAMPLE_PHYSICIANS = [
     address: "123 Health Ave, Phoenix, AZ",
     phone: "(480) 555-1234",
     accepting: true,
-    coordinates: [-112.0740, 33.4484]
+    coordinates: [-112.0740, 33.4484] as [number, number]
   },
   {
     id: 2,
@@ -29,7 +40,7 @@ const SAMPLE_PHYSICIANS = [
     address: "456 Wellness Blvd, Phoenix, AZ",
     phone: "(480) 555-2345",
     accepting: true,
-    coordinates: [-112.0840, 33.4684]
+    coordinates: [-112.0840, 33.4684] as [number, number]
   },
   {
     id: 3,
@@ -39,7 +50,7 @@ const SAMPLE_PHYSICIANS = [
     address: "789 Care Street, Tempe, AZ",
     phone: "(480) 555-3456",
     accepting: false,
-    coordinates: [-111.9400, 33.4255]
+    coordinates: [-111.9400, 33.4255] as [number, number]
   },
   {
     id: 4,
@@ -49,7 +60,7 @@ const SAMPLE_PHYSICIANS = [
     address: "321 Medical Drive, Scottsdale, AZ",
     phone: "(480) 555-4567",
     accepting: true,
-    coordinates: [-111.9260, 33.4941]
+    coordinates: [-111.9260, 33.4941] as [number, number]
   },
   {
     id: 5,
@@ -59,7 +70,7 @@ const SAMPLE_PHYSICIANS = [
     address: "654 Healing Road, Mesa, AZ",
     phone: "(480) 555-5678",
     accepting: true,
-    coordinates: [-111.8313, 33.4152]
+    coordinates: [-111.8313, 33.4152] as [number, number]
   }
 ];
 

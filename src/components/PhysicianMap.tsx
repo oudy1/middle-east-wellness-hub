@@ -13,7 +13,7 @@ type Physician = {
   address: string;
   phone: string;
   accepting: boolean;
-  coordinates: [number, number];
+  coordinates: [number, number]; // Explicitly typed as tuple
 };
 
 type PhysicianMapProps = {
