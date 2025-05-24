@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, Globe } from "lucide-react";
@@ -27,7 +26,7 @@ const Header = () => {
               <span className="text-sm font-light block md:inline md:ml-2">
                 {t("header.home") === "Home" ? 
                   "Supporting Health & Advocacy for Middle Eastern Societies" : 
-                  "شمس   دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
+                  "دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
               </span>
             </Link>
           </div>
