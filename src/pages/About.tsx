@@ -103,13 +103,18 @@ const About = () => {
           </div>
         </section>
 
-        {/* Founder Section */}
+        {/* Team Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-12 text-center">
-              {language === 'ar' ? 'المؤسس' : 'Founder'}
+            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-8 text-center">
+              {language === 'ar' ? 'فريقنا' : 'Our Team'}
             </h2>
-            <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600">
+              Our team is composed of experienced researchers, clinicians, students and community members passionate about improving support for Arab and Middle Eastern communities in healthcare.
+            </p>
+            
+            {/* Founder at the top of team */}
+            <div className="max-w-2xl mx-auto text-center mb-16">
               <div className="mb-8">
                 <div className="w-48 h-48 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <span className="text-gray-500">Photo Coming Soon</span>
@@ -121,18 +126,6 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="py-16 bg-healthLightGray">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-8 text-center">
-              {language === 'ar' ? 'فريقنا' : 'Our Team'}
-            </h2>
-            <p className="text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600">
-              Our team is composed of experienced researchers, clinicians, students and community members passionate about improving support for Arab and Middle Eastern communities in healthcare.
-            </p>
             
             <div className="text-center py-12">
               <p className="text-xl text-gray-600 mb-4">
@@ -146,7 +139,7 @@ const About = () => {
         </section>
 
         {/* Affiliated Physicians Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-healthLightGray">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-8 text-center">
               {language === 'ar' ? 'الأطباء المنتسبون' : 'Affiliated Physicians'}
