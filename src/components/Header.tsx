@@ -1,9 +1,15 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, Globe } from "lucide-react";
+import { Menu, Globe, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,9 +19,15 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
   
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'ar' : 'en');
-  };
+  const languages = [
+    { code: 'en', name: 'English', nativeName: 'English' },
+    { code: 'ar', name: 'Arabic', nativeName: 'عربي' },
+    { code: 'ku', name: 'Kurdish', nativeName: 'کوردی' },
+    { code: 'fa', name: 'Persian', nativeName: 'فارسی' },
+    { code: 'tr', name: 'Turkish', nativeName: 'Türkçe' }
+  ];
+  
+  const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
   
   return (
     <header className="bg-healthDarkBlue text-white">
@@ -44,7 +56,7 @@ const Header = () => {
               {t("header.forCommunity")}
             </Link>
             <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.forClinicians")}
+              Research
             </Link>
             <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
               {t("header.diseases")}
@@ -58,14 +70,29 @@ const Header = () => {
           </nav>
           
           <div className="hidden md:flex items-center">
-            <Button 
-              variant="outline" 
-              className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
-              onClick={toggleLanguage}
-            >
-              <Globe size={16} />
-              {language === 'en' ? 'عربي' : 'English'}
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
+                >
+                  <Globe size={16} />
+                  {currentLanguage.nativeName}
+                  <ChevronDown size={16} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg">
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code as "en" | "ar")}
+                    className="cursor-pointer hover:bg-gray-100 px-4 py-2"
+                  >
+                    {lang.nativeName} ({lang.name})
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           
           {/* Mobile Menu Button */}
@@ -91,7 +118,7 @@ const Header = () => {
               {t("header.forCommunity")}
             </Link>
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">
-              {t("header.forClinicians")}
+              Research
             </Link>
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">
               {t("header.diseases")}
@@ -103,15 +130,30 @@ const Header = () => {
               {t("header.webinars")}
             </Link>
             <div className="pt-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
-                onClick={toggleLanguage}
-              >
-                <Globe size={16} />
-                {language === 'en' ? 'عربي' : 'English'}
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2"
+                  >
+                    <Globe size={16} />
+                    {currentLanguage.nativeName}
+                    <ChevronDown size={16} />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg">
+                  {languages.map((lang) => (
+                    <DropdownMenuItem
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code as "en" | "ar")}
+                      className="cursor-pointer hover:bg-gray-100 px-4 py-2"
+                    >
+                      {lang.nativeName} ({lang.name})
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </nav>
         )}
