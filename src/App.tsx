@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Diseases from "./pages/Diseases";
 import Webinars from "./pages/Webinars";
 import PhysicianDirectory from "./pages/PhysicianDirectory";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/diseases" element={<Diseases />} />
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
