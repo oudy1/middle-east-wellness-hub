@@ -4,6 +4,7 @@ import { User, BookOpen, Monitor, Phone, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import InquiryForm from "./InquiryForm";
 
 const ServicesSection = () => {
   const { t } = useLanguage();
@@ -75,29 +76,9 @@ const ServicesSection = () => {
           ))}
         </div>
         
-        {/* Physician Finder Section */}
-        <div className="mt-20 bg-white p-8 rounded-lg shadow-md">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-6 md:mb-0 md:mr-8 md:w-1/2">
-              <h3 className="text-2xl font-bold text-healthDarkBlue mb-4">{t("services.findPhysician")}</h3>
-              <p className="text-gray-600 mb-6">{t("services.findPhysicianDesc")}</p>
-              <Link to="/physician-directory">
-                <Button className="bg-healthTeal hover:bg-teal-600 text-white">
-                  {t("services.findPhysicianButton")}
-                </Button>
-              </Link>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="bg-healthLightGray rounded-lg p-6 w-full max-w-md">
-                <div className="flex justify-center mb-4">
-                  <MapPin className="h-16 w-16 text-healthTeal" />
-                </div>
-                <p className="text-center text-gray-600">
-                  {t("services.physicianMapInfo")}
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Contact Inquiry Form Section */}
+        <div className="mt-20">
+          <InquiryForm />
         </div>
       </div>
     </section>

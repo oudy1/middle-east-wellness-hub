@@ -14,46 +14,142 @@ const Webinars = () => {
     {
       title: language === 'en' ? 
         "Understanding Diabetes in Middle Eastern Populations" : 
-        "فهم مرض السكري في مجتمعات الشرق الأوسط",
-      presenter: language === 'en' ? "Dr. Sarah Mahmoud" : "د. سارة محمود",
-      date: language === 'en' ? "April 15, 2025" : "١٥ أبريل ٢٠٢٥",
-      duration: language === 'en' ? "45 minutes" : "٤٥ دقيقة",
+        language === 'ar' ? 
+        "فهم مرض السكري في مجتمعات الشرق الأوسط" :
+        language === 'ku' ?
+        "تێگەیشتن لە نەخۆشی شەکرە لە دانیشتووانی ناوەڕاست" :
+        language === 'fa' ?
+        "درک دیابت در جمعیت خاورمیانه" :
+        "Orta Doğu Nüfusunda Diyabeti Anlama",
+      presenter: language === 'en' ? "Dr. Sarah Mahmoud" : 
+        language === 'ar' ? "د. سارة محمود" :
+        language === 'ku' ? "د. سارە محمود" :
+        language === 'fa' ? "دکتر سارا محمود" :
+        "Dr. Sarah Mahmoud",
+      date: language === 'en' ? "April 15, 2025" : 
+        language === 'ar' ? "١٥ أبريل ٢٠٢٥" :
+        language === 'ku' ? "١٥ی نیسانی ٢٠٢٥" :
+        language === 'fa' ? "۱۵ آوریل ۲۰۲۵" :
+        "15 Nisan 2025",
+      duration: language === 'en' ? "45 minutes" : 
+        language === 'ar' ? "٤٥ دقيقة" :
+        language === 'ku' ? "٤٥ خولەک" :
+        language === 'fa' ? "۴۵ دقیقه" :
+        "45 dakika",
       description: language === 'en' ? 
         "An in-depth look at diabetes prevalence, risk factors, and management strategies specific to Middle Eastern communities." : 
-        "نظرة متعمقة في انتشار مرض السكري وعوامل الخطر واستراتيجيات الإدارة الخاصة بمجتمعات الشرق الأوسط."
+        language === 'ar' ?
+        "نظرة متعمقة في انتشار مرض السكري وعوامل الخطر واستراتيجيات الإدارة الخاصة بمجتمعات الشرق الأوسط." :
+        language === 'ku' ?
+        "تەماشایەکی قووڵ لە بڵاوبوونەوەی نەخۆشی شەکرە، هۆکارەکانی مەترسی، و ستراتیژییەکانی بەڕێوەبردنی تایبەت بە کۆمەڵگاکانی ناوەڕاست." :
+        language === 'fa' ?
+        "نگاهی عمیق به شیوع دیابت، عوامل خطر و استراتژی های مدیریت مخصوص جوامع خاورمیانه." :
+        "Orta Doğu toplumlarına özgü diyabet yaygınlığı, risk faktörleri ve yönetim stratejilerine derinlemesine bakış."
     },
     {
       title: language === 'en' ? 
         "Mental Health Awareness: Breaking Cultural Stigmas" : 
-        "الوعي بالصحة النفسية: كسر وصمة العار الثقافية",
-      presenter: language === 'en' ? "Dr. Amir Hassan" : "د. أمير حسن",
-      date: language === 'en' ? "March 22, 2025" : "٢٢ مارس ٢٠٢٥",
-      duration: language === 'en' ? "60 minutes" : "٦٠ دقيقة",
+        language === 'ar' ?
+        "الوعي بالصحة النفسية: كسر وصمة العار الثقافية" :
+        language === 'ku' ?
+        "هۆشیاری تەندروستی دەروونی: شکاندنی شەرمەزاری کولتووری" :
+        language === 'fa' ?
+        "آگاهی سلامت روان: شکستن انگ فرهنگی" :
+        "Ruh Sağlığı Farkındalığı: Kültürel Damgaları Kırma",
+      presenter: language === 'en' ? "Dr. Amir Hassan" : 
+        language === 'ar' ? "د. أمير حسن" :
+        language === 'ku' ? "د. ئەمیر حەسەن" :
+        language === 'fa' ? "دکتر امیر حسن" :
+        "Dr. Amir Hassan",
+      date: language === 'en' ? "March 22, 2025" : 
+        language === 'ar' ? "٢٢ مارس ٢٠٢٥" :
+        language === 'ku' ? "٢٢ی ئازاری ٢٠٢٥" :
+        language === 'fa' ? "۲۲ مارس ۲۰۲۵" :
+        "22 Mart 2025",
+      duration: language === 'en' ? "60 minutes" : 
+        language === 'ar' ? "٦٠ دقيقة" :
+        language === 'ku' ? "٦٠ خولەک" :
+        language === 'fa' ? "۶۰ دقیقه" :
+        "60 dakika",
       description: language === 'en' ? 
         "Addressing mental health challenges in Middle Eastern communities and strategies for breaking down cultural barriers to care." : 
-        "معالجة تحديات الصحة النفسية في مجتمعات الشرق الأوسط واستراتيجيات لكسر الحواجز الثقافية للرعاية."
+        language === 'ar' ?
+        "معالجة تحديات الصحة النفسية في مجتمعات الشرق الأوسط واستراتيجيات لكسر الحواجز الثقافية للرعاية." :
+        language === 'ku' ?
+        "چارەسەرکردنی ئاستەنگەکانی تەندروستی دەروونی لە کۆمەڵگاکانی ناوەڕاست و ستراتیژییەکان بۆ شکاندنی کۆسپەکانی کولتووری بۆ چاودێری." :
+        language === 'fa' ?
+        "پرداختن به چالش های سلامت روان در جوامع خاورمیانه و استراتژی هایی برای شکستن موانع فرهنگی مراقبت." :
+        "Orta Doğu toplumlarında ruh sağlığı zorluklarını ele alma ve bakım için kültürel engelleri kırma stratejileri."
     },
     {
       title: language === 'en' ? 
         "Cardiovascular Health: Prevention Strategies" : 
-        "صحة القلب والأوعية الدموية: استراتيجيات الوقاية",
-      presenter: language === 'en' ? "Dr. Leila Nassar" : "د. ليلى نصار",
-      date: language === 'en' ? "February 10, 2025" : "١٠ فبراير ٢٠٢٥",
-      duration: language === 'en' ? "50 minutes" : "٥٠ دقيقة",
+        language === 'ar' ?
+        "صحة القلب والأوعية الدموية: استراتيجيات الوقاية" :
+        language === 'ku' ?
+        "تەندروستی دڵ و خوێنبەرەکان: ستراتیژییەکانی پێشگیری" :
+        language === 'fa' ?
+        "سلامت قلب و عروق: استراتژی های پیشگیری" :
+        "Kardiyovasküler Sağlık: Önleme Stratejileri",
+      presenter: language === 'en' ? "Dr. Leila Nassar" : 
+        language === 'ar' ? "د. ليلى نصار" :
+        language === 'ku' ? "د. لەیلا نەساری" :
+        language === 'fa' ? "دکتر لیلا نصار" :
+        "Dr. Leila Nassar",
+      date: language === 'en' ? "February 10, 2025" : 
+        language === 'ar' ? "١٠ فبراير ٢٠٢٥" :
+        language === 'ku' ? "١٠ی شوباتی ٢٠٢٥" :
+        language === 'fa' ? "۱۰ فوریه ۲۰۲۵" :
+        "10 Şubat 2025",
+      duration: language === 'en' ? "50 minutes" : 
+        language === 'ar' ? "٥٠ دقيقة" :
+        language === 'ku' ? "٥٠ خولەک" :
+        language === 'fa' ? "۵۰ دقیقه" :
+        "50 dakika",
       description: language === 'en' ? 
         "Essential information about heart health with culturally relevant dietary and lifestyle recommendations." : 
-        "معلومات أساسية عن صحة القلب مع توصيات غذائية ونمط حياة مناسبة ثقافياً."
+        language === 'ar' ?
+        "معلومات أساسية عن صحة القلب مع توصيات غذائية ونمط حياة مناسبة ثقافياً." :
+        language === 'ku' ?
+        "زانیاری بنەڕەتی دەربارەی تەندروستی دڵ لەگەڵ پێشنیارەکانی خۆراک و ژیانی گونجاو لە کولتوور." :
+        language === 'fa' ?
+        "اطلاعات ضروری در مورد سلامت قلب با توصیه های رژیم غذایی و سبک زندگی مرتبط با فرهنگ." :
+        "Kültürel açıdan uygun beslenme ve yaşam tarzı önerileriyle kalp sağlığı hakkında temel bilgiler."
     },
     {
       title: language === 'en' ? 
         "Women's Health: Cultural Considerations in Care" : 
-        "صحة المرأة: اعتبارات ثقافية في الرعاية",
-      presenter: language === 'en' ? "Dr. Fatima Al-Zahrani" : "د. فاطمة الزهراني",
-      date: language === 'en' ? "January 18, 2025" : "١٨ يناير ٢٠٢٥",
-      duration: language === 'en' ? "55 minutes" : "٥٥ دقيقة",
+        language === 'ar' ?
+        "صحة المرأة: اعتبارات ثقافية في الرعاية" :
+        language === 'ku' ?
+        "تەندروستی ژنان: لەبەرچاوگرتنەکانی کولتووری لە چاودێریدا" :
+        language === 'fa' ?
+        "سلامت زنان: ملاحظات فرهنگی در مراقبت" :
+        "Kadın Sağlığı: Bakımda Kültürel Değerlendirmeler",
+      presenter: language === 'en' ? "Dr. Fatima Al-Zahrani" : 
+        language === 'ar' ? "د. فاطمة الزهراني" :
+        language === 'ku' ? "د. فاتیمە الزەهرانی" :
+        language === 'fa' ? "دکتر فاطمه الزهرانی" :
+        "Dr. Fatima Al-Zahrani",
+      date: language === 'en' ? "January 18, 2025" : 
+        language === 'ar' ? "١٨ يناير ٢٠٢٥" :
+        language === 'ku' ? "١٨ی کانوونی دووەمی ٢٠٢٥" :
+        language === 'fa' ? "۱۸ ژانویه ۲۰۲۵" :
+        "18 Ocak 2025",
+      duration: language === 'en' ? "55 minutes" : 
+        language === 'ar' ? "٥٥ دقيقة" :
+        language === 'ku' ? "٥٥ خولەک" :
+        language === 'fa' ? "۵۵ دقیقه" :
+        "55 dakika",
       description: language === 'en' ? 
         "Exploring women's health topics with sensitivity to cultural contexts and traditions." : 
-        "استكشاف مواضيع صحة المرأة مع مراعاة للسياقات الثقافية والتقاليد."
+        language === 'ar' ?
+        "استكشاف مواضيع صحة المرأة مع مراعاة للسياقات الثقافية والتقاليد." :
+        language === 'ku' ?
+        "گەڕان لە بابەتەکانی تەندروستی ژنان لەگەڵ هەستیاری بۆ پێوەندی کولتووری و نەریتەکان." :
+        language === 'fa' ?
+        "کاوش موضوعات سلامت زنان با حساسیت نسبت به زمینه ها و سنت های فرهنگی." :
+        "Kültürel bağlamlara ve geleneklere duyarlılıkla kadın sağlığı konularını keşfetme."
     }
   ];
 

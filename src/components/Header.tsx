@@ -45,26 +45,26 @@ const Header = () => {
           </div>
           
           {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8">
-            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+          <nav className="hidden md:flex space-x-6">
+            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.home")}
             </Link>
-            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.forCommunity")}
             </Link>
-            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              Research
+            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+              {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.diseases")}
             </Link>
-            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.contact")}
             </Link>
-            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
+            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
               {t("header.webinars")}
             </Link>
           </nav>
@@ -85,7 +85,7 @@ const Header = () => {
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
-                    onClick={() => setLanguage(lang.code as "en" | "ar")}
+                    onClick={() => setLanguage(lang.code as "en" | "ar" | "ku" | "fa" | "tr")}
                     className="cursor-pointer hover:bg-gray-100 px-4 py-2"
                   >
                     {lang.nativeName} ({lang.name})
@@ -118,7 +118,7 @@ const Header = () => {
               {t("header.forCommunity")}
             </Link>
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors">
-              Research
+              {t("header.forClinicians")}
             </Link>
             <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">
               {t("header.diseases")}
@@ -146,7 +146,7 @@ const Header = () => {
                   {languages.map((lang) => (
                     <DropdownMenuItem
                       key={lang.code}
-                      onClick={() => setLanguage(lang.code as "en" | "ar")}
+                      onClick={() => setLanguage(lang.code as "en" | "ar" | "ku" | "fa" | "tr")}
                       className="cursor-pointer hover:bg-gray-100 px-4 py-2"
                     >
                       {lang.nativeName} ({lang.name})
