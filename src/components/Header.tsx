@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, Globe, ChevronDown } from "lucide-react";
@@ -45,26 +44,26 @@ const Header = () => {
           </div>
           
           {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-6">
-            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+          <nav className="hidden md:flex space-x-4">
+            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.home")}
             </Link>
-            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.forCommunity")}
             </Link>
-            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.diseases")}
             </Link>
-            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.contact")}
             </Link>
-            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-4' : ''}`}>
+            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-3' : ''}`}>
               {t("header.webinars")}
             </Link>
           </nav>
