@@ -1,28 +1,23 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Diseases from "./pages/Diseases";
-import Webinars from "./pages/Webinars";
-import PhysicianDirectory from "./pages/PhysicianDirectory";
-import Resources from "./pages/Resources";
-import NotFound from "./pages/NotFound";
-import { LanguageProvider } from "./contexts/LanguageContext";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from "@/components/ui/sonner";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import Index from "@/pages/Index";
+import About from "@/pages/About";
+import Services from "@/pages/Services";
+import Resources from "@/pages/Resources";
+import Diseases from "@/pages/Diseases";
+import Webinars from "@/pages/Webinars";
+import PhysicianDirectory from "@/pages/PhysicianDirectory";
+import PhysicianApplication from "@/pages/PhysicianApplication";
+import NotFound from "@/pages/NotFound";
+import './App.css';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <LanguageProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+function App() {
+  return (
+    <LanguageProvider>
+      <Router>
+        <div className="App">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
@@ -31,13 +26,15 @@ const App = () => (
             <Route path="/diseases" element={<Diseases />} />
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/physician-application" element={<PhysicianApplication />} />
+            <Route path="/contact" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+          <Toaster />
+        </div>
+      </Router>
+    </LanguageProvider>
+  );
+}
 
 export default App;

@@ -10,6 +10,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,29 +52,141 @@ const Header = () => {
           </div>
           
           {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-6">
-            <Link to="/" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.home")}
-            </Link>
-            <Link to="/about" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.aboutUs")}
-            </Link>
-            <Link to="/services" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.forCommunity")}
-            </Link>
-            <Link to="/resources" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.forClinicians")}
-            </Link>
-            <Link to="/diseases" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.diseases")}
-            </Link>
-            <Link to="/contact" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.contact")}
-            </Link>
-            <Link to="/webinars" className={`hover:text-healthTeal transition-colors ${language === 'ar' ? 'ml-6' : ''}`}>
-              {t("header.webinars")}
-            </Link>
-          </nav>
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList className="space-x-6">
+              <NavigationMenuItem>
+                <Link to="/" className="hover:text-healthTeal transition-colors px-4 py-2">
+                  {t("header.home")}
+                </Link>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  {t("header.aboutUs")}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Our Story
+                    </Link>
+                    <Link to="/about#mission" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Mission & Vision
+                    </Link>
+                    <Link to="/about#team" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Our Team
+                    </Link>
+                    <Link to="/about#impact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Our Impact
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  {t("header.forCommunity")}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/services" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Community Resources
+                    </Link>
+                    <Link to="/services#events" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Events & Workshops
+                    </Link>
+                    <Link to="/services#support" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Support Groups
+                    </Link>
+                    <Link to="/physician-directory" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Find Physicians
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  {t("header.forClinicians")}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/resources" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Research Opportunities
+                    </Link>
+                    <Link to="/resources#materials" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Educational Materials
+                    </Link>
+                    <Link to="/resources#platform" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Research Platform
+                    </Link>
+                    <Link to="/physician-application" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Join Our Network
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  {t("header.diseases")}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/diseases" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      All Diseases
+                    </Link>
+                    <Link to="/diseases#cardiovascular" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Cardiovascular
+                    </Link>
+                    <Link to="/diseases#mental-health" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Mental Health
+                    </Link>
+                    <Link to="/diseases#diabetes" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Diabetes
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  Contact
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Contact Us
+                    </Link>
+                    <Link to="/contact#inquiry" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      General Inquiry
+                    </Link>
+                    <Link to="/contact#support" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Support Request
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                  {t("header.webinars")}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                  <div className="p-2">
+                    <Link to="/webinars" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      All Webinars
+                    </Link>
+                    <Link to="/webinars#upcoming" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Upcoming Events
+                    </Link>
+                    <Link to="/webinars#archive" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                      Past Recordings
+                    </Link>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           
           <div className="hidden md:flex items-center">
             <DropdownMenu>

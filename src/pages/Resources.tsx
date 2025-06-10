@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
@@ -15,7 +14,14 @@ import {
   FileText,
   BookOpen,
   Monitor,
-  Phone
+  Phone,
+  Users,
+  Heart,
+  Brain,
+  Baby,
+  Stethoscope,
+  FileDown,
+  Video
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -58,34 +64,156 @@ const Resources = () => {
     }
   ];
 
-  const resources = [
+  const resourceCategories = [
     {
-      title: "Research Platform",
-      description: "Access our comprehensive research database and publication library.",
-      icon: <FileText className="h-10 w-10 text-white" />,
+      title: "Mental Health Resources",
+      icon: <Brain className="h-8 w-8 text-white" />,
       color: "bg-healthTeal",
-      link: "/research-platform"
+      resources: [
+        {
+          title: "Cultural Considerations in Mental Health Treatment",
+          description: "Guidelines for providing culturally responsive mental health care to Arab and Middle Eastern patients.",
+          type: "PDF Guide",
+          link: "/resources/mental-health-guide.pdf"
+        },
+        {
+          title: "Depression Screening Tools in Arabic",
+          description: "Validated depression screening questionnaires translated into Arabic with cultural adaptations.",
+          type: "Assessment Tool",
+          link: "/resources/depression-screening-arabic"
+        },
+        {
+          title: "Trauma-Informed Care for Refugees",
+          description: "Best practices for providing trauma-informed mental health services to refugee populations.",
+          type: "Training Module",
+          link: "/resources/trauma-informed-care"
+        }
+      ]
     },
     {
-      title: "Educational Materials",
-      description: "Download culturally appropriate patient education materials.",
-      icon: <BookOpen className="h-10 w-10 text-white" />,
+      title: "Cardiovascular Health",
+      icon: <Heart className="h-8 w-8 text-white" />,
       color: "bg-healthRed",
-      link: "/educational-materials"
+      resources: [
+        {
+          title: "Hypertension Management in Middle Eastern Populations",
+          description: "Evidence-based guidelines for managing hypertension considering genetic and dietary factors.",
+          type: "Clinical Guide",
+          link: "/resources/hypertension-guide"
+        },
+        {
+          title: "Diabetes Prevention Materials",
+          description: "Patient education materials in multiple languages about diabetes prevention and management.",
+          type: "Patient Education",
+          link: "/resources/diabetes-prevention"
+        },
+        {
+          title: "Cardiac Risk Assessment Tools",
+          description: "Population-specific cardiac risk calculators and assessment tools.",
+          type: "Clinical Tool",
+          link: "/resources/cardiac-risk-tools"
+        }
+      ]
     },
     {
-      title: "Newsletter Archive",
-      description: "Browse past newsletters and stay updated with our latest research.",
-      icon: <Monitor className="h-10 w-10 text-white" />,
-      color: "bg-gray-400",
-      link: "/newsletter-archive"
+      title: "Women's Health",
+      icon: <Users className="h-8 w-8 text-white" />,
+      color: "bg-healthPurple",
+      resources: [
+        {
+          title: "Culturally Sensitive Prenatal Care",
+          description: "Guidelines for providing prenatal care that respects cultural practices and beliefs.",
+          type: "Clinical Guide",
+          link: "/resources/prenatal-care-guide"
+        },
+        {
+          title: "Family Planning Resources",
+          description: "Educational materials about family planning options that consider religious and cultural values.",
+          type: "Patient Education",
+          link: "/resources/family-planning"
+        },
+        {
+          title: "Maternal Health Screening",
+          description: "Screening tools and protocols for maternal health in Middle Eastern populations.",
+          type: "Screening Tool",
+          link: "/resources/maternal-screening"
+        }
+      ]
     },
     {
-      title: "Webinar Library",
-      description: "Access recorded webinars and training sessions for healthcare providers.",
-      icon: <Phone className="h-10 w-10 text-white" />,
+      title: "Pediatric Care",
+      icon: <Baby className="h-8 w-8 text-white" />,
+      color: "bg-healthGold",
+      resources: [
+        {
+          title: "Childhood Immunization Guidelines",
+          description: "Vaccination schedules and guidelines adapted for Middle Eastern families.",
+          type: "Clinical Guide",
+          link: "/resources/immunization-guidelines"
+        },
+        {
+          title: "Growth Charts for Middle Eastern Children",
+          description: "Population-specific growth charts and developmental milestones.",
+          type: "Assessment Tool",
+          link: "/resources/growth-charts"
+        },
+        {
+          title: "Adolescent Health Resources",
+          description: "Resources for addressing adolescent health issues in Middle Eastern families.",
+          type: "Clinical Resource",
+          link: "/resources/adolescent-health"
+        }
+      ]
+    },
+    {
+      title: "Research Tools",
+      icon: <FlaskConical className="h-8 w-8 text-white" />,
       color: "bg-healthDarkBlue",
-      link: "/webinar-library"
+      resources: [
+        {
+          title: "Community Health Survey Templates",
+          description: "Validated survey instruments for community health research in Middle Eastern populations.",
+          type: "Research Tool",
+          link: "/resources/survey-templates"
+        },
+        {
+          title: "Data Collection Protocols",
+          description: "Standardized protocols for collecting health data in Middle Eastern communities.",
+          type: "Protocol",
+          link: "/resources/data-protocols"
+        },
+        {
+          title: "Statistical Analysis Guides",
+          description: "Guidelines for analyzing health data from Middle Eastern populations.",
+          type: "Analysis Guide",
+          link: "/resources/analysis-guides"
+        }
+      ]
+    },
+    {
+      title: "Training Materials",
+      icon: <Monitor className="h-8 w-8 text-white" />,
+      color: "bg-gray-600",
+      resources: [
+        {
+          title: "Cultural Competency Training",
+          description: "Comprehensive training modules on providing culturally competent care.",
+          type: "Training Course",
+          link: "/resources/cultural-competency-training"
+        },
+        {
+          title: "Language Interpretation Guidelines",
+          description: "Best practices for working with medical interpreters and language services.",
+          type: "Guidelines",
+          link: "/resources/interpretation-guidelines"
+        },
+        {
+          title: "Webinar Recordings",
+          description: "Library of recorded webinars on various health topics relevant to Middle Eastern communities.",
+          type: "Video Library",
+          link: "/webinars"
+        }
+      ]
     }
   ];
 
@@ -109,6 +237,60 @@ const Resources = () => {
                 'أدوات وموارد لدعم الرعاية الصحية المتجاوبة ثقافياً والبحث المجتمعي' : 
                 'Tools and resources to support culturally responsive healthcare and community-centered research'}
             </p>
+          </div>
+        </section>
+
+        {/* Resources by Category */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-12 text-center">
+              Resources by Category
+            </h2>
+            
+            <div className="space-y-12">
+              {resourceCategories.map((category, categoryIndex) => (
+                <div key={categoryIndex} className="max-w-6xl mx-auto">
+                  <div className="flex items-center mb-8">
+                    <div className={`${category.color} p-3 rounded-lg mr-4`}>
+                      {category.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold text-healthDarkBlue">{category.title}</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {category.resources.map((resource, resourceIndex) => (
+                      <Card key={resourceIndex} className="hover:shadow-lg transition-shadow border-l-4" style={{borderLeftColor: category.color.replace('bg-', '#')}}>
+                        <CardHeader>
+                          <div className="flex items-start justify-between">
+                            <CardTitle className="text-lg text-healthDarkBlue leading-tight">
+                              {resource.title}
+                            </CardTitle>
+                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full whitespace-nowrap ml-2">
+                              {resource.type}
+                            </span>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-gray-600 mb-4 text-sm">{resource.description}</p>
+                          <div className="flex items-center gap-2">
+                            {resource.type.includes('PDF') && <FileDown className="h-4 w-4 text-healthTeal" />}
+                            {resource.type.includes('Video') && <Video className="h-4 w-4 text-healthTeal" />}
+                            {resource.type.includes('Tool') && <Stethoscope className="h-4 w-4 text-healthTeal" />}
+                            <Button 
+                              variant="link" 
+                              className="p-0 text-healthTeal hover:text-healthDarkBlue h-auto"
+                              onClick={() => window.open(resource.link, '_blank')}
+                            >
+                              Access Resource <ExternalLink className="h-3 w-3 ml-1" />
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -198,34 +380,6 @@ const Resources = () => {
               >
                 Post Your Opportunity
               </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Resources Section */}
-        <section className="py-16 bg-healthLightGray">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-12 text-center">
-              {language === 'ar' ? 'الموارد المتاحة' : 'Available Resources'}
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {resources.map((resource, index) => (
-                <Card key={index} className="overflow-hidden border-none shadow-md">
-                  <div className={`${resource.color} p-6`}>
-                    <div className="flex justify-center">
-                      {resource.icon}
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-3">{resource.title}</h3>
-                    <p className="text-gray-600 mb-4">{resource.description}</p>
-                    <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                      Access Resource
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
             </div>
           </div>
         </section>

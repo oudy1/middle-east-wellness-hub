@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,8 @@ import {
   ExternalLink,
   Phone,
   Mail,
-  UserCheck
+  UserCheck,
+  UserPlus
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -117,6 +117,27 @@ const Services = () => {
                 <UserCheck className="h-5 w-5" />
                 Book Mentorship Session
               </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Physician Network CTA */}
+        <section className="py-12 bg-healthTeal/10">
+          <div className="container mx-auto px-4 text-center">
+            <div className="max-w-2xl mx-auto">
+              <UserPlus className="h-12 w-12 text-healthTeal mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
+                Are you a healthcare provider?
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Join our network of culturally competent physicians committed to serving Middle Eastern communities.
+              </p>
+              <Link to="/physician-application">
+                <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto">
+                  <UserPlus className="h-5 w-5" />
+                  Apply to Join Our Network
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
