@@ -37,7 +37,7 @@ const Header = () => {
   const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
   
   return (
-    <header className="bg-healthDarkBlue text-white">
+    <header className="bg-healthDarkBlue text-white relative z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -53,18 +53,18 @@ const Header = () => {
           
           {/* Desktop Menu */}
           <NavigationMenu className="hidden md:flex">
-            <NavigationMenuList className="space-x-6">
+            <NavigationMenuList className="space-x-3">
               <NavigationMenuItem>
-                <Link to="/" className="hover:text-healthTeal transition-colors px-4 py-2">
+                <Link to="/" className="hover:text-healthTeal transition-colors px-3 py-2">
                   {t("header.home")}
                 </Link>
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   {t("header.aboutUs")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       Our Story
@@ -83,10 +83,10 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   {t("header.forCommunity")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/services" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       Community Resources
@@ -105,10 +105,10 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   {t("header.forClinicians")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/resources" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       Research Opportunities
@@ -127,10 +127,10 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   {t("header.diseases")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/diseases" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       All Diseases
@@ -149,10 +149,10 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   Contact
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       Contact Us
@@ -168,10 +168,10 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2">
                   {t("header.webinars")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px]">
+                <NavigationMenuContent className="bg-white border border-gray-200 shadow-lg min-w-[200px] z-50">
                   <div className="p-2">
                     <Link to="/webinars" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
                       All Webinars
@@ -200,7 +200,7 @@ const Header = () => {
                   <ChevronDown size={16} />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg">
+              <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg z-50">
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
