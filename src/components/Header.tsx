@@ -38,12 +38,13 @@ const Header = () => {
   
   return (
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="w-full px-2 md:px-4 py-3">
+      <div className="w-full px-4 py-2">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
+          {/* Logo */}
           <div className="flex items-center flex-shrink-0">
-            <Link to="/" className="text-lg md:text-xl font-bold">
+            <Link to="/" className="text-xl font-bold">
               {language === 'ar' ? "شمس" : "SHAMS"}
-              <span className="text-xs md:text-sm font-light block md:inline md:ml-2">
+              <span className="text-xs font-light block">
                 {t("header.home") === "Home" ? 
                   "Supporting Health & Advocacy for Middle Eastern Societies" : 
                   "شمس دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
@@ -51,31 +52,31 @@ const Header = () => {
             </Link>
           </div>
           
-          {/* Desktop Menu */}
+          {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="space-x-1">
+            <NavigationMenuList className="flex items-center space-x-1">
               <NavigationMenuItem>
-                <Link to="/" className="hover:text-healthTeal transition-colors px-2 py-2 text-sm">
+                <Link to="/" className="hover:text-healthTeal transition-colors px-3 py-2 text-sm rounded-md hover:bg-white/10">
                   {t("header.home")}
                 </Link>
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   {t("header.aboutUs")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/about" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/about" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Our Story
                     </Link>
-                    <Link to="/about#mission" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/about#mission" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Mission & Vision
                     </Link>
-                    <Link to="/about#team" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/about#team" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Our Team
                     </Link>
-                    <Link to="/about#impact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/about#impact" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Our Impact
                     </Link>
                   </div>
@@ -83,21 +84,21 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   {t("header.forCommunity")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/services" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/services" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Community Resources
                     </Link>
-                    <Link to="/services#events" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/services#events" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Events & Workshops
                     </Link>
-                    <Link to="/services#support" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/services#support" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Support Groups
                     </Link>
-                    <Link to="/physician-directory" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/physician-directory" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Find Physicians
                     </Link>
                   </div>
@@ -105,21 +106,21 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   {t("header.forClinicians")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/resources" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/resources" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Research Opportunities
                     </Link>
-                    <Link to="/resources#materials" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/resources#materials" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Educational Materials
                     </Link>
-                    <Link to="/resources#platform" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/resources#platform" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Research Platform
                     </Link>
-                    <Link to="/physician-application" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/physician-application" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Join Our Network
                     </Link>
                   </div>
@@ -127,21 +128,21 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   {t("header.diseases")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/diseases" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/diseases" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       All Diseases
                     </Link>
-                    <Link to="/diseases#cardiovascular" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/diseases#cardiovascular" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Cardiovascular
                     </Link>
-                    <Link to="/diseases#mental-health" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/diseases#mental-health" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Mental Health
                     </Link>
-                    <Link to="/diseases#diabetes" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/diseases#diabetes" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Diabetes
                     </Link>
                   </div>
@@ -149,18 +150,18 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   Contact
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/contact" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/contact" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Contact Us
                     </Link>
-                    <Link to="/contact#inquiry" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/contact#inquiry" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       General Inquiry
                     </Link>
-                    <Link to="/contact#support" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/contact#support" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Support Request
                     </Link>
                   </div>
@@ -168,18 +169,18 @@ const Header = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-2 py-2 text-sm data-[state=open]:bg-white/10">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-white hover:text-white px-3 py-2 text-sm data-[state=open]:bg-white/10 h-auto">
                   {t("header.webinars")}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="absolute left-0 top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-1">
-                  <div className="p-2">
-                    <Link to="/webinars" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                <NavigationMenuContent className="absolute top-full bg-white border border-gray-200 shadow-lg min-w-[200px] z-[100] rounded-md mt-0 left-0">
+                  <div className="p-1">
+                    <Link to="/webinars" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       All Webinars
                     </Link>
-                    <Link to="/webinars#upcoming" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/webinars#upcoming" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Upcoming Events
                     </Link>
-                    <Link to="/webinars#archive" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
+                    <Link to="/webinars#archive" className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded text-sm">
                       Past Recordings
                     </Link>
                   </div>
@@ -188,17 +189,18 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
+          {/* Language Selector */}
           <div className="hidden lg:flex items-center flex-shrink-0">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2 text-xs"
+                  className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-1 text-xs h-8"
                 >
-                  <Globe size={14} />
+                  <Globe size={12} />
                   {currentLanguage.nativeName}
-                  <ChevronDown size={14} />
+                  <ChevronDown size={12} />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg z-[100]">
@@ -206,7 +208,7 @@ const Header = () => {
                   <DropdownMenuItem
                     key={lang.code}
                     onClick={() => setLanguage(lang.code as "en" | "ar" | "ku" | "fa" | "tr")}
-                    className="cursor-pointer hover:bg-gray-100 px-4 py-2 text-sm"
+                    className="cursor-pointer hover:bg-gray-100 px-3 py-2 text-sm"
                   >
                     {lang.nativeName} ({lang.name})
                   </DropdownMenuItem>
@@ -227,7 +229,7 @@ const Header = () => {
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="lg:hidden pt-4 pb-2 space-y-2 max-w-7xl mx-auto">
+          <nav className="lg:hidden pt-3 pb-2 space-y-1 max-w-7xl mx-auto">
             <Link to="/" className="block py-2 hover:text-healthTeal transition-colors text-sm">
               {t("header.home")}
             </Link>
@@ -244,7 +246,7 @@ const Header = () => {
               {t("header.diseases")}
             </Link>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors text-sm">
-              {t("header.contact")}
+              Contact
             </Link>
             <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors text-sm">
               {t("header.webinars")}
@@ -255,11 +257,11 @@ const Header = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-2 text-xs"
+                    className="bg-healthGold hover:bg-healthGold/80 text-healthDarkBlue border-white hover:border-white flex items-center gap-1 text-xs h-8"
                   >
-                    <Globe size={14} />
+                    <Globe size={12} />
                     {currentLanguage.nativeName}
-                    <ChevronDown size={14} />
+                    <ChevronDown size={12} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg z-[100]">
@@ -267,7 +269,7 @@ const Header = () => {
                     <DropdownMenuItem
                       key={lang.code}
                       onClick={() => setLanguage(lang.code as "en" | "ar" | "ku" | "fa" | "tr")}
-                      className="cursor-pointer hover:bg-gray-100 px-4 py-2 text-sm"
+                      className="cursor-pointer hover:bg-gray-100 px-3 py-2 text-sm"
                     >
                       {lang.nativeName} ({lang.name})
                     </DropdownMenuItem>
