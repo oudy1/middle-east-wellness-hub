@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -26,7 +25,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 1,
     name: "Dr. Layla Hassan",
-    specialty: "Family Medicine",
+    specialty: "Medicine",
     languages: ["English", "Arabic"],
     address: "123 Health Ave, Phoenix, AZ",
     phone: "(480) 555-1234",
@@ -36,7 +35,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 2,
     name: "Dr. Ahmed Mahmoud",
-    specialty: "Family Medicine",
+    specialty: "Medicine",
     languages: ["English", "Arabic", "French"],
     address: "456 Wellness Blvd, Phoenix, AZ",
     phone: "(480) 555-2345",
@@ -46,7 +45,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 3,
     name: "Dr. Sarah Nasser",
-    specialty: "Family Medicine",
+    specialty: "Medicine",
     languages: ["English", "Farsi"],
     address: "789 Care Street, Tempe, AZ",
     phone: "(480) 555-3456",
@@ -56,7 +55,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 4,
     name: "Dr. Mohammad Al-Saeed",
-    specialty: "Family Medicine",
+    specialty: "Medicine",
     languages: ["English", "Arabic", "Urdu"],
     address: "321 Medical Drive, Scottsdale, AZ",
     phone: "(480) 555-4567",
@@ -66,7 +65,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 5,
     name: "Dr. Nadia Patel",
-    specialty: "Family Practice",
+    specialty: "Practice",
     languages: ["English", "Hindi", "Urdu"],
     address: "654 Healing Road, Mesa, AZ",
     phone: "(480) 555-5678",

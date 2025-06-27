@@ -7,29 +7,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const UpcomingEventsSection = () => {
   const { t } = useLanguage();
   
-  const events = [
-    {
-      title: t("events.healthcareSymposium"),
-      date: t("events.date") === "Date" ? "June 15, 2025" : "١٥ يونيو، ٢٠٢٥",
-      description: t("events.healthcareSymposiumDesc"),
-      location: t("events.virtual"),
-      registrationLink: "/register/healthcare-symposium"
-    },
-    {
-      title: t("events.communityWorkshop"),
-      date: t("events.date") === "Date" ? "July 2, 2025" : "٢ يوليو، ٢٠٢٥",
-      description: t("events.communityWorkshopDesc"),
-      location: t("events.toronto"),
-      registrationLink: "/register/community-health-workshop"
-    },
-    {
-      title: t("events.researchDay"),
-      date: t("events.date") === "Date" ? "August 10, 2025" : "١٠ أغسطس، ٢٠٢٥",
-      description: t("events.researchDayDesc"),
-      location: t("events.ottawa"),
-      registrationLink: "/register/research-day"
-    }
-  ];
+  const event = {
+    title: t("events.healthcareSymposium"),
+    date: t("events.date") === "Date" ? "June 15, 2025" : "١٥ يونيو، ٢٠٢٥",
+    description: t("events.healthcareSymposiumDesc"),
+    location: t("events.virtual"),
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSfmCIOZ7p4YAFv2M1Bb1fMNB4StJrGUq365oJo1RhKOdITw5A/viewform?usp=header"
+  };
 
   return (
     <section className="py-16 bg-healthLightGray relative overflow-hidden">
@@ -46,28 +30,25 @@ const UpcomingEventsSection = () => {
             </h2>
             <p className="text-gray-600 mt-2">{t("events.subtitle")}</p>
           </div>
-          <Button className="mt-4 md:mt-0 bg-healthTeal hover:bg-teal-600">
-            {t("events.viewAll")} <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map((event, index) => (
-            <Card key={index} className="overflow-hidden border-none shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="text-sm text-healthTeal font-semibold mb-2 flex items-center">
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  {event.date}
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-healthDarkBlue">{event.title}</h3>
-                <p className="text-gray-600 mb-4">{event.description}</p>
-                <div className="text-sm text-gray-500 mb-4">{event.location}</div>
-                <Button asChild variant="outline" className="w-full border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
-                  <a href={event.registrationLink}>{t("events.register")}</a>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="flex justify-center">
+          <Card className="overflow-hidden border-none shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 max-w-md w-full">
+            <CardContent className="p-6">
+              <div className="text-sm text-healthTeal font-semibold mb-2 flex items-center">
+                <CalendarDays className="mr-2 h-4 w-4" />
+                {event.date}
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-healthDarkBlue">{event.title}</h3>
+              <p className="text-gray-600 mb-4">{event.description}</p>
+              <div className="text-sm text-gray-500 mb-4">{event.location}</div>
+              <Button asChild className="w-full bg-healthTeal text-white hover:bg-healthTeal/90">
+                <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
+                  {t("events.register")}
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

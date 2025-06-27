@@ -10,6 +10,7 @@ import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
 import PhysicianApplication from "@/pages/PhysicianApplication";
+import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import './App.css';
 
@@ -27,7 +28,7 @@ function App() {
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
             <Route path="/physician-application" element={<PhysicianApplication />} />
-            <Route path="/contact" element={<Index />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />

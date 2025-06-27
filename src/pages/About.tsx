@@ -5,7 +5,6 @@ import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Users, Heart, Globe } from "lucide-react";
 
 const About = () => {
@@ -52,14 +51,6 @@ const About = () => {
                 <p>
                   Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.
                 </p>
-              </div>
-              <div className="mt-12">
-                <Button 
-                  className="bg-healthTeal hover:bg-healthTeal/80 text-white px-8 py-3 text-lg"
-                  onClick={() => window.open('https://example.com/brighter-future', '_blank')}
-                >
-                  A Brighter Future for Middle Eastern Health
-                </Button>
               </div>
             </div>
           </div>

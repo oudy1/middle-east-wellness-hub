@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FileText, BookOpen, Monitor, Phone } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const ResourcesSection = () => {
   const { t } = useLanguage();
@@ -41,12 +42,12 @@ const ResourcesSection = () => {
   return (
     <section className="py-16 md:py-24 bg-healthLightGray">
       <div className="container mx-auto px-4">
-        <h2 className="section-title">{t("resources.title")}</h2>
+        <h2 className="section-title">Resources</h2>
         <p className="section-description">
           {t("resources.subtitle")}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {resources.map((resource, index) => (
             <Card key={index} className="overflow-hidden border-none shadow-md">
               <div className={`${resource.color} p-6`}>
@@ -63,6 +64,14 @@ const ResourcesSection = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="text-center">
+          <Link to="/about">
+            <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
+              Learn more about our vision
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

@@ -6,6 +6,7 @@ import { Heart, Brain, Wind, Activity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Diseases = () => {
   const { t } = useLanguage();
@@ -79,9 +80,11 @@ const Diseases = () => {
                   <h3 className="text-xl font-semibold mb-2">{t("diseases.personalizedTitle")}</h3>
                   <p>{t("diseases.personalizedDescription")}</p>
                 </div>
-                <Button className="bg-healthTeal hover:bg-teal-700 text-white">
-                  {t("diseases.contactSpecialist")}
-                </Button>
+                <Link to="/services">
+                  <Button className="bg-healthTeal hover:bg-teal-700 text-white">
+                    {t("diseases.contactSpecialist")}
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
