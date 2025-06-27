@@ -13,12 +13,12 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
   return <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="w-full px-4 py-2">
-        <div className="flex items-center justify-between max-w-7xl px-[44px] mx-[40px] py-[16px] my-[2px]">
+      <div className="w-full py-2 mx-[13px] px-[68px]">
+        <div className="flex items-center justify-between max-w-7xl px-[44px] py-[16px] rounded-sm my-0 mx-[10px]">
           {/* Logo - Made bigger and more prominent */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-16 w-16" />
+              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-16 w-16 object-fill" />
               <div>
                 <div className="text-xl font-bold">
                   {language === 'ar' ? "شمس" : "SHAMS"}
@@ -32,7 +32,7 @@ const Header = () => {
           
           {/* Desktop Navigation - Condensed */}
           <nav className="hidden lg:flex items-center space-x-3 text-sm">
-            <Link to="/" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/" className="hover:py-2 transition-colors px-2">
               {t("header.home")}
             </Link>
             <Link to="/about" className="hover:text-healthTeal transition-colors px-2">
