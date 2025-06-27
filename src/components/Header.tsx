@@ -19,13 +19,13 @@ const Header = () => {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex flex-col items-center gap-1">
               <img 
                 src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
                 alt="SHAMS Logo" 
                 className="h-12 w-12"
               />
-              <div>
+              <div className="text-center">
                 <div className="text-lg font-bold">
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
