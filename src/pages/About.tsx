@@ -26,6 +26,13 @@ const About = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-healthDarkBlue mb-8 text-center">
               {language === 'ar' ? 'من نحن' : 'About Us'}
             </h1>
+            <div className="flex justify-center mb-8">
+              <img 
+                src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
+                alt="SHAMS Logo" 
+                className="h-24 w-24"
+              />
+            </div>
             <p className="text-xl text-center max-w-3xl mx-auto mb-16 text-gray-600">
               {language === 'ar' ? 
                 'تعرف على فريقنا المتفاني وأهدافنا في دعم المجتمعات العربية وشرق الأوسطية' : 

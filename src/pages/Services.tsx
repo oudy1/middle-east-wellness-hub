@@ -1,3 +1,4 @@
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -113,10 +114,12 @@ const Services = () => {
                   Find Culturally Competent Physicians
                 </Button>
               </Link>
-              <Button className="bg-healthGold hover:bg-healthGold/90 text-healthDarkBlue flex items-center gap-2">
-                <UserCheck className="h-5 w-5" />
-                Book Mentorship Session
-              </Button>
+              <Link to="/mentorship-booking">
+                <Button className="bg-healthGold hover:bg-healthGold/90 text-healthDarkBlue flex items-center gap-2">
+                  <UserCheck className="h-5 w-5" />
+                  Book Mentorship Session
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -252,10 +255,12 @@ const Services = () => {
               we're here to support you every step of the way.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-healthGold hover:bg-healthGold/90 text-healthDarkBlue flex items-center gap-2 px-8 py-3 text-lg">
-                <UserCheck className="h-5 w-5" />
-                Book Mentorship Session
-              </Button>
+              <Link to="/mentorship-booking">
+                <Button className="bg-healthGold hover:bg-healthGold/90 text-healthDarkBlue flex items-center gap-2 px-8 py-3 text-lg">
+                  <UserCheck className="h-5 w-5" />
+                  Book Mentorship Session
+                </Button>
+              </Link>
               <Link to="/physician-directory">
                 <Button variant="outline" className="border-white text-white hover:bg-white hover:text-healthDarkBlue flex items-center gap-2 px-8 py-3 text-lg">
                   <MapPin className="h-5 w-5" />
