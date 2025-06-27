@@ -17,51 +17,51 @@ const Header = () => {
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
       <div className="w-full px-4 py-2">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
+          {/* Logo - Made bigger and more prominent */}
           <div className="flex items-center flex-shrink-0">
-            <Link to="/" className="flex flex-col items-center gap-1">
+            <Link to="/" className="flex items-center gap-3">
               <img 
                 src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
                 alt="SHAMS Logo" 
-                className="h-12 w-12"
+                className="h-16 w-16"
               />
-              <div className="text-center">
-                <div className="text-lg font-bold">
+              <div>
+                <div className="text-xl font-bold">
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
-                <div className="text-xs font-light">
+                <div className="text-xs font-light max-w-xs">
                   {t("header.home") === "Home" ? 
-                    "Supporting Health & Advocacy for Middle Eastern Societies" : 
-                    "شمس دعم الصحة والدفاع عن مجتمعات الشرق الأوسط"}
+                    "Supporting Health & Advocacy" : 
+                    "دعم الصحة والدفاع"}
                 </div>
               </div>
             </Link>
           </div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-4 text-sm">
-            <Link to="/" className="hover:text-healthTeal transition-colors">
+          {/* Desktop Navigation - Condensed */}
+          <nav className="hidden lg:flex items-center space-x-3 text-sm">
+            <Link to="/" className="hover:text-healthTeal transition-colors px-2">
               {t("header.home")}
             </Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors">
+            <Link to="/about" className="hover:text-healthTeal transition-colors px-2">
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors">
+            <Link to="/services" className="hover:text-healthTeal transition-colors px-2">
               {t("header.forCommunity")}
             </Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors">
+            <Link to="/resources" className="hover:text-healthTeal transition-colors px-2">
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors">
+            <Link to="/diseases" className="hover:text-healthTeal transition-colors px-2">
               {t("header.diseases")}
             </Link>
-            <Link to="/contact" className="hover:text-healthTeal transition-colors">
+            <Link to="/contact" className="hover:text-healthTeal transition-colors px-2">
               Contact
             </Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors">
+            <Link to="/webinars" className="hover:text-healthTeal transition-colors px-2">
               {t("header.webinars")}
             </Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors">
+            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors px-2">
               Physician Directory
             </Link>
           </nav>
