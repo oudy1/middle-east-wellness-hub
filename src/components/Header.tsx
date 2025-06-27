@@ -1,8 +1,10 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {
@@ -18,12 +20,12 @@ const Header = () => {
           {/* Logo - Made bigger and more prominent */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-16 w-16 object-fill" />
               <div>
-                <div className="text-xl font-bold">
+                <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-20 w-20 object-fill mb-2" />
+                <div className="text-2xl font-bold">
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
-                <div className="text-xs font-light max-w-xs">
+                <div className="text-sm font-light max-w-xs">
                   {t("header.home") === "Home" ? "Supporting Health & Advocacy" : "دعم الصحة والدفاع"}
                 </div>
               </div>
@@ -53,7 +55,7 @@ const Header = () => {
             <Link to="/webinars" className="hover:text-healthTeal transition-colors px-2">
               {t("header.webinars")}
             </Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors px-1">
               Physician Directory
             </Link>
           </nav>
