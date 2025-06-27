@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { GraduationCap, Stethoscope, Pill, Tooth, Info } from "lucide-react";
+import { GraduationCap, Stethoscope, Pill, Smile, Info } from "lucide-react";
 
 const MentorshipBooking = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +42,7 @@ const MentorshipBooking = () => {
       value: "dentistry",
       label: "Dentistry",
       description: "Mentorship for dental school preparation and dental practice careers",
-      icon: <Tooth className="h-6 w-6" />
+      icon: <Smile className="h-6 w-6" />
     },
     {
       value: "general",
