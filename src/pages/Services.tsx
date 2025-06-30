@@ -48,27 +48,6 @@ const Services = () => {
     }
   ];
 
-  const upcomingEvents = [
-    {
-      title: "Community Health Fair",
-      date: "March 15, 2024",
-      location: "Phoenix Community Center",
-      description: "Free health screenings and cultural competency discussions."
-    },
-    {
-      title: "Mental Health Awareness Workshop",
-      date: "April 2, 2024",
-      location: "Virtual Event",
-      description: "Breaking stigma around mental health in Middle Eastern communities."
-    },
-    {
-      title: "Nutrition and Cultural Foods",
-      date: "April 20, 2024",
-      location: "Tempe Public Library",
-      description: "Healthy eating while maintaining cultural dietary practices."
-    }
-  ];
-
   const personnel = [
     {
       name: "Dr. Layla Hassan",
@@ -169,38 +148,6 @@ const Services = () => {
                         Learn More <ExternalLink className="h-4 w-4" />
                       </Button>
                     </Link>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Upcoming Events */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-healthDarkBlue">
-              Upcoming Community Events
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {upcomingEvents.map((event, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-2">
-                      <Calendar className="h-6 w-6 text-healthTeal" />
-                      <span className="text-sm font-medium text-healthTeal">{event.date}</span>
-                    </div>
-                    <CardTitle className="text-healthDarkBlue">{event.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center gap-2 mb-3">
-                      <MapPin className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm text-gray-600">{event.location}</span>
-                    </div>
-                    <p className="text-gray-600">{event.description}</p>
-                    <Button className="mt-4 bg-healthTeal hover:bg-healthTeal/90" size="sm">
-                      Register Now
-                    </Button>
                   </CardContent>
                 </Card>
               ))}

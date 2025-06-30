@@ -80,7 +80,7 @@ const Diseases = () => {
                   <h3 className="text-xl font-semibold mb-2">{t("diseases.personalizedTitle")}</h3>
                   <p>{t("diseases.personalizedDescription")}</p>
                 </div>
-                <Link to="/services">
+                <Link to="/physician-directory">
                   <Button className="bg-healthTeal hover:bg-teal-700 text-white">
                     {t("diseases.contactSpecialist")}
                   </Button>

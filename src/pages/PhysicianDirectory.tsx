@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -5,7 +6,7 @@ import PhysicianMap from "@/components/PhysicianMap";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin } from "lucide-react";
+import { MapPin, Stethoscope, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Define the Physician type
@@ -161,6 +162,63 @@ const PhysicianDirectory = () => {
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-healthDarkBlue">
             {t("physicians.directoryTitle")}
           </h1>
+          
+          {/* Physician Information Section - Editable by admin */}
+          <section className="mb-12 bg-white p-6 rounded-lg shadow-md">
+            <div className="flex items-center mb-6">
+              <Stethoscope className="h-8 w-8 text-healthTeal mr-3" />
+              <h2 className="text-2xl font-bold text-healthDarkBlue">Featured Physician Information</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-healthDarkBlue mb-4">Dr. Layla Hassan, MD</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Stethoscope className="h-5 w-5 text-healthTeal" />
+                    <span className="font-medium">Specialty:</span>
+                    <span>Internal Medicine & Endocrinology</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-healthTeal" />
+                    <span className="font-medium">Phone:</span>
+                    <a href="tel:(480) 555-1234" className="text-healthTeal hover:underline">(480) 555-1234</a>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-healthTeal" />
+                    <span className="font-medium">Email:</span>
+                    <a href="mailto:l.hassan@phoenixhealth.org" className="text-healthTeal hover:underline">l.hassan@phoenixhealth.org</a>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-healthTeal" />
+                    <span className="font-medium">Location:</span>
+                    <span>Phoenix Health Center, 123 Health Ave, Phoenix, AZ 85001</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5 text-healthTeal" />
+                    <span className="font-medium">Hours:</span>
+                    <span>Mon-Fri 8:00 AM - 5:00 PM</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-semibold text-healthDarkBlue mb-3">About Dr. Hassan</h4>
+                <p className="text-gray-600 mb-4">
+                  Dr. Hassan specializes in culturally competent care for Middle Eastern communities, 
+                  with expertise in diabetes management and women's health. She is fluent in Arabic 
+                  and English, and has been serving the Phoenix community for over 10 years.
+                </p>
+                <div className="bg-healthTeal/10 p-4 rounded-lg">
+                  <h5 className="font-semibold text-healthDarkBlue mb-2">Languages Spoken:</h5>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm">Arabic</span>
+                    <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm">English</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
           
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="lg:w-1/3">
