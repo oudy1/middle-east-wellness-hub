@@ -14,28 +14,32 @@ const ResourcesSection = () => {
       description: t("resources.researchPlatformDesc"),
       icon: <FileText className="h-10 w-10 text-white" />,
       color: "bg-healthTeal",
-      link: "/research-resources"
+      link: "/research-resources",
+      comingSoon: false
     },
     {
       title: t("resources.educationalMaterials"),
       description: t("resources.educationalMaterialsDesc"),
       icon: <BookOpen className="h-10 w-10 text-white" />,
       color: "bg-healthRed",
-      link: "/educational-materials"
+      link: "/educational-materials",
+      comingSoon: true
     },
     {
       title: t("resources.newsletterArchive"),
       description: t("resources.newsletterArchiveDesc"),
       icon: <Monitor className="h-10 w-10 text-white" />,
       color: "bg-gray-400",
-      link: "/newsletter-archive"
+      link: "/newsletter-archive",
+      comingSoon: false
     },
     {
       title: t("resources.webinarLibrary"),
       description: t("resources.webinarLibraryDesc"),
       icon: <Phone className="h-10 w-10 text-white" />,
       color: "bg-healthDarkBlue",
-      link: "/webinar-library"
+      link: "/webinar-library",
+      comingSoon: true
     }
   ];
 
@@ -49,18 +53,29 @@ const ResourcesSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {resources.map((resource, index) => (
-            <Card key={index} className="overflow-hidden border-none shadow-md">
+            <Card key={index} className="overflow-hidden border-none shadow-md relative">
               <div className={`${resource.color} p-6`}>
                 <div className="flex justify-center">
                   {resource.icon}
                 </div>
+                {resource.comingSoon && (
+                  <div className="absolute top-2 right-2 bg-healthGold text-healthDarkBlue text-xs px-2 py-1 rounded-full font-semibold">
+                    Coming Soon
+                  </div>
+                )}
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-3">{resource.title}</h3>
                 <p className="text-gray-600 mb-4">{resource.description}</p>
-                <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                  {t("resources.accessResource")}
-                </Button>
+                {resource.comingSoon ? (
+                  <Button variant="link" className="p-0 text-gray-400 cursor-not-allowed" disabled>
+                    Coming Soon
+                  </Button>
+                ) : (
+                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
+                    {t("resources.accessResource")}
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}

@@ -48,30 +48,6 @@ const Services = () => {
     }
   ];
 
-  const personnel = [
-    {
-      name: "Dr. Layla Hassan",
-      role: "Community Outreach Director",
-      email: "l.hassan@shams.org",
-      phone: "(480) 555-1234",
-      specialization: "Community engagement and cultural health advocacy"
-    },
-    {
-      name: "Ahmed Mahmoud, LCSW",
-      role: "Mental Health Coordinator",
-      email: "a.mahmoud@shams.org",
-      phone: "(480) 555-2345",
-      specialization: "Culturally responsive mental health services"
-    },
-    {
-      name: "Sarah Nasser, RN",
-      role: "Health Education Specialist",
-      email: "s.nasser@shams.org",
-      phone: "(480) 555-3456",
-      specialization: "Health literacy and community education"
-    }
-  ];
-
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
@@ -99,6 +75,36 @@ const Services = () => {
                   Book Mentorship Session
                 </Button>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Physician Directory Highlight */}
+        <section className="py-12 bg-healthTeal/5">
+          <div className="container mx-auto px-4 text-center">
+            <div className="max-w-2xl mx-auto">
+              <MapPin className="h-16 w-16 text-healthTeal mx-auto mb-6" />
+              <h2 className="text-3xl font-bold text-healthDarkBlue mb-4">
+                Find Physicians Near You
+              </h2>
+              <p className="text-gray-600 mb-8 text-lg">
+                Search our directory of culturally competent physicians who understand your background 
+                and speak your language. Get the care you deserve with providers who truly understand you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/physician-directory">
+                  <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 px-8 py-3 text-lg">
+                    <MapPin className="h-5 w-5" />
+                    Browse Physician Directory
+                  </Button>
+                </Link>
+                <Link to="/physician-application">
+                  <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white flex items-center gap-2 px-8 py-3 text-lg">
+                    <UserPlus className="h-5 w-5" />
+                    Join Our Network
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -148,42 +154,6 @@ const Services = () => {
                         Learn More <ExternalLink className="h-4 w-4" />
                       </Button>
                     </Link>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Personnel Contact */}
-        <section className="py-16 bg-healthLightGray">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-healthDarkBlue">
-              Our Team - Here to Help
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {personnel.map((person, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-healthDarkBlue">{person.name}</CardTitle>
-                    <p className="text-healthTeal font-medium">{person.role}</p>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4 text-sm">{person.specialization}</p>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-gray-500" />
-                        <a href={`mailto:${person.email}`} className="text-sm text-healthTeal hover:underline">
-                          {person.email}
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Phone className="h-4 w-4 text-gray-500" />
-                        <a href={`tel:${person.phone}`} className="text-sm text-healthTeal hover:underline">
-                          {person.phone}
-                        </a>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
