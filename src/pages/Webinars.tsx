@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -168,13 +169,16 @@ const Webinars = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
               {webinarsData.map((webinar, index) => (
-                <Card key={index} className="overflow-hidden border-none shadow-md">
+                <Card key={index} className="overflow-hidden border-none shadow-md relative">
                   <div className="bg-healthDarkBlue p-6 flex justify-between items-center">
                     <h3 className="text-xl font-bold text-white">{webinar.title}</h3>
-                    <Button variant="outline" size="icon" className="rounded-full bg-white hover:bg-healthTeal hover:text-white">
+                    <Button variant="outline" size="icon" className="rounded-full bg-white hover:bg-gray-100 cursor-not-allowed opacity-50" disabled>
                       <Play className="h-6 w-6" />
                     </Button>
                   </div>
+                  <Badge className="absolute top-2 right-2 bg-healthGold text-healthDarkBlue">
+                    Coming Soon
+                  </Badge>
                   <CardContent className="p-6">
                     <div className="flex flex-wrap gap-2 mb-4">
                       <span className="bg-healthTeal/10 text-healthTeal px-3 py-1 rounded-full text-sm">
@@ -188,8 +192,8 @@ const Webinars = () => {
                       </span>
                     </div>
                     <p className="text-gray-600">{webinar.description}</p>
-                    <Button variant="link" className="p-0 mt-4 text-healthTeal hover:text-healthDarkBlue">
-                      {t("webinars.watchNow")}
+                    <Button variant="link" className="p-0 mt-4 text-gray-400 cursor-not-allowed" disabled>
+                      Coming Soon
                     </Button>
                   </CardContent>
                 </Card>
