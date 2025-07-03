@@ -80,7 +80,7 @@ const Services = () => {
         </section>
 
         {/* Physician Directory Highlight */}
-        <section className="py-12 bg-healthTeal/5">
+        <section className="py-16 bg-healthTeal/5">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
               <MapPin className="h-16 w-16 text-healthTeal mx-auto mb-6" />
