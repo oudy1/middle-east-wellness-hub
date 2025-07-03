@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
+import TeamSection from "@/components/TeamSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Heart, Globe } from "lucide-react";
@@ -101,61 +102,8 @@ const About = () => {
           </div>
         </section>
 
-        {/* Team Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-8 text-center">
-              {language === 'ar' ? 'فريقنا' : 'Our Team'}
-            </h2>
-            <p className="text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600">
-              Our team is composed of experienced researchers, clinicians, students and community members passionate about improving support for Arab and Middle Eastern communities in healthcare.
-            </p>
-            
-            {/* Founder at the top of team */}
-            <div className="max-w-2xl mx-auto text-center mb-16">
-              <div className="mb-8">
-                <div className="w-48 h-48 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <span className="text-gray-500">Photo Coming Soon</span>
-                </div>
-                <h3 className="text-2xl font-bold text-healthDarkBlue mb-2">Mahmoud Noweir</h3>
-                <p className="text-healthTeal font-medium mb-4">Founder & Director</p>
-                <p className="text-gray-600 leading-relaxed">
-                  Bio and description coming soon...
-                </p>
-              </div>
-            </div>
-            
-            <div className="text-center py-12">
-              <p className="text-xl text-gray-600 mb-4">
-                {language === 'ar' ? 'قريباً...' : 'Coming Soon...'}
-              </p>
-              <p className="text-gray-500">
-                Team member profiles will be added once everyone submits their photos and descriptions.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Affiliated Physicians Section */}
-        <section className="py-16 bg-healthLightGray">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-8 text-center">
-              {language === 'ar' ? 'الأطباء المنتسبون' : 'Affiliated Physicians'}
-            </h2>
-            <p className="text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600">
-              Healthcare professionals who collaborate with SHAMS to advance culturally responsive care.
-            </p>
-            
-            <div className="text-center py-12">
-              <p className="text-xl text-gray-600 mb-4">
-                {language === 'ar' ? 'قريباً...' : 'Coming Soon...'}
-              </p>
-              <p className="text-gray-500">
-                Physician profiles and affiliations will be added soon.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Team Section - Now using the TeamSection component */}
+        <TeamSection />
       </main>
       
       <Footer />
