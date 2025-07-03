@@ -17,11 +17,6 @@ const TeamSection = () => {
       specialization: "Founder and strategic leadership"
     },
     {
-      name: "Ahmed Mahmoud, LCSW",
-      role: "Co-Director",
-      specialization: "Culturally responsive mental health services"
-    },
-    {
       name: "Amr Al Masri",
       role: "Project Team Committee Lead",
       specialization: "Events"

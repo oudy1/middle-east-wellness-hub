@@ -52,17 +52,17 @@ const Services = () => {
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Hero Section - Centered */}
         <section className="bg-healthDarkBlue text-white py-16">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               For the Community
             </h1>
-            <p className="text-xl mb-8 max-w-3xl">
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
               Connecting Middle Eastern communities with culturally competent healthcare resources, 
               support networks, and advocacy services.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/physician-directory">
                 <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2">
                   <MapPin className="h-5 w-5" />

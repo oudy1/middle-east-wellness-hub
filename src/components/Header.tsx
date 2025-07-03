@@ -33,52 +33,54 @@ const Header = () => {
   const currentLanguage = languages.find(lang => lang.code === language);
 
   return <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="w-full py-2 mx-[13px] px-[68px]">
-        <div className="flex items-center justify-between max-w-7xl px-[44px] py-[16px] rounded-sm my-0 mx-[10px]">
-          {/* Logo - Made bigger and more prominent */}
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          {/* Logo - More compact */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
-              <div>
-                <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-20 w-20 object-fill mb-2" />
-                <div className="text-2xl font-bold">
-                  {language === 'ar' ? "شمس" : "SHAMS"}
-                </div>
-                <div className="text-sm font-light max-w-xs">
-                  {t("header.home") === "Home" ? "Supporting Health & Advocacy" : "دعم الصحة والدفاع"}
+              <div className="flex items-center gap-3">
+                <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-16 w-16 object-contain" />
+                <div>
+                  <div className="text-xl font-bold">
+                    {language === 'ar' ? "شمس" : "SHAMS"}
+                  </div>
+                  <div className="text-xs font-light">
+                    {t("header.home") === "Home" ? "Supporting Health & Advocacy" : "دعم الصحة والدفاع"}
+                  </div>
                 </div>
               </div>
             </Link>
           </div>
           
-          {/* Desktop Navigation - Condensed */}
-          <nav className="hidden lg:flex items-center space-x-3 text-sm">
-            <Link to="/" className="hover:py-2 transition-colors px-2">
+          {/* Desktop Navigation - More compact */}
+          <nav className="hidden lg:flex items-center space-x-6 text-sm">
+            <Link to="/" className="hover:text-healthTeal transition-colors">
               {t("header.home")}
             </Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/about" className="hover:text-healthTeal transition-colors">
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/services" className="hover:text-healthTeal transition-colors">
               {t("header.forCommunity")}
             </Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/resources" className="hover:text-healthTeal transition-colors">
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/diseases" className="hover:text-healthTeal transition-colors">
               {t("header.diseases")}
             </Link>
-            <Link to="/contact" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/contact" className="hover:text-healthTeal transition-colors">
               Contact
             </Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors px-2">
+            <Link to="/webinars" className="hover:text-healthTeal transition-colors">
               {t("header.webinars")}
             </Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors px-1">
+            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors">
               Physician Directory
             </Link>
             
             {/* Language Selector */}
-            <div className="relative ml-4">
+            <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
                 className="flex items-center space-x-1 px-3 py-2 rounded-md hover:bg-healthTeal transition-colors text-sm"
@@ -155,7 +157,7 @@ const Header = () => {
         </div>
         
         {/* Mobile Menu */}
-        {mobileMenuOpen && <nav className="lg:hidden pt-3 pb-2 space-y-1 max-w-7xl mx-auto">
+        {mobileMenuOpen && <nav className="lg:hidden pt-3 pb-2 space-y-1">
             <Link to="/" className="block py-2 hover:text-healthTeal transition-colors text-sm">
               {t("header.home")}
             </Link>
