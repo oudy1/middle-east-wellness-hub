@@ -45,14 +45,14 @@ const Header = () => {
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
                 <div className="text-xs text-healthGold opacity-90">
-                  Supporting Health and Advocacy for Middle Eastern Society
+                  {language === 'ar' ? "الشمس - مصدر الضوء والحياة" : "Sun - Source of Light and Life"}
                 </div>
               </div>
             </Link>
           </div>
           
           {/* Desktop Navigation - Centered */}
-          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
+          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-8 mx-8">
             <Link to="/" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.home")}
             </Link>
