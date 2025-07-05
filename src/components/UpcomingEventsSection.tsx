@@ -21,15 +21,13 @@ const UpcomingEventsSection = () => {
         <div className="calligraphy-frame-bg h-full w-full opacity-30"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-10">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center">
-              <CalendarDays className="mr-3 text-healthTeal h-8 w-8" />
-              {t("events.title")}
-            </h2>
-            <p className="text-gray-600 mt-2">{t("events.subtitle")}</p>
-          </div>
+      <div className="w-full px-4 relative z-10">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center justify-center">
+            <CalendarDays className="mr-3 text-healthTeal h-8 w-8" />
+            {t("events.title")}
+          </h2>
+          <p className="text-gray-600 mt-2">{t("events.subtitle")}</p>
         </div>
         
         <div className="flex justify-center">

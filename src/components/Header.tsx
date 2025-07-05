@@ -34,59 +34,64 @@ const Header = () => {
 
   return (
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="max-w-full mx-auto px-6 py-4">
+      <div className="w-full px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo - Cleaner and more compact */}
+          {/* Logo - Centered with meaning */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-12 w-12 object-contain" />
-              <div className="text-2xl font-bold">
-                {language === 'ar' ? "شمس" : "SHAMS"}
+              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-10 w-10 object-contain" />
+              <div className="flex flex-col">
+                <div className="text-xl font-bold">
+                  {language === 'ar' ? "شمس" : "SHAMS"}
+                </div>
+                <div className="text-xs text-healthGold opacity-90">
+                  Supporting Health and Advocacy for Middle Eastern Society
+                </div>
               </div>
             </Link>
           </div>
           
-          {/* Desktop Navigation - Better spacing */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="hover:text-healthTeal transition-colors font-medium">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-6">
+            <Link to="/" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.home")}
             </Link>
-            <Link to="/about" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/about" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forCommunity")}
             </Link>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/diseases" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.diseases")}
             </Link>
-            <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Contact
             </Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/webinars" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.webinars")}
             </Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors font-medium">
+            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Physician Directory
             </Link>
             
-            {/* Language Selector - More compact */}
+            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
                 className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-healthTeal transition-colors"
                 aria-label="Select language"
               >
-                <Languages size={18} />
+                <Languages size={16} />
                 <span>{currentLanguage?.flag}</span>
-                <ChevronDown size={16} />
+                <ChevronDown size={14} />
               </button>
               
               {languageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg py-1 z-50 border">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -116,13 +121,13 @@ const Header = () => {
                 className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-healthTeal transition-colors"
                 aria-label="Select language"
               >
-                <Languages size={16} />
+                <Languages size={14} />
                 <span>{currentLanguage?.flag}</span>
-                <ChevronDown size={14} />
+                <ChevronDown size={12} />
               </button>
               
               {languageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-1 z-50 border">
+                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-50 border">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -130,12 +135,12 @@ const Header = () => {
                         setLanguage(lang.code as any);
                         setLanguageMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center space-x-2 ${
+                      className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-100 flex items-center space-x-2 ${
                         language === lang.code ? 'bg-healthTeal text-white' : 'text-gray-700'
                       }`}
                     >
                       <span>{lang.flag}</span>
-                      <span className="text-xs">{lang.name}</span>
+                      <span>{lang.name}</span>
                     </button>
                   ))}
                 </div>
@@ -144,7 +149,7 @@ const Header = () => {
             
             {/* Mobile Menu Button */}
             <button className="text-white" onClick={toggleMobileMenu} aria-label="Toggle menu">
-              <Menu size={22} />
+              <Menu size={20} />
             </button>
           </div>
         </div>
