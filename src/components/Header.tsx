@@ -36,7 +36,7 @@ const Header = () => {
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
       <div className="w-full px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo - Centered with meaning */}
+          {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center gap-3">
               <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-10 w-10 object-contain" />
@@ -51,8 +51,8 @@ const Header = () => {
             </Link>
           </div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
             <Link to="/" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.home")}
             </Link>
@@ -77,8 +77,10 @@ const Header = () => {
             <Link to="/physician-directory" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Physician Directory
             </Link>
-            
-            {/* Language Selector */}
+          </nav>
+          
+          {/* Language Selector - Right Side */}
+          <div className="hidden lg:flex items-center">
             <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
@@ -110,7 +112,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-          </nav>
+          </div>
           
           {/* Mobile Language & Menu Button */}
           <div className="lg:hidden flex items-center space-x-3">
