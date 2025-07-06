@@ -12,6 +12,7 @@ import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import PartnersSection from "@/components/PartnersSection";
 import ImpactSection from "@/components/ImpactSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
+import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <main className="flex-grow relative z-10">
         <HeroSection />
         <UpcomingEventsSection />
+        <FeaturedNewsSection />
         <MissionSection />
         <MeetTeamButton />
         <ResourcesSection />
