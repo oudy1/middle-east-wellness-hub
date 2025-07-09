@@ -8,11 +8,11 @@ const UpcomingEventsSection = () => {
   const { t } = useLanguage();
   
   const event = {
-    title: t("events.healthcareSymposium"),
-    date: t("events.date") === "Date" ? "June 15, 2025" : "١٥ يونيو، ٢٠٢٥",
-    description: t("events.healthcareSymposiumDesc"),
-    location: t("events.virtual"),
-    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSfmCIOZ7p4YAFv2M1Bb1fMNB4StJrGUq365oJo1RhKOdITw5A/viewform?usp=header"
+    title: "Coming Soon",
+    date: "Stay Tuned",
+    description: "Exciting health events and educational opportunities are being planned. Check back soon for updates!",
+    location: "Details to follow",
+    registrationLink: "#"
   };
 
   return (
@@ -21,7 +21,7 @@ const UpcomingEventsSection = () => {
         <div className="calligraphy-frame-bg h-full w-full opacity-30"></div>
       </div>
       
-      <div className="w-full px-4 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center justify-center">
             <CalendarDays className="mr-3 text-healthTeal h-8 w-8" />
@@ -40,10 +40,8 @@ const UpcomingEventsSection = () => {
               <h3 className="text-xl font-bold mb-3 text-healthDarkBlue">{event.title}</h3>
               <p className="text-gray-600 mb-4">{event.description}</p>
               <div className="text-sm text-gray-500 mb-4">{event.location}</div>
-              <Button asChild className="w-full bg-healthTeal text-white hover:bg-healthTeal/90">
-                <a href={event.registrationLink} target="_blank" rel="noopener noreferrer">
-                  {t("events.register")}
-                </a>
+              <Button disabled className="w-full bg-gray-400 text-white cursor-not-allowed">
+                Coming Soon
               </Button>
             </CardContent>
           </Card>

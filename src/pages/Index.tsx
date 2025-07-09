@@ -16,7 +16,7 @@ import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-healthLightGray relative">
+    <div className="flex flex-col min-h-screen w-full bg-healthLightGray relative">
       {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
       <CalligraphyBackground />
       <LandmarksGenerator />

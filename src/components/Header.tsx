@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="w-full px-6 py-4">
+      <div className="w-full max-w-full px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">

@@ -10,28 +10,28 @@ const FeaturedNewsSection = () => {
   const newsItems = [
     {
       id: 1,
-      title: "SHAMS Community Health Initiative Reaches 5,000 Families",
-      excerpt: "Our recent health screening program has successfully provided preventive care services to over 5,000 Middle Eastern families across major metropolitan areas.",
-      date: "December 15, 2024",
-      category: "Community Impact",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=250&fit=crop",
+      title: "Middle East Emerges as Global Hub for Digital Health Innovation",
+      excerpt: "The UAE's digital health market is projected to reach $2.6bn by 2030, growing at 23.5% annually. Dubai leads the charge with massive AI investments and innovation platforms.",
+      date: "July 8, 2025",
+      category: "Digital Health",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop",
       featured: true
     },
     {
       id: 2,
-      title: "New Mental Health Resources Launch in Arabic and Kurdish",
-      excerpt: "Expanding accessibility with culturally sensitive mental health materials now available in multiple languages for our community members.",
-      date: "December 10, 2024",
-      category: "Resources",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop"
+      title: "Climate Change Linked to Rising Women's Cancer Rates in MENA",
+      excerpt: "New research reveals that rising temperatures in Middle East and North Africa correlate with increased rates of breast, ovarian, uterine and cervical cancers.",
+      date: "May 27, 2025",
+      category: "Public Health",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop"
     },
     {
       id: 3,
-      title: "Partnership with Regional Medical Centers Announced",
-      excerpt: "SHAMS announces strategic partnerships with 12 medical centers to improve healthcare access for Middle Eastern communities.",
-      date: "December 5, 2024",
-      category: "Partnerships",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop"
+      title: "Health Canada Introduces New Nutrition Warning Labels",
+      excerpt: "Black-and-white labels now alert consumers to foods high in sugar, sodium, and saturated fat, supporting healthier dietary choices across Canadian communities.",
+      date: "July 1, 2025",
+      category: "Nutrition Policy",
+      image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop"
     }
   ];
 
@@ -44,7 +44,7 @@ const FeaturedNewsSection = () => {
         <div className="calligraphy-frame-bg h-full w-full opacity-20"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center justify-center mb-4">
             <Newspaper className="mr-3 text-healthTeal h-8 w-8" />
@@ -115,9 +115,11 @@ const FeaturedNewsSection = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
-            View All News & Updates
-            <ArrowRight className="ml-2 h-4 w-4" />
+          <Button asChild variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
+            <a href="https://www.canada.ca/en/health-canada.html" target="_blank" rel="noopener noreferrer">
+              View All News & Updates
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </div>
       </div>
