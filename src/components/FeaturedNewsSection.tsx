@@ -14,7 +14,8 @@ const FeaturedNewsSection = () => {
       excerpt: "The UAE's digital health market is projected to reach $2.6bn by 2030, growing at 23.5% annually. Dubai leads the charge with massive AI investments and innovation platforms.",
       date: "July 8, 2025",
       category: "Digital Health",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center",
+      url: "https://gulfbusiness.com/middle-east-the-emerging-global-hub-for-digital-health-innovation/",
       featured: true
     },
     {
@@ -23,7 +24,8 @@ const FeaturedNewsSection = () => {
       excerpt: "New research reveals that rising temperatures in Middle East and North Africa correlate with increased rates of breast, ovarian, uterine and cervical cancers.",
       date: "May 27, 2025",
       category: "Public Health",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop"
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop",
+      url: "https://www.frontiersin.org/news/2025/05/27/global-warming-could-be-driving-womens-cancer-risk-frontiers-public-health"
     },
     {
       id: 3,
@@ -31,7 +33,8 @@ const FeaturedNewsSection = () => {
       excerpt: "Black-and-white labels now alert consumers to foods high in sugar, sodium, and saturated fat, supporting healthier dietary choices across Canadian communities.",
       date: "July 1, 2025",
       category: "Nutrition Policy",
-      image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop"
+      image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop",
+      url: "https://www.cbc.ca/news/canada/nova-scotia/health-canada-front-of-package-nutrition-warning-labels-1.7563212"
     }
   ];
 
@@ -59,33 +62,35 @@ const FeaturedNewsSection = () => {
           {/* Featured News - Large Card */}
           {featuredNews && (
             <div className="lg:col-span-2">
-              <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                <div className="relative">
-                  <img 
-                    src={featuredNews.image} 
-                    alt={featuredNews.title}
-                    className="w-full h-64 object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Featured
-                    </span>
+              <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full cursor-pointer">
+                <a href={featuredNews.url} target="_blank" rel="noopener noreferrer" className="block">
+                  <div className="relative">
+                    <img 
+                      src={featuredNews.image} 
+                      alt={featuredNews.title}
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm font-medium">
+                        Featured
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    {featuredNews.date}
-                    <span className="mx-2">•</span>
-                    <span className="text-healthTeal font-medium">{featuredNews.category}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 text-healthDarkBlue">{featuredNews.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{featuredNews.excerpt}</p>
-                  <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
-                    Read Full Story
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardContent>
+                  <CardContent className="p-6">
+                    <div className="flex items-center text-sm text-gray-500 mb-3">
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {featuredNews.date}
+                      <span className="mx-2">•</span>
+                      <span className="text-healthTeal font-medium">{featuredNews.category}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 text-healthDarkBlue">{featuredNews.title}</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{featuredNews.excerpt}</p>
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
+                      Read Full Story
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </a>
               </Card>
             </div>
           )}
@@ -93,22 +98,24 @@ const FeaturedNewsSection = () => {
           {/* Regular News - Smaller Cards */}
           <div className="space-y-6">
             {regularNews.map((item) => (
-              <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="flex">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-24 h-24 object-cover flex-shrink-0"
-                  />
-                  <CardContent className="p-4 flex-1">
-                    <div className="flex items-center text-xs text-gray-500 mb-2">
-                      <Calendar className="mr-1 h-3 w-3" />
-                      {item.date}
-                    </div>
-                    <h4 className="font-bold text-healthDarkBlue mb-2 text-sm leading-tight">{item.title}</h4>
-                    <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
-                  </CardContent>
-                </div>
+              <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                <a href={item.url} target="_blank" rel="noopener noreferrer" className="block">
+                  <div className="flex">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-24 h-24 object-cover flex-shrink-0"
+                    />
+                    <CardContent className="p-4 flex-1">
+                      <div className="flex items-center text-xs text-gray-500 mb-2">
+                        <Calendar className="mr-1 h-3 w-3" />
+                        {item.date}
+                      </div>
+                      <h4 className="font-bold text-healthDarkBlue mb-2 text-sm leading-tight">{item.title}</h4>
+                      <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
+                    </CardContent>
+                  </div>
+                </a>
               </Card>
             ))}
           </div>

@@ -10,7 +10,6 @@ import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
 import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import PartnersSection from "@/components/PartnersSection";
-import ImpactSection from "@/components/ImpactSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 
@@ -29,9 +28,7 @@ const Index = () => {
         <MissionSection />
         <MeetTeamButton />
         <ResourcesSection />
-        <ImpactSection />
         <PartnersSection />
-        <StatsSection />
         <NewsletterSection />
       </main>
       <Footer />

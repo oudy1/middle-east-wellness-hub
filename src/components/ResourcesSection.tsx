@@ -14,7 +14,7 @@ const ResourcesSection = () => {
       description: t("resources.researchPlatformDesc"),
       icon: <FileText className="h-10 w-10 text-white" />,
       color: "bg-healthTeal",
-      link: "/research-resources",
+      link: "/resources",
       comingSoon: false
     },
     {
@@ -24,14 +24,6 @@ const ResourcesSection = () => {
       color: "bg-healthRed",
       link: "/educational-materials",
       comingSoon: true
-    },
-    {
-      title: t("resources.newsletterArchive"),
-      description: t("resources.newsletterArchiveDesc"),
-      icon: <Monitor className="h-10 w-10 text-white" />,
-      color: "bg-gray-400",
-      link: "/newsletter-archive",
-      comingSoon: false
     },
     {
       title: t("resources.webinarLibrary"),
@@ -72,9 +64,11 @@ const ResourcesSection = () => {
                     Coming Soon
                   </Button>
                 ) : (
-                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                    {t("resources.accessResource")}
-                  </Button>
+                  <Link to={resource.link}>
+                    <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
+                      {t("resources.accessResource")}
+                    </Button>
+                  </Link>
                 )}
               </CardContent>
             </Card>
