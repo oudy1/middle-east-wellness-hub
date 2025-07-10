@@ -8,29 +8,9 @@ const PartnersSection = () => {
 
   const partners = [
     {
-      name: t("partners.regionalHealth"),
-      logo: "/placeholder.svg",
-      description: t("partners.regionalHealthDesc")
-    },
-    {
-      name: t("partners.globalMedical"),
-      logo: "/placeholder.svg", 
-      description: t("partners.globalMedicalDesc")
-    },
-    {
-      name: t("partners.healthAccess"),
-      logo: "/placeholder.svg",
-      description: t("partners.healthAccessDesc")
-    },
-    {
-      name: t("partners.culturalAlliance"),
-      logo: "/placeholder.svg",
-      description: t("partners.culturalAllianceDesc")
-    },
-    {
-      name: t("partners.medicalSociety"),
-      logo: "/placeholder.svg",
-      description: t("partners.medicalSocietyDesc")
+      name: "Canadian Arab Institute",
+      logo: "/lovable-uploads/ca74b069-e656-4ce3-944e-98915200f6b6.png",
+      description: "Institut Canado-Arabe"
     }
   ];
 
@@ -49,7 +29,8 @@ const PartnersSection = () => {
           {t("partners.subtitle")}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="flex justify-center">
+          <div className="max-w-md">
           {partners.map((partner, index) => (
             <Card key={index} className="overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-300">
               <CardContent className="p-6 flex flex-col items-center text-center">
@@ -65,6 +46,7 @@ const PartnersSection = () => {
               </CardContent>
             </Card>
           ))}
+          </div>
         </div>
       </div>
     </section>

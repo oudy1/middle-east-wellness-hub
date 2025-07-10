@@ -43,7 +43,7 @@ const ResourcesSection = () => {
           {t("resources.subtitle")}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 justify-items-center max-w-4xl mx-auto">
           {resources.map((resource, index) => (
             <Card key={index} className="overflow-hidden border-none shadow-md relative">
               <div className={`${resource.color} p-6`}>

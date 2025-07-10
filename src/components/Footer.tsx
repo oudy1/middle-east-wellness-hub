@@ -43,18 +43,15 @@ const Footer = () => {
               <li><Link to="/publications" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.publications")}</Link></li>
               <li><Link to="/webinars" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.webinars")}</Link></li>
               <li><Link to="/newsletter" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.newsletter")}</Link></li>
-              <li><Link to="/faq" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.faq")}</Link></li>
+              
             </ul>
           </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("footer.contactUs")}</h3>
             <address className="not-italic text-gray-300">
-              <p className="mb-2">{t("footer.title")}</p>
-              <p className="mb-2">{t("footer.address1")}</p>
-              <p className="mb-2">{t("footer.address2")}</p>
-              <p className="mb-2">{t("footer.email")}</p>
-              <p>{t("footer.phone")}</p>
+              <p className="mb-2">Toronto, Canada</p>
+              <p className="mb-2">info@projectshams.com</p>
             </address>
           </div>
         </div>
