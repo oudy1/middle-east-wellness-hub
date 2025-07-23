@@ -25,12 +25,9 @@ const HeroSection = () => {
           <p className="text-xl text-healthLightGray mb-8 animate-fade-in">
             {t("hero.subtitle")}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
+          <div className="flex justify-center animate-fade-in">
             <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-6 text-lg">
               {t("hero.learnMore")}
-            </Button>
-            <Button variant="outline" className="border-healthGold text-healthGold hover:bg-healthGold hover:text-healthDarkBlue px-8 py-6 text-lg">
-              {t("hero.support")}
             </Button>
           </div>
         </div>

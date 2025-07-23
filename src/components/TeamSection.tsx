@@ -13,33 +13,48 @@ const TeamSection = () => {
   const projectTeam = [
     {
       name: "Mahmoud Noweir",
-      role: "Director",
+      role: "Team Member",
       specialization: "Founder and strategic leadership"
     },
     {
       name: "Amr Al Masri",
-      role: "Project Team Committee Lead",
+      role: "Team Member",
       specialization: "Events"
     },
     {
       name: "Mohamed Salem",
-      role: "Project Team Committee Lead",
+      role: "Team Member",
       specialization: "Research and publication"
     },
     {
       name: "Qamar Al Farsi",
-      role: "Project Team Committee Lead",
+      role: "Team Member",
       specialization: "Community partnerships and engagement co-lead"
     },
     {
       name: "Lodi Sinanios",
-      role: "Project Team Committee Lead",
+      role: "Team Member",
       specialization: "Technology and digital initiatives"
     },
     {
       name: "Mousa El-Sururi",
-      role: "Project Team Committee Lead",
+      role: "Team Member",
       specialization: "Community partnerships and engagement and research"
+    },
+    {
+      name: "Sarah Durani",
+      role: "Team Member",
+      specialization: "Research and community engagement"
+    },
+    {
+      name: "Riad Sankari",
+      role: "Team Member",
+      specialization: "Healthcare advocacy and outreach"
+    },
+    {
+      name: "Saif Arabiat",
+      role: "Team Member",
+      specialization: "Digital health and innovation"
     }
   ];
 
