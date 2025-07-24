@@ -60,35 +60,35 @@ const TeamSection = () => {
 
   const renderPersonCard = (person, index) => (
     <Card key={index} className="hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <CardTitle className="text-healthDarkBlue">{person.name}</CardTitle>
-        <p className="text-healthTeal font-medium">{person.role}</p>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-healthDarkBlue text-lg md:text-xl leading-tight">{person.name}</CardTitle>
+        <p className="text-healthTeal font-medium text-sm md:text-base">{person.role}</p>
       </CardHeader>
-      <CardContent>
-        <p className="text-gray-600 text-sm">{person.specialization}</p>
+      <CardContent className="pt-0">
+        <p className="text-gray-600 text-sm md:text-base leading-relaxed">{person.specialization}</p>
       </CardContent>
     </Card>
   );
 
   return (
-    <section className="py-16 bg-healthLightGray">
+    <section className="py-12 md:py-16 bg-healthLightGray">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center text-healthDarkBlue">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center text-healthDarkBlue">
           Our Team
         </h2>
         
         {/* Affiliated Physicians */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-semibold mb-6 text-healthDarkBlue">Affiliated Physicians</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mb-8 md:mb-12">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 md:mb-6 text-healthDarkBlue">Affiliated Physicians</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {affiliatedPhysicians.map((person, index) => renderPersonCard(person, index))}
           </div>
         </div>
 
         {/* Project Team Committee */}
         <div>
-          <h3 className="text-2xl font-semibold mb-6 text-healthDarkBlue">Project Team</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 md:mb-6 text-healthDarkBlue">Project Team</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {projectTeam.map((person, index) => renderPersonCard(person, index))}
           </div>
         </div>
