@@ -9,6 +9,7 @@ import Resources from "@/pages/Resources";
 import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
+import FamilyPhysician from "@/pages/FamilyPhysician";
 import PhysicianApplication from "@/pages/PhysicianApplication";
 import PostOpportunity from "@/pages/PostOpportunity";
 import Contact from "@/pages/Contact";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/diseases" element={<Diseases />} />
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
+            <Route path="/family-physician" element={<FamilyPhysician />} />
             <Route path="/physician-application" element={<PhysicianApplication />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />

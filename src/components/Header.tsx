@@ -9,6 +9,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [educationMenuOpen, setEducationMenuOpen] = useState(false);
+  const [physicianMenuOpen, setPhysicianMenuOpen] = useState(false);
   const {
     language,
     setLanguage,
@@ -104,9 +105,36 @@ const Header = () => {
             <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Contact
             </Link>
-            <Link to="/physician-directory" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              Physician Directory
-            </Link>
+            
+            {/* Physician Directory Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setPhysicianMenuOpen(!physicianMenuOpen)}
+                className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
+              >
+                <span>Physician Directory</span>
+                <ChevronDown size={14} />
+              </button>
+              
+              {physicianMenuOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                  <Link
+                    to="/physician-directory"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setPhysicianMenuOpen(false)}
+                  >
+                    Find Physician
+                  </Link>
+                  <Link
+                    to="/family-physician"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setPhysicianMenuOpen(false)}
+                  >
+                    Family Physician
+                  </Link>
+                </div>
+              )}
+            </div>
           </nav>
           
           {/* Language Selector - Right Side */}
@@ -215,9 +243,17 @@ const Header = () => {
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors font-medium">
               Contact
             </Link>
-            <Link to="/physician-directory" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              Physician Directory
-            </Link>
+            <div className="py-2">
+              <span className="text-healthTeal font-medium text-sm">Physician Directory</span>
+              <div className="ml-4 mt-1 space-y-1">
+                <Link to="/physician-directory" className="block py-1 hover:text-healthTeal transition-colors">
+                  Find Physician
+                </Link>
+                <Link to="/family-physician" className="block py-1 hover:text-healthTeal transition-colors">
+                  Family Physician
+                </Link>
+              </div>
+            </div>
           </nav>
         )}
       </div>
