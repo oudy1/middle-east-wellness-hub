@@ -240,59 +240,6 @@ const Resources = () => {
           </div>
         </section>
 
-        {/* Resources by Category */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-12 text-center">
-              Resources by Category
-            </h2>
-            
-            <div className="space-y-12">
-              {resourceCategories.map((category, categoryIndex) => (
-                <div key={categoryIndex} className="max-w-6xl mx-auto">
-                  <div className="flex items-center mb-8">
-                    <div className={`${category.color} p-3 rounded-lg mr-4`}>
-                      {category.icon}
-                    </div>
-                    <h3 className="text-2xl font-bold text-healthDarkBlue">{category.title}</h3>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {category.resources.map((resource, resourceIndex) => (
-                      <Card key={resourceIndex} className="hover:shadow-lg transition-shadow border-l-4" style={{borderLeftColor: category.color.replace('bg-', '#')}}>
-                        <CardHeader>
-                          <div className="flex items-start justify-between">
-                            <CardTitle className="text-lg text-healthDarkBlue leading-tight">
-                              {resource.title}
-                            </CardTitle>
-                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full whitespace-nowrap ml-2">
-                              {resource.type}
-                            </span>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-gray-600 mb-4 text-sm">{resource.description}</p>
-                          <div className="flex items-center gap-2">
-                            {resource.type.includes('PDF') && <FileDown className="h-4 w-4 text-healthTeal" />}
-                            {resource.type.includes('Video') && <Video className="h-4 w-4 text-healthTeal" />}
-                            {resource.type.includes('Tool') && <Stethoscope className="h-4 w-4 text-healthTeal" />}
-                            <Button 
-                              variant="link" 
-                              className="p-0 text-healthTeal hover:text-healthDarkBlue h-auto"
-                              onClick={() => window.open(resource.link, '_blank')}
-                            >
-                              Access Resource <ExternalLink className="h-3 w-3 ml-1" />
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Research Opportunities Section */}
         <section className="py-16 bg-white">
@@ -376,7 +323,7 @@ const Resources = () => {
               <Button 
                 variant="outline" 
                 className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white"
-                onClick={() => window.location.href = 'mailto:info@shams.org?subject=Post Research Opportunity'}
+                onClick={() => window.location.href = '/post-opportunity'}
               >
                 Post Your Opportunity
               </Button>

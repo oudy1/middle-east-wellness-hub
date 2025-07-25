@@ -10,6 +10,7 @@ import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
 import PhysicianApplication from "@/pages/PhysicianApplication";
+import PostOpportunity from "@/pages/PostOpportunity";
 import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
 import NotFound from "@/pages/NotFound";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
             <Route path="/physician-application" element={<PhysicianApplication />} />
+            <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="*" element={<NotFound />} />
