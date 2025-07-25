@@ -62,15 +62,6 @@ const Services = () => {
               Connecting Middle Eastern communities with culturally competent healthcare resources, 
               support networks, and advocacy services.
             </p>
-            <div className="flex justify-center px-4">
-              <Link to="/physician-directory">
-                <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 text-sm md:text-base">
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                  <span className="hidden sm:inline">Find Culturally Competent Physicians</span>
-                  <span className="sm:hidden">Find Physicians</span>
-                </Button>
-              </Link>
-            </div>
           </div>
         </section>
 
@@ -94,13 +85,6 @@ const Services = () => {
                     <span className="sm:hidden">Browse Directory</span>
                   </Button>
                 </Link>
-                <Link to="/physician-application" className="w-full sm:w-auto">
-                  <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white flex items-center justify-center gap-2 px-6 md:px-8 py-2 md:py-3 text-base md:text-lg w-full sm:w-auto">
-                    <UserPlus className="h-4 w-4 md:h-5 md:w-5" />
-                    <span className="hidden sm:inline">Join Our Network</span>
-                    <span className="sm:hidden">Join Network</span>
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
@@ -118,8 +102,8 @@ const Services = () => {
                 Join our network of culturally competent physicians committed to serving Middle Eastern communities.
               </p>
               <Link to="/physician-application">
-                <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto">
-                  <UserPlus className="h-5 w-5" />
+                <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <UserPlus className="h-6 w-6" />
                   Apply to Join Our Network
                 </Button>
               </Link>
@@ -127,33 +111,47 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Community Resources */}
+        {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center text-healthDarkBlue">
-              Community Resources
+              Educational Materials
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {communityResources.map((resource, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader className="pb-3 md:pb-4">
-                    <CardTitle className="flex items-center gap-2 md:gap-3 text-healthDarkBlue text-base md:text-lg">
-                      <div className="p-1.5 md:p-2 bg-healthTeal/10 rounded-lg text-healthTeal flex-shrink-0">
-                        {resource.icon}
-                      </div>
-                      <span className="leading-tight">{resource.title}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base leading-relaxed">{resource.description}</p>
-                    <Link to={resource.link}>
-                      <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue flex items-center gap-1 text-sm md:text-base">
-                        Learn More <ExternalLink className="h-3 w-3 md:h-4 md:w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Alone in Canada Guide */}
+              <Card className="hover:shadow-lg transition-shadow">
+                <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
+                  <img 
+                    src="/public/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
+                    alt="Alone in Canada Guide" 
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight">
+                    Alone in Canada: 21 Ways to Make It Better | وحيد في كندا: ٢١ طريقة لتجعلها أفضل
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    Real advice from newcomers on adapting to life in Canada. Covers making friends, cultural norms, holidays, and mental wellness tips especially useful for newcomers.
+                  </p>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    نصائح حقيقية من مهاجرين جدد حول التأقلم مع الحياة في كندا. يشمل بناء الصداقات وفهم الثقافة الكندية ونصائح الصحة النفسية.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">Source: CAMH – Centre for Addiction and Mental Health</p>
+                  <a 
+                    href="https://www.camh.ca/-/media/files/mi-index-other-languages/english-alone-in-canada.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      Download PDF
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
