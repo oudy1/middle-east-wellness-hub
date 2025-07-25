@@ -160,17 +160,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="font-medium">Email</p>
-                        <p className="text-gray-600">info@shams.org</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-healthTeal/10 rounded-lg">
-                        <Phone className="h-5 w-5 text-healthTeal" />
-                      </div>
-                      <div>
-                        <p className="font-medium">Phone</p>
-                        <p className="text-gray-600">(480) 555-SHAMS</p>
+                        <p className="text-gray-600">mahmoudeldossoky47@gmail.com</p>
                       </div>
                     </div>
                     
@@ -179,34 +169,13 @@ const Contact = () => {
                         <MapPin className="h-5 w-5 text-healthTeal" />
                       </div>
                       <div>
-                        <p className="font-medium">Office</p>
-                        <p className="text-gray-600">Phoenix, Arizona</p>
+                        <p className="font-medium">Location</p>
+                        <p className="text-gray-600">Toronto</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-xl text-healthDarkBlue">Office Hours</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span>Monday - Friday</span>
-                        <span className="text-gray-600">9:00 AM - 5:00 PM</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Saturday</span>
-                        <span className="text-gray-600">10:00 AM - 2:00 PM</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Sunday</span>
-                        <span className="text-gray-600">Closed</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
           </div>

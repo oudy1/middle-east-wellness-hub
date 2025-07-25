@@ -230,7 +230,7 @@ const Resources = () => {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-healthDarkBlue mb-8 text-center">
-              {language === 'ar' ? 'الموارد للأطباء والباحثين' : 'Resources for Clinicians & Researchers'}
+              {language === 'ar' ? 'موارد البحث' : 'Research Resources'}
             </h1>
             <p className="text-xl text-center max-w-3xl mx-auto mb-16 text-gray-600">
               {language === 'ar' ? 
@@ -250,12 +250,12 @@ const Resources = () => {
                 <FlaskConical className="h-12 w-12 text-healthTeal" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4">
-                {language === 'ar' ? 'فرص البحث للطلاب' : 'Research Opportunities for Students'}
+                {language === 'ar' ? 'البحث' : 'Research'}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 {language === 'ar' ? 
-                  'اكتشف الفرص البحثية مع الأطباء والباحثين الذين يعملون على تحسين الصحة للمجتمعات العربية وشرق الأوسطية' :
-                  'Discover research opportunities with clinicians and researchers working to improve health outcomes for Arab and Middle Eastern communities'}
+                  'البحث قريباً' :
+                  'Research coming soon'}
               </p>
             </div>
 
@@ -331,23 +331,6 @@ const Resources = () => {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-healthDarkBlue mb-4">
-              {language === 'ar' ? 'مستقبل أكثر إشراقاً لصحة الشرق الأوسط' : 'A Brighter Future for Middle Eastern Health'}
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Join us in advancing research and healthcare that truly serves Arab and Middle Eastern communities.
-            </p>
-            <Button 
-              className="bg-healthTeal hover:bg-healthTeal/80 text-white px-8 py-3 text-lg"
-              onClick={() => window.open('https://example.com/brighter-future', '_blank')}
-            >
-              Learn More About Our Vision
-            </Button>
-          </div>
-        </section>
       </main>
       
       <Footer />
