@@ -152,6 +152,41 @@ const Services = () => {
                   </a>
                 </CardContent>
               </Card>
+
+              {/* Arabic-English Medical Terminology Guide */}
+              <Card className="hover:shadow-lg transition-shadow">
+                <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
+                  <img 
+                    src="/lovable-uploads/46453847-1b06-4288-b707-464176e53351.png" 
+                    alt="Arabic-English Medical Terminology Guide" 
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight">
+                    Arabic-English Medical Terminology Guide | دليل المصطلحات الطبية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    Clear translations of essential medical terms from English to Arabic, helping support communication between healthcare providers and Arabic-speaking patients.
+                  </p>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    ترجمات واضحة للمصطلحات الطبية الأساسية من الإنجليزية إلى العربية، مما يساعد في تحسين التواصل بين مقدمي الرعاية الصحية والمرضى الناطقين بالعربية.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4">Source: Adapted with gratitude from the University of Oregon Health Center</p>
+                  <a 
+                    href="https://health.uoregon.edu/sites/default/files/Translation-Arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      Download PDF
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>

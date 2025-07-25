@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [educationMenuOpen, setEducationMenuOpen] = useState(false);
   const {
     language,
     setLanguage,
@@ -20,6 +21,10 @@ const Header = () => {
 
   const toggleLanguageMenu = () => {
     setLanguageMenuOpen(!languageMenuOpen);
+  };
+
+  const toggleEducationMenu = () => {
+    setEducationMenuOpen(!educationMenuOpen);
   };
 
   const languages = [
@@ -65,14 +70,39 @@ const Header = () => {
             <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              {t("header.diseases")}
-            </Link>
+            
+            {/* Education Dropdown */}
+            <div className="relative">
+              <button
+                onClick={toggleEducationMenu}
+                className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
+              >
+                <span>Education</span>
+                <ChevronDown size={14} />
+              </button>
+              
+              {educationMenuOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                  <Link
+                    to="/diseases"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
+                  >
+                    {t("header.diseases")}
+                  </Link>
+                  <Link
+                    to="/webinars"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
+                  >
+                    Webinars
+                  </Link>
+                </div>
+              )}
+            </div>
+            
             <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Contact
-            </Link>
-            <Link to="/webinars" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              {t("header.webinars")}
             </Link>
             <Link to="/physician-directory" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Physician Directory
@@ -171,14 +201,19 @@ const Header = () => {
             <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors font-medium">
               {t("header.forClinicians")}
             </Link>
-            <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.diseases")}
-            </Link>
+            <div className="py-2">
+              <span className="text-healthTeal font-medium text-sm">Education</span>
+              <div className="ml-4 mt-1 space-y-1">
+                <Link to="/diseases" className="block py-1 hover:text-healthTeal transition-colors">
+                  {t("header.diseases")}
+                </Link>
+                <Link to="/webinars" className="block py-1 hover:text-healthTeal transition-colors">
+                  Webinars
+                </Link>
+              </div>
+            </div>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors font-medium">
               Contact
-            </Link>
-            <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.webinars")}
             </Link>
             <Link to="/physician-directory" className="block py-2 hover:text-healthTeal transition-colors font-medium">
               Physician Directory
