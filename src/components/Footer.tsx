@@ -13,7 +13,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">{t("footer.title")}</h3>
             <p className="mb-4 text-gray-300">
-              {t("footer.description")}
+              Dedicated to improving healthcare access and outcomes for communities across the Middle Eastern communities in Canada.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/projectshams/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-healthTeal transition-colors">
@@ -36,16 +36,6 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t("footer.resources")}</h3>
-            <ul className="space-y-2">
-              <li><Link to="/research" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.research")}</Link></li>
-              <li><Link to="/publications" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.publications")}</Link></li>
-              <li><Link to="/webinars" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.webinars")}</Link></li>
-              <li><Link to="/newsletter" className="text-gray-300 hover:text-healthTeal transition-colors">{t("footer.newsletter")}</Link></li>
-              
-            </ul>
-          </div>
           
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("footer.contactUs")}</h3>

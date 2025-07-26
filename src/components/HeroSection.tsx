@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -26,9 +27,11 @@ const HeroSection = () => {
             {t("hero.subtitle")}
           </p>
           <div className="flex justify-center animate-fade-in">
-            <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-6 text-lg">
-              {t("hero.learnMore")}
-            </Button>
+            <Link to="/about#mission">
+              <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-6 text-lg">
+                {t("hero.learnMore")}
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

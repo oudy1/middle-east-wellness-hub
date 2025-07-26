@@ -43,7 +43,7 @@ const About = () => {
         </section>
 
         {/* Mission Section */}
-        <section className="py-12 md:py-16 bg-white">
+        <section id="mission" className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-healthDarkBlue mb-6 md:mb-8">

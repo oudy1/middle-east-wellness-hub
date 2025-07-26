@@ -10,6 +10,7 @@ const Header = () => {
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [educationMenuOpen, setEducationMenuOpen] = useState(false);
   const [physicianMenuOpen, setPhysicianMenuOpen] = useState(false);
+  const [contactMenuOpen, setContactMenuOpen] = useState(false);
   const {
     language,
     setLanguage,
@@ -73,9 +74,12 @@ const Header = () => {
             </Link>
             
             {/* Education Dropdown */}
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={() => setEducationMenuOpen(true)}
+              onMouseLeave={() => setEducationMenuOpen(false)}
+            >
               <button
-                onClick={toggleEducationMenu}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <span>Education</span>
@@ -87,14 +91,12 @@ const Header = () => {
                   <Link
                     to="/diseases"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setEducationMenuOpen(false)}
                   >
                     {t("header.diseases")}
                   </Link>
                   <Link
                     to="/webinars"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setEducationMenuOpen(false)}
                   >
                     Webinars
                   </Link>
@@ -102,17 +104,44 @@ const Header = () => {
               )}
             </div>
             
-            <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              Contact
-            </Link>
-            <Link to="/support-us" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              Support Us
-            </Link>
+            {/* Contact Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setContactMenuOpen(true)}
+              onMouseLeave={() => setContactMenuOpen(false)}
+            >
+              <button
+                className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
+              >
+                <span>Contact</span>
+                <ChevronDown size={14} />
+              </button>
+              
+              {contactMenuOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                  <Link
+                    to="/contact"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Contact Us
+                  </Link>
+                  <Link
+                    to="/support-us"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Support Us
+                  </Link>
+                </div>
+              )}
+            </div>
             
             {/* Physician Directory Dropdown */}
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={() => setPhysicianMenuOpen(true)}
+              onMouseLeave={() => setPhysicianMenuOpen(false)}
+            >
               <button
-                onClick={() => setPhysicianMenuOpen(!physicianMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <span>Physician Directory</span>
@@ -124,14 +153,12 @@ const Header = () => {
                   <Link
                     to="/physician-directory"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setPhysicianMenuOpen(false)}
                   >
                     Find Physician
                   </Link>
                   <Link
                     to="/family-physician"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setPhysicianMenuOpen(false)}
                   >
                     Family Physician
                   </Link>
@@ -142,9 +169,12 @@ const Header = () => {
           
           {/* Language Selector - Right Side */}
           <div className="hidden lg:flex items-center">
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={() => setLanguageMenuOpen(true)}
+              onMouseLeave={() => setLanguageMenuOpen(false)}
+            >
               <button
-                onClick={toggleLanguageMenu}
                 className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-healthTeal transition-colors"
                 aria-label="Select language"
               >
@@ -243,12 +273,17 @@ const Header = () => {
                 </Link>
               </div>
             </div>
-            <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              Contact
-            </Link>
-            <Link to="/support-us" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              Support Us
-            </Link>
+            <div className="py-2">
+              <span className="text-healthTeal font-medium text-sm">Contact</span>
+              <div className="ml-4 mt-1 space-y-1">
+                <Link to="/contact" className="block py-1 hover:text-healthTeal transition-colors">
+                  Contact Us
+                </Link>
+                <Link to="/support-us" className="block py-1 hover:text-healthTeal transition-colors">
+                  Support Us
+                </Link>
+              </div>
+            </div>
             <div className="py-2">
               <span className="text-healthTeal font-medium text-sm">Physician Directory</span>
               <div className="ml-4 mt-1 space-y-1">

@@ -114,9 +114,12 @@ const Services = () => {
         {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center text-healthDarkBlue">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center text-healthDarkBlue">
               Educational Materials
             </h2>
+            <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed">
+              Download our curated educational resources to learn more about health topics relevant to Middle Eastern communities.
+            </p>
             <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {/* Alone in Canada Guide */}
               <Card className="hover:shadow-lg transition-shadow">
@@ -187,22 +190,9 @@ const Services = () => {
                   </a>
                 </CardContent>
               </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Educational Materials Section */}
-        <section className="py-12 md:py-16 bg-healthDarkBlue text-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center">
-              Educational Materials
-            </h2>
-            <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed">
-              Download our curated educational resources to learn more about health topics relevant to Middle Eastern communities.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-              {/* Educational materials will be added here once files are provided */}
-              <div className="text-center text-gray-300 col-span-full py-8">
+              
+              {/* Placeholder for future materials */}
+              <div className="text-center text-gray-500 col-span-full py-8">
                 Educational materials coming soon...
               </div>
             </div>
