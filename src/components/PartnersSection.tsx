@@ -11,6 +11,11 @@ const PartnersSection = () => {
       name: "Canadian Arab Institute",
       logo: "/lovable-uploads/ca74b069-e656-4ce3-944e-98915200f6b6.png",
       description: "Institut Canado-Arabe"
+    },
+    {
+      name: "Together Project",
+      logo: "/lovable-uploads/c96ab6e9-e7cb-4ed6-a0db-a332b5d2c2f8.png",
+      description: "A project of MakeWay"
     }
   ];
 
@@ -29,8 +34,7 @@ const PartnersSection = () => {
           {t("partners.subtitle")}
         </p>
         
-        <div className="flex justify-center">
-          <div className="max-w-md">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {partners.map((partner, index) => (
             <Card key={index} className="overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-300">
               <CardContent className="p-6 flex flex-col items-center text-center">
@@ -46,7 +50,6 @@ const PartnersSection = () => {
               </CardContent>
             </Card>
           ))}
-          </div>
         </div>
       </div>
     </section>

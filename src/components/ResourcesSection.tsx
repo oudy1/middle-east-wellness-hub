@@ -22,8 +22,8 @@ const ResourcesSection = () => {
       description: t("resources.educationalMaterialsDesc"),
       icon: <BookOpen className="h-10 w-10 text-white" />,
       color: "bg-healthRed",
-      link: "/educational-materials",
-      comingSoon: true
+      link: "/services#educational-materials",
+      comingSoon: false
     },
     {
       title: t("resources.webinarLibrary"),
@@ -75,13 +75,6 @@ const ResourcesSection = () => {
           ))}
         </div>
         
-        <div className="text-center">
-          <Link to="/about">
-            <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
-              Learn more about our vision
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

@@ -117,7 +117,7 @@ const Services = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center text-healthDarkBlue">
               Educational Materials
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {/* Alone in Canada Guide */}
               <Card className="hover:shadow-lg transition-shadow">
                 <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">

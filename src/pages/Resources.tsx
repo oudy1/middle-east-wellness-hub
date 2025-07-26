@@ -21,48 +21,15 @@ import {
   Baby,
   Stethoscope,
   FileDown,
-  Video
+  Video,
+  Plus,
+  Search
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Resources = () => {
   const { language, t } = useLanguage();
-
-  const researchOpportunities = [
-    {
-      researcher: "Dr. Ahmed Hassan",
-      position: "Principal Investigator",
-      institution: "University of Toronto",
-      project: "Cultural Competency in Mental Health Treatment",
-      description: "Seeking undergraduate and graduate students to assist with qualitative research on culturally responsive mental health interventions for Arab communities.",
-      requirements: "Psychology, Public Health, or related field. Arabic language skills preferred.",
-      contact: "a.hassan@research.utoronto.ca",
-      deadline: "March 30, 2024",
-      type: "Mental Health Research"
-    },
-    {
-      researcher: "Dr. Layla Mahmoud",
-      position: "Assistant Professor",
-      institution: "McMaster University",
-      project: "Cardiovascular Health in Middle Eastern Populations",
-      description: "Research opportunity focusing on dietary patterns and cardiovascular outcomes in Middle Eastern immigrant communities.",
-      requirements: "Nutrition, Epidemiology, or Health Sciences background. Experience with data analysis preferred.",
-      contact: "mahmoud@mcmaster.ca",
-      deadline: "April 15, 2024",
-      type: "Cardiovascular Research"
-    },
-    {
-      researcher: "Dr. Omar Al-Rashid",
-      position: "Associate Professor",
-      institution: "University of British Columbia",
-      project: "Healthcare Access Barriers in Arab Communities",
-      description: "Mixed-methods study examining barriers to healthcare access among Arab immigrants in Vancouver.",
-      requirements: "Social Sciences, Health Policy, or Community Health background. Bilingual preferred.",
-      contact: "o.alrashid@ubc.ca",
-      deadline: "May 1, 2024",
-      type: "Health Policy Research"
-    }
-  ];
 
   const resourceCategories = [
     {
@@ -240,8 +207,7 @@ const Resources = () => {
           </div>
         </section>
 
-
-        {/* Research Opportunities Section */}
+        {/* Research Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -250,83 +216,186 @@ const Resources = () => {
                 <FlaskConical className="h-12 w-12 text-healthTeal" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4">
-                {language === 'ar' ? 'البحث' : 'Research'}
+                {language === 'ar' ? 'البحث' : 'Research Coming Soon'}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 {language === 'ar' ? 
                   'البحث قريباً' :
-                  'Research coming soon'}
+                  'We\'re developing new research initiatives focused on improving healthcare outcomes for Middle Eastern and Arab communities in Canada.'}
               </p>
             </div>
 
-            <div className="grid gap-8 max-w-5xl mx-auto">
-              {researchOpportunities.map((opportunity, index) => (
-                <Card key={index} className="shadow-md border-l-4 border-l-healthTeal">
-                  <CardHeader>
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                      <div>
-                        <CardTitle className="text-xl text-healthDarkBlue mb-2">
-                          {opportunity.project}
-                        </CardTitle>
-                        <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                          <span className="flex items-center">
-                            <MapPin className="h-4 w-4 mr-1" />
-                            {opportunity.institution}
-                          </span>
-                          <span className="flex items-center">
-                            <Calendar className="h-4 w-4 mr-1" />
-                            Deadline: {opportunity.deadline}
-                          </span>
+            <div className="text-center py-12">
+              <Search className="h-16 w-16 text-healthTeal mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Research Opportunities Coming Soon</h3>
+              <p className="text-gray-600 mb-6">We're developing new research initiatives. Check back soon for opportunities to contribute to important health research.</p>
+            </div>
+
+            <div className="text-center mb-12">
+              <Link to="/post-opportunity">
+                <Button className="bg-healthRed hover:bg-healthRed/90 text-white">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Post Your Opportunity
+                </Button>
+              </Link>
+            </div>
+
+            {/* Publications & Knowledge Hub */}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Publications & Knowledge Hub</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
+                Research and publications relevant to health issues in the Middle Eastern diaspora
+              </p>
+              
+              <div className="text-center py-12">
+                <BookOpen className="h-16 w-16 text-healthTeal mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Knowledge Hub Coming Soon</h3>
+                <p className="text-gray-600 mb-6">We're curating a comprehensive collection of publications and research findings. Check back soon for valuable insights and evidence-based resources.</p>
+              </div>
+            </div>
+
+            {/* CME & Clinician Training */}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">CME & Clinician Training</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
+                Continuing medical education and training opportunities for culturally competent care
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <Card className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
+                  <GraduationCap className="h-12 w-12 text-healthTeal mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-4">Sinai Health Training</h3>
+                  <p className="text-gray-600 mb-6">Continuing education programs focused on culturally responsive healthcare delivery.</p>
+                  <a 
+                    href="https://www.sinaihealth.ca/education-and-training/continuing-education" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Access Training
+                    </Button>
+                  </a>
+                </Card>
+                
+                <Card className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
+                  <GraduationCap className="h-12 w-12 text-healthRed mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-4">Calgary CME</h3>
+                  <p className="text-gray-600 mb-6">Continuing Medical Education programs from the University of Calgary.</p>
+                  <a 
+                    href="https://cumming.ucalgary.ca/cme/about/strategy" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block"
+                  >
+                    <Button className="bg-healthRed hover:bg-healthRed/90 text-white">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      View Programs
+                    </Button>
+                  </a>
+                </Card>
+              </div>
+            </div>
+
+            {/* Advocacy & Policy */}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Advocacy & Policy</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
+                Highlighting systemic issues and opportunities to influence change in healthcare policy
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                  <FileText className="h-8 w-8 text-healthTeal mb-4" />
+                  <h3 className="text-lg font-semibold mb-3">Policy Briefs</h3>
+                  <p className="text-gray-600 text-sm">Comprehensive analysis of immigrant health gaps and policy recommendations for systemic change.</p>
+                </Card>
+                
+                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                  <Mail className="h-8 w-8 text-healthRed mb-4" />
+                  <h3 className="text-lg font-semibold mb-3">Community Letters</h3>
+                  <p className="text-gray-600 text-sm">Letters from the community to policymakers highlighting urgent healthcare needs and barriers.</p>
+                </Card>
+                
+                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                  <BookOpen className="h-8 w-8 text-healthGold mb-4" />
+                  <h3 className="text-lg font-semibold mb-3">Medical Education Reports</h3>
+                  <p className="text-gray-600 text-sm">Reports on anti-racism initiatives and cultural competency in medical education programs.</p>
+                </Card>
+              </div>
+              
+              <div className="bg-healthLightGray p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-6 text-center">Partner Organizations</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <h4 className="font-semibold mb-2">CCIS</h4>
+                    <p className="text-sm text-gray-600 mb-3">Calgary Centre for Immigrant Services</p>
+                    <Button variant="outline" size="sm" className="w-full">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Visit Website
+                    </Button>
+                  </div>
+                  
+                  <div className="text-center">
+                    <h4 className="font-semibold mb-2">Canadian Arab Institute</h4>
+                    <p className="text-sm text-gray-600 mb-3">Advocacy and community support</p>
+                    <Button variant="outline" size="sm" className="w-full">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Visit Website
+                    </Button>
+                  </div>
+                  
+                  <div className="text-center">
+                    <h4 className="font-semibold mb-2">CAMH</h4>
+                    <p className="text-sm text-gray-600 mb-3">Immigrant & Refugee Services</p>
+                    <Button variant="outline" size="sm" className="w-full">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Visit Website
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Research Resources Section */}
+        <section className="py-16 md:py-24 bg-healthLightGray">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Research Resources</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
+              Comprehensive resources categorized by specialty to support your research and clinical practice
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {resourceCategories.map((category, index) => (
+                <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className={`${category.color} p-6 text-center`}>
+                    <div className="flex justify-center mb-3">
+                      {category.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      {category.resources.map((resource, resourceIndex) => (
+                        <div key={resourceIndex} className="border-l-3 border-l-healthTeal pl-4">
+                          <h4 className="font-semibold text-healthDarkBlue mb-2">{resource.title}</h4>
+                          <p className="text-sm text-gray-600 mb-2">{resource.description}</p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{resource.type}</span>
+                            <Button variant="link" size="sm" className="text-healthTeal p-0">
+                              <ExternalLink className="h-3 w-3 mr-1" />
+                              Access
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="bg-healthTeal/10 text-healthTeal px-3 py-1 rounded-full text-sm font-medium">
-                        {opportunity.type}
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-healthDarkBlue mb-2">
-                        {opportunity.researcher} - {opportunity.position}
-                      </h4>
-                      <p className="text-gray-700 mb-3">{opportunity.description}</p>
-                      <div className="mb-3">
-                        <span className="font-medium text-gray-900">Requirements: </span>
-                        <span className="text-gray-600">{opportunity.requirements}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Button 
-                        className="bg-healthTeal hover:bg-healthTeal/80 text-white flex items-center"
-                        onClick={() => window.location.href = `mailto:${opportunity.contact}?subject=Research Opportunity Inquiry - ${opportunity.project}`}
-                      >
-                        <Mail className="h-4 w-4 mr-2" />
-                        Apply Now
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white"
-                      >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Learn More
-                      </Button>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
               ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <p className="text-gray-600 mb-4">
-                Are you a researcher looking to recruit students for your projects?
-              </p>
-              <Button 
-                variant="outline" 
-                className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white"
-                onClick={() => window.location.href = '/post-opportunity'}
-              >
-                Post Your Opportunity
-              </Button>
             </div>
           </div>
         </section>
