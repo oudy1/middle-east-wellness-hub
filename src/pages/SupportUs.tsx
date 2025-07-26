@@ -96,6 +96,7 @@ const SupportUs = () => {
             </div>
           </div>
         </section>
+import SupportUs from "@/pages/SupportUs";
 
         {/* Contact Form Section */}
         <section className="py-16 bg-healthLightGray">
