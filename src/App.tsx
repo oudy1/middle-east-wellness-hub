@@ -14,6 +14,7 @@ import PhysicianApplication from "@/pages/PhysicianApplication";
 import PostOpportunity from "@/pages/PostOpportunity";
 import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
+import SupportUs from "@/pages/SupportUs";
 import NotFound from "@/pages/NotFound";
 import './App.css';
 
@@ -34,8 +35,9 @@ function App() {
             <Route path="/physician-application" element={<PhysicianApplication />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/mentorship-booking" element={<MentorshipBooking />} />
-            <Route path="*" element={<NotFound />} />
+          <Route path="/mentorship-booking" element={<MentorshipBooking />} />
+          <Route path="/support-us" element={<SupportUs />} />
+          <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
         </div>

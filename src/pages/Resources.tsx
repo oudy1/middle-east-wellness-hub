@@ -40,45 +40,20 @@ const Resources = () => {
         {
           title: "Cultural Considerations in Mental Health Treatment",
           description: "Guidelines for providing culturally responsive mental health care to Arab and Middle Eastern patients.",
-          type: "PDF Guide",
-          link: "/resources/mental-health-guide.pdf"
+          type: "Research Paper",
+          link: "https://www.researchgate.net/publication/312841477_Mental_Health_of_Arab_Americans_Cultural_Considerations_for_Excellence_of_Care"
         },
         {
           title: "Depression Screening Tools in Arabic",
           description: "Validated depression screening questionnaires translated into Arabic with cultural adaptations.",
           type: "Assessment Tool",
-          link: "/resources/depression-screening-arabic"
+          link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10194937/"
         },
         {
           title: "Trauma-Informed Care for Refugees",
           description: "Best practices for providing trauma-informed mental health services to refugee populations.",
-          type: "Training Module",
+          type: "Research Paper",
           link: "/resources/trauma-informed-care"
-        }
-      ]
-    },
-    {
-      title: "Cardiovascular Health",
-      icon: <Heart className="h-8 w-8 text-white" />,
-      color: "bg-healthRed",
-      resources: [
-        {
-          title: "Hypertension Management in Middle Eastern Populations",
-          description: "Evidence-based guidelines for managing hypertension considering genetic and dietary factors.",
-          type: "Clinical Guide",
-          link: "/resources/hypertension-guide"
-        },
-        {
-          title: "Diabetes Prevention Materials",
-          description: "Patient education materials in multiple languages about diabetes prevention and management.",
-          type: "Patient Education",
-          link: "/resources/diabetes-prevention"
-        },
-        {
-          title: "Cardiac Risk Assessment Tools",
-          description: "Population-specific cardiac risk calculators and assessment tools.",
-          type: "Clinical Tool",
-          link: "/resources/cardiac-risk-tools"
         }
       ]
     },
@@ -88,97 +63,16 @@ const Resources = () => {
       color: "bg-healthPurple",
       resources: [
         {
-          title: "Culturally Sensitive Prenatal Care",
-          description: "Guidelines for providing prenatal care that respects cultural practices and beliefs.",
-          type: "Clinical Guide",
-          link: "/resources/prenatal-care-guide"
+          title: "Heart Health for Women",
+          description: "Comprehensive women's health information and resources in multiple languages including Arabic.",
+          type: "Health Guide",
+          link: "https://medlineplus.gov/languages/womenshealth.html#Arabic"
         },
         {
-          title: "Family Planning Resources",
-          description: "Educational materials about family planning options that consider religious and cultural values.",
-          type: "Patient Education",
-          link: "/resources/family-planning"
-        },
-        {
-          title: "Maternal Health Screening",
-          description: "Screening tools and protocols for maternal health in Middle Eastern populations.",
-          type: "Screening Tool",
-          link: "/resources/maternal-screening"
-        }
-      ]
-    },
-    {
-      title: "Pediatric Care",
-      icon: <Baby className="h-8 w-8 text-white" />,
-      color: "bg-healthGold",
-      resources: [
-        {
-          title: "Childhood Immunization Guidelines",
-          description: "Vaccination schedules and guidelines adapted for Middle Eastern families.",
-          type: "Clinical Guide",
-          link: "/resources/immunization-guidelines"
-        },
-        {
-          title: "Growth Charts for Middle Eastern Children",
-          description: "Population-specific growth charts and developmental milestones.",
-          type: "Assessment Tool",
-          link: "/resources/growth-charts"
-        },
-        {
-          title: "Adolescent Health Resources",
-          description: "Resources for addressing adolescent health issues in Middle Eastern families.",
-          type: "Clinical Resource",
-          link: "/resources/adolescent-health"
-        }
-      ]
-    },
-    {
-      title: "Research Tools",
-      icon: <FlaskConical className="h-8 w-8 text-white" />,
-      color: "bg-healthDarkBlue",
-      resources: [
-        {
-          title: "Community Health Survey Templates",
-          description: "Validated survey instruments for community health research in Middle Eastern populations.",
-          type: "Research Tool",
-          link: "/resources/survey-templates"
-        },
-        {
-          title: "Data Collection Protocols",
-          description: "Standardized protocols for collecting health data in Middle Eastern communities.",
-          type: "Protocol",
-          link: "/resources/data-protocols"
-        },
-        {
-          title: "Statistical Analysis Guides",
-          description: "Guidelines for analyzing health data from Middle Eastern populations.",
-          type: "Analysis Guide",
-          link: "/resources/analysis-guides"
-        }
-      ]
-    },
-    {
-      title: "Training Materials",
-      icon: <Monitor className="h-8 w-8 text-white" />,
-      color: "bg-gray-600",
-      resources: [
-        {
-          title: "Cultural Competency Training",
-          description: "Comprehensive training modules on providing culturally competent care.",
-          type: "Training Course",
-          link: "/resources/cultural-competency-training"
-        },
-        {
-          title: "Language Interpretation Guidelines",
-          description: "Best practices for working with medical interpreters and language services.",
-          type: "Guidelines",
-          link: "/resources/interpretation-guidelines"
-        },
-        {
-          title: "Webinar Recordings",
-          description: "Library of recorded webinars on various health topics relevant to Middle Eastern communities.",
-          type: "Video Library",
-          link: "/webinars"
+          title: "Pregnancy and Diabetes Food Guide",
+          description: "Nutritional guidelines for managing diabetes during pregnancy with cultural dietary considerations.",
+          type: "Food Guide",
+          link: "https://phc.eduhealth.ca/en/viewer?file=%2fmedia%2fVCH%2fFL%2fFL.860.D531.AR.pdf#phrase=false&pagemode=bookmarks"
         }
       ]
     }
@@ -327,32 +221,21 @@ const Resources = () => {
               
               <div className="bg-healthLightGray p-8 rounded-lg">
                 <h3 className="text-xl font-semibold mb-6 text-center">Partner Organizations</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <h4 className="font-semibold mb-2">CCIS</h4>
-                    <p className="text-sm text-gray-600 mb-3">Calgary Centre for Immigrant Services</p>
-                    <Button variant="outline" size="sm" className="w-full">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Visit Website
-                    </Button>
-                  </div>
-                  
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 max-w-md mx-auto">
                   <div className="text-center">
                     <h4 className="font-semibold mb-2">Canadian Arab Institute</h4>
                     <p className="text-sm text-gray-600 mb-3">Advocacy and community support</p>
-                    <Button variant="outline" size="sm" className="w-full">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Visit Website
-                    </Button>
-                  </div>
-                  
-                  <div className="text-center">
-                    <h4 className="font-semibold mb-2">CAMH</h4>
-                    <p className="text-sm text-gray-600 mb-3">Immigrant & Refugee Services</p>
-                    <Button variant="outline" size="sm" className="w-full">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Visit Website
-                    </Button>
+                    <a 
+                      href="https://www.canadianarabinstitute.org/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <Button variant="outline" size="sm" className="w-full">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Visit Website
+                      </Button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -364,9 +247,10 @@ const Resources = () => {
         <section className="py-16 md:py-24 bg-healthLightGray">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Research Resources</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
               Comprehensive resources categorized by specialty to support your research and clinical practice
             </p>
+            <p className="text-lg text-healthTeal text-center font-semibold mb-12">More to come!</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {resourceCategories.map((category, index) => (
@@ -385,10 +269,17 @@ const Resources = () => {
                           <p className="text-sm text-gray-600 mb-2">{resource.description}</p>
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{resource.type}</span>
-                            <Button variant="link" size="sm" className="text-healthTeal p-0">
-                              <ExternalLink className="h-3 w-3 mr-1" />
-                              Access
-                            </Button>
+                            <a 
+                              href={resource.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="inline-block"
+                            >
+                              <Button variant="link" size="sm" className="text-healthTeal p-0">
+                                <ExternalLink className="h-3 w-3 mr-1" />
+                                Access
+                              </Button>
+                            </a>
                           </div>
                         </div>
                       ))}

@@ -105,6 +105,9 @@ const Header = () => {
             <Link to="/contact" className="hover:text-healthTeal transition-colors font-medium text-sm">
               Contact
             </Link>
+            <Link to="/support-us" className="hover:text-healthTeal transition-colors font-medium text-sm">
+              Support Us
+            </Link>
             
             {/* Physician Directory Dropdown */}
             <div className="relative">
@@ -242,6 +245,9 @@ const Header = () => {
             </div>
             <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors font-medium">
               Contact
+            </Link>
+            <Link to="/support-us" className="block py-2 hover:text-healthTeal transition-colors font-medium">
+              Support Us
             </Link>
             <div className="py-2">
               <span className="text-healthTeal font-medium text-sm">Physician Directory</span>
