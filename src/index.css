@@ -99,9 +99,17 @@
   * {
     @apply border-border;
   }
+  
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     @apply bg-background text-foreground;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
   }
   
   .section-title {
