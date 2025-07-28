@@ -381,97 +381,14 @@ const PhysicianDirectory = () => {
             </p>
           </div>
 
-          {/* Search and Filter Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="md:col-span-2">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                  <Input
-                    placeholder="Search by name, specialty, clinic, or hospital..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </div>
-              
-              <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Specialty" />
-                </SelectTrigger>
-                <SelectContent>
-                  {SPECIALTIES.map((specialty) => (
-                    <SelectItem key={specialty} value={specialty}>
-                      {specialty}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Language" />
-                </SelectTrigger>
-                <SelectContent>
-                  {LANGUAGES.map((lang) => (
-                    <SelectItem key={lang} value={lang}>
-                      {lang}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between">
-              <p className="text-sm text-gray-600 flex items-center">
-                <Filter className="h-4 w-4 mr-2" />
-                Found {filteredPhysicians.length} physician{filteredPhysicians.length !== 1 ? 's' : ''}
-              </p>
-              
-              {(searchTerm || selectedSpecialty !== "All Specialties" || selectedLanguage !== "All Languages") && (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => {
-                    setSearchTerm("");
-                    setSelectedSpecialty("All Specialties");
-                    setSelectedLanguage("All Languages");
-                  }}
-                >
-                  Clear Filters
-                </Button>
-              )}
-            </div>
-          </div>
-
-          {/* Physicians List */}
-          <div className="space-y-6">
-            {filteredPhysicians.map((physician) => (
-              <PhysicianCard key={physician.id} physician={physician} />
-            ))}
-            
-            {filteredPhysicians.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-lg shadow-md">
-                <div className="max-w-md mx-auto">
-                  <Stethoscope className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">No physicians found</h3>
-                  <p className="text-gray-600 mb-4">
-                    No physicians match your current search criteria. Try adjusting your filters or search terms.
-                  </p>
-                  <Button 
-                    variant="outline"
-                    onClick={() => {
-                      setSearchTerm("");
-                      setSelectedSpecialty("All Specialties");
-                      setSelectedLanguage("All Languages");
-                    }}
-                  >
-                    Clear All Filters
-                  </Button>
-                </div>
-              </div>
-            )}
+          {/* Featured Section */}
+          <div className="bg-white p-8 rounded-lg shadow-md mb-8 text-center">
+            <Stethoscope className="h-16 w-16 text-healthTeal mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">Featured Physician Directory</h2>
+            <p className="text-gray-600 mb-6">
+              We are building a comprehensive directory of culturally competent physicians. Our goal is to connect Middle Eastern communities with healthcare providers who understand their cultural backgrounds and can provide appropriate care.
+            </p>
+            <p className="text-lg text-healthTeal font-semibold">Coming Soon!</p>
           </div>
         </div>
       </main>

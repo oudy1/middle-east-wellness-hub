@@ -53,6 +53,9 @@ const About = () => {
                 <p>
                   Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.
                 </p>
+                <p className="text-right" dir="rtl">
+                  مهمتنا هي بناء الثقة وإزالة الحواجز وخلق مساحة مشتركة من التفاهم بين المجتمعات العربية وشرق أوسطية والنظام الصحي الكندي.
+                </p>
                 <p>
                   We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.
                 </p>

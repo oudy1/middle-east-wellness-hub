@@ -192,54 +192,6 @@ const Resources = () => {
               </div>
             </div>
 
-            {/* Advocacy & Policy */}
-            <div className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Advocacy & Policy</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
-                Highlighting systemic issues and opportunities to influence change in healthcare policy
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                  <FileText className="h-8 w-8 text-healthTeal mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Policy Briefs</h3>
-                  <p className="text-gray-600 text-sm">Comprehensive analysis of immigrant health gaps and policy recommendations for systemic change.</p>
-                </Card>
-                
-                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                  <Mail className="h-8 w-8 text-healthRed mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Community Letters</h3>
-                  <p className="text-gray-600 text-sm">Letters from the community to policymakers highlighting urgent healthcare needs and barriers.</p>
-                </Card>
-                
-                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                  <BookOpen className="h-8 w-8 text-healthGold mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">Medical Education Reports</h3>
-                  <p className="text-gray-600 text-sm">Reports on anti-racism initiatives and cultural competency in medical education programs.</p>
-                </Card>
-              </div>
-              
-              <div className="bg-healthLightGray p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-6 text-center">Partner Organizations</h3>
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 max-w-md mx-auto">
-                  <div className="text-center">
-                    <h4 className="font-semibold mb-2">Canadian Arab Institute</h4>
-                    <p className="text-sm text-gray-600 mb-3">Advocacy and community support</p>
-                    <a 
-                      href="https://www.canadianarabinstitute.org/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-block"
-                    >
-                      <Button variant="outline" size="sm" className="w-full">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Visit Website
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 

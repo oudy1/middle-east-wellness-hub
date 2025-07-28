@@ -74,12 +74,9 @@ const Header = () => {
             </Link>
             
             {/* Education Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setEducationMenuOpen(true)}
-              onMouseLeave={() => setEducationMenuOpen(false)}
-            >
+            <div className="relative">
               <button
+                onClick={toggleEducationMenu}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <span>Education</span>
@@ -91,12 +88,14 @@ const Header = () => {
                   <Link
                     to="/diseases"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
                   >
                     {t("header.diseases")}
                   </Link>
                   <Link
                     to="/webinars"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
                   >
                     Webinars
                   </Link>
@@ -105,12 +104,9 @@ const Header = () => {
             </div>
             
             {/* Contact Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setContactMenuOpen(true)}
-              onMouseLeave={() => setContactMenuOpen(false)}
-            >
+            <div className="relative">
               <button
+                onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <span>Contact</span>
@@ -122,12 +118,14 @@ const Header = () => {
                   <Link
                     to="/contact"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setContactMenuOpen(false)}
                   >
                     Contact Us
                   </Link>
                   <Link
                     to="/support-us"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setContactMenuOpen(false)}
                   >
                     Support Us
                   </Link>
@@ -136,12 +134,9 @@ const Header = () => {
             </div>
             
             {/* Physician Directory Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setPhysicianMenuOpen(true)}
-              onMouseLeave={() => setPhysicianMenuOpen(false)}
-            >
+            <div className="relative">
               <button
+                onClick={() => setPhysicianMenuOpen(!physicianMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <span>Physician Directory</span>
@@ -153,12 +148,14 @@ const Header = () => {
                   <Link
                     to="/physician-directory"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setPhysicianMenuOpen(false)}
                   >
                     Find Physician
                   </Link>
                   <Link
                     to="/family-physician"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setPhysicianMenuOpen(false)}
                   >
                     Family Physician
                   </Link>
@@ -220,7 +217,7 @@ const Header = () => {
               </button>
               
               {languageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-1 z-50 border">
+                <div className="absolute right-0 mt-2 w-36 bg-healthDarkBlue rounded-md shadow-lg py-1 z-50 border border-white/20">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -228,8 +225,8 @@ const Header = () => {
                         setLanguage(lang.code as any);
                         setLanguageMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-100 flex items-center space-x-2 ${
-                        language === lang.code ? 'bg-healthTeal text-white' : 'text-gray-700'
+                      className={`w-full text-left px-3 py-2 text-xs hover:bg-healthTeal flex items-center space-x-2 ${
+                        language === lang.code ? 'bg-healthTeal text-white' : 'text-white hover:text-white'
                       }`}
                     >
                       <span>{lang.flag}</span>
