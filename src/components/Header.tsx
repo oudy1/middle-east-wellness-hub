@@ -166,12 +166,9 @@ const Header = () => {
           
           {/* Language Selector - Right Side */}
           <div className="hidden lg:flex items-center">
-            <div 
-              className="relative"
-              onMouseEnter={() => setLanguageMenuOpen(true)}
-              onMouseLeave={() => setLanguageMenuOpen(false)}
-            >
+            <div className="relative">
               <button
+                onClick={toggleLanguageMenu}
                 className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-healthTeal transition-colors"
                 aria-label="Select language"
               >
