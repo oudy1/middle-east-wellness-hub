@@ -111,6 +111,27 @@ const Services = () => {
           </div>
         </section>
 
+        {/* Apply to Join Us Section */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <div className="max-w-2xl mx-auto">
+              <Users className="h-12 w-12 text-healthTeal mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
+                Join Our Team
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Are you passionate about improving healthcare access for Middle Eastern communities? We're looking for dedicated volunteers, advocates, and professionals to join our mission.
+              </p>
+              <Link to="/join-us">
+                <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <Users className="h-6 w-6" />
+                  Apply to Join Us
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">

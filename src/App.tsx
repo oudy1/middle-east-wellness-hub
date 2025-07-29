@@ -9,8 +9,8 @@ import Resources from "@/pages/Resources";
 import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
-import FamilyPhysician from "@/pages/FamilyPhysician";
 import PhysicianApplication from "@/pages/PhysicianApplication";
+import JoinUs from "@/pages/JoinUs";
 import PostOpportunity from "@/pages/PostOpportunity";
 import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
@@ -30,9 +30,9 @@ function App() {
             <Route path="/resources" element={<Resources />} />
             <Route path="/diseases" element={<Diseases />} />
             <Route path="/webinars" element={<Webinars />} />
-            <Route path="/physician-directory" element={<PhysicianDirectory />} />
-            <Route path="/family-physician" element={<FamilyPhysician />} />
-            <Route path="/physician-application" element={<PhysicianApplication />} />
+          <Route path="/physician-directory" element={<PhysicianDirectory />} />
+          <Route path="/physician-application" element={<PhysicianApplication />} />
+          <Route path="/join-us" element={<JoinUs />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />
           <Route path="/mentorship-booking" element={<MentorshipBooking />} />

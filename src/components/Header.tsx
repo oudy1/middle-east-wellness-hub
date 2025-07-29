@@ -152,13 +152,6 @@ const Header = () => {
                   >
                     Find Physician
                   </Link>
-                  <Link
-                    to="/family-physician"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setPhysicianMenuOpen(false)}
-                  >
-                    Family Physician
-                  </Link>
                 </div>
               )}
             </div>
@@ -283,9 +276,6 @@ const Header = () => {
               <div className="ml-4 mt-1 space-y-1">
                 <Link to="/physician-directory" className="block py-1 hover:text-healthTeal transition-colors">
                   Find Physician
-                </Link>
-                <Link to="/family-physician" className="block py-1 hover:text-healthTeal transition-colors">
-                  Family Physician
                 </Link>
               </div>
             </div>

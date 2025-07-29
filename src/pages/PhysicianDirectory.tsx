@@ -49,6 +49,28 @@ type Physician = {
 // Sample comprehensive physician data
 const SAMPLE_PHYSICIANS: Physician[] = [
   {
+    id: 6,
+    title: "Professor",
+    firstName: "Raed Jad",
+    lastName: "Hawa",
+    gender: "Male",
+    languages: ["English", "Arabic"],
+    specialty: "Psychiatry",
+    subspecialty: "Consultation/Liaison Psychiatry",
+    yearsInPractice: 25,
+    affiliatedHospitals: ["UHN - Toronto Western Hospital"],
+    academicTitles: ["Professor", "Deputy Psychiatrist in Chief", "Director, Division of Consultation/Liaison Psychiatry"],
+    clinicName: "Toronto Western Hospital",
+    address: "399 Bathurst Street, Main Pavilion 7th Floor, 428, Toronto, Ontario Canada M5T 2S8",
+    coordinates: [-79.4013, 43.6568] as [number, number],
+    phone: "(416) 603-5847",
+    email: "raed.hawa@uhn.ca",
+    officeHours: "By Appointment",
+    telehealthAvailable: true,
+    accepting: true,
+    credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
+  },
+  {
     id: 1,
     title: "Dr.",
     firstName: "Layla",

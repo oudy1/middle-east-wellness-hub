@@ -61,10 +61,7 @@ const Diseases = () => {
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold mb-3">{disease.title}</h3>
-                    <p className="text-gray-600 mb-4">{disease.description}</p>
-                    <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                      {t("diseases.learnMore")}
-                    </Button>
+                    <p className="text-gray-600">{disease.description}</p>
                   </CardContent>
                 </Card>
               ))}
