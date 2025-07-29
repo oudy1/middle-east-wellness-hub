@@ -49,17 +49,17 @@ const Header = () => {
 
   return (
     <header className="bg-healthDarkBlue text-white relative z-50 w-full">
-      <div className="w-full max-w-full px-4 sm:px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex items-center justify-between h-12 sm:h-auto">
           {/* Logo */}
-          <div className="flex items-center flex-shrink-0">
-            <Link to="/" className="flex items-center gap-3">
-              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-10 w-10 object-contain" />
-              <div className="flex flex-col">
-                <div className="text-xl font-bold">
+          <div className="flex items-center flex-shrink-0 min-w-0">
+            <Link to="/" className="flex items-center gap-2 sm:gap-3">
+              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain flex-shrink-0" />
+              <div className="flex flex-col min-w-0">
+                <div className="text-lg sm:text-xl font-bold truncate">
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
-                <div className="text-xs text-healthGold opacity-90">
+                <div className="text-xs text-healthGold opacity-90 hidden sm:block">
                   Supporting Health & Advocacy for Middle Eastern Societies
                 </div>
               </div>
@@ -208,21 +208,21 @@ const Header = () => {
           </div>
           
           {/* Mobile Language & Menu Button */}
-          <div className="lg:hidden flex items-center space-x-3">
+          <div className="lg:hidden flex items-center space-x-2 sm:space-x-4">
             {/* Mobile Language Selector */}
             <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
-                className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-healthTeal transition-colors"
+                className="flex items-center space-x-1.5 px-3 py-2.5 rounded-md hover:bg-healthTeal transition-colors min-h-[44px] touch-manipulation"
                 aria-label="Select language"
               >
-                <Languages size={14} />
-                <span>{currentLanguage?.flag}</span>
-                <ChevronDown size={12} />
+                <Languages size={18} />
+                <span className="text-base">{currentLanguage?.flag}</span>
+                <ChevronDown size={14} />
               </button>
               
               {languageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-healthDarkBlue rounded-md shadow-lg py-1 z-50 border border-white/20">
+                <div className="absolute right-0 mt-2 w-44 bg-healthDarkBlue rounded-md shadow-lg py-2 z-50 border border-white/20">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
@@ -230,11 +230,11 @@ const Header = () => {
                         setLanguage(lang.code as any);
                         setLanguageMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs hover:bg-healthTeal flex items-center space-x-2 ${
+                      className={`w-full text-left px-4 py-3 text-sm hover:bg-healthTeal flex items-center space-x-3 min-h-[44px] touch-manipulation ${
                         language === lang.code ? 'bg-healthTeal text-white' : 'text-white hover:text-white'
                       }`}
                     >
-                      <span>{lang.flag}</span>
+                      <span className="text-base">{lang.flag}</span>
                       <span>{lang.name}</span>
                     </button>
                   ))}
@@ -245,65 +245,65 @@ const Header = () => {
             {/* Mobile Menu Sheet */}
             <Sheet>
               <SheetTrigger asChild>
-                <button className="text-white p-2" aria-label="Toggle menu">
-                  <Menu size={20} />
+                <button className="text-white p-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[44px] min-w-[44px] touch-manipulation flex items-center justify-center" aria-label="Toggle menu">
+                  <Menu size={24} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80 bg-healthDarkBlue text-white border-l border-white/10">
-                <SheetHeader>
-                  <SheetTitle className="text-white text-left">Menu</SheetTitle>
+              <SheetContent side="right" className="w-full sm:w-80 bg-healthDarkBlue text-white border-l border-white/10 p-0">
+                <SheetHeader className="p-6 pb-4">
+                  <SheetTitle className="text-white text-left text-xl">Menu</SheetTitle>
                   <SheetDescription className="text-white/70 text-left">
                     Navigate through our pages
                   </SheetDescription>
                 </SheetHeader>
-                <nav className="mt-8 space-y-4">
-                  <Link to="/" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                <nav className="px-4 pb-6 space-y-2 overflow-y-auto">
+                  <Link to="/" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.home")}
                   </Link>
-                  <Link to="/about" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                  <Link to="/about" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.aboutUs")}
                   </Link>
-                  <Link to="/services" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                  <Link to="/services" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.forCommunity")}
                   </Link>
-                  <Link to="/resources" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                  <Link to="/resources" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.forClinicians")}
                   </Link>
                   
                   {/* Education Section */}
-                  <div className="py-3 px-4 border-b border-white/10">
-                    <div className="text-healthTeal font-semibold mb-3">Education</div>
-                    <div className="ml-4 space-y-2">
-                      <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">
+                  <div className="py-4 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-4 text-base">Education</div>
+                    <div className="ml-2 space-y-2">
+                      <Link to="/diseases" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.diseases")}
                       </Link>
-                      <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">
+                      <Link to="/webinars" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         Webinars
                       </Link>
                     </div>
                   </div>
                   
                   {/* Contact Section */}
-                  <div className="py-3 px-4 border-b border-white/10">
-                    <div className="text-healthTeal font-semibold mb-3">Contact</div>
-                    <div className="ml-4 space-y-2">
-                      <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">
+                  <div className="py-4 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-4 text-base">Contact</div>
+                    <div className="ml-2 space-y-2">
+                      <Link to="/contact" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         Contact Us
                       </Link>
-                      <Link to="/support-us" className="block py-2 hover:text-healthTeal transition-colors">
+                      <Link to="/support-us" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         Support Us
                       </Link>
                     </div>
                   </div>
                   
                   {/* Physician Directory Section */}
-                  <div className="py-3 px-4">
-                    <div className="text-healthTeal font-semibold mb-3">Physician Directory</div>
-                    <div className="ml-4 space-y-2">
-                      <Link to="/physician-directory" className="block py-2 hover:text-healthTeal transition-colors">
+                  <div className="py-4 px-4">
+                    <div className="text-healthTeal font-semibold mb-4 text-base">Physician Directory</div>
+                    <div className="ml-2 space-y-2">
+                      <Link to="/physician-directory" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         Find Physician
                       </Link>
-                      <Link to="/family-physician" className="block py-2 hover:text-healthTeal transition-colors">
+                      <Link to="/family-physician" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         Family Physician
                       </Link>
                     </div>
