@@ -1,9 +1,17 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, Languages, ChevronDown } from "lucide-react";
+import { Menu, Languages, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -234,63 +242,78 @@ const Header = () => {
               )}
             </div>
             
-            {/* Mobile Menu Button */}
-            <button className="text-white" onClick={toggleMobileMenu} aria-label="Toggle menu">
-              <Menu size={20} />
-            </button>
+            {/* Mobile Menu Sheet */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="text-white p-2" aria-label="Toggle menu">
+                  <Menu size={20} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-80 bg-healthDarkBlue text-white border-l border-white/10">
+                <SheetHeader>
+                  <SheetTitle className="text-white text-left">Menu</SheetTitle>
+                  <SheetDescription className="text-white/70 text-left">
+                    Navigate through our pages
+                  </SheetDescription>
+                </SheetHeader>
+                <nav className="mt-8 space-y-4">
+                  <Link to="/" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                    {t("header.home")}
+                  </Link>
+                  <Link to="/about" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                    {t("header.aboutUs")}
+                  </Link>
+                  <Link to="/services" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                    {t("header.forCommunity")}
+                  </Link>
+                  <Link to="/resources" className="block py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10">
+                    {t("header.forClinicians")}
+                  </Link>
+                  
+                  {/* Education Section */}
+                  <div className="py-3 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-3">Education</div>
+                    <div className="ml-4 space-y-2">
+                      <Link to="/diseases" className="block py-2 hover:text-healthTeal transition-colors">
+                        {t("header.diseases")}
+                      </Link>
+                      <Link to="/webinars" className="block py-2 hover:text-healthTeal transition-colors">
+                        Webinars
+                      </Link>
+                    </div>
+                  </div>
+                  
+                  {/* Contact Section */}
+                  <div className="py-3 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-3">Contact</div>
+                    <div className="ml-4 space-y-2">
+                      <Link to="/contact" className="block py-2 hover:text-healthTeal transition-colors">
+                        Contact Us
+                      </Link>
+                      <Link to="/support-us" className="block py-2 hover:text-healthTeal transition-colors">
+                        Support Us
+                      </Link>
+                    </div>
+                  </div>
+                  
+                  {/* Physician Directory Section */}
+                  <div className="py-3 px-4">
+                    <div className="text-healthTeal font-semibold mb-3">Physician Directory</div>
+                    <div className="ml-4 space-y-2">
+                      <Link to="/physician-directory" className="block py-2 hover:text-healthTeal transition-colors">
+                        Find Physician
+                      </Link>
+                      <Link to="/family-physician" className="block py-2 hover:text-healthTeal transition-colors">
+                        Family Physician
+                      </Link>
+                    </div>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
         
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <nav className="lg:hidden pt-4 pb-2 space-y-2">
-            <Link to="/" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.home")}
-            </Link>
-            <Link to="/about" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.aboutUs")}
-            </Link>
-            <Link to="/services" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.forCommunity")}
-            </Link>
-            <Link to="/resources" className="block py-2 hover:text-healthTeal transition-colors font-medium">
-              {t("header.forClinicians")}
-            </Link>
-            <div className="py-2">
-              <span className="text-healthTeal font-medium text-sm">Education</span>
-              <div className="ml-4 mt-1 space-y-1">
-                <Link to="/diseases" className="block py-1 hover:text-healthTeal transition-colors">
-                  {t("header.diseases")}
-                </Link>
-                <Link to="/webinars" className="block py-1 hover:text-healthTeal transition-colors">
-                  Webinars
-                </Link>
-              </div>
-            </div>
-            <div className="py-2">
-              <span className="text-healthTeal font-medium text-sm">Contact</span>
-              <div className="ml-4 mt-1 space-y-1">
-                <Link to="/contact" className="block py-1 hover:text-healthTeal transition-colors">
-                  Contact Us
-                </Link>
-                <Link to="/support-us" className="block py-1 hover:text-healthTeal transition-colors">
-                  Support Us
-                </Link>
-              </div>
-            </div>
-            <div className="py-2">
-              <span className="text-healthTeal font-medium text-sm">Physician Directory</span>
-              <div className="ml-4 mt-1 space-y-1">
-                <Link to="/physician-directory" className="block py-1 hover:text-healthTeal transition-colors">
-                  Find Physician
-                </Link>
-                <Link to="/family-physician" className="block py-1 hover:text-healthTeal transition-colors">
-                  Family Physician
-                </Link>
-              </div>
-            </div>
-          </nav>
-        )}
       </div>
     </header>
   );

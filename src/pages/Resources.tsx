@@ -31,47 +31,47 @@ import { Link } from "react-router-dom";
 const Resources = () => {
   const { language, t } = useLanguage();
 
-  const resourceCategories = [
+  const getLocalizedResourceCategories = () => [
     {
-      title: "Mental Health Resources",
+      title: language === 'ar' ? "موارد الصحة النفسية" : "Mental Health Resources",
       icon: <Brain className="h-8 w-8 text-white" />,
       color: "bg-healthTeal",
       resources: [
         {
-          title: "Cultural Considerations in Mental Health Treatment",
-          description: "Guidelines for providing culturally responsive mental health care to Arab and Middle Eastern patients.",
-          type: "Research Paper",
+          title: language === 'ar' ? "الاعتبارات الثقافية في علاج الصحة النفسية" : "Cultural Considerations in Mental Health Treatment",
+          description: language === 'ar' ? "إرشادات لتقديم رعاية الصحة النفسية المتجاوبة ثقافياً للمرضى العرب والشرق أوسطيين." : "Guidelines for providing culturally responsive mental health care to Arab and Middle Eastern patients.",
+          type: language === 'ar' ? "بحث علمي" : "Research Paper",
           link: "https://www.researchgate.net/publication/312841477_Mental_Health_of_Arab_Americans_Cultural_Considerations_for_Excellence_of_Care"
         },
         {
-          title: "Depression Screening Tools in Arabic",
-          description: "Validated depression screening questionnaires translated into Arabic with cultural adaptations.",
-          type: "Assessment Tool",
+          title: language === 'ar' ? "أدوات فحص الاكتئاب باللغة العربية" : "Depression Screening Tools in Arabic",
+          description: language === 'ar' ? "استبيانات فحص الاكتئاب المعتمدة والمترجمة إلى العربية مع التكيف الثقافي." : "Validated depression screening questionnaires translated into Arabic with cultural adaptations.",
+          type: language === 'ar' ? "أداة تقييم" : "Assessment Tool",
           link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10194937/"
         },
         {
-          title: "Trauma-Informed Care for Refugees",
-          description: "Best practices for providing trauma-informed mental health services to refugee populations.",
-          type: "Research Paper",
+          title: language === 'ar' ? "الرعاية المطلعة على الصدمات للاجئين" : "Trauma-Informed Care for Refugees",
+          description: language === 'ar' ? "أفضل الممارسات لتقديم خدمات الصحة النفسية المطلعة على الصدمات لسكان اللاجئين." : "Best practices for providing trauma-informed mental health services to refugee populations.",
+          type: language === 'ar' ? "بحث علمي" : "Research Paper",
           link: "/resources/trauma-informed-care"
         }
       ]
     },
     {
-      title: "Women's Health",
+      title: language === 'ar' ? "صحة المرأة" : "Women's Health",
       icon: <Users className="h-8 w-8 text-white" />,
       color: "bg-healthPurple",
       resources: [
         {
-          title: "Heart Health for Women",
-          description: "Comprehensive women's health information and resources in multiple languages including Arabic.",
-          type: "Health Guide",
+          title: language === 'ar' ? "صحة القلب للنساء" : "Heart Health for Women",
+          description: language === 'ar' ? "معلومات وموارد شاملة حول صحة المرأة بعدة لغات بما في ذلك العربية." : "Comprehensive women's health information and resources in multiple languages including Arabic.",
+          type: language === 'ar' ? "دليل صحي" : "Health Guide",
           link: "https://medlineplus.gov/languages/womenshealth.html#Arabic"
         },
         {
-          title: "Pregnancy and Diabetes Food Guide",
-          description: "Nutritional guidelines for managing diabetes during pregnancy with cultural dietary considerations.",
-          type: "Food Guide",
+          title: language === 'ar' ? "دليل الغذاء للحمل والسكري" : "Pregnancy and Diabetes Food Guide",
+          description: language === 'ar' ? "إرشادات غذائية لإدارة السكري أثناء الحمل مع الاعتبارات الغذائية الثقافية." : "Nutritional guidelines for managing diabetes during pregnancy with cultural dietary considerations.",
+          type: language === 'ar' ? "دليل غذائي" : "Food Guide",
           link: "https://phc.eduhealth.ca/en/viewer?file=%2fmedia%2fVCH%2fFL%2fFL.860.D531.AR.pdf#phrase=false&pagemode=bookmarks"
         }
       ]
@@ -205,7 +205,7 @@ const Resources = () => {
             <p className="text-lg text-healthTeal text-center font-semibold mb-12">More to come!</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {resourceCategories.map((category, index) => (
+              {getLocalizedResourceCategories().map((category, index) => (
                 <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <div className={`${category.color} p-6 text-center`}>
                     <div className="flex justify-center mb-3">

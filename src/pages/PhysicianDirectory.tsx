@@ -66,116 +66,9 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     phone: "(416) 603-5847",
     email: "raed.hawa@uhn.ca",
     officeHours: "By Appointment",
-    telehealthAvailable: true,
-    accepting: true,
-    credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
-  },
-  {
-    id: 1,
-    title: "Dr.",
-    firstName: "Layla",
-    lastName: "Hassan",
-    gender: "Female",
-    languages: ["English", "Arabic", "French"],
-    specialty: "Internal Medicine",
-    subspecialty: "Endocrinology",
-    yearsInPractice: 12,
-    affiliatedHospitals: ["Phoenix General Hospital", "Mercy Medical Center"],
-    academicTitles: ["Assistant Professor of Medicine"],
-    clinicName: "Phoenix Health Center",
-    address: "123 Health Ave, Phoenix, AZ 85001",
-    coordinates: [-112.0740, 33.4484] as [number, number],
-    phone: "(480) 555-1234",
-    email: "l.hassan@phoenixhealth.org",
-    officeHours: "Mon-Fri: 8:00 AM - 5:00 PM",
-    telehealthAvailable: true,
-    accepting: true,
-    credentials: ["MD", "Board Certified Internal Medicine", "Board Certified Endocrinology"]
-  },
-  {
-    id: 2,
-    title: "Dr.",
-    firstName: "Ahmed",
-    lastName: "Mahmoud",
-    gender: "Male",
-    languages: ["English", "Arabic", "Urdu"],
-    specialty: "Cardiology",
-    subspecialty: "Interventional Cardiology",
-    yearsInPractice: 15,
-    affiliatedHospitals: ["St. Joseph's Hospital", "Banner University Medical Center"],
-    academicTitles: ["Associate Professor of Cardiology"],
-    clinicName: "Arizona Heart Institute",
-    address: "456 Wellness Blvd, Phoenix, AZ 85004",
-    coordinates: [-112.0840, 33.4684] as [number, number],
-    phone: "(480) 555-2345",
-    email: "a.mahmoud@azheartinstitute.org",
-    officeHours: "Mon-Thu: 7:00 AM - 4:00 PM, Fri: 7:00 AM - 12:00 PM",
     telehealthAvailable: false,
     accepting: true,
-    credentials: ["MD", "Board Certified Cardiology", "Fellowship Interventional Cardiology"]
-  },
-  {
-    id: 3,
-    title: "Dr.",
-    firstName: "Sarah",
-    lastName: "Nasser",
-    gender: "Female",
-    languages: ["English", "Farsi", "Kurdish"],
-    specialty: "Pediatrics",
-    subspecialty: "Pediatric Pulmonology",
-    yearsInPractice: 8,
-    affiliatedHospitals: ["Phoenix Children's Hospital"],
-    clinicName: "Desert Kids Pediatrics",
-    address: "789 Care Street, Tempe, AZ 85281",
-    coordinates: [-111.9400, 33.4255] as [number, number],
-    phone: "(480) 555-3456",
-    email: "s.nasser@desertkids.org",
-    officeHours: "Mon-Wed, Fri: 8:00 AM - 6:00 PM, Thu: 10:00 AM - 8:00 PM",
-    telehealthAvailable: true,
-    accepting: false,
-    credentials: ["MD", "Board Certified Pediatrics", "Fellowship Pediatric Pulmonology"]
-  },
-  {
-    id: 4,
-    title: "Dr.",
-    firstName: "Mohammad",
-    lastName: "Al-Saeed",
-    gender: "Male",
-    languages: ["English", "Arabic", "Turkish"],
-    specialty: "Orthopedic Surgery",
-    subspecialty: "Sports Medicine",
-    yearsInPractice: 20,
-    affiliatedHospitals: ["Mayo Clinic", "HonorHealth Scottsdale Shea"],
-    academicTitles: ["Professor of Orthopedic Surgery"],
-    clinicName: "Arizona Sports Medicine Center",
-    address: "321 Medical Drive, Scottsdale, AZ 85259",
-    coordinates: [-111.9260, 33.4941] as [number, number],
-    phone: "(480) 555-4567",
-    email: "m.alsaeed@azsports.org",
-    officeHours: "Tue-Sat: 6:00 AM - 3:00 PM",
-    telehealthAvailable: true,
-    accepting: true,
-    credentials: ["MD", "Board Certified Orthopedic Surgery", "Fellowship Sports Medicine", "Team Physician"]
-  },
-  {
-    id: 5,
-    title: "Dr.",
-    firstName: "Nadia",
-    lastName: "Patel",
-    gender: "Female",
-    languages: ["English", "Hindi", "Urdu", "Arabic"],
-    specialty: "Family Medicine",
-    yearsInPractice: 6,
-    affiliatedHospitals: ["Banner Desert Medical Center"],
-    clinicName: "Mesa Family Health",
-    address: "654 Healing Road, Mesa, AZ 85204",
-    coordinates: [-111.8313, 33.4152] as [number, number],
-    phone: "(480) 555-5678",
-    email: "n.patel@mesafamily.org",
-    officeHours: "Mon-Fri: 7:00 AM - 7:00 PM, Sat: 8:00 AM - 2:00 PM",
-    telehealthAvailable: true,
-    accepting: true,
-    credentials: ["MD", "Board Certified Family Medicine"]
+    credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
   }
 ];
 
@@ -268,12 +161,6 @@ const PhysicianDirectory = () => {
             <Badge variant={physician.accepting ? "default" : "secondary"} className="mb-2">
               {physician.accepting ? "Accepting Patients" : "Not Accepting"}
             </Badge>
-            {physician.telehealthAvailable && (
-              <div className="flex items-center text-sm text-green-600">
-                <Video className="h-4 w-4 mr-1" />
-                Telehealth
-              </div>
-            )}
           </div>
         </div>
 
@@ -369,16 +256,6 @@ const PhysicianDirectory = () => {
                     <ExternalLink className="h-4 w-4 mr-1" />
                     View on Google Maps
                   </Button>
-                  {physician.telehealthAvailable && (
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Video className="h-4 w-4 mr-1" />
-                      Book Telehealth
-                    </Button>
-                  )}
                 </div>
               </div>
             </div>
