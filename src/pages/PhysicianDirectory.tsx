@@ -403,15 +403,68 @@ const PhysicianDirectory = () => {
             </p>
           </div>
 
-          {/* Featured Section */}
-          <div className="bg-white p-8 rounded-lg shadow-md mb-8 text-center">
-            <Stethoscope className="h-16 w-16 text-healthTeal mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">Featured Physician Directory</h2>
-            <p className="text-gray-600 mb-6">
-              We are building a comprehensive directory of culturally competent physicians. Our goal is to connect Middle Eastern communities with healthcare providers who understand their cultural backgrounds and can provide appropriate care.
-            </p>
-            <p className="text-lg text-healthTeal font-semibold">Coming Soon!</p>
+          {/* Search and Filter Controls */}
+          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder="Search by name, specialty, or language..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {SPECIALTIES.map(specialty => (
+                    <SelectItem key={specialty} value={specialty}>
+                      {specialty}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {LANGUAGES.map(language => (
+                    <SelectItem key={language} value={language}>
+                      {language}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="mt-4 flex items-center justify-between">
+              <p className="text-sm text-gray-600">
+                Showing {filteredPhysicians.length} physician(s)
+              </p>
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-600">Filter results</span>
+              </div>
+            </div>
           </div>
+
+          {/* Physician Results */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {filteredPhysicians.map((physician) => (
+              <PhysicianCard key={physician.id} physician={physician} />
+            ))}
+          </div>
+
+          {filteredPhysicians.length === 0 && (
+            <div className="text-center py-12">
+              <Stethoscope className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-500 mb-2">No physicians found</h3>
+              <p className="text-gray-400">Try adjusting your search criteria or filters.</p>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

@@ -21,59 +21,8 @@ type Physician = {
   coordinates: [number, number]; // Explicitly define as a tuple with exactly 2 numbers
 };
 
-// Sample physician data for demonstration
-const SAMPLE_PHYSICIANS: Physician[] = [
-  {
-    id: 1,
-    name: "Dr. Layla Hassan",
-    specialty: "Medicine",
-    languages: ["English", "Arabic"],
-    address: "123 Health Ave, Phoenix, AZ",
-    phone: "(480) 555-1234",
-    accepting: true,
-    coordinates: [-112.0740, 33.4484] as [number, number]
-  },
-  {
-    id: 2,
-    name: "Dr. Ahmed Mahmoud",
-    specialty: "Medicine",
-    languages: ["English", "Arabic", "French"],
-    address: "456 Wellness Blvd, Phoenix, AZ",
-    phone: "(480) 555-2345",
-    accepting: true,
-    coordinates: [-112.0840, 33.4684] as [number, number]
-  },
-  {
-    id: 3,
-    name: "Dr. Sarah Nasser",
-    specialty: "Medicine",
-    languages: ["English", "Farsi"],
-    address: "789 Care Street, Tempe, AZ",
-    phone: "(480) 555-3456",
-    accepting: false,
-    coordinates: [-111.9400, 33.4255] as [number, number]
-  },
-  {
-    id: 4,
-    name: "Dr. Mohammad Al-Saeed",
-    specialty: "Medicine",
-    languages: ["English", "Arabic", "Urdu"],
-    address: "321 Medical Drive, Scottsdale, AZ",
-    phone: "(480) 555-4567",
-    accepting: true,
-    coordinates: [-111.9260, 33.4941] as [number, number]
-  },
-  {
-    id: 5,
-    name: "Dr. Nadia Patel",
-    specialty: "Practice",
-    languages: ["English", "Hindi", "Urdu"],
-    address: "654 Healing Road, Mesa, AZ",
-    phone: "(480) 555-5678",
-    accepting: true,
-    coordinates: [-111.8313, 33.4152] as [number, number]
-  }
-];
+// Empty sample data - keeping structure but no physicians listed
+const SAMPLE_PHYSICIANS: Physician[] = [];
 
 const PhysicianDirectory = () => {
   const { t, language } = useLanguage();
