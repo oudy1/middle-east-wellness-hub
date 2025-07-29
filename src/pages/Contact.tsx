@@ -9,9 +9,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
+import DOMPurify from 'dompurify';
 
 const Contact = () => {
   const { language } = useLanguage();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,18 +23,56 @@ const Contact = () => {
     message: ""
   });
 
+  const validateInput = (value: string, maxLength: number = 200) => {
+    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+  };
+
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    const maxLength = field === 'message' ? 2000 : 200;
+    if (value.length <= maxLength) {
+      setFormData(prev => ({
+        ...prev,
+        [field]: DOMPurify.sanitize(value)
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Here you would typically send the form data to your backend
-    alert("Thank you for your message. We will get back to you soon!");
+    
+    // Validate all fields
+    const validations = [
+      { field: 'firstName', value: formData.firstName, maxLength: 100 },
+      { field: 'lastName', value: formData.lastName, maxLength: 100 },
+      { field: 'email', value: formData.email, maxLength: 100 },
+      { field: 'message', value: formData.message, maxLength: 2000 }
+    ];
+    
+    for (const validation of validations) {
+      if (!validation.value || !validateInput(validation.value, validation.maxLength)) {
+        toast({
+          title: "Invalid input",
+          description: `Please check your ${validation.field} field.`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
+    if (!formData.category) {
+      toast({
+        title: "Please select a category",
+        description: "Category is required to help us route your message.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    toast({
+      title: "Message sent!",
+      description: "Thank you for your message. We will get back to you soon!"
+    });
+    
     setFormData({
       firstName: "",
       lastName: "",

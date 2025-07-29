@@ -25,7 +25,14 @@ type PhysicianMapProps = {
 
 const PhysicianMap = ({ physicians, selectedPhysicianId, userLocation }: PhysicianMapProps) => {
   const { t } = useLanguage();
-  const [mapApiKey, setMapApiKey] = useState<string | null>(localStorage.getItem('googleMapsApiKey'));
+  const [mapApiKey, setMapApiKey] = useState<string | null>(() => {
+    try {
+      const stored = localStorage.getItem('googleMapsApiKey');
+      return stored && stored.length > 10 ? stored : null;
+    } catch {
+      return null;
+    }
+  });
   const [showKeyInput, setShowKeyInput] = useState(!mapApiKey);
   const [tempKey, setTempKey] = useState('');
 
@@ -33,9 +40,19 @@ const PhysicianMap = ({ physicians, selectedPhysicianId, userLocation }: Physici
   // In a real implementation, you would use Google Maps JavaScript API
 
   const saveMapKey = () => {
-    localStorage.setItem('googleMapsApiKey', tempKey);
-    setMapApiKey(tempKey);
-    setShowKeyInput(false);
+    if (tempKey.length < 10 || !/^[a-zA-Z0-9_-]+$/.test(tempKey)) {
+      alert('Please enter a valid Google Maps API key');
+      return;
+    }
+    
+    try {
+      localStorage.setItem('googleMapsApiKey', tempKey.trim());
+      setMapApiKey(tempKey.trim());
+      setShowKeyInput(false);
+      setTempKey('');
+    } catch (error) {
+      alert('Error saving API key');
+    }
   };
 
   // Find selected physician

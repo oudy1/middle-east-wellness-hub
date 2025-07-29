@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserCheck, Upload, CheckCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import DOMPurify from 'dompurify';
 
 const PhysicianApplicationForm = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,23 +25,55 @@ const PhysicianApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const validateInput = (value: string, maxLength: number = 200) => {
+    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value
-    });
+    
+    if (type === 'checkbox') {
+      setFormData({
+        ...formData,
+        [name]: checked
+      });
+    } else {
+      const maxLength = name === 'culturalBackground' || name === 'availability' || name === 'message' ? 1000 : 200;
+      if (value.length <= maxLength) {
+        setFormData({
+          ...formData,
+          [name]: DOMPurify.sanitize(value)
+        });
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    console.log('Physician application submitted:', formData);
+    // Validate required fields
+    const requiredFields = ['firstName', 'lastName', 'email', 'specialty', 'hospitalAffiliation', 'experience', 'languagesSpoken', 'availability', 'message'];
+    for (const field of requiredFields) {
+      const value = formData[field as keyof typeof formData] as string;
+      if (!value || !validateInput(value, field.includes('Background') || field.includes('availability') || field === 'message' ? 1000 : 200)) {
+        toast({
+          title: "Invalid input",
+          description: `Please check the ${field} field.`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
+    setIsSubmitting(true);
     
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
+      toast({
+        title: "Application submitted!",
+        description: "Thank you for your application. We will review it and contact you soon."
+      });
     }, 2000);
   };
 

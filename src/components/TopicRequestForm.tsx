@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import DOMPurify from 'dompurify';
 
 const TopicRequestForm = () => {
   const [formData, setFormData] = useState({
@@ -16,15 +17,45 @@ const TopicRequestForm = () => {
   });
   const { toast } = useToast();
 
+  const validateInput = (value: string, maxLength: number = 200) => {
+    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Topic request submitted:', formData);
+    
+    // Validate inputs
+    const validations = [
+      { field: 'name', value: formData.name, maxLength: 100 },
+      { field: 'email', value: formData.email, maxLength: 100 },
+      { field: 'topic', value: formData.topic, maxLength: 200 },
+      { field: 'description', value: formData.description, maxLength: 1000 }
+    ];
+    
+    for (const validation of validations) {
+      if (validation.field !== 'description' && (!validation.value || !validateInput(validation.value, validation.maxLength))) {
+        toast({
+          title: "Invalid input",
+          description: `Please check the ${validation.field} field.`,
+          variant: "destructive"
+        });
+        return;
+      }
+      if (validation.field === 'description' && validation.value && !validateInput(validation.value, validation.maxLength)) {
+        toast({
+          title: "Invalid input",
+          description: "Description is too long or contains invalid characters.",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
     toast({
       title: "Topic Request Submitted",
       description: "Thank you for your suggestion! We'll consider your topic for future webinars.",
     });
-    // Reset form
+    
     setFormData({
       name: '',
       email: '',
@@ -34,10 +65,15 @@ const TopicRequestForm = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    const maxLength = name === 'description' ? 1000 : name === 'topic' ? 200 : 100;
+    
+    if (value.length <= maxLength) {
+      setFormData({
+        ...formData,
+        [name]: DOMPurify.sanitize(value)
+      });
+    }
   };
 
   return (

@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
+import DOMPurify from 'dompurify';
 
 const InquiryForm = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,32 +17,67 @@ const InquiryForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const validateInput = (value: string, maxLength: number = 500) => {
+    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    const maxLength = name === 'message' ? 2000 : 200;
+    
+    if (value.length <= maxLength) {
+      setFormData({
+        ...formData,
+        [name]: DOMPurify.sanitize(value)
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate all fields
+    const validations = [
+      { field: 'name', value: formData.name, maxLength: 100 },
+      { field: 'email', value: formData.email, maxLength: 100 },
+      { field: 'subject', value: formData.subject, maxLength: 200 },
+      { field: 'message', value: formData.message, maxLength: 2000 }
+    ];
+    
+    for (const validation of validations) {
+      if (!validateInput(validation.value, validation.maxLength)) {
+        toast({
+          title: "Invalid input",
+          description: `Please check your ${validation.field} field.`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
     setIsSubmitting(true);
     
-    // For now, we'll just log the form data
-    // In a real application, this would send to an email service
-    console.log('Inquiry form submitted:', formData);
+    // Sanitize all form data before submission
+    const sanitizedData = {
+      name: DOMPurify.sanitize(formData.name.trim()),
+      email: DOMPurify.sanitize(formData.email.trim()),
+      subject: DOMPurify.sanitize(formData.subject.trim()),
+      message: DOMPurify.sanitize(formData.message.trim())
+    };
     
     // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
-      // Reset form
       setFormData({
         name: '',
         email: '',
         subject: '',
         message: ''
       });
-      alert('Thank you for your inquiry! We will get back to you soon.');
+      toast({
+        title: "Message sent!",
+        description: "Thank you for your inquiry! We will get back to you soon."
+      });
     }, 1000);
   };
 
@@ -61,6 +99,7 @@ const InquiryForm = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+                maxLength={100}
               />
             </div>
             <div>
@@ -75,6 +114,7 @@ const InquiryForm = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+                maxLength={100}
               />
             </div>
           </div>
@@ -91,6 +131,7 @@ const InquiryForm = () => {
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+              maxLength={200}
             />
           </div>
           
@@ -106,6 +147,7 @@ const InquiryForm = () => {
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent resize-vertical"
+              maxLength={2000}
             />
           </div>
           

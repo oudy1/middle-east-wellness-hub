@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Upload } from "lucide-react";
+import DOMPurify from 'dompurify';
 
 const PostOpportunityForm = () => {
   const [formData, setFormData] = useState({
@@ -27,17 +28,32 @@ const PostOpportunityForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const { toast } = useToast();
 
+  const validateInput = (value: string, maxLength: number = 200) => {
+    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Research opportunity submitted:', formData);
-    if (file) {
-      console.log('File uploaded:', file.name);
+    
+    // Validate required fields
+    const requiredFields = ['firstName', 'lastName', 'email', 'institution', 'projectTitle', 'projectDescription', 'deadline', 'isPaid'];
+    for (const field of requiredFields) {
+      const value = formData[field as keyof typeof formData] as string;
+      if (!value || (typeof value === 'string' && !validateInput(value, field === 'projectDescription' ? 2000 : 200))) {
+        toast({
+          title: "Invalid input",
+          description: `Please check the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`,
+          variant: "destructive"
+        });
+        return;
+      }
     }
+    
     toast({
       title: "Research Opportunity Submitted",
       description: "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
     });
-    // Reset form
+    
     setFormData({
       firstName: '',
       lastName: '',
@@ -64,10 +80,13 @@ const PostOpportunityForm = () => {
         [name]: checked
       }));
     } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
+      const maxLength = name === 'projectDescription' ? 2000 : 200;
+      if (value.length <= maxLength) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: DOMPurify.sanitize(value)
+        }));
+      }
     }
   };
 
