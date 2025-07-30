@@ -32,7 +32,7 @@ const PostOpportunityForm = () => {
     return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -54,21 +54,48 @@ const PostOpportunityForm = () => {
       description: "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
     });
     
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      newsletter: false,
-      phone: '',
-      institution: '',
-      projectTitle: '',
-      projectDescription: '',
-      preferredBackground: '',
-      deadline: '',
-      isPaid: '',
-      studyWebsite: ''
-    });
-    setFile(null);
+    console.log(formData);
+
+    // setFormData({
+    //   firstName: '',
+    //   lastName: '',
+    //   email: '',
+    //   newsletter: false,
+    //   phone: '',
+    //   institution: '',
+    //   projectTitle: '',
+    //   projectDescription: '',
+    //   preferredBackground: '',
+    //   deadline: '',
+    //   isPaid: '',
+    //   studyWebsite: ''
+    // });
+    // setFile(null);
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbxx3FPK5NjEW9mpiL8A1tYztEK4NWJCYsXaDG8Zy-S2fFBZByxzu6QAxCk-vd7yZzek9w/exec", {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script unless you return CORS headers
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      toast({
+        title: "Research Opportunity Submitted",
+        description: "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
+      });
+  
+      // Optional: Reset form
+      // setFormData({ ... }); setFile(null);
+    } catch (error) {
+      console.error("Failed to submit:", error);
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your opportunity. Try again later.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
