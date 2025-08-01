@@ -1,95 +1,166 @@
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserCheck, Upload, CheckCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { UserCheck, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 const PhysicianApplicationForm = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    email: "",
     signUpForNews: false,
-    phone: '',
-    specialty: '',
-    hospitalAffiliation: '',
-    experience: '',
-    languagesSpoken: '',
-    culturalBackground: '',
-    availability: '',
-    message: ''
+    phone: "",
+    specialty: "",
+    hospitalAffiliation: "",
+    experience: "",
+    languagesSpoken: "",
+    culturalBackground: "",
+    availability: "",
+    message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateInput = (value: string, maxLength: number = 200) => {
-    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+    return (
+      value.length <= maxLength &&
+      DOMPurify.sanitize(value.trim()) === value.trim()
+    );
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    name: string,
+    value: string | boolean
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: typeof value === "string" ? DOMPurify.sanitize(value) : value,
+    }));
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-    
-    if (type === 'checkbox') {
-      setFormData({
-        ...formData,
-        [name]: checked
-      });
+    if (type === "checkbox") {
+      handleInputChange(name, checked);
     } else {
-      const maxLength = name === 'culturalBackground' || name === 'availability' || name === 'message' ? 1000 : 200;
+      const maxLength =
+        name === "culturalBackground" ||
+        name === "availability" ||
+        name === "message"
+          ? 1000
+          : 200;
       if (value.length <= maxLength) {
-        setFormData({
-          ...formData,
-          [name]: DOMPurify.sanitize(value)
-        });
+        handleInputChange(name, value);
       }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'specialty', 'hospitalAffiliation', 'experience', 'languagesSpoken', 'availability', 'message'];
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "specialty",
+      "hospitalAffiliation",
+      "experience",
+      "languagesSpoken",
+      "availability",
+      "message",
+    ];
     for (const field of requiredFields) {
       const value = formData[field as keyof typeof formData] as string;
-      if (!value || !validateInput(value, field.includes('Background') || field.includes('availability') || field === 'message' ? 1000 : 200)) {
+      if (
+        !value ||
+        !validateInput(
+          value,
+          field === "culturalBackground" ||
+            field === "availability" ||
+            field === "message"
+            ? 1000
+            : 200
+        )
+      ) {
         toast({
           title: "Invalid input",
-          description: `Please check the ${field} field.`,
-          variant: "destructive"
+          description: `Please check the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`,
+          variant: "destructive",
         });
         return;
       }
     }
-    
     setIsSubmitting(true);
-    
-    setTimeout(() => {
+    try {
+      const payload = { ...formData, form: "physicianApplication" };
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      signUpForNews: false,
+      phone: "",
+      specialty: "",
+      hospitalAffiliation: "",
+      experience: "",
+      languagesSpoken: "",
+      culturalBackground: "",
+      availability: "",
+      message: "",
+    });
+        toast({
+        title: "Submitting your application...",
+        description: "Please wait while we process your submission.",
+      });
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbxmJPoaFGLDM0oSIgN-prop6IHaZm3_qQ7Y3jDHEk7pIFoKYpu_2G65qKrvClpj9McVWw/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
       setIsSubmitting(false);
       setSubmitted(true);
       toast({
-        title: "Application submitted!",
-        description: "Thank you for your application. We will review it and contact you soon."
+        title: "Application Submitted!",
+        description:
+          "Thank you for your application. We will review it and contact you soon.",
       });
-    }, 2000);
+    } catch (error) {
+      setIsSubmitting(false);
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your application. Try again later.",
+        variant: "destructive",
+      });
+    }
+    
   };
 
   if (submitted) {
     return (
       <Card className="w-full max-w-2xl mx-auto">
-        <CardContent className="p-6 md:p-8 text-center">
-          <CheckCircle className="h-12 w-12 md:h-16 md:w-16 text-healthTeal mx-auto mb-3 md:mb-4" />
-          <h2 className="text-xl sm:text-2xl font-bold mb-3 md:mb-4 text-healthDarkBlue leading-tight">Application Submitted Successfully!</h2>
-          <p className="text-gray-600 mb-4 md:mb-6 text-sm sm:text-base leading-relaxed">
-            Thank you for your interest in joining our network. We will review your application and contact you within 5-7 business days.
-          </p>
-          <Button 
-            onClick={() => setSubmitted(false)}
-            className="bg-healthTeal hover:bg-healthTeal/80 text-white px-6 py-2 text-sm sm:text-base w-full sm:w-auto"
-          >
+        <CardContent className="flex flex-col items-center justify-center py-16">
+          <CheckCircle className="h-12 w-12 md:h-16 md:w-16 text-healthTeal mb-4" />
+          <h2 className="text-2xl font-bold text-healthDarkBlue mb-3 text-center">Thank you for submitting your application!</h2>
+          <p className="text-lg text-gray-700 text-center mb-6">We will review your application and contact you within 5-7 business days.</p>
+          <Button onClick={() => setSubmitted(false)} className="bg-healthTeal hover:bg-healthTeal/80 text-white px-6 py-2 text-base w-full sm:w-auto">
             Submit Another Application
           </Button>
         </CardContent>
@@ -119,57 +190,69 @@ const PhysicianApplicationForm = () => {
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
                   First Name *
                 </label>
-                <input
-                  type="text"
+                <Input
                   id="firstName"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+                  className="w-full"
                 />
               </div>
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
                   Last Name *
                 </label>
-                <input
-                  type="text"
+                <Input
                   id="lastName"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+                  className="w-full"
                 />
               </div>
             </div>
           </div>
 
           {/* Email Section */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
-              Email *
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
+                Email *
+              </label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full"
+              />
+            </div>
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
+                Phone
+              </label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full"
+              />
+            </div>
           </div>
 
           {/* Newsletter Signup */}
           <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
+            <Checkbox
               id="signUpForNews"
               name="signUpForNews"
               checked={formData.signUpForNews}
-              onChange={handleChange}
+              onCheckedChange={(checked) => handleInputChange("signUpForNews", checked as boolean)}
               className="h-4 w-4 text-healthTeal focus:ring-healthTeal border-gray-300 rounded"
             />
             <label htmlFor="signUpForNews" className="text-sm text-gray-700">
@@ -177,61 +260,47 @@ const PhysicianApplicationForm = () => {
             </label>
           </div>
 
-          {/* Phone */}
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
-              Phone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
-            />
-          </div>
-
           {/* Medical Specialty */}
           <div>
             <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Medical Specialty *
             </label>
-            <select
-              id="specialty"
-              name="specialty"
+            <Select
               value={formData.specialty}
-              onChange={handleChange}
+              onValueChange={(value) => handleInputChange("specialty", value)}
               required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
             >
-              <option value="">Select an option</option>
-              <option value="family-medicine">Family Medicine</option>
-              <option value="internal-medicine">Internal Medicine</option>
-              <option value="cardiology">Cardiology</option>
-              <option value="endocrinology">Endocrinology</option>
-              <option value="psychiatry">Psychiatry</option>
-              <option value="psychology">Psychology</option>
-              <option value="pediatrics">Pediatrics</option>
-              <option value="obstetrics-gynecology">Obstetrics & Gynecology</option>
-              <option value="neurology">Neurology</option>
-              <option value="dermatology">Dermatology</option>
-              <option value="orthopedic-surgery">Orthopedic Surgery</option>
-              <option value="general-surgery">General Surgery</option>
-              <option value="emergency-medicine">Emergency Medicine</option>
-              <option value="radiology">Radiology</option>
-              <option value="anesthesiology">Anesthesiology</option>
-              <option value="oncology">Oncology</option>
-              <option value="gastroenterology">Gastroenterology</option>
-              <option value="pulmonology">Pulmonology</option>
-              <option value="nephrology">Nephrology</option>
-              <option value="ophthalmology">Ophthalmology</option>
-              <option value="otolaryngology">Otolaryngology (ENT)</option>
-              <option value="urology">Urology</option>
-              <option value="pathology">Pathology</option>
-              <option value="physical-medicine">Physical Medicine & Rehabilitation</option>
-              <option value="other">Other</option>
-            </select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select an option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="family-medicine">Family Medicine</SelectItem>
+                <SelectItem value="internal-medicine">Internal Medicine</SelectItem>
+                <SelectItem value="cardiology">Cardiology</SelectItem>
+                <SelectItem value="endocrinology">Endocrinology</SelectItem>
+                <SelectItem value="psychiatry">Psychiatry</SelectItem>
+                <SelectItem value="psychology">Psychology</SelectItem>
+                <SelectItem value="pediatrics">Pediatrics</SelectItem>
+                <SelectItem value="obstetrics-gynecology">Obstetrics & Gynecology</SelectItem>
+                <SelectItem value="neurology">Neurology</SelectItem>
+                <SelectItem value="dermatology">Dermatology</SelectItem>
+                <SelectItem value="orthopedic-surgery">Orthopedic Surgery</SelectItem>
+                <SelectItem value="general-surgery">General Surgery</SelectItem>
+                <SelectItem value="emergency-medicine">Emergency Medicine</SelectItem>
+                <SelectItem value="radiology">Radiology</SelectItem>
+                <SelectItem value="anesthesiology">Anesthesiology</SelectItem>
+                <SelectItem value="oncology">Oncology</SelectItem>
+                <SelectItem value="gastroenterology">Gastroenterology</SelectItem>
+                <SelectItem value="pulmonology">Pulmonology</SelectItem>
+                <SelectItem value="nephrology">Nephrology</SelectItem>
+                <SelectItem value="ophthalmology">Ophthalmology</SelectItem>
+                <SelectItem value="otolaryngology">Otolaryngology (ENT)</SelectItem>
+                <SelectItem value="urology">Urology</SelectItem>
+                <SelectItem value="pathology">Pathology</SelectItem>
+                <SelectItem value="physical-medicine">Physical Medicine & Rehabilitation</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Hospital/Clinic Affiliation */}
@@ -239,37 +308,37 @@ const PhysicianApplicationForm = () => {
             <label htmlFor="hospitalAffiliation" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Hospital/Clinic Affiliation *
             </label>
-            <input
-              type="text"
+            <Input
               id="hospitalAffiliation"
               name="hospitalAffiliation"
               value={formData.hospitalAffiliation}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+              className="w-full"
             />
           </div>
-          
+
           {/* Years of Experience */}
           <div>
             <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Years of Experience *
             </label>
-            <select
-              id="experience"
-              name="experience"
+            <Select
               value={formData.experience}
-              onChange={handleChange}
+              onValueChange={(value) => handleInputChange("experience", value)}
               required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
             >
-              <option value="">Select an option</option>
-              <option value="0-2">0-2 years</option>
-              <option value="3-5">3-5 years</option>
-              <option value="6-10">6-10 years</option>
-              <option value="11-15">11-15 years</option>
-              <option value="15+">15+ years</option>
-            </select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select an option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="0-2">0-2 years</SelectItem>
+                <SelectItem value="3-5">3-5 years</SelectItem>
+                <SelectItem value="6-10">6-10 years</SelectItem>
+                <SelectItem value="11-15">11-15 years</SelectItem>
+                <SelectItem value="15+">15+ years</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Languages Spoken */}
@@ -277,31 +346,29 @@ const PhysicianApplicationForm = () => {
             <label htmlFor="languagesSpoken" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Languages Spoken (besides English) *
             </label>
-            <input
-              type="text"
+            <Input
               id="languagesSpoken"
               name="languagesSpoken"
               value={formData.languagesSpoken}
               onChange={handleChange}
               placeholder="e.g., Arabic, Persian, Kurdish, Turkish"
               required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent"
+              className="w-full"
             />
           </div>
-          
+
           {/* Cultural Background */}
           <div>
             <label htmlFor="culturalBackground" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Cultural Background and Experience with Middle Eastern Communities
             </label>
-            <textarea
+            <Textarea
               id="culturalBackground"
               name="culturalBackground"
-              rows={4}
               value={formData.culturalBackground}
               onChange={handleChange}
               placeholder="Please describe your cultural background and experience working with Middle Eastern communities"
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent resize-vertical"
+              className="w-full min-h-[100px]"
             />
           </div>
 
@@ -310,42 +377,40 @@ const PhysicianApplicationForm = () => {
             <label htmlFor="availability" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Availability for SHAMS Activities *
             </label>
-            <textarea
+            <Textarea
               id="availability"
               name="availability"
-              rows={3}
               value={formData.availability}
               onChange={handleChange}
               placeholder="Please describe your availability for webinars, community events, research etc"
               required
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent resize-vertical"
+              className="w-full min-h-[80px]"
             />
           </div>
-          
+
           {/* Message */}
           <div>
             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">
               Message *
             </label>
-            <textarea
+            <Textarea
               id="message"
               name="message"
-              rows={4}
               value={formData.message}
               onChange={handleChange}
               required
               placeholder="Please tell us about yourself and why you're interested in joining our network"
-              className="w-full px-3 py-2 text-sm md:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-transparent resize-vertical"
+              className="w-full min-h-[100px]"
             />
           </div>
 
           <div className="text-center pt-4 md:pt-6">
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
               className="bg-healthTeal hover:bg-healthTeal/80 text-white px-6 md:px-8 py-2 md:py-3 text-base md:text-lg w-full sm:w-auto"
             >
-              {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
+              {isSubmitting ? "Submitting Application..." : "Submit Application"}
             </Button>
           </div>
         </form>

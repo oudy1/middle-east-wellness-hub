@@ -1,149 +1,239 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Upload } from "lucide-react";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 const PostOpportunityForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
+    form: "postOpportunity",
+    firstName: "",
+    lastName: "",
+    email: "",
     newsletter: false,
-    phone: '',
-    institution: '',
-    projectTitle: '',
-    projectDescription: '',
-    preferredBackground: '',
-    deadline: '',
-    isPaid: '',
-    studyWebsite: ''
+    phone: "",
+    institution: "",
+    projectTitle: "",
+    projectDescription: "",
+    preferredBackground: "",
+    deadline: "",
+    isPaid: "",
+    studyWebsite: "",
+    fileData: "",
+    fileName: "",
+    fileType: "",
   });
+  const [submitted, setSubmitted] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const { toast } = useToast();
 
+  const toBase64 = (
+    file: File,
+  ): Promise<{ base64: string; type: string; name: string }> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result as string;
+        const [metadata, base64] = result.split(",");
+        resolve({
+          base64,
+          type: file.type,
+          name: file.name,
+        });
+      };
+
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const validateInput = (value: string, maxLength: number = 200) => {
-    return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
+    return (
+      value.length <= maxLength &&
+      DOMPurify.sanitize(value.trim()) === value.trim()
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'institution', 'projectTitle', 'projectDescription', 'deadline', 'isPaid'];
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "institution",
+      "projectTitle",
+      "projectDescription",
+      "deadline",
+      "isPaid",
+    ];
     for (const field of requiredFields) {
       const value = formData[field as keyof typeof formData] as string;
-      if (!value || (typeof value === 'string' && !validateInput(value, field === 'projectDescription' ? 2000 : 200))) {
+      if (
+        !value ||
+        (typeof value === "string" &&
+          !validateInput(value, field === "projectDescription" ? 2000 : 200))
+      ) {
         toast({
           title: "Invalid input",
-          description: `Please check the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`,
-          variant: "destructive"
+          description: `Please check the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`,
+          variant: "destructive",
         });
         return;
       }
     }
-    
+
     toast({
       title: "Research Opportunity Submitted",
-      description: "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
+      description:
+        "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
     });
-    
+
     console.log(formData);
 
-    // setFormData({
-    //   firstName: '',
-    //   lastName: '',
-    //   email: '',
-    //   newsletter: false,
-    //   phone: '',
-    //   institution: '',
-    //   projectTitle: '',
-    //   projectDescription: '',
-    //   preferredBackground: '',
-    //   deadline: '',
-    //   isPaid: '',
-    //   studyWebsite: ''
-    // });
-    // setFile(null);
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbxx3FPK5NjEW9mpiL8A1tYztEK4NWJCYsXaDG8Zy-S2fFBZByxzu6QAxCk-vd7yZzek9w/exec", {
-        method: "POST",
-        mode: "no-cors", // Required for Google Apps Script unless you return CORS headers
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
+      if (file) {
+        const { base64, name, type } = await toBase64(file);
+        formData.fileData = base64;
+        formData.fileName = name;
+        formData.fileType = type;
+      }
+
+      const payload = { ...formData};
+          setFormData({
+      form: "postOpportunity",
+      firstName: "",
+      lastName: "",
+      email: "",
+      newsletter: false,
+      phone: "",
+      institution: "",
+      projectTitle: "",
+      projectDescription: "",
+      preferredBackground: "",
+      deadline: "",
+      isPaid: "",
+      studyWebsite: "",
+      fileData: "",
+      fileName: "",
+      fileType: "",
+    });
+    setFile(null);
+        toast({
+        title: "Submitting your application...",
+        description: "Please wait while we process your submission.",
       });
-  
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxmJPoaFGLDM0oSIgN-prop6IHaZm3_qQ7Y3jDHEk7pIFoKYpu_2G65qKrvClpj9McVWw/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
       toast({
         title: "Research Opportunity Submitted",
-        description: "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
+        description:
+          "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
       });
-  
-      // Optional: Reset form
-      // setFormData({ ... }); setFile(null);
+
+      setSubmitted(true);
     } catch (error) {
       console.error("Failed to submit:", error);
       toast({
         title: "Submission failed",
-        description: "There was an error submitting your opportunity. Try again later.",
-        variant: "destructive"
+        description:
+          "There was an error submitting your opportunity. Try again later.",
+        variant: "destructive",
       });
     }
-  };
+  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value, type } = e.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: checked
+        [name]: checked,
       }));
     } else {
-      const maxLength = name === 'projectDescription' ? 2000 : 200;
+      const maxLength = name === "projectDescription" ? 2000 : 200;
       if (value.length <= maxLength) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
-          [name]: DOMPurify.sanitize(value)
+          [name]: DOMPurify.sanitize(value),
         }));
       }
     }
   };
 
   const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
+    if (selectedFile.size >= 10 * 1024 * 1024) {
+      toast({
+        title: "Submission failed",
+        description: "File size too big!",
+        variant: "destructive",
+      });
+    }
     setFile(selectedFile);
   };
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
-      <CardHeader>
+            {submitted ? (
+        <CardContent className="flex flex-col items-center justify-center py-16">
+          <h2 className="text-3xl font-bold text-healthDarkBlue mb-4 text-center">Thank you for submitting this form!</h2>
+          <p className="text-lg text-gray-700 text-center">We will get back to you shortly.</p>
+        </CardContent>
+      ) : (
+        <>
+              <CardHeader>
         <CardTitle className="text-3xl font-bold text-center text-healthDarkBlue">
           Share a Research Opportunity
         </CardTitle>
         <p className="text-center text-gray-600 mt-4">
-          Are you a researcher looking to recruit students? Submit your research opportunity and connect with motivated Arab and Middle Eastern students across Canada who are eager to get involved.
+          Are you a researcher looking to recruit students? Submit your research
+          opportunity and connect with motivated Arab and Middle Eastern
+          students across Canada who are eager to get involved.
         </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Section */}
           <div className="space-y-2">
-            <Label className="text-base font-medium">Name <span className="text-red-500">*</span></Label>
+            <Label className="text-base font-medium">
+              Name <span className="text-red-500">*</span>
+            </Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Input
@@ -188,8 +278,11 @@ const PostOpportunityForm = () => {
               id="newsletter"
               name="newsletter"
               checked={formData.newsletter}
-              onCheckedChange={(checked) => 
-                setFormData(prev => ({ ...prev, newsletter: checked as boolean }))
+              onCheckedChange={(checked) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  newsletter: checked as boolean,
+                }))
               }
             />
             <Label htmlFor="newsletter" className="text-sm">
@@ -199,7 +292,9 @@ const PostOpportunityForm = () => {
 
           {/* Phone */}
           <div className="space-y-2">
-            <Label htmlFor="phone" className="text-base font-medium">Phone</Label>
+            <Label htmlFor="phone" className="text-base font-medium">
+              Phone
+            </Label>
             <Input
               id="phone"
               name="phone"
@@ -242,7 +337,10 @@ const PostOpportunityForm = () => {
 
           {/* Project Description */}
           <div className="space-y-2">
-            <Label htmlFor="projectDescription" className="text-base font-medium">
+            <Label
+              htmlFor="projectDescription"
+              className="text-base font-medium"
+            >
               Project Description <span className="text-red-500">*</span>
             </Label>
             <Textarea
@@ -258,7 +356,10 @@ const PostOpportunityForm = () => {
 
           {/* Preferred Background */}
           <div className="space-y-2">
-            <Label htmlFor="preferredBackground" className="text-base font-medium">
+            <Label
+              htmlFor="preferredBackground"
+              className="text-base font-medium"
+            >
               Preferred Background
             </Label>
             <Input
@@ -288,20 +389,27 @@ const PostOpportunityForm = () => {
           {/* Is Paid */}
           <div className="space-y-2">
             <Label className="text-base font-medium">
-              Is this a paid opportunity? <span className="text-red-500">*</span>
+              Is this a paid opportunity?{" "}
+              <span className="text-red-500">*</span>
             </Label>
-            <Select 
-              value={formData.isPaid} 
-              onValueChange={(value) => handleSelectChange('isPaid', value)}
+            <Select
+              value={formData.isPaid}
+              onValueChange={(value) => handleSelectChange("isPaid", value)}
               required
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select an option" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="yes">Yes, this is a paid opportunity</SelectItem>
-                <SelectItem value="no">No, this is an unpaid/volunteer opportunity</SelectItem>
-                <SelectItem value="stipend">Stipend/partial compensation provided</SelectItem>
+                <SelectItem value="yes">
+                  Yes, this is a paid opportunity
+                </SelectItem>
+                <SelectItem value="no">
+                  No, this is an unpaid/volunteer opportunity
+                </SelectItem>
+                <SelectItem value="stipend">
+                  Stipend/partial compensation provided
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -321,9 +429,12 @@ const PostOpportunityForm = () => {
               />
               <Upload className="h-5 w-5 text-gray-400" />
             </div>
-            {file && (
-              <p className="text-sm text-green-600">
-                Selected: {file.name}
+            {file && file.size <= 10 * 1024 * 1024 && (
+              <p className="text-sm text-green-600">Selected: {file.name}</p>
+            )}
+            {file && file.size >= 10 * 1024 * 1024 && (
+              <p className="text-sm text-red-600">
+                File: {file.name} too big! File must be under 10MB!
               </p>
             )}
           </div>
@@ -336,18 +447,22 @@ const PostOpportunityForm = () => {
             <Input
               id="studyWebsite"
               name="studyWebsite"
-              type="url"
               value={formData.studyWebsite}
               onChange={handleChange}
               placeholder="Link the study website if available"
             />
           </div>
 
-          <Button type="submit" className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white py-3 text-lg">
+          <Button
+            type="submit"
+            className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white py-3 text-lg"
+          >
             Submit Research Opportunity
           </Button>
         </form>
       </CardContent>
+      </>
+      )}
     </Card>
   );
 };
