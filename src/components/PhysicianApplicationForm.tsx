@@ -125,7 +125,7 @@ const PhysicianApplicationForm = () => {
         description: "Please wait while we process your submission.",
       });
       await fetch(
-        "https://script.google.com/macros/s/AKfycbzzxnbz0HYSEd2lRmTCWsbC4M9eZlhqXvMlbD9EjAJXo6CrQjbewmVYBdzZajTRQzP4yA/exec",
+        "https://script.google.com/macros/s/AKfycbzxUiC1xIfECzNeVmuUsxJapZWHNJ0Gz5XJSMJFz0YpRKfZqQhDcUu4pZlRVrL4vXDg/exec",
         {
           method: "POST",
           mode: "no-cors",
