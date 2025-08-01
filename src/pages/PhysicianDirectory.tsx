@@ -61,9 +61,9 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     affiliatedHospitals: ["UHN - Toronto Western Hospital"],
     academicTitles: ["Professor", "Deputy Psychiatrist in Chief", "Director, Division of Consultation/Liaison Psychiatry"],
     clinicName: "Toronto Western Hospital",
-    address: "399 Bathurst Street, Main Pavilion 7th Floor, 428, Toronto, Ontario Canada M5T 2S8",
+    address: "Toronto, Ontario Canada",
     coordinates: [-79.4013, 43.6568] as [number, number],
-    phone: "(416) 603-5847",
+    phone: "",
     email: "raed.hawa@uhn.ca",
     officeHours: "By Appointment",
     telehealthAvailable: false,
@@ -244,19 +244,6 @@ const PhysicianDirectory = () => {
                   </div>
                 </div>
                 
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    className="bg-healthTeal hover:bg-healthTeal/90"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(`https://maps.google.com/?q=${encodeURIComponent(physician.address)}`, '_blank');
-                    }}
-                  >
-                    <ExternalLink className="h-4 w-4 mr-1" />
-                    View on Google Maps
-                  </Button>
-                </div>
               </div>
             </div>
           )}

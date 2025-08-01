@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { CheckCircle } from "lucide-react";
 import DOMPurify from 'dompurify';
 
 const TopicRequestForm = () => {
@@ -15,6 +16,7 @@ const TopicRequestForm = () => {
     topic: '',
     description: ''
   });
+  const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
 
   const validateInput = (value: string, maxLength: number = 200) => {
@@ -51,16 +53,18 @@ const TopicRequestForm = () => {
       }
     }
     
-    toast({
-      title: "Topic Request Submitted",
-      description: "Thank you for your suggestion! We'll consider your topic for future webinars.",
-    });
-    
     setFormData({
       name: '',
       email: '',
       topic: '',
       description: ''
+    });
+    
+    setSubmitted(true);
+    
+    toast({
+      title: "Topic Request Submitted",
+      description: "Thank you for your suggestion! We'll consider your topic for future webinars.",
     });
   };
 
@@ -75,6 +79,21 @@ const TopicRequestForm = () => {
       });
     }
   };
+
+  if (submitted) {
+    return (
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardContent className="flex flex-col items-center justify-center py-16">
+          <CheckCircle className="h-12 w-12 md:h-16 md:w-16 text-healthTeal mb-4" />
+          <h2 className="text-2xl font-bold text-healthDarkBlue mb-3 text-center">Thank you for your topic request!</h2>
+          <p className="text-lg text-gray-700 text-center mb-6">We'll consider your suggestion for future webinars and events.</p>
+          <Button onClick={() => setSubmitted(false)} className="bg-healthTeal hover:bg-healthTeal/80 text-white px-6 py-2 text-base w-full sm:w-auto">
+            Submit Another Request
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
