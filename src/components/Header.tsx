@@ -48,13 +48,13 @@ const Header = () => {
   const currentLanguage = languages.find(lang => lang.code === language);
 
   return (
-    <header className="bg-healthDarkBlue text-white relative z-50 w-full">
+    <header className="bg-healthDarkBlue text-white relative z-50 w-full shadow-lg border-b border-healthTeal/20">
       <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         <div className="flex items-center justify-between h-12 sm:h-auto">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
-              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain flex-shrink-0" />
+              <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="SHAMS Logo" className="h-12 w-12 sm:h-14 sm:w-14 object-contain flex-shrink-0" />
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
                   {language === 'ar' ? "شمس" : "SHAMS"}
@@ -87,7 +87,7 @@ const Header = () => {
                 onClick={toggleEducationMenu}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
-                <span>Education</span>
+                <span>{t("header.education")}</span>
                 <ChevronDown size={14} />
               </button>
               
@@ -105,7 +105,7 @@ const Header = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setEducationMenuOpen(false)}
                   >
-                    Webinars
+                    {t("header.webinars")}
                   </Link>
                 </div>
               )}
@@ -117,7 +117,7 @@ const Header = () => {
                 onClick={() => setContactMenuOpen(!contactMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
-                <span>Contact</span>
+                <span>{t("header.contact")}</span>
                 <ChevronDown size={14} />
               </button>
               
@@ -128,14 +128,14 @@ const Header = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setContactMenuOpen(false)}
                   >
-                    Contact Us
+                    {t("header.contactUs")}
                   </Link>
                   <Link
                     to="/support-us"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setContactMenuOpen(false)}
                   >
-                    Support Us
+                    {t("header.supportUs")}
                   </Link>
                 </div>
               )}
@@ -147,7 +147,7 @@ const Header = () => {
                 onClick={() => setPhysicianMenuOpen(!physicianMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
-                <span>Physician Directory</span>
+                <span>{t("header.physicianDirectory")}</span>
                 <ChevronDown size={14} />
               </button>
               
@@ -158,14 +158,14 @@ const Header = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setPhysicianMenuOpen(false)}
                   >
-                    Find Physician
+                    {t("header.findPhysician")}
                   </Link>
                   <Link
                     to="/family-physician"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setPhysicianMenuOpen(false)}
                   >
-                    Family Physician
+                    {t("header.familyPhysician")}
                   </Link>
                 </div>
               )}
@@ -272,39 +272,39 @@ const Header = () => {
                   
                   {/* Education Section */}
                   <div className="py-4 px-4 border-b border-white/10">
-                    <div className="text-healthTeal font-semibold mb-4 text-base">Education</div>
+                    <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.education")}</div>
                     <div className="ml-2 space-y-2">
                       <Link to="/diseases" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.diseases")}
                       </Link>
                       <Link to="/webinars" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        Webinars
+                        {t("header.webinars")}
                       </Link>
                     </div>
                   </div>
                   
                   {/* Contact Section */}
                   <div className="py-4 px-4 border-b border-white/10">
-                    <div className="text-healthTeal font-semibold mb-4 text-base">Contact</div>
+                    <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.contact")}</div>
                     <div className="ml-2 space-y-2">
                       <Link to="/contact" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        Contact Us
+                        {t("header.contactUs")}
                       </Link>
                       <Link to="/support-us" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        Support Us
+                        {t("header.supportUs")}
                       </Link>
                     </div>
                   </div>
                   
                   {/* Physician Directory Section */}
                   <div className="py-4 px-4">
-                    <div className="text-healthTeal font-semibold mb-4 text-base">Physician Directory</div>
+                    <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.physicianDirectory")}</div>
                     <div className="ml-2 space-y-2">
                       <Link to="/physician-directory" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        Find Physician
+                        {t("header.findPhysician")}
                       </Link>
                       <Link to="/family-physician" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        Family Physician
+                        {t("header.familyPhysician")}
                       </Link>
                     </div>
                   </div>

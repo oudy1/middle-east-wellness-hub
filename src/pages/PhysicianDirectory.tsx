@@ -67,7 +67,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     email: "raed.hawa@uhn.ca",
     officeHours: "By Appointment",
     telehealthAvailable: false,
-    accepting: true,
+    accepting: false,
     credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
   }
 ];

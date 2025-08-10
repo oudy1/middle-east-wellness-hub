@@ -65,6 +65,41 @@ const translations = {
     fa: "پزشک پیدا کنید",
     tr: "Doktor Bul"
   },
+  "header.education": {
+    en: "Education",
+    ar: "التعليم",
+    ku: "پەروەردە",
+    fa: "آموزش",
+    tr: "Eğitim"
+  },
+  "header.contactUs": {
+    en: "Contact Us",
+    ar: "اتصل بنا",
+    ku: "پەیوەندیمان پێوە بکەن",
+    fa: "با ما تماس بگیرید",
+    tr: "Bizimle İletişime Geçin"
+  },
+  "header.supportUs": {
+    en: "Support Us",
+    ar: "ادعمنا",
+    ku: "پاڵپشتیمان بکەن",
+    fa: "از ما حمایت کنید",
+    tr: "Bizi Destekleyin"
+  },
+  "header.findPhysician": {
+    en: "Find Physician",
+    ar: "ابحث عن طبيب",
+    ku: "دۆکتۆر بدۆزەرەوە",
+    fa: "پزشک پیدا کنید",
+    tr: "Doktor Bul"
+  },
+  "header.familyPhysician": {
+    en: "Family Physician",
+    ar: "طبيب الأسرة",
+    ku: "دۆکتۆری خێزان",
+    fa: "پزشک خانواده",
+    tr: "Aile Hekimi"
+  },
   
   // Hero Section
   "hero.organizationName": {
