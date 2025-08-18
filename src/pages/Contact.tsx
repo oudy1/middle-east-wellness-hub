@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import DOMPurify from 'dompurify';
 
 const Contact = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -90,10 +90,10 @@ const Contact = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 text-healthDarkBlue">
-                Contact Us
+                {t("contact.title")}
               </h1>
               <p className="text-lg text-gray-600">
-                Get in touch with our team. We're here to help and answer any questions you may have.
+                {t("contact.subtitle")}
               </p>
             </div>
 
@@ -101,14 +101,14 @@ const Contact = () => {
               {/* Contact Form */}
               <Card className="shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-2xl text-healthDarkBlue">Send us a message</CardTitle>
+                  <CardTitle className="text-2xl text-healthDarkBlue">{t("contact.sendMessage")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                          First Name *
+                          {t("contact.firstName")} *
                         </label>
                         <Input
                           id="firstName"
@@ -121,7 +121,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                          Last Name *
+                          {t("contact.lastName")} *
                         </label>
                         <Input
                           id="lastName"
@@ -136,7 +136,7 @@ const Contact = () => {
 
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                        {t("contact.email")} *
                       </label>
                       <Input
                         id="email"
@@ -150,26 +150,26 @@ const Contact = () => {
 
                     <div>
                       <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
-                        Category *
+                        {t("contact.category")} *
                       </label>
                       <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                          <SelectValue placeholder={t("contact.selectCategory")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="general">General Inquiry</SelectItem>
-                          <SelectItem value="support">Support Request</SelectItem>
-                          <SelectItem value="partnership">Partnership</SelectItem>
-                          <SelectItem value="research">Research Collaboration</SelectItem>
-                          <SelectItem value="community">Community Services</SelectItem>
-                          <SelectItem value="physician">Physician Network</SelectItem>
+                          <SelectItem value="general">{t("contact.generalInquiry")}</SelectItem>
+                          <SelectItem value="support">{t("contact.supportRequest")}</SelectItem>
+                          <SelectItem value="partnership">{t("contact.partnership")}</SelectItem>
+                          <SelectItem value="research">{t("contact.research")}</SelectItem>
+                          <SelectItem value="community">{t("contact.community")}</SelectItem>
+                          <SelectItem value="physician">{t("contact.physician")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                        Message *
+                        {t("contact.message")} *
                       </label>
                       <Textarea
                         id="message"
@@ -177,12 +177,12 @@ const Contact = () => {
                         rows={5}
                         value={formData.message}
                         onChange={(e) => handleInputChange("message", e.target.value)}
-                        placeholder="Tell us how we can help you..."
+                        placeholder={t("contact.messagePlaceholder")}
                       />
                     </div>
 
                     <Button type="submit" className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white">
-                      Send Message
+                      {t("contact.sendButton")}
                     </Button>
                   </form>
                 </CardContent>
@@ -192,7 +192,7 @@ const Contact = () => {
               <div className="space-y-6">
                 <Card className="shadow-lg">
                   <CardHeader>
-                    <CardTitle className="text-2xl text-healthDarkBlue">Get in touch</CardTitle>
+                    <CardTitle className="text-2xl text-healthDarkBlue">{t("contact.getInTouch")}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-3">
@@ -200,7 +200,7 @@ const Contact = () => {
                         <Mail className="h-5 w-5 text-healthTeal" />
                       </div>
                       <div>
-                        <p className="font-medium">Email</p>
+                        <p className="font-medium">{t("contact.email")}</p>
                         <p className="text-gray-600">infoprojectshams@gmail.com</p>
                       </div>
                     </div>
@@ -210,8 +210,8 @@ const Contact = () => {
                         <MapPin className="h-5 w-5 text-healthTeal" />
                       </div>
                       <div>
-                        <p className="font-medium">Location</p>
-                        <p className="text-gray-600">Toronto</p>
+                        <p className="font-medium">{t("contact.location")}</p>
+                        <p className="text-gray-600">{t("contact.toronto")}</p>
                       </div>
                     </div>
                   </CardContent>

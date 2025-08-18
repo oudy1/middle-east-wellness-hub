@@ -91,12 +91,10 @@ const Resources = () => {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-healthDarkBlue mb-8 text-center">
-              {language === 'ar' ? 'موارد البحث' : 'Research Resources'}
+              {t("resources.researchResourcesTitle")}
             </h1>
             <p className="text-xl text-center max-w-3xl mx-auto mb-16 text-gray-600">
-              {language === 'ar' ? 
-                'أدوات وموارد لدعم الرعاية الصحية المتجاوبة ثقافياً والبحث المجتمعي' : 
-                'Tools and resources to support culturally responsive healthcare and community-centered research'}
+              {t("resources.researchDescription")}
             </p>
           </div>
         </section>
@@ -110,56 +108,54 @@ const Resources = () => {
                 <FlaskConical className="h-12 w-12 text-healthTeal" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4">
-                {language === 'ar' ? 'البحث' : 'Research Coming Soon'}
+                {t("resources.researchComingSoon")}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                {language === 'ar' ? 
-                  'البحث قريباً' :
-                  'We\'re developing new research initiatives focused on improving healthcare outcomes for Middle Eastern and Arab communities in Canada.'}
+                {t("resources.researchInitiatives")}
               </p>
             </div>
 
             <div className="text-center py-12">
               <Search className="h-16 w-16 text-healthTeal mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Research Opportunities Coming Soon</h3>
-              <p className="text-gray-600 mb-6">We're developing new research initiatives. Check back soon for opportunities to contribute to important health research.</p>
+              <h3 className="text-xl font-semibold mb-2">{t("resources.opportunitiesComingSoon")}</h3>
+              <p className="text-gray-600 mb-6">{t("resources.opportunitiesDescription")}</p>
             </div>
 
             <div className="text-center mb-12">
               <Link to="/post-opportunity">
                 <Button className="bg-healthRed hover:bg-healthRed/90 text-white">
                   <Plus className="h-4 w-4 mr-2" />
-                  Post Your Opportunity
+                  {t("resources.postOpportunity")}
                 </Button>
               </Link>
             </div>
 
             {/* Publications & Knowledge Hub */}
             <div className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Publications & Knowledge Hub</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">{t("resources.publicationsHub")}</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
-                Research and publications relevant to health issues in the Middle Eastern diaspora
+                {t("resources.publicationsDescription")}
               </p>
               
               <div className="text-center py-12">
                 <BookOpen className="h-16 w-16 text-healthTeal mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Knowledge Hub Coming Soon</h3>
-                <p className="text-gray-600 mb-6">We're curating a comprehensive collection of publications and research findings. Check back soon for valuable insights and evidence-based resources.</p>
+                <h3 className="text-xl font-semibold mb-2">{t("resources.knowledgeHubComingSoon")}</h3>
+                <p className="text-gray-600 mb-6">{t("resources.knowledgeHubDescription")}</p>
               </div>
             </div>
 
             {/* CME & Clinician Training */}
             <div className="mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">CME & Clinician Training</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">{t("resources.cmeTraining")}</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
-                Continuing medical education and training opportunities for culturally competent care
+                {t("resources.cmeDescription")}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <Card className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
                   <GraduationCap className="h-12 w-12 text-healthTeal mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-4">Sinai Health Training</h3>
-                  <p className="text-gray-600 mb-6">Continuing education programs focused on culturally responsive healthcare delivery.</p>
+                  <h3 className="text-xl font-semibold mb-4">{t("resources.sinaiHealth")}</h3>
+                  <p className="text-gray-600 mb-6">{t("resources.sinaiDescription")}</p>
                   <a 
                     href="https://www.sinaihealth.ca/education-and-training/continuing-education" 
                     target="_blank" 
@@ -168,15 +164,15 @@ const Resources = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Access Training
+                      {t("resources.accessTraining")}
                     </Button>
                   </a>
                 </Card>
                 
                 <Card className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
                   <GraduationCap className="h-12 w-12 text-healthRed mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-4">Calgary CME</h3>
-                  <p className="text-gray-600 mb-6">Continuing Medical Education programs from the University of Calgary.</p>
+                  <h3 className="text-xl font-semibold mb-4">{t("resources.calgaryCME")}</h3>
+                  <p className="text-gray-600 mb-6">{t("resources.calgaryDescription")}</p>
                   <a 
                     href="https://cumming.ucalgary.ca/cme/about/strategy" 
                     target="_blank" 
@@ -185,7 +181,7 @@ const Resources = () => {
                   >
                     <Button className="bg-healthRed hover:bg-healthRed/90 text-white">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      View Programs
+                      {t("resources.viewPrograms")}
                     </Button>
                   </a>
                 </Card>
@@ -198,11 +194,11 @@ const Resources = () => {
         {/* Research Resources Section */}
         <section className="py-16 md:py-24 bg-healthLightGray">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">Research Resources</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4 text-center">{t("resources.researchResourcesTitle")}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-8">
-              Comprehensive resources categorized by specialty to support your research and clinical practice
+              {t("resources.comprehensiveResources")}
             </p>
-            <p className="text-lg text-healthTeal text-center font-semibold mb-12">More to come!</p>
+            <p className="text-lg text-healthTeal text-center font-semibold mb-12">{t("resources.moreToCome")}</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {getLocalizedResourceCategories().map((category, index) => (
@@ -229,7 +225,7 @@ const Resources = () => {
                             >
                               <Button variant="link" size="sm" className="text-healthTeal p-0">
                                 <ExternalLink className="h-3 w-3 mr-1" />
-                                Access
+                                {t("resources.access")}
                               </Button>
                             </a>
                           </div>

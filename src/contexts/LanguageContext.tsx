@@ -51,6 +51,148 @@ const translations = {
     fa: "تماس",
     tr: "İletişim"
   },
+  
+  // Contact Page
+  "contact.title": {
+    en: "Contact Us",
+    ar: "اتصل بنا",
+    ku: "پەیوەندیمان پێوە بکەن",
+    fa: "با ما تماس بگیرید",
+    tr: "Bizimle İletişime Geçin"
+  },
+  "contact.subtitle": {
+    en: "Get in touch with our team. We're here to help and answer any questions you may have.",
+    ar: "تواصل مع فريقنا. نحن هنا للمساعدة والإجابة على أي أسئلة قد تكون لديك.",
+    ku: "پەیوەندی بە تیمەکەمانەوە بکە. ئێمە لێرەین بۆ یارمەتیدان و وەڵامدانەوەی هەر پرسیارێک کە لەلات هەبێت.",
+    fa: "با تیم ما در تماس باشید. ما اینجا هستیم تا کمک کنیم و به هر سوالی که دارید پاسخ دهیم.",
+    tr: "Ekibimizle iletişime geçin. Size yardımcı olmak ve sahip olabileceğiniz soruları yanıtlamak için buradayız."
+  },
+  "contact.sendMessage": {
+    en: "Send us a message",
+    ar: "أرسل لنا رسالة",
+    ku: "نامەیەکمان بۆ بنێرە",
+    fa: "برای ما پیام ارسال کنید",
+    tr: "Bize mesaj gönderin"
+  },
+  "contact.firstName": {
+    en: "First Name",
+    ar: "الاسم الأول",
+    ku: "ناوی یەکەم",
+    fa: "نام",
+    tr: "Ad"
+  },
+  "contact.lastName": {
+    en: "Last Name",
+    ar: "اسم العائلة",
+    ku: "ناوی کۆتایی",
+    fa: "نام خانوادگی",
+    tr: "Soyad"
+  },
+  "contact.email": {
+    en: "Email Address",
+    ar: "عنوان البريد الإلكتروني",
+    ku: "ناونیشانی ئیمەیڵ",
+    fa: "آدرس ایمیل",
+    tr: "E-posta Adresi"
+  },
+  "contact.category": {
+    en: "Category",
+    ar: "الفئة",
+    ku: "بەش",
+    fa: "دسته بندی",
+    tr: "Kategori"
+  },
+  "contact.message": {
+    en: "Message",
+    ar: "الرسالة",
+    ku: "نامە",
+    fa: "پیام",
+    tr: "Mesaj"
+  },
+  "contact.messagePlaceholder": {
+    en: "Tell us how we can help you...",
+    ar: "أخبرنا كيف يمكننا مساعدتك...",
+    ku: "پێمان بڵێ چۆن دەتوانین یارمەتیت بدەین...",
+    fa: "به ما بگویید چگونه می توانیم به شما کمک کنیم...",
+    tr: "Size nasıl yardımcı olabileceğimizi bize söyleyin..."
+  },
+  "contact.selectCategory": {
+    en: "Select a category",
+    ar: "اختر فئة",
+    ku: "بەشێک هەڵبژێرە",
+    fa: "دسته ای را انتخاب کنید",
+    tr: "Kategori seçin"
+  },
+  "contact.generalInquiry": {
+    en: "General Inquiry",
+    ar: "استفسار عام",
+    ku: "پرسیاری گشتی",
+    fa: "سوال عمومی",
+    tr: "Genel Sorgu"
+  },
+  "contact.supportRequest": {
+    en: "Support Request",
+    ar: "طلب دعم",
+    ku: "داواکاری پاڵپشتی",
+    fa: "درخواست پشتیبانی",
+    tr: "Destek Talebi"
+  },
+  "contact.partnership": {
+    en: "Partnership",
+    ar: "شراكة",
+    ku: "هاوبەشی",
+    fa: "مشارکت",
+    tr: "Ortaklık"
+  },
+  "contact.research": {
+    en: "Research Collaboration",
+    ar: "تعاون بحثي",
+    ku: "هاوکاری توێژینەوە",
+    fa: "همکاری تحقیقاتی",
+    tr: "Araştırma İşbirliği"
+  },
+  "contact.community": {
+    en: "Community Services",
+    ar: "خدمات المجتمع",
+    ku: "خزمەتگوزاری کۆمەڵگا",
+    fa: "خدمات جامعه",
+    tr: "Topluluk Hizmetleri"
+  },
+  "contact.physician": {
+    en: "Physician Network",
+    ar: "شبكة الأطباء",
+    ku: "تۆڕی دۆکتۆران",
+    fa: "شبکه پزشکان",
+    tr: "Doktor Ağı"
+  },
+  "contact.sendButton": {
+    en: "Send Message",
+    ar: "إرسال الرسالة",
+    ku: "نامە بنێرە",
+    fa: "ارسال پیام",
+    tr: "Mesaj Gönder"
+  },
+  "contact.getInTouch": {
+    en: "Get in touch",
+    ar: "تواصل معنا",
+    ku: "پەیوەندیمان پێوە بکە",
+    fa: "در تماس باشید",
+    tr: "İletişime geçin"
+  },
+  "contact.location": {
+    en: "Location",
+    ar: "الموقع",
+    ku: "شوێن",
+    fa: "مکان",
+    tr: "Konum"
+  },
+  "contact.toronto": {
+    en: "Toronto",
+    ar: "تورونتو",
+    ku: "تۆرۆنتۆ",
+    fa: "تورنتو",
+    tr: "Toronto"
+  },
   "header.webinars": {
     en: "Workshops and Resources",
     ar: "ورش العمل والموارد",
@@ -185,13 +327,6 @@ const translations = {
   },
   
   // Resources Section
-  "resources.title": {
-    en: "Community Resources",
-    ar: "موارد المجتمع",
-    ku: "سەرچاوەکانی کۆمەڵگا",
-    fa: "منابع جامعه",
-    tr: "Topluluk Kaynakları"
-  },
   "resources.subtitle": {
     en: "Explore our collection of resources to support healthcare advancement and research in Middle Eastern communities.",
     ar: "استكشف مجموعتنا من الموارد لدعم تقدم الرعاية الصحية والبحث في مجتمعات الشرق الأوسط.",
@@ -261,6 +396,162 @@ const translations = {
     ku: "دەستگەیشتن بە سەرچاوە",
     fa: "دسترسی به منبع",
     tr: "Kaynağa Erişim"
+  },
+  
+  // Resources Page Content
+  "resources.researchResourcesTitle": {
+    en: "Research Resources",
+    ar: "موارد البحث",
+    ku: "سەرچاوەکانی توێژینەوە",
+    fa: "منابع تحقیقات",
+    tr: "Araştırma Kaynakları"
+  },
+  "resources.researchDescription": {
+    en: "Tools and resources to support culturally responsive healthcare and community-centered research",
+    ar: "أدوات وموارد لدعم الرعاية الصحية المتجاوبة ثقافياً والبحث المرتكز على المجتمع",
+    ku: "ئامرازەکان و سەرچاوەکان بۆ پاڵپشتی چاودێری تەندروستی وەڵامدەرەوەی کولتووری و توێژینەوەی ناوەندی کۆمەڵگا",
+    fa: "ابزار و منابع برای حمایت از مراقبت های بهداشتی پاسخگو به فرهنگ و تحقیقات محور جامعه",
+    tr: "Kültürel açıdan duyarlı sağlık hizmetleri ve toplum merkezli araştırmaları desteklemek için araçlar ve kaynaklar"
+  },
+  "resources.researchComingSoon": {
+    en: "Research Coming Soon",
+    ar: "البحث قريباً",
+    ku: "توێژینەوە بەزووی دێت",
+    fa: "تحقیقات به زودی",
+    tr: "Araştırma Yakında"
+  },
+  "resources.researchInitiatives": {
+    en: "We're developing new research initiatives focused on improving healthcare outcomes for Middle Eastern and Arab communities in Canada.",
+    ar: "نحن نطور مبادرات بحثية جديدة تركز على تحسين نتائج الرعاية الصحية لمجتمعات الشرق الأوسط والعرب في كندا.",
+    ku: "ئێمە دەستپێشخەری توێژینەوەی نوێ پەرەپێدەدەین کە سەرنجی لەسەر باشترکردنی ئەنجامەکانی چاودێری تەندروستی بۆ کۆمەڵگاکانی ناوەڕاست و عەرەب لە کەنەدا.",
+    fa: "ما در حال توسعه ابتکارات تحقیقاتی جدید متمرکز بر بهبود نتایج مراقبت های بهداشتی برای جوامع خاورمیانه و عرب در کانادا هستیم.",
+    tr: "Kanada'daki Orta Doğu ve Arap toplumları için sağlık sonuçlarını iyileştirmeye odaklanan yeni araştırma girişimleri geliştiriyoruz."
+  },
+  "resources.opportunitiesComingSoon": {
+    en: "Research Opportunities Coming Soon",
+    ar: "فرص البحث قريباً",
+    ku: "هەلەکانی توێژینەوە بەزووی دێن",
+    fa: "فرصت های تحقیقاتی به زودی",
+    tr: "Araştırma Fırsatları Yakında"
+  },
+  "resources.opportunitiesDescription": {
+    en: "We're developing new research initiatives. Check back soon for opportunities to contribute to important health research.",
+    ar: "نحن نطور مبادرات بحثية جديدة. تحقق مرة أخرى قريباً للحصول على فرص للمساهمة في البحوث الصحية المهمة.",
+    ku: "ئێمە دەستپێشخەری توێژینەوەی نوێ پەرەپێدەدەین. دیسان بگەڕێوە بۆ هەلەکانی بەشداری لە توێژینەوە تەندروستییە گرنگەکان.",
+    fa: "ما در حال توसعه ابتکارات تحقیقاتی جدید هستیم. برای فرصت های مشارکت در تحقیقات مهم سلامت به زودی بررسی کنید.",
+    tr: "Yeni araştırma girişimleri geliştiriyoruz. Önemli sağlık araştırmalarına katkıda bulunma fırsatları için yakında tekrar kontrol edin."
+  },
+  "resources.postOpportunity": {
+    en: "Post Your Opportunity",
+    ar: "انشر فرصتك",
+    ku: "هەلەکەت بڵاوبکەرەوە",
+    fa: "فرصت خود را پست کنید",
+    tr: "Fırsatınızı Paylaşın"
+  },
+  "resources.publicationsHub": {
+    en: "Publications & Knowledge Hub",
+    ar: "المنشورات ومركز المعرفة",
+    ku: "بڵاوکراوەکان و ناوەندی زانیاری",
+    fa: "انتشارات و مرکز دانش",
+    tr: "Yayınlar ve Bilgi Merkezi"
+  },
+  "resources.publicationsDescription": {
+    en: "Research and publications relevant to health issues in the Middle Eastern diaspora",
+    ar: "البحوث والمنشورات ذات الصلة بالقضايا الصحية في الشتات الشرق أوسطي",
+    ku: "توێژینەوە و بڵاوکراوەکانی پەیوەست بە کێشە تەندروستییەکانی دیاسپۆرای ناوەڕاست",
+    fa: "تحقیقات و انتشارات مرتبط با مسائل سلامت در دیاسپورای خاورمیانه",
+    tr: "Orta Doğu diasporasındaki sağlık sorunlarıyla ilgili araştırma ve yayınlar"
+  },
+  "resources.knowledgeHubComingSoon": {
+    en: "Knowledge Hub Coming Soon",
+    ar: "مركز المعرفة قريباً",
+    ku: "ناوەندی زانیاری بەزووی دێت",
+    fa: "مرکز دانش به زودی",
+    tr: "Bilgi Merkezi Yakında"
+  },
+  "resources.knowledgeHubDescription": {
+    en: "We're curating a comprehensive collection of publications and research findings. Check back soon for valuable insights and evidence-based resources.",
+    ar: "نحن نقوم بتنسيق مجموعة شاملة من المنشورات ونتائج البحوث. تحقق مرة أخرى قريباً للحصول على رؤى قيمة وموارد قائمة على الأدلة.",
+    ku: "ئێمە کۆکراوەیەکی گشتگیر لە بڵاوکراوەکان و ئەنجامەکانی توێژینەوە دەکەینەوە. دیسان بگەڕێوە بۆ زانیاری بەنرخ و سەرچاوەی پشت بە بەڵگەوە.",
+    fa: "ما در حال تنظیم مجموعه ای جامع از انتشارات و یافته های تحقیقاتی هستیم. برای بینش های ارزشمند و منابع مبتنی بر شواهد به زودی بررسی کنید.",
+    tr: "Kapsamlı bir yayın ve araştırma bulgularıyla koleksiyonu düzenliyoruz. Değerli içgörüler ve kanıt temelli kaynaklar için yakında tekrar kontrol edin."
+  },
+  "resources.cmeTraining": {
+    en: "CME & Clinician Training",
+    ar: "التعليم الطبي المستمر وتدريب الأطباء",
+    ku: "پەروەردەی پزیشکی بەردەوام و ڕاهێنانی کلینیکی",
+    fa: "آموزش پزشکی مداوم و آموزش پزشکان",
+    tr: "Sürekli Tıp Eğitimi ve Klinisyen Eğitimi"
+  },
+  "resources.cmeDescription": {
+    en: "Continuing medical education and training opportunities for culturally competent care",
+    ar: "فرص التعليم الطبي المستمر والتدريب للرعاية المتجاوبة ثقافياً",
+    ku: "هەلەکانی پەروەردەی پزیشکی بەردەوام و ڕاهێنان بۆ چاودێری کولتووری",
+    fa: "فرصت های آموزش پزشکی مداوم و آموزش برای مراقبت متناسب با فرهنگ",
+    tr: "Kültürel açıdan yetkin bakım için sürekli tıp eğitimi ve eğitim fırsatları"
+  },
+  "resources.sinaiHealth": {
+    en: "Sinai Health Training",
+    ar: "تدريب صحة سيناء",
+    ku: "ڕاهێنانی تەندروستی سیناء",
+    fa: "آموزش سلامت سینا",
+    tr: "Sinai Sağlık Eğitimi"
+  },
+  "resources.sinaiDescription": {
+    en: "Continuing education programs focused on culturally responsive healthcare delivery.",
+    ar: "برامج التعليم المستمر التي تركز على تقديم الرعاية الصحية المتجاوبة ثقافياً.",
+    ku: "بەرنامەکانی پەروەردەی بەردەوام کە سەرنجی لەسەر گەیاندنی چاودێری تەندروستی وەڵامدەرەوەی کولتووری.",
+    fa: "برنامه های آموزش مداوم متمرکز بر ارائه مراقبت های بهداشتی پاسخگو به فرهنگ.",
+    tr: "Kültürel açıdan duyarlı sağlık hizmetleri sunumuna odaklanan sürekli eğitim programları."
+  },
+  "resources.accessTraining": {
+    en: "Access Training",
+    ar: "الوصول إلى التدريب",
+    ku: "دەستگەیشتن بە ڕاهێنان",
+    fa: "دسترسی به آموزش",
+    tr: "Eğitime Erişim"
+  },
+  "resources.calgaryCME": {
+    en: "Calgary CME",
+    ar: "التعليم الطبي المستمر في كالغاري",
+    ku: "پەروەردەی پزیشکی بەردەوامی کالگاری",
+    fa: "آموزش پزشکی مداوم کلگری",
+    tr: "Calgary Sürekli Tıp Eğitimi"
+  },
+  "resources.calgaryDescription": {
+    en: "Continuing Medical Education programs from the University of Calgary.",
+    ar: "برامج التعليم الطبي المستمر من جامعة كالغاري.",
+    ku: "بەرنامەکانی پەروەردەی پزیشکی بەردەوام لە زانکۆی کالگاری.",
+    fa: "برنامه های آموزش پزشکی مداوم از دانشگاه کلگری.",
+    tr: "Calgary Üniversitesi'nden Sürekli Tıp Eğitimi programları."
+  },
+  "resources.viewPrograms": {
+    en: "View Programs",
+    ar: "عرض البرامج",
+    ku: "بەرنامەکان ببینە",
+    fa: "مشاهده برنامه ها",
+    tr: "Programları Görüntüle"
+  },
+  "resources.comprehensiveResources": {
+    en: "Comprehensive resources categorized by specialty to support your research and clinical practice",
+    ar: "موارد شاملة مصنفة حسب التخصص لدعم بحثك وممارستك السريرية",
+    ku: "سەرچاوە گشتگیرەکان کە بەپێی تایبەتمەندی پۆلێن کراون بۆ پاڵپشتی توێژینەوە و پراکتیسی کلینیکیت",
+    fa: "منابع جامع دسته بندی شده بر اساس تخصص برای حمایت از تحقیقات و عملکرد بالینی شما",
+    tr: "Araştırmanızı ve klinik pratiğinizi desteklemek için uzmanlık alanlarına göre kategorize edilmiş kapsamlı kaynaklar"
+  },
+  "resources.moreToCome": {
+    en: "More to come!",
+    ar: "المزيد قادم!",
+    ku: "زیاتر دێت!",
+    fa: "بیشتر در راه است!",
+    tr: "Daha fazlası geliyor!"
+  },
+  "resources.access": {
+    en: "Access",
+    ar: "الوصول",
+    ku: "دەستگەیشتن",
+    fa: "دسترسی",
+    tr: "Erişim"
   },
   
   // Partners Section
@@ -1211,27 +1502,6 @@ const translations = {
     ku: "ناو",
     fa: "نام",
     tr: "İsim"
-  },
-  "contact.email": {
-    en: "Email",
-    ar: "البريد الإلكتروني",
-    ku: "ئیمەیڵ",
-    fa: "ایمیل",
-    tr: "E-posta"
-  },
-  "contact.subject": {
-    en: "Subject",
-    ar: "الموضوع",
-    ku: "بابەت",
-    fa: "موضوع",
-    tr: "Konu"
-  },
-  "contact.message": {
-    en: "Message",
-    ar: "الرسالة",
-    ku: "پەیام",
-    fa: "پیام",
-    tr: "Mesaj"
   },
   "contact.send": {
     en: "Send Message",
