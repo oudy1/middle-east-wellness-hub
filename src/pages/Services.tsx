@@ -71,15 +71,15 @@ const Services = () => {
             <div className="max-w-2xl mx-auto">
               <UserPlus className="h-12 w-12 text-healthTeal mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
-                {t("services.healthcareProvider")}
+                Healthcare Provider
               </h2>
               <p className="text-gray-600 mb-6">
-                {t("services.joinNetwork")}
+                Join our network of healthcare providers dedicated to serving Middle Eastern communities.
               </p>
               <Link to="/physician-application">
                 <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                   <UserPlus className="h-6 w-6" />
-                  {t("services.applyJoinNetwork")}
+                  Apply to Join Network
                 </Button>
               </Link>
             </div>
@@ -92,15 +92,15 @@ const Services = () => {
             <div className="max-w-2xl mx-auto">
               <Users className="h-12 w-12 text-healthTeal mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
-                {t("services.joinTeam")}
+                Join Our Team
               </h2>
               <p className="text-gray-600 mb-6">
-                {t("services.joinTeamDescription")}
+                Become part of our mission to improve healthcare access for Middle Eastern communities.
               </p>
               <Link to="/join-us">
                 <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                   <Users className="h-6 w-6" />
-                  {t("services.applyJoinUs")}
+                  Apply to Join Us
                 </Button>
               </Link>
             </div>
@@ -111,10 +111,10 @@ const Services = () => {
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center text-healthDarkBlue">
-              {t("services.educationalMaterials")}
+              Educational Materials
             </h2>
             <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed">
-              {t("services.educationalDescription")}
+              Access culturally relevant health education resources and guides.
             </p>
             <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {/* Alone in Canada Guide */}
@@ -146,7 +146,7 @@ const Services = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <BookOpen className="h-4 w-4" />
-                      {t("services.downloadPDF")}
+                      Download PDF
                     </Button>
                   </a>
                 </CardContent>
@@ -181,7 +181,7 @@ const Services = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <BookOpen className="h-4 w-4" />
-                      {t("services.downloadPDF")}
+                      Download PDF
                     </Button>
                   </a>
                 </CardContent>
@@ -189,7 +189,7 @@ const Services = () => {
               
               {/* Placeholder for future materials */}
               <div className="text-center text-gray-500 col-span-full py-8">
-                {t("services.materialsComingSoon")}
+                More materials coming soon...
               </div>
             </div>
           </div>
