@@ -51,13 +51,13 @@ const SAMPLE_PHYSICIANS: Physician[] = [
   {
     id: 6,
     title: "Professor",
-    firstName: "Raed Jad",
+    firstName: "Raed",
     lastName: "Hawa",
     gender: "Male",
     languages: ["English", "Arabic"],
     specialty: "Psychiatry",
     subspecialty: "Consultation/Liaison Psychiatry",
-    yearsInPractice: 25,
+    yearsInPractice: 0,
     affiliatedHospitals: ["UHN - Toronto Western Hospital"],
     academicTitles: ["Professor"],
     clinicName: "Toronto Western Hospital",
@@ -67,7 +67,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     email: "raed.hawa@uhn.ca",
     officeHours: "By Appointment",
     telehealthAvailable: false,
-    accepting: false,
+    accepting: true,
     credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
   }
 ];
@@ -194,10 +194,12 @@ const PhysicianDirectory = () => {
               <Clock className="h-4 w-4 text-healthTeal mr-2" />
               <span>{physician.officeHours}</span>
             </div>
-            <div className="flex items-center text-sm">
-              <Stethoscope className="h-4 w-4 text-healthTeal mr-2" />
-              <span>{physician.yearsInPractice} years experience</span>
-            </div>
+            {physician.yearsInPractice > 0 && (
+              <div className="flex items-center text-sm">
+                <Stethoscope className="h-4 w-4 text-healthTeal mr-2" />
+                <span>{physician.yearsInPractice} years experience</span>
+              </div>
+            )}
             {physician.academicTitles && physician.academicTitles.length > 0 && (
               <div className="flex items-center text-sm">
                 <GraduationCap className="h-4 w-4 text-healthTeal mr-2" />
