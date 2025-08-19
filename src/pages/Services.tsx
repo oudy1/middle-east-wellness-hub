@@ -64,29 +64,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Physician Directory Highlight */}
-        <section className="py-12 md:py-16 bg-healthTeal/5">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-2xl mx-auto">
-              <MapPin className="h-12 w-12 md:h-16 md:w-16 text-healthTeal mx-auto mb-4 md:mb-6" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-healthDarkBlue mb-3 md:mb-4">
-                {t("services.findPhysiciansNear")}
-              </h2>
-              <p className="text-gray-600 mb-6 md:mb-8 text-base sm:text-lg px-2 leading-relaxed">
-                {t("services.findPhysiciansDescription")}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
-                <Link to="/physician-directory" className="w-full sm:w-auto">
-                  <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center justify-center gap-2 px-6 md:px-8 py-2 md:py-3 text-base md:text-lg w-full sm:w-auto">
-                    <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                    <span className="hidden sm:inline">{t("services.browseDirectory")}</span>
-                    <span className="sm:hidden">{t("services.browseDirectory")}</span>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Physician Network CTA */}
         <section className="py-12 bg-healthTeal/10">
