@@ -56,10 +56,10 @@ const Services = () => {
         <section className="bg-healthDarkBlue text-white py-12 md:py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight">
-              {t("services.forCommunity")}
+              Community Services
             </h1>
             <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-3xl mx-auto px-2 leading-relaxed">
-              {t("services.communityDescription")}
+              Supporting healthcare advancement and research for Middle Eastern communities.
             </p>
           </div>
         </section>
