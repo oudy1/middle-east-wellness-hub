@@ -157,11 +157,6 @@ const PhysicianDirectory = () => {
               <p className="text-sm text-gray-600">{physician.subspecialty}</p>
             )}
           </div>
-          <div className="text-right">
-            <Badge variant={physician.accepting ? "default" : "secondary"} className="mb-2">
-              {physician.accepting ? "Accepting Patients" : "Not Accepting"}
-            </Badge>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
