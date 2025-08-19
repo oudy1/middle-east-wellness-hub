@@ -5,8 +5,8 @@ const TeamSection = () => {
   const affiliatedPhysicians = [
     {
       name: "Dr. Raed Hawa",
-      role: "Affiliated Physician & Co-Director",
-      specialization: "Internal medicine and community health"
+      role: "Affiliated Physician",
+      specialization: "Consultation liaison psychiatry, sleep medicine and obesity medicine"
     }
   ];
 

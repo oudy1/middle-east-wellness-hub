@@ -59,7 +59,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     subspecialty: "Consultation/Liaison Psychiatry",
     yearsInPractice: 25,
     affiliatedHospitals: ["UHN - Toronto Western Hospital"],
-    academicTitles: ["Professor", "Deputy Psychiatrist in Chief", "Director, Division of Consultation/Liaison Psychiatry"],
+    academicTitles: ["Professor"],
     clinicName: "Toronto Western Hospital",
     address: "Toronto, Ontario Canada",
     coordinates: [-79.4013, 43.6568] as [number, number],
