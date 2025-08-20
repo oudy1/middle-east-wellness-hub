@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import DOMPurify from 'dompurify';
@@ -212,6 +212,23 @@ const Contact = () => {
                       <div>
                         <p className="font-medium">{t("contact.location")}</p>
                         <p className="text-gray-600">{t("contact.toronto")}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-healthTeal/10 rounded-lg">
+                        <Instagram className="h-5 w-5 text-healthTeal" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Instagram</p>
+                        <a 
+                          href="https://www.instagram.com/projectshams/" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-600 hover:text-healthTeal transition-colors"
+                        >
+                          @projectshams
+                        </a>
                       </div>
                     </div>
                   </CardContent>
