@@ -12,6 +12,7 @@ import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import PartnersSection from "@/components/PartnersSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
+import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
 
 const Index = () => {
   return (
@@ -25,6 +26,7 @@ const Index = () => {
         <HeroSection />
         <UpcomingEventsSection />
         <MissionSection />
+        <TopicOfTheWeekSection />
         <FeaturedNewsSection />
         <MeetTeamButton />
         <ResourcesSection />
