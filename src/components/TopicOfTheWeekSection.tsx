@@ -6,25 +6,25 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const TopicOfTheWeekSection = () => {
   const { t, language } = useLanguage();
 
-  // Sample Instagram posts data - replace with actual content
+  // Latest Instagram posts data
   const weeklyTopics = [
     {
       id: 1,
-      titleEn: "Understanding Hypertension",
-      titleAr: "فهم ارتفاع ضغط الدم",
-      imageUrl: "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png", // Using existing uploaded image as placeholder
-      instagramUrl: "https://www.instagram.com/p/DN81EEuDwUV/",
-      descriptionEn: "Learn about blood pressure management and healthy lifestyle choices",
-      descriptionAr: "تعلم عن إدارة ضغط الدم وخيارات نمط الحياة الصحي"
+      titleEn: "Type 2 Diabetes in Arab Communities",
+      titleAr: "المرض السكري من النوع الثاني في المجتمعات العربية",
+      imageUrl: "/lovable-uploads/201f0a7a-4d93-4887-ae1e-69ddb8d106b5.png",
+      instagramUrl: "https://www.instagram.com/p/DN81ia5j_nj/",
+      descriptionEn: "Focus on diet & immigration - Understanding diabetes management in Arab communities",
+      descriptionAr: "التركيز على النظام الغذائي والهجرة - فهم إدارة السكري في المجتمعات العربية"
     },
     {
       id: 2,
-      titleEn: "Diabetes Prevention Tips",
-      titleAr: "نصائح الوقاية من السكري",
-      imageUrl: "/lovable-uploads/c96ab6e9-e7cb-4ed6-a0db-a332b5d2c2f8.png", // Using existing uploaded image as placeholder
-      instagramUrl: "https://www.instagram.com/p/DN81ia5j_nj/",
-      descriptionEn: "Essential tips for preventing and managing diabetes effectively",
-      descriptionAr: "نصائح أساسية للوقاية من السكري وإدارته بفعالية"
+      titleEn: "Type 2 Diabetes: Diet & Migration",
+      titleAr: "المرض السكري من النوع الثاني: النظام الغذائي والهجرة",
+      imageUrl: "/lovable-uploads/b77d07b1-7850-4a30-a38e-23787e27cec6.png",
+      instagramUrl: "https://www.instagram.com/p/DN81EEuDwUV/",
+      descriptionEn: "Essential insights about diabetes in Arab communities with focus on dietary and migration factors",
+      descriptionAr: "رؤى أساسية حول السكري في المجتمعات العربية مع التركيز على العوامل الغذائية والهجرة"
     }
   ];
 
