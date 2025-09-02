@@ -24,7 +24,7 @@ const PartnersSection = () => {
   const clubs = [
     {
       name: "ESA",
-      logo: "/lovable-uploads/3dfd7382-c840-41cb-bbc1-e4505d4fd0b0.png",
+      logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png",
       description: "Egyptian Students Association",
       link: "#"
     }
