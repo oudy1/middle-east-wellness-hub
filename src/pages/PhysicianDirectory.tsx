@@ -99,83 +99,61 @@ const SAMPLE_PHYSICIANS: Physician[] = [
 const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
   {
     id: 1,
-    firstName: "Fatima",
-    lastName: "Al-Rashid",
-    role: "Registered Nurse",
-    specialty: "Emergency Medicine",
+    firstName: "Hiba",
+    lastName: "Al-Masri",
+    role: "Registered Dietitian",
+    specialty: "Nutritional Counseling",
     languages: ["Arabic", "English"],
-    location: "Toronto, ON",
+    location: "Ottawa, ON",
     contact: {
-      email: "fatima.alrashid@hospital.ca",
-      phone: "(416) 555-0123"
+      email: "almasrihiba@outlook.com"
     },
-    credentials: ["RN", "BScN"],
-    experience: 8,
-    description: "Specialized emergency nurse with extensive experience in trauma care and patient advocacy."
+    credentials: ["RD"],
+    experience: 5,
+    description: "Registered Dietitian at NutraHealth specializing in comprehensive nutritional counseling and meal planning."
   },
   {
     id: 2,
-    firstName: "Ahmed",
-    lastName: "Hassan",
-    role: "Pharmacist",
-    specialty: "Clinical Pharmacy",
-    languages: ["Arabic", "English", "French"],
-    location: "Ottawa, ON",
+    firstName: "Dahlia",
+    lastName: "Abou El Hassan",
+    role: "Registered Dietitian",
+    specialty: "Fertility Nutrition and Women's Health",
+    languages: ["Arabic", "English"],
     contact: {
-      email: "ahmed.hassan@pharmacy.ca",
-      website: "www.ahmedpharmacy.ca"
+      email: "dahlia.abouelh@gmail.com"
     },
-    credentials: ["PharmD", "RPh"],
-    experience: 12,
-    description: "Clinical pharmacist specializing in medication therapy management and patient counseling."
+    credentials: ["RD"],
+    experience: 7,
+    description: "Specialized in fertility nutrition and women's health, providing evidence-based nutritional guidance for reproductive wellness."
   },
   {
     id: 3,
-    firstName: "Layla",
-    lastName: "Mahmoud",
-    role: "Social Worker",
-    specialty: "Mental Health",
+    firstName: "Noor",
+    lastName: "Al Assadi",
+    role: "Registered Psychotherapist",
+    specialty: "Mental Health Counseling",
     languages: ["Arabic", "English"],
-    location: "Vancouver, BC",
+    location: "North York, ON",
     contact: {
-      email: "layla.mahmoud@socialservices.bc.ca",
-      phone: "(604) 555-0456"
+      email: "noorassadi@live.com"
     },
-    credentials: ["MSW", "RSW"],
+    credentials: ["RP"],
     experience: 6,
-    description: "Mental health social worker focusing on cultural competency and family therapy."
+    description: "Registered Psychotherapist providing culturally sensitive mental health support and therapeutic interventions."
   },
   {
     id: 4,
-    firstName: "Omar",
-    lastName: "Khalil",
-    role: "Physical Therapist",
-    specialty: "Orthopedic Rehabilitation",
+    firstName: "Menna",
+    lastName: "Komeiha",
+    role: "Researcher",
+    specialty: "Healthcare Research",
     languages: ["Arabic", "English"],
-    location: "Calgary, AB",
     contact: {
-      email: "omar.khalil@physio.ca",
-      website: "www.khalilphysio.com"
+      email: "komeiham@mcmaster.ca"
     },
-    credentials: ["BPT", "MPT"],
-    experience: 10,
-    description: "Orthopedic physical therapist specializing in sports injuries and post-surgical rehabilitation."
-  },
-  {
-    id: 5,
-    firstName: "Nour",
-    lastName: "Abdel-Rahman",
-    role: "Psychologist",
-    specialty: "Clinical Psychology",
-    languages: ["Arabic", "English"],
-    location: "Montreal, QC",
-    contact: {
-      email: "nour.abdelrahman@psychology.ca",
-      phone: "(514) 555-0789"
-    },
-    credentials: ["PhD", "C.Psych"],
-    experience: 7,
-    description: "Clinical psychologist specializing in anxiety, depression, and cultural adaptation therapy."
+    credentials: ["MSc"],
+    experience: 4,
+    description: "Healthcare researcher at UHN contributing to advancing medical knowledge and evidence-based practices."
   }
 ];
 
@@ -194,28 +172,28 @@ const SPECIALTIES = [
 
 const HEALTHCARE_ROLES = [
   "All Roles",
+  "Registered Dietitian",
+  "Registered Psychotherapist", 
+  "Researcher",
   "Registered Nurse",
   "Pharmacist",
   "Social Worker",
   "Physical Therapist",
   "Psychologist",
-  "Occupational Therapist",
-  "Dietitian",
-  "Speech Therapist",
-  "Respiratory Therapist"
+  "Occupational Therapist"
 ];
 
 const HEALTHCARE_SPECIALTIES = [
   "All Specialties",
+  "Nutritional Counseling",
+  "Fertility Nutrition and Women's Health",
+  "Mental Health Counseling",
+  "Healthcare Research",
   "Emergency Medicine",
   "Clinical Pharmacy",
   "Mental Health",
   "Orthopedic Rehabilitation",
-  "Clinical Psychology",
-  "Pediatric Care",
-  "Geriatric Care",
-  "Community Health",
-  "Rehabilitation Services"
+  "Clinical Psychology"
 ];
 
 const LANGUAGES = [
