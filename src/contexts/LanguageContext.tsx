@@ -201,11 +201,11 @@ const translations = {
     tr: "Atölyeler ve Kaynaklar"
   },
   "header.physicianDirectory": {
-    en: "Find a Physician",
-    ar: "ابحث عن طبيب",
-    ku: "دۆکتۆر بدۆزەرەوە",
-    fa: "پزشک پیدا کنید",
-    tr: "Doktor Bul"
+    en: "Find Healthcare Workers",
+    ar: "ابحث عن العاملين في الرعاية الصحية",
+    ku: "کارکەری تەندروستی بدۆزەرەوە",
+    fa: "کارکنان مراقبت های بهداشتی پیدا کنید",
+    tr: "Sağlık Çalışanları Bul"
   },
   "header.education": {
     en: "Education",

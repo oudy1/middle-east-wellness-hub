@@ -122,9 +122,9 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     contact: {
       email: "dahlia.abouelh@gmail.com"
     },
-    credentials: ["RD"],
+    credentials: ["MScFN", "RD"],
     experience: 7,
-    description: "Specialized in fertility nutrition and women's health, providing evidence-based nutritional guidance for reproductive wellness."
+    description: "Dahlia Abou El Hassan, MScFN, RD is a Registered Dietitian specializing in fertility, hormones, and women's health nutrition. She helps individuals and couples navigate nutrition for conception, IVF, and pregnancy with evidence-based strategies and compassionate support. Dahlia is fluent in English and Arabic, and she works with clients to incorporate cultural foods and traditions into their nutrition plans. She provides simple, practical nutrition tips that make healthy eating more approachable and sustainable, helping to enhance overall health while reducing stress around meals."
   },
   {
     id: 3,
@@ -146,14 +146,14 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     firstName: "Menna",
     lastName: "Komeiha",
     role: "Researcher",
-    specialty: "Healthcare Research",
+    specialty: "Health Equity Research",
     languages: ["Arabic", "English"],
     contact: {
       email: "komeiham@mcmaster.ca"
     },
-    credentials: ["MSc"],
+    credentials: ["BDS", "GDip", "MSc"],
     experience: 4,
-    description: "Healthcare researcher at UHN contributing to advancing medical knowledge and evidence-based practices."
+    description: "Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice."
   }
 ];
 
