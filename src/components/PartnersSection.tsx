@@ -23,10 +23,10 @@ const PartnersSection = () => {
       link: "#"
     },
     {
-      name: "NASA",
+      name: "North African Student Association of UW and Laurier",
       logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png",
-      description: "National Aeronautics and Space Administration",
-      link: "https://www.nasa.gov"
+      description: "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University",
+      link: "#"
     }
   ];
 
