@@ -10,21 +10,21 @@ const TopicOfTheWeekSection = () => {
   const weeklyTopics = [
     {
       id: 1,
-      titleEn: "Type 2 Diabetes in Arab Communities",
-      titleAr: "المرض السكري من النوع الثاني في المجتمعات العربية",
+      titleEn: "Healthcare Topic",
+      titleAr: "موضوع الرعاية الصحية",
       imageUrl: "/lovable-uploads/201f0a7a-4d93-4887-ae1e-69ddb8d106b5.png",
-      instagramUrl: "https://www.instagram.com/p/DN81ia5j_nj/",
-      descriptionEn: "Focus on diet & immigration - Understanding diabetes management in Arab communities",
-      descriptionAr: "التركيز على النظام الغذائي والهجرة - فهم إدارة السكري في المجتمعات العربية"
+      instagramUrl: "https://www.instagram.com/p/DOO6J6Ij0U1/",
+      descriptionEn: "Latest health education content from our Instagram",
+      descriptionAr: "أحدث محتوى التعليم الصحي من إنستغرامنا"
     },
     {
       id: 2,
-      titleEn: "Type 2 Diabetes: Diet & Migration",
-      titleAr: "المرض السكري من النوع الثاني: النظام الغذائي والهجرة",
+      titleEn: "Health Awareness",
+      titleAr: "التوعية الصحية",
       imageUrl: "/lovable-uploads/b77d07b1-7850-4a30-a38e-23787e27cec6.png",
-      instagramUrl: "https://www.instagram.com/p/DN81EEuDwUV/",
-      descriptionEn: "Essential insights about diabetes in Arab communities with focus on dietary and migration factors",
-      descriptionAr: "رؤى أساسية حول السكري في المجتمعات العربية مع التركيز على العوامل الغذائية والهجرة"
+      instagramUrl: "https://www.instagram.com/p/DOO6Ky8j_A2/",
+      descriptionEn: "Important health information in Arabic",
+      descriptionAr: "معلومات صحية مهمة باللغة العربية"
     }
   ];
 

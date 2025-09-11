@@ -13,12 +13,6 @@ const PartnersSection = () => {
       description: "Institut Canado-Arabe",
       link: "https://www.canadianarabinstitute.org"
     },
-    {
-      name: "Together Project",
-      logo: "/lovable-uploads/c96ab6e9-e7cb-4ed6-a0db-a332b5d2c2f8.png",
-      description: "A project of MakeWay",
-      link: "https://www.togetherproject.ca"
-    }
   ];
 
   const clubs = [
