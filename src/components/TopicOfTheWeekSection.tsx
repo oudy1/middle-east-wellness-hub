@@ -10,21 +10,21 @@ const TopicOfTheWeekSection = () => {
   const weeklyTopics = [
     {
       id: 1,
-      titleEn: "Healthcare Topic",
-      titleAr: "موضوع الرعاية الصحية",
-      imageUrl: "/lovable-uploads/201f0a7a-4d93-4887-ae1e-69ddb8d106b5.png",
+      titleEn: "Immigration Stress in Arab and Middle Eastern Communities",
+      titleAr: "ضغوط الهجرة في المجتمعات العربية والشرق أوسطية",
+      imageUrl: "/lovable-uploads/84589442-8065-4eff-9471-2dced0c78b92.png",
       instagramUrl: "https://www.instagram.com/p/DOO6J6Ij0U1/",
-      descriptionEn: "Latest health education content from our Instagram",
-      descriptionAr: "أحدث محتوى التعليم الصحي من إنستغرامنا"
+      descriptionEn: "📌 This week's focus: immigration stress in Arab and Middle Eastern communities in Canada. ⚖️ Balancing family expectations with a new life, and how belonging, faith, and cultural ties can help reduce stress and protect our well-being. 🤝 Together, we can understand more and support each other. 💛",
+      descriptionAr: "📌 موضوع هذا الأسبوع: ضغوط الهجرة في المجتمعات العربية والشرق أوسطية في كندا. ⚖️ موازنة توقعات الأسرة مع الحياة الجديدة، وكيف يمكن للانتماء والإيمان والروابط الثقافية أن يخفف من التوتر ويحافظ على صحتنا النفسية. 🤝 معًا نستطيع أن نفهم أكثر وندعم بعضنا البعض. 💛"
     },
     {
       id: 2,
-      titleEn: "Health Awareness",
-      titleAr: "التوعية الصحية",
-      imageUrl: "/lovable-uploads/b77d07b1-7850-4a30-a38e-23787e27cec6.png",
+      titleEn: "Immigration Challenges and Pressures",
+      titleAr: "تحديات وضغوط الهجرة",
+      imageUrl: "/lovable-uploads/49fec047-6117-4fbb-b092-efb298211ef8.png",
       instagramUrl: "https://www.instagram.com/p/DOO6Ky8j_A2/",
-      descriptionEn: "Important health information in Arabic",
-      descriptionAr: "معلومات صحية مهمة باللغة العربية"
+      descriptionEn: "📌 This week's focus: immigration stress in Arab and Middle Eastern communities in Canada. ⚖️ Balancing family expectations with a new life, and how belonging, faith, and cultural ties can help reduce stress and protect our well-being. 🤝 Together, we can understand more and support each other. 💛",
+      descriptionAr: "📌 موضوع هذا الأسبوع: ضغوط الهجرة في المجتمعات العربية والشرق أوسطية في كندا. ⚖️ موازنة توقعات الأسرة مع الحياة الجديدة، وكيف يمكن للانتماء والإيمان والروابط الثقافية أن يخفف من التوتر ويحافظ على صحتنا النفسية. 🤝 معًا نستطيع أن نفهم أكثر وندعم بعضنا البعض. 💛"
     }
   ];
 
