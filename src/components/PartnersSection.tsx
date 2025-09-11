@@ -21,6 +21,12 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png",
       description: "Egyptian Students Association",
       link: "#"
+    },
+    {
+      name: "NASA",
+      logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png",
+      description: "National Aeronautics and Space Administration",
+      link: "https://www.nasa.gov"
     }
   ];
 
