@@ -152,22 +152,22 @@ const Header = () => {
               </button>
               
               {physicianMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
-                  <Link
-                    to="/physician-directory"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setPhysicianMenuOpen(false)}
-                  >
-                    {t("header.findPhysician")}
-                  </Link>
-                  <Link
-                    to="/family-physician"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setPhysicianMenuOpen(false)}
-                  >
-                    {t("header.familyPhysician")}
-                  </Link>
-                </div>
+                 <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+                   <Link
+                     to="/physician-directory"
+                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                     onClick={() => setPhysicianMenuOpen(false)}
+                   >
+                     {t("header.findHealthcareWorkers")}
+                   </Link>
+                   <Link
+                     to="/family-physician"
+                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                     onClick={() => setPhysicianMenuOpen(false)}
+                   >
+                     {t("header.familyPhysician")}
+                   </Link>
+                 </div>
               )}
             </div>
           </nav>
@@ -300,8 +300,8 @@ const Header = () => {
                   <div className="py-4 px-4">
                     <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.physicianDirectory")}</div>
                     <div className="ml-2 space-y-2">
-                      <Link to="/physician-directory" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        {t("header.findPhysician")}
+                       <Link to="/physician-directory" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                         {t("header.findHealthcareWorkers")}
                       </Link>
                       <Link to="/family-physician" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.familyPhysician")}

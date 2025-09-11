@@ -228,13 +228,13 @@ const translations = {
     fa: "از ما حمایت کنید",
     tr: "Bizi Destekleyin"
   },
-  "header.findPhysician": {
-    en: "Find Physician",
-    ar: "ابحث عن طبيب",
-    ku: "دۆکتۆر بدۆزەرەوە",
-    fa: "پزشک پیدا کنید",
-    tr: "Doktor Bul"
-  },
+   "header.findHealthcareWorkers": {
+     en: "Find Healthcare Workers",
+     ar: "ابحث عن العاملين في الرعاية الصحية",
+     ku: "کارکەری تەندروستی بدۆزەرەوە",
+     fa: "کارکنان مراقبت های بهداشتی پیدا کنید",
+     tr: "Sağlık Çalışanları Bul"
+   },
   "header.familyPhysician": {
     en: "Family Physician",
     ar: "طبيب الأسرة",
