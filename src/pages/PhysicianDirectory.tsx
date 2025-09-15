@@ -154,6 +154,20 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     credentials: ["BDS", "GDip", "MSc"],
     experience: 4,
     description: "Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice."
+  },
+  {
+    id: 5,
+    firstName: "Nayla",
+    lastName: "Salameh",
+    role: "Registered Dietitian",
+    specialty: "Diabetes Education",
+    languages: ["Arabic", "English"],
+    contact: {
+      email: "nayla.salameh@example.com"
+    },
+    credentials: ["MSc", "RD", "CDE"],
+    experience: 8,
+    description: "Nayla Salameh is a Registered Dietitian and Certified Diabetes Educator specializing in diabetes management and nutritional counseling. She provides comprehensive diabetes education and personalized nutrition plans to help patients manage their condition effectively."
   }
 ];
 
