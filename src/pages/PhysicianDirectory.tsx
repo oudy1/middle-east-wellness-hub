@@ -163,7 +163,7 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     specialty: "Diabetes Education",
     languages: ["Arabic", "English"],
     contact: {
-      email: "nayla.salameh@example.com"
+      email: "naylasalameh@hotmail.com"
     },
     credentials: ["MSc", "RD", "CDE"],
     experience: 8,
