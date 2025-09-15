@@ -10,21 +10,21 @@ const TopicOfTheWeekSection = () => {
   const weeklyTopics = [
     {
       id: 1,
-      titleEn: "Immigration Stress in Arab and Middle Eastern Communities",
-      titleAr: "ضغوط الهجرة في المجتمعات العربية والشرق أوسطية",
-      imageUrl: "/lovable-uploads/84589442-8065-4eff-9471-2dced0c78b92.png",
-      instagramUrl: "https://www.instagram.com/p/DOO6J6Ij0U1/",
-      descriptionEn: "📌 This week's focus: immigration stress in Arab and Middle Eastern communities in Canada. ⚖️ Balancing family expectations with a new life, and how belonging, faith, and cultural ties can help reduce stress and protect our well-being. 🤝 Together, we can understand more and support each other. 💛",
-      descriptionAr: "📌 موضوع هذا الأسبوع: ضغوط الهجرة في المجتمعات العربية والشرق أوسطية في كندا. ⚖️ موازنة توقعات الأسرة مع الحياة الجديدة، وكيف يمكن للانتماء والإيمان والروابط الثقافية أن يخفف من التوتر ويحافظ على صحتنا النفسية. 🤝 معًا نستطيع أن نفهم أكثر وندعم بعضنا البعض. 💛"
+      titleEn: "Student Health in Canada's MENA Communities",
+      titleAr: "صحة طلاب الشرق الأوسط وشمال أفريقيا في كندا",
+      imageUrl: "/lovable-uploads/student-health-en.png",
+      instagramUrl: "https://www.instagram.com/projectshams/",
+      descriptionEn: "📚 International students are growing fast, but so are stress, pressure, and barriers. Together, we can build support that feels safe and culturally aware. Let's talk about them openly. 💬",
+      descriptionAr: "📚 حملة أكثر من مجرد حقائب: صحة طلاب الشرق الأوسط وشمال أفريقيا في كندا 💬"
     },
     {
       id: 2,
-      titleEn: "Immigration Challenges and Pressures",
-      titleAr: "تحديات وضغوط الهجرة",
-      imageUrl: "/lovable-uploads/49fec047-6117-4fbb-b092-efb298211ef8.png",
-      instagramUrl: "https://www.instagram.com/p/DOO6Ky8j_A2/",
-      descriptionEn: "📌 This week's focus: immigration stress in Arab and Middle Eastern communities in Canada. ⚖️ Balancing family expectations with a new life, and how belonging, faith, and cultural ties can help reduce stress and protect our well-being. 🤝 Together, we can understand more and support each other. 💛",
-      descriptionAr: "📌 موضوع هذا الأسبوع: ضغوط الهجرة في المجتمعات العربية والشرق أوسطية في كندا. ⚖️ موازنة توقعات الأسرة مع الحياة الجديدة، وكيف يمكن للانتماء والإيمان والروابط الثقافية أن يخفف من التوتر ويحافظ على صحتنا النفسية. 🤝 معًا نستطيع أن نفهم أكثر وندعم بعضنا البعض. 💛"
+      titleEn: "Carrying More Than Luggage",
+      titleAr: "حملة أكثر من مجرد حقائب",
+      imageUrl: "/lovable-uploads/student-health-ar.png",
+      instagramUrl: "https://www.instagram.com/projectshams/",
+      descriptionEn: "International students face unique challenges beyond academics. We're addressing the mental health needs of MENA students in Canadian universities.",
+      descriptionAr: "يواجه الطلاب الدوليون تحديات فريدة تتجاوز الأكاديميات. نحن نتناول احتياجات الصحة النفسية لطلاب الشرق الأوسط وشمال أفريقيا في الجامعات الكندية."
     }
   ];
 
