@@ -13,6 +13,12 @@ const PartnersSection = () => {
       description: "Institut Canado-Arabe",
       link: "https://www.canadianarabinstitute.org"
     },
+    {
+      name: "Mississauga Registered Community Group",
+      logo: "/lovable-uploads/mississauga-community-group.jpg",
+      description: "Supporting diverse communities in Mississauga",
+      link: "#"
+    },
   ];
 
   const clubs = [
