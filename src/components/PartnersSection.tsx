@@ -45,11 +45,11 @@ const PartnersSection = () => {
           rel="noopener noreferrer"
           className="block hover:scale-105 transition-transform duration-200"
         >
-          <div className="bg-healthLightGray rounded-full p-4 mb-4">
+          <div className="mb-4">
             <img 
               src={item.logo} 
               alt={item.name}
-              className="h-16 w-16 object-contain" 
+              className="h-24 w-24 object-contain mx-auto" 
             />
           </div>
         </a>
