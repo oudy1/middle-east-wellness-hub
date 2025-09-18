@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -120,9 +120,76 @@
     @apply text-lg text-center max-w-3xl mx-auto mb-8 text-gray-600;
   }
 
-  /* Arabic text direction */
+  /* Arabic text direction and typography */
   .rtl {
     direction: rtl;
+    text-align: right;
+  }
+  
+  .rtl .text-left {
+    text-align: right;
+  }
+  
+  .rtl .text-right {
+    text-align: left;
+  }
+  
+  .rtl .ml-auto {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  
+  .rtl .mr-auto {
+    margin-right: 0;
+    margin-left: auto;
+  }
+  
+  .rtl .flex-row {
+    flex-direction: row-reverse;
+  }
+  
+  /* Arabic typography improvements */
+  [dir="rtl"] {
+    font-family: 'Cairo', 'Noto Sans Arabic', 'Amiri', sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+  
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  [dir="rtl"] .font-arabic {
+    font-family: 'Amiri', serif;
+    line-height: 1.8;
+  }
+  
+  /* Bilingual layout support */
+  .bilingual-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .bilingual-container .english {
+    text-align: left;
+    direction: ltr;
+  }
+  
+  .bilingual-container .arabic {
+    text-align: right;
+    direction: rtl;
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+  }
+  
+  @media (max-width: 768px) {
+    .bilingual-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
   }
 
   /* Adding decorative calligraphy style elements */

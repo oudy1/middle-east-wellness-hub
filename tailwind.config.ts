@@ -111,7 +111,9 @@ export default {
         'fade-in': 'fade-in 0.5s ease-out'
 			},
       fontFamily: {
-        arabic: ['Amiri', 'serif']
+        arabic: ['Amiri', 'serif'],
+        cairo: ['Cairo', 'Noto Sans Arabic', 'sans-serif'],
+        noto: ['Noto Sans Arabic', 'sans-serif']
       },
       backgroundImage: {
         'landmarks-pattern': "url('/src/assets/landmarks-bg.png')",
