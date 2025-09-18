@@ -55,11 +55,14 @@ const Services = () => {
         {/* Hero Section - Centered */}
         <section className="bg-healthDarkBlue text-white py-12 md:py-16">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight">
-              Community Services
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight ${language === 'ar' ? 'font-cairo' : ''}`}>
+              {language === 'ar' ? 'الخدمات المجتمعية' : 'Community Services'}
             </h1>
-            <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-3xl mx-auto px-2 leading-relaxed">
-              Supporting healthcare advancement and research for Middle Eastern communities.
+            <p className={`text-lg sm:text-xl mb-6 md:mb-8 max-w-3xl mx-auto px-2 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'دعم تطوير الرعاية الصحية والبحوث للمجتمعات الشرق أوسطية.' : 
+                'Supporting healthcare advancement and research for Middle Eastern communities.'
+              }
             </p>
           </div>
         </section>
@@ -70,16 +73,19 @@ const Services = () => {
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
               <UserPlus className="h-12 w-12 text-healthTeal mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
-                Healthcare Provider
+              <h2 className={`text-2xl font-bold text-healthDarkBlue mb-4 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? 'مقدم الرعاية الصحية' : 'Healthcare Provider'}
               </h2>
-              <p className="text-gray-600 mb-6">
-                Join our network of healthcare providers dedicated to serving Middle Eastern communities.
+              <p className={`text-gray-600 mb-6 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 
+                  'انضم إلى شبكتنا من مقدمي الرعاية الصحية المتخصصين في خدمة المجتمعات الشرق أوسطية.' : 
+                  'Join our network of healthcare providers dedicated to serving Middle Eastern communities.'
+                }
               </p>
               <Link to="/physician-application">
                 <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                   <UserPlus className="h-6 w-6" />
-                  Apply to Join Network
+                  {language === 'ar' ? 'تقديم طلب للانضمام للشبكة' : 'Apply to Join Network'}
                 </Button>
               </Link>
             </div>
@@ -91,11 +97,14 @@ const Services = () => {
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
               <Users className="h-12 w-12 text-healthTeal mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-healthDarkBlue mb-4">
-                Join Our Team
+              <h2 className={`text-2xl font-bold text-healthDarkBlue mb-4 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? 'انضم إلى فريقنا' : 'Join Our Team'}
               </h2>
-              <p className="text-gray-600 mb-6">
-                Become part of our mission to improve healthcare access for Middle Eastern communities.
+              <p className={`text-gray-600 mb-6 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 
+                  'كن جزءاً من مهمتنا لتحسين الوصول إلى الرعاية الصحية للمجتمعات الشرق أوسطية.' : 
+                  'Become part of our mission to improve healthcare access for Middle Eastern communities.'
+                }
               </p>
               <a 
                 href="https://docs.google.com/forms/d/17O_p-Malu1ei9M6ItZZ85zRjEX7Pff3Kq6yuk0B89hE/edit"
@@ -104,7 +113,7 @@ const Services = () => {
               >
                 <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                   <Users className="h-6 w-6" />
-                  Apply to Join Us
+                  {language === 'ar' ? 'تقديم طلب للانضمام إلينا' : 'Apply to Join Us'}
                 </Button>
               </a>
             </div>
@@ -114,11 +123,14 @@ const Services = () => {
         {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center text-healthDarkBlue">
-              Educational Materials
+            <h2 className={`text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+              {language === 'ar' ? 'المواد التعليمية' : 'Educational Materials'}
             </h2>
-            <p className="text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed">
-              Access culturally relevant health education resources and guides.
+            <p className={`text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'الوصول إلى موارد التعليم الصحي والأدلة ذات الصلة الثقافية.' : 
+                'Access culturally relevant health education resources and guides.'
+              }
             </p>
             <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {/* Alone in Canada Guide */}
@@ -131,18 +143,31 @@ const Services = () => {
                   />
                 </div>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-healthDarkBlue text-lg leading-tight">
-                    Alone in Canada: 21 Ways to Make It Better | وحيد في كندا: ٢١ طريقة لتجعلها أفضل
+                  <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'وحيد في كندا: ٢١ طريقة لتجعلها أفضل | Alone in Canada: 21 Ways to Make It Better' : 
+                      'Alone in Canada: 21 Ways to Make It Better | وحيد في كندا: ٢١ طريقة لتجعلها أفضل'
+                    }
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    Real advice from newcomers on adapting to life in Canada. Covers making friends, cultural norms, holidays, and mental wellness tips especially useful for newcomers.
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'نصائح حقيقية من مهاجرين جدد حول التأقلم مع الحياة في كندا. يشمل بناء الصداقات وفهم الثقافة الكندية ونصائح الصحة النفسية.' : 
+                      'Real advice from newcomers on adapting to life in Canada. Covers making friends, cultural norms, holidays, and mental wellness tips especially useful for newcomers.'
+                    }
                   </p>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    نصائح حقيقية من مهاجرين جدد حول التأقلم مع الحياة في كندا. يشمل بناء الصداقات وفهم الثقافة الكندية ونصائح الصحة النفسية.
+                  {language !== 'ar' && (
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                      نصائح حقيقية من مهاجرين جدد حول التأقلم مع الحياة في كندا. يشمل بناء الصداقات وفهم الثقافة الكندية ونصائح الصحة النفسية.
+                    </p>
+                  )}
+                  <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'المصدر: CAMH – مركز الإدمان والصحة النفسية' : 
+                      'Source: CAMH – Centre for Addiction and Mental Health'
+                    }
                   </p>
-                  <p className="text-xs text-gray-500 mb-4">Source: CAMH – Centre for Addiction and Mental Health</p>
                   <a 
                     href="https://www.camh.ca/-/media/files/mi-index-other-languages/english-alone-in-canada.pdf"
                     target="_blank"
@@ -150,7 +175,7 @@ const Services = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <BookOpen className="h-4 w-4" />
-                      Download PDF
+                      {language === 'ar' ? 'تنزيل PDF' : 'Download PDF'}
                     </Button>
                   </a>
                 </CardContent>
@@ -166,18 +191,31 @@ const Services = () => {
                   />
                 </div>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-healthDarkBlue text-lg leading-tight">
-                    Arabic-English Medical Terminology Guide | دليل المصطلحات الطبية
+                  <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'دليل المصطلحات الطبية العربية-الإنجليزية | Arabic-English Medical Terminology Guide' : 
+                      'Arabic-English Medical Terminology Guide | دليل المصطلحات الطبية'
+                    }
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    Clear translations of essential medical terms from English to Arabic, helping support communication between healthcare providers and Arabic-speaking patients.
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'ترجمات واضحة للمصطلحات الطبية الأساسية من الإنجليزية إلى العربية، مما يساعد في تحسين التواصل بين مقدمي الرعاية الصحية والمرضى الناطقين بالعربية.' : 
+                      'Clear translations of essential medical terms from English to Arabic, helping support communication between healthcare providers and Arabic-speaking patients.'
+                    }
                   </p>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    ترجمات واضحة للمصطلحات الطبية الأساسية من الإنجليزية إلى العربية، مما يساعد في تحسين التواصل بين مقدمي الرعاية الصحية والمرضى الناطقين بالعربية.
+                  {language !== 'ar' && (
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                      ترجمات واضحة للمصطلحات الطبية الأساسية من الإنجليزية إلى العربية، مما يساعد في تحسين التواصل بين مقدمي الرعاية الصحية والمرضى الناطقين بالعربية.
+                    </p>
+                  )}
+                  <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'المصدر: مُقتبس بامتنان من مركز جامعة أوريغون الصحي' : 
+                      'Source: Adapted with gratitude from the University of Oregon Health Center'
+                    }
                   </p>
-                  <p className="text-xs text-gray-500 mb-4">Source: Adapted with gratitude from the University of Oregon Health Center</p>
                   <a 
                     href="https://health.uoregon.edu/sites/default/files/Translation-Arabic.pdf"
                     target="_blank"
@@ -185,15 +223,15 @@ const Services = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <BookOpen className="h-4 w-4" />
-                      Download PDF
+                      {language === 'ar' ? 'تنزيل PDF' : 'Download PDF'}
                     </Button>
                   </a>
                 </CardContent>
               </Card>
               
               {/* Placeholder for future materials */}
-              <div className="text-center text-gray-500 col-span-full py-8">
-                More materials coming soon...
+              <div className={`text-center text-gray-500 col-span-full py-8 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? 'المزيد من المواد قريباً...' : 'More materials coming soon...'}
               </div>
             </div>
           </div>
