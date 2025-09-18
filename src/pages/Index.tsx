@@ -13,7 +13,7 @@ import PartnersSection from "@/components/PartnersSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
-import ArabicTranslationSummary from "@/components/ArabicTranslationSummary";
+
 
 const Index = () => {
   return (
@@ -29,7 +29,6 @@ const Index = () => {
         <MissionSection />
         <TopicOfTheWeekSection />
         <FeaturedNewsSection />
-        <ArabicTranslationSummary />
         <MeetTeamButton />
         <ResourcesSection />
         <PartnersSection />

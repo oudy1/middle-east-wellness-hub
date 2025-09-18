@@ -50,17 +50,23 @@ const About = () => {
                 {language === 'ar' ? 'مهمتنا' : 'Our Mission'}
               </h2>
               <div className="text-base sm:text-lg leading-relaxed text-gray-700 space-y-4 md:space-y-6 px-2">
-                <p>
-                  Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.
+                <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  {language === 'ar' ? 
+                    'مهمتنا هي بناء الثقة وإزالة الحواجز وخلق مساحة مشتركة من التفاهم بين المجتمعات العربية وشرق أوسطية والنظام الصحي الكندي.' : 
+                    'Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.'
+                  }
                 </p>
-                <p className="text-right" dir="rtl">
-                  مهمتنا هي بناء الثقة وإزالة الحواجز وخلق مساحة مشتركة من التفاهم بين المجتمعات العربية وشرق أوسطية والنظام الصحي الكندي.
+                <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  {language === 'ar' ? 
+                    'نحن نركز على سد الفجوات في التعليم الطبي والمشاركة في البحث والوصول إلى الرعاية الصحية بينما ندافع عن الرعاية المتجاوبة ثقافياً والتمثيل الدقيق والحوار الشامل.' : 
+                    'We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.'
+                  }
                 </p>
-                <p>
-                  We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.
-                </p>
-                <p>
-                  Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.
+                <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  {language === 'ar' ? 
+                    'يجمع عملنا بين الطلاب والعائلات والمهنيين والباحثين لبناء مستقبل تكون فيه أصوات المجتمع في مركز العدالة الصحية.' : 
+                    'Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.'
+                  }
                 </p>
               </div>
             </div>
@@ -77,27 +83,42 @@ const About = () => {
               <Card className="text-center p-4 md:p-6">
                 <CardContent className="pt-4 md:pt-6">
                   <Users className="w-10 h-10 md:w-12 md:h-12 text-healthTeal mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">Community-Centered</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    We put community voices at the heart of everything we do, ensuring authentic representation and meaningful participation.
+                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">
+                    {language === 'ar' ? 'محوره المجتمع' : 'Community-Centered'}
+                  </h3>
+                  <p className={`text-sm md:text-base text-gray-600 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'نضع أصوات المجتمع في قلب كل ما نقوم به، مما يضمن التمثيل الأصيل والمشاركة الهادفة.' : 
+                      'We put community voices at the heart of everything we do, ensuring authentic representation and meaningful participation.'
+                    }
                   </p>
                 </CardContent>
               </Card>
               <Card className="text-center p-4 md:p-6">
                 <CardContent className="pt-4 md:pt-6">
                   <Heart className="w-10 h-10 md:w-12 md:h-12 text-healthTeal mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">Culturally Responsive</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    We advocate for healthcare that understands and respects the cultural backgrounds of Arab and Middle Eastern communities.
+                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">
+                    {language === 'ar' ? 'متجاوب ثقافياً' : 'Culturally Responsive'}
+                  </h3>
+                  <p className={`text-sm md:text-base text-gray-600 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'ندافع عن الرعاية الصحية التي تفهم وتحترم الخلفيات الثقافية للمجتمعات العربية وشرق الأوسطية.' : 
+                      'We advocate for healthcare that understands and respects the cultural backgrounds of Arab and Middle Eastern communities.'
+                    }
                   </p>
                 </CardContent>
               </Card>
               <Card className="text-center p-4 md:p-6">
                 <CardContent className="pt-4 md:pt-6">
                   <Globe className="w-10 h-10 md:w-12 md:h-12 text-healthTeal mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">Bridge Building</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                    We create connections between communities, healthcare providers, researchers, and institutions to foster understanding.
+                  <h3 className="text-lg md:text-xl font-semibold text-healthDarkBlue mb-2 md:mb-3">
+                    {language === 'ar' ? 'بناء الجسور' : 'Bridge Building'}
+                  </h3>
+                  <p className={`text-sm md:text-base text-gray-600 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'نخلق روابط بين المجتمعات ومقدمي الرعاية الصحية والباحثين والمؤسسات لتعزيز التفاهم.' : 
+                      'We create connections between communities, healthcare providers, researchers, and institutions to foster understanding.'
+                    }
                   </p>
                 </CardContent>
               </Card>
