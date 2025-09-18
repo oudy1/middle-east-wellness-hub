@@ -202,7 +202,8 @@ const HEALTHCARE_SPECIALTIES = [
   "Nutritional Counseling",
   "Fertility Nutrition and Women's Health",
   "Mental Health Counseling",
-  "Healthcare Research",
+  "Health Equity Research",
+  "Diabetes Education",
   "Emergency Medicine",
   "Clinical Pharmacy",
   "Mental Health",
@@ -298,6 +299,65 @@ const HealthcareWorkersDirectory = () => {
     setFilteredHealthcareWorkers(filtered);
   }, [searchTerm, selectedRole, selectedLanguage, healthcareWorkers]);
 
+  const getTranslatedSpecialty = (specialty: string) => {
+    if (language !== 'ar') return specialty;
+    
+    const specialtyTranslations: { [key: string]: string } = {
+      'All Specialties': 'جميع التخصصات',
+      'Psychiatry': 'الطب النفسي',
+      'Consultation/Liaison Psychiatry': 'الطب النفسي الاستشاري',
+      'Internal Medicine': 'الطب الباطني',
+      'Cardiology': 'أمراض القلب',
+      'Pediatrics': 'طب الأطفال',
+      'Family Medicine': 'طب الأسرة',
+      'Dermatology': 'الأمراض الجلدية',
+      'Neurology': 'طب الأعصاب',
+      'Orthopedic Surgery': 'جراحة العظام',
+      'Obstetrics & Gynecology': 'النساء والتوليد'
+    };
+    
+    return specialtyTranslations[specialty] || specialty;
+  };
+
+  const getTranslatedRole = (role: string) => {
+    if (language !== 'ar') return role;
+    
+    const roleTranslations: { [key: string]: string } = {
+      'All Roles': 'جميع الأدوار',
+      'Registered Dietitian': 'اختصاصي تغذية معتمد',
+      'Registered Psychotherapist': 'معالج نفسي معتمد',
+      'Researcher': 'باحث',
+      'Registered Nurse': 'ممرض معتمد',
+      'Pharmacist': 'صيدلي',
+      'Social Worker': 'أخصائي اجتماعي',
+      'Physical Therapist': 'أخصائي علاج طبيعي',
+      'Psychologist': 'عالم نفس',
+      'Occupational Therapist': 'أخصائي علاج وظيفي'
+    };
+    
+    return roleTranslations[role] || role;
+  };
+
+  const getTranslatedSpecialtyDetail = (specialty: string) => {
+    if (language !== 'ar') return specialty;
+    
+    const specialtyDetailTranslations: { [key: string]: string } = {
+      'All Specialties': 'جميع التخصصات',
+      'Nutritional Counseling': 'الاستشارة الغذائية',
+      'Fertility Nutrition and Women\'s Health': 'تغذية الخصوبة وصحة المرأة',
+      'Mental Health Counseling': 'الاستشارة النفسية',
+      'Health Equity Research': 'بحوث العدالة الصحية',
+      'Diabetes Education': 'تعليم مرض السكري',
+      'Emergency Medicine': 'طب الطوارئ',
+      'Clinical Pharmacy': 'الصيدلة السريرية',
+      'Mental Health': 'الصحة النفسية',
+      'Orthopedic Rehabilitation': 'إعادة التأهيل العظمي',
+      'Clinical Psychology': 'علم النفس السريري'
+    };
+    
+    return specialtyDetailTranslations[specialty] || specialty;
+  };
+
   const PhysicianCard = ({ physician }: { physician: Physician }) => (
     <Card 
       className={`cursor-pointer hover:shadow-lg transition-all duration-200 ${
@@ -308,12 +368,16 @@ const HealthcareWorkersDirectory = () => {
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h3 className="text-xl font-bold text-healthDarkBlue">
+            <h3 className={`text-xl font-bold text-healthDarkBlue ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {physician.title} {physician.firstName} {physician.lastName}
             </h3>
-            <p className="text-healthTeal font-medium">{physician.specialty}</p>
+            <p className={`text-healthTeal font-medium ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {getTranslatedSpecialty(physician.specialty)}
+            </p>
             {physician.subspecialty && (
-              <p className="text-sm text-gray-600">{physician.subspecialty}</p>
+              <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {getTranslatedSpecialty(physician.subspecialty)}
+              </p>
             )}
           </div>
         </div>
@@ -423,11 +487,15 @@ const HealthcareWorkersDirectory = () => {
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-healthDarkBlue">
+            <h3 className={`text-xl font-bold text-healthDarkBlue ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {worker.firstName} {worker.lastName}
             </h3>
-            <p className="text-healthTeal font-medium">{worker.role}</p>
-            <p className="text-sm text-gray-600">{worker.specialty}</p>
+            <p className={`text-healthTeal font-medium ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {getTranslatedRole(worker.role)}
+            </p>
+            <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {getTranslatedSpecialtyDetail(worker.specialty)}
+            </p>
           </div>
           {worker.profilePhoto && (
             <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center ml-4">
@@ -568,17 +636,7 @@ const HealthcareWorkersDirectory = () => {
                     <SelectContent>
                       {SPECIALTIES.map(specialty => (
                         <SelectItem key={specialty} value={specialty}>
-                          {language === 'ar' && specialty === 'All Specialties' ? 'جميع التخصصات' : 
-                           language === 'ar' && specialty === 'Psychiatry' ? 'الطب النفسي' :
-                           language === 'ar' && specialty === 'Internal Medicine' ? 'الطب الباطني' :
-                           language === 'ar' && specialty === 'Cardiology' ? 'أمراض القلب' :
-                           language === 'ar' && specialty === 'Pediatrics' ? 'طب الأطفال' :
-                           language === 'ar' && specialty === 'Family Medicine' ? 'طب الأسرة' :
-                           language === 'ar' && specialty === 'Dermatology' ? 'الأمراض الجلدية' :
-                           language === 'ar' && specialty === 'Neurology' ? 'طب الأعصاب' :
-                           language === 'ar' && specialty === 'Orthopedic Surgery' ? 'جراحة العظام' :
-                           language === 'ar' && specialty === 'Obstetrics & Gynecology' ? 'النساء والتوليد' :
-                           specialty}
+                          {getTranslatedSpecialty(specialty)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -591,17 +649,7 @@ const HealthcareWorkersDirectory = () => {
                     <SelectContent>
                       {HEALTHCARE_ROLES.map(role => (
                         <SelectItem key={role} value={role}>
-                          {language === 'ar' && role === 'All Roles' ? 'جميع الأدوار' :
-                           language === 'ar' && role === 'Registered Dietitian' ? 'اختصاصي تغذية معتمد' :
-                           language === 'ar' && role === 'Registered Psychotherapist' ? 'معالج نفسي معتمد' :
-                           language === 'ar' && role === 'Researcher' ? 'باحث' :
-                           language === 'ar' && role === 'Registered Nurse' ? 'ممرض معتمد' :
-                           language === 'ar' && role === 'Pharmacist' ? 'صيدلي' :
-                           language === 'ar' && role === 'Social Worker' ? 'أخصائي اجتماعي' :
-                           language === 'ar' && role === 'Physical Therapist' ? 'أخصائي علاج طبيعي' :
-                           language === 'ar' && role === 'Psychologist' ? 'عالم نفس' :
-                           language === 'ar' && role === 'Occupational Therapist' ? 'أخصائي علاج وظيفي' :
-                           role}
+                          {getTranslatedRole(role)}
                         </SelectItem>
                       ))}
                     </SelectContent>
