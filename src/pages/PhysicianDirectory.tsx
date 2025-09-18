@@ -351,7 +351,7 @@ const HealthcareWorkersDirectory = () => {
             {physician.yearsInPractice > 0 && (
               <div className="flex items-center text-sm">
                 <Stethoscope className="h-4 w-4 text-healthTeal mr-2" />
-                <span>{physician.yearsInPractice} years experience</span>
+                <span>{language === 'ar' ? `${physician.yearsInPractice} سنوات خبرة` : `${physician.yearsInPractice} years experience`}</span>
               </div>
             )}
             {physician.academicTitles && physician.academicTitles.length > 0 && (
@@ -365,7 +365,9 @@ const HealthcareWorkersDirectory = () => {
 
         <div className="space-y-3">
           <div>
-            <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">Languages:</h5>
+            <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 'اللغات:' : 'Languages:'}
+            </h5>
             <div className="flex flex-wrap gap-1">
               {physician.languages.map((lang) => (
                 <Badge key={lang} variant="outline" className="text-xs">
@@ -376,7 +378,9 @@ const HealthcareWorkersDirectory = () => {
           </div>
 
           <div>
-            <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">Affiliated Hospitals:</h5>
+            <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 'المستشفيات المنتسبة:' : 'Affiliated Hospitals:'}
+            </h5>
             <div className="flex flex-wrap gap-1">
               {physician.affiliatedHospitals.map((hospital) => (
                 <Badge key={hospital} variant="secondary" className="text-xs">
@@ -390,7 +394,9 @@ const HealthcareWorkersDirectory = () => {
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="space-y-3">
                 <div>
-                  <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">Credentials:</h5>
+                  <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'المؤهلات:' : 'Credentials:'}
+                  </h5>
                   <div className="flex flex-wrap gap-1">
                     {physician.credentials.map((credential) => (
                       <Badge key={credential} className="text-xs bg-healthTeal">
@@ -460,20 +466,22 @@ const HealthcareWorkersDirectory = () => {
             <div className="flex items-center text-sm">
               <ExternalLink className="h-4 w-4 text-healthTeal mr-2" />
               <a href={worker.contact.website} target="_blank" rel="noopener noreferrer" className="text-healthTeal hover:underline">
-                Website
+                {language === 'ar' ? 'الموقع الإلكتروني' : 'Website'}
               </a>
             </div>
           )}
 
           <div className="flex items-center text-sm">
             <Heart className="h-4 w-4 text-healthTeal mr-2" />
-            <span>{worker.experience} years experience</span>
+            <span>{language === 'ar' ? `${worker.experience} سنوات خبرة` : `${worker.experience} years experience`}</span>
           </div>
         </div>
 
         <div className="space-y-3 mt-4">
           <div>
-            <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">Languages:</h5>
+            <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 'اللغات:' : 'Languages:'}
+            </h5>
             <div className="flex flex-wrap gap-1">
               {worker.languages.map((lang) => (
                 <Badge key={lang} variant="outline" className="text-xs">
@@ -484,7 +492,9 @@ const HealthcareWorkersDirectory = () => {
           </div>
 
           <div>
-            <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">Credentials:</h5>
+            <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 'المؤهلات:' : 'Credentials:'}
+            </h5>
             <div className="flex flex-wrap gap-1">
               {worker.credentials.map((credential) => (
                 <Badge key={credential} className="text-xs bg-healthTeal">
@@ -496,7 +506,9 @@ const HealthcareWorkersDirectory = () => {
 
           {selectedWorker === worker.id && worker.description && (
             <div className="mt-4 pt-4 border-t border-gray-200">
-              <h5 className="font-semibold text-sm text-healthDarkBlue mb-2">About:</h5>
+              <h5 className={`font-semibold text-sm text-healthDarkBlue mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 'نبذة عن:' : 'About:'}
+              </h5>
               <p className="text-sm text-gray-600">{worker.description}</p>
             </div>
           )}
@@ -511,12 +523,14 @@ const HealthcareWorkersDirectory = () => {
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-healthDarkBlue">
-              Find Healthcare Workers
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+              {language === 'ar' ? 'العثور على العاملين في الرعاية الصحية' : 'Find Healthcare Workers'}
             </h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Find qualified healthcare providers who understand your cultural background and speak your language. 
-              Our comprehensive directory includes physicians and other healthcare professionals with detailed information about their expertise, credentials, and availability.
+            <p className={`text-lg text-gray-600 max-w-3xl mx-auto ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'العثور على مقدمي الرعاية الصحية المؤهلين الذين يفهمون خلفيتك الثقافية ويتحدثون لغتك. يشمل دليلنا الشامل الأطباء وغيرهم من المهنيين الصحيين مع معلومات تفصيلية حول خبراتهم ومؤهلاتهم وتوفرهم.' : 
+                'Find qualified healthcare providers who understand your cultural background and speak your language. Our comprehensive directory includes physicians and other healthcare professionals with detailed information about their expertise, credentials, and availability.'
+              }
             </p>
           </div>
 
@@ -524,11 +538,11 @@ const HealthcareWorkersDirectory = () => {
             <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="physicians" className="flex items-center gap-2">
                 <Stethoscope className="h-4 w-4" />
-                Physicians
+                {language === 'ar' ? 'الأطباء' : 'Physicians'}
               </TabsTrigger>
               <TabsTrigger value="healthcare-workers" className="flex items-center gap-2">
                 <Heart className="h-4 w-4" />
-                Professional Health Workers
+                {language === 'ar' ? 'العاملين الصحيين المحترفين' : 'Professional Health Workers'}
               </TabsTrigger>
             </TabsList>
 
@@ -538,10 +552,11 @@ const HealthcareWorkersDirectory = () => {
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
-                    placeholder="Search by name, specialty, or language..."
+                    placeholder={language === 'ar' ? 'البحث بالاسم أو التخصص أو اللغة...' : 'Search by name, specialty, or language...'}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10"
+                    dir={language === 'ar' ? 'rtl' : 'ltr'}
                   />
                 </div>
                 
@@ -553,7 +568,17 @@ const HealthcareWorkersDirectory = () => {
                     <SelectContent>
                       {SPECIALTIES.map(specialty => (
                         <SelectItem key={specialty} value={specialty}>
-                          {specialty}
+                          {language === 'ar' && specialty === 'All Specialties' ? 'جميع التخصصات' : 
+                           language === 'ar' && specialty === 'Psychiatry' ? 'الطب النفسي' :
+                           language === 'ar' && specialty === 'Internal Medicine' ? 'الطب الباطني' :
+                           language === 'ar' && specialty === 'Cardiology' ? 'أمراض القلب' :
+                           language === 'ar' && specialty === 'Pediatrics' ? 'طب الأطفال' :
+                           language === 'ar' && specialty === 'Family Medicine' ? 'طب الأسرة' :
+                           language === 'ar' && specialty === 'Dermatology' ? 'الأمراض الجلدية' :
+                           language === 'ar' && specialty === 'Neurology' ? 'طب الأعصاب' :
+                           language === 'ar' && specialty === 'Orthopedic Surgery' ? 'جراحة العظام' :
+                           language === 'ar' && specialty === 'Obstetrics & Gynecology' ? 'النساء والتوليد' :
+                           specialty}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -566,7 +591,17 @@ const HealthcareWorkersDirectory = () => {
                     <SelectContent>
                       {HEALTHCARE_ROLES.map(role => (
                         <SelectItem key={role} value={role}>
-                          {role}
+                          {language === 'ar' && role === 'All Roles' ? 'جميع الأدوار' :
+                           language === 'ar' && role === 'Registered Dietitian' ? 'اختصاصي تغذية معتمد' :
+                           language === 'ar' && role === 'Registered Psychotherapist' ? 'معالج نفسي معتمد' :
+                           language === 'ar' && role === 'Researcher' ? 'باحث' :
+                           language === 'ar' && role === 'Registered Nurse' ? 'ممرض معتمد' :
+                           language === 'ar' && role === 'Pharmacist' ? 'صيدلي' :
+                           language === 'ar' && role === 'Social Worker' ? 'أخصائي اجتماعي' :
+                           language === 'ar' && role === 'Physical Therapist' ? 'أخصائي علاج طبيعي' :
+                           language === 'ar' && role === 'Psychologist' ? 'عالم نفس' :
+                           language === 'ar' && role === 'Occupational Therapist' ? 'أخصائي علاج وظيفي' :
+                           role}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -578,24 +613,29 @@ const HealthcareWorkersDirectory = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {LANGUAGES.map(language => (
-                      <SelectItem key={language} value={language}>
-                        {language}
+                    {LANGUAGES.map(lang => (
+                      <SelectItem key={lang} value={lang}>
+                        {lang === 'All Languages' && language === 'ar' ? 'جميع اللغات' :
+                         lang === 'Arabic' && language === 'ar' ? 'العربية' :
+                         lang === 'English' && language === 'ar' ? 'الإنجليزية' :
+                         lang}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="mt-4 flex items-center justify-between">
-                <p className="text-sm text-gray-600">
+                <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                   {activeTab === "physicians" 
-                    ? `Showing ${filteredPhysicians.length} physician(s)`
-                    : `Showing ${filteredHealthcareWorkers.length} healthcare worker(s)`
+                    ? (language === 'ar' ? `عرض ${filteredPhysicians.length} طبيب` : `Showing ${filteredPhysicians.length} physician(s)`)
+                    : (language === 'ar' ? `عرض ${filteredHealthcareWorkers.length} عامل رعاية صحية` : `Showing ${filteredHealthcareWorkers.length} healthcare worker(s)`)
                   }
                 </p>
                 <div className="flex items-center gap-2">
                   <Filter className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-600">Filter results</span>
+                  <span className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'تصفية النتائج' : 'Filter results'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -610,8 +650,12 @@ const HealthcareWorkersDirectory = () => {
               {filteredPhysicians.length === 0 && (
                 <div className="text-center py-12">
                   <Stethoscope className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-500 mb-2">No physicians found</h3>
-                  <p className="text-gray-400">Try adjusting your search criteria or filters.</p>
+                  <h3 className={`text-xl font-semibold text-gray-500 mb-2 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                    {language === 'ar' ? 'لم يتم العثور على أطباء' : 'No physicians found'}
+                  </h3>
+                  <p className={`text-gray-400 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'حاول تعديل معايير البحث أو المرشحات.' : 'Try adjusting your search criteria or filters.'}
+                  </p>
                 </div>
               )}
             </TabsContent>
@@ -626,8 +670,12 @@ const HealthcareWorkersDirectory = () => {
               {filteredHealthcareWorkers.length === 0 && (
                 <div className="text-center py-12">
                   <Heart className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-500 mb-2">No healthcare workers found</h3>
-                  <p className="text-gray-400">Try adjusting your search criteria or filters.</p>
+                  <h3 className={`text-xl font-semibold text-gray-500 mb-2 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                    {language === 'ar' ? 'لم يتم العثور على عاملي رعاية صحية' : 'No healthcare workers found'}
+                  </h3>
+                  <p className={`text-gray-400 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'حاول تعديل معايير البحث أو المرشحات.' : 'Try adjusting your search criteria or filters.'}
+                  </p>
                 </div>
               )}
             </TabsContent>
