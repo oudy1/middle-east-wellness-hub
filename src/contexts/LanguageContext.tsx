@@ -266,11 +266,11 @@ const translations = {
     tr: "Orta Doğu Sağlık Hizmetlerini Geliştirme"
   },
   "hero.subtitle": {
-    en: "Our mission is to improve healthcare access, research, and outcomes for communities across the Middle East through innovative solutions and education.",
-    ar: "مهمتنا هي تحسين الوصول إلى الرعاية الصحية والبحث والنتائج للمجتمعات في جميع أنحاء الشرق الأوسط من خلال الحلول المبتكرة والتعليم.",
-    ku: "ئامانجمان باشترکردنی دەستگەیشتن بە چاودێری تەندروستی، توێژینەوە و ئەنجامەکانە بۆ کۆمەڵگاکانی ناوەڕاست لە ڕێگای چارەسەری داهێنەرانە و پەروەردەوە.",
-    fa: "مأموریت ما بهبود دسترسی به مراقبت های بهداشتی، تحقیقات و نتایج برای جوامع سراسر خاورمیانه از طریق راه حل های نوآورانه و آموزش است.",
-    tr: "Misyonumuz, yenilikçi çözümler ve eğitim yoluyla Orta Doğu'daki topluluklar için sağlık hizmetlerine erişimi, araştırmayı ve sonuçları iyileştirmektir."
+    en: "Our mission is to improve healthcare access, research, and outcomes for Middle Eastern communities in Canada through innovative solutions and education.",
+    ar: "مهمتنا هي تحسين الوصول إلى الرعاية الصحية والبحث والنتائج للمجتمعات الشرق أوسطية في كندا من خلال الحلول المبتكرة والتعليم.",
+    ku: "ئامانجمان باشترکردنی دەستگەیشتن بە چاودێری تەندروستی، توێژینەوە و ئەنجامەکانە بۆ کۆمەڵگاکانی ناوەڕاست لە کەنەدا لە ڕێگای چارەسەری داهێنەرانە و پەروەردەوە.",
+    fa: "مأموریت ما بهبود دسترسی به مراقبت های بهداشتی، تحقیقات و نتایج برای جوامع خاورمیانه ای در کانادا از طریق راه حل های نوآورانه و آموزش است.",
+    tr: "Misyonumuz, yenilikçi çözümler ve eğitim yoluyla Kanada'daki Orta Doğu toplulukları için sağlık hizmetlerine erişimi, araştırmayı ve sonuçları iyileştirmektir."
   },
   "hero.learnMore": {
     en: "Learn About Our Mission",

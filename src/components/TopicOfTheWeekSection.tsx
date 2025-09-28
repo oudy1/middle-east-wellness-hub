@@ -10,21 +10,21 @@ const TopicOfTheWeekSection = () => {
   const weeklyTopics = [
     {
       id: 1,
-      titleEn: "Student Health in Canada's MENA Communities",
-      titleAr: "صحة طلاب الشرق الأوسط وشمال أفريقيا في كندا",
-      imageUrl: "/lovable-uploads/student-health-en.png",
+      titleEn: "Alzheimer's Awareness Week",
+      titleAr: "أسبوع التوعية بمرض الزهايمر",
+      imageUrl: "/lovable-uploads/alzheimer-awareness-en.png",
       instagramUrl: "https://www.instagram.com/projectshams/",
-      descriptionEn: "📚 International students are growing fast, but so are stress, pressure, and barriers. Together, we can build support that feels safe and culturally aware. Let's talk about them openly. 💬",
-      descriptionAr: "📚 حملة أكثر من مجرد حقائب: صحة طلاب الشرق الأوسط وشمال أفريقيا في كندا 💬"
+      descriptionEn: "This week is Alzheimer's Awareness Week. My grandfather's story reminds me that dementia isn't just 'old age' it's a disease that shakes entire families. In Canada, over 477,000 people are living with dementia. Yet there are no clear stats for Arab Canadians our community remains invisible in the data. 🌿 This week, let's break the silence: • Speak openly about #Dementia and #Alzheimers. • Push for culturally safe care and Arabic-language resources. • Support families carrying the heavy burden alone",
+      descriptionAr: "هذا الأسبوع هو أسبوع التوعية بمرض الزهايمر. قصة جدي علّمتني أن الخرف ليس مجرد \"كبر سن\" بل مرض يهز العائلة كلها. في كندا، أكثر من 477 ألف شخص يعيشون مع الخرف — لكن لا توجد إحصائيات دقيقة تخص الجالية العربية. هذا الصمت يجعلنا غير مرئيين. 🌿 خلال هذا الأسبوع، دعونا نكسر الصمت: • نتكلم عن #الخرف و #الزهايمر بلا خوف. • نطالب برعاية آمنة ثقافيًا وموارد باللغة العربية. • ندعم العائلات التي تتحمل العبء وحدها"
     },
     {
       id: 2,
-      titleEn: "Carrying More Than Luggage",
-      titleAr: "حملة أكثر من مجرد حقائب",
-      imageUrl: "/lovable-uploads/student-health-ar.png",
+      titleEn: "My Gedo's Story",
+      titleAr: "قصة جدي",
+      imageUrl: "/lovable-uploads/alzheimer-awareness-ar.png",
       instagramUrl: "https://www.instagram.com/projectshams/",
-      descriptionEn: "International students face unique challenges beyond academics. We're addressing the mental health needs of MENA students in Canadian universities.",
-      descriptionAr: "يواجه الطلاب الدوليون تحديات فريدة تتجاوز الأكاديميات. نحن نتناول احتياجات الصحة النفسية لطلاب الشرق الأوسط وشمال أفريقيا في الجامعات الكندية."
+      descriptionEn: "My grandfather was one of the most influential people in my life. Growing up in Egypt, he helped raise me and was deeply respected in our community. He even built a mosque under his home so that people could access prayer easily. Everyone spoke highly of him, and I was proud to be his grandson. After moving to Canada, visits became less frequent. Following his retirement, he spent more time at home and slowly dementia began to take hold. Each summer when we visited, I noticed his memory fading.",
+      descriptionAr: "كان جدي واحداً من أهم الأشخاص في حياتي. كبرت وأنا بجانبه في مصر، وكان له دور كبير في تربيتي. كان رجلاً محترماً يعرفه الجميع في منطقتنا. حتى أنه بنى مسجداً أسفل بيته ليكون مكاناً يسهل على الناس الوصول إليه للصلاة. كان الناس دائماً يتحدثون عنه بالخير، وكنت أري دائماً أنني أوسول انتقلنا إلى كندا، أصبح التواصل أصعب وزياراتنا أقل. وبعد تقاعده، قضى وقتاً أطول في البيت، ومع مرور الوقت بدأت أعراض الزهايمر تطور عليه. كل صيف كنا نزوره، كنت ألري دائماً فيشيء يقيسنا."
     }
   ];
 
