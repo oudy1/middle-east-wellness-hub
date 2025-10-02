@@ -92,6 +92,28 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     telehealthAvailable: false,
     accepting: true,
     credentials: ["MSc", "MD", "FRCPC", "DABSM", "DABPN", "DFAPA", "DFCPA", "Diplomate American Board of Psychiatry and Neurology", "Diplomate American Board of Sleep Medicine"]
+  },
+  {
+    id: 7,
+    title: "Dr.",
+    firstName: "Albiruni",
+    lastName: "Abdul Razak",
+    gender: "Male",
+    languages: ["English", "Malay"],
+    specialty: "Internal Medicine",
+    subspecialty: "Hematology Oncology",
+    yearsInPractice: 0,
+    affiliatedHospitals: ["Princess Margaret Cancer Centre", "Sinai Health"],
+    academicTitles: ["Assistant Professor"],
+    clinicName: "Princess Margaret Cancer Centre",
+    address: "Toronto, Ontario Canada",
+    coordinates: [-79.3902, 43.6596] as [number, number],
+    phone: "",
+    email: "albiruni.razak@uhn.ca",
+    officeHours: "By Appointment",
+    telehealthAvailable: false,
+    accepting: true,
+    credentials: ["MD", "Assistant Professor at University of Toronto", "Staff Medical Oncologist - Phase 1 Clinical Trials and Sarcoma", "Lead - Medical Oncology Sarcoma Program"]
   }
 ];
 
