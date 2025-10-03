@@ -39,6 +39,12 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/myom-logo.png",
       description: "Moroccan Youth of Montreal",
       link: "#"
+    },
+    {
+      name: "CASA",
+      logo: "/lovable-uploads/casa-logo.png",
+      description: "Christian Arab Student Association - University of Alberta",
+      link: "#"
     }
   ];
 
