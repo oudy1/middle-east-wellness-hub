@@ -115,8 +115,200 @@ const Resources = () => {
               </p>
             </div>
 
-            <div className="text-center py-12">
-              <Search className="h-16 w-16 text-healthTeal mx-auto mb-4" />
+            {/* SHAMS Research Opportunity - Canadian Dream Deferred */}
+            <div className="mb-12">
+              <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
+                <div className="bg-gradient-to-r from-healthTeal to-healthPurple p-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white text-center">
+                    {language === 'ar' ? 'الحلم الكندي المؤجل' : 'The Canadian Dream Deferred'}
+                  </h3>
+                  <p className="text-white/90 text-center mt-2">
+                    {language === 'ar' 
+                      ? 'كيف يفهم الكنديون من أصول مصرية مرحلة النضج ويحققونها'
+                      : 'How Egyptian Canadians Understand and Achieve Adulthood'}
+                  </p>
+                </div>
+                
+                <CardContent className="p-6 md:p-8">
+                  {/* Flyer Image */}
+                  <div className="mb-6">
+                    <img 
+                      src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                      alt={language === 'ar' ? 'ملصق دراسة الحلم الكندي المؤجل' : 'Canadian Dream Deferred Study Flyer'}
+                      className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+                    />
+                  </div>
+
+                  {/* Study Description */}
+                  <div className={`mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    {language === 'ar' ? (
+                      <>
+                        <p className="text-gray-700 mb-4 leading-relaxed">
+                          دراسة من جامعة تورنتو بقيادة الدكتورة رانيا سالم والدكتورة أمينة فيدان الشويغلو تبحث في كيفية فهم الكنديين من أصول مصرية لمرحلة النضج وكيف يعيشونها في ظل التحديات الاقتصادية والثقافية والعوائق المؤسسية.
+                        </p>
+                        <p className="text-healthTeal font-semibold mb-4">
+                          مشروع شمس يشارك في دعم عملية التوظيف والمساعدة في الوصول إلى المشاركين.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-gray-700 mb-4 leading-relaxed">
+                          This University of Toronto study, led by Dr. Rania Salem and Dr. Emine Fidan Elcioglu, explores how Egyptian Canadians in the Greater Toronto Area experience and define adulthood in the face of economic pressures, cultural change, and systemic barriers.
+                        </p>
+                        <p className="text-healthTeal font-semibold mb-4">
+                          SHAMS is co-piloting recruitment for this study, helping connect interested participants with the research team.
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Participant Groups */}
+                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    {/* Group 1 */}
+                    <Card className="border-2 border-healthTeal">
+                      <CardHeader className="bg-healthTeal/10">
+                        <CardTitle className={`text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {language === 'ar' 
+                            ? 'المجموعة الأولى: الجيل 1.5 من الكنديين المصريين'
+                            : 'Group 1: 1.5-Generation Egyptian Canadians'}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <ul className={`space-y-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {language === 'ar' ? (
+                            <>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>مولود في مصر</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>انتقل إلى كندا بين سن 5 و 15</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>18 سنة أو أكبر حالياً</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>مواطن كندي أو مقيم دائم</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>يعيش في منطقة تورنتو الكبرى</span>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>Born in Egypt</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>Moved to Canada between ages 5–15</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>Currently 18 years of age or older</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>Canadian citizen or permanent resident</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthTeal">✅</span>
+                                <span>Living in the Greater Toronto Area</span>
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    {/* Group 2 */}
+                    <Card className="border-2 border-healthPurple">
+                      <CardHeader className="bg-healthPurple/10">
+                        <CardTitle className={`text-lg ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {language === 'ar' 
+                            ? 'المجموعة الثانية: الآباء المهاجرون من الجيل الأول'
+                            : 'Group 2: First-Generation Immigrant Parents'}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <ul className={`space-y-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {language === 'ar' ? (
+                            <>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>ربيت طفلاً واحداً على الأقل</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>الطفل مولود في مصر</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>هاجر إلى كندا بين سن 5 و 15 (جيل 1.5)</span>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>Raised at least one child</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>Child was born in Egypt</span>
+                              </li>
+                              <li className="flex items-start gap-2">
+                                <span className="text-healthPurple">✅</span>
+                                <span>Immigrated to Canada between ages 5–15 (1.5 generation)</span>
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Call to Action */}
+                  <div className="text-center space-y-4">
+                    <a 
+                      href="https://dreamdeferred-egyptian-canadian.weebly.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white text-lg px-8 py-6">
+                        <ExternalLink className="h-5 w-5 mr-2" />
+                        {language === 'ar' 
+                          ? 'للمزيد من المعلومات أو للمشاركة'
+                          : 'Learn More or Participate'}
+                      </Button>
+                    </a>
+                    <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar' 
+                        ? 'للاستفسار: canadiandreamdeferred@gmail.com'
+                        : 'For inquiries: canadiandreamdeferred@gmail.com'}
+                    </p>
+                  </div>
+
+                  {/* SHAMS Partnership Note */}
+                  <div className="mt-6 p-4 bg-healthLightGray rounded-lg">
+                    <p className={`text-sm text-gray-700 italic ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar'
+                        ? 'شمس تدعم عملية التوظيف لهذه الدراسة بالشراكة مع جامعة تورنتو.'
+                        : 'SHAMS is supporting recruitment for this study in partnership with the University of Toronto.'}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center py-8">
+              <Search className="h-12 w-12 text-healthTeal mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">{t("resources.opportunitiesComingSoon")}</h3>
               <p className="text-gray-600 mb-6">{t("resources.opportunitiesDescription")}</p>
             </div>
