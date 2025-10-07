@@ -13,6 +13,7 @@ import PartnersSection from "@/components/PartnersSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
+import ResearchTeaserSection from "@/components/ResearchTeaserSection";
 
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
         <UpcomingEventsSection />
         <MissionSection />
         <TopicOfTheWeekSection />
+        <ResearchTeaserSection />
         <FeaturedNewsSection />
         <MeetTeamButton />
         <ResourcesSection />
