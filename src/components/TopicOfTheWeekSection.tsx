@@ -1,109 +1,103 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Instagram, ExternalLink } from "lucide-react";
+import { Instagram, ExternalLink, Heart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
+import breastCancerImage from "@/assets/breast-cancer-awareness.png";
 
 const TopicOfTheWeekSection = () => {
   const { t, language } = useLanguage();
 
-  // Latest Instagram posts data
-  const weeklyTopics = [
-    {
-      id: 1,
-      titleEn: "Alzheimer's Awareness Week",
-      titleAr: "أسبوع التوعية بمرض الزهايمر",
-      imageUrl: "/lovable-uploads/alzheimer-awareness-en.png",
-      instagramUrl: "https://www.instagram.com/projectshams/",
-      descriptionEn: "This week is Alzheimer's Awareness Week. My grandfather's story reminds me that dementia isn't just 'old age' it's a disease that shakes entire families. In Canada, over 477,000 people are living with dementia. Yet there are no clear stats for Arab Canadians our community remains invisible in the data. 🌿 This week, let's break the silence: • Speak openly about #Dementia and #Alzheimers. • Push for culturally safe care and Arabic-language resources. • Support families carrying the heavy burden alone",
-      descriptionAr: "هذا الأسبوع هو أسبوع التوعية بمرض الزهايمر. قصة جدي علّمتني أن الخرف ليس مجرد \"كبر سن\" بل مرض يهز العائلة كلها. في كندا، أكثر من 477 ألف شخص يعيشون مع الخرف — لكن لا توجد إحصائيات دقيقة تخص الجالية العربية. هذا الصمت يجعلنا غير مرئيين. 🌿 خلال هذا الأسبوع، دعونا نكسر الصمت: • نتكلم عن #الخرف و #الزهايمر بلا خوف. • نطالب برعاية آمنة ثقافيًا وموارد باللغة العربية. • ندعم العائلات التي تتحمل العبء وحدها"
-    },
-    {
-      id: 2,
-      titleEn: "My Gedo's Story",
-      titleAr: "قصة جدي",
-      imageUrl: "/lovable-uploads/alzheimer-awareness-ar.png",
-      instagramUrl: "https://www.instagram.com/projectshams/",
-      descriptionEn: "My grandfather was one of the most influential people in my life. Growing up in Egypt, he helped raise me and was deeply respected in our community. He even built a mosque under his home so that people could access prayer easily. Everyone spoke highly of him, and I was proud to be his grandson. After moving to Canada, visits became less frequent. Following his retirement, he spent more time at home and slowly dementia began to take hold. Each summer when we visited, I noticed his memory fading.",
-      descriptionAr: "كان جدي واحداً من أهم الأشخاص في حياتي. كبرت وأنا بجانبه في مصر، وكان له دور كبير في تربيتي. كان رجلاً محترماً يعرفه الجميع في منطقتنا. حتى أنه بنى مسجداً أسفل بيته ليكون مكاناً يسهل على الناس الوصول إليه للصلاة. كان الناس دائماً يتحدثون عنه بالخير، وكنت أري دائماً أنني أوسول انتقلنا إلى كندا، أصبح التواصل أصعب وزياراتنا أقل. وبعد تقاعده، قضى وقتاً أطول في البيت، ومع مرور الوقت بدأت أعراض الزهايمر تطور عليه. كل صيف كنا نزوره، كنت ألري دائماً فيشيء يقيسنا."
-    }
-  ];
+  // Breast Cancer Awareness Month Feature
+  const weeklyTopic = {
+    titleEn: "Breast Cancer Awareness Month",
+    titleAr: "شهر التوعية بسرطان الثدي",
+    imageUrl: breastCancerImage,
+    descriptionEn: "October is Breast Cancer Awareness Month — a time to share reliable information, encourage early screening, and support those affected in our community. SHAMS now offers free Arabic educational booklets on prevention, early testing, and post-diagnosis care. Visit our Health Resources section below to download these materials directly and share them with your loved ones.",
+    descriptionAr: "شهر أكتوبر هو شهر التوعية بسرطان الثدي — فرصة لنشر المعلومات الموثوقة، وتشجيع الفحص المبكر، ودعم كل من تأثر بهذه التجربة في مجتمعنا. يقدم مشروع شمس الآن كتيبات توعوية مجانية باللغة العربية حول الوقاية، والفحوصات المبكرة، والعناية بعد التشخيص. يمكنك زيارة قسم الموارد الصحية في الأسفل لتحميل الكتيبات ومشاركتها مع من تحب.",
+    collaborationEn: "In collaboration with the American Cancer Society and the Nova Scotia Breast Screening Program.",
+    collaborationAr: "بالتعاون مع الجمعية الأمريكية للسرطان وبرنامج نوفا سكوشا للكشف المبكر عن الثدي."
+  };
 
   return (
     <section className="py-16 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
-        {/* Header */}
+        {/* Header with Pink Ribbon Icon */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            {language === 'ar' ? 'موضوع الأسبوع' : 'Topic of the Week'}
-          </h2>
-          <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Heart className="w-8 h-8 text-pink-500 fill-pink-500" />
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              {language === 'ar' ? 'موضوع الأسبوع: شهر التوعية بسرطان الثدي' : 'Weekly Topic: Breast Cancer Awareness Month'}
+            </h2>
+            <Heart className="w-8 h-8 text-pink-500 fill-pink-500" />
+          </div>
+        </div>
+
+        {/* Featured Topic Card with Pink Accent */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="overflow-hidden border-2 border-pink-200 bg-gradient-to-br from-pink-50/50 to-white">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Image Section */}
+              <div className="relative">
+                <img 
+                  src={weeklyTopic.imageUrl} 
+                  alt={language === 'ar' ? weeklyTopic.titleAr : weeklyTopic.titleEn}
+                  className="w-full h-full object-cover min-h-[300px]"
+                />
+                <div className="absolute top-4 right-4">
+                  <div className="bg-pink-500 text-white rounded-full px-4 py-2 font-semibold shadow-lg">
+                    {language === 'ar' ? 'أكتوبر' : 'October'}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Content Section */}
+              <CardContent className="p-8 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold mb-4 text-foreground">
+                  {language === 'ar' ? weeklyTopic.titleAr : weeklyTopic.titleEn}
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {language === 'ar' ? weeklyTopic.descriptionAr : weeklyTopic.descriptionEn}
+                </p>
+                
+                {/* Action Button */}
+                <Link to="/services">
+                  <Button 
+                    size="lg"
+                    className="w-full bg-pink-500 hover:bg-pink-600 text-white border-0"
+                  >
+                    {language === 'ar' ? 'عرض الموارد بالعربية' : 'View Arabic Resources'}
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+
+                {/* Collaboration Note */}
+                <p className="text-sm text-muted-foreground mt-6 italic">
+                  {language === 'ar' ? weeklyTopic.collaborationAr : weeklyTopic.collaborationEn}
+                </p>
+              </CardContent>
+            </div>
+          </Card>
+        </div>
+
+        {/* Instagram Follow Section */}
+        <div className="text-center">
+          <p className="text-lg text-muted-foreground mb-6">
             {language === 'ar' 
-              ? 'تابعنا على إنستغرام للمزيد من المحتوى التعليمي الصحي (المحتوى بالعربية والإنجليزية)'
-              : 'Follow us on Instagram for more health education content (Arabic & English content)'
+              ? 'تابعنا على إنستغرام للمزيد من المحتوى التعليمي الصحي'
+              : 'Follow us on Instagram for more health education content'
             }
           </p>
           
-          {/* Instagram Follow Button */}
           <Button 
             variant="outline" 
             size="lg"
-            className="mb-8 bg-gradient-to-r from-pink-500 to-orange-500 text-white border-0 hover:from-pink-600 hover:to-orange-600"
+            className="bg-gradient-to-r from-pink-500 to-orange-500 text-white border-0 hover:from-pink-600 hover:to-orange-600"
             onClick={() => window.open('https://www.instagram.com/projectshams/', '_blank')}
           >
             <Instagram className="w-5 h-5 mr-2" />
             {language === 'ar' ? 'تابعنا على إنستغرام' : 'Follow us on Instagram'}
             <ExternalLink className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-
-        {/* Topics Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {weeklyTopics.map((topic) => (
-            <Card 
-              key={topic.id} 
-              className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-primary/20"
-              onClick={() => window.open(topic.instagramUrl, '_blank')}
-            >
-              <div className="relative">
-                <img 
-                  src={topic.imageUrl} 
-                  alt={language === 'ar' ? topic.titleAr : topic.titleEn}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute top-4 right-4">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
-                    <Instagram className="w-5 h-5 text-pink-500" />
-                  </div>
-                </div>
-              </div>
-              
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
-                  {language === 'ar' ? topic.titleAr : topic.titleEn}
-                </h3>
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {language === 'ar' ? topic.descriptionAr : topic.descriptionEn}
-                </p>
-                <div className="flex items-center text-sm text-primary font-medium">
-                  {language === 'ar' ? 'اقرأ المزيد على إنستغرام' : 'Read more on Instagram'}
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-4">
-            {language === 'ar' 
-              ? 'هل لديك موضوع تريد أن نغطيه؟'
-              : 'Have a topic you want us to cover?'
-            }
-          </p>
-          <Button variant="secondary" size="lg">
-            {language === 'ar' ? 'اقترح موضوعاً' : 'Suggest a Topic'}
           </Button>
         </div>
       </div>
