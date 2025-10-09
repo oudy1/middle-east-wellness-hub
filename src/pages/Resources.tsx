@@ -307,6 +307,151 @@ const Resources = () => {
               </Card>
             </div>
 
+            {/* Mount Sinai Hospital Research Opportunity */}
+            <div className="mb-12">
+              <Card className="shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-blue-200 hover:border-blue-400">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <Stethoscope className="h-8 w-8 text-white" />
+                    <h3 className="text-2xl md:text-3xl font-bold text-white text-center">
+                      {language === 'ar' ? 'فرصة بحثية' : 'RESEARCH OPPORTUNITY'}
+                    </h3>
+                  </div>
+                  <p className="text-white/95 text-center text-lg font-semibold">
+                    {language === 'ar' 
+                      ? 'مساعد بحث متطوع – مستشفى ماونت سايناي (طب الأطفال)'
+                      : 'Volunteer Research Assistant – Mount Sinai Hospital (Paediatrics)'}
+                  </p>
+                  <p className="text-white/80 text-center mt-1">
+                    {language === 'ar'
+                      ? 'الدكتور عادل محمد | قسم طب الأطفال'
+                      : 'Dr. Adel Mohamed | Department of Paediatrics'}
+                  </p>
+                </div>
+                
+                <CardContent className="p-6 md:p-8">
+                  {/* Description */}
+                  <div className={`mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    {language === 'ar' ? (
+                      <p className="text-gray-700 leading-relaxed mb-4">
+                        نبحث عن مساعد بحث متطوع يتمتع بالحماس والانتباه للتفاصيل للمساعدة في مشاريع بحثية مستمرة مع الدكتور عادل محمد في قسم طب الأطفال بمستشفى ماونت سايناي.
+                        توفر هذه الفرصة تجربة عملية في البحث السريري وفرصة ممتازة للطلاب أو الخريجين الجدد المهتمين بالرعاية الصحية أو الطب أو البحث العلمي.
+                      </p>
+                    ) : (
+                      <p className="text-gray-700 leading-relaxed mb-4">
+                        We are seeking a motivated and detail-oriented Volunteer Research Assistant to support ongoing research projects for Dr. Adel Mohamed at the Department of Paediatrics, Mount Sinai Hospital.
+                        This position offers hands-on experience in patient-based research and is an excellent opportunity for students or recent graduates interested in healthcare, medicine, or clinical research.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Responsibilities */}
+                  <div className="mb-6">
+                    <h4 className={`text-xl font-semibold text-blue-600 mb-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar' ? 'المسؤوليات:' : 'Responsibilities:'}
+                    </h4>
+                    <ul className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar' ? (
+                        <>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>المشاركة شخصياً في الأنشطة البحثية اليومية</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>المساعدة في توظيف المرضى، بما في ذلك الاقتراب من المشاركين المؤهلين والتواصل معهم تحت الإشراف</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>دعم جمع البيانات من خلال مراجعة ملفات المرضى وتسجيل المعلومات السريرية والاحتفاظ بسجلات البحث</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>المساعدة في تخزين وتنظيم الفحوصات، والتأكد من تسمية الملفات وأرشفتها بشكل صحيح وفقاً لبروتوكولات الدراسة</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>فحص المرضى المؤهلين بناءً على معايير الإدراج/الاستبعاد</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>التعاون بشكل وثيق مع فريق البحث لضمان إجراء الدراسة بشكل أخلاقي ودقيق</span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Participate in person in daily research activities</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Assist with patient recruitment, including approaching and engaging eligible participants under supervision</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Support data collection by reviewing patient charts, recording clinical information, and maintaining research logs</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Assist with scan storage and organization, ensuring files are properly labeled and archived according to study protocols</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Screen eligible patients based on inclusion/exclusion criteria</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="text-blue-500 mt-1">•</span>
+                            <span>Collaborate closely with the research team to ensure ethical and accurate study conduct</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Call to Action */}
+                  <div className="text-center space-y-4 mt-8">
+                    <a 
+                      href="https://form.jotform.com/252638048316257" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <Button className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all animate-fade-in">
+                        <FileText className="h-5 w-5 mr-2" />
+                        {language === 'ar' 
+                          ? 'قدّم الآن / Submit Application'
+                          : 'Submit Application'}
+                        <ExternalLink className="h-4 w-4 ml-2" />
+                      </Button>
+                    </a>
+                    
+                    <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar' 
+                        ? 'يمكنك أيضاً مراسلتنا على إنستغرام للمزيد من التفاصيل'
+                        : 'You can also DM us on Instagram for more details'}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 justify-center mt-4">
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        #ClinicalResearch
+                      </span>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        #Healthcare
+                      </span>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        #VolunteerOpportunity
+                      </span>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        #MountSinaiHospital
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             <div className="text-center py-8">
               <Search className="h-12 w-12 text-healthTeal mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">{t("resources.opportunitiesComingSoon")}</h3>
