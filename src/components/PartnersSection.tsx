@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Handshake } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const PartnersSection = () => {
   const { t } = useLanguage();
@@ -93,12 +94,12 @@ const PartnersSection = () => {
           </div>
           
           <div className="text-center">
-            <a 
-              href="mailto:contact@projectshams.org?subject=Partnership Inquiry" 
+            <Link 
+              to="/contact" 
               className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline"
             >
               Become a partner
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -117,12 +118,12 @@ const PartnersSection = () => {
           </div>
           
           <div className="text-center">
-            <a 
-              href="mailto:contact@projectshams.org?subject=Club Partnership" 
+            <Link 
+              to="/contact" 
               className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline"
             >
               Add your club
-            </a>
+            </Link>
           </div>
         </div>
       </div>
