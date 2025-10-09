@@ -13,7 +13,8 @@ import {
   Phone,
   Mail,
   UserCheck,
-  UserPlus
+  UserPlus,
+  Heart
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -229,10 +230,134 @@ const Services = () => {
                 </CardContent>
               </Card>
               
-              {/* Placeholder for future materials */}
-              <div className={`text-center text-gray-500 col-span-full py-8 ${language === 'ar' ? 'font-cairo' : ''}`}>
-                {language === 'ar' ? 'المزيد من المواد قريباً...' : 'More materials coming soon...'}
-              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Health Resources - Breast Cancer Awareness */}
+        <section className="py-12 md:py-16 bg-pink-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Heart className="h-8 w-8 text-pink-500 fill-pink-500" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🩺 العناية بسرطان الثدي (بالعربية)' : '🩺 Breast Cancer Awareness (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'يهدف هذا القسم إلى تزويد المجتمع بمصادر موثوقة باللغة العربية حول التوعية بسرطان الثدي، الكشف المبكر، والرعاية بعد التشخيص.' : 
+                'This section aims to provide the community with reliable Arabic-language resources about breast cancer awareness, early detection, and post-diagnosis care.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Resource 1: تقليل خطر الإصابة بالسرطان */}
+              <Card className="hover:shadow-lg transition-shadow border-pink-100">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    تقليل خطر الإصابة بالسرطان
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    دليل مبسط من الجمعية الأمريكية للسرطان حول خيارات الحياة الصحية التي تساعد في تقليل خطر الإصابة بالسرطان — مثل النشاط البدني، النظام الغذائي المتوازن، والفحوصات المنتظمة.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                  </p>
+                  <a 
+                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/help-reduce-cancer-risk.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      <span className="font-cairo">تحميل PDF</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 2: بعد تشخيص سرطان الثدي */}
+              <Card className="hover:shadow-lg transition-shadow border-pink-100">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    بعد تشخيص سرطان الثدي
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب شامل يشرح ما يمكن توقعه بعد التشخيص، وخيارات العلاج، ونصائح للحفاظ على الصحة والدعم النفسي.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                  </p>
+                  <a 
+                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/after-a-breast-cancer-diagnosis.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      <span className="font-cairo">تحميل PDF</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 3: احصل على اختباراتك */}
+              <Card className="hover:shadow-lg transition-shadow border-pink-100">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    احصل على اختباراتك!
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    يوضح أنواع فحوصات السرطان الموصى بها حسب العمر والجنس، بما في ذلك فحص الثدي، القولون، وعنق الرحم، وأهمية المتابعة الطبية.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                  </p>
+                  <a 
+                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/get-your-tests.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      <span className="font-cairo">تحميل PDF</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 4: برنامج نوفا سكوشا للكشف المبكر عن الثدي */}
+              <Card className="hover:shadow-lg transition-shadow border-pink-100">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    برنامج نوفا سكوشا للكشف المبكر عن الثدي
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    معلومات موجهة للمقيمين في نوفا سكوشا حول متى وكيف يجب إجراء فحص الثدي بالأشعة (الماموغرام)، مع أرقام التواصل المباشر لحجز المواعيد.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: برنامج نوفا سكوشا للكشف المبكر عن سرطان الثدي (Nova Scotia Breast Screening Program)
+                  </p>
+                  <a 
+                    href="https://nsbreastscreening.ca/sites/default/files/2023-05/NSBSP-ProviderTearPad%20Arabic%20SM%2007%20Nov.%202022.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      <span className="font-cairo">تحميل PDF</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
