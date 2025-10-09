@@ -87,7 +87,7 @@ const ResearchTeaserSection = () => {
                   className="block mx-auto"
                 >
                   <img 
-                    src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                    src="/lovable-uploads/dream-deferred-flyer-en.png" 
                     alt="Canadian Dream Deferred Study Flyer"
                     className="w-[65%] mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                     style={{ marginBottom: '15px' }}
@@ -122,7 +122,7 @@ const ResearchTeaserSection = () => {
                   className="block mx-auto"
                 >
                   <img 
-                    src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                    src="/lovable-uploads/dream-deferred-flyer-ar.png" 
                     alt="دراسة الحلم الكندي المؤجل"
                     className="w-[65%] mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                     style={{ marginBottom: '15px' }}
