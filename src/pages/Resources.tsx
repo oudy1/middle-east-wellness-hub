@@ -130,13 +130,24 @@ const Resources = () => {
                 </div>
                 
                 <CardContent className="p-6 md:p-8">
-                  {/* Flyer Image */}
+                  {/* Flyer Image - Clickable */}
                   <div className="mb-6">
-                    <img 
-                      src="/lovable-uploads/dream-deferred-flyer.jpg" 
-                      alt={language === 'ar' ? 'ملصق دراسة الحلم الكندي المؤجل' : 'Canadian Dream Deferred Study Flyer'}
-                      className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
-                    />
+                    <a 
+                      href={language === 'ar' 
+                        ? '/lovable-uploads/ar-projectshams-flyer-1.5gen-oct8.pdf'
+                        : '/lovable-uploads/projectshams-flyer-1.5gen-oct8.pdf'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <img 
+                        src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                        alt={language === 'ar' ? 'ملصق دراسة الحلم الكندي المؤجل' : 'Canadian Dream Deferred Study Flyer'}
+                        className="w-full max-w-md mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                        style={{ maxWidth: '65%' }}
+                      />
+                    </a>
                   </div>
 
                   {/* Study Description */}

@@ -74,17 +74,25 @@ const ResearchTeaserSection = () => {
           <div className="grid md:grid-cols-2 gap-0">
             {/* English Version */}
             <div className="p-8 bg-gradient-to-br from-healthTeal/5 to-white border-r border-gray-200">
-              <div className="flex items-start gap-4 mb-4">
-                <img 
-                  src="/lovable-uploads/dream-deferred-flyer.jpg" 
-                  alt="Canadian Dream Deferred Study"
-                  className="w-24 h-24 object-cover rounded-lg shadow-md"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-healthDarkBlue mb-2">
-                    New Study: The Canadian Dream Deferred
-                  </h3>
-                </div>
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-healthDarkBlue mb-4 text-center">
+                  New Study: The Canadian Dream Deferred
+                </h3>
+                
+                {/* Clickable Poster - English */}
+                <a 
+                  href="/lovable-uploads/projectshams-flyer-1.5gen-oct8.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block mx-auto"
+                >
+                  <img 
+                    src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                    alt="Canadian Dream Deferred Study Flyer"
+                    className="w-[65%] mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                    style={{ marginBottom: '15px' }}
+                  />
+                </a>
               </div>
               
               <p className="text-gray-700 mb-6 leading-relaxed">
@@ -101,17 +109,25 @@ const ResearchTeaserSection = () => {
 
             {/* Arabic Version */}
             <div className="p-8 bg-gradient-to-br from-healthPurple/5 to-white" dir="rtl">
-              <div className="flex items-start gap-4 mb-4">
-                <img 
-                  src="/lovable-uploads/dream-deferred-flyer.jpg" 
-                  alt="دراسة الحلم الكندي المؤجل"
-                  className="w-24 h-24 object-cover rounded-lg shadow-md"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-healthDarkBlue mb-2">
-                    دراسة جديدة: الحلم الكندي المؤجل
-                  </h3>
-                </div>
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-healthDarkBlue mb-4 text-center">
+                  دراسة جديدة: الحلم الكندي المؤجل
+                </h3>
+                
+                {/* Clickable Poster - Arabic */}
+                <a 
+                  href="/lovable-uploads/ar-projectshams-flyer-1.5gen-oct8.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block mx-auto"
+                >
+                  <img 
+                    src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                    alt="دراسة الحلم الكندي المؤجل"
+                    className="w-[65%] mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                    style={{ marginBottom: '15px' }}
+                  />
+                </a>
               </div>
               
               <p className="text-gray-700 mb-6 leading-relaxed">
