@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
 type LanguageContextType = {
   language: "en" | "ar" | "ku" | "fa" | "tr";
@@ -1522,7 +1522,18 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<"en" | "ar" | "ku" | "fa" | "tr">("en");
+  const [language, setLanguage] = useState<"en" | "ar" | "ku" | "fa" | "tr">(() => {
+    // Initialize language from localStorage or default to English
+    const savedLanguage = localStorage.getItem("shams-language");
+    return (savedLanguage as "en" | "ar" | "ku" | "fa" | "tr") || "en";
+  });
+
+  // Persist language choice and update document attributes
+  useEffect(() => {
+    localStorage.setItem("shams-language", language);
+    document.documentElement.setAttribute("lang", language);
+    document.documentElement.setAttribute("dir", language === "ar" || language === "ku" || language === "fa" ? "rtl" : "ltr");
+  }, [language]);
 
   const t = (key: string): string => {
     if (!translations[key]) {
@@ -1534,7 +1545,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div dir={language === "ar" ? "rtl" : "ltr"} className={language === "ar" ? "font-arabic" : ""}>
+      <div dir={language === "ar" || language === "ku" || language === "fa" ? "rtl" : "ltr"} className={language === "ar" ? "font-cairo" : ""}>
         {children}
       </div>
     </LanguageContext.Provider>

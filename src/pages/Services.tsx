@@ -21,6 +21,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Services = () => {
   const { t, language } = useLanguage();
+  
+  // Determine text direction
+  const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
   const communityResources = [
     {
@@ -50,7 +53,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
+    <div className="flex flex-col min-h-screen bg-healthLightGray" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
       <main className="flex-grow">
         {/* Hero Section - Centered */}
