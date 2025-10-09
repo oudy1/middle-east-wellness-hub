@@ -245,8 +245,8 @@ const Services = () => {
             </div>
             <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {language === 'ar' ? 
-                'يهدف هذا القسم إلى تزويد المجتمع بمصادر موثوقة باللغة العربية حول التوعية بسرطان الثدي، الكشف المبكر، والرعاية بعد التشخيص.' : 
-                'This section aims to provide the community with reliable Arabic-language resources about breast cancer awareness, early detection, and post-diagnosis care.'
+                'نقدم لك هنا مجموعة من الكتيبات التوعوية حول الوقاية من السرطان، وفحوصات الكشف المبكر، والعناية بعد التشخيص. جميع المواد متوفرة باللغة العربية ويمكن تحميلها مباشرة.' : 
+                'We provide a collection of educational booklets about cancer prevention, early detection screenings, and post-diagnosis care. All materials are available in Arabic and can be downloaded directly.'
               }
             </p>
             
@@ -260,19 +260,19 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
-                    دليل مبسط من الجمعية الأمريكية للسرطان حول خيارات الحياة الصحية التي تساعد في تقليل خطر الإصابة بالسرطان — مثل النشاط البدني، النظام الغذائي المتوازن، والفحوصات المنتظمة.
+                    دليل من الجمعية الأمريكية للسرطان حول كيفية تقليل خطر الإصابة بالسرطان من خلال نمط حياة صحي.
                   </p>
                   <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
-                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                    المصدر مذكور في الكتيب
                   </p>
                   <a 
-                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/help-reduce-cancer-risk.pdf"
+                    href="/lovable-uploads/help-reduce-cancer-risk.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
-                      <ExternalLink className="h-4 w-4" />
-                      <span className="font-cairo">تحميل PDF</span>
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
                     </Button>
                   </a>
                 </CardContent>
@@ -287,19 +287,19 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
-                    كتيب شامل يشرح ما يمكن توقعه بعد التشخيص، وخيارات العلاج، ونصائح للحفاظ على الصحة والدعم النفسي.
+                    كتيب شامل من الجمعية الأمريكية للسرطان يشرح ما يمكن توقعه بعد التشخيص والعلاجات الممكنة.
                   </p>
                   <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
-                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                    المصدر مذكور في الكتيب
                   </p>
                   <a 
-                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/after-a-breast-cancer-diagnosis.pdf"
+                    href="/lovable-uploads/after-a-breast-cancer-diagnosis.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
-                      <ExternalLink className="h-4 w-4" />
-                      <span className="font-cairo">تحميل PDF</span>
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
                     </Button>
                   </a>
                 </CardContent>
@@ -314,19 +314,19 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
-                    يوضح أنواع فحوصات السرطان الموصى بها حسب العمر والجنس، بما في ذلك فحص الثدي، القولون، وعنق الرحم، وأهمية المتابعة الطبية.
+                    كتيب حول أهمية فحوصات السرطان الموصى بها حسب العمر، بما في ذلك فحص الثدي.
                   </p>
                   <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
-                    المصدر: الجمعية الأمريكية للسرطان (American Cancer Society)
+                    المصدر مذكور في الكتيب
                   </p>
                   <a 
-                    href="https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/get-your-tests.pdf"
+                    href="/lovable-uploads/get-your-tests.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
-                      <ExternalLink className="h-4 w-4" />
-                      <span className="font-cairo">تحميل PDF</span>
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
                     </Button>
                   </a>
                 </CardContent>
@@ -341,24 +341,28 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
-                    معلومات موجهة للمقيمين في نوفا سكوشا حول متى وكيف يجب إجراء فحص الثدي بالأشعة (الماموغرام)، مع أرقام التواصل المباشر لحجز المواعيد.
+                    تعليمات من برنامج نوفا سكوشا حول فحص الماموغرام ومتى يُنصح به للنساء.
                   </p>
                   <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
-                    المصدر: برنامج نوفا سكوشا للكشف المبكر عن سرطان الثدي (Nova Scotia Breast Screening Program)
+                    المصدر مذكور في الكتيب
                   </p>
                   <a 
-                    href="https://nsbreastscreening.ca/sites/default/files/2023-05/NSBSP-ProviderTearPad%20Arabic%20SM%2007%20Nov.%202022.pdf"
+                    href="/lovable-uploads/NSBSP-ProviderTearPad-Arabic.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
-                      <ExternalLink className="h-4 w-4" />
-                      <span className="font-cairo">تحميل PDF</span>
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
                     </Button>
                   </a>
                 </CardContent>
               </Card>
             </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed text-right font-cairo" dir="rtl">
+              تم جمع هذه الموارد من مواقع رسمية مثل الجمعية الأمريكية للسرطان وبرنامج نوفا سكوشا للكشف المبكر عن الثدي.
+            </p>
           </div>
         </section>
       </main>
