@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ExternalLink, GraduationCap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, GraduationCap, Stethoscope } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import mountSinaiImage from "@/assets/mount-sinai-research.png";
 
 const ResearchTeaserSection = () => {
   const { language } = useLanguage();
@@ -17,6 +19,57 @@ const ResearchTeaserSection = () => {
           </h2>
         </div>
 
+
+        {/* Featured: Mount Sinai Hospital Research Opportunity */}
+        <Card className="max-w-6xl mx-auto overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 mb-8 border-2 border-blue-200">
+          <div className="relative">
+            {/* "Now Recruiting" Badge */}
+            <div className="absolute top-4 right-4 z-10">
+              <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-bold shadow-lg animate-fade-in">
+                {language === 'ar' ? 'نبحث عن متطوعين' : 'Now Recruiting'}
+              </Badge>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Image Section */}
+              <div className="relative h-64 md:h-auto">
+                <img 
+                  src={mountSinaiImage}
+                  alt="Mount Sinai Hospital Research"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent" />
+              </div>
+
+              {/* Content Section - Bilingual Display */}
+              <div className="p-8 bg-gradient-to-br from-blue-50 to-white">
+                <div className="flex items-center gap-3 mb-4">
+                  <Stethoscope className="h-8 w-8 text-blue-600" />
+                  <h3 className={`text-2xl font-bold text-blue-900 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    {language === 'ar' 
+                      ? 'فرصة بحثية جديدة: التطوع في مستشفى ماونت سايناي'
+                      : 'New Research Opportunity: Volunteer with Mount Sinai Hospital'}
+                  </h3>
+                </div>
+                
+                <p className={`text-gray-700 mb-6 leading-relaxed ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {language === 'ar' 
+                    ? 'يعلن مشروع شمس عن فرصة بحثية بالتعاون مع الدكتور عادل محمد من قسم طب الأطفال في مستشفى ماونت سايناي. نبحث عن مساعد بحث متطوع مهتم بالبحث الطبي والرعاية الصحية.'
+                    : "SHAMS is supporting a new research opportunity with Dr. Adel Mohamed at Mount Sinai Hospital's Department of Paediatrics. We're looking for a motivated Volunteer Research Assistant to gain hands-on experience in clinical research and patient care."}
+                </p>
+                
+                <Link to="/resources">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full md:w-auto transition-all duration-300 hover:shadow-lg hover-scale">
+                    {language === 'ar' ? 'عرض التفاصيل والتقديم' : 'Learn More & Apply'}
+                    <ExternalLink className={`h-4 w-4 ${language === 'ar' ? 'mr-2' : 'ml-2'}`} />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Canadian Dream Deferred Study */}
         <Card className="max-w-6xl mx-auto overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover-scale">
           <div className="grid md:grid-cols-2 gap-0">
             {/* English Version */}
