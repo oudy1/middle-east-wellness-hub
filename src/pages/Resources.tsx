@@ -130,24 +130,49 @@ const Resources = () => {
                 </div>
                 
                 <CardContent className="p-6 md:p-8">
-                  {/* Flyer Image - Clickable */}
+                  {/* Bilingual Posters Side-by-Side */}
                   <div className="mb-6">
-                    <a 
-                      href={language === 'ar' 
-                        ? '/lovable-uploads/ar-projectshams-flyer-1.5gen-oct8.pdf'
-                        : '/lovable-uploads/projectshams-flyer-1.5gen-oct8.pdf'
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <img 
-                        src="/lovable-uploads/dream-deferred-flyer.jpg" 
-                        alt={language === 'ar' ? 'ملصق دراسة الحلم الكندي المؤجل' : 'Canadian Dream Deferred Study Flyer'}
-                        className="w-full max-w-md mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                        style={{ maxWidth: '65%' }}
-                      />
-                    </a>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {/* English Poster */}
+                      <div className="text-center">
+                        <a 
+                          href='/lovable-uploads/projectshams-flyer-1.5gen-oct8.pdf'
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <img 
+                            src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                            alt="Canadian Dream Deferred Study Flyer"
+                            className="w-full max-w-md mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                            style={{ maxWidth: '70%' }}
+                          />
+                        </a>
+                        <p className="text-sm text-gray-600 mt-3 italic">
+                          Updated October 2025 — Study Recruitment Poster (UofT x SHAMS)
+                        </p>
+                      </div>
+
+                      {/* Arabic Poster */}
+                      <div className="text-center" dir="rtl">
+                        <a 
+                          href='/lovable-uploads/ar-projectshams-flyer-1.5gen-oct8.pdf'
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <img 
+                            src="/lovable-uploads/dream-deferred-flyer.jpg" 
+                            alt="ملصق دراسة الحلم الكندي المؤجل"
+                            className="w-full max-w-md mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                            style={{ maxWidth: '70%' }}
+                          />
+                        </a>
+                        <p className="text-sm text-gray-600 mt-3 italic">
+                          محدث في أكتوبر ٢٠٢٥ — ملصق التوظيف البحثي (جامعة تورنتو × مشروع شمس)
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Study Description */}
