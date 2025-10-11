@@ -46,6 +46,18 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/casa-logo.png",
       description: "Christian Arab Student Association - University of Alberta",
       link: "#"
+    },
+    {
+      name: "PCC",
+      logo: "/lovable-uploads/pcc-logo.png",
+      description: "Palestinian Cultural Club - University of Alberta",
+      link: "#"
+    },
+    {
+      name: "APS UTM",
+      logo: "/lovable-uploads/aps-utm-logo.png",
+      description: "Association of Palestinian Students - UofT Mississauga",
+      link: "#"
     }
   ];
 
