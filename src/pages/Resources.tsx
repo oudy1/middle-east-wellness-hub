@@ -98,23 +98,9 @@ const Resources = () => {
             </p>
           </div>
         </section>
-
         {/* Research Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-4">
-                <GraduationCap className="h-12 w-12 text-healthTeal mr-3" />
-                <FlaskConical className="h-12 w-12 text-healthTeal" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue mb-4">
-                {t("resources.researchComingSoon")}
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                {t("resources.researchInitiatives")}
-              </p>
-            </div>
-
             {/* SHAMS Research Opportunity - Canadian Dream Deferred */}
             <div className="mb-12">
               <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
