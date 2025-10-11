@@ -13,7 +13,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">{t("footer.title")}</h3>
             <p className="mb-4 text-gray-300">
-              Dedicated to improving healthcare access and outcomes for communities across the Middle Eastern communities in Canada.
+              SHAMS - Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern communities across Canada.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/projectshams/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-healthTeal transition-colors">
