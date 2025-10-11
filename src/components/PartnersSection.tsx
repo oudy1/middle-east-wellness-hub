@@ -1,11 +1,26 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Handshake } from "lucide-react";
+import { Handshake, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback } from "react";
 
 const PartnersSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'start',
+    slidesToScroll: 1,
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   const partners = [
     {
@@ -62,7 +77,7 @@ const PartnersSection = () => {
   ];
 
   const renderPartnerCard = (item: any, index: number) => (
-    <Card key={index} className="overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-300">
+    <Card key={index} className="overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardContent className="p-6 flex flex-col items-center text-center">
         <a 
           href={item.link} 
@@ -79,9 +94,34 @@ const PartnersSection = () => {
           </div>
         </a>
         <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-        <p className="text-sm text-gray-500">{item.description}</p>
+        <p className="text-sm text-gray-500 line-clamp-1">{item.description}</p>
       </CardContent>
     </Card>
+  );
+
+  const renderClubCard = (item: any, index: number) => (
+    <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] md:flex-[0_0_33.333%] lg:flex-[0_0_25%] px-3">
+      <Card className="overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+        <CardContent className="p-6 flex flex-col items-center text-center h-full">
+          <a 
+            href={item.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block hover:scale-105 transition-transform duration-200"
+          >
+            <div className="mb-4">
+              <img 
+                src={item.logo} 
+                alt={item.name}
+                className="h-24 w-24 object-contain mx-auto" 
+              />
+            </div>
+          </a>
+          <h3 className="text-lg font-bold mb-2">{item.name}</h3>
+          <p className="text-sm text-gray-500 line-clamp-1">{item.description}</p>
+        </CardContent>
+      </Card>
+    </div>
   );
 
   return (
@@ -115,26 +155,48 @@ const PartnersSection = () => {
           </div>
         </div>
 
-        {/* Clubs Section */}
+        {/* Clubs Section with Carousel */}
         <div>
           <h2 className="section-title flex items-center justify-center">
             <Handshake className="mr-3 text-healthTeal h-8 w-8" />
-            Clubs We Work With
+            {language === 'ar' ? 'النوادي والجمعيات الطلابية المتعاونة معنا' : 'Student Clubs & Associations We Collaborate With'}
           </h2>
           <p className="section-description">
-            Student organizations and community clubs supporting our mission
+            {language === 'ar' ? 'منظمات طلابية ونوادي مجتمعية تدعم مهمتنا' : 'Student organizations and community clubs supporting our mission'}
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-4xl mx-auto mb-4">
-            {clubs.map(renderPartnerCard)}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Navigation Arrows */}
+            <button
+              onClick={scrollPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
+              aria-label="Previous clubs"
+            >
+              <ChevronLeft className="h-6 w-6 text-healthTeal" />
+            </button>
+            
+            <button
+              onClick={scrollNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
+              aria-label="Next clubs"
+            >
+              <ChevronRight className="h-6 w-6 text-healthTeal" />
+            </button>
+
+            {/* Carousel */}
+            <div className="embla overflow-hidden" ref={emblaRef}>
+              <div className="embla__container flex -mx-3">
+                {clubs.map(renderClubCard)}
+              </div>
+            </div>
           </div>
           
-          <div className="text-center">
+          <div className="text-center mt-6">
             <Link 
               to="/contact" 
               className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline"
             >
-              Add your club
+              {language === 'ar' ? 'أضف ناديك' : 'Add your club'}
             </Link>
           </div>
         </div>
