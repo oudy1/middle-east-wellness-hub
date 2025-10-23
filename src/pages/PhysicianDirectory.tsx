@@ -164,20 +164,6 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     description: "Registered Psychotherapist providing culturally sensitive mental health support and therapeutic interventions."
   },
   {
-    id: 4,
-    firstName: "Menna",
-    lastName: "Komeiha",
-    role: "Researcher",
-    specialty: "Health Equity Research",
-    languages: ["Arabic", "English"],
-    contact: {
-      email: "komeiham@mcmaster.ca"
-    },
-    credentials: ["BDS", "GDip", "MSc"],
-    experience: 4,
-    description: "Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice."
-  },
-  {
     id: 5,
     firstName: "Nayla",
     lastName: "Salameh",

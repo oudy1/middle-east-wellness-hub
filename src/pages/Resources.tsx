@@ -474,6 +474,170 @@ const Resources = () => {
               </Card>
             </div>
 
+            {/* Researchers Associated with SHAMS Section */}
+            <div className="mb-16">
+              <div className="text-center mb-10">
+                <div className="flex items-center justify-center mb-4 gap-3">
+                  <FlaskConical className="h-10 w-10 text-healthTeal" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue">
+                    {language === 'ar' ? 'الباحثون المتعاونون مع مشروع شمس' : 'Researchers Associated with SHAMS'}
+                  </h2>
+                  <GraduationCap className="h-10 w-10 text-healthTeal" />
+                </div>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  {language === 'ar' 
+                    ? 'باحثون رئيسيون يتعاونون مع مشروع شمس أو منتسبون إليه'
+                    : 'Key researchers collaborating with or affiliated with SHAMS'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {/* Menna Komeiha */}
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthTeal/20 hover:border-healthTeal/40">
+                  <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6">
+                    <div className="w-32 h-32 bg-gradient-to-br from-healthTeal to-healthTeal/70 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <GraduationCap className="h-16 w-16 text-white" />
+                    </div>
+                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'منة قميحة' : 'Menna Komeiha'}
+                    </h3>
+                    <p className="text-center text-healthTeal font-semibold mb-1">
+                      {language === 'ar' ? 'باحثة' : 'Researcher'}
+                    </p>
+                    <p className="text-center text-gray-600 text-sm">
+                      {language === 'ar' ? 'بحث المساواة الصحية' : 'Health Equity Research'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📧 البريد الإلكتروني:' : '📧 Email:'}
+                        </h4>
+                        <a href="mailto:komeiham@mcmaster.ca" className="text-healthTeal hover:underline break-all">
+                          komeiham@mcmaster.ca
+                        </a>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-200">
+                        <div>
+                          <p className="text-sm text-gray-600 mb-1">
+                            {language === 'ar' ? 'الخبرة' : 'Experience'}
+                          </p>
+                          <p className="font-semibold text-healthDarkBlue">
+                            {language === 'ar' ? '٤ سنوات' : '4 years'}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600 mb-1">
+                            {language === 'ar' ? 'اللغات' : 'Languages'}
+                          </p>
+                          <p className="font-semibold text-healthDarkBlue">
+                            {language === 'ar' ? 'العربية، الإنجليزية' : 'Arabic, English'}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {language === 'ar' ? 'المؤهلات:' : 'Credentials:'}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">BDS</span>
+                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">GDip</span>
+                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">MSc</span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm">
+                          {language === 'ar'
+                            ? 'منة قميحة باحثة في المساواة الصحية ولديها خلفية في طب الأسنان والعلوم الصحية التطبيقية والصحة العالمية. يركز بحثها على الصحة الرقمية، والرعاية التي تركز على المريض، وتعزيز المساواة الصحية من خلال معالجة المحددات الاجتماعية للصحة. تطبق الأساليب النوعية والكمية لإنتاج أدلة تفيد السياسات والممارسات.'
+                            : 'Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice.'}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Mahmoud El-Maklizi */}
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthPurple/20 hover:border-healthPurple/40">
+                  <div className="bg-gradient-to-br from-healthPurple/10 to-healthPurple/5 p-6">
+                    <div className="w-32 h-32 bg-gradient-to-br from-healthPurple to-healthPurple/70 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <FlaskConical className="h-16 w-16 text-white" />
+                    </div>
+                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'محمود المقلزي' : 'Mahmoud El-Maklizi'}
+                    </h3>
+                    <p className="text-center text-healthPurple font-semibold mb-1">
+                      {language === 'ar' ? 'باحث ما بعد الدكتوراه' : 'Postdoctoral Research Fellow'}
+                    </p>
+                    <p className="text-center text-gray-600 text-sm">
+                      {language === 'ar' 
+                        ? 'معهد أبحاث مستشفى تورونتو العام (TGHRI), UHN' 
+                        : 'Toronto General Hospital Research Institute (TGHRI), UHN'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🏛️ الانتماء:' : '🏛️ Affiliation:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar'
+                            ? 'جامعة تورنتو / شبكة الصحة الجامعية'
+                            : 'University of Toronto / University Health Network'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? 'نبذة عنه:' : 'About:'}
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
+                          {language === 'ar'
+                            ? 'محمود المقلزي هو باحث ما بعد الدكتوراه في مختبر كلينت روبنز في معهد أبحاث مستشفى تورونتو العام. يستكشف عمله تطوير وتنظيم ووظيفة الخلايا البلازمية التنظيمية، حيث يجمع بين البحث الجزيئي التفصيلي والإرشاد لطلاب الدراسات العليا. إنه شغوف بترجمة أبحاث علم المناعة إلى تطبيقات ذات معنى تحسن رعاية المرضى.'
+                            : "Mahmoud El-Maklizi is a Postdoctoral Research Fellow in Clint Robbins' Lab at the Toronto General Hospital Research Institute. His work explores the development, regulation, and function of regulatory plasma cells, combining detailed molecular research with mentorship for graduate students. He is passionate about translating immunology research into meaningful applications that improve patient care."}
+                        </p>
+                        <p className="text-gray-700 leading-relaxed text-sm italic">
+                          {language === 'ar'
+                            ? 'بعيدًا عن العلم، محمود فنان يرسم باستخدام القلم الرصاص والفحم والحبر. يعزو قيمه العائلية القريبة لتشكيل نهجه التعاوني في المختبر وأسلوب إرشاده.'
+                            : 'Beyond science, Mahmoud is an artist who paints using pencil, charcoal, and ink. He credits his close family values for shaping his collaborative approach in the lab and his mentorship style.'}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* View All Researchers Button */}
+              <div className="text-center mt-10">
+                <Button 
+                  variant="outline" 
+                  className="border-2 border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white transition-all duration-300"
+                  disabled
+                >
+                  <GraduationCap className="h-4 w-4 mr-2" />
+                  {language === 'ar' ? 'عرض جميع الباحثين (قريبًا)' : 'View All Researchers (Coming Soon)'}
+                </Button>
+              </div>
+            </div>
+
             <div className="text-center py-8">
               <Search className="h-12 w-12 text-healthTeal mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">{t("resources.opportunitiesComingSoon")}</h3>
