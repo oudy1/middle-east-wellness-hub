@@ -73,6 +73,12 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/aps-utm-logo.png",
       description: "Association of Palestinian Students - UofT Mississauga",
       link: "#"
+    },
+    {
+      name: "McMaster Muslims in Healthcare Club",
+      logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg",
+      description: "McMaster University student club supporting Muslim healthcare professionals",
+      link: "#"
     }
   ];
 
