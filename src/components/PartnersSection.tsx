@@ -79,6 +79,12 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg",
       description: "McMaster University student club supporting Muslim healthcare professionals",
       link: "#"
+    },
+    {
+      name: "LESA",
+      logo: "/lovable-uploads/lesa-western-logo.jpg",
+      description: "The Levant Students' Association - Western University",
+      link: "#"
     }
   ];
 
