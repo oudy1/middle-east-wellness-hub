@@ -627,12 +627,8 @@ const Resources = () => {
                 {/* Dr. Delaney Glass */}
                 <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
                   <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
-                    <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-healthDarkBlue/20">
-                      <img 
-                        src="/lovable-uploads/delaney-glass.jpg" 
-                        alt="Dr. Delaney Glass"
-                        className="w-full h-full object-cover"
-                      />
+                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <GraduationCap className="h-16 w-16 text-white" />
                     </div>
                     <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'د. ديلاني غلاس' : 'Dr. Delaney Glass'}
