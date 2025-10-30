@@ -623,6 +623,126 @@ const Resources = () => {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Dr. Delaney Glass */}
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
+                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
+                    <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-healthDarkBlue/20">
+                      <img 
+                        src="/lovable-uploads/delaney-glass.jpg" 
+                        alt="Dr. Delaney Glass"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'د. ديلاني غلاس' : 'Dr. Delaney Glass'}
+                    </h3>
+                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                      {language === 'ar' ? 'أستاذ مساعد' : 'Assistant Professor'}
+                    </p>
+                    <p className="text-center text-gray-600 text-sm">
+                      {language === 'ar' 
+                        ? 'جامعة تورنتو - حرم سانت جورج' 
+                        : 'University of Toronto – St. George Campus'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📧 البريد الإلكتروني:' : '📧 Email:'}
+                        </h4>
+                        <a href="mailto:delaney.glass@utoronto.ca" className="text-healthTeal hover:underline break-all">
+                          delaney.glass@utoronto.ca
+                        </a>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🔬 مجالات الدراسة:' : '🔬 Fields of Study:'}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'الأنثروبولوجيا التطورية' : 'Evolutionary Anthropology'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'الأنثروبولوجيا الطبية' : 'Medical Anthropology'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'الصحة العامة' : 'Public Health'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'علم الأحياء البشرية' : 'Human Biology'}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🌍 مجالات الاهتمام:' : '🌍 Areas of Interest:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm leading-relaxed">
+                          {language === 'ar'
+                            ? 'صحة ورفاهية الأطفال والمراهقين، علم الغدد الصماء العصبية النفسية، الأنثروبولوجيا البيولوجية الثقافية، الشتات العربي، النزوح، الصراع، عدم المساواة الاجتماعية، والمرونة'
+                            : 'Child and adolescent health and well-being, psychoneuroendocrinology, biocultural anthropology, Arab diaspora, displacement, conflict, social inequality, and resilience'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📍 المناطق البحثية:' : '📍 Research Regions:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'الأردن، كندا' : 'Jordan, Canada'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
+                          {language === 'ar'
+                            ? 'الدكتورة ديلاني غلاس هي عالمة أنثروبولوجيا بيولوجية ثقافية وعالمة أحياء بشرية ذات طرق بحث مختلطة تعمل بشكل أساسي مع المجتمعات العربية في أمريكا الشمالية والأردن. يستكشف بحثها الدوافع البيولوجية الثقافية والعواقب الصحية للمحن المبكرة في الحياة وعدم المساواة الاجتماعية على نمو الطفل والمراهق، والتطور البلوغي، والصحة النفسية. تدمج أطر من الأنثروبولوجيا الطبية وعلم الأحياء التطوري والبحوث الصحية النوعية لفهم أفضل لكيفية تشكيل السياق والثقافة للنتائج الصحية.'
+                            : 'Dr. Delaney Glass is a mixed-methods biocultural anthropologist and human biologist working primarily with Arab communities in North America and Jordan. Her research explores the biocultural drivers and health consequences of early life adversity and social inequalities on child and adolescent growth, pubertal development, and mental health. She integrates frameworks from medical anthropology, evolutionary biology, and qualitative health research to better understand how context and culture shape health outcomes.'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🎓 التعليم:' : '🎓 Education:'}
+                        </h4>
+                        <div className="space-y-2 text-sm text-gray-700">
+                          <div className="flex items-start gap-2">
+                            <span className="text-healthDarkBlue">•</span>
+                            <span>
+                              {language === 'ar' 
+                                ? 'دكتوراه، الأنثروبولوجيا البيولوجية – جامعة واشنطن'
+                                : 'PhD, Biological Anthropology – University of Washington'}
+                            </span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-healthDarkBlue">•</span>
+                            <span>
+                              {language === 'ar' 
+                                ? 'ماجستير في الصحة العامة، علم الأوبئة (صحة الأم والطفل) – جامعة واشنطن (2023)'
+                                : 'MPH, Epidemiology (Maternal & Child Health) – University of Washington (2023)'}
+                            </span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-healthDarkBlue">•</span>
+                            <span>
+                              {language === 'ar' 
+                                ? 'ماجستير، الأنثروبولوجيا البيولوجية – جامعة واشنطن (2020)'
+                                : 'MA, Biological Anthropology – University of Washington (2020)'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
 
               {/* View All Researchers Button */}
