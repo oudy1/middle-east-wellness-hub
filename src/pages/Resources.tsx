@@ -739,6 +739,90 @@ const Resources = () => {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Dr. Emine Fidan Elcioglu */}
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
+                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
+                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <GraduationCap className="h-16 w-16 text-white" />
+                    </div>
+                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'د. إمين فيدان إلسيوغلو' : 'Dr. Emine Fidan Elcioglu'}
+                    </h3>
+                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                      {language === 'ar' ? 'أستاذ مشارك' : 'Associate Professor'}
+                    </p>
+                    <p className="text-center text-gray-600 text-sm">
+                      {language === 'ar' 
+                        ? 'قسم علم الاجتماع، جامعة تورنتو' 
+                        : 'Department of Sociology, University of Toronto'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🔬 التخصص:' : '🔬 Specialization:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'علم الاجتماع' : 'Sociology'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Dr. Rania Salem */}
+                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
+                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
+                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <GraduationCap className="h-16 w-16 text-white" />
+                    </div>
+                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'د. رانيا سالم' : 'Dr. Rania Salem'}
+                    </h3>
+                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                      {language === 'ar' ? 'أستاذ مشارك' : 'Associate Professor'}
+                    </p>
+                    <p className="text-center text-gray-600 text-sm">
+                      {language === 'ar' 
+                        ? 'قسم علم الاجتماع، جامعة تورنتو' 
+                        : 'Department of Sociology, University of Toronto'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🔬 التخصص:' : '🔬 Specialization:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'علم الاجتماع' : 'Sociology'}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
+                        </h4>
+                        <p className="text-gray-700 text-sm">
+                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
 
               {/* View All Researchers Button */}
