@@ -23,13 +23,21 @@ import {
   FileDown,
   Video,
   Plus,
-  Search
+  Search,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Resources = () => {
   const { language, t } = useLanguage();
+  const [expandedResearcher, setExpandedResearcher] = useState<string | null>(null);
+
+  const toggleResearcher = (id: string) => {
+    setExpandedResearcher(expandedResearcher === id ? null : id);
+  };
 
   const getLocalizedResourceCategories = () => [
     {
@@ -491,436 +499,372 @@ const Resources = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {/* Menna Komeiha */}
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthTeal/20 hover:border-healthTeal/40">
-                  <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-healthTeal to-healthTeal/70 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <GraduationCap className="h-16 w-16 text-white" />
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthTeal/20 hover:border-healthTeal/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthTeal to-healthTeal/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <GraduationCap className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'منة قميحة' : 'Menna Komeiha'}
                     </h3>
-                    <p className="text-center text-healthTeal font-semibold mb-1">
+                    <p className="text-sm text-healthTeal font-semibold">
                       {language === 'ar' ? 'باحثة' : 'Researcher'}
                     </p>
-                    <p className="text-center text-gray-600 text-sm">
+                    <p className="text-xs text-gray-600">
                       {language === 'ar' ? 'بحث المساواة الصحية' : 'Health Equity Research'}
                     </p>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📧 البريد الإلكتروني:' : '📧 Email:'}
-                        </h4>
-                        <a href="mailto:komeiham@mcmaster.ca" className="text-healthTeal hover:underline break-all">
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'باحثة في المساواة الصحية متخصصة في طب الأسنان والعلوم الصحية التطبيقية. تركز على الصحة الرقمية والرعاية التي تركز على المريض.'
+                          : 'Health equity researcher specializing in dentistry and applied health sciences. Focuses on digital health and patient-centered care addressing social determinants.'}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <Mail className="h-3 w-3 text-healthTeal" />
+                        <a href="mailto:komeiham@mcmaster.ca" className="text-healthTeal hover:underline truncate">
                           komeiham@mcmaster.ca
                         </a>
                       </div>
-                      
-                      <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-200">
-                        <div>
-                          <p className="text-sm text-gray-600 mb-1">
-                            {language === 'ar' ? 'الخبرة' : 'Experience'}
-                          </p>
-                          <p className="font-semibold text-healthDarkBlue">
-                            {language === 'ar' ? '٤ سنوات' : '4 years'}
+
+                      {expandedResearcher === 'menna' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div className="grid grid-cols-2 gap-3">
+                            <div>
+                              <p className="text-xs text-gray-600">{language === 'ar' ? 'الخبرة' : 'Experience'}</p>
+                              <p className="text-sm font-semibold text-healthDarkBlue">{language === 'ar' ? '٤ سنوات' : '4 years'}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">{language === 'ar' ? 'اللغات' : 'Languages'}</p>
+                              <p className="text-sm font-semibold text-healthDarkBlue">{language === 'ar' ? 'العربية، الإنجليزية' : 'Arabic, English'}</p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? 'المؤهلات:' : 'Credentials:'}</p>
+                            <div className="flex flex-wrap gap-1">
+                              <span className="px-2 py-0.5 bg-healthTeal/10 text-healthTeal rounded-full text-xs">BDS</span>
+                              <span className="px-2 py-0.5 bg-healthTeal/10 text-healthTeal rounded-full text-xs">GDip</span>
+                              <span className="px-2 py-0.5 bg-healthTeal/10 text-healthTeal rounded-full text-xs">MSc</span>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'منة قميحة باحثة في المساواة الصحية ولديها خلفية في طب الأسنان والعلوم الصحية التطبيقية والصحة العالمية. يركز بحثها على الصحة الرقمية، والرعاية التي تركز على المريض، وتعزيز المساواة الصحية من خلال معالجة المحددات الاجتماعية للصحة. تطبق الأساليب النوعية والكمية لإنتاج أدلة تفيد السياسات والممارسات.'
+                              : 'Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice.'}
                           </p>
                         </div>
-                        <div>
-                          <p className="text-sm text-gray-600 mb-1">
-                            {language === 'ar' ? 'اللغات' : 'Languages'}
-                          </p>
-                          <p className="font-semibold text-healthDarkBlue">
-                            {language === 'ar' ? 'العربية، الإنجليزية' : 'Arabic, English'}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <p className="text-sm text-gray-600 mb-2">
-                          {language === 'ar' ? 'المؤهلات:' : 'Credentials:'}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">BDS</span>
-                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">GDip</span>
-                          <span className="px-3 py-1 bg-healthTeal/10 text-healthTeal rounded-full text-sm font-medium">MSc</span>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
-                        </h4>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          {language === 'ar'
-                            ? 'منة قميحة باحثة في المساواة الصحية ولديها خلفية في طب الأسنان والعلوم الصحية التطبيقية والصحة العالمية. يركز بحثها على الصحة الرقمية، والرعاية التي تركز على المريض، وتعزيز المساواة الصحية من خلال معالجة المحددات الاجتماعية للصحة. تطبق الأساليب النوعية والكمية لإنتاج أدلة تفيد السياسات والممارسات.'
-                            : 'Menna Komeiha is a health equity researcher with a background in dentistry, applied health science, and global health. Her research focuses on digital health, patient-centered care, and advancing health equity through tackling the social determinants of health. She applies both qualitative and quantitative methods to generate evidence that informs policy and practice.'}
-                        </p>
-                      </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('menna')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthTeal hover:text-healthDarkBlue transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'menna' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
                   </CardContent>
                 </Card>
 
                 {/* Mahmoud El-Maklizi */}
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthPurple/20 hover:border-healthPurple/40">
-                  <div className="bg-gradient-to-br from-healthPurple/10 to-healthPurple/5 p-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-healthPurple to-healthPurple/70 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <FlaskConical className="h-16 w-16 text-white" />
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthPurple/20 hover:border-healthPurple/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthPurple/10 to-healthPurple/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthPurple to-healthPurple/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <FlaskConical className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'محمود المقلزي' : 'Mahmoud El-Maklizi'}
                     </h3>
-                    <p className="text-center text-healthPurple font-semibold mb-1">
-                      {language === 'ar' ? 'باحث ما بعد الدكتوراه' : 'Postdoctoral Research Fellow'}
+                    <p className="text-sm text-healthPurple font-semibold">
+                      {language === 'ar' ? 'باحث ما بعد الدكتوراه' : 'Postdoctoral Fellow'}
                     </p>
-                    <p className="text-center text-gray-600 text-sm">
-                      {language === 'ar' 
-                        ? 'معهد أبحاث مستشفى تورونتو العام (TGHRI), UHN' 
-                        : 'Toronto General Hospital Research Institute (TGHRI), UHN'}
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'TGHRI, UHN' : 'TGHRI, UHN'}
                     </p>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🏛️ الانتماء:' : '🏛️ Affiliation:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar'
-                            ? 'جامعة تورنتو / شبكة الصحة الجامعية'
-                            : 'University of Toronto / University Health Network'}
-                        </p>
-                      </div>
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'باحث في معهد أبحاث مستشفى تورونتو العام متخصص في علم المناعة. يدرس تطوير وتنظيم الخلايا البلازمية التنظيمية.'
+                          : 'Researcher at Toronto General Hospital Research Institute specializing in immunology. Studies development and regulation of regulatory plasma cells.'}
+                      </p>
                       
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
-                        </p>
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <MapPin className="h-3 w-3 text-healthPurple" />
+                        <span>{language === 'ar' ? 'تورونتو، أونتاريو' : 'Toronto, Ontario'}</span>
                       </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? 'نبذة عنه:' : 'About:'}
-                        </h4>
-                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
-                          {language === 'ar'
-                            ? 'محمود المقلزي هو باحث ما بعد الدكتوراه في مختبر كلينت روبنز في معهد أبحاث مستشفى تورونتو العام. يستكشف عمله تطوير وتنظيم ووظيفة الخلايا البلازمية التنظيمية، حيث يجمع بين البحث الجزيئي التفصيلي والإرشاد لطلاب الدراسات العليا. إنه شغوف بترجمة أبحاث علم المناعة إلى تطبيقات ذات معنى تحسن رعاية المرضى.'
-                            : "Mahmoud El-Maklizi is a Postdoctoral Research Fellow in Clint Robbins' Lab at the Toronto General Hospital Research Institute. His work explores the development, regulation, and function of regulatory plasma cells, combining detailed molecular research with mentorship for graduate students. He is passionate about translating immunology research into meaningful applications that improve patient care."}
-                        </p>
-                        <p className="text-gray-700 leading-relaxed text-sm italic">
-                          {language === 'ar'
-                            ? 'بعيدًا عن العلم، محمود فنان يرسم باستخدام القلم الرصاص والفحم والحبر. يعزو قيمه العائلية القريبة لتشكيل نهجه التعاوني في المختبر وأسلوب إرشاده.'
-                            : 'Beyond science, Mahmoud is an artist who paints using pencil, charcoal, and ink. He credits his close family values for shaping his collaborative approach in the lab and his mentorship style.'}
-                        </p>
-                      </div>
+
+                      {expandedResearcher === 'mahmoud' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🏛️ الانتماء:' : '🏛️ Affiliation:'}</p>
+                            <p className="text-sm text-gray-700">
+                              {language === 'ar' ? 'جامعة تورنتو / شبكة الصحة الجامعية' : 'University of Toronto / University Health Network'}
+                            </p>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'محمود المقلزي هو باحث ما بعد الدكتوراه في مختبر كلينت روبنز في معهد أبحاث مستشفى تورونتو العام. يستكشف عمله تطوير وتنظيم ووظيفة الخلايا البلازمية التنظيمية، حيث يجمع بين البحث الجزيئي التفصيلي والإرشاد لطلاب الدراسات العليا. إنه شغوف بترجمة أبحاث علم المناعة إلى تطبيقات ذات معنى تحسن رعاية المرضى.'
+                              : "Mahmoud El-Maklizi is a Postdoctoral Research Fellow in Clint Robbins' Lab at the Toronto General Hospital Research Institute. His work explores the development, regulation, and function of regulatory plasma cells, combining detailed molecular research with mentorship for graduate students. He is passionate about translating immunology research into meaningful applications that improve patient care."}
+                          </p>
+                          <p className="text-sm text-gray-700 leading-relaxed italic">
+                            {language === 'ar'
+                              ? 'بعيدًا عن العلم، محمود فنان يرسم باستخدام القلم الرصاص والفحم والحبر. يعزو قيمه العائلية القريبة لتشكيل نهجه التعاوني في المختبر وأسلوب إرشاده.'
+                              : 'Beyond science, Mahmoud is an artist who paints using pencil, charcoal, and ink. He credits his close family values for shaping his collaborative approach in the lab and his mentorship style.'}
+                          </p>
+                        </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('mahmoud')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthPurple hover:text-healthDarkBlue transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'mahmoud' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
                   </CardContent>
                 </Card>
 
                 {/* Dr. Delaney Glass */}
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
-                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <GraduationCap className="h-16 w-16 text-white" />
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthDarkBlue/20 hover:border-healthDarkBlue/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <GraduationCap className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'د. ديلاني غلاس' : 'Dr. Delaney Glass'}
                     </h3>
-                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                    <p className="text-sm text-healthDarkBlue font-semibold">
                       {language === 'ar' ? 'أستاذ مساعد' : 'Assistant Professor'}
                     </p>
-                    <p className="text-center text-gray-600 text-sm">
-                      {language === 'ar' 
-                        ? 'جامعة تورنتو - حرم سانت جورج' 
-                        : 'University of Toronto – St. George Campus'}
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'جامعة تورنتو' : 'University of Toronto'}
                     </p>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📧 البريد الإلكتروني:' : '📧 Email:'}
-                        </h4>
-                        <a href="mailto:delaney.glass@utoronto.ca" className="text-healthTeal hover:underline break-all">
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'عالمة أنثروبولوجيا طبية وبيولوجية متخصصة في صحة المراهقين والشتات العربي. تبحث في تأثير الصدمات المبكرة على النمو.'
+                          : 'Medical and biocultural anthropologist specializing in adolescent health and Arab diaspora. Examines early life stress impacts on development.'}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <Mail className="h-3 w-3 text-healthDarkBlue" />
+                        <a href="mailto:delaney.glass@utoronto.ca" className="text-healthTeal hover:underline truncate">
                           delaney.glass@utoronto.ca
                         </a>
                       </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🔬 مجالات الدراسة:' : '🔬 Fields of Study:'}
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'الأنثروبولوجيا التطورية' : 'Evolutionary Anthropology'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'الأنثروبولوجيا الطبية' : 'Medical Anthropology'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'الصحة العامة' : 'Public Health'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'علم الأحياء البشرية' : 'Human Biology'}
-                          </span>
+
+                      {expandedResearcher === 'delaney' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🔬 مجالات الدراسة:' : '🔬 Fields:'}</p>
+                            <div className="flex flex-wrap gap-1">
+                              <span className="px-2 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs">
+                                {language === 'ar' ? 'الأنثروبولوجيا' : 'Anthropology'}
+                              </span>
+                              <span className="px-2 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs">
+                                {language === 'ar' ? 'الصحة العامة' : 'Public Health'}
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'الدكتورة ديلاني غلاس هي عالمة أنثروبولوجيا بيولوجية ثقافية تعمل بشكل أساسي مع المجتمعات العربية في أمريكا الشمالية والأردن. يستكشف بحثها الدوافع البيولوجية الثقافية والعواقب الصحية للمحن المبكرة في الحياة وعدم المساواة الاجتماعية على نمو الطفل والمراهق، والتطور البلوغي، والصحة النفسية.'
+                              : 'Dr. Delaney Glass is a mixed-methods biocultural anthropologist working primarily with Arab communities in North America and Jordan. Her research explores the biocultural drivers and health consequences of early life adversity and social inequalities on child and adolescent growth, pubertal development, and mental health.'}
+                          </p>
                         </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🌍 مجالات الاهتمام:' : '🌍 Areas of Interest:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm leading-relaxed">
-                          {language === 'ar'
-                            ? 'صحة ورفاهية الأطفال والمراهقين، علم الغدد الصماء العصبية النفسية، الأنثروبولوجيا البيولوجية الثقافية، الشتات العربي، النزوح، الصراع، عدم المساواة الاجتماعية، والمرونة'
-                            : 'Child and adolescent health and well-being, psychoneuroendocrinology, biocultural anthropology, Arab diaspora, displacement, conflict, social inequality, and resilience'}
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📍 المناطق البحثية:' : '📍 Research Regions:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'الأردن، كندا' : 'Jordan, Canada'}
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
-                        </h4>
-                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
-                          {language === 'ar'
-                            ? 'الدكتورة ديلاني غلاس هي عالمة أنثروبولوجيا بيولوجية ثقافية وعالمة أحياء بشرية ذات طرق بحث مختلطة تعمل بشكل أساسي مع المجتمعات العربية في أمريكا الشمالية والأردن. يستكشف بحثها الدوافع البيولوجية الثقافية والعواقب الصحية للمحن المبكرة في الحياة وعدم المساواة الاجتماعية على نمو الطفل والمراهق، والتطور البلوغي، والصحة النفسية. تدمج أطر من الأنثروبولوجيا الطبية وعلم الأحياء التطوري والبحوث الصحية النوعية لفهم أفضل لكيفية تشكيل السياق والثقافة للنتائج الصحية.'
-                            : 'Dr. Delaney Glass is a mixed-methods biocultural anthropologist and human biologist working primarily with Arab communities in North America and Jordan. Her research explores the biocultural drivers and health consequences of early life adversity and social inequalities on child and adolescent growth, pubertal development, and mental health. She integrates frameworks from medical anthropology, evolutionary biology, and qualitative health research to better understand how context and culture shape health outcomes.'}
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🎓 التعليم:' : '🎓 Education:'}
-                        </h4>
-                        <div className="space-y-2 text-sm text-gray-700">
-                          <div className="flex items-start gap-2">
-                            <span className="text-healthDarkBlue">•</span>
-                            <span>
-                              {language === 'ar' 
-                                ? 'دكتوراه، الأنثروبولوجيا البيولوجية – جامعة واشنطن'
-                                : 'PhD, Biological Anthropology – University of Washington'}
-                            </span>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <span className="text-healthDarkBlue">•</span>
-                            <span>
-                              {language === 'ar' 
-                                ? 'ماجستير في الصحة العامة، علم الأوبئة (صحة الأم والطفل) – جامعة واشنطن (2023)'
-                                : 'MPH, Epidemiology (Maternal & Child Health) – University of Washington (2023)'}
-                            </span>
-                          </div>
-                          <div className="flex items-start gap-2">
-                            <span className="text-healthDarkBlue">•</span>
-                            <span>
-                              {language === 'ar' 
-                                ? 'ماجستير، الأنثروبولوجيا البيولوجية – جامعة واشنطن (2020)'
-                                : 'MA, Biological Anthropology – University of Washington (2020)'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('delaney')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthDarkBlue hover:text-healthTeal transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'delaney' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
                   </CardContent>
                 </Card>
 
                 {/* Dr. Emine Fidan Elcioglu */}
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
-                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <GraduationCap className="h-16 w-16 text-white" />
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthTeal/20 hover:border-healthTeal/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthTeal to-healthTeal/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <GraduationCap className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'د. إمين فيدان إلسيوغلو' : 'Dr. Emine Fidan Elcioglu'}
                     </h3>
-                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                    <p className="text-sm text-healthTeal font-semibold">
                       {language === 'ar' ? 'أستاذ مشارك' : 'Associate Professor'}
                     </p>
-                    <p className="text-center text-gray-600 text-sm">
-                      {language === 'ar' 
-                        ? 'قسم علم الاجتماع، جامعة تورنتو' 
-                        : 'Department of Sociology, University of Toronto'}
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'علم الاجتماع، جامعة تورنتو' : 'Sociology, U of T'}
                     </p>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🎓 التعليم:' : '🎓 Education:'}
-                        </h4>
-                        <div className="space-y-2 text-sm text-gray-700">
-                          <div className="flex items-start gap-2">
-                            <span className="text-healthDarkBlue">•</span>
-                            <span>
-                              {language === 'ar' 
-                                ? 'دكتوراه في علم الاجتماع – جامعة كاليفورنيا، بيركلي'
-                                : 'Ph.D. in Sociology – University of California, Berkeley'}
-                            </span>
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'أستاذ علم الاجتماع متخصص في سياسات الهجرة ودراسات العرق والإثنية. يفحص بحثها عدم المساواة والهيمنة والمقاومة.'
+                          : 'Sociology professor specializing in immigration politics, race, and ethnicity studies. Examines inequality, domination, and resistance dynamics.'}
+                      </p>
+
+                      {expandedResearcher === 'emine' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🎓 التعليم:' : '🎓 Education:'}</p>
+                            <div className="space-y-1 text-sm text-gray-700">
+                              <div className="flex items-start gap-1">
+                                <span className="text-healthTeal text-xs">•</span>
+                                <span className="text-xs">{language === 'ar' ? 'دكتوراه، UC Berkeley' : 'Ph.D., UC Berkeley'}</span>
+                              </div>
+                              <div className="flex items-start gap-1">
+                                <span className="text-healthTeal text-xs">•</span>
+                                <span className="text-xs">{language === 'ar' ? 'بكالوريوس، جامعة شيكاغو' : 'B.A., U of Chicago'}</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-start gap-2">
-                            <span className="text-healthDarkBlue">•</span>
-                            <span>
-                              {language === 'ar' 
-                                ? 'بكالوريوس في الاقتصاد والتاريخ – جامعة شيكاغو'
-                                : 'B.A. in Economics and History – University of Chicago'}
-                            </span>
-                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'الدكتورة إمين فيدان إلسيوغلو هي أستاذ مشارك في علم الاجتماع بجامعة تورنتو. يدرس بحثها سياسات الهجرة كنافذة على ديناميكيات أوسع من عدم المساواة والهيمنة والمقاومة. هي مؤلفة كتاب "مقسمون بالجدار: سياسات الهجرة التقدمية والمحافظة على الحدود الأمريكية المكسيكية" (مطبعة جامعة كاليفورنيا، 2020).'
+                              : "Dr. Emine Fidan Elcioglu is an Associate Professor of Sociology at the University of Toronto. Her research examines immigration politics as a window into broader dynamics of inequality, domination, and resistance. She is the author of Divided by the Wall: Progressive and Conservative Immigration Politics at the U.S.–Mexico Border (University of California Press, 2020)."}
+                          </p>
                         </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'دراسات الهجرة النقدية' : 'Critical Migration Studies'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'العرق والإثنية' : 'Race and Ethnicity'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'طرق البحث النوعي' : 'Qualitative Research Methods'}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
-                        </h4>
-                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
-                          {language === 'ar'
-                            ? 'الدكتورة إمين فيدان إلسيوغلو هي أستاذ مشارك في علم الاجتماع بجامعة تورنتو. يدرس بحثها سياسات الهجرة كنافذة على ديناميكيات أوسع من عدم المساواة والهيمنة والمقاومة. هي مؤلفة كتاب "مقسمون بالجدار: سياسات الهجرة التقدمية والمحافظة على الحدود الأمريكية المكسيكية" (مطبعة جامعة كاليفورنيا، 2020)، وهي دراسة إثنوغرافية تبحث لماذا يحشد الأمريكيون العاديون حول سياسات الهجرة حتى عندما يشكون في أن أفعالهم ستحدث تغييراً.'
-                            : "Dr. Emine Fidan Elcioglu is an Associate Professor of Sociology at the University of Toronto. Her research examines immigration politics as a window into broader dynamics of inequality, domination, and resistance. She is the author of Divided by the Wall: Progressive and Conservative Immigration Politics at the U.S.–Mexico Border (University of California Press, 2020), an ethnographic study of why ordinary Americans mobilize around immigration politics even when they doubt their actions will bring change."}
-                        </p>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          {language === 'ar'
-                            ? 'نشرت مؤخراً عن جاذبية السياسة المحافظة بين أبناء المهاجرين، وترابط البيئة والتقييدية، والعلاقة بين الأسلحة والحركات المعادية للأجانب، والعواقب السياسية لنظام رعاية اللاجئين الخاص في كندا.'
-                            : "Most recently, she has also published on the appeal of conservative politics among the children of immigrants, the entanglement of environmentalism and restrictionism, the relationship between guns and nativist movements, and the political consequences of Canada's private refugee sponsorship system."}
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
-                        </p>
-                      </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('emine')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthTeal hover:text-healthDarkBlue transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'emine' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
                   </CardContent>
                 </Card>
 
                 {/* Dr. Rania Salem */}
-                <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-healthDarkBlue/20 hover:border-healthDarkBlue/40">
-                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <GraduationCap className="h-16 w-16 text-white" />
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthPurple/20 hover:border-healthPurple/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthPurple/10 to-healthPurple/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthPurple to-healthPurple/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <GraduationCap className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className={`text-2xl font-bold text-healthDarkBlue text-center mb-2 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
                       {language === 'ar' ? 'د. رانيا سالم' : 'Dr. Rania Salem'}
                     </h3>
-                    <p className="text-center text-healthDarkBlue font-semibold mb-1">
+                    <p className="text-sm text-healthPurple font-semibold">
                       {language === 'ar' ? 'أستاذ مشارك' : 'Associate Professor'}
                     </p>
-                    <p className="text-center text-gray-600 text-sm">
-                      {language === 'ar' 
-                        ? 'قسم علم الاجتماع، جامعة تورنتو' 
-                        : 'Department of Sociology, University of Toronto'}
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'علم الاجتماع، جامعة تورنتو' : 'Sociology, U of T'}
                     </p>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🔬 مجالات البحث والتدريس:' : '🔬 Teaching and Research Interests:'}
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'علم اجتماع الأسرة' : 'Sociology of Families'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'دراسات النوع الاجتماعي' : 'Gender Studies'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'علم الاجتماع الاقتصادي' : 'Economic Sociology'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'التنمية الدولية' : 'International Development'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'علم السكان الاجتماعي' : 'Social Demography'}
-                          </span>
-                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
-                            {language === 'ar' ? 'دراسات الشرق الأوسط' : 'Middle East Studies'}
-                          </span>
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'أستاذ علم الاجتماع متخصص في الأسرة والنوع الاجتماعي ودراسات الشرق الأوسط. تبحث في ديناميكيات الزواج والعمل والوكالة.'
+                          : 'Sociology professor specializing in families, gender, and Middle East studies. Researches marriage dynamics, work, and women\'s agency.'}
+                      </p>
+
+                      {expandedResearcher === 'rania' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p>
+                            <div className="flex flex-wrap gap-1">
+                              <span className="px-2 py-0.5 bg-healthPurple/10 text-healthPurple rounded-full text-xs">
+                                {language === 'ar' ? 'الأسرة' : 'Families'}
+                              </span>
+                              <span className="px-2 py-0.5 bg-healthPurple/10 text-healthPurple rounded-full text-xs">
+                                {language === 'ar' ? 'النوع الاجتماعي' : 'Gender'}
+                              </span>
+                              <span className="px-2 py-0.5 bg-healthPurple/10 text-healthPurple rounded-full text-xs">
+                                {language === 'ar' ? 'الشرق الأوسط' : 'Middle East'}
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'تقع اهتمامات البروفيسورة سالم التعليمية والبحثية عند تقاطع علم اجتماع الأسرة، ودراسات النوع الاجتماعي، وعلم الاجتماع الاقتصادي، والتنمية الدولية، وعلم السكان الاجتماعي، ودراسات الشرق الأوسط. درست آثار النفقات الزوجية في مصر على توقيت الزواج، وقوة المرأة داخل الزواج، والزيجات السرية.'
+                              : "Professor Salem's teaching and research interests lie at the intersection of the sociology of families, gender studies, economic sociology, international development, social demography, and Middle East studies. She has studied the implications of matrimonial expenditures in Egypt for marriage timing, women's power within marriage, and secret marriages."}
+                          </p>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'يستخدم مشروعها الحالي مقابلات نوعية مع الأزواج ذوي الدخل المزدوج في مصر لاستكشاف كيف يُفهم ويُعامل المال المماثل ظاهرياً بشكل مختلف بناءً على جنس المكتسب.'
+                              : 'Her current project uses qualitative interviews with dual-earning couples in Egypt to explore how seemingly similar monies are understood and treated differently based on the gender of the earner.'}
+                          </p>
                         </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
-                        </h4>
-                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
-                          {language === 'ar'
-                            ? 'تقع اهتمامات البروفيسورة سالم التعليمية والبحثية عند تقاطع علم اجتماع الأسرة، ودراسات النوع الاجتماعي، وعلم الاجتماع الاقتصادي، والتنمية الدولية، وعلم السكان الاجتماعي، ودراسات الشرق الأوسط. درست آثار النفقات الزوجية في مصر على توقيت الزواج، وقوة المرأة داخل الزواج، والزيجات السرية.'
-                            : "Professor Salem's teaching and research interests lie at the intersection of the sociology of families, gender studies, economic sociology, international development, social demography, and Middle East studies. She has studied the implications of matrimonial expenditures in Egypt for marriage timing, women's power within marriage, and secret marriages."}
-                        </p>
-                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
-                          {language === 'ar'
-                            ? 'تعاونت أيضاً في مشاريع تبحث كيف تؤثر تجارب العنف من الشريك الحميم على أداء أنواع مختلفة من العمل بين النساء المصريات، وتأثير أنواع مختلفة من عمل المرأة على سلطتها في مصر، وتأثيرات الأقارب على انتقالات الشابات إلى سوق العمل في قطر.'
-                            : 'She has also collaborated on projects that investigate how experiences of intimate partner violence influence the performance of different types of work among Egyptian women, the impact of various types of women\'s work on their agency in Egypt, and kin influences on young women\'s transitions into the labor force in Qatar.'}
-                        </p>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                          {language === 'ar'
-                            ? 'يستخدم مشروعها الحالي مقابلات نوعية مع الأزواج ذوي الدخل المزدوج في مصر لاستكشاف كيف يُفهم ويُعامل المال المماثل ظاهرياً بشكل مختلف بناءً على جنس المكتسب. تم تمويل أبحاث سالم من قبل المركز الدولي لبحوث التنمية، ومنتدى البحوث الاقتصادية، وصندوق قطر الوطني للبحوث، ونُشرت أبحاثها في مجلة قضايا الأسرة، والبحوث الديموغرافية، والنوع الاجتماعي والعمل والتنظيم، وعلم الاجتماع النوعي، وغيرها.'
-                            : 'Her current project uses qualitative interviews with dual-earning couples in Egypt to explore how seemingly similar monies are understood and treated differently based on the gender of the earner. Salem\'s research has been funded by the International Development Research Center, the Economic Research Forum, and the Qatar National Research Fund, and her research has been published in Journal of Family Issues, Demographic Research, Gender, Work & Organization, and Qualitative Sociology, among others.'}
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '📍 الموقع:' : '📍 Location:'}
-                        </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'تورونتو، أونتاريو، كندا' : 'Toronto, Ontario, Canada'}
-                        </p>
-                      </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('rania')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthPurple hover:text-healthDarkBlue transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'rania' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
                   </CardContent>
                 </Card>
-              </div>
-
-              {/* View All Researchers Button */}
-              <div className="text-center mt-10">
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white transition-all duration-300"
-                  disabled
-                >
-                  <GraduationCap className="h-4 w-4 mr-2" />
-                  {language === 'ar' ? 'عرض جميع الباحثين (قريبًا)' : 'View All Researchers (Coming Soon)'}
-                </Button>
               </div>
             </div>
 
