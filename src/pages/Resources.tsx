@@ -763,10 +763,58 @@ const Resources = () => {
                     <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                       <div>
                         <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🔬 التخصص:' : '🔬 Specialization:'}
+                          {language === 'ar' ? '🎓 التعليم:' : '🎓 Education:'}
                         </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'علم الاجتماع' : 'Sociology'}
+                        <div className="space-y-2 text-sm text-gray-700">
+                          <div className="flex items-start gap-2">
+                            <span className="text-healthDarkBlue">•</span>
+                            <span>
+                              {language === 'ar' 
+                                ? 'دكتوراه في علم الاجتماع – جامعة كاليفورنيا، بيركلي'
+                                : 'Ph.D. in Sociology – University of California, Berkeley'}
+                            </span>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <span className="text-healthDarkBlue">•</span>
+                            <span>
+                              {language === 'ar' 
+                                ? 'بكالوريوس في الاقتصاد والتاريخ – جامعة شيكاغو'
+                                : 'B.A. in Economics and History – University of Chicago'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'دراسات الهجرة النقدية' : 'Critical Migration Studies'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'العرق والإثنية' : 'Race and Ethnicity'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'طرق البحث النوعي' : 'Qualitative Research Methods'}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
+                          {language === 'ar'
+                            ? 'الدكتورة إمين فيدان إلسيوغلو هي أستاذ مشارك في علم الاجتماع بجامعة تورنتو. يدرس بحثها سياسات الهجرة كنافذة على ديناميكيات أوسع من عدم المساواة والهيمنة والمقاومة. هي مؤلفة كتاب "مقسمون بالجدار: سياسات الهجرة التقدمية والمحافظة على الحدود الأمريكية المكسيكية" (مطبعة جامعة كاليفورنيا، 2020)، وهي دراسة إثنوغرافية تبحث لماذا يحشد الأمريكيون العاديون حول سياسات الهجرة حتى عندما يشكون في أن أفعالهم ستحدث تغييراً.'
+                            : "Dr. Emine Fidan Elcioglu is an Associate Professor of Sociology at the University of Toronto. Her research examines immigration politics as a window into broader dynamics of inequality, domination, and resistance. She is the author of Divided by the Wall: Progressive and Conservative Immigration Politics at the U.S.–Mexico Border (University of California Press, 2020), an ethnographic study of why ordinary Americans mobilize around immigration politics even when they doubt their actions will bring change."}
+                        </p>
+                        <p className="text-gray-700 leading-relaxed text-sm">
+                          {language === 'ar'
+                            ? 'نشرت مؤخراً عن جاذبية السياسة المحافظة بين أبناء المهاجرين، وترابط البيئة والتقييدية، والعلاقة بين الأسلحة والحركات المعادية للأجانب، والعواقب السياسية لنظام رعاية اللاجئين الخاص في كندا.'
+                            : "Most recently, she has also published on the appeal of conservative politics among the children of immigrants, the entanglement of environmentalism and restrictionism, the relationship between guns and nativist movements, and the political consequences of Canada's private refugee sponsorship system."}
                         </p>
                       </div>
                       
@@ -805,10 +853,48 @@ const Resources = () => {
                     <div className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                       <div>
                         <h4 className="font-semibold text-healthDarkBlue mb-2">
-                          {language === 'ar' ? '🔬 التخصص:' : '🔬 Specialization:'}
+                          {language === 'ar' ? '🔬 مجالات البحث والتدريس:' : '🔬 Teaching and Research Interests:'}
                         </h4>
-                        <p className="text-gray-700 text-sm">
-                          {language === 'ar' ? 'علم الاجتماع' : 'Sociology'}
+                        <div className="flex flex-wrap gap-2">
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'علم اجتماع الأسرة' : 'Sociology of Families'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'دراسات النوع الاجتماعي' : 'Gender Studies'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'علم الاجتماع الاقتصادي' : 'Economic Sociology'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'التنمية الدولية' : 'International Development'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'علم السكان الاجتماعي' : 'Social Demography'}
+                          </span>
+                          <span className="px-3 py-1 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs font-medium">
+                            {language === 'ar' ? 'دراسات الشرق الأوسط' : 'Middle East Studies'}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="font-semibold text-healthDarkBlue mb-2">
+                          {language === 'ar' ? 'نبذة عنها:' : 'About:'}
+                        </h4>
+                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
+                          {language === 'ar'
+                            ? 'تقع اهتمامات البروفيسورة سالم التعليمية والبحثية عند تقاطع علم اجتماع الأسرة، ودراسات النوع الاجتماعي، وعلم الاجتماع الاقتصادي، والتنمية الدولية، وعلم السكان الاجتماعي، ودراسات الشرق الأوسط. درست آثار النفقات الزوجية في مصر على توقيت الزواج، وقوة المرأة داخل الزواج، والزيجات السرية.'
+                            : "Professor Salem's teaching and research interests lie at the intersection of the sociology of families, gender studies, economic sociology, international development, social demography, and Middle East studies. She has studied the implications of matrimonial expenditures in Egypt for marriage timing, women's power within marriage, and secret marriages."}
+                        </p>
+                        <p className="text-gray-700 leading-relaxed text-sm mb-3">
+                          {language === 'ar'
+                            ? 'تعاونت أيضاً في مشاريع تبحث كيف تؤثر تجارب العنف من الشريك الحميم على أداء أنواع مختلفة من العمل بين النساء المصريات، وتأثير أنواع مختلفة من عمل المرأة على سلطتها في مصر، وتأثيرات الأقارب على انتقالات الشابات إلى سوق العمل في قطر.'
+                            : 'She has also collaborated on projects that investigate how experiences of intimate partner violence influence the performance of different types of work among Egyptian women, the impact of various types of women\'s work on their agency in Egypt, and kin influences on young women\'s transitions into the labor force in Qatar.'}
+                        </p>
+                        <p className="text-gray-700 leading-relaxed text-sm">
+                          {language === 'ar'
+                            ? 'يستخدم مشروعها الحالي مقابلات نوعية مع الأزواج ذوي الدخل المزدوج في مصر لاستكشاف كيف يُفهم ويُعامل المال المماثل ظاهرياً بشكل مختلف بناءً على جنس المكتسب. تم تمويل أبحاث سالم من قبل المركز الدولي لبحوث التنمية، ومنتدى البحوث الاقتصادية، وصندوق قطر الوطني للبحوث، ونُشرت أبحاثها في مجلة قضايا الأسرة، والبحوث الديموغرافية، والنوع الاجتماعي والعمل والتنظيم، وعلم الاجتماع النوعي، وغيرها.'
+                            : 'Her current project uses qualitative interviews with dual-earning couples in Egypt to explore how seemingly similar monies are understood and treated differently based on the gender of the earner. Salem\'s research has been funded by the International Development Research Center, the Economic Research Forum, and the Qatar National Research Fund, and her research has been published in Journal of Family Issues, Demographic Research, Gender, Work & Organization, and Qualitative Sociology, among others.'}
                         </p>
                       </div>
                       
