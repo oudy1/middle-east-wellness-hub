@@ -14,7 +14,8 @@ import {
   Mail,
   UserCheck,
   UserPlus,
-  Heart
+  Heart,
+  Pill
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -228,6 +229,50 @@ const Services = () => {
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <BookOpen className="h-4 w-4" />
                       {language === 'ar' ? 'تنزيل PDF' : 'Download PDF'}
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* AboutKidsHealth Arabic Resource */}
+              <Card className="hover:shadow-lg transition-shadow">
+                <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-6">
+                  <Pill className="h-20 w-20 text-healthTeal" />
+                </div>
+                <CardHeader className="pb-3">
+                  <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'معلومات صحية باللغة العربية – موقع AboutKidsHealth' : 
+                      'Health Information in Arabic – AboutKidsHealth'
+                    }
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'اكتشف معلومات موثوقة حول الأدوية والحالات الصحية والعلاجات — متوفرة الآن باللغة العربية عبر موقع AboutKidsHealth التابع لمستشفى الأطفال SickKids.' : 
+                      'Explore trusted, evidence-based information about medications, health conditions, and treatments — now available in Arabic through AboutKidsHealth (SickKids Hospital).'
+                    }
+                  </p>
+                  {language !== 'ar' && (
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                      اكتشف معلومات موثوقة حول الأدوية والحالات الصحية والعلاجات — متوفرة الآن باللغة العربية عبر موقع AboutKidsHealth التابع لمستشفى الأطفال SickKids.
+                    </p>
+                  )}
+                  <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 
+                      'المصدر: مستشفى الأطفال المرضى (SickKids)' : 
+                      'Source: The Hospital for Sick Children (SickKids)'
+                    }
+                  </p>
+                  <a 
+                    href="https://www.aboutkidshealth.ca/ar/health-information-in-arabic/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      {language === 'ar' ? 'زيارة الموقع' : 'Visit Website'}
                     </Button>
                   </a>
                 </CardContent>
