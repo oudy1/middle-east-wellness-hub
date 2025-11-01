@@ -14,11 +14,11 @@ import {
   Mail,
   UserCheck,
   UserPlus,
-  Heart,
-  Pill
+  Heart
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import sickKidsLogo from "@/assets/sickkids-logo.svg";
 
 const Services = () => {
   const { t, language } = useLanguage();
@@ -236,8 +236,8 @@ const Services = () => {
 
               {/* AboutKidsHealth Arabic Resource */}
               <Card className="hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-6">
-                  <Pill className="h-20 w-20 text-healthTeal" />
+                <div className="aspect-video bg-white flex items-center justify-center p-6">
+                  <img src={sickKidsLogo} alt="SickKids Hospital Logo" className="h-20 w-auto object-contain" />
                 </div>
                 <CardHeader className="pb-3">
                   <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
