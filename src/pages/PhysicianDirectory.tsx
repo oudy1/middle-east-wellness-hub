@@ -114,6 +114,28 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     telehealthAvailable: false,
     accepting: true,
     credentials: ["MD", "Assistant Professor at University of Toronto", "Staff Medical Oncologist - Phase 1 Clinical Trials and Sarcoma", "Lead - Medical Oncology Sarcoma Program"]
+  },
+  {
+    id: 8,
+    title: "Dr.",
+    firstName: "Muhammad Z.",
+    lastName: "Shrayyef",
+    gender: "Male",
+    languages: ["English", "Arabic"],
+    specialty: "Endocrinology",
+    subspecialty: "Thyroid | Diabetes & Metabolism | Obesity Medicine",
+    yearsInPractice: 0,
+    affiliatedHospitals: ["Thyroid & Hormones Endocrinology Center"],
+    academicTitles: ["Assistant Professor (Clinical Medicine), University of Toronto"],
+    clinicName: "Thyroid & Hormones Endocrinology Center",
+    address: "Toronto, Ontario Canada",
+    coordinates: [-79.3832, 43.6532] as [number, number],
+    phone: "",
+    email: "thyroidandhormones@gmail.com",
+    officeHours: "By Appointment",
+    telehealthAvailable: false,
+    accepting: true,
+    credentials: ["MD", "Assistant Professor (Clinical Medicine), University of Toronto"]
   }
 ];
 
@@ -189,7 +211,8 @@ const SPECIALTIES = [
   "Dermatology",
   "Neurology",
   "Psychiatry",
-  "Obstetrics & Gynecology"
+  "Obstetrics & Gynecology",
+  "Endocrinology"
 ];
 
 const HEALTHCARE_ROLES = [
@@ -321,7 +344,8 @@ const HealthcareWorkersDirectory = () => {
       'Dermatology': 'الأمراض الجلدية',
       'Neurology': 'طب الأعصاب',
       'Orthopedic Surgery': 'جراحة العظام',
-      'Obstetrics & Gynecology': 'النساء والتوليد'
+      'Obstetrics & Gynecology': 'النساء والتوليد',
+      'Endocrinology': 'الغدد الصماء'
     };
     
     return specialtyTranslations[specialty] || specialty;
