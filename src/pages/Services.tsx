@@ -413,6 +413,180 @@ const Services = () => {
             </p>
           </div>
         </section>
+
+        {/* Cardiovascular Health - Arabic Infographics */}
+        <section className="py-12 md:py-16 bg-red-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Heart className="h-8 w-8 text-red-500 fill-red-500" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🫀 صحة القلب والأوعية الدموية (إنفوغرافيك بالعربية)' : '🫀 Cardiovascular Health (Arabic Infographics)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'كتيبات توعوية بالعربية حول صحة القلب والأوعية الدموية، الوقاية من أمراض القلب، وإدارة عوامل الخطر مثل السكري وضغط الدم والكوليسترول.' : 
+                'Arabic-language educational booklets about cardiovascular health, heart disease prevention, and managing risk factors like diabetes, blood pressure, and cholesterol.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Resource 1: Diabetes */}
+              <Card className="hover:shadow-lg transition-shadow border-red-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    داء السكري
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب مبسط باللغة العربية يوضح كيفية الوقاية من داء السكري وإدارته لتحسين صحة القلب.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: CardioSmart – American College of Cardiology
+                  </p>
+                  <a 
+                    href="https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/diabetes-arabic.pdf?sfvrsn=696e0277_2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 2: Blood Pressure */}
+              <Card className="hover:shadow-lg transition-shadow border-red-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    ضغط الدم
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    معلومات أساسية عن ضغط الدم الطبيعي والعوامل التي تساعد على خفضه والوقاية من أمراض القلب.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: CardioSmart – American College of Cardiology
+                  </p>
+                  <a 
+                    href="https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/blood-pressure-arabic.pdf?sfvrsn=102298b6_2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 3: Cholesterol */}
+              <Card className="hover:shadow-lg transition-shadow border-red-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    الكوليسترول
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    إنفوغرافيك يشرح أهمية التحكم في مستويات الكوليسترول للوقاية من أمراض القلب والشرايين.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: CardioSmart – American College of Cardiology
+                  </p>
+                  <a 
+                    href="https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/cholesterol-arabic.pdf?sfvrsn=249562a4_1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 4: Obesity */}
+              <Card className="hover:shadow-lg transition-shadow border-red-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    السمنة
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب يسلط الضوء على العلاقة بين السمنة وصحة القلب وكيفية تبني نمط حياة صحي.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: CardioSmart – American College of Cardiology
+                  </p>
+                  <a 
+                    href="https://www.cardiosmart.org/docs/default-source/assets/infographic/obesity-arabic.pdf?sfvrsn=d8ed4121_2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 5: Stroke */}
+              <Card className="hover:shadow-lg transition-shadow border-red-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Heart className="h-5 w-5 text-red-500" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    السكتة الدماغية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب توعوي يوضح علامات السكتة الدماغية وطرق الوقاية منها وأهمية التدخل السريع.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: CardioSmart – American College of Cardiology
+                  </p>
+                  <a 
+                    href="https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/stroke-arabic.pdf?sfvrsn=972de942_2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed text-right font-cairo" dir="rtl">
+              جميع المواد مقدمة من CardioSmart – American College of Cardiology
+            </p>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
