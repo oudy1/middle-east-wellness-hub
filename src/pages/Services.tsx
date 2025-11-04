@@ -14,7 +14,8 @@ import {
   Mail,
   UserCheck,
   UserPlus,
-  Heart
+  Heart,
+  Activity
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -415,7 +416,7 @@ const Services = () => {
         </section>
 
         {/* Cardiovascular Health - Arabic Infographics */}
-        <section className="py-12 md:py-16 bg-red-50/30">
+        <section id="cardio-health" className="py-12 md:py-16 bg-red-50/30">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Heart className="h-8 w-8 text-red-500 fill-red-500" />
@@ -584,6 +585,132 @@ const Services = () => {
             
             <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed text-right font-cairo" dir="rtl">
               جميع المواد مقدمة من CardioSmart – American College of Cardiology
+            </p>
+          </div>
+        </section>
+
+        {/* Diabetes Education - Arabic Resources */}
+        <section id="diabetes-education" className="py-12 md:py-16 bg-teal-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Activity className="h-8 w-8 text-healthTeal" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🩸 التثقيف حول مرض السكري (مواد باللغة العربية)' : '🩸 Diabetes Education (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'مواد تعليمية شاملة بالعربية حول مرض السكري، أعراضه، أنواعه، وكيفية إدارته للوقاية من المضاعفات وتحسين نوعية الحياة.' : 
+                'Comprehensive Arabic educational materials about diabetes, its symptoms, types, and management strategies to prevent complications and improve quality of life.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Resource 1: What is Diabetes */}
+              <Card className="hover:shadow-lg transition-shadow border-teal-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Activity className="h-5 w-5 text-healthTeal" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    ما هو مرض السكري؟
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب تعليمي يشرح ما هو مرض السكري، أسبابه، وأنواعه، وكيفية التعامل معه يوميًا.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Learning About Diabetes Organization
+                  </p>
+                  <a 
+                    href="https://learningaboutdiabetes.org/wp-content/uploads/Whatisdiabetes-AR.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 2: Metabolic Syndrome */}
+              <Card className="hover:shadow-lg transition-shadow border-teal-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Activity className="h-5 w-5 text-healthTeal" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    متلازمة الأيض
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    يوضح هذا الكتيب العلاقة بين متلازمة الأيض وخطر الإصابة بالسكري وأمراض القلب.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Learning About Diabetes Organization
+                  </p>
+                  <a 
+                    href="https://learningaboutdiabetes.org/wp-content/uploads/MetabolicSyndrome20AR.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 3: Know the Symptoms */}
+              <Card className="hover:shadow-lg transition-shadow border-teal-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Activity className="h-5 w-5 text-healthTeal" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    تعرّف على أعراض السكري
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    إنفوغرافيك باللغة العربية يساعد على التعرف على أعراض مرض السكري ومتى يجب مراجعة الطبيب.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Learning About Diabetes Organization
+                  </p>
+                  <a 
+                    href="https://learningaboutdiabetes.org/wp-content/uploads/Know20The20Symptoms20AR.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed text-right font-cairo" dir="rtl">
+              جميع المواد مقدمة من Learning About Diabetes – مواد تعليمية بالعربية
+            </p>
+          </div>
+        </section>
+
+        {/* Footer note for all resources */}
+        <section className="py-8 bg-healthLightGray">
+          <div className="container mx-auto px-4">
+            <p className={`text-sm text-gray-600 text-center max-w-4xl mx-auto leading-relaxed ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'جميع الموارد متاحة للجمهور ومشتركة من منظمات طبية موثوقة لدعم التعليم الصحي باللغة العربية.' : 
+                'All resources are publicly available and shared from verified medical organizations to support accessible Arabic-language health education.'
+              }
             </p>
           </div>
         </section>

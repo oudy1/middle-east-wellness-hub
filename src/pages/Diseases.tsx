@@ -61,7 +61,23 @@ const Diseases = () => {
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold mb-3">{disease.title}</h3>
-                    <p className="text-gray-600">{disease.description}</p>
+                    <p className="text-gray-600 mb-4">{disease.description}</p>
+                    
+                    {/* Cross-link to educational resources */}
+                    {index === 0 && (
+                      <Link to="/services#diabetes-education">
+                        <Button variant="outline" className="w-full border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
+                          {t("diseases.viewResources")}
+                        </Button>
+                      </Link>
+                    )}
+                    {(index === 1) && (
+                      <Link to="/services#cardio-health">
+                        <Button variant="outline" className="w-full border-healthRed text-healthRed hover:bg-healthRed hover:text-white">
+                          {t("diseases.viewResources")}
+                        </Button>
+                      </Link>
+                    )}
                   </CardContent>
                 </Card>
               ))}
