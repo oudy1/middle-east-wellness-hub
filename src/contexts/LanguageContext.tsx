@@ -1171,6 +1171,13 @@ const translations = {
     fa: "بیماری های تنفسی مانند آسم و COPD می توانند به طور قابل توجهی بر کیفیت زندگی تأثیر بگذارند. در مورد شیوع در جمعیت خاورمیانه، عوامل محیطی و رویکردهای مدیریت بیاموزید.",
     tr: "Astım ve KOAH gibi solunum hastalıkları yaşam kalitesini önemli ölçüde etkileyebilir. Orta Doğu nüfusunda yaygınlık, çevresel faktörler ve yönetim yaklaşımları hakkında bilgi edinin."
   },
+  "diseases.viewResources": {
+    en: "View Educational Resources",
+    ar: "عرض المواد التعليمية",
+    ku: "ماددە پەروەردەییەکان ببینە",
+    fa: "مشاهده منابع آموزشی",
+    tr: "Eğitim Kaynaklarını Görüntüle"
+  },
   
   // Webinars Page
   "webinars.title": {
