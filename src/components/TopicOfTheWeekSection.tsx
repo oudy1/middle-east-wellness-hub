@@ -33,53 +33,61 @@ const TopicOfTheWeekSection = () => {
           </div>
         </div>
 
-        {/* Featured Topic Card with Brown Accent */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <Card className="overflow-hidden border-2 border-[#795548]/30 bg-gradient-to-br from-amber-50/50 to-white hover:shadow-xl transition-shadow duration-300">
-            <div className="grid md:grid-cols-2 gap-0">
-              {/* Image Section */}
-              <div className="relative">
-                <img 
-                  src={weeklyTopic.imageUrl} 
-                  alt={language === 'ar' ? weeklyTopic.titleAr : weeklyTopic.titleEn}
-                  className="w-full h-full object-cover min-h-[300px]"
-                />
-                <div className="absolute top-4 right-4">
-                  <div className="bg-[#4E342E] text-white rounded-full px-4 py-2 font-semibold shadow-lg">
-                    {language === 'ar' ? 'نوفمبر' : 'November'}
-                  </div>
+        {/* Featured Topic Card with Brown Accent - Full Width Image with Text Overlay */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <Card className="overflow-hidden border-2 border-[#795548]/30 hover:shadow-xl transition-shadow duration-300">
+            <div className="relative min-h-[400px] md:min-h-[450px]">
+              {/* Background Image */}
+              <img 
+                src={weeklyTopic.imageUrl} 
+                alt={language === 'ar' ? weeklyTopic.titleAr : weeklyTopic.titleEn}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              
+              {/* Gradient Overlay for Text Visibility */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
+              
+              {/* November Label */}
+              <div className={`absolute top-6 ${language === 'ar' ? 'left-6' : 'right-6'} z-20`}>
+                <div className="bg-[#3E2723] text-white rounded-2xl px-4 py-2 font-semibold shadow-lg">
+                  {language === 'ar' ? 'نوفمبر' : 'November'}
                 </div>
               </div>
               
-              {/* Content Section */}
-              <CardContent className={`p-8 flex flex-col justify-center ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                <h3 className={`text-2xl font-bold mb-4 text-[#4E342E] ${language === 'ar' ? 'font-cairo' : ''}`}>
-                  {language === 'ar' ? 'موفمبر: شهر التوعية بصحة الرجال' : 'Movember: Men\'s Health Awareness Month'}
-                </h3>
-                <p className={`text-muted-foreground mb-6 leading-relaxed ${language === 'ar' ? 'font-cairo' : ''}`}>
-                  {language === 'ar' 
-                    ? 'يهدف هذا الشهر إلى نشر الوعي حول سرطان البروستاتا والخصية، والصحة النفسية للرجال. تصفّح موادنا التعليمية باللغة العربية للتعرف على صحة الرجال وجودة الحياة النفسية من مصادر طبية موثوقة.'
-                    : 'Raising awareness about prostate and testicular cancer, and men\'s mental health. Explore our Arabic educational materials to learn about men\'s health, wellness, and emotional wellbeing from trusted medical sources.'}
-                </p>
+              {/* Text Content Overlay */}
+              <div className={`absolute inset-0 flex items-center ${language === 'ar' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-xl p-8 md:p-12 ${language === 'ar' ? 'md:pr-12 md:pl-4' : 'md:pl-12 md:pr-4'}`}>
+                  {/* Semi-transparent Background Behind Text */}
+                  <div className={`bg-black/10 backdrop-blur-sm rounded-lg p-6 md:p-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <h3 className={`text-2xl md:text-4xl font-semibold mb-4 text-white drop-shadow-lg ${language === 'ar' ? 'font-cairo' : ''}`}>
+                      {language === 'ar' ? 'موفمبر: شهر التوعية بصحة الرجال' : 'Movember: Men\'s Health Awareness Month'}
+                    </h3>
+                    <p className={`text-base md:text-lg mb-6 text-white/95 leading-relaxed drop-shadow-md ${language === 'ar' ? 'font-cairo' : ''}`}>
+                      {language === 'ar' 
+                        ? 'يهدف هذا الشهر إلى زيادة الوعي حول سرطان البروستاتا والخصية، والصحة النفسية للرجال.'
+                        : 'Promoting awareness of prostate cancer, testicular cancer, and men\'s mental health.'}
+                    </p>
                 
-                {/* Action Button */}
-                <Link to="/services#mental-health-arabic">
-                  <Button 
-                    size="lg"
-                    className="w-full bg-[#4E342E] hover:bg-[#795548] text-white border-0 transition-colors duration-200 shadow-md hover:shadow-lg"
-                  >
-                    {language === 'ar' ? 'عرض المواد التعليمية بالعربية' : 'View Arabic Men\'s Health Resources'}
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-
-                {/* Collaboration Note */}
-                <p className={`text-sm text-muted-foreground mt-6 italic ${language === 'ar' ? 'font-cairo text-right' : 'text-left'}`}>
-                  {language === 'ar' ? weeklyTopic.collaborationAr : weeklyTopic.collaborationEn}
-                </p>
-              </CardContent>
+                    {/* Action Button */}
+                    <Link to="/services#mental-health-arabic" className="block">
+                      <Button 
+                        size="lg"
+                        className="w-full bg-[#4E342E] hover:bg-[#795548] text-white border-0 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                      >
+                        {language === 'ar' ? 'عرض المواد التعليمية بالعربية' : 'View Arabic Health Resources'}
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </Card>
+          
+          {/* Collaboration Note Below Banner */}
+          <p className={`text-sm text-muted-foreground text-center mt-4 italic px-4 ${language === 'ar' ? 'font-cairo' : ''}`}>
+            {language === 'ar' ? weeklyTopic.collaborationAr : weeklyTopic.collaborationEn}
+          </p>
         </div>
 
         {/* Instagram Follow Section */}
