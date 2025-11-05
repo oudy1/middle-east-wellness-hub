@@ -43,7 +43,7 @@ const Diseases = () => {
       hoverColor: "hover:shadow-[0_8px_30px_rgb(107,114,128,0.3)]",
       borderColor: "border-[hsl(220,13%,48%)]",
       textColor: "text-[hsl(220,13%,48%)]",
-      link: "/services#cardio-health",
+      link: "/services#mental-health-arabic",
       iconAlt: "Brain icon for mental health"
     },
     {

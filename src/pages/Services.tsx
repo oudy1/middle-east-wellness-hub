@@ -15,7 +15,8 @@ import {
   UserCheck,
   UserPlus,
   Heart,
-  Activity
+  Activity,
+  Brain
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -699,6 +700,134 @@ const Services = () => {
             
             <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed text-right font-cairo" dir="rtl">
               جميع المواد مقدمة من Learning About Diabetes – مواد تعليمية بالعربية
+            </p>
+          </div>
+        </section>
+
+        {/* Mental Health & Well-Being - Arabic Resources */}
+        <section id="mental-health-arabic" className="py-12 md:py-16 bg-purple-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Brain className="h-8 w-8 text-[hsl(220,13%,48%)]" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🧠 الصحة النفسية وجودة الحياة (مواد باللغة العربية)' : '🧠 Mental Health & Well-Being (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'مواد تعليمية باللغة العربية حول الصحة النفسية والرفاهية، تشمل مواضيع مثل الصدمات النفسية، القلق، ونظافة النوم.' : 
+                'Arabic-language educational materials about mental health and well-being, covering topics like trauma, anxiety, and sleep hygiene.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Resource 1: All About Trauma */}
+              <Card className="hover:shadow-lg transition-shadow border-purple-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    كل شيء عن الصدمة النفسية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب يشرح تأثير الصدمات النفسية على الصحة العقلية والجسدية، مع نصائح للتعامل والدعم.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Minds Matter Psychiatry – Resources
+                  </p>
+                  <a 
+                    href="https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-All-About-Trauma-arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 2: Sleep Hygiene */}
+              <Card className="hover:shadow-lg transition-shadow border-purple-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    نظافة النوم
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    دليل مبسط لتحسين جودة النوم وتبني عادات نوم صحية لتحسين الراحة النفسية والجسدية.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Minds Matter Psychiatry – Resources
+                  </p>
+                  <a 
+                    href="https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Sleep-Hygiene-arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Resource 3: Anxiety */}
+              <Card className="hover:shadow-lg transition-shadow border-purple-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    القلق
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    كتيب توعوي يشرح طبيعة القلق، أسبابه، وأهم استراتيجيات السيطرة عليه بطريقة مبسطة.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: Minds Matter Psychiatry – Resources
+                  </p>
+                  <a 
+                    href="https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Anxiety-arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الكتيب</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed font-cairo" dir="rtl">
+              <span className="block mb-2 text-right">
+                المصدر: المواد مقدمة من Minds Matter Psychiatry ({" "}
+                <a 
+                  href="https://mindsmatterpsychiatry.com/resources/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[hsl(220,13%,48%)] hover:underline"
+                >
+                  https://mindsmatterpsychiatry.com/resources/
+                </a>
+                {" "}) ومشتركة لدعم التوعية المجتمعية باللغة العربية.
+              </span>
+              <span className="block text-center text-gray-500">
+                Sources: All materials are provided by Minds Matter Psychiatry and shared with permission for public education.
+              </span>
             </p>
           </div>
         </section>
