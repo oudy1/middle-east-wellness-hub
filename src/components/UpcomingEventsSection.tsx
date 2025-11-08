@@ -1,47 +1,89 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Globe, DollarSign, ExternalLink } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import eventPosterEn from "@/assets/east-to-west-webinar.jpg";
 import eventPosterAr from "@/assets/east-to-west-webinar-ar.jpg";
 
 const UpcomingEventsSection = () => {
-  const { language } = useLanguage();
+  // Local language state for this section only, with localStorage persistence
+  const [eventLanguage, setEventLanguage] = useState<'en' | 'ar'>(() => {
+    const saved = localStorage.getItem('shams-event-language');
+    return (saved === 'ar' || saved === 'en') ? saved : 'en';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('shams-event-language', eventLanguage);
+  }, [eventLanguage]);
 
   const eventData = {
     titleEn: "East to West: Nutrition and Diabetes Post-Immigration",
     titleAr: "من الشرق إلى الغرب: التغذية والسكري بعد الهجرة",
     date: "Nov 26",
+    dateAr: "٢٦ نوفمبر",
     timeEn: "7:00 PM EST",
-    timeAr: "7:00 مساءً بتوقيت شرق كندا",
-    speakersEn: "Dr. Muhammad Z. Shrayyef, Endocrinologist • Hiba Al-Masri, Registered Dietitian",
-    speakersAr: "الدكتور محمد ز. شريّف، طبيب الغدد الصماء • هبة المصري، أخصائية تغذية مسجلة",
+    timeAr: "٧:٠٠ مساءً بتوقيت شرق كندا",
+    speakersEn: "Dr. Muhammad Z. Shrayyef, Endocrinologist | Hiba Al-Masri, Registered Dietitian",
+    speakersAr: "د. محمد ز. شريّف (استشاري الغدد الصماء) • هبة المصري (أخصائية تغذية مسجلة)",
     descEn: "A friendly session on eating well and managing diabetes after moving to Canada. Practical tips and Q&A for you and your family.",
     descAr: "جلسة ودّية حول التغذية الجيدة وإدارة السكري بعد الهجرة إلى كندا. نصائح عملية وأسئلة وأجوبة لك ولعائلتك.",
     registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSco8Gp1Oy7nGm-nPqtlqZ1dS9K997_Y-YIquy5HYTsBVFlFhA/viewform?usp=header"
   };
 
-  const isArabic = language === 'ar';
+  const isArabic = eventLanguage === 'ar';
   const currentPoster = isArabic ? eventPosterAr : eventPosterEn;
 
   return (
     <section className="py-16 bg-gradient-to-b from-muted/30 to-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-3 text-foreground ${isArabic ? 'font-cairo' : ''}`}>
+        <div className="text-center mb-6">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-foreground ${isArabic ? 'font-cairo' : ''}`}>
             {isArabic ? 'الفعالية القادمة لمشروع شمس' : 'Upcoming SHAMS Event'}
           </h2>
+
+          {/* Language Toggle - Always Visible */}
+          <div className="inline-flex rounded-lg shadow-sm bg-background border border-border overflow-hidden">
+            <button
+              onClick={() => setEventLanguage('en')}
+              onKeyDown={(e) => e.key === 'Enter' && setEventLanguage('en')}
+              className={`px-6 py-3 text-sm font-semibold transition-all duration-200 ${
+                eventLanguage === 'en'
+                  ? 'bg-white text-foreground shadow-sm'
+                  : 'bg-muted/50 text-muted-foreground hover:bg-muted/80'
+              }`}
+              aria-pressed={eventLanguage === 'en'}
+              aria-label="Switch to English"
+            >
+              English
+            </button>
+            <button
+              onClick={() => setEventLanguage('ar')}
+              onKeyDown={(e) => e.key === 'Enter' && setEventLanguage('ar')}
+              className={`px-6 py-3 text-sm font-semibold transition-all duration-200 font-cairo ${
+                eventLanguage === 'ar'
+                  ? 'bg-white text-foreground shadow-sm'
+                  : 'bg-muted/50 text-muted-foreground hover:bg-muted/80'
+              }`}
+              aria-pressed={eventLanguage === 'ar'}
+              aria-label="Switch to Arabic"
+            >
+              العربية
+            </button>
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <Card className="overflow-hidden border-2 border-border/50 shadow-lg">
-            {/* Event Poster - Auto-switches based on language */}
+            {/* Event Poster - Auto-switches with smooth fade transition */}
             <div className="flex justify-center bg-muted/20 p-6 md:p-8">
               <img 
+                key={eventLanguage}
                 src={currentPoster} 
-                alt={isArabic ? 'ملصق فعالية شمس' : 'SHAMS event poster'}
-                className="w-full max-w-[420px] md:max-w-[480px] lg:max-w-[600px] h-auto rounded-lg shadow-md"
+                alt={isArabic 
+                  ? 'ملصق فعالية شمس: من الشرق إلى الغرب، التغذية والسكري بعد الهجرة.' 
+                  : 'SHAMS event poster: East to West, Nutrition and Diabetes Post-Immigration.'}
+                className="w-full max-w-[420px] md:max-w-[480px] lg:max-w-[600px] h-auto rounded-lg shadow-md animate-fade-in"
                 loading="lazy"
               />
             </div>
@@ -56,7 +98,7 @@ const UpcomingEventsSection = () => {
                 <div className={`flex flex-wrap gap-4 text-muted-foreground ${isArabic ? 'flex-row-reverse' : ''}`}>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span className="font-medium">{eventData.date}</span>
+                    <span className="font-medium">{isArabic ? eventData.dateAr : eventData.date}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="font-medium">{isArabic ? eventData.timeAr : eventData.timeEn}</span>
