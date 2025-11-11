@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, GraduationCap, Stethoscope } from "lucide-react";
+import { ExternalLink, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import mountSinaiImage from "@/assets/mount-sinai-research.png";
 
 const ResearchTeaserSection = () => {
   const { language } = useLanguage();
@@ -20,50 +19,114 @@ const ResearchTeaserSection = () => {
         </div>
 
 
-        {/* Featured: Mount Sinai Hospital Research Opportunity */}
-        <Card className="max-w-6xl mx-auto overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 mb-8 border-2 border-blue-200">
+        {/* Featured: Dr. Delaney Glass - Analyst (RA) Opportunity */}
+        <Card className="max-w-6xl mx-auto overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 mb-8 border-2 border-purple-200">
           <div className="relative">
-            {/* "Now Recruiting" Badge */}
+            {/* "Apply by Nov 28" Badge */}
             <div className="absolute top-4 right-4 z-10">
-              <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-bold shadow-lg animate-fade-in">
-                {language === 'ar' ? 'نبحث عن متطوعين' : 'Now Recruiting'}
+              <Badge className="bg-purple-600 text-white px-4 py-2 text-sm font-bold shadow-lg animate-fade-in">
+                {language === 'ar' ? 'قدّم قبل ٢٨ نوفمبر' : 'Apply by Nov 28, 2025'}
               </Badge>
             </div>
 
             <div className="grid md:grid-cols-2 gap-0">
-              {/* Image Section */}
-              <div className="relative h-64 md:h-auto">
-                <img 
-                  src={mountSinaiImage}
-                  alt="Mount Sinai Hospital Research"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent" />
-              </div>
-
-              {/* Content Section - Bilingual Display */}
-              <div className="p-8 bg-gradient-to-br from-blue-50 to-white">
+              {/* Content Section */}
+              <div className="p-8 bg-gradient-to-br from-purple-50 to-white">
                 <div className="flex items-center gap-3 mb-4">
-                  <Stethoscope className="h-8 w-8 text-blue-600" />
-                  <h3 className={`text-2xl font-bold text-blue-900 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  <GraduationCap className="h-8 w-8 text-purple-600" />
+                  <h3 className={`text-2xl font-bold text-purple-900 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                     {language === 'ar' 
-                      ? 'فرصة بحثية جديدة: التطوع في مستشفى ماونت سايناي'
-                      : 'New Research Opportunity: Volunteer with Mount Sinai Hospital'}
+                      ? 'فرصة بحثية: محلّل/ـة بيانات (جامعة تورونتو)'
+                      : 'New Research Opportunity: Analyst (RA) – U of T'}
                   </h3>
                 </div>
                 
-                <p className={`text-gray-700 mb-6 leading-relaxed ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {language === 'ar' 
-                    ? 'يعلن مشروع شمس عن فرصة بحثية بالتعاون مع الدكتور عادل محمد من قسم طب الأطفال في مستشفى ماونت سايناي. نبحث عن مساعد بحث متطوع مهتم بالبحث الطبي والرعاية الصحية.'
-                    : "SHAMS is supporting a new research opportunity with Dr. Adel Mohamed at Mount Sinai Hospital's Department of Paediatrics. We're looking for a motivated Volunteer Research Assistant to gain hands-on experience in clinical research and patient care."}
+                <p className={`text-sm text-purple-700 mb-3 font-semibold ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {language === 'ar'
+                    ? 'د. ديلاني غلاس | تحليل مختلط الأساليب حول الصحة والمساواة (بيانات الأردن)'
+                    : 'Dr. Delaney Glass | Mixed-Methods Health & Inequality Analysis (Jordan dataset)'}
                 </p>
                 
-                <Link to="/resources">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full md:w-auto transition-all duration-300 hover:shadow-lg hover-scale">
-                    {language === 'ar' ? 'عرض التفاصيل والتقديم' : 'Learn More & Apply'}
+                <p className={`text-gray-700 mb-6 leading-relaxed ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {language === 'ar' 
+                    ? 'البحث مع الدكتورة ديلاني غلاس حول العوامل البنيوية/الاجتماعية والسلامة والصحة باستخدام R (تحليل العوامل EFA/CFA والنمذجة البنائية SEM). للطلبة في جامعة تورونتو فقط.'
+                    : "Join Dr. Delaney Glass to analyze health, safety, and structural factors using R (EFA/CFA/SEM). U of T students only."}
+                </p>
+                
+                <a 
+                  href="https://form.jotform.com/253143939587268" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-[#F36F21] hover:bg-[#d96119] text-white w-full md:w-auto transition-all duration-300 hover:shadow-lg hover-scale">
+                    {language === 'ar' ? 'التقديم / الإرسال' : 'Apply / Submit'}
                     <ExternalLink className={`h-4 w-4 ${language === 'ar' ? 'mr-2' : 'ml-2'}`} />
                   </Button>
-                </Link>
+                </a>
+              </div>
+
+              {/* Info Section */}
+              <div className="p-8 bg-gradient-to-br from-healthTeal/5 to-white border-l border-gray-200">
+                <h4 className={`text-lg font-bold text-healthDarkBlue mb-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {language === 'ar' ? 'متطلبات الأهلية:' : 'Eligibility:'}
+                </h4>
+                <ul className={`space-y-2 mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {language === 'ar' ? (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">طالب في جامعة تورونتو (بكالوريوس أو دراسات عليا)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">إحصاء متقدم + R مطلوب</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">مرتاح مع EFA/CFA وSEM أو راغب في التعلم</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">الخبرة في الأساليب البايزية/التكرارية ميزة إضافية</span>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">U of T student (undergrad or grad)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">Advanced statistics + R required</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">Comfortable with or willing to learn EFA/CFA and SEM</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-600">✓</span>
+                        <span className="text-sm">Experience in Bayesian/Frequentist approaches is a plus</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
+                    #QuantAnalysis
+                  </span>
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
+                    #RStats
+                  </span>
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
+                    #SEM
+                  </span>
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
+                    #HealthInequality
+                  </span>
+                </div>
               </div>
             </div>
           </div>
