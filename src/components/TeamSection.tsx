@@ -16,6 +16,17 @@ const TeamSection = () => {
         en: "Consultation liaison psychiatry, sleep medicine and obesity medicine",
         ar: "الطب النفسي الاستشاري، طب النوم وطب السمنة"
       }
+    },
+    {
+      name: "Dr. Noha Abdel Gawad",
+      role: {
+        en: "Affiliated Physician",
+        ar: "طبيبة منتسبة"
+      },
+      specialization: {
+        en: "Consultation/Liaison Psychiatry - Adult and medically complex patients, liver disease and neuropsychiatric conditions",
+        ar: "الطب النفسي الاستشاري / الارتباطي - رعاية المرضى البالغين ذوي الحالات الطبية المعقدة، مع التركيز على أمراض الكبد والاضطرابات العصبية والنفسية"
+      }
     }
   ];
 

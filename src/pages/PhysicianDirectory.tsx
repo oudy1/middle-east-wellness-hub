@@ -116,6 +116,28 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     credentials: ["MD", "Assistant Professor at University of Toronto", "Staff Medical Oncologist - Phase 1 Clinical Trials and Sarcoma", "Lead - Medical Oncology Sarcoma Program"]
   },
   {
+    id: 9,
+    title: "Dr.",
+    firstName: "Noha",
+    lastName: "Abdel Gawad",
+    gender: "Female",
+    languages: ["English", "Arabic"],
+    specialty: "Psychiatry",
+    subspecialty: "Consultation/Liaison Psychiatry",
+    yearsInPractice: 0,
+    affiliatedHospitals: ["UHN - Toronto General Hospital"],
+    academicTitles: ["Assistant Professor"],
+    clinicName: "Toronto General Hospital",
+    address: "200 Elizabeth St., Toronto, Ontario, Canada M5G 2C4",
+    coordinates: [-79.3874, 43.6596] as [number, number],
+    phone: "",
+    email: "",
+    officeHours: "By Appointment",
+    telehealthAvailable: false,
+    accepting: true,
+    credentials: ["MD", "ABPN", "FRCPC", "Assistant Professor of Psychiatry, University of Toronto", "Board Certified by American Board of Psychiatry & Neurology", "Fellow of the Royal College of Physicians of Canada"]
+  },
+  {
     id: 8,
     title: "Dr.",
     firstName: "Muhammad Z.",
