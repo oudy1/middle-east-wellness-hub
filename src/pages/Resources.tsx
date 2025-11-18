@@ -26,10 +26,7 @@ import {
   Plus,
   Search,
   ChevronDown,
-  ChevronUp,
-  Syringe,
-  Shield,
-  Wind
+  ChevronUp
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -88,51 +85,6 @@ const Resources = () => {
         }
       ]
     },
-    {
-      title: language === 'ar' ? "التطعيمات واللقاحات (مواد باللغة العربية)" : "Vaccines & Immunization (Arabic Resources)",
-      icon: <Syringe className="h-8 w-8 text-white" />,
-      color: "bg-healthRed",
-      resources: [
-        {
-          title: language === 'ar' ? "HealthLink BC – معلومات حول الحصبة واللقاح" : "HealthLink BC – Infographic on Measles & Vaccine",
-          description: language === 'ar' ? "ملخص مبسّط حول الحصبة وأهمية لقاح الحصبة لحماية الأطفال والبالغين." : "Simplified overview of measles and the importance of measles vaccine for protecting children and adults.",
-          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
-          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14b-a.pdf"
-        },
-        {
-          title: language === 'ar' ? "HealthLink BC – معلومات حول لقاح MMRV" : "HealthLink BC – Info on MMRV Vaccine",
-          description: language === 'ar' ? "معلومات حول لقاح الحصبة والنكاف والحصبة الألمانية وجدري الماء (MMRV) وفوائده ومتى يجب إعطاؤه." : "Information about measles, mumps, rubella, and varicella (MMRV) vaccine, its benefits, and when to give it.",
-          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
-          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14e-A.pdf"
-        }
-      ]
-    },
-    {
-      title: language === 'ar' ? "السلامة والصحة في الهواء الطلق (مواد باللغة العربية)" : "Safety & Outdoor Health (Arabic Resources)",
-      icon: <Shield className="h-8 w-8 text-white" />,
-      color: "bg-healthDarkBlue",
-      resources: [
-        {
-          title: language === 'ar' ? "HealthLink BC – المخاطر الصحية في البرية" : "HealthLink BC – Health Risks in the Wilderness",
-          description: language === 'ar' ? "إرشادات حول المخاطر الصحية أثناء التواجد في البرية وكيفية تجنب الإصابات والأمراض." : "Guidelines on health risks during wilderness activities and how to avoid injuries and illnesses.",
-          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
-          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile24-A.pdf"
-        }
-      ]
-    },
-    {
-      title: language === 'ar' ? "الإقلاع عن التدخين وصحة الرئة (مواد باللغة العربية)" : "Smoking Cessation & Lung Health (Arabic Resources)",
-      icon: <Wind className="h-8 w-8 text-white" />,
-      color: "bg-healthGold",
-      resources: [
-        {
-          title: language === 'ar' ? "HealthLink BC – الإقلاع عن التدخين" : "HealthLink BC – Quitting Smoking",
-          description: language === 'ar' ? "نصائح عملية وموارد لمساعدة الأفراد على الإقلاع عن التدخين وتحسين صحة الرئة." : "Practical tips and resources to help individuals quit smoking and improve lung health.",
-          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
-          link: "https://www.healthlinkbc.ca/sites/default/files/documents/healthfiles/hfile30c-a.pdf"
-        }
-      ]
-    }
   ];
 
   return (
