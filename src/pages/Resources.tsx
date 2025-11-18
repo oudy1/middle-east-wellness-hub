@@ -26,7 +26,10 @@ import {
   Plus,
   Search,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Syringe,
+  Shield,
+  Wind
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -82,6 +85,51 @@ const Resources = () => {
           description: language === 'ar' ? "إرشادات غذائية لإدارة السكري أثناء الحمل مع الاعتبارات الغذائية الثقافية." : "Nutritional guidelines for managing diabetes during pregnancy with cultural dietary considerations.",
           type: language === 'ar' ? "دليل غذائي" : "Food Guide",
           link: "https://phc.eduhealth.ca/en/viewer?file=%2fmedia%2fVCH%2fFL%2fFL.860.D531.AR.pdf#phrase=false&pagemode=bookmarks"
+        }
+      ]
+    },
+    {
+      title: language === 'ar' ? "التطعيمات واللقاحات (مواد باللغة العربية)" : "Vaccines & Immunization (Arabic Resources)",
+      icon: <Syringe className="h-8 w-8 text-white" />,
+      color: "bg-healthRed",
+      resources: [
+        {
+          title: language === 'ar' ? "HealthLink BC – معلومات حول الحصبة واللقاح" : "HealthLink BC – Infographic on Measles & Vaccine",
+          description: language === 'ar' ? "ملخص مبسّط حول الحصبة وأهمية لقاح الحصبة لحماية الأطفال والبالغين." : "Simplified overview of measles and the importance of measles vaccine for protecting children and adults.",
+          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
+          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14b-a.pdf"
+        },
+        {
+          title: language === 'ar' ? "HealthLink BC – معلومات حول لقاح MMRV" : "HealthLink BC – Info on MMRV Vaccine",
+          description: language === 'ar' ? "معلومات حول لقاح الحصبة والنكاف والحصبة الألمانية وجدري الماء (MMRV) وفوائده ومتى يجب إعطاؤه." : "Information about measles, mumps, rubella, and varicella (MMRV) vaccine, its benefits, and when to give it.",
+          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
+          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14e-A.pdf"
+        }
+      ]
+    },
+    {
+      title: language === 'ar' ? "السلامة والصحة في الهواء الطلق (مواد باللغة العربية)" : "Safety & Outdoor Health (Arabic Resources)",
+      icon: <Shield className="h-8 w-8 text-white" />,
+      color: "bg-healthDarkBlue",
+      resources: [
+        {
+          title: language === 'ar' ? "HealthLink BC – المخاطر الصحية في البرية" : "HealthLink BC – Health Risks in the Wilderness",
+          description: language === 'ar' ? "إرشادات حول المخاطر الصحية أثناء التواجد في البرية وكيفية تجنب الإصابات والأمراض." : "Guidelines on health risks during wilderness activities and how to avoid injuries and illnesses.",
+          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
+          link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile24-A.pdf"
+        }
+      ]
+    },
+    {
+      title: language === 'ar' ? "الإقلاع عن التدخين وصحة الرئة (مواد باللغة العربية)" : "Smoking Cessation & Lung Health (Arabic Resources)",
+      icon: <Wind className="h-8 w-8 text-white" />,
+      color: "bg-healthGold",
+      resources: [
+        {
+          title: language === 'ar' ? "HealthLink BC – الإقلاع عن التدخين" : "HealthLink BC – Quitting Smoking",
+          description: language === 'ar' ? "نصائح عملية وموارد لمساعدة الأفراد على الإقلاع عن التدخين وتحسين صحة الرئة." : "Practical tips and resources to help individuals quit smoking and improve lung health.",
+          type: language === 'ar' ? "تحميل الملف" : "Download PDF",
+          link: "https://www.healthlinkbc.ca/sites/default/files/documents/healthfiles/hfile30c-a.pdf"
         }
       ]
     }
@@ -985,6 +1033,13 @@ const Resources = () => {
                         </div>
                       ))}
                     </div>
+                    {(category.title.includes('Arabic Resources') || category.title.includes('مواد باللغة العربية')) && (
+                      <div className={`mt-6 pt-4 border-t border-gray-200 text-xs text-gray-600 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {language === 'ar' 
+                          ? 'المواد مقدمة من HealthLinkBC لدعم الوصول إلى معلومات صحية موثوقة باللغة العربية.'
+                          : 'Resources provided by HealthLinkBC to support accessible Arabic health education.'}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
