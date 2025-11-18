@@ -127,16 +127,16 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Research Resources */}
+        {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <h2 className={`text-2xl sm:text-3xl font-bold mb-4 md:mb-6 text-center text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
-              {language === 'ar' ? 'موارد البحث' : 'Research Resources'}
+              {language === 'ar' ? 'المواد التعليمية' : 'Educational Materials'}
             </h2>
             <p className={`text-lg sm:text-xl mb-6 md:mb-8 max-w-2xl mx-auto text-center px-2 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {language === 'ar' ? 
-                'موارد شاملة مصنفة حسب التخصص لدعم أبحاثك وممارستك السريرية.' : 
-                'Comprehensive resources categorized by specialty to support your research and clinical practice.'
+                'الوصول إلى موارد التعليم الصحي والأدلة ذات الصلة الثقافية.' : 
+                'Access culturally relevant health education resources and guides.'
               }
             </p>
             <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
