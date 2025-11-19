@@ -835,6 +835,213 @@ const Services = () => {
           </div>
         </section>
 
+        {/* Vaccines & Immunization - HealthLinkBC Arabic Resources */}
+        <section id="vaccines-immunization" className="py-12 md:py-16 bg-blue-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Syringe className="h-8 w-8 text-healthDarkBlue" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '💉 التطعيمات واللقاحات (مواد باللغة العربية)' : '💉 Vaccines & Immunization (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'معلومات موثوقة حول اللقاحات وأهميتها في الوقاية من الأمراض المعدية للأطفال والبالغين.' : 
+                'Trusted information about vaccines and their importance in preventing infectious diseases for children and adults.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* HealthLink BC - Measles & Vaccine */}
+              <Card className="hover:shadow-lg transition-shadow border-blue-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Syringe className="h-5 w-5 text-healthDarkBlue" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    HealthLink BC – معلومات حول الحصبة واللقاح
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    ملخص مبسّط حول الحصبة وأهمية لقاح الحصبة لحماية الأطفال والبالغين.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: HealthLinkBC
+                  </p>
+                  <a 
+                    href="https://www.healthlinkbc.ca/sites/default/files/documents/hfile14b-a.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الملف</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* HealthLink BC - MMRV Vaccine */}
+              <Card className="hover:shadow-lg transition-shadow border-blue-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Syringe className="h-5 w-5 text-healthDarkBlue" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    HealthLink BC – معلومات حول لقاح MMRV
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    معلومات حول لقاح الحصبة والنكاف والحصبة الألمانية وجدري الماء (MMRV) وفوائده ومواعيد إعطائه.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: HealthLinkBC
+                  </p>
+                  <a 
+                    href="https://www.healthlinkbc.ca/sites/default/files/documents/hfile14e-A.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الملف</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed">
+              <span className={`block mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 
+                  'المواد مقدمة من HealthLinkBC لدعم الوصول إلى معلومات صحية موثوقة باللغة العربية.' : 
+                  'Resources provided by HealthLinkBC to support accessible Arabic health education.'
+                }
+              </span>
+            </p>
+          </div>
+        </section>
+
+        {/* Safety & Outdoor Health - HealthLinkBC Arabic Resources */}
+        <section id="safety-outdoor-health" className="py-12 md:py-16 bg-green-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Shield className="h-8 w-8 text-green-600" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🛡️ السلامة والصحة في الهواء الطلق (مواد باللغة العربية)' : '🛡️ Safety & Outdoor Health (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'نصائح وإرشادات حول كيفية الحفاظ على سلامتك وصحتك أثناء التواجد في الطبيعة والهواء الطلق.' : 
+                'Tips and guidelines on how to stay safe and healthy during outdoor and wilderness activities.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* HealthLink BC - Health Risks in the Wilderness */}
+              <Card className="hover:shadow-lg transition-shadow border-green-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Shield className="h-5 w-5 text-green-600" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    HealthLink BC – المخاطر الصحية في البرية
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    دليل حول المخاطر الصحية في البرية وكيفية الوقاية من الإصابات والأمراض أثناء التواجد في الهواء الطلق.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: HealthLinkBC
+                  </p>
+                  <a 
+                    href="https://www.healthlinkbc.ca/sites/default/files/documents/hfile24-A.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الملف</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed">
+              <span className={`block mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 
+                  'المواد مقدمة من HealthLinkBC لدعم الوصول إلى معلومات صحية موثوقة باللغة العربية.' : 
+                  'Resources provided by HealthLinkBC to support accessible Arabic health education.'
+                }
+              </span>
+            </p>
+          </div>
+        </section>
+
+        {/* Smoking Cessation & Lung Health - HealthLinkBC Arabic Resources */}
+        <section id="smoking-cessation" className="py-12 md:py-16 bg-slate-50/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Wind className="h-8 w-8 text-slate-600" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? '🌬️ الإقلاع عن التدخين وصحة الرئة (مواد باللغة العربية)' : '🌬️ Smoking Cessation & Lung Health (Arabic Resources)'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' ? 
+                'موارد وأدوات لمساعدتك على الإقلاع عن التدخين وتحسين صحة رئتيك.' : 
+                'Resources and tools to help you quit smoking and improve your lung health.'
+              }
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* HealthLink BC - Quitting Smoking */}
+              <Card className="hover:shadow-lg transition-shadow border-slate-100">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 justify-end">
+                    <Wind className="h-5 w-5 text-slate-600" />
+                  </div>
+                  <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                    HealthLink BC – الإقلاع عن التدخين
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">
+                    معلومات تساعد على الإقلاع عن التدخين وتحسين صحة الرئة مع نصائح عملية وأدوات دعم.
+                  </p>
+                  <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">
+                    المصدر: HealthLinkBC
+                  </p>
+                  <a 
+                    href="https://www.healthlinkbc.ca/sites/default/files/documents/healthfiles/hfile30c-a.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-slate-600 hover:bg-slate-700 text-white flex items-center gap-2 w-full">
+                      <BookOpen className="h-4 w-4" />
+                      <span className="font-cairo">تحميل الملف</span>
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed">
+              <span className={`block mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {language === 'ar' ? 
+                  'المواد مقدمة من HealthLinkBC لدعم الوصول إلى معلومات صحية موثوقة باللغة العربية.' : 
+                  'Resources provided by HealthLinkBC to support accessible Arabic health education.'
+                }
+              </span>
+            </p>
+          </div>
+        </section>
+
         {/* Footer note for all resources */}
         <section className="py-8 bg-healthLightGray">
           <div className="container mx-auto px-4">
