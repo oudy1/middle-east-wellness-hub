@@ -372,10 +372,10 @@ const Resources = () => {
                           rel="noopener noreferrer"
                           className="block"
                         >
-                          <embed 
-                            src="/lovable-uploads/rise-c-flyer.pdf" 
-                            type="application/pdf"
-                            className="w-full h-96 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                          <img 
+                            src="/lovable-uploads/rise-c-flyer.png" 
+                            alt={language === 'ar' ? 'ملصق دراسة RISE-C' : 'RISE-C Study Flyer'}
+                            className="w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                           />
                         </a>
                         <p className="text-sm text-gray-600 mt-3 italic">
@@ -393,18 +393,6 @@ const Resources = () => {
                             ? 'RISE-C هي دراسة مدفوعة للأشخاص الملوّنين في كندا. تدرس الخبرات والسلامة والصحة النفسية باستخدام مقابلة آمنة واستبيانات يومية قصيرة.'
                             : 'RISE-C is a paid research study for people of colour in Canada. The study examines experiences, safety, and wellbeing using a secure interview and short daily surveys.'}
                         </p>
-
-                        {/* Safety Note */}
-                        <div className="bg-healthLightGray/50 p-4 rounded-lg mb-6">
-                          <div className="flex items-start gap-2">
-                            <Shield className="h-5 w-5 text-healthTeal flex-shrink-0 mt-1" />
-                            <p className="text-sm text-gray-700">
-                              {language === 'ar' 
-                                ? 'إذا كنت في خطر مباشر، اتصل بالرقم 911 أو اذهب إلى أقرب قسم طوارئ.'
-                                : 'If you are in immediate danger, call 911 or go to the nearest emergency department.'}
-                            </p>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>

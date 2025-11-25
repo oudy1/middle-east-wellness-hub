@@ -47,12 +47,9 @@ const ResearchTeaserSection = () => {
                 className="block mx-auto w-full max-w-md"
               >
                 <img 
-                  src="/lovable-uploads/rise-c-flyer.pdf" 
+                  src="/lovable-uploads/rise-c-flyer.png" 
                   alt={language === 'ar' ? 'ملصق دراسة RISE-C' : 'RISE-C Study Flyer'}
                   className="w-full rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
               </a>
             </div>
