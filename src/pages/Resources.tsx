@@ -26,7 +26,10 @@ import {
   Plus,
   Search,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  DollarSign,
+  Shield,
+  CheckCircle2
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -332,6 +335,262 @@ const Resources = () => {
                       {language === 'ar'
                         ? 'شمس تدعم عملية التوظيف لهذه الدراسة بالشراكة مع جامعة تورنتو.'
                         : 'SHAMS is supporting recruitment for this study in partnership with the University of Toronto.'}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* RISE-C Study Detail Section */}
+            <div className="mb-12">
+              <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
+                <div className="bg-gradient-to-r from-healthTeal to-healthPurple p-6">
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white text-center">
+                      {language === 'ar' ? 'دراسة RISE-C' : 'RISE-C Study'}
+                    </h3>
+                    <Badge className="bg-yellow-500 text-yellow-900 border-yellow-600">
+                      <DollarSign className="h-4 w-4 mr-1" />
+                      {language === 'ar' ? 'مدفوعة' : 'Paid'}
+                    </Badge>
+                  </div>
+                  <p className="text-white/90 text-center">
+                    {language === 'ar' 
+                      ? 'دراسة مدفوعة للأشخاص الملوّنين في كندا'
+                      : 'Paid study for people of colour in Canada'}
+                  </p>
+                </div>
+                
+                <CardContent className="p-6 md:p-8">
+                  {/* Flyer */}
+                  <div className="mb-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <a 
+                          href='/lovable-uploads/rise-c-flyer.pdf'
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <embed 
+                            src="/lovable-uploads/rise-c-flyer.pdf" 
+                            type="application/pdf"
+                            className="w-full h-96 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                          />
+                        </a>
+                        <p className="text-sm text-gray-600 mt-3 italic">
+                          {language === 'ar' ? 'ملصق الدراسة' : 'Study Flyer'}
+                        </p>
+                      </div>
+
+                      {/* Study Info */}
+                      <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        <h4 className="text-xl font-bold text-healthDarkBlue mb-4">
+                          {language === 'ar' ? 'نظرة عامة' : 'Overview'}
+                        </h4>
+                        <p className="text-gray-700 mb-6 leading-relaxed">
+                          {language === 'ar' 
+                            ? 'RISE-C هي دراسة مدفوعة للأشخاص الملوّنين في كندا. تدرس الخبرات والسلامة والصحة النفسية باستخدام مقابلة آمنة واستبيانات يومية قصيرة.'
+                            : 'RISE-C is a paid research study for people of colour in Canada. The study examines experiences, safety, and wellbeing using a secure interview and short daily surveys.'}
+                        </p>
+
+                        {/* Safety Note */}
+                        <div className="bg-healthLightGray/50 p-4 rounded-lg mb-6">
+                          <div className="flex items-start gap-2">
+                            <Shield className="h-5 w-5 text-healthTeal flex-shrink-0 mt-1" />
+                            <p className="text-sm text-gray-700">
+                              {language === 'ar' 
+                                ? 'إذا كنت في خطر مباشر، اتصل بالرقم 911 أو اذهب إلى أقرب قسم طوارئ.'
+                                : 'If you are in immediate danger, call 911 or go to the nearest emergency department.'}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Who Can Join */}
+                  <div className={`mb-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <h4 className="text-xl font-bold text-healthDarkBlue mb-4 flex items-center gap-2">
+                      {language === 'ar' ? (
+                        <>
+                          <CheckCircle2 className="h-6 w-6 text-healthTeal" />
+                          <span>من يمكنه الانضمام</span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="h-6 w-6 text-healthTeal" />
+                          <span>Who Can Join</span>
+                        </>
+                      )}
+                    </h4>
+                    <ul className="space-y-3">
+                      {language === 'ar' ? (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>العمر 16 سنة أو أكثر</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>من الأشخاص الملوّنين ويقيم في كندا</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>يتحدث الإنجليزية وقادر على إعطاء الموافقة</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>لديه هاتف ذكي ورقم كندي لاستبيانات يومية لمدة أسبوعين</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>يستطيع حضور مقابلة تأسيسية عبر زووم مع كاميرا وميكروفون</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>مرّ مؤخراً بأفكار أو اندفاعات تتعلق بإيذاء النفس أو الانتحار أو نوبات الأكل القهري أو القيء المتعمّد أو الشرب القهري مرتبطة بالشعور بالسوء أو التوتر</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>لديه خبرة مع التمييز العنصري أو مؤشرات العنصرية الداخلية</span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>16 years or older</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Person of colour living in Canada</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Fluent in English and able to consent</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Has a smartphone with a Canadian number for two-week daily surveys</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Can attend a baseline Zoom visit with camera and microphone</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Recently had thoughts or urges related to self-harm, suicide, binge eating, purging, or binge drinking tied to feeling bad or stressed</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthTeal text-xl">✓</span>
+                            <span>Has experienced racial discrimination or internalized racism markers</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* What You Will Do */}
+                  <div className={`mb-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <h4 className="text-xl font-bold text-healthDarkBlue mb-4">
+                      {language === 'ar' ? 'ما ستفعله' : 'What You Will Do'}
+                    </h4>
+                    <ul className="space-y-3">
+                      {language === 'ar' ? (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>مقابلة تأسيسية عبر الإنترنت من ساعة إلى ساعتين</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>استبيانات حول الصحة النفسية وجودة الحياة</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>أسئلة يومية قصيرة عبر التطبيق لمدة نحو أسبوعين</span>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>1 to 2 hour online baseline interview</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>Surveys about mental health and wellbeing</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-healthPurple">•</span>
+                            <span>Short app-based daily questions for about two weeks</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Safety and Support */}
+                  <div className={`mb-8 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <h4 className="text-xl font-bold text-healthDarkBlue mb-4">
+                      {language === 'ar' ? 'السلامة والدعم' : 'Safety and Support'}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">
+                      {language === 'ar' 
+                        ? 'يحصل المشارك على قائمة موارد للأزمات قبل تحديد الموعد. يجري الفريق المدرب فحوصات للمخاطر في بداية ونهاية المقابلة التأسيسية باستخدام بروتوكول UWRAP، ويتم إعداد خطة أمان عند الحاجة. التنبيهات التلقائية تؤدي إلى متابعة إذا ظهرت استجابات عالية الخطورة في الاستبيانات اليومية. توجد إجراءات لحفظ السرية وأمن البيانات.'
+                        : 'Participants receive crisis resources before scheduling. Trained staff complete risk checks at the start and end of the baseline interview using the UWRAP protocol and create a safety plan when needed. Automated alerts prompt follow-up if high-risk responses appear in daily surveys. Confidentiality and data security procedures are in place.'}
+                    </p>
+                  </div>
+
+                  {/* Call to Action */}
+                  <div className="text-center space-y-4">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      <a 
+                        href="https://uwo.eu.qualtrics.com/jfe/form/SV_a8BHB591h11CmUe" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white text-lg px-8 py-6">
+                          <ExternalLink className={`h-5 w-5 ${language === 'ar' ? 'ml-2' : 'mr-2'}`} />
+                          {language === 'ar' ? 'ابدأ استبيان التأهيل' : 'Take Pre-Screening'}
+                        </Button>
+                      </a>
+                      
+                      <a 
+                        href="/lovable-uploads/rise-c-flyer.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <Button variant="outline" className="border-healthPurple text-healthPurple hover:bg-healthPurple/10 text-lg px-8 py-6">
+                          <FileDown className={`h-5 w-5 ${language === 'ar' ? 'ml-2' : 'mr-2'}`} />
+                          {language === 'ar' ? 'تنزيل الملصق' : 'Download Flyer'}
+                        </Button>
+                      </a>
+                    </div>
+                    
+                    <p className={`text-sm text-gray-600 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar' 
+                        ? 'للاستفسار: rise-c.study@uwo.ca'
+                        : 'For questions: rise-c.study@uwo.ca'}
+                    </p>
+                  </div>
+
+                  {/* Study Info Note */}
+                  <div className="mt-6 p-4 bg-healthLightGray rounded-lg">
+                    <p className={`text-sm text-gray-700 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {language === 'ar'
+                        ? 'التوظيف جارٍ حتى الوصول إلى حجم العينة المطلوب أو حتى أكتوبر 2027. الباحث الرئيسي: د. خيسوس شافاريا، دكتوراه | الباحث المشارك: جيسون تشونغ، ماجستير'
+                        : 'Recruitment ongoing until sample size is reached or until October 2027. Principal Investigator: Dr. Jesus Chavarria, PhD | Co-Investigator: Jason Chung, MSc'}
+                    </p>
+                  </div>
+
+                  {/* Footer Note */}
+                  <div className="mt-4 text-center">
+                    <p className="text-xs text-gray-500 italic">
+                      {language === 'ar' 
+                        ? 'المواد مقدمة من جامعة ويسترن أونتاريو لدعم الوصول إلى معلومات بحثية موثوقة.'
+                        : 'Resources provided by Western University to support accessible research information.'}
                     </p>
                   </div>
                 </CardContent>
