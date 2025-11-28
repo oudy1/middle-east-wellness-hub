@@ -384,14 +384,28 @@ const Resources = () => {
                       </div>
 
                       {/* Study Info */}
-                      <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        <h4 className="text-xl font-bold text-healthDarkBlue mb-4">
+                      <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                        <h4 className={`text-xl font-bold text-healthDarkBlue mb-4 ${language === 'ar' ? 'font-cairo' : ''}`}>
                           {language === 'ar' ? 'نظرة عامة' : 'Overview'}
                         </h4>
-                        <p className="text-gray-700 mb-6 leading-relaxed">
-                          {language === 'ar' 
-                            ? 'RISE-C هي دراسة مدفوعة للأشخاص الملوّنين في كندا. تدرس الخبرات والسلامة والصحة النفسية باستخدام مقابلة آمنة واستبيانات يومية قصيرة.'
-                            : 'RISE-C is a paid research study for people of colour in Canada. The study examines experiences, safety, and wellbeing using a secure interview and short daily surveys.'}
+                        <p 
+                          className={`text-gray-700 mb-6 ${language === 'ar' ? 'font-cairo' : ''}`}
+                          style={{ 
+                            maxWidth: '65ch', 
+                            lineHeight: '1.6',
+                            marginLeft: language === 'ar' ? 'auto' : '0',
+                            marginRight: language === 'ar' ? '0' : 'auto'
+                          }}
+                        >
+                          {language === 'ar' ? (
+                            <>
+                              RISE-C هي دراسة <strong className="font-semibold">مدفوعة</strong> للأشخاص الملوّنين في كندا. تدرس التجارب اليومية والسلامة وجودة الحياة من خلال مقابلة آمنة عبر الإنترنت وأسئلة قصيرة يومية لمدة نحو أسبوعين. تُحفظ معلوماتك بسرية، وتتوفر موارد دعم للمشاركين.
+                            </>
+                          ) : (
+                            <>
+                              RISE-C is a <strong className="font-semibold">paid</strong> research study for people of colour in Canada. The study looks at daily experiences, safety, and wellbeing through one secure online interview and brief daily check-ins for about two weeks. Your information is confidential, and support resources are provided.
+                            </>
+                          )}
                         </p>
                       </div>
                     </div>
