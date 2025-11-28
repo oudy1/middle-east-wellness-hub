@@ -968,6 +968,85 @@ const Resources = () => {
                     </button>
                   </CardContent>
                 </Card>
+
+                {/* Jason Chung */}
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthDarkBlue/20 hover:border-healthDarkBlue/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthDarkBlue/10 to-healthDarkBlue/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthDarkBlue to-healthDarkBlue/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <Brain className="h-12 w-12 text-white" />
+                    </div>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'جيسون تشانغ' : 'Jason Chung, M.Sc.'}
+                    </h3>
+                    <p className="text-sm text-healthDarkBlue font-semibold">
+                      {language === 'ar' ? 'طالب دكتوراه' : 'PhD Candidate'}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'علم النفس الإكلينيكي وعِلم الاعتلال النفسي' : 'Clinical Science & Psychopathology'}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {language === 'ar' ? 'جامعة ويسترن' : 'Western University'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'إيذاء النفس، تعاطي المواد، الانتحار، واضطرابات الأكل—مع التركيز على الفئات المُهمَّشة و+LGBTQ'
+                          : 'Self-injury, substance use, suicide, and eating pathology—especially among racialized and LGBTQ+ populations'}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <Mail className="h-3 w-3 text-healthDarkBlue" />
+                        <a href="mailto:jchun264@uwo.ca" className="text-healthTeal hover:underline truncate">
+                          jchun264@uwo.ca
+                        </a>
+                      </div>
+
+                      {expandedResearcher === 'jason' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🔬 التركيز البحثي:' : '🔬 Research Focus:'}</p>
+                            <div className="flex flex-wrap gap-1">
+                              <span className="px-2 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs">
+                                {language === 'ar' ? 'الصحة النفسية' : 'Mental Health'}
+                              </span>
+                              <span className="px-2 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs">
+                                {language === 'ar' ? 'سلوكيات عالية الخطورة' : 'High-Risk Behaviors'}
+                              </span>
+                              <span className="px-2 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-xs">
+                                {language === 'ar' ? 'المساواة' : 'Equity'}
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'تحديد العوامل التي تُبقي السلوكيات عالية الخطورة وتزيدها (إيذاء النفس، تعاطي المواد، الانتحار، واضطرابات الأكل)، مع التركيز على الفئات المُهمَّشة و+LGBTQ'
+                              : 'Identifying factors that maintain and increase high-risk behaviors (self-injury, substance use, suicide, and eating pathology), with particular focus on marginalized and LGBTQ+ populations'}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('jason')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthDarkBlue hover:text-healthTeal transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'jason' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
