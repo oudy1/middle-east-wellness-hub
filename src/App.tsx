@@ -10,6 +10,8 @@ import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
 import FamilyPhysician from "@/pages/FamilyPhysician";
+import FamilyPhysicianDirectory from "@/pages/FamilyPhysicianDirectory";
+import FamilyPhysicianCities from "@/pages/FamilyPhysicianCities";
 import PhysicianApplication from "@/pages/PhysicianApplication";
 import JoinUs from "@/pages/JoinUs";
 import PostOpportunity from "@/pages/PostOpportunity";
@@ -33,6 +35,9 @@ function App() {
             <Route path="/webinars" element={<Webinars />} />
           <Route path="/physician-directory" element={<PhysicianDirectory />} />
           <Route path="/family-physician" element={<FamilyPhysician />} />
+          <Route path="/physicians/family" element={<FamilyPhysicianDirectory />} />
+          <Route path="/physicians/family/cities" element={<FamilyPhysicianCities />} />
+          <Route path="/physicians/family/:citySlug" element={<FamilyPhysicianDirectory />} />
           <Route path="/physician-application" element={<PhysicianApplication />} />
           <Route path="/join-us" element={<JoinUs />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
