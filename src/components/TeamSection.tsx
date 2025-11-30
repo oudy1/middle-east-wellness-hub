@@ -28,7 +28,20 @@ const TeamSection = () => {
       specialization: {
         en: "Founder and strategic leadership",
         ar: "المؤسس والقيادة الاستراتيجية"
-      }
+      },
+      tags: ["Leadership"]
+    },
+    {
+      name: "Sofia Sarwary",
+      role: {
+        en: "Project Manager",
+        ar: "مدير المشروع"
+      },
+      specialization: {
+        en: "Project Management",
+        ar: "إدارة المشروع"
+      },
+      tags: ["Project Management"]
     },
     {
       name: "Amr Al Masri",
@@ -39,29 +52,92 @@ const TeamSection = () => {
       specialization: {
         en: "Events",
         ar: "الفعاليات"
-      }
+      },
+      tags: ["Events"]
     },
     {
-      name: "Mohamed Salem",
+      name: "Hassan Sheather",
       role: {
-        en: "Team Member",
-        ar: "عضو الفريق"
+        en: "Research & Outreach",
+        ar: "البحث والتواصل"
       },
       specialization: {
-        en: "Research and publication",
-        ar: "البحث والنشر"
-      }
+        en: "Research and community outreach",
+        ar: "البحث والتواصل المجتمعي"
+      },
+      tags: ["Research", "Outreach"]
     },
     {
-      name: "Qamar Al Farsi",
+      name: "Darah Freije",
       role: {
-        en: "Team Member",
-        ar: "عضو الفريق"
+        en: "Outreach",
+        ar: "التواصل المجتمعي"
       },
       specialization: {
-        en: "Community partnerships and engagement co-lead",
-        ar: "قائد مشارك للشراكات المجتمعية والمشاركة"
-      }
+        en: "Community outreach",
+        ar: "التواصل المجتمعي"
+      },
+      tags: ["Outreach"]
+    },
+    {
+      name: "Abdullah Azzawi",
+      role: {
+        en: "Research & Educational Materials",
+        ar: "البحث والمواد التعليمية"
+      },
+      specialization: {
+        en: "Research and educational content development",
+        ar: "البحث وتطوير المحتوى التعليمي"
+      },
+      tags: ["Research", "Education"]
+    },
+    {
+      name: "Alanoud",
+      role: {
+        en: "Graphic Designer",
+        ar: "مصممة جرافيك"
+      },
+      specialization: {
+        en: "Visual design and branding",
+        ar: "التصميم البصري والهوية"
+      },
+      tags: ["Design"]
+    },
+    {
+      name: "Karim Sahlab",
+      role: {
+        en: "Research & Social Media",
+        ar: "البحث ووسائل التواصل الاجتماعي"
+      },
+      specialization: {
+        en: "Research and social media management",
+        ar: "البحث وإدارة وسائل التواصل الاجتماعي"
+      },
+      tags: ["Research", "Social Media"]
+    },
+    {
+      name: "Marta Mhanna",
+      role: {
+        en: "Research & Social Media",
+        ar: "البحث ووسائل التواصل الاجتماعي"
+      },
+      specialization: {
+        en: "Research and social media management",
+        ar: "البحث وإدارة وسائل التواصل الاجتماعي"
+      },
+      tags: ["Research", "Social Media"]
+    },
+    {
+      name: "Mariam Ihab",
+      role: {
+        en: "Videography",
+        ar: "التصوير الفيديو"
+      },
+      specialization: {
+        en: "Video production and content creation",
+        ar: "إنتاج الفيديو وإنشاء المحتوى"
+      },
+      tags: ["Social Media", "Design"]
     },
     {
       name: "Lodi Sinanios",
@@ -72,7 +148,8 @@ const TeamSection = () => {
       specialization: {
         en: "Technology and digital initiatives",
         ar: "التكنولوجيا والمبادرات الرقمية"
-      }
+      },
+      tags: ["Technology"]
     },
     {
       name: "Mousa El-Sururi",
@@ -83,7 +160,8 @@ const TeamSection = () => {
       specialization: {
         en: "Community partnerships and engagement and research",
         ar: "الشراكات المجتمعية والمشاركة والبحث"
-      }
+      },
+      tags: ["Outreach", "Research"]
     },
     {
       name: "Sarah Durani",
@@ -94,7 +172,8 @@ const TeamSection = () => {
       specialization: {
         en: "Research and community engagement",
         ar: "البحث والمشاركة المجتمعية"
-      }
+      },
+      tags: ["Research", "Outreach"]
     },
     {
       name: "Riad Sankari",
@@ -105,7 +184,8 @@ const TeamSection = () => {
       specialization: {
         en: "Healthcare advocacy and outreach",
         ar: "الدعوة الصحية والتوعية"
-      }
+      },
+      tags: ["Outreach"]
     },
     {
       name: "Saif Arabiat",
@@ -116,7 +196,8 @@ const TeamSection = () => {
       specialization: {
         en: "Digital health and innovation",
         ar: "الصحة الرقمية والابتكار"
-      }
+      },
+      tags: ["Technology"]
     }
   ];
 
@@ -160,7 +241,7 @@ const TeamSection = () => {
           <h3 className={`text-xl sm:text-2xl font-semibold mb-4 md:mb-6 text-healthDarkBlue ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
             {language === 'ar' ? 'فريق المشروع' : 'Project Team'}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {projectTeam.map((person, index) => renderPersonCard(person, index))}
           </div>
         </div>
