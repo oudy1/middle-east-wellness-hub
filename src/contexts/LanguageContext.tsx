@@ -1623,11 +1623,11 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<"en" | "ar" | "ku" | "fa" | "tr">(() => {
-    // Initialize language from localStorage or default to English
-    const savedLanguage = localStorage.getItem("shams-language");
-    return (savedLanguage as "en" | "ar" | "ku" | "fa" | "tr") || "en";
-  });
+  // Initialize language from localStorage or default to English
+  const savedLanguage = localStorage.getItem("shams-language");
+  const initialLanguage = (savedLanguage as "en" | "ar" | "ku" | "fa" | "tr") || "en";
+  
+  const [language, setLanguage] = useState<"en" | "ar" | "ku" | "fa" | "tr">(initialLanguage);
 
   // Persist language choice and update document attributes
   useEffect(() => {
