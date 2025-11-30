@@ -2,6 +2,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import WhatIsSHAMS from "@/components/WhatIsSHAMS";
+import WhatWeDoSection from "@/components/WhatWeDoSection";
 import MissionSection from "@/components/MissionSection";
 import ResourcesSection from "@/components/ResourcesSection";
 import StatsSection from "@/components/StatsSection";
@@ -26,6 +28,8 @@ const Index = () => {
       <Header />
       <main className="flex-grow relative z-10">
         <HeroSection />
+        <WhatIsSHAMS />
+        <WhatWeDoSection />
         <UpcomingEventsSection />
         <MissionSection />
         <TopicOfTheWeekSection />

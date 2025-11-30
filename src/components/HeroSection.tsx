@@ -20,16 +20,21 @@ const HeroSection = () => {
             <span className="mx-2">•</span>
             <span>{t("hero.tagline")}</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 animate-fade-in leading-tight">
             {t("hero.title")}
           </h1>
-          <p className="text-xl text-healthLightGray mb-8 animate-fade-in">
+          <p className="text-lg md:text-xl text-healthLightGray mb-8 animate-fade-in">
             {t("hero.subtitle")}
           </p>
-          <div className="flex justify-center animate-fade-in">
-            <Link to="/about#mission">
-              <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-6 text-lg">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+            <Link to="/about">
+              <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-3 text-base">
                 {t("hero.learnMore")}
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-healthDarkBlue px-8 py-3 text-base">
+                {t("hero.servicesButton")}
               </Button>
             </Link>
           </div>
