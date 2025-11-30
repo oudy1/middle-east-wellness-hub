@@ -33,7 +33,7 @@ const HeroSection = () => {
               </Button>
             </Link>
             <Link to="/services">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-healthDarkBlue px-8 py-3 text-base">
+              <Button className="bg-white text-healthDarkBlue hover:bg-healthLightGray border-2 border-white px-8 py-3 text-base">
                 {t("hero.servicesButton")}
               </Button>
             </Link>
