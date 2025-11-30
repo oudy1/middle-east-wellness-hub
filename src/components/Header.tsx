@@ -161,11 +161,18 @@ const Header = () => {
                      {t("header.findHealthcareWorkers")}
                    </Link>
                    <Link
-                     to="/family-physician"
+                     to="/physicians/family"
                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                      onClick={() => setPhysicianMenuOpen(false)}
                    >
                      {t("header.familyPhysician")}
+                   </Link>
+                   <Link
+                     to="/physicians/family/cities"
+                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-xs"
+                     onClick={() => setPhysicianMenuOpen(false)}
+                   >
+                     {language === 'ar' ? 'تصفح حسب المدينة' : 'Browse by City'}
                    </Link>
                  </div>
               )}
