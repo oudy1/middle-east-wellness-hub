@@ -6,7 +6,13 @@ import LandmarksGenerator from "@/components/LandmarksGenerator";
 import TeamSection from "@/components/TeamSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Heart, Globe } from "lucide-react";
+import { Users, Heart, Globe, MapPin } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown } from "lucide-react";
 
 const About = () => {
   const { language, t } = useLanguage();
@@ -42,32 +48,46 @@ const About = () => {
           </div>
         </section>
 
+        {/* Canada Focus Banner */}
+        <section className="py-4 bg-healthTeal/20 border-y border-healthTeal/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3">
+              <MapPin className="w-5 h-5 text-healthTeal" />
+              <p className="text-lg font-semibold text-healthDarkBlue">
+                {t("about.canadaFocus")}
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Mission Section */}
         <section id="mission" className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-healthDarkBlue mb-6 md:mb-8">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-healthDarkBlue mb-6 md:mb-8 text-center">
                 {language === 'ar' ? 'مهمتنا' : 'Our Mission'}
               </h2>
-              <div className="text-base sm:text-lg leading-relaxed text-gray-700 space-y-4 md:space-y-6 px-2">
+              <div className="text-base sm:text-lg leading-relaxed text-gray-700 mb-8 px-2">
                 <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                  {language === 'ar' ? 
-                    'مهمتنا هي بناء الثقة وإزالة الحواجز وخلق مساحة مشتركة من التفاهم بين المجتمعات العربية وشرق أوسطية والنظام الصحي الكندي.' : 
-                    'Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.'
-                  }
+                  {t("about.mission")}
                 </p>
-                <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                  {language === 'ar' ? 
-                    'نحن نركز على سد الفجوات في التعليم الطبي والمشاركة في البحث والوصول إلى الرعاية الصحية بينما ندافع عن الرعاية المتجاوبة ثقافياً والتمثيل الدقيق والحوار الشامل.' : 
-                    'We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.'
-                  }
-                </p>
-                <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                  {language === 'ar' ? 
-                    'يجمع عملنا بين الطلاب والعائلات والمهنيين والباحثين لبناء مستقبل تكون فيه أصوات المجتمع في مركز العدالة الصحية.' : 
-                    'Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.'
-                  }
-                </p>
+              </div>
+              
+              {/* Why Communities FAQ */}
+              <div className="mt-8">
+                <Collapsible>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-healthLightGray rounded-lg hover:bg-gray-200 transition-colors">
+                    <span className="font-semibold text-healthDarkBlue text-left">
+                      {t("about.whyCommunitiesTitle")}
+                    </span>
+                    <ChevronDown className="w-5 h-5 text-healthTeal" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="p-4 text-gray-700">
+                    <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      {t("about.whyCommunitiesDesc")}
+                    </p>
+                  </CollapsibleContent>
+                </Collapsible>
               </div>
             </div>
           </div>
