@@ -18,8 +18,7 @@ import {
   Search, 
   X,
   Building2,
-  Globe,
-  ExternalLink
+  Globe
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { 
@@ -325,8 +324,6 @@ const FamilyPhysicianDirectory = () => {
               {paginatedPhysicians.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
                   {paginatedPhysicians.map((physician) => {
-                    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(physician.address)}`;
-                    
                     return (
                       <Card 
                         key={physician.id} 
@@ -389,7 +386,7 @@ const FamilyPhysicianDirectory = () => {
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="flex-1"
+                              className="w-full"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedPhysician(physician);
@@ -397,18 +394,6 @@ const FamilyPhysicianDirectory = () => {
                             >
                               {isRTL ? 'عرض التفاصيل' : 'View Details'}
                             </Button>
-                            {physician.address && (
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                asChild
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="h-4 w-4" />
-                                </a>
-                              </Button>
-                            )}
                           </div>
                         </CardContent>
                       </Card>
