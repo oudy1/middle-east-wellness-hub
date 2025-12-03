@@ -3,8 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const UpcomingEventsSection = () => {
+  const navigate = useNavigate();
   const [eventLanguage, setEventLanguage] = useState<'en' | 'ar'>(() => {
     const saved = localStorage.getItem('shams-event-language');
     return (saved === 'ar' || saved === 'en') ? saved : 'en';
@@ -69,7 +71,7 @@ const UpcomingEventsSection = () => {
                 <Button 
                   size="default"
                   className="bg-[#F36F21] hover:bg-[#D85E15] text-white shadow-sm mt-2"
-                  onClick={() => window.open('https://youtu.be/veBBeJx_3HI', '_blank', 'noopener')}
+                  onClick={() => navigate('/resources')}
                 >
                   <Play className={`w-4 h-4 ${isArabic ? 'ml-2' : 'mr-2'}`} />
                   {isArabic ? 'شاهد الآن' : 'Watch Now'}
