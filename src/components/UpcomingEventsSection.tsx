@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Globe, DollarSign, ExternalLink } from "lucide-react";
-import eventPosterEn from "@/assets/east-to-west-webinar.jpg";
-import eventPosterAr from "@/assets/east-to-west-webinar-ar.jpg";
+import { Play } from "lucide-react";
 
 const UpcomingEventsSection = () => {
-  // Local language state for this section only, with localStorage persistence
   const [eventLanguage, setEventLanguage] = useState<'en' | 'ar'>(() => {
     const saved = localStorage.getItem('shams-event-language');
     return (saved === 'ar' || saved === 'en') ? saved : 'en';
@@ -17,128 +14,66 @@ const UpcomingEventsSection = () => {
     localStorage.setItem('shams-event-language', eventLanguage);
   }, [eventLanguage]);
 
-  const eventData = {
-    titleEn: "East to West: Nutrition and Diabetes Post-Immigration",
-    titleAr: "من الشرق إلى الغرب: التغذية والسكري بعد الهجرة",
-    date: "Nov 26",
-    dateAr: "٢٦ نوفمبر",
-    timeEn: "7:00 PM EST",
-    timeAr: "٧:٠٠ مساءً بتوقيت شرق كندا",
-    speakersEn: "Dr. Muhammad Z. Shrayyef, Endocrinologist | Hiba Al-Masri, Registered Dietitian",
-    speakersAr: "د. محمد ز. شريّف (استشاري الغدد الصماء) • هبة المصري (أخصائية تغذية مسجلة)",
-    descEn: "A friendly session on eating well and managing diabetes after moving to Canada. Practical tips and Q&A for you and your family.",
-    descAr: "جلسة ودّية حول التغذية الجيدة وإدارة السكري بعد الهجرة إلى كندا. نصائح عملية وأسئلة وأجوبة لك ولعائلتك.",
-    registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSco8Gp1Oy7nGm-nPqtlqZ1dS9K997_Y-YIquy5HYTsBVFlFhA/viewform?usp=header"
-  };
-
   const isArabic = eventLanguage === 'ar';
-  const currentPoster = isArabic ? eventPosterAr : eventPosterEn;
 
   return (
-    <section className="py-16 bg-gradient-to-b from-muted/30 to-background">
+    <section className="py-12 bg-gradient-to-b from-muted/30 to-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-foreground ${isArabic ? 'font-cairo' : ''}`}>
-            {isArabic ? 'الفعالية القادمة لمشروع شمس' : 'Upcoming SHAMS Event'}
-          </h2>
+        <div className="max-w-xl mx-auto">
+          <Card className="overflow-hidden border border-border/50 shadow-md hover:shadow-lg transition-shadow">
+            <CardContent className={`p-5 md:p-6 ${isArabic ? 'font-cairo' : ''}`} dir={isArabic ? 'rtl' : 'ltr'}>
+              {/* Language Toggle */}
+              <div className="flex justify-center mb-4">
+                <div className="inline-flex rounded-md shadow-sm bg-muted/30 border border-border/50 overflow-hidden text-xs">
+                  <button
+                    onClick={() => setEventLanguage('en')}
+                    className={`px-3 py-1.5 font-medium transition-all ${
+                      eventLanguage === 'en'
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:bg-muted/50'
+                    }`}
+                    aria-pressed={eventLanguage === 'en'}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => setEventLanguage('ar')}
+                    className={`px-3 py-1.5 font-medium transition-all font-cairo ${
+                      eventLanguage === 'ar'
+                        ? 'bg-background text-foreground shadow-sm'
+                        : 'text-muted-foreground hover:bg-muted/50'
+                    }`}
+                    aria-pressed={eventLanguage === 'ar'}
+                  >
+                    العربية
+                  </button>
+                </div>
+              </div>
 
-          {/* Language Toggle - Always Visible */}
-          <div className="inline-flex rounded-lg shadow-sm bg-background border border-border overflow-hidden">
-            <button
-              onClick={() => setEventLanguage('en')}
-              onKeyDown={(e) => e.key === 'Enter' && setEventLanguage('en')}
-              className={`px-6 py-3 text-sm font-semibold transition-all duration-200 ${
-                eventLanguage === 'en'
-                  ? 'bg-white text-foreground shadow-sm'
-                  : 'bg-muted/50 text-muted-foreground hover:bg-muted/80'
-              }`}
-              aria-pressed={eventLanguage === 'en'}
-              aria-label="Switch to English"
-            >
-              English
-            </button>
-            <button
-              onClick={() => setEventLanguage('ar')}
-              onKeyDown={(e) => e.key === 'Enter' && setEventLanguage('ar')}
-              className={`px-6 py-3 text-sm font-semibold transition-all duration-200 font-cairo ${
-                eventLanguage === 'ar'
-                  ? 'bg-white text-foreground shadow-sm'
-                  : 'bg-muted/50 text-muted-foreground hover:bg-muted/80'
-              }`}
-              aria-pressed={eventLanguage === 'ar'}
-              aria-label="Switch to Arabic"
-            >
-              العربية
-            </button>
-          </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <Card className="overflow-hidden border-2 border-border/50 shadow-lg">
-            {/* Event Poster - Auto-switches with smooth fade transition */}
-            <div className="flex justify-center bg-muted/20 p-6 md:p-8">
-              <img 
-                key={eventLanguage}
-                src={currentPoster} 
-                alt={isArabic 
-                  ? 'ملصق فعالية شمس: من الشرق إلى الغرب، التغذية والسكري بعد الهجرة.' 
-                  : 'SHAMS event poster: East to West, Nutrition and Diabetes Post-Immigration.'}
-                className="w-full max-w-[420px] md:max-w-[480px] lg:max-w-[600px] h-auto rounded-lg shadow-md animate-fade-in"
-                loading="lazy"
-              />
-            </div>
-
-            <CardContent className={`p-6 md:p-8 ${isArabic ? 'font-cairo' : ''}`} dir={isArabic ? 'rtl' : 'ltr'}>
-              {/* Event Content - Auto-switches based on language */}
-              <div className="space-y-5 mb-6">
-                <h3 className="text-2xl font-bold text-foreground">
-                  {isArabic ? eventData.titleAr : eventData.titleEn}
+              {/* Content */}
+              <div className="text-center space-y-3">
+                <Badge variant="secondary" className="text-xs px-2 py-0.5">
+                  {isArabic ? 'تسجيل ندوة' : 'Recorded Webinar'}
+                </Badge>
+                
+                <h3 className="text-lg md:text-xl font-bold text-foreground">
+                  {isArabic ? 'شاهد تسجيل الندوة' : 'Watch the Webinar Recording'}
                 </h3>
                 
-                <div className={`flex flex-wrap gap-4 text-muted-foreground ${isArabic ? 'flex-row-reverse' : ''}`}>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span className="font-medium">{isArabic ? eventData.dateAr : eventData.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium">{isArabic ? eventData.timeAr : eventData.timeEn}</span>
-                  </div>
-                </div>
-
-                <p className="text-base leading-relaxed text-muted-foreground">
-                  {isArabic ? eventData.descAr : eventData.descEn}
+                <p className="text-sm text-muted-foreground">
+                  {isArabic 
+                    ? 'من الشرق إلى الغرب: التغذية والسكري بعد الهجرة' 
+                    : 'East to West: Nutrition & Diabetes Post-Immigration'}
                 </p>
 
-                <p className="text-sm text-muted-foreground italic">
-                  <strong>{isArabic ? 'المتحدثون:' : 'Speakers:'}</strong> {isArabic ? eventData.speakersAr : eventData.speakersEn}
-                </p>
-              </div>
-
-              {/* Single Sign Up Button */}
-              <div className="mb-6">
                 <Button 
-                  size="lg"
-                  className="w-full bg-[#F36F21] hover:bg-[#D85E15] text-white shadow-md"
-                  onClick={() => window.open(eventData.registrationUrl, '_blank', 'noopener')}
+                  size="default"
+                  className="bg-[#F36F21] hover:bg-[#D85E15] text-white shadow-sm mt-2"
+                  onClick={() => window.open('https://youtu.be/veBBeJx_3HI', '_blank', 'noopener')}
                 >
-                  {isArabic ? 'التسجيل' : 'Sign Up'}
-                  <ExternalLink className={`w-4 h-4 ${isArabic ? 'mr-2' : 'ml-2'}`} />
+                  <Play className={`w-4 h-4 ${isArabic ? 'ml-2' : 'mr-2'}`} />
+                  {isArabic ? 'شاهد الآن' : 'Watch Now'}
                 </Button>
-              </div>
-
-              {/* Quick Facts Pills */}
-              <div className={`flex flex-wrap justify-center gap-3 pt-4 border-t border-border/50 ${isArabic ? 'flex-row-reverse' : ''}`}>
-                <Badge variant="secondary" className="px-4 py-2 text-sm">
-                  <DollarSign className={`w-4 h-4 ${isArabic ? 'ml-1' : 'mr-1'}`} />
-                  {isArabic ? 'مجاني' : 'Free'}
-                </Badge>
-                <Badge variant="secondary" className="px-4 py-2 text-sm">
-                  <Globe className={`w-4 h-4 ${isArabic ? 'ml-1' : 'mr-1'}`} />
-                  {isArabic ? 'افتراضي' : 'Online'}
-                </Badge>
-                <Badge variant="secondary" className="px-4 py-2 text-sm">
-                  {isArabic ? 'ثنائي اللغة' : 'Bilingual'}
-                </Badge>
               </div>
             </CardContent>
           </Card>
@@ -149,4 +84,3 @@ const UpcomingEventsSection = () => {
 };
 
 export default UpcomingEventsSection;
-
