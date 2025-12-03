@@ -71,7 +71,7 @@ const UpcomingEventsSection = () => {
                 <Button 
                   size="default"
                   className="bg-[#F36F21] hover:bg-[#D85E15] text-white shadow-sm mt-2"
-                  onClick={() => navigate('/resources')}
+                  onClick={() => navigate('/webinars')}
                 >
                   <Play className={`w-4 h-4 ${isArabic ? 'ml-2' : 'mr-2'}`} />
                   {isArabic ? 'شاهد الآن' : 'Watch Now'}
