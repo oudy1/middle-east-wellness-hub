@@ -616,7 +616,98 @@ const Resources = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                {/* Dr. Jesus (Jesse) Chavarria */}
+                <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthTeal/20 hover:border-healthTeal/40 flex flex-col h-full">
+                  <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6 text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-healthTeal to-healthTeal/70 rounded-full mx-auto mb-3 flex items-center justify-center">
+                      <GraduationCap className="h-12 w-12 text-white" />
+                    </div>
+                    <h3 className={`text-lg font-bold text-healthDarkBlue mb-1 ${language === 'ar' ? 'font-arabic' : ''}`}>
+                      {language === 'ar' ? 'د. خيسوس (جيسي) تشافارّيا' : 'Jesus (Jesse) Chavarria, PhD'}
+                    </h3>
+                    <p className="text-sm text-healthTeal font-semibold">
+                      {language === 'ar' ? 'أستاذ مساعد، علم النفس السريري' : 'Assistant Professor, Clinical Psychology'}
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      {language === 'ar' ? 'جامعة ويسترن' : 'Western University'}
+                    </p>
+                  </div>
+                  
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <div className={`space-y-3 ${language === 'ar' ? 'text-right' : 'text-left'} flex-grow`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {language === 'ar'
+                          ? 'يدرس الدكتور تشافارّيا العوامل والآليات التي تسهم في اضطرابات تعاطي المواد والآثار الضارة المرتبطة بها. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل.'
+                          : 'Dr. Chavarria studies risk factors and mechanisms that contribute to substance use disorders and substance-related harms. His work uses clinical and quantitative methods to identify targets for intervention.'}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <MapPin className="h-3 w-3 text-healthTeal" />
+                        <span>{language === 'ar' ? 'لندن، أونتاريو، كندا' : 'London, Ontario, Canada'}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <Mail className="h-3 w-3 text-healthTeal" />
+                        <a href="mailto:jchavarr@uwo.ca" className="text-healthTeal hover:underline truncate">
+                          jchavarr@uwo.ca
+                        </a>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1">
+                        {(language === 'ar' 
+                          ? ['تعاطي المواد', 'الإدمان', 'آليات الخطر', 'تطوير العلاج', 'الفئات المهمشة']
+                          : ['Substance Use', 'Addiction', 'Risk Mechanisms', 'Treatment Development', 'Marginalized Populations']
+                        ).map((tag, idx) => (
+                          <span key={idx} className="px-2 py-0.5 bg-healthTeal/10 text-healthTeal rounded-full text-xs">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {expandedResearcher === 'chavarria' && (
+                        <div className="pt-3 border-t border-gray-200 space-y-3 animate-fade-in">
+                          <div>
+                            <p className="text-xs text-gray-600 mb-1">{language === 'ar' ? '🏛️ الانتماءات:' : '🏛️ Affiliations:'}</p>
+                            <p className="text-sm text-gray-700">
+                              {language === 'ar' 
+                                ? 'قسم علم النفس، جامعة ويسترن (جامعة أونتاريو الغربية)'
+                                : 'Department of Psychology, Western University (University of Western Ontario)'}
+                            </p>
+                            <p className="text-sm text-gray-700 mt-1">
+                              {language === 'ar'
+                                ? 'معهد أبحاث سياسات الصحة النفسية، مركز الإدمان والصحة النفسية (CAMH)'
+                                : 'Institute for Mental Health Policy Research, Centre for Addiction and Mental Health (CAMH)'}
+                            </p>
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {language === 'ar'
+                              ? 'يدرس الدكتور تشافارّيا العوامل والآليات التي تسهم في اضطرابات تعاطي المواد والآثار الضارة المرتبطة بها. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل، مع هدف تطوير ونشر علاجات تُقلّل أو تُزيل السلوكيات الإدمانية، خاصة لدى الفئات المهمشة.'
+                              : 'Dr. Chavarria studies risk factors and mechanisms that contribute to substance use disorders and substance-related harms. His work uses clinical and quantitative methods to identify targets for intervention. The aim is to develop and disseminate treatments that reduce or eliminate problematic substance use, particularly among marginalized populations.'}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <button
+                      onClick={() => toggleResearcher('chavarria')}
+                      className="mt-3 flex items-center gap-1 text-sm text-healthTeal hover:text-healthDarkBlue transition-colors font-medium self-start"
+                    >
+                      {expandedResearcher === 'chavarria' ? (
+                        <>
+                          {language === 'ar' ? 'إخفاء' : 'Show Less'}
+                          <ChevronUp className="h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'ar' ? 'المزيد' : 'Read More'}
+                          <ChevronDown className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                  </CardContent>
+                </Card>
+
                 {/* Menna Komeiha */}
                 <Card className="shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-healthTeal/20 hover:border-healthTeal/40 flex flex-col h-full">
                   <div className="bg-gradient-to-br from-healthTeal/10 to-healthTeal/5 p-6 text-center">
