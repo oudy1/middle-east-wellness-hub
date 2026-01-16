@@ -9,7 +9,7 @@ const HeroSection = () => {
   const { t, language } = useLanguage();
   
   return (
-    <section className="relative bg-healthDarkBlue py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-healthDarkBlue py-10 md:py-14 overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-calligraphy-pattern opacity-15"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-healthDarkBlue/95 via-healthDarkBlue to-healthDarkBlue/95"></div>
@@ -18,11 +18,11 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Logo - Large and prominent */}
-          <div className="flex justify-center pt-4 pb-10 md:pb-12">
+          <div className="flex justify-center pb-6 md:pb-8">
             <img 
               src={SHAMS_LOGO_PRIMARY} 
               alt="SHAMS Logo" 
-              className="h-40 w-40 sm:h-52 sm:w-52 md:h-64 md:w-64 lg:h-72 lg:w-72 object-contain"
+              className="h-36 w-36 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-64 lg:w-64 object-contain"
             />
           </div>
           
