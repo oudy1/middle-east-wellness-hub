@@ -9,25 +9,27 @@ const HeroSection = () => {
   const { t, language } = useLanguage();
   
   return (
-    <section className="relative bg-healthDarkBlue py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-healthDarkBlue py-20 md:py-28 overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-calligraphy-pattern opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-healthDarkBlue via-healthDarkBlue/90 to-healthDarkBlue/70"></div>
+        <div className="absolute inset-0 bg-calligraphy-pattern opacity-15"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-healthDarkBlue/95 via-healthDarkBlue to-healthDarkBlue/95"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Hero Logo - Large and prominent */}
+          <div className="flex justify-center pt-4 pb-10 md:pb-12">
             <img 
               src={SHAMS_LOGO_PRIMARY} 
               alt="SHAMS Logo" 
-              className="h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 object-contain"
+              className="h-40 w-40 sm:h-52 sm:w-52 md:h-64 md:w-64 lg:h-72 lg:w-72 object-contain"
             />
           </div>
-          <div className="mb-2 text-healthGold opacity-70">
-            <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
-            <span className="mx-2">•</span>
-            <span>{t("hero.tagline")}</span>
+          
+          <div className="mb-3 text-healthGold">
+            <span className="font-arabic text-2xl md:text-3xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
+            <span className="mx-3">•</span>
+            <span className="text-lg md:text-xl">{t("hero.tagline")}</span>
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 animate-fade-in leading-tight">
             {t("hero.title")}
