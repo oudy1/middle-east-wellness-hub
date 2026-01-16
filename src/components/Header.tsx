@@ -59,7 +59,7 @@ const Header = () => {
               <img 
                 src={SHAMS_LOGO_PRIMARY} 
                 alt="SHAMS Logo" 
-                className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
+                className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain flex-shrink-0"
               />
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
