@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
-const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/shams-logo-primary.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,7 +17,7 @@ const Footer = () => {
               <img 
                 src={SHAMS_LOGO_PRIMARY} 
                 alt="SHAMS Logo" 
-                className="h-12 w-12 object-contain"
+                className="h-14 w-14 object-contain"
               />
               <h3 className="text-xl font-bold">{t("footer.title")}</h3>
             </Link>

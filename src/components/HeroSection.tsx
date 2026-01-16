@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
-const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/shams-logo-primary.png";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -18,13 +18,11 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex justify-center mb-6">
-            <div className="bg-white/95 rounded-full p-3 shadow-lg">
-              <img 
-                src={SHAMS_LOGO_PRIMARY} 
-                alt="SHAMS Logo" 
-                className="h-20 w-20 md:h-28 md:w-28 object-contain"
-              />
-            </div>
+            <img 
+              src={SHAMS_LOGO_PRIMARY} 
+              alt="SHAMS Logo" 
+              className="h-28 w-28 md:h-36 md:w-36 object-contain"
+            />
           </div>
           <div className="mb-2 text-healthGold opacity-70">
             <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
