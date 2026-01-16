@@ -85,6 +85,13 @@ const PartnersSection = () => {
       logo: "/lovable-uploads/lesa-western-logo.jpg",
       description: "The Levant Students' Association - Western University",
       link: "#"
+    },
+    {
+      // CLUB_LOGO_WOMEN_IN_MEDICINE_UOTTAWA - Club logo only, not SHAMS brand
+      name: "Women in Medicine",
+      logo: "/lovable-uploads/club-logo-women-in-medicine-uottawa.png",
+      description: "Women in Medicine - University of Ottawa",
+      link: "#"
     }
   ];
 

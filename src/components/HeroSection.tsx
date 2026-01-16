@@ -2,7 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import shamsLogo from "@/assets/shams-logo.png";
+// SHAMS_LOGO_PRIMARY - Do not change this logo path
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -18,7 +19,7 @@ const HeroSection = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex justify-center mb-4">
             <img 
-              src={shamsLogo} 
+              src={SHAMS_LOGO_PRIMARY} 
               alt="SHAMS Logo" 
               className="h-16 w-16 md:h-20 md:w-20 object-contain"
             />
