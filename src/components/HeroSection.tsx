@@ -17,12 +17,14 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <img 
-              src={SHAMS_LOGO_PRIMARY} 
-              alt="SHAMS Logo" 
-              className="h-28 w-28 md:h-36 md:w-36 object-contain"
-            />
+          <div className="flex justify-center mb-8">
+            <div className="bg-white/95 rounded-2xl p-4 sm:p-5 shadow-lg">
+              <img 
+                src={SHAMS_LOGO_PRIMARY} 
+                alt="SHAMS Logo" 
+                className="h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 object-contain"
+              />
+            </div>
           </div>
           <div className="mb-2 text-healthGold opacity-70">
             <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
