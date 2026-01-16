@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Menu, Languages, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import shamsLogo from "@/assets/shams-logo.png";
+// SHAMS_LOGO_PRIMARY - Do not change this logo path
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
 import {
   Sheet,
   SheetContent,
@@ -56,9 +57,9 @@ const Header = () => {
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
               <img 
-                src={shamsLogo} 
+                src={SHAMS_LOGO_PRIMARY} 
                 alt="SHAMS Logo" 
-                className="h-10 w-10 sm:h-12 sm:w-12 object-contain flex-shrink-0"
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain flex-shrink-0"
               />
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
