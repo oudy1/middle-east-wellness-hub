@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import shamsLogo from "@/assets/shams-logo.png";
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
@@ -15,6 +16,13 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
+          <div className="flex justify-center mb-4">
+            <img 
+              src={shamsLogo} 
+              alt="SHAMS Logo" 
+              className="h-16 w-16 md:h-20 md:w-20 object-contain"
+            />
+          </div>
           <div className="mb-2 text-healthGold opacity-70">
             <span className="font-arabic text-2xl tracking-wide">{language === 'ar' ? "شمس" : "SHAMS"}</span>
             <span className="mx-2">•</span>

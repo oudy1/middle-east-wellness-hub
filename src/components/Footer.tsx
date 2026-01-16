@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import shamsLogo from "@/assets/shams-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,14 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">{t("footer.title")}</h3>
+            <Link to="/" className="flex items-center gap-3 mb-4" onClick={() => window.scrollTo(0, 0)}>
+              <img 
+                src={shamsLogo} 
+                alt="SHAMS Logo" 
+                className="h-12 w-12 object-contain"
+              />
+              <h3 className="text-xl font-bold">{t("footer.title")}</h3>
+            </Link>
             <p className="mb-4 text-gray-300">
               Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern communities across Canada.
             </p>

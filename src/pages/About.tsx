@@ -13,6 +13,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
+import shamsLogo from "@/assets/shams-logo.png";
 
 const About = () => {
   const { language, t } = useLanguage();
@@ -35,9 +36,9 @@ const About = () => {
             </h1>
             <div className="flex justify-center mb-6 md:mb-8">
               <img 
-                src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
+                src={shamsLogo} 
                 alt="SHAMS Logo" 
-                className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24"
+                className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain"
               />
             </div>
             <p className="text-lg sm:text-xl text-center max-w-3xl mx-auto mb-12 md:mb-16 text-gray-600 px-2">
