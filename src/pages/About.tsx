@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
-const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/shams-logo-primary.png";
 
 const About = () => {
   const { language, t } = useLanguage();
@@ -39,7 +39,7 @@ const About = () => {
               <img 
                 src={SHAMS_LOGO_PRIMARY} 
                 alt="SHAMS Logo" 
-                className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain"
+                className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 object-contain"
               />
             </div>
             <p className="text-lg sm:text-xl text-center max-w-3xl mx-auto mb-12 md:mb-16 text-gray-600 px-2">

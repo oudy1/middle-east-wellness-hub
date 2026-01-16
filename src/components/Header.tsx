@@ -5,7 +5,7 @@ import { Menu, Languages, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
-const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
+const SHAMS_LOGO_PRIMARY = "/lovable-uploads/shams-logo-primary.png";
 import {
   Sheet,
   SheetContent,
@@ -56,13 +56,11 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
-              <div className="bg-white/95 rounded-full p-1.5 shadow-md">
-                <img 
-                  src={SHAMS_LOGO_PRIMARY} 
-                  alt="SHAMS Logo" 
-                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain flex-shrink-0"
-                />
-              </div>
+              <img 
+                src={SHAMS_LOGO_PRIMARY} 
+                alt="SHAMS Logo" 
+                className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
+              />
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
                   {language === 'ar' ? "شمس" : "SHAMS"}
