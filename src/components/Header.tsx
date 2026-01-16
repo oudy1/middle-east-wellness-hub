@@ -56,11 +56,13 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 sm:gap-3">
-              <img 
-                src={SHAMS_LOGO_PRIMARY} 
-                alt="SHAMS Logo" 
-                className="h-12 w-12 sm:h-14 sm:w-14 object-contain flex-shrink-0"
-              />
+              <div className="bg-white/95 rounded-full p-1.5 shadow-md">
+                <img 
+                  src={SHAMS_LOGO_PRIMARY} 
+                  alt="SHAMS Logo" 
+                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain flex-shrink-0"
+                />
+              </div>
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
                   {language === 'ar' ? "شمس" : "SHAMS"}
