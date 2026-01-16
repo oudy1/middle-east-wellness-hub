@@ -36,13 +36,11 @@ const About = () => {
               {language === 'ar' ? 'من نحن' : 'About Us'}
             </h1>
             <div className="flex justify-center mb-6 md:mb-8">
-              <div className="bg-white rounded-2xl p-4 shadow-md">
-                <img 
-                  src={SHAMS_LOGO_PRIMARY} 
-                  alt="SHAMS Logo" 
-                  className="h-24 w-24 sm:h-28 sm:w-28 md:h-36 md:w-36 object-contain"
-                />
-              </div>
+              <img 
+                src={SHAMS_LOGO_PRIMARY} 
+                alt="SHAMS Logo" 
+                className="h-28 w-28 sm:h-32 sm:w-32 md:h-40 md:w-40 object-contain"
+              />
             </div>
             <p className="text-lg sm:text-xl text-center max-w-3xl mx-auto mb-12 md:mb-16 text-gray-600 px-2">
               {language === 'ar' ? 
