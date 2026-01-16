@@ -1,21 +1,21 @@
 import { Card } from "@/components/ui/card";
 import { Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import disabilitiesImageEn from "@/assets/disabilities-seen-unseen-en.png";
-import disabilitiesImageAr from "@/assets/disabilities-seen-unseen-ar.png";
+import womensHealthEn from "@/assets/womens-health-en.png";
+import womensHealthAr from "@/assets/womens-health-ar.png";
 
 const TopicOfTheWeekSection = () => {
   const { language } = useLanguage();
   const isArabic = language === 'ar';
 
   const topic = {
-    titleEn: "Disabilities: Seen and Unseen",
-    titleAr: "الإعاقات: الظاهرة وغير الظاهرة",
-    subtitleEn: "Learn how visible and invisible disabilities show up in our communities.",
-    subtitleAr: "كيف تظهر الإعاقات الظاهرة وغير الظاهرة في مجتمعاتنا.",
-    altEn: "Elder with walker between cars — Disabilities: Seen and Unseen (SHAMS).",
-    altAr: "شخص يستخدم المشّاية بين سيارتين — الإعاقات: الظاهرة وغير الظاهرة (شمس).",
-    instagramUrl: "https://www.instagram.com/projectshams/"
+    titleEn: "Women's Health",
+    titleAr: "صحة المرأة",
+    subtitleEn: "This week's focus highlights women's health issues, including visible and invisible conditions, access to care, and culturally relevant health experiences within Middle Eastern and North African communities in Canada.",
+    subtitleAr: "يسلّط موضوع هذا الأسبوع الضوء على صحة المرأة، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية، والتجارب الصحية ذات الصلة الثقافية داخل المجتمعات الشرق أوسطية وشمال أفريقيا في كندا.",
+    altEn: "Women's Health — SHAMS weekly topic featuring a woman in hijab with floral design",
+    altAr: "صحة المرأة — موضوع الأسبوع من شمس يظهر امرأة محجبة مع تصميم الأزهار",
+    instagramUrl: "https://www.instagram.com/p/DTlmPHtD_fD/"
   };
 
   const handleCardClick = () => {
@@ -49,7 +49,7 @@ const TopicOfTheWeekSection = () => {
             {/* Square Image Container */}
             <div className="relative aspect-square w-full overflow-hidden">
               <img 
-                src={isArabic ? disabilitiesImageAr : disabilitiesImageEn}
+                src={isArabic ? womensHealthAr : womensHealthEn}
                 alt={isArabic ? topic.altAr : topic.altEn}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
@@ -68,21 +68,14 @@ const TopicOfTheWeekSection = () => {
           </Card>
         </div>
 
-        {/* Instagram Follow Section */}
+        {/* Instagram CTA Button */}
         <div className="text-center">
-          <p className={`text-lg text-muted-foreground mb-6 ${isArabic ? 'font-cairo' : ''}`}>
-            {isArabic 
-              ? 'تابعنا على إنستغرام للمزيد من المحتوى التعليمي الصحي'
-              : 'Follow us on Instagram for more health education content'
-            }
-          </p>
-          
           <button 
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0 hover:from-primary/90 hover:to-primary/70 transition-all duration-200 shadow-md hover:shadow-lg px-6 py-3 rounded-md font-medium"
-            onClick={() => window.open('https://www.instagram.com/projectshams/', '_blank', 'noopener,noreferrer')}
+            className={`inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0 hover:from-primary/90 hover:to-primary/70 transition-all duration-200 shadow-md hover:shadow-lg px-6 py-3 rounded-md font-medium ${isArabic ? 'flex-row-reverse' : ''}`}
+            onClick={() => window.open(topic.instagramUrl, '_blank', 'noopener,noreferrer')}
           >
             <Instagram className="w-5 h-5" />
-            {isArabic ? 'تابعنا على إنستغرام' : 'Follow us on Instagram'}
+            {isArabic ? 'تعرّفوا أكثر على إنستغرام' : 'Learn More on Instagram'}
           </button>
         </div>
       </div>
