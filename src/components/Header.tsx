@@ -55,12 +55,14 @@ const Header = () => {
         <div className="flex items-center justify-between h-12 sm:h-auto">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
-            <Link to="/" className="flex items-center gap-2 sm:gap-3">
-              <img 
-                src={SHAMS_LOGO_PRIMARY} 
-                alt="SHAMS Logo" 
-                className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
-              />
+            <Link to="/" className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-white/95 rounded-lg p-1.5 sm:p-2">
+                <img 
+                  src={SHAMS_LOGO_PRIMARY} 
+                  alt="SHAMS Logo" 
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain flex-shrink-0"
+                />
+              </div>
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
                   {language === 'ar' ? "شمس" : "SHAMS"}
