@@ -16,11 +16,31 @@ interface ChatMessagesProps {
 export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading }) => {
   const { language } = useLanguage();
 
+  // Validate URL to prevent XSS via javascript: protocol
+  const isValidUrl = (url: string): boolean => {
+    const trimmed = url.trim().toLowerCase();
+    // Block dangerous protocols
+    if (trimmed.startsWith('javascript:') || 
+        trimmed.startsWith('data:') || 
+        trimmed.startsWith('vbscript:')) {
+      return false;
+    }
+    // Allow relative paths starting with /
+    if (url.startsWith('/')) {
+      return true;
+    }
+    // Allow http/https URLs
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return true;
+    }
+    return false;
+  };
+
   // Parse message content for links and format
   const formatContent = (content: string) => {
     // Convert markdown-style links to clickable links
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    const parts = [];
+    const parts: (string | React.ReactElement)[] = [];
     let lastIndex = 0;
     let match;
 
@@ -29,18 +49,27 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
       if (match.index > lastIndex) {
         parts.push(content.slice(lastIndex, match.index));
       }
-      // Add the link
-      parts.push(
-        <a
-          key={match.index}
-          href={match[2]}
-          target={match[2].startsWith('http') ? '_blank' : '_self'}
-          rel="noopener noreferrer"
-          className="text-healthGold hover:underline font-medium"
-        >
-          {match[1]}
-        </a>
-      );
+      
+      const linkText = match[1];
+      const linkUrl = match[2];
+      
+      // Only create link if URL is safe, otherwise show plain text
+      if (isValidUrl(linkUrl)) {
+        parts.push(
+          <a
+            key={match.index}
+            href={linkUrl}
+            target={linkUrl.startsWith('http') ? '_blank' : '_self'}
+            rel="noopener noreferrer"
+            className="text-healthGold hover:underline font-medium"
+          >
+            {linkText}
+          </a>
+        );
+      } else {
+        // Show as plain text if URL is not safe
+        parts.push(linkText);
+      }
       lastIndex = match.index + match[0].length;
     }
     
