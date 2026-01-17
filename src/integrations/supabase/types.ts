@@ -193,7 +193,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      topic_leaderboard: {
+        Row: {
+          language: string | null
+          suggestion_count: number | null
+          topic: string | null
+          total_votes: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
