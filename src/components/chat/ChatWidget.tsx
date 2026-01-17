@@ -3,7 +3,7 @@ import { MessageCircle, X, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChatMessages } from './ChatMessages';
-import { ChatInput } from './ChatInput';
+import { ChatInput, ChatInputRef } from './ChatInput';
 import { ChatQuickReplies } from './ChatQuickReplies';
 import { useChatSession } from '@/hooks/useChatSession';
 
@@ -12,6 +12,7 @@ const ChatWidget: React.FC = () => {
   const [isMinimized, setIsMinimized] = useState(false);
   const { language } = useLanguage();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatInputRef = useRef<ChatInputRef>(null);
   
   const {
     messages,
@@ -27,6 +28,16 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Focus input when chat opens (with delay for mobile)
+  useEffect(() => {
+    if (!isOpen || isMinimized) return;
+    const timer = setTimeout(() => {
+      chatInputRef.current?.focus();
+      chatInputRef.current?.scrollIntoView();
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [isOpen, isMinimized]);
 
   const quickReplies = language === 'ar' ? [
     { label: 'موارد بالعربي', message: 'أريد موارد صحية بالعربي' },
@@ -50,7 +61,8 @@ const ChatWidget: React.FC = () => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg"
+        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg touch-manipulation"
+        style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
         aria-label={language === 'ar' ? 'افتح المحادثة' : 'Open chat'}
       >
         <MessageCircle className="h-6 w-6 text-healthDarkBlue" />
@@ -60,9 +72,12 @@ const ChatWidget: React.FC = () => {
 
   return (
     <div 
-      className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 ${
-        isMinimized ? 'h-14' : 'h-[600px] max-h-[calc(100vh-48px)]'
-      }`}
+      className={`fixed z-[60] pointer-events-auto bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 ${
+        isMinimized ? 'h-14' : 'h-[100dvh] sm:h-[600px] sm:max-h-[calc(100vh-48px)]'
+      } w-full sm:w-[380px] sm:max-w-[calc(100vw-48px)] bottom-0 right-0 sm:bottom-6 sm:right-6`}
+      style={{ 
+        maxHeight: isMinimized ? '56px' : 'calc(100dvh - env(safe-area-inset-top, 0px))',
+      }}
       dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
       {/* Header */}
@@ -84,18 +99,20 @@ const ChatWidget: React.FC = () => {
         </div>
         <div className="flex items-center gap-1">
           <Button
+            type="button"
             variant="ghost"
             size="icon"
             onClick={() => setIsMinimized(!isMinimized)}
-            className="h-8 w-8 text-white hover:bg-white/10"
+            className="h-8 w-8 text-white hover:bg-white/10 touch-manipulation"
           >
             <Minimize2 className="h-4 w-4" />
           </Button>
           <Button
+            type="button"
             variant="ghost"
             size="icon"
             onClick={() => setIsOpen(false)}
-            className="h-8 w-8 text-white hover:bg-white/10"
+            className="h-8 w-8 text-white hover:bg-white/10 touch-manipulation"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -103,9 +120,9 @@ const ChatWidget: React.FC = () => {
       </div>
 
       {!isMinimized && (
-        <>
+        <div className="flex flex-col h-[calc(100%-56px)]">
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 h-[calc(100%-140px)] bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
             {messages.length === 0 ? (
               <div className="space-y-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
@@ -132,11 +149,12 @@ const ChatWidget: React.FC = () => {
 
           {/* Input */}
           <ChatInput 
+            ref={chatInputRef}
             onSend={sendMessage}
             disabled={isLoading}
             placeholder={language === 'ar' ? 'اكتب رسالتك...' : 'Type your message...'}
           />
-        </>
+        </div>
       )}
     </div>
   );
