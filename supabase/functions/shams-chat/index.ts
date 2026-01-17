@@ -1,9 +1,46 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+// Allowed origins for CORS
+const ALLOWED_ORIGINS = [
+  "https://middle-east-wellness-hub.lovable.app",
+  "https://id-preview--76e904db-540a-45be-8950-ed6938900787.lovable.app",
+  "http://localhost:5173",
+  "http://localhost:8080",
+];
+
+// Simple in-memory rate limiting
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 20; // 20 requests per minute per IP
+
+function isRateLimited(clientIp: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(clientIp);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(clientIp, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  
+  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+  
+  record.count++;
+  return false;
+}
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const allowedOrigin = origin && ALLOWED_ORIGINS.some(o => origin.startsWith(o.replace(/:\d+$/, ''))) 
+    ? origin 
+    : ALLOWED_ORIGINS[0];
+  
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
 
 const SHAMS_SYSTEM_PROMPT = `### ROLE
 You are SHAMS Guide, a bilingual website assistant for Project SHAMS:
@@ -105,14 +142,93 @@ AR:
 قبل ما تمشي: تابع SHAMS على إنستغرام للمواضيع الأسبوعية.
 وإذا احتجت مساعدة، ابعث لنا إيميل ونرجع لك.`;
 
+// Validate message structure
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
+function validatePayload(data: unknown): { messages: ChatMessage[]; language: string } | null {
+  if (!data || typeof data !== 'object') return null;
+  
+  const payload = data as Record<string, unknown>;
+  
+  // Validate messages array
+  if (!Array.isArray(payload.messages)) return null;
+  if (payload.messages.length === 0 || payload.messages.length > 50) return null;
+  
+  for (const msg of payload.messages) {
+    if (!msg || typeof msg !== 'object') return null;
+    const m = msg as Record<string, unknown>;
+    if (typeof m.role !== 'string' || !['user', 'assistant', 'system'].includes(m.role)) return null;
+    if (typeof m.content !== 'string') return null;
+    if (m.content.length > 10000) return null; // Max 10k chars per message
+  }
+  
+  // Validate language
+  const language = typeof payload.language === 'string' && ['en', 'ar'].includes(payload.language) 
+    ? payload.language 
+    : 'en';
+  
+  return { 
+    messages: payload.messages as ChatMessage[], 
+    language 
+  };
+}
+
 serve(async (req) => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+  
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Only allow POST requests
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Method not allowed" }), 
+      { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
+
+  // Check origin
+  if (!origin || !ALLOWED_ORIGINS.some(o => origin.startsWith(o.replace(/:\d+$/, '')))) {
+    console.warn(`Blocked request from unauthorized origin: ${origin}`);
+    return new Response(
+      JSON.stringify({ error: "Unauthorized origin" }), 
+      { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
+
+  // Get client IP for rate limiting
+  const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
+                   req.headers.get("cf-connecting-ip") || 
+                   "unknown";
+
+  // Check rate limit
+  if (isRateLimited(clientIp)) {
+    console.warn(`Rate limited: ${clientIp}`);
+    return new Response(
+      JSON.stringify({ error: "Too many requests. Please wait a moment." }), 
+      { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
+
   try {
-    const { messages, language } = await req.json();
+    const rawData = await req.json();
+    
+    // Validate payload structure
+    const validated = validatePayload(rawData);
+    if (!validated) {
+      return new Response(
+        JSON.stringify({ error: "Invalid request format" }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    
+    const { messages, language } = validated;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
@@ -124,7 +240,7 @@ serve(async (req) => {
       ? "\n\nThe user's interface is set to Arabic. Default to Arabic responses unless they write in English."
       : "\n\nThe user's interface is set to English. Default to English responses unless they write in Arabic.";
 
-    console.log(`Processing chat request with ${messages.length} messages, language: ${language}`);
+    console.log(`Processing chat request from ${clientIp} with ${messages.length} messages, language: ${language}`);
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
