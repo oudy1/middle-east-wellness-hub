@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface QuickReply {
   label: string;
@@ -17,16 +18,28 @@ export const ChatQuickReplies: React.FC<ChatQuickRepliesProps> = ({
   onSelect, 
   disabled 
 }) => {
+  const { language } = useLanguage();
+  
+  const handleSelect = (message: string) => {
+    if (!disabled) {
+      onSelect(message);
+    }
+  };
+
   return (
-    <div className="flex flex-wrap gap-2">
+    <div 
+      className="flex flex-wrap gap-2"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+    >
       {replies.map((reply, index) => (
         <Button
           key={index}
+          type="button"
           variant="outline"
           size="sm"
-          onClick={() => onSelect(reply.message)}
+          onClick={() => handleSelect(reply.message)}
           disabled={disabled}
-          className="text-xs bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors"
+          className="text-xs min-h-[44px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95"
         >
           {reply.label}
         </Button>

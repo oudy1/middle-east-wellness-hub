@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2 } from 'lucide-react';
+import { ChatSafetyFooter } from './ChatSafetyFooter';
 
 interface Message {
   id: string;
@@ -15,6 +16,20 @@ interface ChatMessagesProps {
 
 export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading }) => {
   const { language } = useLanguage();
+
+  // Check if last message contains emergency keywords
+  const hasEmergencyContent = (content: string): boolean => {
+    const emergencyKeywords = [
+      'suicide', 'kill myself', 'end my life', 'want to die',
+      'انتحار', 'أريد الموت', 'أنهي حياتي', 'اقتل نفسي',
+      'emergency', 'طوارئ', '911', 'crisis', 'أزمة'
+    ];
+    const lowerContent = content.toLowerCase();
+    return emergencyKeywords.some(keyword => lowerContent.includes(keyword.toLowerCase()));
+  };
+
+  const lastMessage = messages[messages.length - 1];
+  const showEmergencyBanner = lastMessage && hasEmergencyContent(lastMessage.content);
 
   // Validate URL to prevent XSS via javascript: protocol
   const isValidUrl = (url: string): boolean => {
@@ -83,6 +98,22 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
 
   return (
     <div className="space-y-3">
+      {showEmergencyBanner && (
+        <div 
+          className="bg-red-100 border border-red-300 rounded-lg p-3 text-sm text-red-800"
+          dir={language === 'ar' ? 'rtl' : 'ltr'}
+        >
+          <p className="font-bold mb-1">
+            {language === 'ar' ? '⚠️ إذا كنت في خطر فوري:' : '⚠️ If you are in immediate danger:'}
+          </p>
+          <p>
+            {language === 'ar' 
+              ? 'اتصل بـ 911 أو اذهب إلى أقرب غرفة طوارئ. خط أزمات كندا: 1-833-456-4566'
+              : 'Call 911 or go to your nearest emergency room. Canada Crisis Line: 1-833-456-4566'}
+          </p>
+        </div>
+      )}
+      
       {messages.map((message) => (
         <div
           key={message.id}
@@ -113,6 +144,11 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
             </div>
           </div>
         </div>
+      )}
+
+      {/* Safety footer after messages */}
+      {messages.length > 0 && !isLoading && (
+        <ChatSafetyFooter />
       )}
     </div>
   );
