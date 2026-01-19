@@ -36,6 +36,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { SEOHead } from "@/components/SEOHead";
 
 const PROVINCES = [
   { value: "ON", label_en: "Ontario", label_ar: "أونتاريو" },
@@ -112,6 +113,7 @@ const FindHealthcareWorkers = () => {
   const [workers, setWorkers] = useState<HealthcareWorker[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
   
   // Suggestion form state
   const [suggestionOpen, setSuggestionOpen] = useState(false);
@@ -127,18 +129,61 @@ const FindHealthcareWorkers = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isAr = language === "ar";
+
   // Auto-search if params are provided
   useEffect(() => {
-    if (searchParams.get("city") && searchParams.get("province")) {
-      handleSearch();
+    const cityParam = searchParams.get("city");
+    const provinceParam = searchParams.get("province");
+    if (cityParam && provinceParam) {
+      handleSearchWithParams(cityParam, provinceParam);
     }
-  }, []);
+  }, [searchParams]);
+
+  const handleSearchWithParams = async (cityParam: string, provinceParam: string) => {
+    setCity(cityParam);
+    setProvince(provinceParam);
+    setIsLoading(true);
+    setHasSearched(true);
+    setSearchError(null);
+
+    try {
+      let query = supabase
+        .from("healthcare_workers")
+        .select("*")
+        .ilike("city", `%${cityParam.trim()}%`)
+        .eq("province", provinceParam);
+
+      const langParam = searchParams.get("language");
+      if (langParam) {
+        setLanguageFilter(langParam);
+        query = query.contains("languages", [langParam]);
+      }
+
+      const specialtyParam = searchParams.get("specialty");
+      if (specialtyParam) {
+        setProviderType(specialtyParam);
+        query = query.eq("provider_type", specialtyParam);
+      }
+
+      const { data, error } = await query.order("full_name");
+
+      if (error) throw error;
+
+      setWorkers(data || []);
+    } catch (error) {
+      console.error("Search error:", error);
+      setSearchError(isAr ? "حدث خطأ في البحث" : "An error occurred while searching");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSearch = async () => {
     if (!city.trim() || !province) {
       toast({
-        title: language === "ar" ? "مطلوب" : "Required",
-        description: language === "ar" 
+        title: isAr ? "مطلوب" : "Required",
+        description: isAr 
           ? "يرجى إدخال المدينة والمقاطعة" 
           : "Please enter city and province",
         variant: "destructive",
@@ -148,6 +193,7 @@ const FindHealthcareWorkers = () => {
 
     setIsLoading(true);
     setHasSearched(true);
+    setSearchError(null);
 
     try {
       let query = supabase
@@ -175,9 +221,10 @@ const FindHealthcareWorkers = () => {
       setWorkers(data || []);
     } catch (error) {
       console.error("Search error:", error);
+      setSearchError(isAr ? "حدث خطأ في البحث" : "An error occurred while searching");
       toast({
-        title: language === "ar" ? "خطأ" : "Error",
-        description: language === "ar" 
+        title: isAr ? "خطأ" : "Error",
+        description: isAr 
           ? "حدث خطأ في البحث" 
           : "An error occurred while searching",
         variant: "destructive",
@@ -238,24 +285,30 @@ const FindHealthcareWorkers = () => {
     }
   };
 
-  const isAr = language === "ar";
 
   return (
-    <div className="flex flex-col min-h-screen bg-background" dir={isAr ? "rtl" : "ltr"}>
-      <Header />
-      <main className="flex-grow">
-        <div className="container mx-auto px-4 py-8 md:py-12">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              {isAr ? "ابحث عن مقدمي الرعاية الصحية" : "Find Healthcare Workers"}
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {isAr 
-                ? "ابحث عن أطباء ومقدمي رعاية صحية يتحدثون لغتك في منطقتك"
-                : "Find doctors and healthcare providers who speak your language in your area"}
-            </p>
-          </div>
+    <>
+      <SEOHead
+        title={isAr ? "ابحث عن مقدمي الرعاية الصحية | SHAMS" : "Find Healthcare Workers | SHAMS"}
+        description={isAr 
+          ? "ابحث عن أطباء ومقدمي رعاية صحية يتحدثون لغتك في منطقتك"
+          : "Find doctors and healthcare providers who speak your language in your area"}
+      />
+      <div className="flex flex-col min-h-screen bg-background" dir={isAr ? "rtl" : "ltr"}>
+        <Header />
+        <main className="flex-grow">
+          <div className="container mx-auto px-4 py-6 sm:py-8 md:py-12">
+            {/* Header */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+                {isAr ? "ابحث عن مقدمي الرعاية الصحية" : "Find Healthcare Workers"}
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
+                {isAr 
+                  ? "ابحث عن أطباء ومقدمي رعاية صحية يتحدثون لغتك في منطقتك"
+                  : "Find doctors and healthcare providers who speak your language in your area"}
+              </p>
+            </div>
 
           {/* Search Form */}
           <Card className="mb-8">
@@ -589,10 +642,11 @@ const FindHealthcareWorkers = () => {
               </CardContent>
             </Card>
           )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 
