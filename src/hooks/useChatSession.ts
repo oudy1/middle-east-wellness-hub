@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, getOrCreateSessionId } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -9,22 +9,13 @@ interface Message {
   content: string;
 }
 
-const getOrCreateSessionId = (): string => {
-  const key = 'shams_chat_session_id';
-  let sessionId = localStorage.getItem(key);
-  if (!sessionId) {
-    sessionId = crypto.randomUUID();
-    localStorage.setItem(key, sessionId);
-  }
-  return sessionId;
-};
-
 export const useChatSession = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const { language } = useLanguage();
   const { toast } = useToast();
+  // Use the canonical session ID from the Supabase client
   const sessionId = getOrCreateSessionId();
 
   // Load existing conversation on mount
