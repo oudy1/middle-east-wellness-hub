@@ -1,11 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-// Allowed origins for CORS
+// Allowed origins for CORS - includes production, preview, and local dev
 const ALLOWED_ORIGINS = [
+  "https://www.projectshams.com",
+  "https://projectshams.com",
   "https://middle-east-wellness-hub.lovable.app",
   "https://id-preview--76e904db-540a-45be-8950-ed6938900787.lovable.app",
+  "https://76e904db-540a-45be-8950-ed6938900787.lovableproject.com",
   "http://localhost:5173",
   "http://localhost:8080",
+  "http://localhost:3000",
 ];
 
 // Simple in-memory rate limiting
@@ -31,13 +35,18 @@ function isRateLimited(clientIp: string): boolean {
 }
 
 function getCorsHeaders(origin: string | null): Record<string, string> {
-  const allowedOrigin = origin && ALLOWED_ORIGINS.some(o => origin.startsWith(o.replace(/:\d+$/, ''))) 
-    ? origin 
-    : ALLOWED_ORIGINS[0];
+  // Check if origin matches any allowed origin (with port stripping for localhost)
+  const isAllowed = origin && ALLOWED_ORIGINS.some(allowed => {
+    const normalizedAllowed = allowed.replace(/:\d+$/, '');
+    const normalizedOrigin = origin.replace(/:\d+$/, '');
+    return normalizedOrigin === normalizedAllowed || origin === allowed;
+  });
+  
+  const allowedOrigin = isAllowed ? origin : ALLOWED_ORIGINS[0];
   
   return {
-    "Access-Control-Allow-Origin": allowedOrigin,
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Origin": allowedOrigin!,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-session-id",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
 }
@@ -193,8 +202,14 @@ serve(async (req) => {
     );
   }
 
-  // Check origin
-  if (!origin || !ALLOWED_ORIGINS.some(o => origin.startsWith(o.replace(/:\d+$/, '')))) {
+  // Check origin - use same logic as getCorsHeaders
+  const isAllowed = origin && ALLOWED_ORIGINS.some(allowed => {
+    const normalizedAllowed = allowed.replace(/:\d+$/, '');
+    const normalizedOrigin = origin.replace(/:\d+$/, '');
+    return normalizedOrigin === normalizedAllowed || origin === allowed;
+  });
+  
+  if (!origin || !isAllowed) {
     console.warn(`Blocked request from unauthorized origin: ${origin}`);
     return new Response(
       JSON.stringify({ error: "Unauthorized origin" }), 
