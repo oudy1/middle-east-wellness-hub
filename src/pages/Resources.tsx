@@ -1231,6 +1231,69 @@ const Resources = () => {
           </div>
         </section>
 
+        {/* Clinical Tools and Templates Section */}
+        <section id="clinical-tools" className="py-12 md:py-16 bg-gradient-to-br from-healthDarkBlue/5 to-healthTeal/5">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-healthDarkBlue mb-4 text-center">
+              {language === 'ar' ? 'الأدوات والقوالب السريرية' : 'Clinical Tools and Templates'}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-8">
+              {language === 'ar' 
+                ? 'موارد عملية لطلاب الطب والمقيمين والأطباء لدعم سير العمل السريري.'
+                : 'Practical resources for medical students, residents, and physicians to support clinical workflow.'}
+            </p>
+            
+            <div className="max-w-2xl mx-auto">
+              <Card className="hover:shadow-xl transition-shadow border-2 border-healthTeal/20">
+                <CardHeader className="pb-3">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <Badge variant="secondary" className="text-xs bg-healthTeal/10 text-healthTeal">
+                      {language === 'ar' ? 'قوالب' : 'Templates'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-healthDarkBlue/10 text-healthDarkBlue">
+                      {language === 'ar' ? 'المرضى الداخليين' : 'Inpatient'}
+                    </Badge>
+                  </div>
+                  <CardTitle className={`text-healthDarkBlue text-lg flex items-center gap-2 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <FileText className="h-5 w-5 text-healthTeal" />
+                    {language === 'ar' ? 'قوالب نقطة الرعاية' : 'Point-of-Care Templates'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' 
+                      ? 'قوالب للمشاكل السريرية الشائعة تشمل قوائم القبول، نماذج جمع التاريخ المرضي، التشخيص التفريقي، وعبارات التقييم والخطة.'
+                      : 'Templates for common clinical problems including admission checklists, HPI intakes, differentials, and A&P dotphrases.'}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2 mb-3">
+                    <a 
+                      href="https://www.pointofcaremedicine.com/templates"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
+                    >
+                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full text-sm">
+                        <ExternalLink className="h-4 w-4" />
+                        {language === 'ar' ? 'افتح القوالب' : 'Open templates'}
+                      </Button>
+                    </a>
+                    <Link to="/services#clinical-tools" className="flex-1">
+                      <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal/10 flex items-center gap-2 w-full text-sm">
+                        {language === 'ar' ? 'عرض التفاصيل' : 'View details'}
+                      </Button>
+                    </Link>
+                  </div>
+                  <p className={`text-xs text-gray-500 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' 
+                      ? 'SHAMS ليست منتسبة لهذا الموقع.'
+                      : 'SHAMS is not affiliated with this website.'}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Research Resources Section */}
         <section className="py-16 md:py-24 bg-healthLightGray">
           <div className="container mx-auto px-4">

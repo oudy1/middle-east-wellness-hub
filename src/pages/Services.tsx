@@ -1,8 +1,8 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { 
   BookOpen, 
   Calendar, 
@@ -19,7 +19,10 @@ import {
   Brain,
   Syringe,
   Shield,
-  Wind
+  Wind,
+  Stethoscope,
+  FileText,
+  Plus
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -1039,6 +1042,137 @@ const Services = () => {
                 }
               </span>
             </p>
+          </div>
+        </section>
+
+        {/* For Medical Students, Residents, and Clinicians */}
+        <section id="clinical-tools" className="py-12 md:py-16 bg-gradient-to-br from-healthDarkBlue/5 to-healthTeal/5">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Stethoscope className="h-8 w-8 text-healthDarkBlue" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? 'لطلاب الطب والمقيمين والأطباء' : 'For Medical Students, Residents, and Clinicians'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar' 
+                ? 'أدوات سريرية وقوالب عملية لدعم سير العمل السريري واتخاذ القرارات المبنية على الأدلة.'
+                : 'Clinical tools and practical templates to support clinical workflow and evidence-based decision-making.'}
+            </p>
+            
+            <div className="max-w-3xl mx-auto">
+              <Card className="hover:shadow-xl transition-shadow border-2 border-healthTeal/20">
+                <CardHeader className="pb-4">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <Badge variant="secondary" className="text-xs bg-healthTeal/10 text-healthTeal border-healthTeal/20">
+                      {language === 'ar' ? 'سير العمل السريري' : 'Clinical workflow'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-healthDarkBlue/10 text-healthDarkBlue border-healthDarkBlue/20">
+                      {language === 'ar' ? 'المرضى الداخليين' : 'Inpatient'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-healthPurple/10 text-healthPurple border-healthPurple/20">
+                      {language === 'ar' ? 'قوالب' : 'Templates'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                      {language === 'ar' ? 'طلاب' : 'Students'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                      {language === 'ar' ? 'مقيمين' : 'Residents'}
+                    </Badge>
+                    <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                      {language === 'ar' ? 'أطباء' : 'Physicians'}
+                    </Badge>
+                  </div>
+                  <CardTitle className={`text-healthDarkBlue text-xl leading-tight flex items-center gap-2 ${language === 'ar' ? 'text-right font-cairo flex-row-reverse' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <FileText className="h-6 w-6 text-healthTeal flex-shrink-0" />
+                    {language === 'ar' ? 'قوالب نقطة الرعاية' : 'Point-of-Care Templates'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-gray-700 mb-4 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' 
+                      ? 'مجموعة من قوالب نقطة الرعاية للمشاكل السريرية الشائعة. تشمل قوائم القبول، نماذج جمع التاريخ المرضي، النتائج الفحصية الرئيسية، التشخيص التفريقي، وعبارات التقييم والخطة الجاهزة للسجل الطبي الإلكتروني. الهدف هو المرجع السريع عند سرير المريض لتبسيط سير العمل ودعم الرعاية المبنية على الأدلة.'
+                      : 'A set of point-of-care templates for common clinical problems. These include admission checklists, HPI intakes, key exam findings, differentials, and Assessment and Plan dotphrases for the EHR. The goal is quick reference at the bedside to help streamline workflow and support evidence-based care.'}
+                  </p>
+                  <p className={`text-sm text-healthTeal mb-4 font-medium ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' 
+                      ? 'ملاحظة: التركيز الحالي على قوالب المرضى الداخليين. سيتم إضافة قوالب العيادات الخارجية لاحقاً.'
+                      : 'Note: The current focus is inpatient templates. Outpatient templates will be added later.'}
+                  </p>
+                  
+                  <div className={`mb-6 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <p className="text-sm font-semibold text-gray-700 mb-2">
+                      {language === 'ar' ? 'الميزات الرئيسية:' : 'Key features:'}
+                    </p>
+                    <ul className={`text-sm text-gray-600 space-y-1 ${language === 'ar' ? 'mr-4' : 'ml-4'}`}>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'قوائم مراجعة القبول' : 'Admission checklists'}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'قوالب جمع التاريخ المرضي' : 'HPI intake templates'}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'النتائج الفحصية الرئيسية' : 'Key exam findings'}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'محفزات التشخيص التفريقي' : 'Differential diagnosis prompts'}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'عبارات التقييم والخطة (جاهزة للسجل الإلكتروني)' : 'Assessment and Plan dotphrases (EHR ready)'}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-healthTeal">•</span>
+                        {language === 'ar' ? 'مصممة للاستخدام السريع عند نقطة الرعاية' : 'Built for rapid use at the point of care'}
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                    <a 
+                      href="https://www.pointofcaremedicine.com/templates"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1"
+                    >
+                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                        <ExternalLink className="h-4 w-4" />
+                        {language === 'ar' ? 'افتح القوالب' : 'Open templates'}
+                      </Button>
+                    </a>
+                    <Link to="/services#topic-request" className="flex-1">
+                      <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal/10 flex items-center gap-2 w-full">
+                        <Plus className="h-4 w-4" />
+                        {language === 'ar' ? 'اقترح موضوع قالب' : 'Suggest a template topic'}
+                      </Button>
+                    </Link>
+                    <Link to="/contact" className="flex-1">
+                      <Button variant="outline" className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/10 flex items-center gap-2 w-full">
+                        <Mail className="h-4 w-4" />
+                        {language === 'ar' ? 'شارك مورداً مع SHAMS' : 'Share a resource with SHAMS'}
+                      </Button>
+                    </Link>
+                  </div>
+                  
+                  <div className={`text-xs text-gray-500 space-y-1 pt-3 border-t border-gray-100 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <p>
+                      {language === 'ar' 
+                        ? 'تقدم SHAMS روابط لأغراض تعليمية. هذه ليست نصيحة طبية. للقرارات الخاصة بالمريض، اتبع إرشاداتك السريرية المحلية وتحدث مع طبيبك المشرف أو فريق الرعاية.'
+                        : 'SHAMS provides links for education. This is not medical advice. For patient-specific decisions, follow your local clinical guidance and speak with your supervising physician or care team.'}
+                    </p>
+                    <p className="font-medium">
+                      {language === 'ar' 
+                        ? 'SHAMS ليست منتسبة لهذا الموقع.'
+                        : 'SHAMS is not affiliated with this website.'}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
 
