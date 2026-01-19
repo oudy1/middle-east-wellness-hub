@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { ChatSafetyFooter } from './ChatSafetyFooter';
 
 interface Message {
@@ -16,6 +18,7 @@ interface ChatMessagesProps {
 
 export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading }) => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
 
   // Check if last message contains emergency keywords
   const hasEmergencyContent = (content: string): boolean => {
@@ -34,55 +37,81 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
   // Validate URL to prevent XSS via javascript: protocol
   const isValidUrl = (url: string): boolean => {
     const trimmed = url.trim().toLowerCase();
-    // Block dangerous protocols
     if (trimmed.startsWith('javascript:') || 
         trimmed.startsWith('data:') || 
         trimmed.startsWith('vbscript:')) {
       return false;
     }
-    // Allow relative paths starting with /
     if (url.startsWith('/')) {
       return true;
     }
-    // Allow http/https URLs
     if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
       return true;
     }
     return false;
   };
 
-  // Parse message content for links and format
+  // Handle navigation for internal links
+  const handleNavigation = (url: string) => {
+    if (url.startsWith('/')) {
+      navigate(url);
+    } else if (url.startsWith('http')) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  // Parse message content for links and navigation buttons
   const formatContent = (content: string) => {
-    // Convert markdown-style links to clickable links
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     const parts: (string | React.ReactElement)[] = [];
     let lastIndex = 0;
     let match;
+    let buttonCount = 0;
+    const buttons: React.ReactElement[] = [];
 
     while ((match = linkRegex.exec(content)) !== null) {
       // Add text before the link
       if (match.index > lastIndex) {
-        parts.push(content.slice(lastIndex, match.index));
+        const textBefore = content.slice(lastIndex, match.index);
+        if (textBefore.trim()) {
+          parts.push(textBefore);
+        }
       }
       
       const linkText = match[1];
       const linkUrl = match[2];
       
-      // Only create link if URL is safe, otherwise show plain text
       if (isValidUrl(linkUrl)) {
-        parts.push(
-          <a
-            key={match.index}
-            href={linkUrl}
-            target={linkUrl.startsWith('http') ? '_blank' : '_self'}
-            rel="noopener noreferrer"
-            className="text-healthGold hover:underline font-medium"
-          >
-            {linkText}
-          </a>
-        );
+        const isInternalRoute = linkUrl.startsWith('/');
+        
+        if (isInternalRoute) {
+          // Render as a navigation button for internal routes
+          buttons.push(
+            <Button
+              key={`btn-${buttonCount++}`}
+              variant="outline"
+              size="sm"
+              onClick={() => handleNavigation(linkUrl)}
+              className="text-xs min-h-[40px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95"
+            >
+              {linkText}
+            </Button>
+          );
+        } else {
+          // Render as external link
+          parts.push(
+            <a
+              key={match.index}
+              href={linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-healthGold hover:underline font-medium"
+            >
+              {linkText}
+            </a>
+          );
+        }
       } else {
-        // Show as plain text if URL is not safe
         parts.push(linkText);
       }
       lastIndex = match.index + match[0].length;
@@ -90,7 +119,24 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
     
     // Add remaining text
     if (lastIndex < content.length) {
-      parts.push(content.slice(lastIndex));
+      const remainingText = content.slice(lastIndex);
+      if (remainingText.trim()) {
+        parts.push(remainingText);
+      }
+    }
+
+    // If we have buttons, render them in a flex container after the text
+    if (buttons.length > 0) {
+      return (
+        <div className="space-y-3">
+          {parts.length > 0 && (
+            <div className="whitespace-pre-wrap">{parts}</div>
+          )}
+          <div className="flex flex-wrap gap-2 mt-2">
+            {buttons}
+          </div>
+        </div>
+      );
     }
 
     return parts.length > 0 ? parts : content;
@@ -108,8 +154,8 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
           </p>
           <p>
             {language === 'ar' 
-              ? 'اتصل بـ 911 أو اذهب إلى أقرب غرفة طوارئ. خط أزمات كندا: 1-833-456-4566'
-              : 'Call 911 or go to your nearest emergency room. Canada Crisis Line: 1-833-456-4566'}
+              ? 'اتصل بـ 911 أو اذهب إلى أقرب غرفة طوارئ. في كندا، اتصل أو أرسل رسالة إلى 988 للدعم النفسي.'
+              : 'Call 911 or go to your nearest emergency room. In Canada, call or text 988 for mental health support.'}
           </p>
         </div>
       )}
@@ -146,7 +192,6 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
         </div>
       )}
 
-      {/* Safety footer after messages */}
       {messages.length > 0 && !isLoading && (
         <ChatSafetyFooter />
       )}
