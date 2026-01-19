@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Languages, ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { HeaderSearchButton } from "@/components/ResourceFinder";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
 const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
 import {
@@ -185,8 +186,12 @@ const Header = () => {
             </div>
           </nav>
           
-          {/* Language Selector - Right Side */}
-          <div className="hidden lg:flex items-center">
+          {/* Search and Language Selector - Right Side */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Desktop Search */}
+            <HeaderSearchButton variant="desktop" />
+            
+            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
@@ -220,13 +225,16 @@ const Header = () => {
             </div>
           </div>
           
-          {/* Mobile Language & Menu Button */}
-          <div className="lg:hidden flex items-center space-x-2 sm:space-x-4">
+          {/* Mobile Search, Language & Menu Button */}
+          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2">
+            {/* Mobile Search Button */}
+            <HeaderSearchButton variant="mobile" />
+            
             {/* Mobile Language Selector */}
             <div className="relative">
               <button
                 onClick={toggleLanguageMenu}
-                className="flex items-center space-x-1.5 px-3 py-2.5 rounded-md hover:bg-healthTeal transition-colors min-h-[44px] touch-manipulation"
+                className="flex items-center space-x-1.5 px-2 py-2.5 rounded-md hover:bg-healthTeal transition-colors min-h-[44px] touch-manipulation"
                 aria-label="Select language"
               >
                 <Languages size={18} />
