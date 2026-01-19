@@ -1144,12 +1144,6 @@ const Services = () => {
                         {language === 'ar' ? 'افتح القوالب' : 'Open templates'}
                       </Button>
                     </a>
-                    <Link to="/services#topic-request" className="flex-1">
-                      <Button variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal/10 flex items-center gap-2 w-full">
-                        <Plus className="h-4 w-4" />
-                        {language === 'ar' ? 'اقترح موضوع قالب' : 'Suggest a template topic'}
-                      </Button>
-                    </Link>
                     <Link to="/contact" className="flex-1">
                       <Button variant="outline" className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/10 flex items-center gap-2 w-full">
                         <Mail className="h-4 w-4" />
