@@ -14,6 +14,7 @@ import FamilyPhysicianDirectory from "@/pages/FamilyPhysicianDirectory";
 import FamilyPhysicianCities from "@/pages/FamilyPhysicianCities";
 import PhysicianApplication from "@/pages/PhysicianApplication";
 import JoinUs from "@/pages/JoinUs";
+import Volunteer from "@/pages/Volunteer";
 import PostOpportunity from "@/pages/PostOpportunity";
 import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/physicians/family/:citySlug" element={<FamilyPhysicianDirectory />} />
             <Route path="/physician-application" element={<PhysicianApplication />} />
             <Route path="/join-us" element={<JoinUs />} />
+            <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
