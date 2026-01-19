@@ -14,6 +14,7 @@ const ChatWidget: React.FC = () => {
   const { language } = useLanguage();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<ChatInputRef>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   
   const {
     messages,
@@ -35,33 +36,71 @@ const ChatWidget: React.FC = () => {
     if (!isOpen || isMinimized) return;
     const timer = setTimeout(() => {
       chatInputRef.current?.focus();
-      chatInputRef.current?.scrollIntoView();
-    }, 100);
+    }, 150);
     return () => clearTimeout(timer);
   }, [isOpen, isMinimized]);
 
-  // Bilingual welcome message
-  const welcomeMessage = language === 'ar' 
-    ? 'أهلاً، أنا دليل SHAMS. أقدر أساعدك تلاقي موارد، مقدمي رعاية صحية، فرص بحثية، أو تسجيلات. إيش تحتاج اليوم؟'
-    : "Hey, I'm the SHAMS Guide. I can help you find resources, healthcare workers, research opportunities, or recordings. What are you looking for today?";
+  // Prevent body scroll when chat is open on mobile
+  useEffect(() => {
+    if (isOpen && !isMinimized) {
+      const isMobile = window.innerWidth < 640;
+      if (isMobile) {
+        document.body.style.overflow = 'hidden';
+      }
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, isMinimized]);
 
-  // Bilingual quick replies
-  const quickReplies = language === 'ar' ? [
-    { label: 'اذهب إلى الموارد الآن', message: 'أريد الوصول إلى الموارد التعليمية' },
-    { label: 'ابحث عن مقدمي رعاية صحية', message: 'أبحث عن طبيب عائلة أو مقدم رعاية صحية' },
-    { label: 'فرص بحثية', message: 'ما هي الفرص البحثية المتاحة؟' },
-    { label: 'شاهد التسجيلات', message: 'أريد مشاهدة تسجيلات الندوات والفعاليات' },
-    { label: 'اقترح موضوعاً', message: 'أريد اقتراح موضوع للنقاش' },
-    { label: 'تطوع أو شارك معنا', message: 'كيف أتطوع مع مشروع شمس؟' },
-    { label: 'تواصل مع SHAMS', message: 'أريد التواصل مع فريق SHAMS' },
-  ] : [
-    { label: 'Find resources now', message: 'I want to access educational resources' },
-    { label: 'Find healthcare workers', message: "I'm looking for a family doctor or healthcare provider" },
-    { label: 'Research opportunities', message: 'What research opportunities are available?' },
-    { label: 'Watch recordings', message: 'I want to watch webinar and event recordings' },
-    { label: 'Suggest a topic', message: 'I want to suggest a discussion topic' },
-    { label: 'Volunteer / Get involved', message: 'How can I volunteer with SHAMS?' },
-    { label: 'Contact SHAMS', message: 'I want to contact the SHAMS team' },
+  // Bilingual welcome message
+  const welcomeMessage = 
+    "Hi, I'm the SHAMS Guide. I can help you find resources, browse our pages, or connect with our team.\n\nمرحباً، أنا مساعد SHAMS. أقدر أساعدك تلاقي مصادر، توصل لصفحات الموقع، أو تتواصل مع فريقنا.";
+
+  // Bilingual quick replies with both languages in label
+  const quickReplies = [
+    { 
+      label: language === 'ar' 
+        ? 'ابحث عن مقدمي رعاية | Find Healthcare Workers' 
+        : 'Find Healthcare Workers | ابحث عن مقدمي رعاية',
+      message: language === 'ar' 
+        ? 'أبحث عن طبيب أو مقدم رعاية صحية' 
+        : "I'm looking for a doctor or healthcare provider"
+    },
+    { 
+      label: language === 'ar' 
+        ? 'تصفح المصادر | Browse Resources' 
+        : 'Browse Resources | تصفح المصادر',
+      message: language === 'ar' 
+        ? 'أريد الوصول إلى الموارد التعليمية' 
+        : 'I want to access educational resources'
+    },
+    { 
+      label: language === 'ar' 
+        ? 'تواصل معنا | Contact SHAMS' 
+        : 'Contact SHAMS | تواصل معنا',
+      message: language === 'ar' 
+        ? 'أريد التواصل مع فريق SHAMS' 
+        : 'I want to contact the SHAMS team'
+    },
+    { 
+      label: language === 'ar' 
+        ? 'اقترح موضوعاً | Suggest a Topic' 
+        : 'Suggest a Topic | اقترح موضوعاً',
+      message: language === 'ar' 
+        ? 'أريد اقتراح موضوع للنقاش' 
+        : 'I want to suggest a discussion topic'
+    },
+    { 
+      label: language === 'ar' 
+        ? 'فرص بحثية | Research Opportunities' 
+        : 'Research Opportunities | فرص بحثية',
+      message: language === 'ar' 
+        ? 'ما هي الفرص البحثية المتاحة؟' 
+        : 'What research opportunities are available?'
+    },
   ];
 
   const handleQuickReply = (message: string) => {
@@ -84,15 +123,16 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Backdrop for mobile */}
+      {/* Backdrop for mobile - prevents interaction with page behind */}
       <div 
-        className="fixed inset-0 z-[55] bg-black/20 sm:hidden"
+        className="fixed inset-0 z-[55] bg-black/30 sm:hidden touch-none"
         onClick={() => setIsOpen(false)}
         aria-hidden="true"
       />
       
       <div 
-        className={`fixed z-[60] pointer-events-auto bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 ${
+        ref={chatContainerRef}
+        className={`fixed z-[60] pointer-events-auto bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 flex flex-col ${
           isMinimized ? 'h-14' : 'h-[100dvh] sm:h-[600px] sm:max-h-[calc(100vh-48px)]'
         } w-full sm:w-[400px] sm:max-w-[calc(100vw-48px)] bottom-0 right-0 sm:bottom-6 sm:right-6`}
         style={{ 
@@ -101,7 +141,7 @@ const ChatWidget: React.FC = () => {
         dir={language === 'ar' ? 'rtl' : 'ltr'}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-healthDarkBlue text-white">
+        <div className="flex items-center justify-between px-4 py-3 bg-healthDarkBlue text-white shrink-0">
           <div className="flex items-center gap-3">
             <img 
               src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
@@ -109,9 +149,7 @@ const ChatWidget: React.FC = () => {
               className="h-8 w-8 object-contain"
             />
             <div>
-              <h3 className="font-semibold text-sm">
-                {language === 'ar' ? 'دليل SHAMS' : 'SHAMS Guide'}
-              </h3>
+              <h3 className="font-semibold text-sm">SHAMS Guide</h3>
               <p className="text-xs text-white/70">
                 {language === 'ar' ? 'متاح للمساعدة' : 'Here to help'}
               </p>
@@ -140,15 +178,18 @@ const ChatWidget: React.FC = () => {
         </div>
 
         {!isMinimized && (
-          <div className="flex flex-col h-[calc(100%-56px)]">
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+          <>
+            {/* Messages area - scrollable */}
+            <div className="flex-1 overflow-y-auto p-4 bg-gray-50 overscroll-contain">
               {messages.length === 0 ? (
                 <div className="space-y-4">
                   <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <p className="text-sm text-gray-700">
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap">
                       {welcomeMessage}
                     </p>
+                  </div>
+                  <div className="text-xs text-center text-muted-foreground mb-2">
+                    {language === 'ar' ? 'روابط سريعة | Quick links' : 'Quick links | روابط سريعة'}
                   </div>
                   <ChatQuickReplies 
                     replies={quickReplies} 
@@ -163,17 +204,19 @@ const ChatWidget: React.FC = () => {
                   isLoading={isLoading}
                 />
               )}
-              <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} className="h-1" />
             </div>
 
-            {/* Input */}
-            <ChatInput 
-              ref={chatInputRef}
-              onSend={sendMessage}
-              disabled={isLoading}
-              placeholder={language === 'ar' ? 'اكتب رسالتك...' : 'Type your message...'}
-            />
-          </div>
+            {/* Input area - fixed at bottom */}
+            <div className="shrink-0">
+              <ChatInput 
+                ref={chatInputRef}
+                onSend={sendMessage}
+                disabled={isLoading}
+                placeholder={language === 'ar' ? 'اكتب رسالتك...' : 'Type your message...'}
+              />
+            </div>
+          </>
         )}
       </div>
     </>

@@ -34,7 +34,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
   const lastMessage = messages[messages.length - 1];
   const showEmergencyBanner = lastMessage && hasEmergencyContent(lastMessage.content);
 
-  // Validate URL to prevent XSS via javascript: protocol
+  // Validate URL to prevent XSS
   const isValidUrl = (url: string): boolean => {
     const trimmed = url.trim().toLowerCase();
     if (trimmed.startsWith('javascript:') || 
@@ -52,7 +52,9 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
   };
 
   // Handle navigation for internal links
-  const handleNavigation = (url: string) => {
+  const handleNavigation = (e: React.MouseEvent | React.TouchEvent, url: string) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (url.startsWith('/')) {
       navigate(url);
     } else if (url.startsWith('http')) {
@@ -89,10 +91,19 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
           buttons.push(
             <Button
               key={`btn-${buttonCount++}`}
+              type="button"
               variant="outline"
               size="sm"
-              onClick={() => handleNavigation(linkUrl)}
-              className="text-xs min-h-[40px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95"
+              onClick={(e) => handleNavigation(e, linkUrl)}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                if (linkUrl.startsWith('/')) {
+                  navigate(linkUrl);
+                } else if (linkUrl.startsWith('http')) {
+                  window.open(linkUrl, '_blank', 'noopener,noreferrer');
+                }
+              }}
+              className="text-xs min-h-[40px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none"
             >
               {linkText}
             </Button>
@@ -125,14 +136,17 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
       }
     }
 
-    // If we have buttons, render them in a flex container after the text
+    // If we have buttons, render them after the text with a label
     if (buttons.length > 0) {
       return (
         <div className="space-y-3">
           {parts.length > 0 && (
             <div className="whitespace-pre-wrap">{parts}</div>
           )}
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div className="text-xs text-muted-foreground mb-1">
+            {language === 'ar' ? 'روابط سريعة | Quick links' : 'Quick links | روابط سريعة'}
+          </div>
+          <div className="flex flex-wrap gap-2">
             {buttons}
           </div>
         </div>
