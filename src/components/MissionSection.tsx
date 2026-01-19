@@ -315,7 +315,7 @@ const MissionSection = () => {
                 <h3 className="text-2xl font-bold text-center mb-6">Mission Statement</h3>
                 <p className="text-lg text-center mb-6 relative">
                   <span className="absolute -top-6 -left-6 font-arabic text-healthRed opacity-25 text-3xl">ثقة</span>
-                  Our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.
+                  As a non-profit organization, our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern communities and the Canadian healthcare system.
                 </p>
                 <p className="text-lg text-center mb-6 relative">
                   <span className="absolute -top-6 -right-6 font-arabic text-healthTeal opacity-25 text-3xl">تعليم</span>

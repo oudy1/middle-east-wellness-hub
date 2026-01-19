@@ -266,11 +266,11 @@ const translations = {
     tr: "ŞEMS: Kanada'daki Orta Doğu ve Kuzey Afrika toplulukları için sağlık desteği"
   },
   "hero.subtitle": {
-    en: "We are a youth-led Canadian initiative that provides health education, mentorship, and research opportunities.",
-    ar: "مبادرة شبابية كندية تقدّم التثقيف الصحي والإرشاد والفرص البحثية.",
-    ku: "ئێمە دەستپێشخەرییەکی کەنەدی بە سەرپەرشتی گەنجانین کە پەروەردەی تەندروستی، ڕێنمایی و دەرفەتەکانی توێژینەوە دابین دەکات.",
-    fa: "ما یک ابتکار کانادایی به رهبری جوانان هستیم که آموزش سلامت، راهنمایی و فرصت های تحقیقاتی ارائه می دهیم.",
-    tr: "Sağlık eğitimi, mentorluk ve araştırma fırsatları sağlayan, gençler tarafından yönetilen bir Kanada girişimiyiz."
+    en: "We are a youth-led Canadian non-profit organization that provides health education, mentorship, and research opportunities.",
+    ar: "منظمة كندية غير ربحية يقودها الشباب تقدّم التثقيف الصحي والإرشاد والفرص البحثية.",
+    ku: "ئێمە ڕێکخراوێکی نەفتەخوازی کەنەدی بە سەرپەرشتی گەنجانین کە پەروەردەی تەندروستی، ڕێنمایی و دەرفەتەکانی توێژینەوە دابین دەکات.",
+    fa: "ما یک سازمان غیرانتفاعی کانادایی به رهبری جوانان هستیم که آموزش سلامت، راهنمایی و فرصت های تحقیقاتی ارائه می دهیم.",
+    tr: "Sağlık eğitimi, mentorluk ve araştırma fırsatları sağlayan, gençler tarafından yönetilen bir Kanada kar amacı gütmeyen kuruluşuyuz."
   },
   "hero.learnMore": {
     en: "Learn more",
@@ -305,11 +305,11 @@ const translations = {
     tr: "ŞEMS nedir"
   },
   "whatIsShams.description": {
-    en: "SHAMS stands for Support for Health Advocacy in Middle Eastern Communities. Our primary focus is Canada. We collaborate globally when it helps our communities here.",
-    ar: "شمس اختصار لعبارة دعم المناصرة الصحية في المجتمعات الشرق أوسطية. تركيزنا الأساسي هو كندا. نتعاون دولياً عند الحاجة لدعم مجتمعاتنا هنا.",
-    ku: "شەمس واتای پاڵپشتی بەرگریکردن لە تەندروستی لە کۆمەڵگاکانی ناوەڕاست. سەرەکیترین ئامانجمان کەنەداە. ئێمە لە ئاستی جیهانیدا هاوکاری دەکەین کاتێک یارمەتی کۆمەڵگاکانمان لێرە دەدات.",
-    fa: "شمس مخفف حمایت از حمایت سلامت در جوامع خاورمیانه است. تمرکز اصلی ما کانادا است. ما به صورت جهانی همکاری می کنیم وقتی به جوامع ما در اینجا کمک می کند.",
-    tr: "ŞEMS, Orta Doğu Topluluklarında Sağlık Savunuculuğu Desteği anlamına gelir. Öncelikli odağımız Kanada'dır. Buradaki topluluklarımıza yardımcı olduğunda küresel olarak işbirliği yaparız."
+    en: "SHAMS stands for Support for Health Advocacy in Middle Eastern Communities. We are a youth-led Canadian non-profit organization focused on Canada. We collaborate globally when it helps our communities here.",
+    ar: "شمس اختصار لعبارة دعم المناصرة الصحية في المجتمعات الشرق أوسطية. نحن منظمة كندية غير ربحية يقودها الشباب وتركيزنا الأساسي هو كندا. نتعاون دولياً عند الحاجة لدعم مجتمعاتنا هنا.",
+    ku: "شەمس واتای پاڵپشتی بەرگریکردن لە تەندروستی لە کۆمەڵگاکانی ناوەڕاست. ئێمە ڕێکخراوێکی نەفتەخوازی کەنەدی بە سەرپەرشتی گەنجانین. سەرەکیترین ئامانجمان کەنەداە. ئێمە لە ئاستی جیهانیدا هاوکاری دەکەین کاتێک یارمەتی کۆمەڵگاکانمان لێرە دەدات.",
+    fa: "شمس مخفف حمایت از حمایت سلامت در جوامع خاورمیانه است. ما یک سازمان غیرانتفاعی کانادایی به رهبری جوانان هستیم. تمرکز اصلی ما کانادا است. ما به صورت جهانی همکاری می کنیم وقتی به جوامع ما در اینجا کمک می کند.",
+    tr: "ŞEMS, Orta Doğu Topluluklarında Sağlık Savunuculuğu Desteği anlamına gelir. Gençler tarafından yönetilen bir Kanada kar amacı gütmeyen kuruluşuyuz. Öncelikli odağımız Kanada'dır. Buradaki topluluklarımıza yardımcı olduğunda küresel olarak işbirliği yaparız."
   },
   
   // What we do section
