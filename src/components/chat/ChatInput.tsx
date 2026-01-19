@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -28,6 +28,23 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
       },
     }));
 
+    // Handle virtual keyboard on mobile
+    useEffect(() => {
+      const handleResize = () => {
+        // When keyboard opens, scroll input into view
+        if (document.activeElement === inputRef.current) {
+          setTimeout(() => {
+            inputRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+          }, 100);
+        }
+      };
+
+      if (typeof visualViewport !== 'undefined') {
+        visualViewport.addEventListener('resize', handleResize);
+        return () => visualViewport.removeEventListener('resize', handleResize);
+      }
+    }, []);
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       const trimmed = input.trim();
@@ -42,7 +59,10 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
     };
 
     return (
-      <div className="border-t border-gray-200 p-3 bg-white pb-[calc(env(safe-area-inset-bottom,0px)+12px)]">
+      <div 
+        className="border-t border-gray-200 p-3 bg-white"
+        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
+      >
         <form 
           ref={formRef}
           onSubmit={handleSubmit} 

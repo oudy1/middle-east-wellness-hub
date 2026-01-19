@@ -20,7 +20,9 @@ export const ChatQuickReplies: React.FC<ChatQuickRepliesProps> = ({
 }) => {
   const { language } = useLanguage();
   
-  const handleSelect = (message: string) => {
+  const handleSelect = (e: React.MouseEvent | React.TouchEvent, message: string) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (!disabled) {
       onSelect(message);
     }
@@ -37,9 +39,15 @@ export const ChatQuickReplies: React.FC<ChatQuickRepliesProps> = ({
           type="button"
           variant="outline"
           size="sm"
-          onClick={() => handleSelect(reply.message)}
+          onClick={(e) => handleSelect(e, reply.message)}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            if (!disabled) {
+              onSelect(reply.message);
+            }
+          }}
           disabled={disabled}
-          className="text-xs min-h-[44px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95"
+          className="text-xs min-h-[44px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none"
         >
           {reply.label}
         </Button>

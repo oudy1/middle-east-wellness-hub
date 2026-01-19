@@ -144,6 +144,111 @@ export type Database = {
           },
         ]
       }
+      healthcare_workers: {
+        Row: {
+          accepting_new_patients: boolean | null
+          address: string | null
+          city: string
+          clinic_name: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          languages: string[] | null
+          last_verified_at: string | null
+          notes: string | null
+          phone: string | null
+          provider_type: string
+          province: string
+          source: string | null
+          specialty: string | null
+          virtual_available: boolean | null
+          website: string | null
+        }
+        Insert: {
+          accepting_new_patients?: boolean | null
+          address?: string | null
+          city: string
+          clinic_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          languages?: string[] | null
+          last_verified_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          provider_type?: string
+          province: string
+          source?: string | null
+          specialty?: string | null
+          virtual_available?: boolean | null
+          website?: string | null
+        }
+        Update: {
+          accepting_new_patients?: boolean | null
+          address?: string | null
+          city?: string
+          clinic_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          languages?: string[] | null
+          last_verified_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          provider_type?: string
+          province?: string
+          source?: string | null
+          specialty?: string | null
+          virtual_available?: boolean | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      provider_suggestions: {
+        Row: {
+          city: string
+          contact_info: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          provider_name: string
+          provider_type: string | null
+          province: string
+          status: string | null
+          submitted_by_email: string | null
+          submitted_by_name: string | null
+        }
+        Insert: {
+          city: string
+          contact_info?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          provider_name: string
+          provider_type?: string | null
+          province: string
+          status?: string | null
+          submitted_by_email?: string | null
+          submitted_by_name?: string | null
+        }
+        Update: {
+          city?: string
+          contact_info?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          provider_name?: string
+          provider_type?: string | null
+          province?: string
+          status?: string | null
+          submitted_by_email?: string | null
+          submitted_by_name?: string | null
+        }
+        Relationships: []
+      }
       research_requests: {
         Row: {
           conversation_id: string | null

@@ -13,6 +13,7 @@ import FamilyPhysician from "@/pages/FamilyPhysician";
 import FamilyPhysicianDirectory from "@/pages/FamilyPhysicianDirectory";
 import FamilyPhysicianCities from "@/pages/FamilyPhysicianCities";
 import PhysicianApplication from "@/pages/PhysicianApplication";
+import FindHealthcareWorkers from "@/pages/FindHealthcareWorkers";
 import JoinUs from "@/pages/JoinUs";
 import Volunteer from "@/pages/Volunteer";
 import PostOpportunity from "@/pages/PostOpportunity";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
             <Route path="/family-physician" element={<FamilyPhysician />} />
+            <Route path="/find-healthcare-workers" element={<FindHealthcareWorkers />} />
             <Route path="/physicians/family" element={<FamilyPhysicianDirectory />} />
             <Route path="/physicians/family/cities" element={<FamilyPhysicianCities />} />
             <Route path="/physicians/family/:citySlug" element={<FamilyPhysicianDirectory />} />
