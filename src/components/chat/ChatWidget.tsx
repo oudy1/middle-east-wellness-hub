@@ -40,23 +40,28 @@ const ChatWidget: React.FC = () => {
     return () => clearTimeout(timer);
   }, [isOpen, isMinimized]);
 
-  // Bilingual quick replies with full list
+  // Bilingual welcome message
+  const welcomeMessage = language === 'ar' 
+    ? 'أهلاً، أنا دليل SHAMS. أقدر أساعدك تلاقي موارد، مقدمي رعاية صحية، فرص بحثية، أو تسجيلات. إيش تحتاج اليوم؟'
+    : "Hey, I'm the SHAMS Guide. I can help you find resources, healthcare workers, research opportunities, or recordings. What are you looking for today?";
+
+  // Bilingual quick replies
   const quickReplies = language === 'ar' ? [
-    { label: 'موارد باللغة العربية', message: 'أريد موارد صحية باللغة العربية' },
+    { label: 'اذهب إلى الموارد الآن', message: 'أريد الوصول إلى الموارد التعليمية' },
     { label: 'ابحث عن مقدمي رعاية صحية', message: 'أبحث عن طبيب عائلة أو مقدم رعاية صحية' },
-    { label: 'تطوع مع شمس', message: 'كيف أتطوع مع مشروع شمس؟' },
     { label: 'فرص بحثية', message: 'ما هي الفرص البحثية المتاحة؟' },
-    { label: 'شاهد تسجيلات الفعاليات', message: 'أريد مشاهدة تسجيلات الندوات والفعاليات' },
+    { label: 'شاهد التسجيلات', message: 'أريد مشاهدة تسجيلات الندوات والفعاليات' },
     { label: 'اقترح موضوعاً', message: 'أريد اقتراح موضوع للنقاش' },
-    { label: 'دعم في أزمة', message: 'أحتاج مساعدة عاجلة أو دعم في أزمة' },
+    { label: 'تطوع أو شارك معنا', message: 'كيف أتطوع مع مشروع شمس؟' },
+    { label: 'تواصل مع SHAMS', message: 'أريد التواصل مع فريق SHAMS' },
   ] : [
-    { label: 'Find Arabic resources', message: 'I need health resources in Arabic' },
+    { label: 'Find resources now', message: 'I want to access educational resources' },
     { label: 'Find healthcare workers', message: "I'm looking for a family doctor or healthcare provider" },
-    { label: 'Volunteer with SHAMS', message: 'How can I volunteer with SHAMS?' },
     { label: 'Research opportunities', message: 'What research opportunities are available?' },
-    { label: 'Watch event recordings', message: 'I want to watch webinar and event recordings' },
+    { label: 'Watch recordings', message: 'I want to watch webinar and event recordings' },
     { label: 'Suggest a topic', message: 'I want to suggest a discussion topic' },
-    { label: 'Crisis support', message: 'I need urgent help or crisis support' },
+    { label: 'Volunteer / Get involved', message: 'How can I volunteer with SHAMS?' },
+    { label: 'Contact SHAMS', message: 'I want to contact the SHAMS team' },
   ];
 
   const handleQuickReply = (message: string) => {
@@ -105,7 +110,7 @@ const ChatWidget: React.FC = () => {
             />
             <div>
               <h3 className="font-semibold text-sm">
-                {language === 'ar' ? 'مرشد شمس' : 'SHAMS Guide'}
+                {language === 'ar' ? 'دليل SHAMS' : 'SHAMS Guide'}
               </h3>
               <p className="text-xs text-white/70">
                 {language === 'ar' ? 'متاح للمساعدة' : 'Here to help'}
@@ -142,9 +147,7 @@ const ChatWidget: React.FC = () => {
                 <div className="space-y-4">
                   <div className="bg-white rounded-lg p-4 shadow-sm">
                     <p className="text-sm text-gray-700">
-                      {language === 'ar' 
-                        ? 'مرحباً! أنا مرشد شمس. أقدر أساعدك توصل للموارد الصحية المناسبة. شو تحتاج اليوم؟'
-                        : "Hi! I'm SHAMS Guide. I can help you find the right health resources. What do you need today?"}
+                      {welcomeMessage}
                     </p>
                   </div>
                   <ChatQuickReplies 
