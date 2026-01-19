@@ -16,6 +16,7 @@ import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
 import ResearchTeaserSection from "@/components/ResearchTeaserSection";
+import { ResourceFinderSection } from "@/components/ResourceFinder";
 
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
       <Header />
       <main className="flex-grow relative z-10">
         <HeroSection />
+        <ResourceFinderSection />
         <WhatIsSHAMS />
         <WhatWeDoSection />
         <UpcomingEventsSection />
