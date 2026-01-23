@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
-import { supabase, getOrCreateSessionId } from '@/integrations/supabase/client';
+import { useState, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -10,69 +9,11 @@ interface Message {
 }
 
 export const useChatSession = () => {
+  // Start fresh every time - no persistence
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [conversationId, setConversationId] = useState<string | null>(null);
   const { language } = useLanguage();
   const { toast } = useToast();
-  // Use the canonical session ID from the Supabase client
-  const sessionId = getOrCreateSessionId();
-
-  // Load existing conversation on mount
-  useEffect(() => {
-    const loadConversation = async () => {
-      try {
-        // Find existing conversation for this session
-        const { data: conversations, error: convError } = await supabase
-          .from('chat_conversations')
-          .select('id')
-          .eq('session_id', sessionId)
-          .order('created_at', { ascending: false })
-          .limit(1);
-
-        if (convError) throw convError;
-
-        if (conversations && conversations.length > 0) {
-          const convId = conversations[0].id;
-          setConversationId(convId);
-
-          // Load messages
-          const { data: msgs, error: msgsError } = await supabase
-            .from('chat_messages')
-            .select('id, role, content')
-            .eq('conversation_id', convId)
-            .order('created_at', { ascending: true });
-
-          if (msgsError) throw msgsError;
-
-          if (msgs) {
-            setMessages(msgs.filter(m => m.role !== 'system') as Message[]);
-          }
-        }
-      } catch (error) {
-        console.error('Error loading conversation:', error);
-      }
-    };
-
-    loadConversation();
-  }, [sessionId]);
-
-  const createConversation = async (): Promise<string> => {
-    const { data, error } = await supabase
-      .from('chat_conversations')
-      .insert({ session_id: sessionId, language })
-      .select('id')
-      .single();
-
-    if (error) throw error;
-    return data.id;
-  };
-
-  const saveMessage = async (convId: string, role: 'user' | 'assistant', content: string) => {
-    await supabase
-      .from('chat_messages')
-      .insert({ conversation_id: convId, role, content });
-  };
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || isLoading) return;
@@ -89,17 +30,7 @@ export const useChatSession = () => {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      // Create conversation if needed
-      let convId = conversationId;
-      if (!convId) {
-        convId = await createConversation();
-        setConversationId(convId);
-      }
-
-      // Save user message
-      await saveMessage(convId, 'user', content.trim());
-
-      // Prepare messages for API (include history)
+      // Prepare messages for API (include history from current session only)
       const apiMessages = [...messages, userMessage].map(m => ({
         role: m.role,
         content: m.content
@@ -177,11 +108,6 @@ export const useChatSession = () => {
         }
       }
 
-      // Save assistant message
-      if (assistantContent) {
-        await saveMessage(convId, 'assistant', assistantContent);
-      }
-
     } catch (error) {
       console.error('Chat error:', error);
       toast({
@@ -196,12 +122,11 @@ export const useChatSession = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [messages, conversationId, language, isLoading, toast]);
+  }, [messages, language, isLoading, toast]);
 
   return {
     messages,
     isLoading,
     sendMessage,
-    conversationId,
   };
 };

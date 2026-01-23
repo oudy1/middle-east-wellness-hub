@@ -20,7 +20,6 @@ const ChatWidget: React.FC = () => {
     messages,
     isLoading,
     sendMessage,
-    conversationId
   } = useChatSession();
 
   const scrollToBottom = () => {
