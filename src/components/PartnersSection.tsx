@@ -157,7 +157,7 @@ const PartnersSection = () => {
             Our Partners
           </h2>
           <p className="section-description">
-            Working together to improve health outcomes in Arab communities
+            Working together to improve health outcomes in Arab societies
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-4">

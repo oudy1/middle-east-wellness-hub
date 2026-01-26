@@ -16,7 +16,7 @@ const JoinUs = () => {
   const content = {
     en: {
       heroTitle: "Join Our Mission",
-      heroDescription: "Help us improve healthcare access and advocacy for Middle Eastern and North African communities. Together, we can create meaningful change and build a more inclusive healthcare system.",
+      heroDescription: "Help us improve healthcare access and advocacy for Middle Eastern and North African societies. Together, we can create meaningful change and build a more inclusive healthcare system.",
       ctaTitle: "Volunteer with SHAMS",
       ctaLine1: "Fill out our volunteer application. It takes 2 to 3 minutes.",
       ctaLine2: "After you submit, our team will follow up by email.",

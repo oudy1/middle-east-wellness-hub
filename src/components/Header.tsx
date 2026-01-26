@@ -67,7 +67,7 @@ const Header = () => {
                   {language === 'ar' ? "شمس" : "SHAMS"}
                 </div>
                 <div className="text-xs text-healthGold opacity-90 hidden sm:block">
-                  Supporting Health & Advocacy for Middle Eastern Communities
+                  Supporting Health & Advocacy for Middle Eastern Societies
                 </div>
               </div>
             </Link>

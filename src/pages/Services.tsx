@@ -74,7 +74,7 @@ const Services = () => {
             <p className={`text-lg sm:text-xl mb-6 md:mb-8 max-w-3xl mx-auto px-2 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {language === 'ar' ? 
                 'دعم تطوير الرعاية الصحية والبحوث للمجتمعات الشرق أوسطية.' : 
-                'Supporting healthcare advancement and research for Middle Eastern communities.'
+                'Supporting healthcare advancement and research for Middle Eastern societies.'
               }
             </p>
           </div>
@@ -92,7 +92,7 @@ const Services = () => {
               <p className={`text-gray-600 mb-6 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                 {language === 'ar' ? 
                   'انضم إلى شبكتنا من مقدمي الرعاية الصحية المتخصصين في خدمة المجتمعات الشرق أوسطية.' : 
-                  'Join our network of healthcare providers dedicated to serving Middle Eastern communities.'
+                  'Join our network of healthcare providers dedicated to serving Middle Eastern societies.'
                 }
               </p>
               <Link to="/physician-application">
@@ -116,7 +116,7 @@ const Services = () => {
               <p className={`text-gray-600 mb-6 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                 {language === 'ar' ? 
                   'كن جزءاً من مهمتنا لتحسين الوصول إلى الرعاية الصحية للمجتمعات الشرق أوسطية.' : 
-                  'Become part of our mission to improve healthcare access for Middle Eastern communities.'
+                  'Become part of our mission to improve healthcare access for Middle Eastern societies.'
                 }
               </p>
               <a 

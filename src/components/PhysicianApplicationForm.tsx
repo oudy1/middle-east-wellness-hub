@@ -178,7 +178,7 @@ const PhysicianApplicationForm = () => {
           Join Our Physician Network
         </CardTitle>
         <p className="text-gray-600 mt-2 text-sm sm:text-base">
-          Help us provide culturally competent healthcare to Middle Eastern communities
+          Help us provide culturally competent healthcare to Middle Eastern societies
         </p>
       </CardHeader>
       <CardContent className="p-4 md:p-6 lg:p-8">

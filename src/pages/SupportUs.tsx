@@ -25,7 +25,7 @@ const SupportUs = () => {
     },
     {
       title: "Fund Our Initiatives",
-      description: "Help us develop new research programs, educational resources, and community outreach initiatives that address health disparities in Middle Eastern communities.",
+      description: "Help us develop new research programs, educational resources, and outreach initiatives that address health disparities in Middle Eastern societies.",
       icon: <DollarSign className="h-12 w-12 text-healthRed" />,
       color: "bg-healthRed/10"
     },

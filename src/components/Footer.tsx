@@ -22,7 +22,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold">{t("footer.title")}</h3>
             </Link>
             <p className="mb-4 text-gray-300">
-              Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern communities across Canada.
+              Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern societies across Canada.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/projectshams/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-healthTeal transition-colors">
