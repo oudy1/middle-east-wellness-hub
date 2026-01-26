@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -53,6 +53,12 @@ const ChatWidget: React.FC = () => {
       document.body.style.overflow = '';
     };
   }, [isOpen, isMinimized]);
+
+  // Close chat when navigating - passed to ChatMessages
+  const handleNavigationClose = useCallback(() => {
+    setIsOpen(false);
+    document.body.style.overflow = '';
+  }, []);
 
   // Bilingual welcome message
   const welcomeMessage = 
@@ -122,20 +128,22 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Backdrop for mobile - prevents interaction with page behind */}
+      {/* Backdrop for mobile - lower z-index than chat window */}
       <div 
-        className="fixed inset-0 z-[55] bg-black/30 sm:hidden touch-none"
+        className="fixed inset-0 z-[55] bg-black/30 sm:hidden"
         onClick={() => setIsOpen(false)}
         aria-hidden="true"
+        style={{ pointerEvents: 'auto' }}
       />
       
       <div 
         ref={chatContainerRef}
-        className={`fixed z-[60] pointer-events-auto bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 flex flex-col ${
+        className={`fixed z-[60] bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 flex flex-col ${
           isMinimized ? 'h-14' : 'h-[100dvh] sm:h-[600px] sm:max-h-[calc(100vh-48px)]'
         } w-full sm:w-[400px] sm:max-w-[calc(100vw-48px)] bottom-0 right-0 sm:bottom-6 sm:right-6`}
         style={{ 
           maxHeight: isMinimized ? '56px' : 'calc(100dvh - env(safe-area-inset-top, 0px))',
+          pointerEvents: 'auto',
         }}
         dir={language === 'ar' ? 'rtl' : 'ltr'}
       >
@@ -179,7 +187,10 @@ const ChatWidget: React.FC = () => {
         {!isMinimized && (
           <>
             {/* Messages area - scrollable */}
-            <div className="flex-1 overflow-y-auto p-4 bg-gray-50 overscroll-contain">
+            <div 
+              className="flex-1 overflow-y-auto p-4 bg-gray-50 overscroll-contain"
+              style={{ pointerEvents: 'auto' }}
+            >
               {messages.length === 0 ? (
                 <div className="space-y-4">
                   <div className="bg-white rounded-lg p-4 shadow-sm">
@@ -201,6 +212,7 @@ const ChatWidget: React.FC = () => {
                 <ChatMessages 
                   messages={messages} 
                   isLoading={isLoading}
+                  onNavigate={handleNavigationClose}
                 />
               )}
               <div ref={messagesEndRef} className="h-1" />

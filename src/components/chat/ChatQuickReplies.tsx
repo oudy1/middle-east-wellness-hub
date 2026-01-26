@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -20,18 +20,17 @@ export const ChatQuickReplies: React.FC<ChatQuickRepliesProps> = ({
 }) => {
   const { language } = useLanguage();
   
-  const handleSelect = (e: React.MouseEvent | React.TouchEvent, message: string) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSelect = useCallback((message: string) => {
     if (!disabled) {
       onSelect(message);
     }
-  };
+  }, [disabled, onSelect]);
 
   return (
     <div 
       className="flex flex-wrap gap-2"
       dir={language === 'ar' ? 'rtl' : 'ltr'}
+      style={{ pointerEvents: 'auto' }}
     >
       {replies.map((reply, index) => (
         <Button
@@ -39,15 +38,14 @@ export const ChatQuickReplies: React.FC<ChatQuickRepliesProps> = ({
           type="button"
           variant="outline"
           size="sm"
-          onClick={(e) => handleSelect(e, reply.message)}
-          onTouchEnd={(e) => {
+          onClick={(e) => {
             e.preventDefault();
-            if (!disabled) {
-              onSelect(reply.message);
-            }
+            e.stopPropagation();
+            handleSelect(reply.message);
           }}
           disabled={disabled}
-          className="text-xs min-h-[44px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none"
+          className="text-xs min-h-[44px] px-4 py-2 bg-white hover:bg-healthGold/20 border-healthGold/40 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none cursor-pointer"
+          style={{ pointerEvents: 'auto' }}
         >
           {reply.label}
         </Button>

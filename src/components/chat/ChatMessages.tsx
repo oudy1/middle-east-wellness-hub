@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2 } from 'lucide-react';
@@ -14,9 +14,32 @@ interface Message {
 interface ChatMessagesProps {
   messages: Message[];
   isLoading: boolean;
+  onNavigate?: () => void; // Callback to close chat on navigation
 }
 
-export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading }) => {
+// Approved internal routes map for validation
+const APPROVED_ROUTES: Record<string, boolean> = {
+  '/': true,
+  '/about': true,
+  '/services': true,
+  '/resources': true,
+  '/diseases': true,
+  '/webinars': true,
+  '/contact': true,
+  '/find-healthcare-workers': true,
+  '/physician-directory': true,
+  '/family-physician': true,
+  '/physician-application': true,
+  '/join-us': true,
+  '/volunteer': true,
+  '/post-opportunity': true,
+  '/support-us': true,
+  '/mentorship-booking': true,
+  '/physicians/family': true,
+  '/physicians/family/cities': true,
+};
+
+export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading, onNavigate }) => {
   const { language } = useLanguage();
   const navigate = useNavigate();
 
@@ -51,16 +74,34 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
     return false;
   };
 
-  // Handle navigation for internal links
-  const handleNavigation = (e: React.MouseEvent | React.TouchEvent, url: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (url.startsWith('/')) {
-      navigate(url);
-    } else if (url.startsWith('http')) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
+  // Validate internal route against approved list
+  const isApprovedRoute = (url: string): boolean => {
+    // Extract base path (without query params or hash)
+    const basePath = url.split('?')[0].split('#')[0];
+    return APPROVED_ROUTES[basePath] === true;
   };
+
+  // Handle navigation for internal links - using useCallback for stability
+  const handleInternalNavigation = useCallback((url: string) => {
+    // Validate it's an approved route
+    if (!isApprovedRoute(url)) {
+      console.warn('Attempted navigation to unapproved route:', url);
+      return;
+    }
+    
+    // Close chat widget first if callback provided
+    onNavigate?.();
+    
+    // Use setTimeout to ensure state updates complete before navigation
+    setTimeout(() => {
+      navigate(url);
+    }, 50);
+  }, [navigate, onNavigate]);
+
+  // Handle external links
+  const handleExternalNavigation = useCallback((url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }, []);
 
   // Parse message content for links and navigation buttons
   const formatContent = (content: string) => {
@@ -87,39 +128,44 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
         const isInternalRoute = linkUrl.startsWith('/');
         
         if (isInternalRoute) {
+          const url = linkUrl; // Capture for closure
           // Render as a navigation button for internal routes
           buttons.push(
             <Button
-              key={`btn-${buttonCount++}`}
+              key={`nav-btn-${buttonCount++}`}
               type="button"
               variant="outline"
               size="sm"
-              onClick={(e) => handleNavigation(e, linkUrl)}
-              onTouchEnd={(e) => {
+              onClick={(e) => {
                 e.preventDefault();
-                if (linkUrl.startsWith('/')) {
-                  navigate(linkUrl);
-                } else if (linkUrl.startsWith('http')) {
-                  window.open(linkUrl, '_blank', 'noopener,noreferrer');
-                }
+                e.stopPropagation();
+                handleInternalNavigation(url);
               }}
-              className="text-xs min-h-[40px] px-3 py-2 bg-white hover:bg-healthGold/10 border-healthGold/30 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none"
+              className="text-xs min-h-[44px] px-4 py-2 bg-white hover:bg-healthGold/20 border-healthGold/40 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none cursor-pointer z-10"
+              style={{ pointerEvents: 'auto' }}
             >
               {linkText}
             </Button>
           );
         } else {
-          // Render as external link
-          parts.push(
-            <a
-              key={match.index}
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-healthGold hover:underline font-medium"
+          // Render as external link button
+          const url = linkUrl;
+          buttons.push(
+            <Button
+              key={`ext-btn-${buttonCount++}`}
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleExternalNavigation(url);
+              }}
+              className="text-xs min-h-[44px] px-4 py-2 bg-white hover:bg-healthTeal/10 border-healthTeal/30 text-healthDarkBlue hover:border-healthTeal transition-colors touch-manipulation active:scale-95 select-none cursor-pointer z-10"
+              style={{ pointerEvents: 'auto' }}
             >
-              {linkText}
-            </a>
+              {linkText} ↗
+            </Button>
           );
         }
       } else {
@@ -146,7 +192,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
           <div className="text-xs text-muted-foreground mb-1">
             {language === 'ar' ? 'روابط سريعة | Quick links' : 'Quick links | روابط سريعة'}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" style={{ pointerEvents: 'auto' }}>
             {buttons}
           </div>
         </div>
@@ -185,6 +231,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading 
                 ? 'bg-healthDarkBlue text-white'
                 : 'bg-white text-gray-800 shadow-sm border border-gray-100'
             }`}
+            style={{ pointerEvents: 'auto' }}
           >
             <div className="whitespace-pre-wrap">
               {formatContent(message.content)}
