@@ -54,7 +54,7 @@ const FeaturedNewsSection = () => {
             Featured Health News
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Stay updated with our latest community achievements, health initiatives, and impact stories from Middle Eastern communities.
+            Stay updated with our latest achievements, health initiatives, and impact stories from Middle Eastern societies.
           </p>
         </div>
 

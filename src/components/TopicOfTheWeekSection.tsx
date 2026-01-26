@@ -11,7 +11,7 @@ const TopicOfTheWeekSection = () => {
   const topic = {
     titleEn: "Women's Health",
     titleAr: "صحة المرأة",
-    subtitleEn: "This week's focus highlights women's health issues, including visible and invisible conditions, access to care, and culturally relevant health experiences within Middle Eastern and North African communities in Canada.",
+    subtitleEn: "This week's focus highlights women's health issues, including visible and invisible conditions, access to care, and culturally relevant health experiences within Middle Eastern and North African societies in Canada.",
     subtitleAr: "يسلّط موضوع هذا الأسبوع الضوء على صحة المرأة، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية، والتجارب الصحية ذات الصلة الثقافية داخل المجتمعات الشرق أوسطية وشمال أفريقيا في كندا.",
     altEn: "Women's Health — SHAMS weekly topic featuring a woman in hijab with floral design",
     altAr: "صحة المرأة — موضوع الأسبوع من شمس يظهر امرأة محجبة مع تصميم الأزهار",

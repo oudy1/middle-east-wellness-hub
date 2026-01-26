@@ -45,7 +45,7 @@ const About = () => {
             <p className="text-lg sm:text-xl text-center max-w-3xl mx-auto mb-12 md:mb-16 text-gray-600 px-2">
               {language === 'ar' ? 
                 'تعرف على فريقنا المتفاني وأهدافنا في دعم المجتمعات العربية وشرق الأوسطية' : 
-                'Learn about our dedicated team and mission to support Arab and Middle Eastern communities'}
+                'Learn about our dedicated team and mission to support Arab and Middle Eastern societies'}
             </p>
           </div>
         </section>
@@ -75,18 +75,18 @@ const About = () => {
                 </p>
               </div>
               
-              {/* Why Communities FAQ */}
+              {/* Why Societies FAQ */}
               <div className="mt-8">
                 <Collapsible>
                   <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-healthLightGray rounded-lg hover:bg-gray-200 transition-colors">
                     <span className="font-semibold text-healthDarkBlue text-left">
-                      {t("about.whyCommunitiesTitle")}
+                      {t("about.whySocietiesTitle")}
                     </span>
                     <ChevronDown className="w-5 h-5 text-healthTeal" />
                   </CollapsibleTrigger>
                   <CollapsibleContent className="p-4 text-gray-700">
                     <p className={language === 'ar' ? 'text-right' : ''} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                      {t("about.whyCommunitiesDesc")}
+                      {t("about.whySocietiesDesc")}
                     </p>
                   </CollapsibleContent>
                 </Collapsible>

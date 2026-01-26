@@ -252,14 +252,14 @@ const translations = {
     tr: "ŞEMS"
   },
   "hero.tagline": {
-    en: "Supporting Health & Advocacy for Middle Eastern Communities",
+    en: "Supporting Health & Advocacy for Middle Eastern Societies",
     ar: "دعم المناصرة الصحية في المجتمعات الشرق أوسطية",
     ku: "پاڵپشتی تەندروستی و پارێزگاری بۆ کۆمەڵگای ناوەڕاست",
     fa: "حمایت از سلامت و حمایت از جوامع خاورمیانه",
     tr: "Orta Doğu Toplumları için Sağlık Desteği ve Savunuculuk"
   },
   "hero.title": {
-    en: "SHAMS: Health support for Middle Eastern and North African communities in Canada",
+    en: "SHAMS: Health support for Middle Eastern and North African societies in Canada",
     ar: "شمس: دعم صحي للمجتمعات الشرق أوسطية والشمال أفريقية في كندا",
     ku: "شەمس: پاڵپشتی تەندروستی بۆ کۆمەڵگاکانی ناوەڕاست و باکووری ئەفریقا لە کەنەدا",
     fa: "شمس: حمایت سلامت برای جوامع خاورمیانه و شمال آفریقا در کانادا",
@@ -305,7 +305,7 @@ const translations = {
     tr: "ŞEMS nedir"
   },
   "whatIsShams.description": {
-    en: "SHAMS stands for Support for Health Advocacy in Middle Eastern Communities. We are a youth-led Canadian non-profit organization focused on Canada. We collaborate globally when it helps our communities here.",
+    en: "SHAMS stands for Support for Health Advocacy in Middle Eastern Societies. We are a youth-led Canadian non-profit organization focused on Canada. We collaborate globally when it helps our communities here.",
     ar: "شمس اختصار لعبارة دعم المناصرة الصحية في المجتمعات الشرق أوسطية. نحن منظمة كندية غير ربحية يقودها الشباب وتركيزنا الأساسي هو كندا. نتعاون دولياً عند الحاجة لدعم مجتمعاتنا هنا.",
     ku: "شەمس واتای پاڵپشتی بەرگریکردن لە تەندروستی لە کۆمەڵگاکانی ناوەڕاست. ئێمە ڕێکخراوێکی نەفتەخوازی کەنەدی بە سەرپەرشتی گەنجانین. سەرەکیترین ئامانجمان کەنەداە. ئێمە لە ئاستی جیهانیدا هاوکاری دەکەین کاتێک یارمەتی کۆمەڵگاکانمان لێرە دەدات.",
     fa: "شمس مخفف حمایت از حمایت سلامت در جوامع خاورمیانه است. ما یک سازمان غیرانتفاعی کانادایی به رهبری جوانان هستیم. تمرکز اصلی ما کانادا است. ما به صورت جهانی همکاری می کنیم وقتی به جوامع ما در اینجا کمک می کند.",
@@ -358,7 +358,7 @@ const translations = {
   
   // About page - Mission
   "about.mission": {
-    en: "Our mission is to support Middle Eastern and North African communities in Canada through practical health education, mentorship, and community-driven research. We build partnerships with clinicians, researchers, and community groups to make health information accessible and culturally grounded.",
+    en: "Our mission is to support Middle Eastern and North African societies in Canada through practical health education, mentorship, and society-driven research. We build partnerships with clinicians, researchers, and community groups to make health information accessible and culturally grounded.",
     ar: "مهمتنا هي دعم المجتمعات الشرق أوسطية والشمال أفريقية في كندا عبر التثقيف الصحي العملي، والإرشاد، والأبحاث التي تنطلق من المجتمع. نعقد شراكات مع الأطباء والباحثين والجهات المجتمعية لتقديم معلومات صحية ميسّرة وملائمة ثقافياً.",
     ku: "ئامانجمان پاڵپشتی کۆمەڵگاکانی ناوەڕاست و باکووری ئەفریقایە لە کەنەدا لە ڕێگەی پەروەردەی تەندروستی پراکتیکی، ڕێنمایی و توێژینەوەی کۆمەڵایەتی. ئێمە هاوبەشی لەگەڵ پزیشکان، توێژەران و گرووپە کۆمەڵایەتیەکان دادەمەزرێنین بۆ دەستڕاگەیشتن و زەمینەی کلتووری.",
     fa: "مأموریت ما حمایت از جوامع خاورمیانه و شمال آفریقا در کانادا از طریق آموزش سلامت عملی، راهنمایی و تحقیقات محور جامعه است. ما مشارکت با پزشکان، محققان و گروه های جامعه برای دسترسی به اطلاعات سلامت و زمینه فرهنگی ایجاد می کنیم.",
@@ -366,19 +366,19 @@ const translations = {
   },
   
   // About page - Why communities
-  "about.whyCommunitiesTitle": {
-    en: "Why we say 'communities'",
+  "about.whySocietiesTitle": {
+    en: "Why we say 'societies'",
     ar: "لماذا نقول 'مجتمعات'",
     ku: "بۆچی دەڵێین 'کۆمەڵگاکان'",
     fa: "چرا می گوییم 'جوامع'",
     tr: "Neden 'topluluklar' diyoruz"
   },
-  "about.whyCommunitiesDesc": {
-    en: "We serve people and families in real neighborhoods and networks. 'Communities' describes our focus better than 'societies'. Our long form reads Support for Health Advocacy in Middle Eastern Communities.",
-    ar: "نخدم الأفراد والعائلات في الأحياء وروابط المجتمع. كلمة 'مجتمعات' تعبّر عن تركيزنا بشكل أدق من 'مجتمعات دولية واسعة'. الصيغة الكاملة لاسمنا: دعم المناصرة الصحية في المجتمعات الشرق أوسطية.",
-    ku: "ئێمە خزمەت بە خەڵک و خێزانەکان دەکەین لە گەڕەک و تۆڕەکانی ڕاستەقینەدا. 'کۆمەڵگاکان' باشتر باسی ئامانجمان دەکات لە 'کۆمەڵگەکان'. فۆرمی درێژی ئێمە دەڵێت پاڵپشتی بەرگریکردن لە تەندروستی لە کۆمەڵگاکانی ناوەڕاست.",
-    fa: "ما به مردم و خانواده ها در محله ها و شبکه های واقعی خدمت می کنیم. 'جوامع' تمرکز ما را بهتر از 'جوامع' توصیف می کند. فرم طولانی ما می خواند حمایت از حمایت سلامت در جوامع خاورمیانه.",
-    tr: "Gerçek mahallelerde ve ağlarda insanlara ve ailelere hizmet ediyoruz. 'Topluluklar' odağımızı 'toplumlar'dan daha iyi tanımlar. Uzun formumuz Orta Doğu Topluluklarında Sağlık Savunuculuğu Desteği'ni okur."
+  "about.whySocietiesDesc": {
+    en: "We serve people and families in real neighborhoods and networks. 'Societies' reflects the formal, organized nature of the groups we support. Our long form reads Support for Health Advocacy in Middle Eastern Societies.",
+    ar: "نخدم الأفراد والعائلات في الأحياء وروابط المجتمع. كلمة 'مجتمعات' تعبّر عن تركيزنا بشكل أدق. الصيغة الكاملة لاسمنا: دعم المناصرة الصحية في المجتمعات الشرق أوسطية.",
+    ku: "ئێمە خزمەت بە خەڵک و خێزانەکان دەکەین لە گەڕەک و تۆڕەکانی ڕاستەقینەدا. 'کۆمەڵگاکان' باشتر باسی ئامانجمان دەکات. فۆرمی درێژی ئێمە دەڵێت پاڵپشتی بەرگریکردن لە تەندروستی لە کۆمەڵگاکانی ناوەڕاست.",
+    fa: "ما به مردم و خانواده ها در محله ها و شبکه های واقعی خدمت می کنیم. 'جوامع' تمرکز ما را بهتر توصیف می کند. فرم طولانی ما می خواند حمایت از حمایت سلامت در جوامع خاورمیانه.",
+    tr: "Gerçek mahallelerde ve ağlarda insanlara ve ailelere hizmet ediyoruz. 'Topluluklar' odağımızı daha iyi tanımlar. Uzun formumuz Orta Doğu Topluluklarında Sağlık Savunuculuğu Desteği'ni okur."
   },
   
   // About page - Canada focus
@@ -1024,14 +1024,14 @@ const translations = {
     tr: "ŞEMS"
   },
   "footer.subtitle": {
-    en: "Supporting Health & Advocacy for Middle Eastern Communities",
+    en: "Supporting Health & Advocacy for Middle Eastern Societies",
     ar: "دعم المناصرة الصحية في المجتمعات الشرق أوسطية",
     ku: "پاڵپشتی تەندروستی و پارێزگاری بۆ کۆمەڵگای ناوەڕاست",
     fa: "حمایت از سلامت و حمایت از جوامع خاورمیانه",
     tr: "Orta Doğu Toplumları için Sağlık Desteği ve Savunuculuk"
   },
   "footer.description": {
-    en: "Dedicated to improving healthcare access and outcomes for communities across the Middle East.",
+    en: "Dedicated to improving healthcare access and outcomes for societies across the Middle East.",
     ar: "مكرسة لتحسين الوصول إلى الرعاية الصحية والنتائج للمجتمعات في جميع أنحاء الشرق الأوسط.",
     ku: "تەرخانکراوە بۆ باشترکردنی دەستگەیشتن بە چاودێری تەندروستی و ئەنجامەکان بۆ کۆمەڵگاکانی سەرانسەری ناوەڕاست.",
     fa: "اختصاص یافته به بهبود دسترسی به مراقبت های بهداشتی و نتایج برای جوامع سراسر خاورمیانه.",

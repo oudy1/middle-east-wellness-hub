@@ -27,7 +27,7 @@ const ArabicTranslationSummary = () => {
         ar: "محتوى متجاوب ثقافياً"
       },
       description: {
-        en: "All health terminology and content adapted for Middle Eastern communities with cultural sensitivity",
+        en: "All health terminology and content adapted for Middle Eastern societies with cultural sensitivity",
         ar: "جميع المصطلحات الصحية والمحتوى مُكيف لمجتمعات الشرق الأوسط مع الحساسية الثقافية"
       }
     },
@@ -161,7 +161,7 @@ const ArabicTranslationSummary = () => {
                 <p className="text-center text-sm text-gray-700">
                   {language === 'ar' 
                     ? '✨ جميع النصوص والمحتوى مترجم ومُحسَّن للثقافة العربية والمجتمعات الشرق أوسطية'
-                    : '✨ All text and content professionally translated and culturally optimized for Arabic and Middle Eastern communities'
+                    : '✨ All text and content professionally translated and culturally optimized for Arabic and Middle Eastern societies'
                   }
                 </p>
               </div>

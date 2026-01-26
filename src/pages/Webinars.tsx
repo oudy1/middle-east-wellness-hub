@@ -98,7 +98,7 @@ const Webinars = () => {
                       <Badge className="bg-healthTeal text-white">Nutrition</Badge>
                       <Badge className="bg-healthTeal text-white">Immigration</Badge>
                       <Badge className="bg-healthTeal text-white">Newcomer Health</Badge>
-                      <Badge className="bg-healthTeal text-white">Middle Eastern Communities</Badge>
+                      <Badge className="bg-healthTeal text-white">Middle Eastern Societies</Badge>
                     </div>
 
                     {/* Description */}

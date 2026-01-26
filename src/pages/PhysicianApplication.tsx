@@ -18,7 +18,7 @@ const PhysicianApplication = () => {
               Join Our Physician Network
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Partner with SHAMS to provide culturally competent healthcare to Middle Eastern communities. 
+              Partner with SHAMS to provide culturally competent healthcare to Middle Eastern societies. 
               Together, we can bridge the gap between healthcare providers and the communities we serve.
             </p>
           </div>
