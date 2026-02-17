@@ -34,6 +34,44 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+
+const SawaFlyerButton = ({ language, label, parentSrc, adolescentSrc, parentAlt, adolescentAlt }: {
+  language: string; label: string; parentSrc: string; adolescentSrc: string; parentAlt: string; adolescentAlt: string;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button
+        variant="outline"
+        className="border-healthTeal text-healthTeal hover:bg-healthTeal/10"
+        onClick={() => setOpen(true)}
+      >
+        <FileText className="h-4 w-4 mr-2" />
+        {label}
+      </Button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogTitle className="text-center text-lg font-bold text-healthDarkBlue">{label}</DialogTitle>
+          <div className="space-y-6">
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-2">{language === 'ar' ? 'نشرة الوالدين' : 'Parent Flyer'}</p>
+              <img src={parentSrc} alt={parentAlt} className="w-full rounded-lg shadow" />
+            </div>
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-2">{language === 'ar' ? 'نشرة المراهقين' : 'Adolescent Flyer'}</p>
+              <img src={adolescentSrc} alt={adolescentAlt} className="w-full rounded-lg shadow" />
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
 
 const Resources = () => {
   const { language, t } = useLanguage();
@@ -594,6 +632,139 @@ const Resources = () => {
                         ? 'المواد مقدمة من جامعة ويسترن أونتاريو لدعم الوصول إلى معلومات بحثية موثوقة.'
                         : 'Resources provided by Western University to support accessible research information.'}
                     </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Community Research Spotlight — SAWA Study */}
+            <div className="mb-12">
+              <div className="text-center mb-8">
+                <Badge className="bg-amber-100 text-amber-800 border-amber-300 mb-3">
+                  {language === 'ar' ? 'فرصة بحثية مجتمعية' : 'Community Research Opportunity'}
+                </Badge>
+                <h2 className="text-2xl md:text-3xl font-bold text-healthDarkBlue">
+                  {language === 'ar' ? 'أضواء على أبحاث المجتمع' : 'Community Research Spotlight'}
+                </h2>
+              </div>
+
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden max-w-4xl mx-auto border border-healthTeal/20">
+                <div className="bg-gradient-to-r from-healthTeal/80 to-healthDarkBlue/80 p-5">
+                  <h3 className="text-xl md:text-2xl font-bold text-white text-center">
+                    {language === 'ar' 
+                      ? 'دراسة السلامة الاجتماعية ورفاهية المراهقين (سوا)' 
+                      : 'Social Safety and Wellbeing Among Adolescents Study (SAWA)'}
+                  </h3>
+                  <p className="text-white/80 text-center text-sm mt-1">
+                    {language === 'ar' 
+                      ? 'جامعة تورنتو — قسم الأنثروبولوجيا' 
+                      : 'University of Toronto — Department of Anthropology'}
+                  </p>
+                </div>
+
+                <CardContent className="p-6 md:p-8">
+                  <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-center">
+                    <p className="text-xs text-amber-700 italic">
+                      {language === 'ar'
+                        ? 'هذه فرصة بحثية مجتمعية خارجية — ليست دراسة يديرها مشروع شمس.'
+                        : 'This is an external community research opportunity — not a SHAMS-run study.'}
+                    </p>
+                  </div>
+
+                  <p className={`text-gray-700 leading-relaxed mb-6 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar'
+                      ? 'تستكشف هذه الدراسة البحثية المستمرة التجارب الاجتماعية والرفاهية والصحة للمراهقين العرب في منطقة تورنتو الكبرى على مدار الزمن. تتابع الدراسة المشاركين لمدة تصل إلى 6 أشهر وتهدف إلى فهم أفضل لكيفية تأثير البيئات الاجتماعية على نتائج صحة الشباب.'
+                      : 'This ongoing research study explores the social experiences, wellbeing, and health of Arab adolescents in the Greater Toronto Area over time. The study follows participants for up to 6 months and aims to better understand how social environments shape youth health outcomes.'}
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    {/* Who can participate */}
+                    <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      <h4 className="text-lg font-bold text-healthDarkBlue mb-3 flex items-center gap-2">
+                        <Users className="h-5 w-5 text-healthTeal" />
+                        {language === 'ar' ? 'من يمكنه المشاركة' : 'Who Can Participate'}
+                      </h4>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthTeal">✓</span>
+                          <span>{language === 'ar' ? 'الشباب بين 9 و16 سنة' : 'Youth ages 9–16'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthTeal">✓</span>
+                          <span>{language === 'ar' ? 'يعرّفون أنفسهم كعرب' : 'Identify as Arab'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthTeal">✓</span>
+                          <span>{language === 'ar' ? 'يعيشون في منطقة تورنتو الكبرى' : 'Live in the Greater Toronto Area'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthTeal">✓</span>
+                          <span>{language === 'ar' ? 'انتقلوا إلى كندا أو والداهم انتقلوا إلى كندا' : 'Moved to Canada or have parents who moved to Canada'}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* What participation involves */}
+                    <div className={`${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      <h4 className="text-lg font-bold text-healthDarkBlue mb-3">
+                        {language === 'ar' ? 'ماذا تتضمن المشاركة' : 'What Participation Involves'}
+                      </h4>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthPurple">•</span>
+                          <span>{language === 'ar' ? 'استبيانات' : 'Surveys'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthPurple">•</span>
+                          <span>{language === 'ar' ? 'متابعات قصيرة عبر الرسائل النصية أو البريد الإلكتروني' : 'Short text/email check-ins'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthPurple">•</span>
+                          <span>{language === 'ar' ? 'ارتداء جهاز مراقبة نبضات القلب Polar H10 لبضعة أيام شهرياً' : 'Wearing a Polar H10 heart monitor for a few days per month'}</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-healthPurple">•</span>
+                          <span className="font-semibold">{language === 'ar' ? 'تعويض يصل إلى 125 دولاراً' : 'Compensation up to $125'}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Contact */}
+                  <div className={`mb-6 p-4 bg-healthLightGray rounded-lg ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <h4 className="text-sm font-bold text-healthDarkBlue mb-2">
+                      {language === 'ar' ? 'معلومات الاتصال' : 'Contact Information'}
+                    </h4>
+                    <div className="flex flex-col sm:flex-row gap-3 text-sm text-gray-700">
+                      <a href="mailto:sawastudy.anthro@utoronto.ca" className="flex items-center gap-2 text-healthTeal hover:underline">
+                        <Mail className="h-4 w-4" />
+                        sawastudy.anthro@utoronto.ca
+                      </a>
+                      <a href="tel:+12894019910" className="flex items-center gap-2 text-healthTeal hover:underline">
+                        <Phone className="h-4 w-4" />
+                        +1 289 401 9910
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Flyer Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <SawaFlyerButton
+                      language={language}
+                      label={language === 'ar' ? 'عرض النشرة بالإنجليزية' : 'View English Flyer'}
+                      parentSrc="/lovable-uploads/sawa-flyer-parent-en.png"
+                      adolescentSrc="/lovable-uploads/sawa-flyer-adolescent-en.png"
+                      parentAlt="SAWA Parent Flyer (English)"
+                      adolescentAlt="SAWA Adolescent Flyer (English)"
+                    />
+                    <SawaFlyerButton
+                      language={language}
+                      label={language === 'ar' ? 'عرض النشرة بالعربية' : 'View Arabic Flyer'}
+                      parentSrc="/lovable-uploads/sawa-flyer-parent-ar.png"
+                      adolescentSrc="/lovable-uploads/sawa-flyer-adolescent-ar.png"
+                      parentAlt="SAWA Parent Flyer (Arabic)"
+                      adolescentAlt="SAWA Adolescent Flyer (Arabic)"
+                    />
                   </div>
                 </CardContent>
               </Card>
