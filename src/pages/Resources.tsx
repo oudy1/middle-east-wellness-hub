@@ -663,6 +663,15 @@ const Resources = () => {
                 </div>
 
                 <CardContent className="p-6 md:p-8">
+                  {/* SAWA Poster */}
+                  <div className="flex justify-center mb-6">
+                    <img
+                      src={language === 'ar' ? "/lovable-uploads/sawa-flyer-parent-ar.png" : "/lovable-uploads/sawa-flyer-parent-en.png"}
+                      alt={language === 'ar' ? "ملصق دراسة سوا" : "SAWA Study Poster"}
+                      className="w-full max-w-md rounded-lg shadow-md object-contain"
+                    />
+                  </div>
+
                   <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-center">
                     <p className="text-xs text-amber-700 italic">
                       {language === 'ar'
