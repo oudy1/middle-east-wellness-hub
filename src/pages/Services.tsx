@@ -136,11 +136,16 @@ const Services = () => {
         {/* Patient Rights */}
         <section className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Shield className="h-8 w-8 text-healthTeal" />
-              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
-                {language === 'ar' ? 'حقوق المريض' : 'Patient Rights'}
-              </h2>
+            <div className="flex flex-col items-center gap-2 mb-4">
+              <div className="flex items-center gap-3">
+                <Shield className="h-8 w-8 text-healthTeal" />
+                <h2 className="text-2xl sm:text-3xl font-bold text-healthDarkBlue">
+                  Patient Rights
+                </h2>
+              </div>
+              <p className="text-xl sm:text-2xl font-bold text-healthDarkBlue font-cairo" dir="rtl">
+                حقوق المرضى
+              </p>
             </div>
             <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {language === 'ar'
