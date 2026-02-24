@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import ResearchWebinarCarousel from "@/components/ResearchWebinarCarousel";
 import WhatIsSHAMS from "@/components/WhatIsSHAMS";
+import FeaturedWebinarBanner from "@/components/FeaturedWebinarBanner";
 import WhatWeDoSection from "@/components/WhatWeDoSection";
 import MissionSection from "@/components/MissionSection";
 import ResourcesSection from "@/components/ResourcesSection";
@@ -30,6 +31,7 @@ const Index = () => {
       <Header />
       <main className="flex-grow relative z-10">
         <HeroSection />
+        <FeaturedWebinarBanner />
         <ResearchWebinarCarousel />
         <ResourceFinderSection />
         <WhatIsSHAMS />
