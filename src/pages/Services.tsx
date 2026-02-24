@@ -133,6 +133,76 @@ const Services = () => {
           </div>
         </section>
 
+        {/* Patient Rights */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Shield className="h-8 w-8 text-healthTeal" />
+              <h2 className={`text-2xl sm:text-3xl font-bold text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>
+                {language === 'ar' ? 'حقوق المريض' : 'Patient Rights'}
+              </h2>
+            </div>
+            <p className={`text-base sm:text-lg mb-8 max-w-3xl mx-auto text-center px-2 leading-relaxed text-gray-700 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar'
+                ? 'دليل مبسّط لحقوق المريض في أونتاريو، مثل الخصوصية، الموافقة، الاحترام، وكيفية تقديم شكوى أو طلب مساعدة.'
+                : 'A plain-language guide to your rights as a patient in Ontario, including dignity, privacy, consent, and how to speak up.'}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+              {/* English Version */}
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`}>
+                    {language === 'ar' ? 'حقوقك في النظام الصحي في أونتاريو (إنجليزي)' : "Your Rights in Ontario's Health System"}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar'
+                      ? 'ميثاق حقوق المريض ومسؤولياته من Ontario Health atHome.'
+                      : 'Patient Bill of Rights and Responsibilities from Ontario Health atHome.'}
+                  </p>
+                  <a
+                    href="https://www.ontariohealthathome.ca/patients-caregivers/patient-bill-rights-responsibilities/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <ExternalLink className="h-4 w-4" />
+                      {language === 'ar' ? 'عرض حقوق المريض (إنجليزي)' : 'View Patient Rights (English)'}
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+
+              {/* Arabic Version */}
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'حقوقك في النظام الصحي في أونتاريو (عربي)' : 'Patient Rights (Arabic Version)'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-gray-600 mb-4 text-sm leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar'
+                      ? 'النسخة العربية من ميثاق حقوق المريض ومسؤولياته.'
+                      : 'Arabic translation of the Patient Bill of Rights and Responsibilities.'}
+                  </p>
+                  <a
+                    href="https://www.ontariohealthathome.ca/blobohahprod4cd80afe1b/wp-content/uploads/2023/01/OHaH-Patient-Bill-Rights-Arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <FileText className="h-4 w-4" />
+                      {language === 'ar' ? 'عرض النسخة العربية (PDF)' : 'View Arabic Version (PDF)'}
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Educational Materials */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
