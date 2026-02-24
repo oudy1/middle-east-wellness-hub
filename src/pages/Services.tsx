@@ -22,6 +22,7 @@ import {
   Wind,
   Stethoscope,
   FileText,
+  FileDown,
   Plus
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -80,6 +81,57 @@ const Services = () => {
           </div>
         </section>
 
+
+        {/* Featured: Patient Rights */}
+        <section className="py-10 md:py-14 bg-white">
+          <div className="container mx-auto px-4">
+            <Card className={`border-2 border-healthTeal shadow-lg overflow-hidden ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              <div className="bg-gradient-to-r from-healthTeal to-healthDarkBlue p-5 md:p-6 flex items-center gap-3">
+                <Shield className="h-7 w-7 text-white shrink-0" />
+                <div>
+                  <Badge className="bg-white/20 text-white border-white/30 mb-1">
+                    {language === 'ar' ? 'حقوق المريض' : 'Patient Rights'}
+                  </Badge>
+                  <h2 className="text-xl md:text-2xl font-bold text-white">
+                    {language === 'ar'
+                      ? 'حقوقك في النظام الصحي في أونتاريو'
+                      : "Your Rights in Ontario's Health System (OHIP and Hospital Care)"}
+                  </h2>
+                </div>
+              </div>
+              <CardContent className="p-5 md:p-6">
+                <p className="text-gray-700 mb-5 leading-relaxed">
+                  {language === 'ar'
+                    ? 'دليل مبسّط لحقوق المريض في أونتاريو، مثل الخصوصية، الموافقة، الاحترام، وكيفية تقديم شكوى أو طلب مساعدة.'
+                    : 'A plain-language guide to your rights as a patient in Ontario, including dignity, privacy, consent, and how to speak up.'}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="https://www.ontariohealthathome.ca/patients-caregivers/patient-bill-rights-responsibilities/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="w-full sm:w-auto bg-healthTeal hover:bg-healthTeal/90 text-white">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      {language === 'ar' ? 'عرض حقوق المريض (إنجليزي)' : 'View Patient Rights (English)'}
+                    </Button>
+                  </a>
+                  <a
+                    href="/lovable-uploads/OHaH-Patient-Bill-Rights-Arabic.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    <Button variant="outline" className="w-full sm:w-auto border-healthTeal text-healthTeal hover:bg-healthTeal/10">
+                      <FileDown className="h-4 w-4 mr-2" />
+                      {language === 'ar' ? 'تحميل نسخة عربية' : 'Download Arabic Version (PDF)'}
+                    </Button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
 
         {/* Physician Network CTA */}
         <section className="py-12 bg-healthTeal/10">
