@@ -162,7 +162,7 @@ const Services = () => {
                       : 'Patient Bill of Rights and Responsibilities from Ontario Health atHome.'}
                   </p>
                   <a
-                    href="https://www.ontariohealthathome.ca/patients-caregivers/patient-bill-rights-responsibilities/"
+                    href="https://ontariohealthathome.ca/patient-bill-of-rights-responsibilities/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -178,7 +178,7 @@ const Services = () => {
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="pb-3">
                   <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                    {language === 'ar' ? 'حقوقك في النظام الصحي في أونتاريو (عربي)' : 'Patient Rights (Arabic Version)'}
+                    {language === 'ar' ? 'حقوقك في النظام الصحي في أونتاريو (عربي)' : 'Patient Rights (عربي)'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">
@@ -194,7 +194,7 @@ const Services = () => {
                   >
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
                       <FileText className="h-4 w-4" />
-                      {language === 'ar' ? 'عرض النسخة العربية (PDF)' : 'View Arabic Version (PDF)'}
+                      {language === 'ar' ? 'عرض النسخة العربية (PDF)' : 'View عربي Version (PDF)'}
                     </Button>
                   </a>
                 </CardContent>
