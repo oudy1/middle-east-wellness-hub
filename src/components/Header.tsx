@@ -85,10 +85,7 @@ const Header = () => {
             {/* Services Dropdown */}
             <div className="relative">
               <button
-                onClick={() => setContactMenuOpen(false) || setEducationMenuOpen(false) || setPhysicianMenuOpen(false)}
-                onMouseEnter={() => {
-                  setServicesMenuOpen(true);
-                }}
+                onClick={() => setServicesMenuOpen(!servicesMenuOpen)}
                 className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
               >
                 <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
