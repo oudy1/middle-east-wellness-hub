@@ -118,7 +118,7 @@ const Header = () => {
                   </Link>
                 </div>
               )}
-            </Link>
+            </div>
             <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
             </Link>
