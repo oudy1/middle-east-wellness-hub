@@ -50,6 +50,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />
+            <Route path="/programs" element={<Programs />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
