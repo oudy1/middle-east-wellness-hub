@@ -22,6 +22,7 @@ const Header = () => {
   const [educationMenuOpen, setEducationMenuOpen] = useState(false);
   const [physicianMenuOpen, setPhysicianMenuOpen] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const {
     language,
     setLanguage,
@@ -81,9 +82,40 @@ const Header = () => {
             <Link to="/about" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              {t("header.forCommunity")}
-            </Link>
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setServicesMenuOpen(!servicesMenuOpen)}
+                className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
+              >
+                <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
+                  {t("header.forCommunity")}
+                </Link>
+                <ChevronDown size={14} />
+              </button>
+              
+              {servicesMenuOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border"
+                  onMouseLeave={() => setServicesMenuOpen(false)}
+                >
+                  <Link
+                    to="/services"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setServicesMenuOpen(false)}
+                  >
+                    {t("header.forCommunity")}
+                  </Link>
+                  <Link
+                    to="/programs"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setServicesMenuOpen(false)}
+                  >
+                    {language === 'ar' ? 'البرامج' : 'Programs'}
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
             </Link>
@@ -284,9 +316,18 @@ const Header = () => {
                   <Link to="/about" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.aboutUs")}
                   </Link>
-                  <Link to="/services" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
-                    {t("header.forCommunity")}
-                  </Link>
+                  {/* Services Section */}
+                  <div className="py-4 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.forCommunity")}</div>
+                    <div className="ml-2 space-y-2">
+                      <Link to="/services" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {t("header.forCommunity")}
+                      </Link>
+                      <Link to="/programs" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {language === 'ar' ? 'البرامج' : 'Programs'}
+                      </Link>
+                    </div>
+                  </div>
                   <Link to="/resources" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.forClinicians")}
                   </Link>
