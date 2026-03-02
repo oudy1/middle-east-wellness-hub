@@ -22,6 +22,7 @@ const Header = () => {
   const [educationMenuOpen, setEducationMenuOpen] = useState(false);
   const [physicianMenuOpen, setPhysicianMenuOpen] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const {
     language,
     setLanguage,
