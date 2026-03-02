@@ -316,9 +316,18 @@ const Header = () => {
                   <Link to="/about" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.aboutUs")}
                   </Link>
-                  <Link to="/services" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
-                    {t("header.forCommunity")}
-                  </Link>
+                  {/* Services Section */}
+                  <div className="py-4 px-4 border-b border-white/10">
+                    <div className="text-healthTeal font-semibold mb-4 text-base">{t("header.forCommunity")}</div>
+                    <div className="ml-2 space-y-2">
+                      <Link to="/services" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {t("header.forCommunity")}
+                      </Link>
+                      <Link to="/programs" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {language === 'ar' ? 'البرامج' : 'Programs'}
+                      </Link>
+                    </div>
+                  </div>
                   <Link to="/resources" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.forClinicians")}
                   </Link>
