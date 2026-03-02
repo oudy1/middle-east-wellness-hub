@@ -81,8 +81,42 @@ const Header = () => {
             <Link to="/about" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.aboutUs")}
             </Link>
-            <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
-              {t("header.forCommunity")}
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setContactMenuOpen(false) || setEducationMenuOpen(false) || setPhysicianMenuOpen(false)}
+                onMouseEnter={() => {
+                  setServicesMenuOpen(true);
+                }}
+                className="flex items-center space-x-1 hover:text-healthTeal transition-colors font-medium text-sm"
+              >
+                <Link to="/services" className="hover:text-healthTeal transition-colors font-medium text-sm">
+                  {t("header.forCommunity")}
+                </Link>
+                <ChevronDown size={14} />
+              </button>
+              
+              {servicesMenuOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border"
+                  onMouseLeave={() => setServicesMenuOpen(false)}
+                >
+                  <Link
+                    to="/services"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setServicesMenuOpen(false)}
+                  >
+                    {t("header.forCommunity")}
+                  </Link>
+                  <Link
+                    to="/programs"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setServicesMenuOpen(false)}
+                  >
+                    {language === 'ar' ? 'البرامج' : 'Programs'}
+                  </Link>
+                </div>
+              )}
             </Link>
             <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
