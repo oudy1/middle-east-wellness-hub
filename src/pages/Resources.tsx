@@ -582,6 +582,35 @@ const Resources = () => {
                 isAr={isAr}
               />
 
+              {/* Dr. Ryan Persram */}
+              <ResearcherCard
+                nameEn="Dr. Ryan Persram"
+                nameAr="د. ريان بيرسرام"
+                roleEn="Assistant Professor"
+                roleAr="أستاذ مساعد"
+                orgEn="Toronto Metropolitan University"
+                orgAr="جامعة تورنتو متروبوليتان"
+                bioEn="Developmental psychology researcher studying youth interpersonal relationships and how sibling, peer, and romantic experiences shape adolescent development and mental health."
+                bioAr="باحث في علم النفس التنموي يدرس العلاقات الشخصية للشباب وكيف تشكل تجارب الأشقاء والأقران والعلاقات العاطفية نمو المراهقين وصحتهم النفسية."
+                email="ryan.persram@torontomu.ca"
+                tags={isAr ? ['علم النفس التنموي', 'علاقات الشباب'] : ['Developmental Psychology', 'Youth Relationships']}
+                id="persram"
+                expandedResearcher={expandedResearcher}
+                toggleResearcher={toggleResearcher}
+                colorAccent="healthTeal"
+                icon={<GraduationCap className="h-10 w-10 text-white" />}
+                expandedContent={
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p>
+                    <p className="text-xs text-muted-foreground">{isAr ? 'علم النفس التنموي، علاقات المراهقين، الأشقاء، الأقران، الصداقات، العلاقات العاطفية، التكيف النفسي الاجتماعي' : 'Developmental psychology, adolescent relationships, sibling relationships, peer relationships, friendships, romantic relationships, psychosocial adjustment'}</p>
+                    <a href="http://www.ryanjpersram.ca" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
+                      <ExternalLink className="h-3 w-3" /> {isAr ? 'موقع البحث' : 'Research Website'}
+                    </a>
+                  </div>
+                }
+                isAr={isAr}
+              />
+
               {/* Jason Chung */}
               <ResearcherCard
                 nameEn="Jason Chung, M.Sc."

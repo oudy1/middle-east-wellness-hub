@@ -41,10 +41,8 @@ function App() {
             <Route path="/physicians/family" element={<FamilyPhysicianDirectory />} />
             <Route path="/physicians/family/cities" element={<FamilyPhysicianCities />} />
             <Route path="/physicians/family/:citySlug" element={<FamilyPhysicianDirectory />} />
-            <Route path="/physician-application" element={<PhysicianApplication />} />
             <Route path="/join-us" element={<JoinUs />} />
             <Route path="/volunteer" element={<Volunteer />} />
-            <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />

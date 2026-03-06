@@ -181,12 +181,17 @@ const Services = () => {
                       'Join our network of healthcare providers dedicated to serving Middle Eastern societies.'
                     }
                   </p>
-                  <Link to="/physician-application">
+                  <p className={`text-sm text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    {language === 'ar'
+                      ? 'إذا كنت متخصصاً في الرعاية الصحية وترغب في الانضمام إلى منصة شمس أو التعاون معنا، يرجى مراسلتنا بمعلوماتك.'
+                      : 'If you are a healthcare professional interested in being listed on the SHAMS platform or collaborating with us, please email us with your information.'}
+                  </p>
+                  <a href="mailto:infoprojectshams@gmail.com?subject=Physician%20Listing%20Request%20%E2%80%93%20SHAMS">
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                       <UserPlus className="h-6 w-6" />
-                      {language === 'ar' ? 'تقديم طلب للانضمام للشبكة' : 'Apply to Join Network'}
+                      {language === 'ar' ? 'انضم إلى شبكة أطباء شمس' : 'Join the SHAMS Physician Network'}
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </section>
