@@ -405,17 +405,21 @@ const Resources = () => {
               </DialogContent>
             </Dialog>
 
-            {/* Post opportunity + coming soon */}
+            {/* Submit opportunity via email */}
             <div className="text-center py-8 mt-8">
               <Search className="h-10 w-10 text-primary mx-auto mb-3" />
               <h3 className="text-lg font-semibold mb-1">{t("resources.opportunitiesComingSoon")}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{t("resources.opportunitiesDescription")}</p>
-              <Link to="/post-opportunity">
+              <p className="text-sm text-muted-foreground mb-4">
+                {isAr
+                  ? 'إذا كنت ترغب في مشاركة فرصة بحثية أو وظيفية مع مجتمع شمس، يرجى مراسلتنا بالتفاصيل.'
+                  : 'If you would like to share a research position, job, or opportunity with the SHAMS community, please email us with the details.'}
+              </p>
+              <a href="mailto:infoprojectshams@gmail.com?subject=Opportunity%20Submission%20%E2%80%93%20SHAMS">
                 <Button className="bg-destructive hover:bg-destructive/90 text-destructive-foreground">
-                  <Plus className="h-4 w-4 mr-2" />
-                  {t("resources.postOpportunity")}
+                  <Mail className="h-4 w-4 mr-2" />
+                  {isAr ? 'أرسل فرصة' : 'Submit an Opportunity'}
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </section>
@@ -575,6 +579,35 @@ const Resources = () => {
                 toggleResearcher={toggleResearcher}
                 colorAccent="healthPurple"
                 icon={<GraduationCap className="h-10 w-10 text-white" />}
+                isAr={isAr}
+              />
+
+              {/* Dr. Ryan Persram */}
+              <ResearcherCard
+                nameEn="Dr. Ryan Persram"
+                nameAr="د. ريان بيرسرام"
+                roleEn="Assistant Professor"
+                roleAr="أستاذ مساعد"
+                orgEn="Toronto Metropolitan University"
+                orgAr="جامعة تورنتو متروبوليتان"
+                bioEn="Developmental psychology researcher studying youth interpersonal relationships and how sibling, peer, and romantic experiences shape adolescent development and mental health."
+                bioAr="باحث في علم النفس التنموي يدرس العلاقات الشخصية للشباب وكيف تشكل تجارب الأشقاء والأقران والعلاقات العاطفية نمو المراهقين وصحتهم النفسية."
+                email="ryan.persram@torontomu.ca"
+                tags={isAr ? ['علم النفس التنموي', 'علاقات الشباب'] : ['Developmental Psychology', 'Youth Relationships']}
+                id="persram"
+                expandedResearcher={expandedResearcher}
+                toggleResearcher={toggleResearcher}
+                colorAccent="healthTeal"
+                icon={<GraduationCap className="h-10 w-10 text-white" />}
+                expandedContent={
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p>
+                    <p className="text-xs text-muted-foreground">{isAr ? 'علم النفس التنموي، علاقات المراهقين، الأشقاء، الأقران، الصداقات، العلاقات العاطفية، التكيف النفسي الاجتماعي' : 'Developmental psychology, adolescent relationships, sibling relationships, peer relationships, friendships, romantic relationships, psychosocial adjustment'}</p>
+                    <a href="http://www.ryanjpersram.ca" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
+                      <ExternalLink className="h-3 w-3" /> {isAr ? 'موقع البحث' : 'Research Website'}
+                    </a>
+                  </div>
+                }
                 isAr={isAr}
               />
 
