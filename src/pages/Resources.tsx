@@ -735,6 +735,28 @@ const Resources = () => {
   );
 };
 
+// Color maps for Tailwind JIT safety
+const accentStyles: Record<string, { border: string; borderHover: string; gradFrom: string; gradTo: string; circle: string; circleGrad: string; text: string; tagBg: string; }> = {
+  healthTeal: {
+    border: 'border-healthTeal/20', borderHover: 'hover:border-healthTeal/40',
+    gradFrom: 'from-healthTeal/10', gradTo: 'to-healthTeal/5',
+    circle: 'from-healthTeal', circleGrad: 'to-healthTeal/70',
+    text: 'text-healthTeal', tagBg: 'bg-healthTeal/10',
+  },
+  healthPurple: {
+    border: 'border-healthPurple/20', borderHover: 'hover:border-healthPurple/40',
+    gradFrom: 'from-healthPurple/10', gradTo: 'to-healthPurple/5',
+    circle: 'from-healthPurple', circleGrad: 'to-healthPurple/70',
+    text: 'text-healthPurple', tagBg: 'bg-healthPurple/10',
+  },
+  healthDarkBlue: {
+    border: 'border-healthDarkBlue/20', borderHover: 'hover:border-healthDarkBlue/40',
+    gradFrom: 'from-healthDarkBlue/10', gradTo: 'to-healthDarkBlue/5',
+    circle: 'from-healthDarkBlue', circleGrad: 'to-healthDarkBlue/70',
+    text: 'text-healthDarkBlue', tagBg: 'bg-healthDarkBlue/10',
+  },
+};
+
 // Reusable Researcher Card Component
 interface ResearcherCardProps {
   nameEn: string;
@@ -762,16 +784,18 @@ const ResearcherCard = ({
   nameEn, nameAr, roleEn, roleAr, orgEn, orgAr, bioEn, bioAr,
   email, locationEn, locationAr, tags, id, expandedResearcher, toggleResearcher,
   colorAccent, icon, expandedContent, isAr
-}: ResearcherCardProps) => (
-  <Card className={`shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-${colorAccent}/20 hover:border-${colorAccent}/40 flex flex-col h-full`}>
-    <div className={`bg-gradient-to-br from-${colorAccent}/10 to-${colorAccent}/5 p-5 text-center`}>
-      <div className={`w-20 h-20 bg-gradient-to-br from-${colorAccent} to-${colorAccent}/70 rounded-full mx-auto mb-2 flex items-center justify-center`}>
+}: ResearcherCardProps) => {
+  const s = accentStyles[colorAccent] || accentStyles.healthTeal;
+  return (
+  <Card className={`shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border ${s.border} ${s.borderHover} flex flex-col h-full`}>
+    <div className={`bg-gradient-to-br ${s.gradFrom} ${s.gradTo} p-5 text-center`}>
+      <div className={`w-20 h-20 bg-gradient-to-br ${s.circle} ${s.circleGrad} rounded-full mx-auto mb-2 flex items-center justify-center`}>
         {icon}
       </div>
       <h3 className={`text-base font-bold text-foreground mb-0.5 ${isAr ? 'font-arabic' : ''}`}>
         {isAr ? nameAr : nameEn}
       </h3>
-      <p className={`text-xs text-${colorAccent} font-semibold`}>{isAr ? roleAr : roleEn}</p>
+      <p className={`text-xs ${s.text} font-semibold`}>{isAr ? roleAr : roleEn}</p>
       <p className="text-[10px] text-muted-foreground">{isAr ? orgAr : orgEn}</p>
     </div>
     
@@ -781,14 +805,14 @@ const ResearcherCard = ({
         
         {locationEn && (
           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-            <MapPin className={`h-3 w-3 text-${colorAccent}`} />
+            <MapPin className={`h-3 w-3 ${s.text}`} />
             <span>{isAr ? locationAr : locationEn}</span>
           </div>
         )}
 
         {email && (
           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-            <Mail className={`h-3 w-3 text-${colorAccent}`} />
+            <Mail className={`h-3 w-3 ${s.text}`} />
             <a href={`mailto:${email}`} className="text-primary hover:underline truncate">{email}</a>
           </div>
         )}
@@ -796,7 +820,7 @@ const ResearcherCard = ({
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {tags.map((tag, idx) => (
-              <span key={idx} className={`px-1.5 py-0.5 bg-${colorAccent}/10 text-${colorAccent} rounded-full text-[10px]`}>{tag}</span>
+              <span key={idx} className={`px-1.5 py-0.5 ${s.tagBg} ${s.text} rounded-full text-[10px]`}>{tag}</span>
             ))}
           </div>
         )}
@@ -811,7 +835,7 @@ const ResearcherCard = ({
       {expandedContent && (
         <button
           onClick={() => toggleResearcher(id)}
-          className={`mt-2 flex items-center gap-1 text-xs text-${colorAccent} hover:text-foreground transition-colors font-medium self-start`}
+          className={`mt-2 flex items-center gap-1 text-xs ${s.text} hover:text-foreground transition-colors font-medium self-start`}
         >
           {expandedResearcher === id ? (
             <>{isAr ? 'إخفاء' : 'Show Less'}<ChevronUp className="h-3 w-3" /></>
