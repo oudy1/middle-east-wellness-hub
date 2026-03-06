@@ -846,6 +846,7 @@ const ResearcherCard = ({
       )}
     </CardContent>
   </Card>
-);
+  );
+};
 
 export default Resources;
