@@ -371,6 +371,9 @@ const Resources = () => {
           </div>
         </section>
 
+        {/* SHAMS Research Portfolio */}
+        <SHAMSResearchPortfolio />
+
         {/* Research Studies - Compact Grid */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
