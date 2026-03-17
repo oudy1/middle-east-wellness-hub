@@ -41,6 +41,7 @@ import {
 import { studies } from "@/lib/studyData";
 import StudyCard from "@/components/StudyCard";
 import SawaFlyerCarousel from "@/components/SawaFlyerCarousel";
+import SHAMSResearchPortfolio from "@/components/SHAMSResearchPortfolio";
 
 const Resources = () => {
   const { language, t } = useLanguage();
