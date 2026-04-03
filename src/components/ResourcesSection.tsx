@@ -1,12 +1,13 @@
 
 import { Button } from "@/components/ui/button";
-import { FileText, BookOpen, Monitor, Phone } from "lucide-react";
+import { FileText, BookOpen, Phone } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
 const ResourcesSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isAr = language === 'ar';
   
   const resources = [
     {
@@ -30,16 +31,18 @@ const ResourcesSection = () => {
       description: t("resources.webinarLibraryDesc"),
       icon: <Phone className="h-10 w-10 text-white" />,
       color: "bg-healthDarkBlue",
-      link: "/webinar-library",
-      comingSoon: true
+      link: "/webinars",
+      comingSoon: false
     }
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-healthLightGray">
-      <div className="container mx-auto px-4">
-        <h2 className="section-title">Resources</h2>
-        <p className="section-description">
+    <section className="py-16 md:py-24 bg-muted/30">
+      <div className="container mx-auto px-4" dir={isAr ? 'rtl' : 'ltr'}>
+        <h2 className={`section-title ${isAr ? 'font-cairo' : ''}`}>
+          {isAr ? 'الموارد' : 'Resources'}
+        </h2>
+        <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
           {t("resources.subtitle")}
         </p>
         
@@ -50,31 +53,19 @@ const ResourcesSection = () => {
                 <div className="flex justify-center">
                   {resource.icon}
                 </div>
-                {resource.comingSoon && (
-                  <div className="absolute top-2 right-2 bg-healthGold text-healthDarkBlue text-xs px-2 py-1 rounded-full font-semibold">
-                    Coming Soon
-                  </div>
-                )}
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-3">{resource.title}</h3>
-                <p className="text-gray-600 mb-4">{resource.description}</p>
-                {resource.comingSoon ? (
-                  <Button variant="link" className="p-0 text-gray-400 cursor-not-allowed" disabled>
-                    Coming Soon
+                <h3 className={`text-xl font-bold mb-3 ${isAr ? 'font-cairo' : ''}`}>{resource.title}</h3>
+                <p className={`text-muted-foreground mb-4 ${isAr ? 'font-cairo' : ''}`}>{resource.description}</p>
+                <Link to={resource.link}>
+                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthTeal/80">
+                    {t("resources.accessResource")}
                   </Button>
-                ) : (
-                  <Link to={resource.link}>
-                    <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
-                      {t("resources.accessResource")}
-                    </Button>
-                  </Link>
-                )}
+                </Link>
               </CardContent>
             </Card>
           ))}
         </div>
-        
       </div>
     </section>
   );

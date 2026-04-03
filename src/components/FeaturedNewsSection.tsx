@@ -5,8 +5,9 @@ import { Newspaper, ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FeaturedNewsSection = () => {
-  const { t } = useLanguage();
-  
+  const { language } = useLanguage();
+  const isAr = language === 'ar';
+
   const newsItems = [
     {
       id: 1,
@@ -47,19 +48,20 @@ const FeaturedNewsSection = () => {
         <div className="calligraphy-frame-bg h-full w-full opacity-20"></div>
       </div>
       
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10" dir={isAr ? 'rtl' : 'ltr'}>
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-healthDarkBlue flex items-center justify-center mb-4">
-            <Newspaper className="mr-3 text-healthTeal h-8 w-8" />
-            Featured Health News
+          <h2 className={`text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center mb-4 ${isAr ? 'font-cairo' : ''}`}>
+            <Newspaper className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {isAr ? 'أخبار صحية مميزة' : 'Featured Health News'}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Stay updated with our latest achievements, health initiatives, and impact stories from Middle Eastern societies.
+          <p className={`text-muted-foreground max-w-2xl mx-auto ${isAr ? 'font-cairo' : ''}`}>
+            {isAr
+              ? 'تابعوا آخر الإنجازات والمبادرات الصحية وقصص التأثير من المجتمعات الشرق أوسطية.'
+              : 'Stay updated with our latest achievements, health initiatives, and impact stories from Middle Eastern societies.'}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Featured News - Large Card */}
           {featuredNews && (
             <div className="lg:col-span-2">
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full cursor-pointer">
@@ -69,25 +71,26 @@ const FeaturedNewsSection = () => {
                       src={featuredNews.image} 
                       alt={featuredNews.title}
                       className="w-full h-64 object-cover"
+                      loading="lazy"
                     />
-                    <div className="absolute top-4 left-4">
+                    <div className={`absolute top-4 ${isAr ? 'right-4' : 'left-4'}`}>
                       <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm font-medium">
-                        Featured
+                        {isAr ? 'مميز' : 'Featured'}
                       </span>
                     </div>
                   </div>
                   <CardContent className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-3">
-                      <Calendar className="mr-2 h-4 w-4" />
+                    <div className={`flex items-center text-sm text-muted-foreground mb-3`}>
+                      <Calendar className={`${isAr ? 'ml-2' : 'mr-2'} h-4 w-4`} />
                       {featuredNews.date}
                       <span className="mx-2">•</span>
                       <span className="text-healthTeal font-medium">{featuredNews.category}</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-healthDarkBlue">{featuredNews.title}</h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{featuredNews.excerpt}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">{featuredNews.title}</h3>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">{featuredNews.excerpt}</p>
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
-                      Read Full Story
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      {isAr ? 'اقرأ القصة كاملة' : 'Read Full Story'}
+                      <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
                     </Button>
                   </CardContent>
                 </a>
@@ -95,7 +98,6 @@ const FeaturedNewsSection = () => {
             </div>
           )}
 
-          {/* Regular News - Smaller Cards */}
           <div className="space-y-6">
             {regularNews.map((item) => (
               <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
@@ -105,14 +107,15 @@ const FeaturedNewsSection = () => {
                       src={item.image} 
                       alt={item.title}
                       className="w-24 h-24 object-cover flex-shrink-0"
+                      loading="lazy"
                     />
                     <CardContent className="p-4 flex-1">
-                      <div className="flex items-center text-xs text-gray-500 mb-2">
-                        <Calendar className="mr-1 h-3 w-3" />
+                      <div className={`flex items-center text-xs text-muted-foreground mb-2`}>
+                        <Calendar className={`${isAr ? 'ml-1' : 'mr-1'} h-3 w-3`} />
                         {item.date}
                       </div>
-                      <h4 className="font-bold text-healthDarkBlue mb-2 text-sm leading-tight">{item.title}</h4>
-                      <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
+                      <h4 className="font-bold text-foreground mb-2 text-sm leading-tight">{item.title}</h4>
+                      <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
                     </CardContent>
                   </div>
                 </a>
@@ -124,8 +127,8 @@ const FeaturedNewsSection = () => {
         <div className="text-center">
           <Button asChild variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
             <a href="https://www.canada.ca/en/health-canada.html" target="_blank" rel="noopener noreferrer">
-              View All News & Updates
-              <ArrowRight className="ml-2 h-4 w-4" />
+              {isAr ? 'عرض جميع الأخبار والتحديثات' : 'View All News & Updates'}
+              <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
             </a>
           </Button>
         </div>
