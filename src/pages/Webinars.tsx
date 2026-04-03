@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Calendar, Mail, Globe } from "lucide-react";
+import { Play, Calendar, Mail, Globe, FileText, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TopicRequestForm from "@/components/TopicRequestForm";
 
