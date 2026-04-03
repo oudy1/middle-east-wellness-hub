@@ -1121,13 +1121,6 @@ const translations = {
     fa: "تلفن: +۹۷۱ ۴ ۱۲۳ ۴۵۶۷",
     tr: "Telefon: +971 4 123 4567"
   },
-  "footer.description": {
-    en: "Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern societies across Canada.",
-    ar: "مكرّسون لتحسين الوصول إلى الرعاية الصحية والتعليم والرفاهية للمجتمعات الشرق أوسطية في كندا.",
-    ku: "تەرخانکراوین بۆ باشترکردنی دەستگەیشتن بە تەندروستی و پەروەردە و خۆشگوزەرانی بۆ کۆمەڵگاکانی ڕۆژهەڵاتی ناوین لە کەنەدا.",
-    fa: "متعهد به بهبود دسترسی به مراقبت‌های بهداشتی، آموزش و رفاه برای جوامع خاورمیانه‌ای در کانادا.",
-    tr: "Kanada genelinde Orta Doğu toplulukları için sağlık erişimini, eğitimi ve refahı iyileştirmeye adanmıştır."
-  },
   "footer.copyright": {
     en: "Middle Eastern Health Initiative. All rights reserved.",
     ar: "مبادرة الصحة في الشرق الأوسط. جميع الحقوق محفوظة.",
