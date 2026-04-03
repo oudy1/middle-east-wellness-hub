@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Calendar, Mail, Globe } from "lucide-react";
+import { Play, Calendar, Mail, Globe, FileText, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TopicRequestForm from "@/components/TopicRequestForm";
 
@@ -14,6 +14,29 @@ const Webinars = () => {
   const [webinarLang, setWebinarLang] = useState<'en' | 'ar'>('en');
 
   const webinars = [
+    {
+      id: 'womens-health',
+      youtubeId: '',
+      en: {
+        title: "Women's Health Across Life Stages",
+        description: "A space to talk about hormones, healing, and support. This webinar focused on women's health topics relevant to Middle Eastern communities, including visible and invisible conditions, access to care, and culturally relevant health experiences.",
+        speakers: [
+          "Project SHAMS Health Team"
+        ],
+        watchButton: "Watch Recording",
+      },
+      ar: {
+        title: "صحة المرأة عبر مراحل الحياة",
+        description: "مساحة للحديث عن الهرمونات، التعافي، والدعم. ركزت هذه الندوة على مواضيع صحة المرأة ذات الصلة بالمجتمعات الشرق أوسطية، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية.",
+        speakers: [
+          "فريق مشروع شمس الصحي"
+        ],
+        watchButton: "شاهد التسجيل",
+      },
+      tags: ["Women's Health", 'Hormones', 'Community Health'],
+      slidesUrl: '/lovable-uploads/womens-health-webinar-poster.pdf',
+      resourcesUrl: '/lovable-uploads/womens-health-webinar-poster.pdf',
+    },
     {
       id: 'intro-research',
       youtubeId: '3q-R60RmeLI',
@@ -99,16 +122,18 @@ const Webinars = () => {
                   </div>
 
                   <CardContent className="p-0">
-                    {/* YouTube Embed */}
-                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                      <iframe
-                        className="absolute top-0 left-0 w-full h-full"
-                        src={`https://www.youtube.com/embed/${webinar.youtubeId}`}
-                        title={webinar.en.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
+                    {/* YouTube Embed - only show if youtubeId exists */}
+                    {webinar.youtubeId ? (
+                      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                        <iframe
+                          className="absolute top-0 left-0 w-full h-full"
+                          src={`https://www.youtube.com/embed/${webinar.youtubeId}`}
+                          title={webinar.en.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : null}
 
                     {/* Webinar Details */}
                     <div className={`p-8 ${webinarLang === 'ar' ? 'text-right font-cairo' : 'text-left'}`} dir={webinarLang === 'ar' ? 'rtl' : 'ltr'}>
@@ -151,14 +176,34 @@ const Webinars = () => {
                         </ul>
                       </div>
 
-                      {/* Watch Button */}
-                      <Button 
-                        className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white mb-8"
-                        onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
-                      >
-                        <Play className="mr-2 h-4 w-4" />
-                        {webinar[webinarLang].watchButton}
-                      </Button>
+                      {/* Action Buttons */}
+                      <div className={`flex flex-wrap gap-2 mb-8 ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                        {webinar.youtubeId && (
+                          <Button 
+                            className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white"
+                            onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
+                          >
+                            <Play className="mr-2 h-4 w-4" />
+                            {webinar[webinarLang].watchButton}
+                          </Button>
+                        )}
+                        {(webinar as any).slidesUrl && (
+                          <a href={(webinar as any).slidesUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline" className="gap-1.5">
+                              <FileText className="h-4 w-4" />
+                              {webinarLang === 'ar' ? 'عرض الشرائح' : 'View Slides'}
+                            </Button>
+                          </a>
+                        )}
+                        {(webinar as any).resourcesUrl && (
+                          <a href={(webinar as any).resourcesUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline" className="gap-1.5">
+                              <ExternalLink className="h-4 w-4" />
+                              {webinarLang === 'ar' ? 'عرض الموارد' : 'View Resources'}
+                            </Button>
+                          </a>
+                        )}
+                      </div>
 
                       {/* Contact Info */}
                       <div className="border-t pt-6 mt-6">
