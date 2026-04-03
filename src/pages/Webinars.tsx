@@ -15,6 +15,29 @@ const Webinars = () => {
 
   const webinars = [
     {
+      id: 'womens-health',
+      youtubeId: '',
+      en: {
+        title: "Women's Health Across Life Stages",
+        description: "A space to talk about hormones, healing, and support. This webinar focused on women's health topics relevant to Middle Eastern communities, including visible and invisible conditions, access to care, and culturally relevant health experiences.",
+        speakers: [
+          "Project SHAMS Health Team"
+        ],
+        watchButton: "Watch Recording",
+      },
+      ar: {
+        title: "صحة المرأة عبر مراحل الحياة",
+        description: "مساحة للحديث عن الهرمونات، التعافي، والدعم. ركزت هذه الندوة على مواضيع صحة المرأة ذات الصلة بالمجتمعات الشرق أوسطية، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية.",
+        speakers: [
+          "فريق مشروع شمس الصحي"
+        ],
+        watchButton: "شاهد التسجيل",
+      },
+      tags: ["Women's Health", 'Hormones', 'Community Health'],
+      slidesUrl: '/lovable-uploads/womens-health-webinar-poster.pdf',
+      resourcesUrl: '/lovable-uploads/womens-health-webinar-poster.pdf',
+    },
+    {
       id: 'intro-research',
       youtubeId: '3q-R60RmeLI',
       en: {

@@ -1,85 +1,54 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Play } from "lucide-react";
+import { FileText, ExternalLink, Play } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Toggle this to switch from registration to recording mode
-const EVENT_STATUS: "upcoming" | "completed" = "upcoming";
-const REGISTRATION_URL = "https://forms.gle/MuxC2jfxYsTgZEbr6";
+const SLIDES_URL = "/lovable-uploads/womens-health-webinar-poster.pdf";
+const RESOURCES_URL = "/lovable-uploads/womens-health-webinar-poster.pdf";
 const RECORDING_URL = ""; // Add recording URL when available
 
 const FeaturedWebinarBanner = () => {
   const { language } = useLanguage();
   const isRTL = language === "ar";
-  const isCompleted = (EVENT_STATUS as string) === "completed";
+  const hasRecording = RECORDING_URL.length > 0;
 
   return (
-    <section className="py-10 md:py-14 bg-gradient-to-b from-healthLightGray to-white">
+    <section className="py-8 md:py-10">
       <div className="container mx-auto px-4">
         <div
-          className={`bg-white rounded-2xl shadow-lg overflow-hidden border border-healthTeal/20 max-w-5xl mx-auto ${isRTL ? "text-right" : "text-left"}`}
+          className={`max-w-2xl mx-auto bg-card border border-border/50 rounded-xl p-5 md:p-6 ${isRTL ? "text-right" : "text-left"}`}
           dir={isRTL ? "rtl" : "ltr"}
         >
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Poster */}
-            <a
-              href="/lovable-uploads/womens-health-webinar-poster.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="/lovable-uploads/womens-health-webinar-poster.jpg"
-                alt={isRTL ? "ملصق ندوة صحة المرأة" : "Women's Health Webinar Poster"}
-                className="w-full h-full object-cover cursor-pointer hover:opacity-95 transition-opacity"
-              />
+          <h3 className={`text-lg md:text-xl font-bold text-foreground mb-1 ${isRTL ? "font-cairo" : ""}`}>
+            {isRTL ? "في حال فاتتك ندوة صحة المرأة" : "In Case You Missed Our Women's Health Webinar"}
+          </h3>
+
+          <p className={`text-sm text-muted-foreground mb-4 leading-relaxed ${isRTL ? "font-cairo" : ""}`}>
+            {isRTL
+              ? "أضفنا مواد الندوة هنا لتتمكنوا من مراجعة النقاط الأساسية والموارد من الجلسة."
+              : "We've added the webinar materials here so you can still review the main points and resources from the session."}
+          </p>
+
+          <div className={`flex flex-wrap gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <a href={SLIDES_URL} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm" className="gap-1.5">
+                <FileText className="h-4 w-4" />
+                {isRTL ? "عرض الشرائح" : "View Slides"}
+              </Button>
             </a>
-
-            {/* Content */}
-            <div className="p-6 md:p-8 flex flex-col justify-center">
-              <Badge className="bg-healthTeal/15 text-healthTeal border-healthTeal/30 w-fit mb-4 text-xs">
-                {isRTL ? "ندوة مجانية" : "Free Webinar"}
-              </Badge>
-
-              <h2 className={`text-2xl md:text-3xl font-bold text-healthDarkBlue mb-2 leading-tight ${isRTL ? "font-cairo" : ""}`}>
-                {isRTL ? "صحة المرأة عبر مراحل الحياة" : "Women's Health Across Life Stages"}
-              </h2>
-
-              <p className="text-sm text-healthTeal font-semibold mb-3">
-                {isRTL ? "الخميس، ٢٦ مارس • ٧:٠٠ مساءً" : "Thursday, March 26 • 7:00 PM"}
-              </p>
-
-              <p className={`text-gray-600 mb-5 leading-relaxed text-sm md:text-base ${isRTL ? "font-cairo" : ""}`}>
-                {isRTL
-                  ? "مساحة للحديث عن الهرمونات، التعافي، والدعم. انضموا لنا في ندوة تعليمية حول مواضيع صحة المرأة ذات الصلة بمجتمعاتنا."
-                  : "A space to talk about hormones, healing, and support. Join Project SHAMS for an educational webinar focused on women's health topics relevant to Middle Eastern communities."}
-              </p>
-
-              <p className={`text-xs text-gray-500 mb-6 ${isRTL ? "font-cairo" : ""}`}>
-                {isRTL ? "مقدّمة من مشروع شمس" : "Hosted by Project SHAMS"}
-              </p>
-
-              <a
-                href={isCompleted ? RECORDING_URL : REGISTRATION_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <Button className="w-full md:w-auto bg-healthTeal hover:bg-healthTeal/90 text-white text-base px-8 py-3 h-auto">
-                  {isCompleted ? (
-                    <>
-                      <Play className="h-5 w-5" />
-                      {isRTL ? "شاهد التسجيل" : "Watch Recording"}
-                    </>
-                  ) : (
-                    <>
-                      <ExternalLink className="h-5 w-5" />
-                      {isRTL ? "سجّل الآن" : "Register Here"}
-                    </>
-                  )}
+            <a href={RESOURCES_URL} target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm" className="gap-1.5">
+                <ExternalLink className="h-4 w-4" />
+                {isRTL ? "عرض الموارد" : "View Resources"}
+              </Button>
+            </a>
+            {hasRecording && (
+              <a href={RECORDING_URL} target="_blank" rel="noopener noreferrer">
+                <Button size="sm" className="gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Play className="h-4 w-4" />
+                  {isRTL ? "شاهد التسجيل" : "Watch Recording"}
                 </Button>
               </a>
-            </div>
+            )}
           </div>
         </div>
       </div>
