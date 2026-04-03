@@ -117,7 +117,7 @@
   }
   
   .section-description {
-    @apply text-lg text-center max-w-3xl mx-auto mb-8 text-gray-600;
+    @apply text-lg text-center max-w-3xl mx-auto mb-8 text-muted-foreground;
   }
 
   /* Arabic text direction and typography */
