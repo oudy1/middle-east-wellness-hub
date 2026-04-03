@@ -314,32 +314,44 @@ const MissionSection = () => {
                 <div className="absolute top-1/4 -left-20 text-healthPurple opacity-20 font-arabic text-4xl rotate-6 animate-[pulse_7s_infinite]">طب</div>
                 <div className="absolute top-1/3 -right-24 text-healthGold opacity-20 font-arabic text-4xl -rotate-9 animate-[pulse_6s_infinite]">الرعاية</div>
                 
-                {/* Updated Mission Statement */}
-                <h3 className="text-2xl font-bold text-center mb-6">Mission Statement</h3>
-                <p className="text-lg text-center mb-6 relative">
-                  <span className="absolute -top-6 -left-6 font-arabic text-healthRed opacity-25 text-3xl">ثقة</span>
-                  As a non-profit organization, our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern societies and the Canadian healthcare system.
-                </p>
-                <p className="text-lg text-center mb-6 relative">
-                  <span className="absolute -top-6 -right-6 font-arabic text-healthTeal opacity-25 text-3xl">تعليم</span>
-                  We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.
-                </p>
-                <p className="text-lg text-center mb-8 relative">
-                  <span className="absolute -bottom-6 -right-6 font-arabic text-healthGold opacity-25 text-3xl">مجتمع</span>
-                  Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.
-                  <span className="absolute -bottom-6 -left-6 font-arabic text-healthPurple opacity-25 text-3xl">تعاون</span>
-                </p>
-                
-                {/* Concise Arabic Mission Statement */}
-                <div className="bg-healthLightGray/30 p-6 rounded-lg rtl">
-                  <h3 className="text-2xl font-bold text-center mb-4 font-arabic">الرسالة</h3>
-                  <p className="text-lg text-center mb-4 font-arabic leading-relaxed">
-                    مهمّتنا هي نردم الفجوة بين الجاليات العربية والشرق أوسطية في كندا وبين النظام الصحي، من خلال بناء ثقة حقيقية، وتسهيل الفهم، وخلق مساحة نحكي فيها بصوتنا ونوصل أفكارنا.
-                  </p>
-                  <p className="text-lg text-center font-arabic leading-relaxed">
-                    نحن نسعى إلى كسر الحواجز التي تُبعد مجتمعاتنا عن البحث العلمي والطب والتعليم الصحي. ونعمل معًا كطلاب وأهالٍ وأطباء وباحثين لبناء مجتمع متعاون وواعٍ يُمثلنا وينطلق منّا ولأجلنا.
-                  </p>
-                </div>
+                {isArabic ? (
+                  <div className="rtl" dir="rtl">
+                    <h3 className="text-2xl font-bold text-center mb-6 font-cairo">الرسالة</h3>
+                    <p className="text-lg text-center mb-4 font-cairo leading-relaxed">
+                      مهمّتنا هي نردم الفجوة بين الجاليات العربية والشرق أوسطية في كندا وبين النظام الصحي، من خلال بناء ثقة حقيقية، وتسهيل الفهم، وخلق مساحة نحكي فيها بصوتنا ونوصل أفكارنا.
+                    </p>
+                    <p className="text-lg text-center font-cairo leading-relaxed">
+                      نحن نسعى إلى كسر الحواجز التي تُبعد مجتمعاتنا عن البحث العلمي والطب والتعليم الصحي. ونعمل معًا كطلاب وأهالٍ وأطباء وباحثين لبناء مجتمع متعاون وواعٍ يُمثلنا وينطلق منّا ولأجلنا.
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <h3 className="text-2xl font-bold text-center mb-6">Mission Statement</h3>
+                    <p className="text-lg text-center mb-6 relative">
+                      <span className="absolute -top-6 -left-6 font-arabic text-healthRed opacity-25 text-3xl">ثقة</span>
+                      As a non-profit organization, our mission is to build trust, dismantle barriers, and create a shared space of understanding between Arab and Middle Eastern societies and the Canadian healthcare system.
+                    </p>
+                    <p className="text-lg text-center mb-6 relative">
+                      <span className="absolute -top-6 -right-6 font-arabic text-healthTeal opacity-25 text-3xl">تعليم</span>
+                      We focus on bridging gaps in medical education, research participation, and healthcare access while advocating for culturally responsive care, accurate representation, and inclusive dialogue.
+                    </p>
+                    <p className="text-lg text-center mb-8 relative">
+                      <span className="absolute -bottom-6 -right-6 font-arabic text-healthGold opacity-25 text-3xl">مجتمع</span>
+                      Our work brings together students, families, professionals, and researchers to build a future where community voices are at the center of health equity.
+                      <span className="absolute -bottom-6 -left-6 font-arabic text-healthPurple opacity-25 text-3xl">تعاون</span>
+                    </p>
+                    
+                    <div className="bg-healthLightGray/30 p-6 rounded-lg rtl">
+                      <h3 className="text-2xl font-bold text-center mb-4 font-arabic">الرسالة</h3>
+                      <p className="text-lg text-center mb-4 font-arabic leading-relaxed">
+                        مهمّتنا هي نردم الفجوة بين الجاليات العربية والشرق أوسطية في كندا وبين النظام الصحي، من خلال بناء ثقة حقيقية، وتسهيل الفهم، وخلق مساحة نحكي فيها بصوتنا ونوصل أفكارنا.
+                      </p>
+                      <p className="text-lg text-center font-arabic leading-relaxed">
+                        نحن نسعى إلى كسر الحواجز التي تُبعد مجتمعاتنا عن البحث العلمي والطب والتعليم الصحي. ونعمل معًا كطلاب وأهالٍ وأطباء وباحثين لبناء مجتمع متعاون وواعٍ يُمثلنا وينطلق منّا ولأجلنا.
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </Card>
           </div>
