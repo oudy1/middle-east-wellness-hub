@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const MissionSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
