@@ -7,6 +7,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const MissionSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const { t, language } = useLanguage();
+  const isArabic = language === 'ar';
 
   useEffect(() => {
     // Function to create organized calligraphy background
