@@ -7,7 +7,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 
 const PartnersSection = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const isAr = language === 'ar';
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
     align: 'start',
@@ -32,112 +33,48 @@ const PartnersSection = () => {
     {
       name: "Mississauga Registered Community Group",
       logo: "/lovable-uploads/mississauga-community-group.jpg",
-      description: "Supporting diverse communities in Mississauga",
+      description: isAr ? 'دعم المجتمعات المتنوعة في ميسيساغا' : "Supporting diverse communities in Mississauga",
       link: "#"
     },
   ];
 
   const clubs = [
-    {
-      name: "ESA",
-      logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png",
-      description: "Egyptian Students Association",
-      link: "#"
-    },
-    {
-      name: "North African Student Association of UW and Laurier",
-      logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png",
-      description: "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University",
-      link: "#"
-    },
-    {
-      name: "MYOM",
-      logo: "/lovable-uploads/myom-logo.png",
-      description: "Moroccan Youth of Montreal",
-      link: "#"
-    },
-    {
-      name: "CASA",
-      logo: "/lovable-uploads/casa-logo.png",
-      description: "Christian Arab Student Association - University of Alberta",
-      link: "#"
-    },
-    {
-      name: "PCC",
-      logo: "/lovable-uploads/pcc-logo.png",
-      description: "Palestinian Cultural Club - University of Alberta",
-      link: "#"
-    },
-    {
-      name: "APS UTM",
-      logo: "/lovable-uploads/aps-utm-logo.png",
-      description: "Association of Palestinian Students - UofT Mississauga",
-      link: "#"
-    },
-    {
-      name: "McMaster Muslims in Healthcare Club",
-      logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg",
-      description: "McMaster University student club supporting Muslim healthcare professionals",
-      link: "#"
-    },
-    {
-      name: "LESA",
-      logo: "/lovable-uploads/lesa-western-logo.jpg",
-      description: "The Levant Students' Association - Western University",
-      link: "#"
-    },
-    {
-      // CLUB_LOGO_WOMEN_IN_MEDICINE_UOTTAWA - Club logo only, not SHAMS brand
-      name: "Women in Medicine",
-      logo: "/lovable-uploads/club-logo-women-in-medicine-uottawa.png",
-      description: "Women in Medicine - University of Ottawa",
-      link: "#"
-    }
+    { name: "ESA", logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png", description: "Egyptian Students Association", link: "#" },
+    { name: "North African Student Association of UW and Laurier", logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png", description: "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University", link: "#" },
+    { name: "MYOM", logo: "/lovable-uploads/myom-logo.png", description: "Moroccan Youth of Montreal", link: "#" },
+    { name: "CASA", logo: "/lovable-uploads/casa-logo.png", description: "Christian Arab Student Association - University of Alberta", link: "#" },
+    { name: "PCC", logo: "/lovable-uploads/pcc-logo.png", description: "Palestinian Cultural Club - University of Alberta", link: "#" },
+    { name: "APS UTM", logo: "/lovable-uploads/aps-utm-logo.png", description: "Association of Palestinian Students - UofT Mississauga", link: "#" },
+    { name: "McMaster Muslims in Healthcare Club", logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg", description: "McMaster University student club supporting Muslim healthcare professionals", link: "#" },
+    { name: "LESA", logo: "/lovable-uploads/lesa-western-logo.jpg", description: "The Levant Students' Association - Western University", link: "#" },
+    { name: "Women in Medicine", logo: "/lovable-uploads/club-logo-women-in-medicine-uottawa.png", description: "Women in Medicine - University of Ottawa", link: "#" }
   ];
 
-  const renderPartnerCard = (item: any, index: number) => (
-    <Card key={index} className="overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+  const renderPartnerCard = (item: typeof partners[0], index: number) => (
+    <Card key={index} className="overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <CardContent className="p-6 flex flex-col items-center text-center">
-        <a 
-          href={item.link} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="block hover:scale-105 transition-transform duration-200"
-        >
+        <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-200">
           <div className="mb-4">
-            <img 
-              src={item.logo} 
-              alt={item.name}
-              className="h-24 w-24 object-contain mx-auto" 
-            />
+            <img src={item.logo} alt={item.name} className="h-24 w-24 object-contain mx-auto" loading="lazy" />
           </div>
         </a>
         <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-        <p className="text-sm text-gray-500 line-clamp-1">{item.description}</p>
+        <p className="text-sm text-muted-foreground line-clamp-1">{item.description}</p>
       </CardContent>
     </Card>
   );
 
-  const renderClubCard = (item: any, index: number) => (
+  const renderClubCard = (item: typeof clubs[0], index: number) => (
     <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] md:flex-[0_0_33.333%] lg:flex-[0_0_25%] px-3">
-      <Card className="overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+      <Card className="overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
         <CardContent className="p-6 flex flex-col items-center text-center h-full">
-          <a 
-            href={item.link} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="block hover:scale-105 transition-transform duration-200"
-          >
+          <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-200">
             <div className="mb-4">
-              <img 
-                src={item.logo} 
-                alt={item.name}
-                className="h-24 w-24 object-contain mx-auto" 
-              />
+              <img src={item.logo} alt={item.name} className="h-24 w-24 object-contain mx-auto" loading="lazy" />
             </div>
           </a>
           <h3 className="text-lg font-bold mb-2">{item.name}</h3>
-          <p className="text-sm text-gray-500 line-clamp-1">{item.description}</p>
+          <p className="text-sm text-muted-foreground line-clamp-1">{item.description}</p>
         </CardContent>
       </Card>
     </div>
@@ -150,14 +87,13 @@ const PartnersSection = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10 space-y-12">
-        {/* Partners Section */}
         <div>
-          <h2 className="section-title flex items-center justify-center">
-            <Handshake className="mr-3 text-healthTeal h-8 w-8" />
-            Our Partners
+          <h2 className={`section-title flex items-center justify-center ${isAr ? 'font-cairo' : ''}`}>
+            <Handshake className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {isAr ? 'شركاؤنا' : 'Our Partners'}
           </h2>
-          <p className="section-description">
-            Working together to improve health outcomes in Arab societies
+          <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
+            {isAr ? 'نعمل معًا لتحسين النتائج الصحية في المجتمعات العربية' : 'Working together to improve health outcomes in Arab societies'}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-4">
@@ -165,44 +101,38 @@ const PartnersSection = () => {
           </div>
           
           <div className="text-center">
-            <Link 
-              to="/contact" 
-              className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline"
-            >
-              Become a partner
+            <Link to="/contact" className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline">
+              {isAr ? 'كن شريكًا' : 'Become a partner'}
             </Link>
           </div>
         </div>
 
-        {/* Clubs Section with Carousel */}
         <div>
-          <h2 className="section-title flex items-center justify-center">
-            <Handshake className="mr-3 text-healthTeal h-8 w-8" />
-            {language === 'ar' ? 'النوادي والجمعيات الطلابية المتعاونة معنا' : 'Student Clubs & Associations We Collaborate With'}
+          <h2 className={`section-title flex items-center justify-center ${isAr ? 'font-cairo' : ''}`}>
+            <Handshake className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {isAr ? 'النوادي والجمعيات الطلابية المتعاونة معنا' : 'Student Clubs & Associations We Collaborate With'}
           </h2>
-          <p className="section-description">
-            {language === 'ar' ? 'منظمات طلابية ونوادي مجتمعية تدعم مهمتنا' : 'Student organizations and community clubs supporting our mission'}
+          <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
+            {isAr ? 'منظمات طلابية ونوادي مجتمعية تدعم مهمتنا' : 'Student organizations and community clubs supporting our mission'}
           </p>
           
           <div className="relative max-w-6xl mx-auto">
-            {/* Navigation Arrows */}
             <button
               onClick={scrollPrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
-              aria-label="Previous clubs"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-accent transition-colors border border-border"
+              aria-label={isAr ? 'السابق' : 'Previous clubs'}
             >
               <ChevronLeft className="h-6 w-6 text-healthTeal" />
             </button>
             
             <button
               onClick={scrollNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition-colors border border-gray-200"
-              aria-label="Next clubs"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-accent transition-colors border border-border"
+              aria-label={isAr ? 'التالي' : 'Next clubs'}
             >
               <ChevronRight className="h-6 w-6 text-healthTeal" />
             </button>
 
-            {/* Carousel */}
             <div className="embla overflow-hidden" ref={emblaRef}>
               <div className="embla__container flex -mx-3">
                 {clubs.map(renderClubCard)}
@@ -211,11 +141,8 @@ const PartnersSection = () => {
           </div>
           
           <div className="text-center mt-6">
-            <Link 
-              to="/contact" 
-              className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline"
-            >
-              {language === 'ar' ? 'أضف ناديك' : 'Add your club'}
+            <Link to="/contact" className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline">
+              {isAr ? 'أضف ناديك' : 'Add your club'}
             </Link>
           </div>
         </div>
