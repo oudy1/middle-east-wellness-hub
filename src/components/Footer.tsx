@@ -22,7 +22,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold">{t("footer.title")}</h3>
             </Link>
             <p className="mb-4 text-gray-300">
-              Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern societies across Canada.
+              {t("footer.description")}
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/projectshams/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-healthTeal transition-colors">
@@ -38,7 +38,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-300 hover:text-healthTeal transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.home")}</Link></li>
-              <li><Link to="/about" className="text-gray-300 hover:text-healthTeal transition-colors" onClick={() => window.scrollTo(0, 0)}>About Us</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-healthTeal transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.aboutUs")}</Link></li>
               <li><Link to="/services" className="text-gray-300 hover:text-healthTeal transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.forCommunity")}</Link></li>
               <li><Link to="/contact" className="text-gray-300 hover:text-healthTeal transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.contact")}</Link></li>
             </ul>

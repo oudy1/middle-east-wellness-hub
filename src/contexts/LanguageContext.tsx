@@ -1031,11 +1031,11 @@ const translations = {
     tr: "Orta Doğu Toplumları için Sağlık Desteği ve Savunuculuk"
   },
   "footer.description": {
-    en: "Dedicated to improving healthcare access and outcomes for societies across the Middle East.",
-    ar: "مكرسة لتحسين الوصول إلى الرعاية الصحية والنتائج للمجتمعات في جميع أنحاء الشرق الأوسط.",
-    ku: "تەرخانکراوە بۆ باشترکردنی دەستگەیشتن بە چاودێری تەندروستی و ئەنجامەکان بۆ کۆمەڵگاکانی سەرانسەری ناوەڕاست.",
-    fa: "اختصاص یافته به بهبود دسترسی به مراقبت های بهداشتی و نتایج برای جوامع سراسر خاورمیانه.",
-    tr: "Orta Doğu'daki topluluklar için sağlık hizmetlerine erişimi ve sonuçları iyileştirmeye adanmıştır."
+    en: "Dedicated to improving healthcare access, education, and wellbeing for Middle Eastern societies across Canada.",
+    ar: "مكرّسون لتحسين الوصول إلى الرعاية الصحية والتعليم والرفاهية للمجتمعات الشرق أوسطية في كندا.",
+    ku: "تەرخانکراوین بۆ باشترکردنی دەستگەیشتن بە تەندروستی و پەروەردە و خۆشگوزەرانی بۆ کۆمەڵگاکانی ڕۆژهەڵاتی ناوین لە کەنەدا.",
+    fa: "متعهد به بهبود دسترسی به مراقبت‌های بهداشتی، آموزش و رفاه برای جوامع خاورمیانه‌ای در کانادا.",
+    tr: "Kanada genelinde Orta Doğu toplulukları için sağlık erişimini, eğitimi ve refahı iyileştirmeye adanmıştır."
   },
   "footer.quickLinks": {
     en: "Quick Links",
