@@ -279,8 +279,8 @@ const MissionSection = () => {
         <div className="max-w-5xl mx-auto">
           <h2 className="section-title">
             <span className="relative inline-block">
-              <span className="relative z-10">Our Mission</span>
-              <span className="absolute -top-6 -left-8 text-healthGold opacity-20 font-arabic text-4xl">رسالة</span>
+              <span className="relative z-10">{t("mission.title")}</span>
+              {!isArabic && <span className="absolute -top-6 -left-8 text-healthGold opacity-20 font-arabic text-4xl">رسالة</span>}
             </span>
           </h2>
           
