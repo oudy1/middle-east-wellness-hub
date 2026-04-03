@@ -176,14 +176,34 @@ const Webinars = () => {
                         </ul>
                       </div>
 
-                      {/* Watch Button */}
-                      <Button 
-                        className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white mb-8"
-                        onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
-                      >
-                        <Play className="mr-2 h-4 w-4" />
-                        {webinar[webinarLang].watchButton}
-                      </Button>
+                      {/* Action Buttons */}
+                      <div className={`flex flex-wrap gap-2 mb-8 ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                        {webinar.youtubeId && (
+                          <Button 
+                            className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white"
+                            onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
+                          >
+                            <Play className="mr-2 h-4 w-4" />
+                            {webinar[webinarLang].watchButton}
+                          </Button>
+                        )}
+                        {(webinar as any).slidesUrl && (
+                          <a href={(webinar as any).slidesUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline" className="gap-1.5">
+                              <FileText className="h-4 w-4" />
+                              {webinarLang === 'ar' ? 'عرض الشرائح' : 'View Slides'}
+                            </Button>
+                          </a>
+                        )}
+                        {(webinar as any).resourcesUrl && (
+                          <a href={(webinar as any).resourcesUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline" className="gap-1.5">
+                              <ExternalLink className="h-4 w-4" />
+                              {webinarLang === 'ar' ? 'عرض الموارد' : 'View Resources'}
+                            </Button>
+                          </a>
+                        )}
+                      </div>
 
                       {/* Contact Info */}
                       <div className="border-t pt-6 mt-6">
