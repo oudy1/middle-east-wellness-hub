@@ -134,31 +134,31 @@ const MissionSection = () => {
       const borderWidth = 60; // Width of the border area
       const createFrameBorder = () => {
         // Top border
-        for (let i = 0; i < 60; i++) {
-          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+        for (let i = 0; i < 20; i++) {
+          const x = (frameWidth * (i / 20)) + (Math.random() * 20 - 10);
           const y = Math.random() * borderWidth;
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Bottom border
-        for (let i = 0; i < 60; i++) {
-          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+        for (let i = 0; i < 20; i++) {
+          const x = (frameWidth * (i / 20)) + (Math.random() * 20 - 10);
           const y = frameHeight - (Math.random() * borderWidth);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Left border
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 15; i++) {
           const x = Math.random() * borderWidth;
-          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          const y = (frameHeight * (i / 15)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Right border
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 15; i++) {
           const x = frameWidth - (Math.random() * borderWidth);
-          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          const y = (frameHeight * (i / 15)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
       };
       
