@@ -40,7 +40,7 @@ const ResourcesSection = () => {
     <section className="py-16 md:py-24 bg-muted/30">
       <div className="container mx-auto px-4" dir={isAr ? 'rtl' : 'ltr'}>
         <h2 className={`section-title ${isAr ? 'font-cairo' : ''}`}>
-          {isAr ? 'الموارد' : 'Resources'}
+          {t("resources.title")}
         </h2>
         <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
           {t("resources.subtitle")}
