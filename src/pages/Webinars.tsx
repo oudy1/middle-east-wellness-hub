@@ -100,6 +100,9 @@ const Webinars = () => {
               </p>
             </div>
             
+            {/* Women's Health Slides Viewer */}
+            <WebinarSlidesViewer />
+
             {/* Webinar Cards */}
             {webinars.map((webinar) => (
               <div key={webinar.id} className="max-w-5xl mx-auto mb-16">
