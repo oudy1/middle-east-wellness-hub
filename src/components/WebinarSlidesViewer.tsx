@@ -5,9 +5,9 @@ import { FileText, ExternalLink, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import womensHealthPoster from "@/assets/womens-health-webinar-poster.png";
 
-const SLIDES_ID = "1zF3FQrqBSAgORHIlxmI2VShKe2zH3ZUFo4PbE_roahA";
-const EMBED_URL = `https://docs.google.com/presentation/d/${SLIDES_ID}/embed?start=false&loop=false&delayms=3000`;
-const VIEW_URL = `https://docs.google.com/presentation/d/${SLIDES_ID}/pub?start=false&loop=false&delayms=3000`;
+const EMBED_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F9sAcu8cOI4cMJBYPIeWPDLZ9lJiISM1B0HGzpYynMwWio6iXLBPdaFr-ixDcDbKJJG/pubembed?start=false&loop=false&delayms=3000";
+const VIEW_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F9sAcu8cOI4cMJBYPIeWPDLZ9lJiISM1B0HGzpYynMwWio6iXLBPdaFr-ixDcDbKJJG/pub?start=false&loop=false&delayms=3000";
+const PDF_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F9sAcu8cOI4cMJBYPIeWPDLZ9lJiISM1B0HGzpYynMwWio6iXLBPdaFr-ixDcDbKJJG/pub?start=false&loop=false&delayms=3000&output=pdf";
 
 const WebinarSlidesViewer = () => {
   const { language, t } = useLanguage();
