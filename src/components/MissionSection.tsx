@@ -273,7 +273,7 @@ const MissionSection = () => {
   }, []);
   
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden" ref={sectionRef}>
+    <section className="py-12 md:py-16 relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-5"></div>
       <div className="container mx-auto px-4 relative">
         <div className="max-w-5xl mx-auto">
