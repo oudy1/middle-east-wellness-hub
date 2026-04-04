@@ -45,7 +45,7 @@ const TopicOfTheWeekSection = () => {
               }
             }}
           >
-            <div className="relative aspect-square w-full overflow-hidden">
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
               <img 
                 src={isArabic ? stressAr : stressEn}
                 alt={isArabic ? topic.altAr : topic.altEn}

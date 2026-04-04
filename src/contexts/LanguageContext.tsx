@@ -1323,6 +1323,58 @@ const translations = {
     fa: "مواد وبینار را اینجا اضافه کرده ایم تا بتوانید نکات اصلی و منابع جلسه را مرور کنید.",
     tr: "Web semineri materyallerini buraya ekledik, böylece oturumun ana noktalarını ve kaynaklarını hâlâ inceleyebilirsiniz."
   },
+  // Research Webinar Archive
+  "researchWebinar.missedTitle": {
+    en: "Missed Our Research Webinar?",
+    ar: "فاتتك ندوة البحث؟",
+    ku: "وەبینارەکەی توێژینەوەت لەدەست چوو؟",
+    fa: "وبینار تحقیقاتی ما را از دست دادید؟",
+    tr: "Araştırma Web Seminerimizi Kaçırdınız mı?"
+  },
+  "researchWebinar.description": {
+    en: "Watch the recording of our Intro to Research: How to Get Your First Role + Mistakes to Avoid session.",
+    ar: "شاهد تسجيل ندوة \"مقدمة في البحث: كيف تحصل على أول فرصة + أخطاء يجب تجنبها\".",
+    ku: "تۆمارکردنی وەبینارەکەمان تەماشا بکە: چۆن یەکەم ڕۆڵت بەدەست بهێنیت + هەڵەکانی دوورکەوتنەوە.",
+    fa: "ضبط وبینار مقدمه ای بر تحقیقات ما را تماشا کنید: چگونه اولین نقش خود را بگیرید + اشتباهاتی که باید اجتناب کنید.",
+    tr: "Araştırmaya Giriş web seminerimizin kaydını izleyin: İlk Rolünüzü Nasıl Alırsınız + Kaçınılması Gereken Hatalar."
+  },
+  // Events Section
+  "events.recordedWebinar": {
+    en: "Recorded Webinar",
+    ar: "تسجيل ندوة",
+    ku: "وەبینارەکی تۆمارکراو",
+    fa: "وبینار ضبط شده",
+    tr: "Kayıtlı Web Semineri"
+  },
+  "events.watchRecording": {
+    en: "Watch the Webinar Recording",
+    ar: "شاهد تسجيل الندوة",
+    ku: "تۆمارکردنی وەبینارەکە تەماشا بکە",
+    fa: "ضبط وبینار را تماشا کنید",
+    tr: "Web Semineri Kaydını İzleyin"
+  },
+  "events.nutritionWebinar": {
+    en: "East to West: Nutrition & Diabetes Post-Immigration",
+    ar: "من الشرق إلى الغرب: التغذية والسكري بعد الهجرة",
+    ku: "لە ڕۆژهەڵات بۆ ڕۆژئاوا: خۆراک و شەکرە پاش کۆچکردن",
+    fa: "از شرق به غرب: تغذیه و دیابت پس از مهاجرت",
+    tr: "Doğudan Batıya: Göç Sonrası Beslenme ve Diyabet"
+  },
+  "events.watchNow": {
+    en: "Watch Now",
+    ar: "شاهد الآن",
+    ku: "ئێستا تەماشا بکە",
+    fa: "اکنون تماشا کنید",
+    tr: "Şimdi İzle"
+  },
+  // Resources Section Title
+  "resources.title": {
+    en: "Resources",
+    ar: "الموارد",
+    ku: "سەرچاوەکان",
+    fa: "منابع",
+    tr: "Kaynaklar"
+  },
   
   // Diseases Page
   "diseases.title": {

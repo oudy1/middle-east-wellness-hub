@@ -128,37 +128,37 @@ const MissionSection = () => {
       ];
       
       // Create grid-based organization for hundreds of elements
-      const elementCount = 200; // Number of calligraphy elements
+      const elementCount = 80; // Number of calligraphy elements
       
       // Create frame border elements (more densely packed)
       const borderWidth = 60; // Width of the border area
       const createFrameBorder = () => {
         // Top border
-        for (let i = 0; i < 60; i++) {
-          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+        for (let i = 0; i < 20; i++) {
+          const x = (frameWidth * (i / 20)) + (Math.random() * 20 - 10);
           const y = Math.random() * borderWidth;
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Bottom border
-        for (let i = 0; i < 60; i++) {
-          const x = (frameWidth * (i / 60)) + (Math.random() * 20 - 10);
+        for (let i = 0; i < 20; i++) {
+          const x = (frameWidth * (i / 20)) + (Math.random() * 20 - 10);
           const y = frameHeight - (Math.random() * borderWidth);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Left border
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 15; i++) {
           const x = Math.random() * borderWidth;
-          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          const y = (frameHeight * (i / 15)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
         
         // Right border
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 15; i++) {
           const x = frameWidth - (Math.random() * borderWidth);
-          const y = (frameHeight * (i / 40)) + (Math.random() * 20 - 10);
-          createCalligraphyElement(x, y, arabicTexts, 0.2, 14, 22, true);
+          const y = (frameHeight * (i / 15)) + (Math.random() * 20 - 10);
+          createCalligraphyElement(x, y, arabicTexts, 0.15, 12, 18, true);
         }
       };
       
@@ -245,10 +245,10 @@ const MissionSection = () => {
       createInnerElements();
       
       // Add special featured phrases in larger size
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 5; i++) {
         const x = borderWidth + Math.random() * (frameWidth - borderWidth * 2);
         const y = borderWidth + Math.random() * (frameHeight - borderWidth * 2);
-        createCalligraphyElement(x, y, healthPhrases, 0.35, 24, 32, false);
+        createCalligraphyElement(x, y, healthPhrases, 0.25, 20, 26, false);
       }
     };
     
@@ -273,7 +273,7 @@ const MissionSection = () => {
   }, []);
   
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden" ref={sectionRef}>
+    <section className="py-12 md:py-16 relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-5"></div>
       <div className="container mx-auto px-4 relative">
         <div className="max-w-5xl mx-auto">
@@ -285,7 +285,7 @@ const MissionSection = () => {
           </h2>
           
           {/* Ornate Calligraphic Frame */}
-          <div className="relative p-8 md:p-12 lg:p-16 mb-8 mt-8">
+          <div className="relative p-6 md:p-8 lg:p-10 mb-6 mt-6">
             {/* Frame Border with Rich Calligraphy Pattern */}
             <div ref={frameRef} className="absolute inset-0 border-8 border-opacity-30 border-healthGold rounded-lg overflow-hidden">
               <div className="absolute inset-0 calligraphy-frame-bg opacity-10"></div>
