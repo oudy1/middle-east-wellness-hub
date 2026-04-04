@@ -45,7 +45,7 @@ const WebinarSlidesViewer = () => {
                   {t("common.viewSlides")}
                 </Button>
               </a>
-              <a href={`https://docs.google.com/presentation/d/${SLIDES_ID}/export/pdf`} target="_blank" rel="noopener noreferrer">
+              <a href={PDF_URL} target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="gap-1.5">
                   <ExternalLink className="h-4 w-4" />
                   {t("slides.downloadDeck")}
