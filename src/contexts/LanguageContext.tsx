@@ -1093,40 +1093,12 @@ const translations = {
     fa: "با ما تماس بگیرید",
     tr: "Bizimle İletişime Geçin"
   },
-  "footer.address1": {
-    en: "123 Healthcare Avenue",
-    ar: "١٢٣ شارع الرعاية الصحية",
-    ku: "١٢٣ شەقامی چاودێری تەندروستی",
-    fa: "۱۲۳ خیابان مراقبت های بهداشتی",
-    tr: "123 Sağlık Caddesi"
-  },
-  "footer.address2": {
-    en: "Dubai, UAE",
-    ar: "دبي، الإمارات العربية المتحدة",
-    ku: "دووبەی، میرنشینە یەکگرتووە عەرەبییەکان",
-    fa: "دبی، امارات متحده عربی",
-    tr: "Dubai, BAE"
-  },
-  "footer.email": {
-    en: "Email: info@mehealthinitiative.org",
-    ar: "البريد الإلكتروني: info@mehealthinitiative.org",
-    ku: "ئیمەیڵ: info@mehealthinitiative.org",
-    fa: "ایمیل: info@mehealthinitiative.org",
-    tr: "E-posta: info@mehealthinitiative.org"
-  },
-  "footer.phone": {
-    en: "Phone: +971 4 123 4567",
-    ar: "الهاتف: +٩٧١ ٤ ١٢٣ ٤٥٦٧",
-    ku: "تەلەفۆن: +٩٧١ ٤ ١٢٣ ٤٥٦٧",
-    fa: "تلفن: +۹۷۱ ۴ ۱۲۳ ۴۵۶۷",
-    tr: "Telefon: +971 4 123 4567"
-  },
   "footer.copyright": {
-    en: "Middle Eastern Health Initiative. All rights reserved.",
-    ar: "مبادرة الصحة في الشرق الأوسط. جميع الحقوق محفوظة.",
-    ku: "دەستپێشخەری تەندروستی ناوەڕاست. هەموو مافەکان پارێزراون.",
-    fa: "ابتکار سلامت خاورمیانه. تمام حقوق محفوظ است.",
-    tr: "Orta Doğu Sağlık Girişimi. Tüm hakları saklıdır."
+    en: "SHAMS. All rights reserved.",
+    ar: "شمس. جميع الحقوق محفوظة.",
+    ku: "شەمس. هەموو مافەکان پارێزراون.",
+    fa: "شمس. تمام حقوق محفوظ است.",
+    tr: "ŞEMS. Tüm hakları saklıdır."
   },
   "footer.privacy": {
     en: "Privacy Policy",
@@ -1148,6 +1120,208 @@ const translations = {
     ku: "پۆلیسی کووکی",
     fa: "سیاست کوکی",
     tr: "Çerez Politikası"
+  },
+  // Standardized button/label translations
+  "common.programs": {
+    en: "Programs",
+    ar: "البرامج",
+    ku: "بەرنامەکان",
+    fa: "برنامه ها",
+    tr: "Programlar"
+  },
+  "common.browseByCity": {
+    en: "Browse by City",
+    ar: "تصفح حسب المدينة",
+    ku: "بە شار بگەڕێ",
+    fa: "بر اساس شهر مرور کنید",
+    tr: "Şehre Göre Ara"
+  },
+  "common.menu": {
+    en: "Menu",
+    ar: "القائمة",
+    ku: "لیست",
+    fa: "منو",
+    tr: "Menü"
+  },
+  "common.navigatePages": {
+    en: "Navigate through our pages",
+    ar: "تصفح صفحاتنا",
+    ku: "لە پەڕەکانماندا بگەڕێ",
+    fa: "در صفحات ما حرکت کنید",
+    tr: "Sayfalarımızda gezinin"
+  },
+  "common.learnMore": {
+    en: "Learn More",
+    ar: "اقرأ المزيد",
+    ku: "زیاتر بزانە",
+    fa: "بیشتر بدانید",
+    tr: "Daha Fazla Bilgi"
+  },
+  "common.viewAll": {
+    en: "View All",
+    ar: "عرض الكل",
+    ku: "هەمووی ببینە",
+    fa: "مشاهده همه",
+    tr: "Tümünü Görüntüle"
+  },
+  "common.watchRecording": {
+    en: "Watch Recording",
+    ar: "شاهد التسجيل",
+    ku: "تۆمارکردن تەماشا بکە",
+    fa: "ضبط را تماشا کنید",
+    tr: "Kaydı İzle"
+  },
+  "common.viewSlides": {
+    en: "View Slides",
+    ar: "عرض الشرائح",
+    ku: "سلایدەکان ببینە",
+    fa: "مشاهده اسلایدها",
+    tr: "Slaytları Görüntüle"
+  },
+  "common.viewResources": {
+    en: "View Resources",
+    ar: "عرض الموارد",
+    ku: "سەرچاوەکان ببینە",
+    fa: "مشاهده منابع",
+    tr: "Kaynakları Görüntüle"
+  },
+  "common.registerHere": {
+    en: "Register Here",
+    ar: "سجل هنا",
+    ku: "لێرە تۆمار بکە",
+    fa: "اینجا ثبت نام کنید",
+    tr: "Buradan Kayıt Olun"
+  },
+  // Research Teaser Section
+  "research.title": {
+    en: "Research Studies",
+    ar: "الدراسات البحثية",
+    ku: "توێژینەوە لێکۆڵینەوەکان",
+    fa: "مطالعات تحقیقاتی",
+    tr: "Araştırma Çalışmaları"
+  },
+  "research.subtitle": {
+    en: "SHAMS supports recruitment for these studies in partnership with research institutions",
+    ar: "شمس تدعم عملية التوظيف لهذه الدراسات بالشراكة مع مؤسسات بحثية",
+    ku: "شەمس پاڵپشتی توانینی ئەم توێژینەوانە دەکات لە هاوبەشی لەگەڵ دامەزراوە توێژینەوەییەکان",
+    fa: "شمس از استخدام برای این مطالعات با مشارکت مؤسسات تحقیقاتی پشتیبانی می کند",
+    tr: "ŞEMS, araştırma kurumlarıyla ortaklık içinde bu çalışmalar için işe alımı destekler"
+  },
+  "research.viewAllStudies": {
+    en: "View All Studies & Resources",
+    ar: "عرض جميع الدراسات والموارد",
+    ku: "هەموو توێژینەوە و سەرچاوەکان ببینە",
+    fa: "مشاهده همه مطالعات و منابع",
+    tr: "Tüm Çalışmaları ve Kaynakları Görüntüle"
+  },
+  // Featured News Section
+  "news.title": {
+    en: "Featured Health News",
+    ar: "أخبار صحية مميزة",
+    ku: "هەواڵی تەندروستی تایبەت",
+    fa: "اخبار سلامت برجسته",
+    tr: "Öne Çıkan Sağlık Haberleri"
+  },
+  "news.subtitle": {
+    en: "Stay updated with our latest achievements, health initiatives, and impact stories from Middle Eastern societies.",
+    ar: "تابعوا آخر الإنجازات والمبادرات الصحية وقصص التأثير من المجتمعات الشرق أوسطية.",
+    ku: "لە کۆتا دەستکەوتەکان، دەستپێشخەرییە تەندروستییەکان و چیرۆکەکانی کاریگەری لە کۆمەڵگاکانی ناوەڕاستەوە ئاگادار بە.",
+    fa: "از آخرین دستاوردها، ابتکارات سلامت و داستان های تأثیر از جوامع خاورمیانه به روز بمانید.",
+    tr: "Orta Doğu toplumlarından en son başarılarımız, sağlık girişimlerimiz ve etki hikayelerimizle güncel kalın."
+  },
+  "news.featured": {
+    en: "Featured",
+    ar: "مميز",
+    ku: "تایبەت",
+    fa: "ویژه",
+    tr: "Öne Çıkan"
+  },
+  "news.readFullStory": {
+    en: "Read Full Story",
+    ar: "اقرأ القصة كاملة",
+    ku: "چیرۆکە تەواوەکە بخوێنەرەوە",
+    fa: "داستان کامل را بخوانید",
+    tr: "Tam Haberi Oku"
+  },
+  "news.viewAll": {
+    en: "View All News & Updates",
+    ar: "عرض جميع الأخبار والتحديثات",
+    ku: "هەموو هەواڵ و نوێکارییەکان ببینە",
+    fa: "مشاهده همه اخبار و به روز رسانی ها",
+    tr: "Tüm Haberleri ve Güncellemeleri Görüntüle"
+  },
+  // Weekly Topic Section
+  "weeklyTopic.title": {
+    en: "Weekly Topic",
+    ar: "موضوع الأسبوع",
+    ku: "بابەتی هەفتانە",
+    fa: "موضوع هفته",
+    tr: "Haftalık Konu"
+  },
+  "weeklyTopic.learnMoreInstagram": {
+    en: "Learn More on Instagram",
+    ar: "تعرّفوا أكثر على إنستغرام",
+    ku: "لە ئینستاگرامدا زیاتر بزانە",
+    fa: "در اینستاگرام بیشتر بدانید",
+    tr: "Instagram'da Daha Fazla Bilgi"
+  },
+  // Partners Section
+  "partners.ourPartners": {
+    en: "Our Partners",
+    ar: "شركاؤنا",
+    ku: "هاوبەشەکانمان",
+    fa: "شرکای ما",
+    tr: "Ortaklarımız"
+  },
+  "partners.ourPartnersSubtitle": {
+    en: "Working together to improve health outcomes in Arab societies",
+    ar: "نعمل معًا لتحسين النتائج الصحية في المجتمعات العربية",
+    ku: "پێکەوە کار دەکەین بۆ باشترکردنی ئەنجامە تەندروستییەکان لە کۆمەڵگاکانی عەرەبیدا",
+    fa: "با هم برای بهبود نتایج سلامت در جوامع عربی کار می کنیم",
+    tr: "Arap toplumlarında sağlık sonuçlarını iyileştirmek için birlikte çalışıyoruz"
+  },
+  "partners.becomePartner": {
+    en: "Become a partner",
+    ar: "كن شريكًا",
+    ku: "هاوبەش بە",
+    fa: "شریک شوید",
+    tr: "Ortak olun"
+  },
+  "partners.studentClubs": {
+    en: "Student Clubs & Associations We Collaborate With",
+    ar: "النوادي والجمعيات الطلابية المتعاونة معنا",
+    ku: "یانە و کۆمەڵەکانی قوتابی کە هاوکارییان لەگەڵ دەکەین",
+    fa: "باشگاه ها و انجمن های دانشجویی که با آنها همکاری می کنیم",
+    tr: "İşbirliği Yaptığımız Öğrenci Kulüpleri ve Dernekleri"
+  },
+  "partners.studentClubsSubtitle": {
+    en: "Student organizations and community clubs supporting our mission",
+    ar: "منظمات طلابية ونوادي مجتمعية تدعم مهمتنا",
+    ku: "ڕێکخراوە قوتابییەکان و یانە کۆمەڵایەتییەکان کە پاڵپشتی ئامانجمان دەکەن",
+    fa: "سازمان های دانشجویی و باشگاه های جامعه ای که از مأموریت ما حمایت می کنند",
+    tr: "Misyonumuzu destekleyen öğrenci kuruluşları ve topluluk kulüpleri"
+  },
+  "partners.addClub": {
+    en: "Add your club",
+    ar: "أضف ناديك",
+    ku: "یانەکەت زیاد بکە",
+    fa: "باشگاه خود را اضافه کنید",
+    tr: "Kulübünüzü ekleyin"
+  },
+  // Webinar Banner
+  "webinar.missedTitle": {
+    en: "In Case You Missed Our Women's Health Webinar",
+    ar: "في حال فاتتك ندوة صحة المرأة",
+    ku: "ئەگەر وەبینارەکەی تەندروستی ژنانت لەدەست چوو",
+    fa: "در صورتی که وبینار سلامت زنان ما را از دست دادید",
+    tr: "Kadın Sağlığı Web Seminerimizi Kaçırdıysanız"
+  },
+  "webinar.missedSubtitle": {
+    en: "We've added the webinar materials here so you can still review the main points and resources from the session.",
+    ar: "أضفنا مواد الندوة هنا لتتمكنوا من مراجعة النقاط الأساسية والموارد من الجلسة.",
+    ku: "ماددەکانی وەبینارەکەمان لێرە زیاد کردووە بۆ ئەوەی هێشتا خاڵە سەرەکییەکان و سەرچاوەکان بپشکنیت.",
+    fa: "مواد وبینار را اینجا اضافه کرده ایم تا بتوانید نکات اصلی و منابع جلسه را مرور کنید.",
+    tr: "Web semineri materyallerini buraya ekledik, böylece oturumun ana noktalarını ve kaynaklarını hâlâ inceleyebilirsiniz."
   },
   
   // Diseases Page

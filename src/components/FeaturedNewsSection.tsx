@@ -5,8 +5,8 @@ import { Newspaper, ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FeaturedNewsSection = () => {
-  const { language } = useLanguage();
-  const isAr = language === 'ar';
+  const { language, t } = useLanguage();
+  const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
   const newsItems = [
     {
@@ -48,16 +48,14 @@ const FeaturedNewsSection = () => {
         <div className="calligraphy-frame-bg h-full w-full opacity-20"></div>
       </div>
       
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10" dir={isAr ? 'rtl' : 'ltr'}>
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="text-center mb-12">
-          <h2 className={`text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center mb-4 ${isAr ? 'font-cairo' : ''}`}>
-            <Newspaper className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
-            {isAr ? 'أخبار صحية مميزة' : 'Featured Health News'}
+          <h2 className={`text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center mb-4 ${isRTL ? 'font-cairo' : ''}`}>
+            <Newspaper className={`${isRTL ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {t("news.title")}
           </h2>
-          <p className={`text-muted-foreground max-w-2xl mx-auto ${isAr ? 'font-cairo' : ''}`}>
-            {isAr
-              ? 'تابعوا آخر الإنجازات والمبادرات الصحية وقصص التأثير من المجتمعات الشرق أوسطية.'
-              : 'Stay updated with our latest achievements, health initiatives, and impact stories from Middle Eastern societies.'}
+          <p className={`text-muted-foreground max-w-2xl mx-auto ${isRTL ? 'font-cairo' : ''}`}>
+            {t("news.subtitle")}
           </p>
         </div>
 
@@ -73,15 +71,15 @@ const FeaturedNewsSection = () => {
                       className="w-full h-64 object-cover"
                       loading="lazy"
                     />
-                    <div className={`absolute top-4 ${isAr ? 'right-4' : 'left-4'}`}>
+                    <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'}`}>
                       <span className="bg-healthTeal text-white px-3 py-1 rounded-full text-sm font-medium">
-                        {isAr ? 'مميز' : 'Featured'}
+                        {t("news.featured")}
                       </span>
                     </div>
                   </div>
                   <CardContent className="p-6">
                     <div className={`flex items-center text-sm text-muted-foreground mb-3`}>
-                      <Calendar className={`${isAr ? 'ml-2' : 'mr-2'} h-4 w-4`} />
+                      <Calendar className={`${isRTL ? 'ml-2' : 'mr-2'} h-4 w-4`} />
                       {featuredNews.date}
                       <span className="mx-2">•</span>
                       <span className="text-healthTeal font-medium">{featuredNews.category}</span>
@@ -89,8 +87,8 @@ const FeaturedNewsSection = () => {
                     <h3 className="text-2xl font-bold mb-3 text-foreground">{featuredNews.title}</h3>
                     <p className="text-muted-foreground mb-4 leading-relaxed">{featuredNews.excerpt}</p>
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
-                      {isAr ? 'اقرأ القصة كاملة' : 'Read Full Story'}
-                      <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
+                      {t("news.readFullStory")}
+                      <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
                     </Button>
                   </CardContent>
                 </a>
@@ -111,7 +109,7 @@ const FeaturedNewsSection = () => {
                     />
                     <CardContent className="p-4 flex-1">
                       <div className={`flex items-center text-xs text-muted-foreground mb-2`}>
-                        <Calendar className={`${isAr ? 'ml-1' : 'mr-1'} h-3 w-3`} />
+                        <Calendar className={`${isRTL ? 'ml-1' : 'mr-1'} h-3 w-3`} />
                         {item.date}
                       </div>
                       <h4 className="font-bold text-foreground mb-2 text-sm leading-tight">{item.title}</h4>
@@ -127,8 +125,8 @@ const FeaturedNewsSection = () => {
         <div className="text-center">
           <Button asChild variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
             <a href="https://www.canada.ca/en/health-canada.html" target="_blank" rel="noopener noreferrer">
-              {isAr ? 'عرض جميع الأخبار والتحديثات' : 'View All News & Updates'}
-              <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
+              {t("news.viewAll")}
+              <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
             </a>
           </Button>
         </div>
