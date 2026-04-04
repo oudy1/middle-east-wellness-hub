@@ -128,7 +128,7 @@ const MissionSection = () => {
       ];
       
       // Create grid-based organization for hundreds of elements
-      const elementCount = 200; // Number of calligraphy elements
+      const elementCount = 80; // Number of calligraphy elements
       
       // Create frame border elements (more densely packed)
       const borderWidth = 60; // Width of the border area
