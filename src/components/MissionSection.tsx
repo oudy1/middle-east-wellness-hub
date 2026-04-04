@@ -285,7 +285,7 @@ const MissionSection = () => {
           </h2>
           
           {/* Ornate Calligraphic Frame */}
-          <div className="relative p-8 md:p-12 lg:p-16 mb-8 mt-8">
+          <div className="relative p-6 md:p-8 lg:p-10 mb-6 mt-6">
             {/* Frame Border with Rich Calligraphy Pattern */}
             <div ref={frameRef} className="absolute inset-0 border-8 border-opacity-30 border-healthGold rounded-lg overflow-hidden">
               <div className="absolute inset-0 calligraphy-frame-bg opacity-10"></div>
