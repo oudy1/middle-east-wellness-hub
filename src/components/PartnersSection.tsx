@@ -7,8 +7,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 
 const PartnersSection = () => {
-  const { language } = useLanguage();
-  const isAr = language === 'ar';
+  const { language, t } = useLanguage();
+  const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
     align: 'start',
@@ -33,7 +33,7 @@ const PartnersSection = () => {
     {
       name: "Mississauga Registered Community Group",
       logo: "/lovable-uploads/mississauga-community-group.jpg",
-      description: isAr ? 'دعم المجتمعات المتنوعة في ميسيساغا' : "Supporting diverse communities in Mississauga",
+      description: language === 'ar' ? 'دعم المجتمعات المتنوعة في ميسيساغا' : "Supporting diverse communities in Mississauga",
       link: "#"
     },
   ];
@@ -88,12 +88,12 @@ const PartnersSection = () => {
       
       <div className="container mx-auto px-4 relative z-10 space-y-12">
         <div>
-          <h2 className={`section-title flex items-center justify-center ${isAr ? 'font-cairo' : ''}`}>
-            <Handshake className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
-            {isAr ? 'شركاؤنا' : 'Our Partners'}
+          <h2 className={`section-title flex items-center justify-center ${isRTL ? 'font-cairo' : ''}`}>
+            <Handshake className={`${isRTL ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {t("partners.ourPartners")}
           </h2>
-          <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
-            {isAr ? 'نعمل معًا لتحسين النتائج الصحية في المجتمعات العربية' : 'Working together to improve health outcomes in Arab societies'}
+          <p className={`section-description ${isRTL ? 'font-cairo' : ''}`}>
+            {t("partners.ourPartnersSubtitle")}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-4">
@@ -102,25 +102,25 @@ const PartnersSection = () => {
           
           <div className="text-center">
             <Link to="/contact" className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline">
-              {isAr ? 'كن شريكًا' : 'Become a partner'}
+              {t("partners.becomePartner")}
             </Link>
           </div>
         </div>
 
         <div>
-          <h2 className={`section-title flex items-center justify-center ${isAr ? 'font-cairo' : ''}`}>
-            <Handshake className={`${isAr ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
-            {isAr ? 'النوادي والجمعيات الطلابية المتعاونة معنا' : 'Student Clubs & Associations We Collaborate With'}
+          <h2 className={`section-title flex items-center justify-center ${isRTL ? 'font-cairo' : ''}`}>
+            <Handshake className={`${isRTL ? 'ml-3' : 'mr-3'} text-healthTeal h-8 w-8`} />
+            {t("partners.studentClubs")}
           </h2>
-          <p className={`section-description ${isAr ? 'font-cairo' : ''}`}>
-            {isAr ? 'منظمات طلابية ونوادي مجتمعية تدعم مهمتنا' : 'Student organizations and community clubs supporting our mission'}
+          <p className={`section-description ${isRTL ? 'font-cairo' : ''}`}>
+            {t("partners.studentClubsSubtitle")}
           </p>
           
           <div className="relative max-w-6xl mx-auto">
             <button
               onClick={scrollPrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-accent transition-colors border border-border"
-              aria-label={isAr ? 'السابق' : 'Previous clubs'}
+              aria-label={isRTL ? 'السابق' : 'Previous clubs'}
             >
               <ChevronLeft className="h-6 w-6 text-healthTeal" />
             </button>
@@ -128,7 +128,7 @@ const PartnersSection = () => {
             <button
               onClick={scrollNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-accent transition-colors border border-border"
-              aria-label={isAr ? 'التالي' : 'Next clubs'}
+              aria-label={isRTL ? 'التالي' : 'Next clubs'}
             >
               <ChevronRight className="h-6 w-6 text-healthTeal" />
             </button>
@@ -142,7 +142,7 @@ const PartnersSection = () => {
           
           <div className="text-center mt-6">
             <Link to="/contact" className="inline-block text-healthTeal hover:text-healthTeal/80 text-sm font-medium underline">
-              {isAr ? 'أضف ناديك' : 'Add your club'}
+              {t("partners.addClub")}
             </Link>
           </div>
         </div>

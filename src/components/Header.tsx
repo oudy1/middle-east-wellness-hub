@@ -65,10 +65,10 @@ const Header = () => {
               />
               <div className="flex flex-col min-w-0">
                 <div className="text-lg sm:text-xl font-bold truncate">
-                  {language === 'ar' ? "شمس" : "SHAMS"}
+                  {t("footer.title")}
                 </div>
                 <div className="text-xs text-healthGold opacity-90 hidden sm:block">
-                  Supporting Health & Advocacy for Middle Eastern Societies
+                  {t("hero.tagline")}
                 </div>
               </div>
             </Link>
@@ -111,7 +111,7 @@ const Header = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setServicesMenuOpen(false)}
                   >
-                    {language === 'ar' ? 'البرامج' : 'Programs'}
+                    {t("common.programs")}
                   </Link>
                 </div>
               )}
@@ -211,7 +211,7 @@ const Header = () => {
                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-xs"
                      onClick={() => setPhysicianMenuOpen(false)}
                    >
-                     {language === 'ar' ? 'تصفح حسب المدينة' : 'Browse by City'}
+                     {t("common.browseByCity")}
                    </Link>
                  </div>
               )}
@@ -304,9 +304,9 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-80 bg-healthDarkBlue text-white border-l border-white/10 p-0">
                 <SheetHeader className="p-6 pb-4">
-                  <SheetTitle className="text-white text-left text-xl">Menu</SheetTitle>
+                  <SheetTitle className="text-white text-left text-xl">{t("common.menu")}</SheetTitle>
                   <SheetDescription className="text-white/70 text-left">
-                    Navigate through our pages
+                    {t("common.navigatePages")}
                   </SheetDescription>
                 </SheetHeader>
                 <nav className="px-4 pb-6 space-y-2 overflow-y-auto">
@@ -324,7 +324,7 @@ const Header = () => {
                         {t("header.forCommunity")}
                       </Link>
                       <Link to="/programs" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
-                        {language === 'ar' ? 'البرامج' : 'Programs'}
+                        {t("common.programs")}
                       </Link>
                     </div>
                   </div>
