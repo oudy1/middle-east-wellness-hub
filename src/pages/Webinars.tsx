@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Header from "@/components/Header";
+import WebinarSlidesViewer from "@/components/WebinarSlidesViewer";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -99,6 +100,9 @@ const Webinars = () => {
               </p>
             </div>
             
+            {/* Women's Health Slides Viewer */}
+            <WebinarSlidesViewer />
+
             {/* Webinar Cards */}
             {webinars.map((webinar) => (
               <div key={webinar.id} className="max-w-5xl mx-auto mb-16">

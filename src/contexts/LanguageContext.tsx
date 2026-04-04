@@ -1338,6 +1338,49 @@ const translations = {
     fa: "ضبط وبینار مقدمه ای بر تحقیقات ما را تماشا کنید: چگونه اولین نقش خود را بگیرید + اشتباهاتی که باید اجتناب کنید.",
     tr: "Araştırmaya Giriş web seminerimizin kaydını izleyin: İlk Rolünüzü Nasıl Alırsınız + Kaçınılması Gereken Hatalar."
   },
+  // Slides Viewer
+  "slides.title": {
+    en: "Women's Health Webinar Slides",
+    ar: "شرائح ندوة صحة المرأة",
+    ku: "سلایدەکانی وەبینارەکەی تەندروستی ژنان",
+    fa: "اسلایدهای وبینار سلامت زنان",
+    tr: "Kadın Sağlığı Web Semineri Slaytları"
+  },
+  "slides.subtitle": {
+    en: "Browse the slides from our Women's Health Webinar.",
+    ar: "تصفح شرائح ندوة صحة المرأة.",
+    ku: "سلایدەکانی وەبینارەکەی تەندروستی ژنان بگەڕێ.",
+    fa: "اسلایدهای وبینار سلامت زنان ما را مرور کنید.",
+    tr: "Kadın Sağlığı Web Seminerimizin slaytlarına göz atın."
+  },
+  "slides.posterAlt": {
+    en: "Women's Health Across Life Stages webinar poster",
+    ar: "ملصق ندوة صحة المرأة عبر مراحل الحياة",
+    ku: "پۆستەری وەبینارەکەی تەندروستی ژنان",
+    fa: "پوستر وبینار سلامت زنان در مراحل مختلف زندگی",
+    tr: "Yaşam Evrelerinde Kadın Sağlığı web semineri afişi"
+  },
+  "slides.downloadDeck": {
+    en: "Download Slides",
+    ar: "تحميل الشرائح",
+    ku: "سلایدەکان دابەزێنە",
+    fa: "دانلود اسلایدها",
+    tr: "Slaytları İndir"
+  },
+  "slides.embedFallback": {
+    en: "The slide viewer could not load. You can view the slides directly.",
+    ar: "تعذر تحميل عارض الشرائح. يمكنك عرض الشرائح مباشرة.",
+    ku: "پیشاندەری سلاید نەتوانرا بار بکرێت. دەتوانیت سلایدەکان ڕاستەوخۆ ببینیت.",
+    fa: "نمایشگر اسلاید بارگذاری نشد. می توانید اسلایدها را مستقیماً مشاهده کنید.",
+    tr: "Slayt görüntüleyici yüklenemedi. Slaytları doğrudan görüntüleyebilirsiniz."
+  },
+  "slides.openInNewTab": {
+    en: "Open in New Tab",
+    ar: "فتح في علامة تبويب جديدة",
+    ku: "لە تابێکی نوێ بکەرەوە",
+    fa: "باز کردن در تب جدید",
+    tr: "Yeni Sekmede Aç"
+  },
   // Events Section
   "events.recordedWebinar": {
     en: "Recorded Webinar",
