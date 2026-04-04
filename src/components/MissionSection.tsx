@@ -245,10 +245,10 @@ const MissionSection = () => {
       createInnerElements();
       
       // Add special featured phrases in larger size
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 5; i++) {
         const x = borderWidth + Math.random() * (frameWidth - borderWidth * 2);
         const y = borderWidth + Math.random() * (frameHeight - borderWidth * 2);
-        createCalligraphyElement(x, y, healthPhrases, 0.35, 24, 32, false);
+        createCalligraphyElement(x, y, healthPhrases, 0.25, 20, 26, false);
       }
     };
     
