@@ -15,26 +15,13 @@ type: feature
 - `content/weekly-topics.json` — weekly topic entries with image refs, imported by TopicOfTheWeekSection.tsx
 - `content/programs.json` — 4 partner programs, imported by Programs.tsx
 
-## Phase 3 (Planned)
-Content files:
-- `content/glossary.json`
-- `content/faq.json`
-- `content/site-settings.json`
-- `content/navigation.json`
-- `content/resources.json`
-- `content/chatbot-routes.json`
-- `content/healthcare-workers.json` (seed file for DB, not runtime)
+## Phase 3 (Done)
+- `content/navigation.json` — mainNav, footerNav, languages config (reference file, not yet wired into Header)
+- `content/glossary.json` — 4 bilingual health terms (OHIP, CAMH, IFHP, 988)
+- `content/faq.json` — 5 bilingual FAQ entries (general, healthcare, research)
+- `public/sitemap.xml` — 15 pages with priorities
+- `public/manifest.webmanifest` — standalone installability manifest
+- `public/robots.txt` — updated with sitemap reference
 
-Asset reorganization:
-- `/public/logo/shams-logo.png`
-- `/public/og/og-image.png`
-- `/public/favicons/*`
-- `/public/posters/*`
-- `/public/slides/*`
-- `/public/pdfs/*`
-- `/public/images/*`
-
-Web manifest & SEO:
-- `robots.txt` (exists)
-- `sitemap.xml`
-- `manifest.webmanifest`
+### Asset note
+`public/lovable-uploads/` is managed by Lovable and should not be reorganized. Files are referenced by UUID paths across the codebase.

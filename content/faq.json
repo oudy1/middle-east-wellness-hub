@@ -1,0 +1,42 @@
+[
+  {
+    "id": "what-is-shams",
+    "questionEn": "What is SHAMS?",
+    "questionAr": "ما هو مشروع شمس؟",
+    "answerEn": "SHAMS (Support for Health Advocacy in Middle Eastern Societies) is a youth-led Canadian non-profit providing health education, mentorship, research opportunities, and healthcare navigation for Middle Eastern and North African societies in Canada.",
+    "answerAr": "شمس (دعم التوعية الصحية في المجتمعات الشرق أوسطية) هو مشروع كندي غير ربحي يقوده الشباب يقدم التعليم الصحي والإرشاد وفرص البحث والتوجيه الصحي للمجتمعات الشرق أوسطية وشمال أفريقيا في كندا.",
+    "category": "general"
+  },
+  {
+    "id": "how-to-find-doctor",
+    "questionEn": "How do I find a doctor who speaks Arabic?",
+    "questionAr": "كيف أجد طبيباً يتحدث العربية؟",
+    "answerEn": "Use our Healthcare Worker Directory at /find-healthcare-workers. You can filter by city, language, and specialty to find providers who speak Arabic and other languages.",
+    "answerAr": "استخدم دليل مقدمي الرعاية الصحية على /find-healthcare-workers. يمكنك التصفية حسب المدينة واللغة والتخصص للعثور على مقدمي خدمات يتحدثون العربية ولغات أخرى.",
+    "category": "healthcare"
+  },
+  {
+    "id": "volunteer",
+    "questionEn": "How can I volunteer with SHAMS?",
+    "questionAr": "كيف يمكنني التطوع مع شمس؟",
+    "answerEn": "Visit our Volunteer page at /volunteer to fill out the application form. We welcome students, healthcare professionals, and community members.",
+    "answerAr": "قم بزيارة صفحة التطوع على /volunteer لملء نموذج الطلب. نرحب بالطلاب ومتخصصي الرعاية الصحية وأفراد المجتمع.",
+    "category": "general"
+  },
+  {
+    "id": "emergency",
+    "questionEn": "What should I do in a mental health emergency?",
+    "questionAr": "ماذا أفعل في حالة طوارئ نفسية؟",
+    "answerEn": "Call 911 for immediate danger. For mental health crisis support, call or text 988 (available 24/7). You can also visit CAMH (camh.ca) for resources.",
+    "answerAr": "اتصل بـ 911 في حالة الخطر الفوري. للحصول على دعم أزمات الصحة النفسية، اتصل أو أرسل رسالة نصية إلى 988 (متاح على مدار الساعة). يمكنك أيضاً زيارة CAMH (camh.ca) للموارد.",
+    "category": "healthcare"
+  },
+  {
+    "id": "research-participation",
+    "questionEn": "How can I participate in a research study?",
+    "questionAr": "كيف يمكنني المشاركة في دراسة بحثية؟",
+    "answerEn": "Visit our Research page at /research to see active studies. Each study card has eligibility criteria and a link to sign up or contact the research team.",
+    "answerAr": "قم بزيارة صفحة البحث على /research لرؤية الدراسات النشطة. تحتوي كل بطاقة دراسة على معايير الأهلية ورابط للتسجيل أو التواصل مع فريق البحث.",
+    "category": "research"
+  }
+]
