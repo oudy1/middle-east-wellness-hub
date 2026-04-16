@@ -1,0 +1,68 @@
+[
+  {
+    "id": "womens-health",
+    "youtubeId": "",
+    "en": {
+      "title": "Women's Health Across Life Stages",
+      "description": "A space to talk about hormones, healing, and support. This webinar focused on women's health topics relevant to Middle Eastern communities, including visible and invisible conditions, access to care, and culturally relevant health experiences.",
+      "speakers": ["Project SHAMS Health Team"],
+      "watchButton": "Watch Recording"
+    },
+    "ar": {
+      "title": "صحة المرأة عبر مراحل الحياة",
+      "description": "مساحة للحديث عن الهرمونات، التعافي، والدعم. ركزت هذه الندوة على مواضيع صحة المرأة ذات الصلة بالمجتمعات الشرق أوسطية، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية.",
+      "speakers": ["فريق مشروع شمس الصحي"],
+      "watchButton": "شاهد التسجيل"
+    },
+    "tags": ["Women's Health", "Hormones", "Community Health"],
+    "slidesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
+    "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf"
+  },
+  {
+    "id": "intro-research",
+    "youtubeId": "3q-R60RmeLI",
+    "en": {
+      "title": "Intro to Research: How to Get Your First Role + Mistakes to Avoid (SHAMS Webinar)",
+      "description": "Project SHAMS hosted a free Intro to Research webinar for students who want research experience but don't know where to start.\n\nIn this session, two researchers explain in clear, practical terms: what research looks like day-to-day, skills that matter early, common mistakes students make, how to land your first opportunity, and a live Q&A.",
+      "speakers": [
+        "Dr. Mahmoud El-Maklizi — University Health Network",
+        "Maha Khawaja — PhD Student, McMaster University"
+      ],
+      "watchButton": "Watch Recording"
+    },
+    "ar": {
+      "title": "مقدمة في البحث العلمي: كيف تحصل على أول فرصة + أخطاء يجب تجنبها (ندوة شمس)",
+      "description": "استضاف مشروع شمس ندوة مجانية حول مقدمة في البحث العلمي للطلاب الذين يرغبون في اكتساب خبرة بحثية لكن لا يعرفون من أين يبدأون.\n\nفي هذه الجلسة، يشرح باحثان بأسلوب عملي وواضح: كيف يبدو البحث يوميًا، المهارات المهمة في البداية، الأخطاء الشائعة، وكيفية الحصول على أول فرصة، مع جلسة أسئلة وأجوبة.",
+      "speakers": [
+        "الدكتور محمود المكليزي — شبكة الصحة الجامعية",
+        "مها خواجة — طالبة دكتوراه، جامعة ماكماستر"
+      ],
+      "watchButton": "شاهد التسجيل"
+    },
+    "tags": ["Research", "Students", "Career", "Q&A"]
+  },
+  {
+    "id": "nutrition-diabetes",
+    "youtubeId": "veBBeJx_3HI",
+    "date": "November 26, 2025 — 7:00 PM EST",
+    "en": {
+      "title": "East to West: Nutrition & Diabetes Post-Immigration",
+      "description": "Immigrating to a new country brings major changes to food habits, lifestyle, stress, and overall health. This webinar explores how Middle Eastern and Arab families can navigate diabetes management and healthy nutrition after settling in Canada. The session includes practical, culturally relevant tips with a Q&A segment.",
+      "speakers": [
+        "Dr. Muhammad Z. Shrayyef, Endocrinologist, Assistant Professor of Clinical Medicine — University of Toronto",
+        "Hiba Al-Masri, Registered Dietitian"
+      ],
+      "watchButton": "Watch Webinar"
+    },
+    "ar": {
+      "title": "من الشرق إلى الغرب: التغذية والسكري بعد الهجرة",
+      "description": "تغيّر الهجرة العادات الغذائية، مستوى الضغط، والبيئة الصحية. تقدم هذه الندوة شرحًا بسيطًا وعمليًا لإدارة السكري والتغذية الصحية بعد الانتقال إلى كندا، مع نصائح مناسبة للعائلات العربية والشرق أوسطية وفقرة للأسئلة والأجوبة.",
+      "speakers": [
+        "الدكتور محمد شريّف — استشاري الغدد الصماء، أستاذ مساعد بجامعة تورونتو",
+        "هيبا المصري — أخصائية تغذية مسجّلة"
+      ],
+      "watchButton": "شاهد الندوة"
+    },
+    "tags": ["Diabetes", "Nutrition", "Immigration", "Newcomer Health", "Middle Eastern Societies"]
+  }
+]
