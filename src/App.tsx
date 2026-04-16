@@ -20,6 +20,8 @@ import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
 import SupportUs from "@/pages/SupportUs";
 import Programs from "@/pages/Programs";
+import FAQ from "@/pages/FAQ";
+import Glossary from "@/pages/Glossary";
 import NotFound from "@/pages/NotFound";
 import ChatWidget from "@/components/chat/ChatWidget";
 import './App.css';
@@ -50,6 +52,8 @@ function App() {
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/glossary" element={<Glossary />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
