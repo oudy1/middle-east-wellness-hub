@@ -9,30 +9,19 @@ type: feature
 - `content/webinars.json` — 3 webinars with bilingual content, imported by Webinars page
 - `content/studies.json` — 4 studies with bilingual content, imported by studyData.ts
 
-## Phase 2 (Planned)
-Content files:
-- `content/researchers.json`
-- `content/team.json`
-- `content/weekly-topics.json`
-- `content/glossary.json`
-- `content/faq.json`
-- `content/site-settings.json`
-- `content/navigation.json`
-- `content/resources.json`
-- `content/programs.json`
-- `content/chatbot-routes.json`
-- `content/healthcare-workers.json` (seed file for DB, not runtime)
+## Phase 2 (Done)
+- `content/team.json` — affiliatedPhysicians + projectTeam, imported by TeamSection.tsx
+- `content/researchers.json` — 8 researchers with bilingual bios, imported by Research.tsx
+- `content/weekly-topics.json` — weekly topic entries with image refs, imported by TopicOfTheWeekSection.tsx
+- `content/programs.json` — 4 partner programs, imported by Programs.tsx
 
-Asset reorganization:
-- `/public/logo/shams-logo.png`
-- `/public/og/og-image.png`
-- `/public/favicons/*`
-- `/public/posters/*`
-- `/public/slides/*`
-- `/public/pdfs/*`
-- `/public/images/*`
+## Phase 3 (Done)
+- `content/navigation.json` — mainNav, footerNav, languages config (reference file, not yet wired into Header)
+- `content/glossary.json` — 4 bilingual health terms (OHIP, CAMH, IFHP, 988)
+- `content/faq.json` — 5 bilingual FAQ entries (general, healthcare, research)
+- `public/sitemap.xml` — 15 pages with priorities
+- `public/manifest.webmanifest` — standalone installability manifest
+- `public/robots.txt` — updated with sitemap reference
 
-Web manifest & SEO:
-- `robots.txt` (exists)
-- `sitemap.xml`
-- `manifest.webmanifest`
+### Asset note
+`public/lovable-uploads/` is managed by Lovable and should not be reorganized. Files are referenced by UUID paths across the codebase.
