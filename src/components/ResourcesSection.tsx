@@ -15,7 +15,7 @@ const ResourcesSection = () => {
       description: t("resources.researchPlatformDesc"),
       icon: <FileText className="h-10 w-10 text-white" />,
       color: "bg-healthTeal",
-      link: "/resources",
+      link: "/research",
       comingSoon: false
     },
     {
@@ -31,7 +31,7 @@ const ResourcesSection = () => {
       description: t("resources.webinarLibraryDesc"),
       icon: <Phone className="h-10 w-10 text-white" />,
       color: "bg-healthDarkBlue",
-      link: "/webinars",
+      link: "/recordings",
       comingSoon: false
     }
   ];

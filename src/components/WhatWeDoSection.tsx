@@ -23,7 +23,7 @@ const WhatWeDoSection = () => {
       icon: FlaskConical,
       title: t("whatWeDo.communityResearch"),
       description: t("whatWeDo.communityResearchDesc"),
-      link: "/resources"
+      link: "/research"
     }
   ];
   

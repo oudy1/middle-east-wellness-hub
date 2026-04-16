@@ -32,7 +32,7 @@ const UpcomingEventsSection = () => {
                 <Button 
                   size="default"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm mt-2"
-                  onClick={() => navigate('/webinars')}
+                  onClick={() => navigate('/recordings')}
                 >
                   <Play className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                   {t("events.watchNow")}

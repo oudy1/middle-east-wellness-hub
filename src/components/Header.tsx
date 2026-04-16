@@ -116,7 +116,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <Link to="/resources" className="hover:text-healthTeal transition-colors font-medium text-sm">
+            <Link to="/research" className="hover:text-healthTeal transition-colors font-medium text-sm">
               {t("header.forClinicians")}
             </Link>
             
@@ -140,7 +140,7 @@ const Header = () => {
                     {t("header.diseases")}
                   </Link>
                   <Link
-                    to="/webinars"
+                    to="/recordings"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setEducationMenuOpen(false)}
                   >
@@ -328,7 +328,7 @@ const Header = () => {
                       </Link>
                     </div>
                   </div>
-                  <Link to="/resources" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
+                  <Link to="/research" className="block py-4 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium border-b border-white/10 min-h-[56px] flex items-center touch-manipulation">
                     {t("header.forClinicians")}
                   </Link>
                   
@@ -339,7 +339,7 @@ const Header = () => {
                       <Link to="/diseases" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.diseases")}
                       </Link>
-                      <Link to="/webinars" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                      <Link to="/recordings" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.webinars")}
                       </Link>
                     </div>

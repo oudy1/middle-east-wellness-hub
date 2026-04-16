@@ -20,7 +20,8 @@ import {
   Wind,
   Stethoscope,
   FileText,
-  AlertTriangle
+  AlertTriangle,
+  GraduationCap
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -912,6 +913,81 @@ const Services = () => {
             </div>
           </section>
         )}
+
+        {/* Clinical Resources Section */}
+        <section id="resources" className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
+              {language === 'ar' ? 'التدريب المستمر والأدوات السريرية' : 'CME & Clinical Tools'}
+            </h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto text-center mb-6">
+              {language === 'ar' ? 'موارد للأطباء والمقيمين وطلاب الطب' : 'Resources for physicians, residents, and medical students'}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto mb-8">
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <GraduationCap className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h3 className="text-lg font-semibold mb-3">
+                  {language === 'ar' ? 'مركز سيناي للتعليم المستمر' : 'Sinai Health CME'}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {language === 'ar' ? 'برامج التعليم الطبي المستمر من مركز سيناي الصحي.' : 'Continuing medical education programs from Sinai Health.'}
+                </p>
+                <a href="https://www.sinaihealth.ca/education-and-training/continuing-education" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {language === 'ar' ? 'الوصول للتدريب' : 'Access Training'}
+                  </Button>
+                </a>
+              </Card>
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <GraduationCap className="h-10 w-10 text-destructive mx-auto mb-3" />
+                <h3 className="text-lg font-semibold mb-3">
+                  {language === 'ar' ? 'التعليم الطبي المستمر - كالغاري' : 'Calgary CME'}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {language === 'ar' ? 'برامج التعليم الطبي المستمر من جامعة كالغاري.' : 'Continuing medical education programs from the University of Calgary.'}
+                </p>
+                <a href="https://cumming.ucalgary.ca/cme/about/strategy" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button className="bg-destructive hover:bg-destructive/90 text-destructive-foreground">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {language === 'ar' ? 'عرض البرامج' : 'View Programs'}
+                  </Button>
+                </a>
+              </Card>
+            </div>
+
+            {/* Point-of-Care Templates */}
+            <div className="max-w-2xl mx-auto">
+              <Card className="hover:shadow-xl transition-shadow border-2 border-primary/20">
+                <CardHeader className="pb-2">
+                  <div className="flex flex-wrap gap-2 mb-1">
+                    <Badge variant="secondary" className="text-xs bg-primary/10 text-primary">{language === 'ar' ? 'قوالب' : 'Templates'}</Badge>
+                    <Badge variant="secondary" className="text-xs bg-foreground/10 text-foreground">{language === 'ar' ? 'المرضى الداخليين' : 'Inpatient'}</Badge>
+                  </div>
+                  <CardTitle className={`text-foreground text-base flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <FileText className="h-4 w-4 text-primary" />
+                    {language === 'ar' ? 'قوالب نقطة الرعاية' : 'Point-of-Care Templates'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className={`text-muted-foreground mb-3 text-sm ${isRTL ? 'text-right' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
+                    {language === 'ar' 
+                      ? 'قوالب للمشاكل السريرية الشائعة تشمل قوائم القبول، نماذج جمع التاريخ المرضي، التشخيص التفريقي، وعبارات التقييم والخطة.'
+                      : 'Templates for common clinical problems including admission checklists, HPI intakes, differentials, and A&P dotphrases.'}
+                  </p>
+                  <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer" className="inline-block">
+                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 text-sm">
+                      <ExternalLink className="h-4 w-4" />{language === 'ar' ? 'افتح القوالب' : 'Open templates'}
+                    </Button>
+                  </a>
+                  <p className={`text-xs text-muted-foreground mt-2 ${isRTL ? 'text-right' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
+                    {language === 'ar' ? 'SHAMS ليست منتسبة لهذا الموقع.' : 'SHAMS is not affiliated with this website.'}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
 
         {/* Footer note */}
         <section className="py-8 bg-healthLightGray">
