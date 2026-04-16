@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import glossaryData from "../../content/glossary.json";
+import { HighlightText } from "@/components/HighlightText";
 
 const categories = ["all", "healthcare-system", "mental-health", "research", "education", "conditions", "nutrition", "newcomer"] as const;
 
@@ -211,14 +212,23 @@ const Glossary = () => {
                     <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
                       <div className="flex items-baseline gap-3 flex-wrap">
                         <span className="text-xl font-bold text-primary">
-                          {isArabic ? item.termAr : item.termEn}
+                          <HighlightText
+                            text={isArabic ? item.termAr : item.termEn}
+                            query={searchQuery}
+                          />
                         </span>
                       </div>
                       <p className="text-foreground">
-                        {isArabic ? item.definitionAr : item.definitionEn}
+                        <HighlightText
+                          text={isArabic ? item.definitionAr : item.definitionEn}
+                          query={searchQuery}
+                        />
                       </p>
                       <p className="text-xs opacity-70 border-t pt-2 border-border">
-                        {isArabic ? item.definitionEn : item.definitionAr}
+                        <HighlightText
+                          text={isArabic ? item.definitionEn : item.definitionAr}
+                          query={searchQuery}
+                        />
                       </p>
                     </div>
                   ))}

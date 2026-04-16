@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import faqData from "../../content/faq.json";
+import { HighlightText } from "@/components/HighlightText";
 
 const categories = ["all", "general", "healthcare", "mental-health", "research", "newcomer"] as const;
 
@@ -144,12 +145,23 @@ const FAQ = () => {
                 className="border rounded-lg px-4 bg-card"
               >
                 <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
-                  {isArabic ? item.questionAr : item.questionEn}
+                  <HighlightText
+                    text={isArabic ? item.questionAr : item.questionEn}
+                    query={searchQuery}
+                  />
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pb-4 space-y-3">
-                  <p>{isArabic ? item.answerAr : item.answerEn}</p>
+                  <p>
+                    <HighlightText
+                      text={isArabic ? item.answerAr : item.answerEn}
+                      query={searchQuery}
+                    />
+                  </p>
                   <p className="text-xs opacity-70 border-t pt-2 border-border">
-                    {isArabic ? item.answerEn : item.answerAr}
+                    <HighlightText
+                      text={isArabic ? item.answerEn : item.answerAr}
+                      query={searchQuery}
+                    />
                   </p>
                 </AccordionContent>
               </AccordionItem>
