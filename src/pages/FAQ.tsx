@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
@@ -44,15 +44,27 @@ const FAQ = () => {
     })),
   };
 
+  useEffect(() => {
+    const scriptId = "faq-jsonld";
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(faqJsonLd);
+    return () => {
+      const existing = document.getElementById(scriptId);
+      if (existing) existing.remove();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
         title="FAQ - SHAMS"
         description="Frequently asked questions about SHAMS, health resources, and community services for Middle Eastern societies in Canada."
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Header />
 
