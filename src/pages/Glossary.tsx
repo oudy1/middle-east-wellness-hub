@@ -27,6 +27,38 @@ const Glossary = () => {
     ? glossaryData
     : glossaryData.filter((item) => item.category === activeCategory);
 
+  const glossaryJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "name": "SHAMS Health & Advocacy Glossary",
+    "description": "Bilingual (English/Arabic) glossary of health, healthcare system, and advocacy terms for Middle Eastern societies in Canada.",
+    "inLanguage": ["en", "ar"],
+    "hasDefinedTerm": glossaryData.map((item) => ({
+      "@type": "DefinedTerm",
+      "name": item.termEn,
+      "alternateName": item.termAr,
+      "description": item.definitionEn,
+      "inDefinedTermSet": "SHAMS Health & Advocacy Glossary",
+      "termCode": item.id,
+    })),
+  };
+
+  useEffect(() => {
+    const scriptId = "glossary-jsonld";
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(glossaryJsonLd);
+    return () => {
+      const existing = document.getElementById(scriptId);
+      if (existing) existing.remove();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
