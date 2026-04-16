@@ -28,7 +28,7 @@ const ResearchTeaserSection = () => {
         </div>
 
         <div className="text-center">
-          <Link to="/resources">
+          <Link to="/research">
             <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
               {t("research.viewAllStudies")}
             </Button>
