@@ -146,6 +146,20 @@ const Header = () => {
                   >
                     {t("header.webinars")}
                   </Link>
+                  <Link
+                    to="/faq"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
+                  >
+                    {t("footer.faq")}
+                  </Link>
+                  <Link
+                    to="/glossary"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setEducationMenuOpen(false)}
+                  >
+                    {t("common.glossary")}
+                  </Link>
                 </div>
               )}
             </div>
@@ -341,6 +355,12 @@ const Header = () => {
                       </Link>
                       <Link to="/recordings" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("header.webinars")}
+                      </Link>
+                      <Link to="/faq" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {t("footer.faq")}
+                      </Link>
+                      <Link to="/glossary" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {t("common.glossary")}
                       </Link>
                     </div>
                   </div>
