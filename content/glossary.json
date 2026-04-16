@@ -8,14 +8,6 @@
     "category": "healthcare-system"
   },
   {
-    "id": "camh",
-    "termEn": "CAMH",
-    "termAr": "CAMH",
-    "definitionEn": "Centre for Addiction and Mental Health. Canada's largest mental health teaching hospital, located in Toronto.",
-    "definitionAr": "مركز الإدمان والصحة النفسية. أكبر مستشفى تعليمي للصحة النفسية في كندا، يقع في تورنتو.",
-    "category": "mental-health"
-  },
-  {
     "id": "ifhp",
     "termEn": "IFHP",
     "termAr": "IFHP",
@@ -24,11 +16,131 @@
     "category": "healthcare-system"
   },
   {
-    "id": "rls",
-    "termEn": "Mental Health Crisis Line (988)",
-    "termAr": "خط أزمات الصحة النفسية (988)",
+    "id": "hcn",
+    "termEn": "Health Card Number",
+    "termAr": "رقم البطاقة الصحية",
+    "definitionEn": "A unique number on your provincial health card used to access publicly funded healthcare services across Canada.",
+    "definitionAr": "رقم فريد على بطاقتك الصحية الإقليمية يُستخدم للوصول إلى خدمات الرعاية الصحية الممولة من الحكومة في كندا.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "fht",
+    "termEn": "FHT (Family Health Team)",
+    "termAr": "فريق صحة الأسرة",
+    "definitionEn": "A group of family doctors, nurses, and other health professionals who work together to provide primary care in Ontario.",
+    "definitionAr": "مجموعة من أطباء الأسرة والممرضين وغيرهم من المتخصصين الصحيين الذين يعملون معا لتقديم الرعاية الأولية في أونتاريو.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "walk-in-clinic",
+    "termEn": "Walk-in Clinic",
+    "termAr": "عيادة بدون موعد",
+    "definitionEn": "A medical clinic that accepts patients without an appointment, typically for non-emergency issues. No referral needed.",
+    "definitionAr": "عيادة طبية تقبل المرضى بدون موعد مسبق، عادة للحالات غير الطارئة. لا تحتاج إلى إحالة.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "camh",
+    "termEn": "CAMH",
+    "termAr": "CAMH",
+    "definitionEn": "Centre for Addiction and Mental Health. Canada's largest mental health teaching hospital, located in Toronto.",
+    "definitionAr": "مركز الإدمان والصحة النفسية. أكبر مستشفى تعليمي للصحة النفسية في كندا، يقع في تورنتو.",
+    "category": "mental-health"
+  },
+  {
+    "id": "988-crisis",
+    "termEn": "988 Suicide & Crisis Helpline",
+    "termAr": "خط أزمات الانتحار 988",
     "definitionEn": "Canada's national three-digit number for people in crisis or thinking about suicide. Available 24/7 by phone or text.",
     "definitionAr": "الرقم الوطني الكندي المكون من ثلاثة أرقام للأشخاص في أزمة أو الذين يفكرون في الانتحار. متاح على مدار الساعة.",
     "category": "mental-health"
+  },
+  {
+    "id": "cbt",
+    "termEn": "CBT (Cognitive Behavioural Therapy)",
+    "termAr": "العلاج السلوكي المعرفي",
+    "definitionEn": "A common type of talk therapy that helps people identify and change negative thought patterns and behaviours. Often used for anxiety and depression.",
+    "definitionAr": "نوع شائع من العلاج بالكلام يساعد الأشخاص على تحديد وتغيير أنماط التفكير والسلوكيات السلبية. يُستخدم غالبا للقلق والاكتئاب.",
+    "category": "mental-health"
+  },
+  {
+    "id": "stigma",
+    "termEn": "Mental Health Stigma",
+    "termAr": "وصمة الصحة النفسية",
+    "definitionEn": "Negative attitudes or discrimination against people with mental health conditions. Reducing stigma encourages people to seek help without shame.",
+    "definitionAr": "المواقف السلبية أو التمييز ضد الأشخاص الذين يعانون من حالات صحية نفسية. تقليل الوصمة يشجع الناس على طلب المساعدة دون خجل.",
+    "category": "mental-health"
+  },
+  {
+    "id": "reb",
+    "termEn": "REB (Research Ethics Board)",
+    "termAr": "مجلس أخلاقيات البحث",
+    "definitionEn": "A committee that reviews research involving human participants to ensure ethical standards are met before a study can begin.",
+    "definitionAr": "لجنة تراجع الأبحاث التي تشمل مشاركين بشريين لضمان استيفاء المعايير الأخلاقية قبل بدء الدراسة.",
+    "category": "research"
+  },
+  {
+    "id": "informed-consent",
+    "termEn": "Informed Consent",
+    "termAr": "الموافقة المستنيرة",
+    "definitionEn": "The process of providing a patient or research participant with enough information to make a voluntary decision about treatment or study participation.",
+    "definitionAr": "عملية تزويد المريض أو المشارك في البحث بمعلومات كافية لاتخاذ قرار طوعي بشأن العلاج أو المشاركة في الدراسة.",
+    "category": "research"
+  },
+  {
+    "id": "clinical-trial",
+    "termEn": "Clinical Trial",
+    "termAr": "تجربة سريرية",
+    "definitionEn": "A research study that tests new medical treatments, drugs, or devices on human volunteers to determine safety and effectiveness.",
+    "definitionAr": "دراسة بحثية تختبر علاجات طبية أو أدوية أو أجهزة جديدة على متطوعين بشريين لتحديد سلامتها وفعاليتها.",
+    "category": "research"
+  },
+  {
+    "id": "cme",
+    "termEn": "CME (Continuing Medical Education)",
+    "termAr": "التعليم الطبي المستمر",
+    "definitionEn": "Ongoing professional development for physicians and healthcare providers to maintain and enhance their knowledge and clinical skills.",
+    "definitionAr": "التطوير المهني المستمر للأطباء ومقدمي الرعاية الصحية للحفاظ على معارفهم ومهاراتهم السريرية وتعزيزها.",
+    "category": "education"
+  },
+  {
+    "id": "cultural-competence",
+    "termEn": "Cultural Competence",
+    "termAr": "الكفاءة الثقافية",
+    "definitionEn": "The ability of healthcare providers to understand and respond to the cultural and linguistic needs of patients from diverse backgrounds.",
+    "definitionAr": "قدرة مقدمي الرعاية الصحية على فهم والاستجابة للاحتياجات الثقافية واللغوية للمرضى من خلفيات متنوعة.",
+    "category": "education"
+  },
+  {
+    "id": "diabetes",
+    "termEn": "Type 2 Diabetes",
+    "termAr": "السكري من النوع الثاني",
+    "definitionEn": "A chronic condition where the body does not use insulin properly, leading to high blood sugar. More prevalent in MENA populations due to genetic and dietary factors.",
+    "definitionAr": "حالة مزمنة لا يستخدم فيها الجسم الأنسولين بشكل صحيح، مما يؤدي إلى ارتفاع نسبة السكر في الدم. أكثر انتشارا في مجتمعات الشرق الأوسط وشمال أفريقيا بسبب عوامل وراثية وغذائية.",
+    "category": "conditions"
+  },
+  {
+    "id": "hypertension",
+    "termEn": "Hypertension (High Blood Pressure)",
+    "termAr": "ارتفاع ضغط الدم",
+    "definitionEn": "A condition where blood pressure in the arteries is persistently elevated. A major risk factor for heart disease and stroke.",
+    "definitionAr": "حالة يكون فيها ضغط الدم في الشرايين مرتفعا باستمرار. عامل خطر رئيسي لأمراض القلب والسكتة الدماغية.",
+    "category": "conditions"
+  },
+  {
+    "id": "settlement-services",
+    "termEn": "Settlement Services",
+    "termAr": "خدمات الاستقرار",
+    "definitionEn": "Government-funded programs that help newcomers and immigrants settle into life in Canada, including language classes, job support, and community connections.",
+    "definitionAr": "برامج ممولة من الحكومة تساعد القادمين الجدد والمهاجرين على الاستقرار في الحياة في كندا، بما في ذلك دروس اللغة ودعم التوظيف والروابط المجتمعية.",
+    "category": "newcomer"
+  },
+  {
+    "id": "pr-card",
+    "termEn": "PR Card (Permanent Resident Card)",
+    "termAr": "بطاقة الإقامة الدائمة",
+    "definitionEn": "An official document proving permanent resident status in Canada. Required to access many public services including provincial health insurance.",
+    "definitionAr": "وثيقة رسمية تثبت حالة الإقامة الدائمة في كندا. مطلوبة للوصول إلى العديد من الخدمات العامة بما في ذلك التأمين الصحي الإقليمي.",
+    "category": "newcomer"
   }
 ]
