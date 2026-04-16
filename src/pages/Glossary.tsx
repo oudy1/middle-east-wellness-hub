@@ -5,7 +5,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 import glossaryData from "../../content/glossary.json";
 
-const categories = ["all", "healthcare-system", "mental-health", "research", "education", "conditions", "newcomer"] as const;
+const categories = ["all", "healthcare-system", "mental-health", "research", "education", "conditions", "nutrition", "newcomer"] as const;
 
 const categoryLabels: Record<string, { en: string; ar: string }> = {
   all: { en: "All", ar: "الكل" },
@@ -14,6 +14,7 @@ const categoryLabels: Record<string, { en: string; ar: string }> = {
   research: { en: "Research", ar: "البحث" },
   education: { en: "Education", ar: "التعليم" },
   conditions: { en: "Conditions", ar: "الحالات الصحية" },
+  nutrition: { en: "Nutrition & Diet", ar: "التغذية والنظام الغذائي" },
   newcomer: { en: "Newcomers", ar: "القادمون الجدد" },
 };
 

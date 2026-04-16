@@ -32,6 +32,14 @@
     "category": "general"
   },
   {
+    "id": "donate",
+    "questionEn": "How can I donate to or support SHAMS?",
+    "questionAr": "كيف يمكنني التبرع لشمس أو دعمه؟",
+    "answerEn": "Visit our Support Us page at /support-us for information on how to contribute. You can also help by sharing our resources, volunteering, or connecting us with organizations in your community.",
+    "answerAr": "قم بزيارة صفحة ادعمنا على /support-us للحصول على معلومات حول كيفية المساهمة. يمكنك أيضا المساعدة من خلال مشاركة مواردنا أو التطوع أو ربطنا بمنظمات في مجتمعك.",
+    "category": "general"
+  },
+  {
     "id": "how-to-find-doctor",
     "questionEn": "How do I find a doctor who speaks Arabic?",
     "questionAr": "كيف أجد طبيبا يتحدث العربية؟",
@@ -64,6 +72,46 @@
     "category": "healthcare"
   },
   {
+    "id": "family-doctor-waitlist",
+    "questionEn": "How long does it take to get a family doctor in Ontario?",
+    "questionAr": "كم من الوقت يستغرق الحصول على طبيب عائلة في أونتاريو؟",
+    "answerEn": "Wait times vary by city and can range from weeks to over a year. Register with Health Care Connect (Ontario) to be matched with a provider. In the meantime, use walk-in clinics for non-urgent care.",
+    "answerAr": "تختلف أوقات الانتظار حسب المدينة ويمكن أن تتراوح من أسابيع إلى أكثر من سنة. سجّل في Health Care Connect (أونتاريو) ليتم ربطك بمقدم خدمة. في هذه الأثناء، استخدم العيادات بدون موعد للرعاية غير العاجلة.",
+    "category": "healthcare"
+  },
+  {
+    "id": "interpreter-hospital",
+    "questionEn": "Can I get an interpreter at the hospital?",
+    "questionAr": "هل يمكنني الحصول على مترجم في المستشفى؟",
+    "answerEn": "Yes. Most Canadian hospitals provide professional interpreter services at no cost. Ask the front desk or your nurse to arrange one. You have the right to understand your care in your preferred language.",
+    "answerAr": "نعم. توفر معظم المستشفيات الكندية خدمات ترجمة مهنية مجانا. اطلب من مكتب الاستقبال أو الممرض/ة ترتيب مترجم. لديك الحق في فهم رعايتك بلغتك المفضلة.",
+    "category": "healthcare"
+  },
+  {
+    "id": "mental-health-stigma",
+    "questionEn": "How can I talk to my family about mental health?",
+    "questionAr": "كيف يمكنني التحدث مع عائلتي عن الصحة النفسية؟",
+    "answerEn": "Start with small conversations using health-focused language rather than clinical terms. Frame it as taking care of overall well-being. CAMH and other organizations offer guides specifically designed for MENA families navigating mental health discussions.",
+    "answerAr": "ابدأ بمحادثات صغيرة باستخدام لغة تركز على الصحة بدلا من المصطلحات السريرية. قدّم الأمر على أنه اهتمام بالصحة العامة. تقدم CAMH ومنظمات أخرى أدلة مصممة خصيصا للعائلات من الشرق الأوسط وشمال أفريقيا حول مناقشات الصحة النفسية.",
+    "category": "mental-health"
+  },
+  {
+    "id": "therapy-options",
+    "questionEn": "What therapy options are available in Arabic?",
+    "questionAr": "ما خيارات العلاج النفسي المتاحة بالعربية؟",
+    "answerEn": "Several therapists in Ontario and other provinces offer services in Arabic. Check our Healthcare Worker Directory, or contact organizations like BLCC (blcc.ca) which provide culturally sensitive counselling for Arabic-speaking clients.",
+    "answerAr": "يقدم العديد من المعالجين النفسيين في أونتاريو ومقاطعات أخرى خدمات بالعربية. تحقق من دليل مقدمي الرعاية الصحية لدينا، أو تواصل مع منظمات مثل BLCC (blcc.ca) التي تقدم استشارات حساسة ثقافيا للعملاء الناطقين بالعربية.",
+    "category": "mental-health"
+  },
+  {
+    "id": "free-counselling",
+    "questionEn": "Is free counselling available for newcomers?",
+    "questionAr": "هل الاستشارات النفسية المجانية متاحة للقادمين الجدد؟",
+    "answerEn": "Yes. Programs like the Newcomer Mental Wellness Program and IFHP-funded counselling provide free short-term support. Visit our Programs page for links to these services.",
+    "answerAr": "نعم. توفر برامج مثل برنامج الصحة النفسية للقادمين الجدد والاستشارات الممولة من IFHP دعما مجانيا قصير المدى. قم بزيارة صفحة البرامج للحصول على روابط لهذه الخدمات.",
+    "category": "mental-health"
+  },
+  {
     "id": "research-participation",
     "questionEn": "How can I participate in a research study?",
     "questionAr": "كيف يمكنني المشاركة في دراسة بحثية؟",
@@ -80,6 +128,14 @@
     "category": "research"
   },
   {
+    "id": "research-compensation",
+    "questionEn": "Do research participants get paid?",
+    "questionAr": "هل يحصل المشاركون في الأبحاث على تعويض مالي؟",
+    "answerEn": "It depends on the study. Some offer financial compensation, gift cards, or transit tokens. Each study listing on our Research page specifies whether compensation is provided.",
+    "answerAr": "يعتمد ذلك على الدراسة. تقدم بعض الدراسات تعويضا ماليا أو بطاقات هدايا أو قسائم مواصلات. يحدد كل إعلان دراسة على صفحة الأبحاث ما إذا كان يتم تقديم تعويض.",
+    "category": "research"
+  },
+  {
     "id": "newcomer-health-coverage",
     "questionEn": "I just arrived in Canada. How do I get health coverage?",
     "questionAr": "وصلت للتو إلى كندا. كيف أحصل على تغطية صحية؟",
@@ -93,6 +149,22 @@
     "questionAr": "أين يمكنني العثور على خدمات دعم الاستقرار؟",
     "answerEn": "Many cities have settlement agencies that provide free help with housing, language classes, and employment. Visit our Services page for links to partner organizations in your area.",
     "answerAr": "تمتلك العديد من المدن وكالات استقرار توفر مساعدة مجانية في السكن ودروس اللغة والتوظيف. قم بزيارة صفحة الخدمات للحصول على روابط للمنظمات الشريكة في منطقتك.",
+    "category": "newcomer"
+  },
+  {
+    "id": "children-school-health",
+    "questionEn": "Does my child need vaccinations for school in Canada?",
+    "questionAr": "هل يحتاج طفلي إلى تطعيمات للمدرسة في كندا؟",
+    "answerEn": "Yes. Ontario requires proof of immunization for school-age children. Contact your local public health unit to review your child's records and get any missing vaccines at no cost.",
+    "answerAr": "نعم. تتطلب أونتاريو إثبات التطعيم للأطفال في سن المدرسة. تواصل مع وحدة الصحة العامة المحلية لمراجعة سجلات طفلك والحصول على أي لقاحات ناقصة مجانا.",
+    "category": "newcomer"
+  },
+  {
+    "id": "dental-coverage",
+    "questionEn": "Is dental care covered in Canada?",
+    "questionAr": "هل تغطية طب الأسنان مشمولة في كندا؟",
+    "answerEn": "Provincial health plans generally do not cover dental care. However, the Canadian Dental Care Plan (CDCP) provides coverage for eligible residents. Children under 12 may qualify for the Canada Dental Benefit. Some community health centres offer low-cost dental services.",
+    "answerAr": "لا تغطي الخطط الصحية الإقليمية عادة رعاية الأسنان. ومع ذلك، يوفر برنامج رعاية الأسنان الكندي (CDCP) تغطية للمقيمين المؤهلين. قد يتأهل الأطفال دون 12 سنة لمنفعة طب الأسنان الكندية. تقدم بعض مراكز الصحة المجتمعية خدمات أسنان منخفضة التكلفة.",
     "category": "newcomer"
   }
 ]

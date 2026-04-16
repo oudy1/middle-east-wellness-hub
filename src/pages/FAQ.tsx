@@ -11,12 +11,13 @@ import {
 } from "@/components/ui/accordion";
 import faqData from "../../content/faq.json";
 
-const categories = ["all", "general", "healthcare", "research", "newcomer"] as const;
+const categories = ["all", "general", "healthcare", "mental-health", "research", "newcomer"] as const;
 
 const categoryLabels: Record<string, { en: string; ar: string }> = {
   all: { en: "All", ar: "الكل" },
   general: { en: "General", ar: "عام" },
   healthcare: { en: "Healthcare", ar: "الرعاية الصحية" },
+  "mental-health": { en: "Mental Health", ar: "الصحة النفسية" },
   research: { en: "Research", ar: "البحث" },
   newcomer: { en: "Newcomers", ar: "القادمون الجدد" },
 };

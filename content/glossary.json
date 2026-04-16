@@ -40,6 +40,30 @@
     "category": "healthcare-system"
   },
   {
+    "id": "chc",
+    "termEn": "CHC (Community Health Centre)",
+    "termAr": "مركز الصحة المجتمعية",
+    "definitionEn": "A publicly funded clinic providing primary care, mental health support, and social services. Serves patients regardless of insurance status, including newcomers without OHIP.",
+    "definitionAr": "عيادة ممولة من الحكومة تقدم الرعاية الأولية ودعم الصحة النفسية والخدمات الاجتماعية. تخدم المرضى بغض النظر عن حالة التأمين، بما في ذلك القادمين الجدد بدون أوهيب.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "referral",
+    "termEn": "Referral",
+    "termAr": "إحالة طبية",
+    "definitionEn": "A request from your family doctor to see a specialist. In Canada, most specialists require a referral before they will accept you as a patient.",
+    "definitionAr": "طلب من طبيب العائلة لرؤية أخصائي. في كندا، يتطلب معظم الأخصائيين إحالة قبل قبولك كمريض.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "telehealth",
+    "termEn": "Telehealth Ontario",
+    "termAr": "الصحة عن بُعد في أونتاريو",
+    "definitionEn": "A free, confidential telephone service (1-866-797-0000) where registered nurses provide health advice 24/7 in over 300 languages.",
+    "definitionAr": "خدمة هاتفية مجانية وسرية (1-866-797-0000) حيث تقدم ممرضات مسجلات نصائح صحية على مدار الساعة بأكثر من 300 لغة.",
+    "category": "healthcare-system"
+  },
+  {
     "id": "camh",
     "termEn": "CAMH",
     "termAr": "CAMH",
@@ -72,6 +96,22 @@
     "category": "mental-health"
   },
   {
+    "id": "ptsd",
+    "termEn": "PTSD (Post-Traumatic Stress Disorder)",
+    "termAr": "اضطراب ما بعد الصدمة",
+    "definitionEn": "A mental health condition triggered by experiencing or witnessing a traumatic event. Symptoms include flashbacks, nightmares, and severe anxiety. Common among refugees and survivors of conflict.",
+    "definitionAr": "حالة صحية نفسية تنتج عن التعرض لحدث صادم أو مشاهدته. تشمل الأعراض استرجاع الذكريات والكوابيس والقلق الشديد. شائعة بين اللاجئين والناجين من النزاعات.",
+    "category": "mental-health"
+  },
+  {
+    "id": "anxiety",
+    "termEn": "Anxiety Disorder",
+    "termAr": "اضطراب القلق",
+    "definitionEn": "A group of mental health conditions characterized by excessive worry, fear, or nervousness that interferes with daily life. Treatable with therapy, medication, or both.",
+    "definitionAr": "مجموعة من الحالات النفسية تتميز بالقلق المفرط أو الخوف أو التوتر الذي يتداخل مع الحياة اليومية. قابلة للعلاج بالعلاج النفسي أو الأدوية أو كليهما.",
+    "category": "mental-health"
+  },
+  {
     "id": "reb",
     "termEn": "REB (Research Ethics Board)",
     "termAr": "مجلس أخلاقيات البحث",
@@ -96,6 +136,14 @@
     "category": "research"
   },
   {
+    "id": "peer-review",
+    "termEn": "Peer Review",
+    "termAr": "مراجعة الأقران",
+    "definitionEn": "The evaluation of a research paper by other experts in the same field before it is published. Ensures quality and accuracy of scientific findings.",
+    "definitionAr": "تقييم ورقة بحثية من قبل خبراء آخرين في نفس المجال قبل نشرها. يضمن جودة ودقة النتائج العلمية.",
+    "category": "research"
+  },
+  {
     "id": "cme",
     "termEn": "CME (Continuing Medical Education)",
     "termAr": "التعليم الطبي المستمر",
@@ -109,6 +157,22 @@
     "termAr": "الكفاءة الثقافية",
     "definitionEn": "The ability of healthcare providers to understand and respond to the cultural and linguistic needs of patients from diverse backgrounds.",
     "definitionAr": "قدرة مقدمي الرعاية الصحية على فهم والاستجابة للاحتياجات الثقافية واللغوية للمرضى من خلفيات متنوعة.",
+    "category": "education"
+  },
+  {
+    "id": "health-literacy",
+    "termEn": "Health Literacy",
+    "termAr": "المعرفة الصحية",
+    "definitionEn": "The ability to find, understand, and use health information to make informed decisions. Low health literacy is common among newcomers navigating an unfamiliar healthcare system.",
+    "definitionAr": "القدرة على العثور على المعلومات الصحية وفهمها واستخدامها لاتخاذ قرارات مستنيرة. انخفاض المعرفة الصحية شائع بين القادمين الجدد الذين يتعاملون مع نظام رعاية صحية غير مألوف.",
+    "category": "education"
+  },
+  {
+    "id": "sdoh",
+    "termEn": "Social Determinants of Health",
+    "termAr": "المحددات الاجتماعية للصحة",
+    "definitionEn": "Non-medical factors that influence health outcomes, such as income, education, housing, employment, and social support. Newcomers often face challenges across multiple determinants.",
+    "definitionAr": "العوامل غير الطبية التي تؤثر على النتائج الصحية، مثل الدخل والتعليم والسكن والتوظيف والدعم الاجتماعي. غالبا ما يواجه القادمون الجدد تحديات عبر محددات متعددة.",
     "category": "education"
   },
   {
@@ -128,6 +192,54 @@
     "category": "conditions"
   },
   {
+    "id": "thalassemia",
+    "termEn": "Thalassemia",
+    "termAr": "الثلاسيميا",
+    "definitionEn": "An inherited blood disorder common in Mediterranean and Middle Eastern populations where the body makes less hemoglobin than normal. Genetic screening is recommended for carriers.",
+    "definitionAr": "اضطراب دم وراثي شائع في مجتمعات البحر الأبيض المتوسط والشرق الأوسط حيث ينتج الجسم كمية أقل من الهيموغلوبين عن المعتاد. يُوصى بالفحص الجيني للحاملين.",
+    "category": "conditions"
+  },
+  {
+    "id": "vitamin-d",
+    "termEn": "Vitamin D Deficiency",
+    "termAr": "نقص فيتامين د",
+    "definitionEn": "A common condition in Canada, especially among newcomers from warmer climates. Low vitamin D can affect bone health, immunity, and mood. Supplementation is often recommended.",
+    "definitionAr": "حالة شائعة في كندا، خاصة بين القادمين الجدد من المناخات الأكثر دفئا. يمكن أن يؤثر انخفاض فيتامين د على صحة العظام والمناعة والمزاج. غالبا ما يُوصى بالمكملات.",
+    "category": "conditions"
+  },
+  {
+    "id": "gestational-diabetes",
+    "termEn": "Gestational Diabetes",
+    "termAr": "سكري الحمل",
+    "definitionEn": "Diabetes that develops during pregnancy. Women of Middle Eastern descent have higher risk. It usually resolves after delivery but increases future Type 2 diabetes risk.",
+    "definitionAr": "السكري الذي يتطور أثناء الحمل. النساء من أصول شرق أوسطية لديهن خطر أعلى. عادة ما يزول بعد الولادة لكنه يزيد من خطر الإصابة بالسكري من النوع الثاني مستقبلا.",
+    "category": "conditions"
+  },
+  {
+    "id": "halal-diet",
+    "termEn": "Halal Diet",
+    "termAr": "النظام الغذائي الحلال",
+    "definitionEn": "Food prepared according to Islamic dietary laws. In a healthcare setting, patients can request halal meals. Hospitals in major Canadian cities typically accommodate this.",
+    "definitionAr": "طعام محضّر وفقا لأحكام الشريعة الإسلامية الغذائية. في المستشفيات، يمكن للمرضى طلب وجبات حلال. تلبي المستشفيات في المدن الكندية الكبرى هذا الطلب عادة.",
+    "category": "nutrition"
+  },
+  {
+    "id": "ramadan-fasting",
+    "termEn": "Fasting & Medication (Ramadan)",
+    "termAr": "الصيام والأدوية (رمضان)",
+    "definitionEn": "During Ramadan, patients may need to adjust medication schedules. Consult your doctor before fasting, especially if you have diabetes, heart disease, or take regular medications.",
+    "definitionAr": "خلال شهر رمضان، قد يحتاج المرضى إلى تعديل مواعيد الأدوية. استشر طبيبك قبل الصيام، خاصة إذا كنت مصابا بالسكري أو أمراض القلب أو تتناول أدوية بانتظام.",
+    "category": "nutrition"
+  },
+  {
+    "id": "food-guide",
+    "termEn": "Canada's Food Guide",
+    "termAr": "دليل الغذاء الكندي",
+    "definitionEn": "Health Canada's official guide to healthy eating. Emphasizes fruits, vegetables, whole grains, and protein foods. Available in multiple languages including Arabic.",
+    "definitionAr": "الدليل الرسمي لوزارة الصحة الكندية للأكل الصحي. يركز على الفواكه والخضروات والحبوب الكاملة والأطعمة الغنية بالبروتين. متاح بعدة لغات بما في ذلك العربية.",
+    "category": "nutrition"
+  },
+  {
     "id": "settlement-services",
     "termEn": "Settlement Services",
     "termAr": "خدمات الاستقرار",
@@ -141,6 +253,22 @@
     "termAr": "بطاقة الإقامة الدائمة",
     "definitionEn": "An official document proving permanent resident status in Canada. Required to access many public services including provincial health insurance.",
     "definitionAr": "وثيقة رسمية تثبت حالة الإقامة الدائمة في كندا. مطلوبة للوصول إلى العديد من الخدمات العامة بما في ذلك التأمين الصحي الإقليمي.",
+    "category": "newcomer"
+  },
+  {
+    "id": "linc",
+    "termEn": "LINC (Language Instruction for Newcomers)",
+    "termAr": "تعليم اللغة للقادمين الجدد",
+    "definitionEn": "Free English or French language classes funded by the federal government for permanent residents and some other eligible newcomers. Classes also help with understanding the Canadian healthcare system.",
+    "definitionAr": "دروس مجانية في اللغة الإنجليزية أو الفرنسية ممولة من الحكومة الفيدرالية للمقيمين الدائمين وبعض القادمين الجدد المؤهلين. تساعد الدروس أيضا في فهم نظام الرعاية الصحية الكندي.",
+    "category": "newcomer"
+  },
+  {
+    "id": "cdcp",
+    "termEn": "CDCP (Canadian Dental Care Plan)",
+    "termAr": "خطة رعاية الأسنان الكندية",
+    "definitionEn": "A federal program providing dental coverage to eligible Canadian residents who do not have private dental insurance. Covers preventive and restorative dental services.",
+    "definitionAr": "برنامج فيدرالي يوفر تغطية طب الأسنان للمقيمين الكنديين المؤهلين الذين ليس لديهم تأمين أسنان خاص. يغطي خدمات طب الأسنان الوقائية والعلاجية.",
     "category": "newcomer"
   }
 ]
