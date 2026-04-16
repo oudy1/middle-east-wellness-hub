@@ -1,0 +1,50 @@
+[
+  {
+    "term": "OHIP",
+    "fullForm": "Ontario Health Insurance Plan",
+    "fullFormAr": "خطة التأمين الصحي في أونتاريو",
+    "definition": "Ontario's public health insurance program covering most medically necessary services for eligible residents.",
+    "definitionAr": "برنامج التأمين الصحي العام في أونتاريو الذي يغطي معظم الخدمات الطبية الضرورية للمقيمين المؤهلين.",
+    "category": "insurance"
+  },
+  {
+    "term": "CAMH",
+    "fullForm": "Centre for Addiction and Mental Health",
+    "fullFormAr": "مركز الإدمان والصحة النفسية",
+    "definition": "Canada's largest mental health teaching hospital, located in Toronto.",
+    "definitionAr": "أكبر مستشفى تعليمي للصحة النفسية في كندا، يقع في تورنتو.",
+    "category": "mental-health"
+  },
+  {
+    "term": "IFHP",
+    "fullForm": "Interim Federal Health Program",
+    "fullFormAr": "البرنامج الصحي الفيدرالي المؤقت",
+    "definition": "A federal program providing temporary health coverage to refugee claimants, resettled refugees, and certain other groups not yet eligible for provincial health insurance.",
+    "definitionAr": "برنامج فيدرالي يوفر تغطية صحية مؤقتة لطالبي اللجوء واللاجئين المعاد توطينهم وبعض الفئات الأخرى غير المؤهلة بعد للتأمين الصحي الإقليمي.",
+    "category": "insurance"
+  },
+  {
+    "term": "988",
+    "fullForm": "988 Suicide Crisis Helpline",
+    "fullFormAr": "خط مساعدة الأزمات والانتحار 988",
+    "definition": "Canada's national three-digit number for suicide prevention and emotional distress support, available 24/7 in English and French.",
+    "definitionAr": "الرقم الوطني الكندي المكون من ثلاثة أرقام للوقاية من الانتحار ودعم الضائقة العاطفية، متاح على مدار الساعة باللغتين الإنجليزية والفرنسية.",
+    "category": "crisis"
+  },
+  {
+    "term": "REB",
+    "fullForm": "Research Ethics Board",
+    "fullFormAr": "مجلس أخلاقيات البحث",
+    "definition": "A committee that reviews research involving human participants to ensure ethical standards are met.",
+    "definitionAr": "لجنة تراجع الأبحاث التي تشمل مشاركين بشريين لضمان استيفاء المعايير الأخلاقية.",
+    "category": "research"
+  },
+  {
+    "term": "CME",
+    "fullForm": "Continuing Medical Education",
+    "fullFormAr": "التعليم الطبي المستمر",
+    "definition": "Ongoing professional development activities for physicians and healthcare providers to maintain and enhance their knowledge and skills.",
+    "definitionAr": "أنشطة التطوير المهني المستمر للأطباء ومقدمي الرعاية الصحية للحفاظ على معارفهم ومهاراتهم وتعزيزها.",
+    "category": "education"
+  }
+]

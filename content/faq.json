@@ -1,0 +1,37 @@
+[
+  {
+    "question": "What is SHAMS?",
+    "questionAr": "ما هو شمس؟",
+    "answer": "SHAMS stands for Support for Health Advocacy in Middle Eastern Societies. We are a youth-led Canadian non-profit focused on health education, mentorship, and community research for MENA societies in Canada.",
+    "answerAr": "شمس هو اختصار لدعم الدعوة الصحية في مجتمعات الشرق الأوسط. نحن منظمة كندية غير ربحية يقودها الشباب وتركز على التثقيف الصحي والإرشاد والبحث المجتمعي لمجتمعات الشرق الأوسط وشمال أفريقيا في كندا.",
+    "category": "general"
+  },
+  {
+    "question": "How can I find a family physician who speaks Arabic?",
+    "questionAr": "كيف يمكنني العثور على طبيب عائلة يتحدث العربية؟",
+    "answer": "Visit our Find Healthcare Workers page and filter by language. Our directory includes physicians across Canadian cities who serve Arabic-speaking patients.",
+    "answerAr": "قم بزيارة صفحة البحث عن العاملين في الرعاية الصحية وقم بالتصفية حسب اللغة. يتضمن دليلنا أطباء في مدن كندية مختلفة يخدمون المرضى الناطقين بالعربية.",
+    "category": "healthcare"
+  },
+  {
+    "question": "Does SHAMS provide medical advice?",
+    "questionAr": "هل يقدم شمس استشارات طبية؟",
+    "answer": "No. SHAMS provides health education and connects you with resources, but we do not offer medical diagnoses or treatment. Always consult a licensed healthcare provider for personal medical concerns.",
+    "answerAr": "لا. يقدم شمس التثقيف الصحي ويربطك بالموارد، لكننا لا نقدم تشخيصات طبية أو علاجا. استشر دائما مقدم رعاية صحية مرخصا بشأن مخاوفك الطبية الشخصية.",
+    "category": "general"
+  },
+  {
+    "question": "How can I volunteer with SHAMS?",
+    "questionAr": "كيف يمكنني التطوع مع شمس؟",
+    "answer": "Visit our Volunteer page to fill out the application form. We welcome students, healthcare professionals, and community members who want to contribute.",
+    "answerAr": "قم بزيارة صفحة التطوع لملء نموذج الطلب. نرحب بالطلاب والمهنيين الصحيين وأفراد المجتمع الذين يرغبون في المساهمة.",
+    "category": "general"
+  },
+  {
+    "question": "How can I participate in a research study?",
+    "questionAr": "كيف يمكنني المشاركة في دراسة بحثية؟",
+    "answer": "Check our Research page for current studies recruiting participants. Each study listing includes eligibility criteria and contact information for the research team.",
+    "answerAr": "تحقق من صفحة الأبحاث لمعرفة الدراسات الحالية التي تبحث عن مشاركين. يتضمن كل إعلان دراسة معايير الأهلية ومعلومات الاتصال بفريق البحث.",
+    "category": "research"
+  }
+]
