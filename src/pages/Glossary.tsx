@@ -5,15 +5,12 @@ import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 import glossaryData from "../../content/glossary.json";
 
-const categories = ["all", "insurance", "mental-health", "crisis", "research", "education"] as const;
+const categories = ["all", "healthcare-system", "mental-health"] as const;
 
 const categoryLabels: Record<string, { en: string; ar: string }> = {
   all: { en: "All", ar: "الكل" },
-  insurance: { en: "Insurance", ar: "التأمين" },
+  "healthcare-system": { en: "Healthcare System", ar: "النظام الصحي" },
   "mental-health": { en: "Mental Health", ar: "الصحة النفسية" },
-  crisis: { en: "Crisis", ar: "الأزمات" },
-  research: { en: "Research", ar: "البحث" },
-  education: { en: "Education", ar: "التعليم" },
 };
 
 const Glossary = () => {
@@ -60,19 +57,18 @@ const Glossary = () => {
         </div>
 
         <div className="space-y-4">
-          {filtered.map((item, index) => (
-            <div key={index} className="border rounded-lg p-5 bg-card space-y-2">
+          {filtered.map((item) => (
+            <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
               <div className="flex items-baseline gap-3 flex-wrap">
-                <span className="text-xl font-bold text-primary">{item.term}</span>
-                <span className="text-sm text-muted-foreground">
-                  {isArabic ? item.fullFormAr : item.fullForm}
+                <span className="text-xl font-bold text-primary">
+                  {isArabic ? item.termAr : item.termEn}
                 </span>
               </div>
               <p className="text-foreground">
-                {isArabic ? item.definitionAr : item.definition}
+                {isArabic ? item.definitionAr : item.definitionEn}
               </p>
               <p className="text-xs opacity-70 border-t pt-2 border-border">
-                {isArabic ? item.definition : item.definitionAr}
+                {isArabic ? item.definitionEn : item.definitionAr}
               </p>
             </div>
           ))}

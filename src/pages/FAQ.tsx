@@ -64,19 +64,19 @@ const FAQ = () => {
         </div>
 
         <Accordion type="single" collapsible className="space-y-3">
-          {filtered.map((item, index) => (
+          {filtered.map((item) => (
             <AccordionItem
-              key={index}
-              value={`faq-${index}`}
+              key={item.id}
+              value={item.id}
               className="border rounded-lg px-4 bg-card"
             >
               <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
-                {isArabic ? item.questionAr : item.question}
+                {isArabic ? item.questionAr : item.questionEn}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground pb-4 space-y-3">
-                <p>{isArabic ? item.answerAr : item.answer}</p>
+                <p>{isArabic ? item.answerAr : item.answerEn}</p>
                 <p className="text-xs opacity-70 border-t pt-2 border-border">
-                  {isArabic ? item.answer : item.answerAr}
+                  {isArabic ? item.answerEn : item.answerAr}
                 </p>
               </AccordionContent>
             </AccordionItem>
