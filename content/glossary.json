@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ohip",
+    "termEn": "OHIP",
+    "termAr": "أوهيب",
+    "definitionEn": "Ontario Health Insurance Plan. Ontario's publicly funded health insurance covering medically necessary services for eligible residents.",
+    "definitionAr": "خطة التأمين الصحي في أونتاريو. تأمين صحي ممول من الحكومة يغطي الخدمات الطبية الضرورية للمقيمين المؤهلين.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "camh",
+    "termEn": "CAMH",
+    "termAr": "CAMH",
+    "definitionEn": "Centre for Addiction and Mental Health. Canada's largest mental health teaching hospital, located in Toronto.",
+    "definitionAr": "مركز الإدمان والصحة النفسية. أكبر مستشفى تعليمي للصحة النفسية في كندا، يقع في تورنتو.",
+    "category": "mental-health"
+  },
+  {
+    "id": "ifhp",
+    "termEn": "IFHP",
+    "termAr": "IFHP",
+    "definitionEn": "Interim Federal Health Program. Provides temporary health-care coverage to eligible refugees, refugee claimants, and other protected persons.",
+    "definitionAr": "برنامج الصحة الفيدرالي المؤقت. يوفر تغطية صحية مؤقتة للاجئين المؤهلين وطالبي اللجوء والأشخاص المحميين.",
+    "category": "healthcare-system"
+  },
+  {
+    "id": "rls",
+    "termEn": "Mental Health Crisis Line (988)",
+    "termAr": "خط أزمات الصحة النفسية (988)",
+    "definitionEn": "Canada's national three-digit number for people in crisis or thinking about suicide. Available 24/7 by phone or text.",
+    "definitionAr": "الرقم الوطني الكندي المكون من ثلاثة أرقام للأشخاص في أزمة أو الذين يفكرون في الانتحار. متاح على مدار الساعة.",
+    "category": "mental-health"
+  }
+]
