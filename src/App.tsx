@@ -6,6 +6,7 @@ import Index from "@/pages/Index";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
 import Resources from "@/pages/Resources";
+import Research from "@/pages/Research";
 import Diseases from "@/pages/Diseases";
 import Webinars from "@/pages/Webinars";
 import PhysicianDirectory from "@/pages/PhysicianDirectory";
@@ -33,7 +34,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/research" element={<Research />} />
             <Route path="/diseases" element={<Diseases />} />
+            <Route path="/recordings" element={<Webinars />} />
             <Route path="/webinars" element={<Webinars />} />
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
             <Route path="/family-physician" element={<FamilyPhysician />} />

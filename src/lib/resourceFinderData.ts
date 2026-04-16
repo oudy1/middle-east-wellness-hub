@@ -103,7 +103,7 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'الأبحاث',
     keywords_en: ['research', 'study', 'RA', 'research assistant', 'clinical trial', 'survey', 'participate', 'academic'],
     keywords_ar: ['بحث', 'أبحاث', 'دراسة', 'مساعد بحث', 'تجربة سريرية', 'استبيان', 'مشاركة', 'أكاديمي'],
-    url: '/resources',
+    url: '/research',
     category: 'research',
     anchor: 'research'
   },
@@ -115,7 +115,7 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'الفعاليات والتسجيلات',
     keywords_en: ['event', 'events', 'webinar', 'recording', 'workshop', 'seminar', 'lecture', 'video', 'watch'],
     keywords_ar: ['فعالية', 'فعاليات', 'ندوة', 'تسجيل', 'ورشة', 'محاضرة', 'فيديو', 'مشاهدة'],
-    url: '/webinars',
+    url: '/recordings',
     category: 'events'
   },
 

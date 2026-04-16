@@ -36,7 +36,7 @@ const ServicesSection = () => {
       description: t("services.webinarsDesc"),
       icon: <Phone className="h-10 w-10 text-white" />,
       color: "bg-healthDarkBlue",
-      link: "/webinars"
+      link: "/recordings"
     },
     {
       title: t("services.physicianDirectory"),
