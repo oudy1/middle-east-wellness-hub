@@ -31,11 +31,28 @@ const FAQ = () => {
     ? faqData
     : faqData.filter((item) => item.category === activeCategory);
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map((item) => ({
+      "@type": "Question",
+      "name": item.questionEn,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answerEn,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
         title="FAQ - SHAMS"
         description="Frequently asked questions about SHAMS, health resources, and community services for Middle Eastern societies in Canada."
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Header />
 
