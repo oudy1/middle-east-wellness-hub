@@ -81,8 +81,8 @@ Format: [Button Text](/route)
 Main pages:
 - /find-healthcare-workers - Search for doctors and providers
 - /services - Educational materials and resources
-- /resources - Research hub and studies
-- /webinars - Recorded events and webinars
+- /research - Research hub and studies
+- /recordings - Recorded events and webinars
 - /contact - Contact SHAMS team
 - /about - About SHAMS
 - /volunteer - Volunteer opportunities
@@ -92,7 +92,7 @@ Main pages:
 With anchors:
 - /services#educational-materials - Educational materials
 - /services#topic-request - Suggest a topic
-- /resources#research - Research section
+- /research#studies - Active research studies
 
 ### HEALTHCARE WORKER SEARCH
 When user asks for a doctor, Arab doctor, family physician, therapist, etc:
@@ -108,7 +108,7 @@ User asks "find resources" or "I need info":
 "Sure! Use the quick links below.
 
 [Educational Materials](/services)
-[Watch Recordings](/webinars)
+[Watch Recordings](/recordings)
 [Find Healthcare Workers](/find-healthcare-workers)"
 
 User asks "I want to contact you":
