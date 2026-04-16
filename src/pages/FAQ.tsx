@@ -138,9 +138,10 @@ const FAQ = () => {
           </div>
         ) : (
           <Accordion
+            key={normalizedQuery}
             type="single"
             collapsible
-            value={normalizedQuery && filtered.length > 0 ? filtered[0].id : undefined}
+            defaultValue={normalizedQuery && filtered.length > 0 ? filtered[0].id : undefined}
             className="space-y-3"
           >
             {filtered.map((item) => (
