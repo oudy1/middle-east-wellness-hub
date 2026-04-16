@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Accordion,
