@@ -28,10 +28,20 @@ const FAQ = () => {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filtered = activeCategory === "all"
-    ? faqData
-    : faqData.filter((item) => item.category === activeCategory);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filtered = faqData.filter((item) => {
+    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+    if (!matchesCategory) return false;
+    if (!normalizedQuery) return true;
+    return (
+      item.questionEn.toLowerCase().includes(normalizedQuery) ||
+      item.questionAr.toLowerCase().includes(normalizedQuery) ||
+      item.answerEn.toLowerCase().includes(normalizedQuery) ||
+      item.answerAr.toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   const faqJsonLd = {
     "@context": "https://schema.org",
