@@ -1,0 +1,133 @@
+{
+  "affiliatedPhysicians": [
+    {
+      "name": "Dr. Raed Hawa",
+      "roleEn": "Affiliated Physician",
+      "roleAr": "طبيب منتسب",
+      "specializationEn": "Consultation liaison psychiatry, sleep medicine and obesity medicine",
+      "specializationAr": "الطب النفسي الاستشاري، طب النوم وطب السمنة"
+    }
+  ],
+  "projectTeam": [
+    {
+      "name": "Mahmoud Noweir",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Founder and strategic leadership",
+      "specializationAr": "المؤسس والقيادة الاستراتيجية",
+      "tags": ["Leadership"]
+    },
+    {
+      "name": "Sofia Sarwary",
+      "roleEn": "Project Manager",
+      "roleAr": "مدير المشروع",
+      "specializationEn": "Project Management",
+      "specializationAr": "إدارة المشروع",
+      "tags": ["Project Management"]
+    },
+    {
+      "name": "Amr Al Masri",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Events",
+      "specializationAr": "الفعاليات",
+      "tags": ["Events"]
+    },
+    {
+      "name": "Hassan Sheather",
+      "roleEn": "Research & Outreach",
+      "roleAr": "البحث والتواصل",
+      "specializationEn": "Research and community outreach",
+      "specializationAr": "البحث والتواصل المجتمعي",
+      "tags": ["Research", "Outreach"]
+    },
+    {
+      "name": "Darah Freije",
+      "roleEn": "Outreach",
+      "roleAr": "التواصل المجتمعي",
+      "specializationEn": "Community outreach",
+      "specializationAr": "التواصل المجتمعي",
+      "tags": ["Outreach"]
+    },
+    {
+      "name": "Abdullah Azzawi",
+      "roleEn": "Research & Educational Materials",
+      "roleAr": "البحث والمواد التعليمية",
+      "specializationEn": "Research and educational content development",
+      "specializationAr": "البحث وتطوير المحتوى التعليمي",
+      "tags": ["Research", "Education"]
+    },
+    {
+      "name": "Alanoud",
+      "roleEn": "Graphic Designer",
+      "roleAr": "مصممة جرافيك",
+      "specializationEn": "Visual design and branding",
+      "specializationAr": "التصميم البصري والهوية",
+      "tags": ["Design"]
+    },
+    {
+      "name": "Karim Sahlab",
+      "roleEn": "Research & Social Media",
+      "roleAr": "البحث ووسائل التواصل الاجتماعي",
+      "specializationEn": "Research and social media management",
+      "specializationAr": "البحث وإدارة وسائل التواصل الاجتماعي",
+      "tags": ["Research", "Social Media"]
+    },
+    {
+      "name": "Marta Mhanna",
+      "roleEn": "Research & Social Media",
+      "roleAr": "البحث ووسائل التواصل الاجتماعي",
+      "specializationEn": "Research and social media management",
+      "specializationAr": "البحث وإدارة وسائل التواصل الاجتماعي",
+      "tags": ["Research", "Social Media"]
+    },
+    {
+      "name": "Mariam Ihab",
+      "roleEn": "Videography",
+      "roleAr": "التصوير الفيديو",
+      "specializationEn": "Video production and content creation",
+      "specializationAr": "إنتاج الفيديو وإنشاء المحتوى",
+      "tags": ["Social Media", "Design"]
+    },
+    {
+      "name": "Lodi Sinanios",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Technology and digital initiatives",
+      "specializationAr": "التكنولوجيا والمبادرات الرقمية",
+      "tags": ["Technology"]
+    },
+    {
+      "name": "Mousa El-Sururi",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Community partnerships and engagement and research",
+      "specializationAr": "الشراكات المجتمعية والمشاركة والبحث",
+      "tags": ["Outreach", "Research"]
+    },
+    {
+      "name": "Sarah Durani",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Research and community engagement",
+      "specializationAr": "البحث والمشاركة المجتمعية",
+      "tags": ["Research", "Outreach"]
+    },
+    {
+      "name": "Riad Sankari",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Healthcare advocacy and outreach",
+      "specializationAr": "الدعوة الصحية والتوعية",
+      "tags": ["Outreach"]
+    },
+    {
+      "name": "Saif Arabiat",
+      "roleEn": "Team Member",
+      "roleAr": "عضو الفريق",
+      "specializationEn": "Digital health and innovation",
+      "specializationAr": "الصحة الرقمية والابتكار",
+      "tags": ["Technology"]
+    }
+  ]
+}
