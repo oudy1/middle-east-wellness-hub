@@ -39,6 +39,42 @@ const Glossary = () => {
     );
   });
 
+  // Alphabet jump bar setup
+  const englishAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const arabicAlphabet = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي".split("");
+  const alphabet = isArabic ? arabicAlphabet : englishAlphabet;
+
+  const getFirstLetter = (item: typeof glossaryData[number]) => {
+    const term = isArabic ? item.termAr : item.termEn;
+    return (term?.trim().charAt(0) || "#").toUpperCase();
+  };
+
+  // Sort filtered terms alphabetically for the active language
+  const sortedFiltered = [...filtered].sort((a, b) => {
+    const aTerm = isArabic ? a.termAr : a.termEn;
+    const bTerm = isArabic ? b.termAr : b.termEn;
+    return aTerm.localeCompare(bTerm, isArabic ? "ar" : "en");
+  });
+
+  // Group by first letter
+  const groupedByLetter = sortedFiltered.reduce<Record<string, typeof glossaryData>>((acc, item) => {
+    const letter = getFirstLetter(item);
+    if (!acc[letter]) acc[letter] = [];
+    acc[letter].push(item);
+    return acc;
+  }, {});
+
+  const availableLetters = new Set(Object.keys(groupedByLetter));
+
+  const scrollToLetter = (letter: string) => {
+    const el = document.getElementById(`letter-${letter}`);
+    if (el) {
+      const yOffset = -80;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const glossaryJsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
