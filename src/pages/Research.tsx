@@ -493,21 +493,73 @@ const Research = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 max-w-7xl mx-auto">
-              <ResearcherCard nameEn="Jesus (Jesse) Chavarria, PhD" nameAr="د. خيسوس (جيسي) تشافارّيا" roleEn="Assistant Professor, Clinical Psychology" roleAr="أستاذ مساعد، علم النفس السريري" orgEn="Western University" orgAr="جامعة ويسترن" bioEn="Studies risk factors and mechanisms contributing to substance use disorders. Uses clinical and quantitative methods to identify targets for intervention." bioAr="يدرس العوامل والآليات التي تسهم في اضطرابات تعاطي المواد. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل." email="jchavarr@uwo.ca" locationEn="London, Ontario, Canada" locationAr="لندن، أونتاريو، كندا" tags={isAr ? ['تعاطي المواد', 'الإدمان', 'آليات الخطر'] : ['Substance Use', 'Addiction', 'Risk Mechanisms']} id="chavarria" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? '🏛️ الانتماءات:' : '🏛️ Affiliations:'}</p><p className="text-xs text-muted-foreground">{isAr ? 'قسم علم النفس، جامعة ويسترن' : 'Department of Psychology, Western University'}</p><p className="text-xs text-muted-foreground">{isAr ? 'معهد أبحاث سياسات الصحة النفسية، CAMH' : 'Institute for Mental Health Policy Research, CAMH'}</p></div>} isAr={isAr} />
+              {researchersData.map((r) => {
+                const iconMap: Record<string, React.ReactNode> = {
+                  graduation: <GraduationCap className="h-10 w-10 text-white" />,
+                  flask: <FlaskConical className="h-10 w-10 text-white" />,
+                  brain: <Brain className="h-10 w-10 text-white" />,
+                };
+                const expandedContent = r.expandedContent ? (
+                  <div className="space-y-2">
+                    {('affiliationsEn' in r.expandedContent) && (
+                      <>
+                        <p className="text-xs text-muted-foreground">{isAr ? '🏛️ الانتماءات:' : '🏛️ Affiliations:'}</p>
+                        {(isAr ? (r.expandedContent as any).affiliationsAr : (r.expandedContent as any).affiliationsEn)?.map((a: string, i: number) => (
+                          <p key={i} className="text-xs text-muted-foreground">{a}</p>
+                        ))}
+                      </>
+                    )}
+                    {('experienceEn' in r.expandedContent) && (
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <p className="text-xs text-muted-foreground">{isAr ? 'الخبرة' : 'Experience'}</p>
+                          <p className="text-xs font-semibold">{isAr ? (r.expandedContent as any).experienceAr : (r.expandedContent as any).experienceEn}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">{isAr ? 'اللغات' : 'Languages'}</p>
+                          <p className="text-xs font-semibold">{isAr ? (r.expandedContent as any).languagesAr : (r.expandedContent as any).languagesEn}</p>
+                        </div>
+                      </div>
+                    )}
+                    {('researchAreasEn' in r.expandedContent) && (
+                      <>
+                        <p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p>
+                        <p className="text-xs text-muted-foreground">{isAr ? (r.expandedContent as any).researchAreasAr : (r.expandedContent as any).researchAreasEn}</p>
+                        {(r.expandedContent as any).websiteUrl && (
+                          <a href={(r.expandedContent as any).websiteUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1">
+                            <ExternalLink className="h-3 w-3" /> {isAr ? 'موقع البحث' : 'Research Website'}
+                          </a>
+                        )}
+                      </>
+                    )}
+                  </div>
+                ) : undefined;
 
-              <ResearcherCard nameEn="Menna Komeiha" nameAr="منة قميحة" roleEn="Researcher" roleAr="باحثة" orgEn="Health Equity Research" orgAr="بحث المساواة الصحية" bioEn="Health equity researcher specializing in dentistry and applied health sciences. Focuses on digital health and patient-centered care." bioAr="باحثة في المساواة الصحية متخصصة في طب الأسنان والعلوم الصحية التطبيقية." email="komeiham@mcmaster.ca" tags={[]} id="menna" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<FlaskConical className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><div className="grid grid-cols-2 gap-2"><div><p className="text-xs text-muted-foreground">{isAr ? 'الخبرة' : 'Experience'}</p><p className="text-xs font-semibold">{isAr ? '٤ سنوات' : '4 years'}</p></div><div><p className="text-xs text-muted-foreground">{isAr ? 'اللغات' : 'Languages'}</p><p className="text-xs font-semibold">{isAr ? 'العربية، الإنجليزية' : 'Arabic, English'}</p></div></div></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Mahmoud El-Maklizi" nameAr="محمود المقلزي" roleEn="Postdoctoral Fellow" roleAr="باحث ما بعد الدكتوراه" orgEn="TGHRI, UHN" orgAr="TGHRI, UHN" bioEn="Researcher at Toronto General Hospital Research Institute specializing in immunology. Studies regulatory plasma cells." bioAr="باحث في معهد أبحاث مستشفى تورونتو العام متخصص في علم المناعة." email={undefined} locationEn="Toronto, Ontario" locationAr="تورونتو، أونتاريو" tags={[]} id="mahmoud" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthPurple" icon={<FlaskConical className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Delaney Glass" nameAr="د. ديلاني غلاس" roleEn="Assistant Professor" roleAr="أستاذ مساعد" orgEn="University of Toronto" orgAr="جامعة تورنتو" bioEn="Medical and biocultural anthropologist specializing in adolescent health and Arab diaspora." bioAr="عالمة أنثروبولوجيا طبية وبيولوجية متخصصة في صحة المراهقين والشتات العربي." email="delaney.glass@utoronto.ca" tags={isAr ? ['الأنثروبولوجيا', 'الصحة العامة'] : ['Anthropology', 'Public Health']} id="delaney" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Emine Fidan Elcioglu" nameAr="د. إمين فيدان إلسيوغلو" roleEn="Associate Professor" roleAr="أستاذ مشارك" orgEn="Sociology, U of T" orgAr="علم الاجتماع، جامعة تورنتو" bioEn="Sociology professor specializing in immigration politics, race, and ethnicity studies." bioAr="أستاذ علم الاجتماع متخصص في سياسات الهجرة ودراسات العرق والإثنية." email={undefined} tags={[]} id="emine" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Rania Salem" nameAr="د. رانيا سالم" roleEn="Associate Professor" roleAr="أستاذ مشارك" orgEn="Sociology, U of T" orgAr="علم الاجتماع، جامعة تورنتو" bioEn="Sociology professor specializing in families, gender, and Middle East studies." bioAr="أستاذ علم الاجتماع متخصص في الأسرة والنوع الاجتماعي ودراسات الشرق الأوسط." email={undefined} tags={isAr ? ['الأسرة', 'النوع الاجتماعي', 'الشرق الأوسط'] : ['Families', 'Gender', 'Middle East']} id="rania" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthPurple" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Ryan Persram" nameAr="د. ريان بيرسرام" roleEn="Assistant Professor" roleAr="أستاذ مساعد" orgEn="Toronto Metropolitan University" orgAr="جامعة تورنتو متروبوليتان" bioEn="Developmental psychology researcher studying youth interpersonal relationships and how sibling, peer, and romantic experiences shape adolescent development and mental health." bioAr="باحث في علم النفس التنموي يدرس العلاقات الشخصية للشباب وكيف تشكل تجارب الأشقاء والأقران والعلاقات العاطفية نمو المراهقين وصحتهم النفسية." email="ryan.persram@torontomu.ca" tags={isAr ? ['علم النفس التنموي', 'علاقات الشباب'] : ['Developmental Psychology', 'Youth Relationships']} id="persram" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p><p className="text-xs text-muted-foreground">{isAr ? 'علم النفس التنموي، علاقات المراهقين، الأشقاء، الأقران، الصداقات، العلاقات العاطفية، التكيف النفسي الاجتماعي' : 'Developmental psychology, adolescent relationships, sibling relationships, peer relationships, friendships, romantic relationships, psychosocial adjustment'}</p><a href="http://www.ryanjpersram.ca" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1"><ExternalLink className="h-3 w-3" /> {isAr ? 'موقع البحث' : 'Research Website'}</a></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Jason Chung, M.Sc." nameAr="جيسون تشانغ" roleEn="PhD Candidate" roleAr="طالب دكتوراه" orgEn="Clinical Science & Psychopathology" orgAr="علم النفس الإكلينيكي وعِلم الاعتلال النفسي" bioEn="Self-injury, substance use, suicide, and eating pathology, especially among racialized and LGBTQ+ populations." bioAr="إيذاء النفس، تعاطي المواد، الانتحار، واضطرابات الأكل، مع التركيز على الفئات المُهمَّشة." email="jchun264@uwo.ca" tags={isAr ? ['الصحة النفسية', 'المساواة'] : ['Mental Health', 'Equity']} id="jason" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<Brain className="h-10 w-10 text-white" />} isAr={isAr} />
+                return (
+                  <ResearcherCard
+                    key={r.id}
+                    nameEn={r.nameEn}
+                    nameAr={r.nameAr}
+                    roleEn={r.roleEn}
+                    roleAr={r.roleAr}
+                    orgEn={r.orgEn}
+                    orgAr={r.orgAr}
+                    bioEn={r.bioEn}
+                    bioAr={r.bioAr}
+                    email={r.email}
+                    locationEn={r.locationEn}
+                    locationAr={r.locationAr}
+                    tags={isAr ? r.tagsAr : r.tagsEn}
+                    id={r.id}
+                    expandedResearcher={expandedResearcher}
+                    toggleResearcher={toggleResearcher}
+                    colorAccent={r.colorAccent}
+                    icon={iconMap[r.iconType] || iconMap.graduation}
+                    expandedContent={expandedContent}
+                    isAr={isAr}
+                  />
+                );
+              })}
             </div>
           </div>
         </section>
