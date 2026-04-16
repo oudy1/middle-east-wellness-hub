@@ -24,10 +24,20 @@ const Glossary = () => {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filtered = activeCategory === "all"
-    ? glossaryData
-    : glossaryData.filter((item) => item.category === activeCategory);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filtered = glossaryData.filter((item) => {
+    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+    if (!matchesCategory) return false;
+    if (!normalizedQuery) return true;
+    return (
+      item.termEn.toLowerCase().includes(normalizedQuery) ||
+      item.termAr.toLowerCase().includes(normalizedQuery) ||
+      item.definitionEn.toLowerCase().includes(normalizedQuery) ||
+      item.definitionAr.toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   const glossaryJsonLd = {
     "@context": "https://schema.org",
