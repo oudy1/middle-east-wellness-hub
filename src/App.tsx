@@ -51,6 +51,7 @@ function App() {
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
