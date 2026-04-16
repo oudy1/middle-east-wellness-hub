@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Accordion,
@@ -26,10 +28,20 @@ const FAQ = () => {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filtered = activeCategory === "all"
-    ? faqData
-    : faqData.filter((item) => item.category === activeCategory);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filtered = faqData.filter((item) => {
+    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+    if (!matchesCategory) return false;
+    if (!normalizedQuery) return true;
+    return (
+      item.questionEn.toLowerCase().includes(normalizedQuery) ||
+      item.questionAr.toLowerCase().includes(normalizedQuery) ||
+      item.answerEn.toLowerCase().includes(normalizedQuery) ||
+      item.answerAr.toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -78,7 +90,24 @@ const FAQ = () => {
             : "Answers to common questions about SHAMS and our services"}
         </p>
 
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <div className="relative mb-6 max-w-md mx-auto">
+          <Search
+            className={`absolute top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground ${
+              isArabic ? "right-3" : "left-3"
+            }`}
+          />
+          <Input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={isArabic ? "ابحث في الأسئلة..." : "Search questions..."}
+            className={isArabic ? "pr-9 text-right" : "pl-9"}
+            dir={isArabic ? "rtl" : "ltr"}
+            aria-label={isArabic ? "البحث في الأسئلة الشائعة" : "Search FAQ"}
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2 justify-center mb-6">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -94,25 +123,39 @@ const FAQ = () => {
           ))}
         </div>
 
-        <Accordion type="single" collapsible className="space-y-3">
-          {filtered.map((item) => (
-            <AccordionItem
-              key={item.id}
-              value={item.id}
-              className="border rounded-lg px-4 bg-card"
-            >
-              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
-                {isArabic ? item.questionAr : item.questionEn}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-4 space-y-3">
-                <p>{isArabic ? item.answerAr : item.answerEn}</p>
-                <p className="text-xs opacity-70 border-t pt-2 border-border">
-                  {isArabic ? item.answerEn : item.answerAr}
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <p className="text-sm text-muted-foreground text-center mb-6">
+          {isArabic
+            ? `${filtered.length} من ${faqData.length} سؤال`
+            : `Showing ${filtered.length} of ${faqData.length} questions`}
+        </p>
+
+        {filtered.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            {isArabic
+              ? "لم يتم العثور على أسئلة مطابقة. جرّب كلمة بحث أخرى."
+              : "No matching questions found. Try a different search."}
+          </div>
+        ) : (
+          <Accordion type="single" collapsible className="space-y-3">
+            {filtered.map((item) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className="border rounded-lg px-4 bg-card"
+              >
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
+                  {isArabic ? item.questionAr : item.questionEn}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-4 space-y-3">
+                  <p>{isArabic ? item.answerAr : item.answerEn}</p>
+                  <p className="text-xs opacity-70 border-t pt-2 border-border">
+                    {isArabic ? item.answerEn : item.answerAr}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        )}
       </main>
 
       <Footer />
