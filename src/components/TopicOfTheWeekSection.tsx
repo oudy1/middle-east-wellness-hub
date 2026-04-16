@@ -3,21 +3,21 @@ import { Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import stressEn from "@/assets/stress-mental-health-en.png";
 import stressAr from "@/assets/stress-mental-health-ar.png";
+import weeklyTopics from "../../content/weekly-topics.json";
+
+// Image map for dynamic resolution
+const imageMap: Record<string, string> = {
+  "/src/assets/stress-mental-health-en.png": stressEn,
+  "/src/assets/stress-mental-health-ar.png": stressAr,
+};
 
 const TopicOfTheWeekSection = () => {
   const { language, t } = useLanguage();
   const isArabic = language === 'ar';
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
-  const topic = {
-    titleEn: "Stress & Mental Health During Exams",
-    titleAr: "التوتر والصحة النفسية خلال فترة الامتحانات",
-    subtitleEn: "This week's focus highlights stress management and mental health support for students during exam periods, with tips and resources relevant to Middle Eastern and North African communities in Canada.",
-    subtitleAr: "يسلّط موضوع هذا الأسبوع الضوء على إدارة التوتر ودعم الصحة النفسية للطلاب خلال فترة الامتحانات، مع نصائح وموارد ذات صلة بالمجتمعات الشرق أوسطية وشمال أفريقيا في كندا.",
-    altEn: "Stress & Mental Health During Exams - SHAMS weekly topic",
-    altAr: "التوتر والصحة النفسية خلال فترة الامتحانات - موضوع الأسبوع من شمس",
-    instagramUrl: "https://www.instagram.com/p/DWrkD5-GInT/"
-  };
+  const topic = weeklyTopics.find(tp => tp.active) || weeklyTopics[0];
+  const imageSrc = imageMap[isArabic ? topic.imageAr : topic.imageEn] || stressEn;
 
   const handleCardClick = () => {
     window.open(topic.instagramUrl, '_blank', 'noopener,noreferrer');
@@ -40,20 +40,17 @@ const TopicOfTheWeekSection = () => {
             tabIndex={0}
             aria-label={isArabic ? topic.altAr : topic.altEn}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleCardClick();
-              }
+              if (e.key === 'Enter' || e.key === ' ') handleCardClick();
             }}
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">
               <img 
-                src={isArabic ? stressAr : stressEn}
+                src={imageSrc}
                 alt={isArabic ? topic.altAr : topic.altEn}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
             </div>
-            
             <div className={`p-4 md:p-6 bg-card ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
               <h3 className={`text-xl md:text-2xl font-semibold text-foreground mb-2 ${isRTL ? 'font-cairo' : ''}`}>
                 {isArabic ? topic.titleAr : topic.titleEn}
