@@ -1,0 +1,53 @@
+{
+  "mainNav": [
+    {
+      "labelKey": "header.home",
+      "path": "/"
+    },
+    {
+      "labelKey": "header.aboutUs",
+      "path": "/about"
+    },
+    {
+      "labelKey": "header.forCommunity",
+      "path": "/services",
+      "children": [
+        { "labelKey": "header.forCommunity", "path": "/services" },
+        { "labelKey": "common.programs", "path": "/programs" }
+      ]
+    },
+    {
+      "labelKey": "header.forClinicians",
+      "path": "/research"
+    },
+    {
+      "labelKey": "header.education",
+      "children": [
+        { "labelKey": "header.diseases", "path": "/diseases" },
+        { "labelKey": "header.webinars", "path": "/recordings" }
+      ]
+    },
+    {
+      "labelKey": "header.contact",
+      "children": [
+        { "labelKey": "header.contactUs", "path": "/contact" },
+        { "labelKey": "header.supportUs", "path": "/support-us" }
+      ]
+    },
+    {
+      "labelKey": "header.physicianDirectory",
+      "children": [
+        { "labelKey": "header.findHealthcareWorkers", "path": "/physician-directory" },
+        { "labelKey": "header.familyPhysician", "path": "/physicians/family" },
+        { "labelKey": "common.browseByCity", "path": "/physicians/family/cities" }
+      ]
+    }
+  ],
+  "languages": [
+    { "code": "en", "name": "English", "flag": "🇺🇸" },
+    { "code": "ar", "name": "العربية", "flag": "🇸🇦" },
+    { "code": "ku", "name": "کوردی", "flag": "" },
+    { "code": "fa", "name": "فارسی", "flag": "🇮🇷" },
+    { "code": "tr", "name": "Türkçe", "flag": "🇹🇷" }
+  ]
+}
