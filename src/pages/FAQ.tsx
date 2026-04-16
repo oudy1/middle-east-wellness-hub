@@ -137,7 +137,13 @@ const FAQ = () => {
               : "No matching questions found. Try a different search."}
           </div>
         ) : (
-          <Accordion type="single" collapsible className="space-y-3">
+          <Accordion
+            key={normalizedQuery}
+            type="single"
+            collapsible
+            defaultValue={normalizedQuery && filtered.length > 0 ? filtered[0].id : undefined}
+            className="space-y-3"
+          >
             {filtered.map((item) => (
               <AccordionItem
                 key={item.id}
