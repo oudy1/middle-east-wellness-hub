@@ -34,6 +34,7 @@ import { studies } from "@/lib/studyData";
 import StudyCard from "@/components/StudyCard";
 import SawaFlyerCarousel from "@/components/SawaFlyerCarousel";
 import SHAMSResearchPortfolio from "@/components/SHAMSResearchPortfolio";
+import researchersData from "../../content/researchers.json";
 
 // Color maps for Tailwind JIT safety
 const accentStyles: Record<string, { border: string; borderHover: string; gradFrom: string; gradTo: string; circle: string; circleGrad: string; text: string; tagBg: string; }> = {
