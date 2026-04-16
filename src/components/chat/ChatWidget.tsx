@@ -64,47 +64,30 @@ const ChatWidget: React.FC = () => {
   const welcomeMessage = 
     "Hi, I'm the SHAMS Guide. I can help you find resources, browse our pages, or connect with our team.\n\nمرحباً، أنا مساعد SHAMS. أقدر أساعدك تلاقي مصادر، توصل لصفحات الموقع، أو تتواصل مع فريقنا.";
 
-  // Bilingual quick replies with both languages in label
   const quickReplies = [
     { 
-      label: language === 'ar' 
-        ? 'ابحث عن مقدمي رعاية | Find Healthcare Workers' 
-        : 'Find Healthcare Workers | ابحث عن مقدمي رعاية',
-      message: language === 'ar' 
-        ? 'أبحث عن طبيب أو مقدم رعاية صحية' 
-        : "I'm looking for a doctor or healthcare provider"
+      label: language === 'ar' ? 'ابحث عن الموارد الصحية بالعربية' : 'Find Arabic health resources',
+      message: language === 'ar' ? 'ابحث عن الموارد الصحية بالعربية' : 'Find Arabic health resources'
     },
     { 
-      label: language === 'ar' 
-        ? 'تصفح المصادر | Browse Resources' 
-        : 'Browse Resources | تصفح المصادر',
-      message: language === 'ar' 
-        ? 'أريد الوصول إلى الموارد التعليمية' 
-        : 'I want to access educational resources'
+      label: language === 'ar' ? 'شاهد تسجيل ندوة' : 'Watch a webinar recording',
+      message: language === 'ar' ? 'شاهد تسجيل ندوة' : 'Watch a webinar recording'
     },
     { 
-      label: language === 'ar' 
-        ? 'تواصل معنا | Contact SHAMS' 
-        : 'Contact SHAMS | تواصل معنا',
-      message: language === 'ar' 
-        ? 'أريد التواصل مع فريق SHAMS' 
-        : 'I want to contact the SHAMS team'
+      label: language === 'ar' ? 'تصفّح الدراسات البحثية' : 'Browse research studies',
+      message: language === 'ar' ? 'تصفّح الدراسات البحثية' : 'Browse research studies'
     },
     { 
-      label: language === 'ar' 
-        ? 'اقترح موضوعاً | Suggest a Topic' 
-        : 'Suggest a Topic | اقترح موضوعاً',
-      message: language === 'ar' 
-        ? 'أريد اقتراح موضوع للنقاش' 
-        : 'I want to suggest a discussion topic'
+      label: language === 'ar' ? 'ابحث عن مقدم رعاية صحية' : 'Find a healthcare worker',
+      message: language === 'ar' ? 'ابحث عن مقدم رعاية صحية' : 'Find a healthcare worker'
     },
     { 
-      label: language === 'ar' 
-        ? 'فرص بحثية | Research Opportunities' 
-        : 'Research Opportunities | فرص بحثية',
-      message: language === 'ar' 
-        ? 'ما هي الفرص البحثية المتاحة؟' 
-        : 'What research opportunities are available?'
+      label: language === 'ar' ? 'اطّلع على برامج شمس' : 'View SHAMS programs',
+      message: language === 'ar' ? 'اطّلع على برامج شمس' : 'View SHAMS programs'
+    },
+    { 
+      label: language === 'ar' ? 'تواصل مع شمس' : 'Contact SHAMS',
+      message: language === 'ar' ? 'تواصل مع شمس' : 'Contact SHAMS'
     },
   ];
 
