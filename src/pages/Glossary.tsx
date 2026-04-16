@@ -39,6 +39,42 @@ const Glossary = () => {
     );
   });
 
+  // Alphabet jump bar setup
+  const englishAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const arabicAlphabet = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي".split("");
+  const alphabet = isArabic ? arabicAlphabet : englishAlphabet;
+
+  const getFirstLetter = (item: typeof glossaryData[number]) => {
+    const term = isArabic ? item.termAr : item.termEn;
+    return (term?.trim().charAt(0) || "#").toUpperCase();
+  };
+
+  // Sort filtered terms alphabetically for the active language
+  const sortedFiltered = [...filtered].sort((a, b) => {
+    const aTerm = isArabic ? a.termAr : a.termEn;
+    const bTerm = isArabic ? b.termAr : b.termEn;
+    return aTerm.localeCompare(bTerm, isArabic ? "ar" : "en");
+  });
+
+  // Group by first letter
+  const groupedByLetter = sortedFiltered.reduce<Record<string, typeof glossaryData>>((acc, item) => {
+    const letter = getFirstLetter(item);
+    if (!acc[letter]) acc[letter] = [];
+    acc[letter].push(item);
+    return acc;
+  }, {});
+
+  const availableLetters = new Set(Object.keys(groupedByLetter));
+
+  const scrollToLetter = (letter: string) => {
+    const el = document.getElementById(`letter-${letter}`);
+    if (el) {
+      const yOffset = -80;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   const glossaryJsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
@@ -122,11 +158,40 @@ const Glossary = () => {
           ))}
         </div>
 
-        <p className="text-sm text-muted-foreground text-center mb-6">
+        <p className="text-sm text-muted-foreground text-center mb-4">
           {isArabic
             ? `${filtered.length} من ${glossaryData.length} مصطلح`
             : `Showing ${filtered.length} of ${glossaryData.length} terms`}
         </p>
+
+        {/* A-Z Jump Bar */}
+        <div
+          className="sticky top-16 z-10 bg-background/95 backdrop-blur-sm py-3 mb-4 border-b border-border"
+          dir={isArabic ? "rtl" : "ltr"}
+        >
+          <div className="flex flex-wrap gap-1 justify-center">
+            {alphabet.map((letter) => {
+              const enabled = availableLetters.has(letter);
+              return (
+                <button
+                  key={letter}
+                  onClick={() => enabled && scrollToLetter(letter)}
+                  disabled={!enabled}
+                  className={`min-w-[28px] h-7 px-1.5 rounded text-xs font-semibold transition-colors ${
+                    enabled
+                      ? "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground cursor-pointer"
+                      : "text-muted-foreground/40 cursor-not-allowed"
+                  }`}
+                  aria-label={
+                    isArabic ? `الانتقال إلى ${letter}` : `Jump to ${letter}`
+                  }
+                >
+                  {letter}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         {filtered.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground">
@@ -135,21 +200,30 @@ const Glossary = () => {
               : "No matching terms found. Try a different search."}
           </div>
         ) : (
-          <div className="space-y-4">
-            {filtered.map((item) => (
-              <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-xl font-bold text-primary">
-                    {isArabic ? item.termAr : item.termEn}
-                  </span>
+          <div className="space-y-8">
+            {Object.entries(groupedByLetter).map(([letter, items]) => (
+              <section key={letter} id={`letter-${letter}`} className="scroll-mt-24">
+                <h2 className="text-2xl font-bold text-primary border-b-2 border-primary/30 pb-2 mb-4">
+                  {letter}
+                </h2>
+                <div className="space-y-4">
+                  {items.map((item) => (
+                    <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
+                      <div className="flex items-baseline gap-3 flex-wrap">
+                        <span className="text-xl font-bold text-primary">
+                          {isArabic ? item.termAr : item.termEn}
+                        </span>
+                      </div>
+                      <p className="text-foreground">
+                        {isArabic ? item.definitionAr : item.definitionEn}
+                      </p>
+                      <p className="text-xs opacity-70 border-t pt-2 border-border">
+                        {isArabic ? item.definitionEn : item.definitionAr}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-foreground">
-                  {isArabic ? item.definitionAr : item.definitionEn}
-                </p>
-                <p className="text-xs opacity-70 border-t pt-2 border-border">
-                  {isArabic ? item.definitionEn : item.definitionAr}
-                </p>
-              </div>
+              </section>
             ))}
           </div>
         )}
