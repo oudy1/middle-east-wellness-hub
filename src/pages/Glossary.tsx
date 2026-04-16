@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEOHead } from "@/components/SEOHead";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import glossaryData from "../../content/glossary.json";
 
@@ -22,10 +24,20 @@ const Glossary = () => {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filtered = activeCategory === "all"
-    ? glossaryData
-    : glossaryData.filter((item) => item.category === activeCategory);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filtered = glossaryData.filter((item) => {
+    const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+    if (!matchesCategory) return false;
+    if (!normalizedQuery) return true;
+    return (
+      item.termEn.toLowerCase().includes(normalizedQuery) ||
+      item.termAr.toLowerCase().includes(normalizedQuery) ||
+      item.definitionEn.toLowerCase().includes(normalizedQuery) ||
+      item.definitionAr.toLowerCase().includes(normalizedQuery)
+    );
+  });
 
   const glossaryJsonLd = {
     "@context": "https://schema.org",
@@ -77,7 +89,24 @@ const Glossary = () => {
             : "Key health and community terms with bilingual definitions"}
         </p>
 
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <div className="relative mb-6 max-w-md mx-auto">
+          <Search
+            className={`absolute top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground ${
+              isArabic ? "right-3" : "left-3"
+            }`}
+          />
+          <Input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={isArabic ? "ابحث عن مصطلح..." : "Search terms..."}
+            className={isArabic ? "pr-9 text-right" : "pl-9"}
+            dir={isArabic ? "rtl" : "ltr"}
+            aria-label={isArabic ? "البحث في المصطلحات" : "Search glossary"}
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2 justify-center mb-6">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -93,23 +122,37 @@ const Glossary = () => {
           ))}
         </div>
 
-        <div className="space-y-4">
-          {filtered.map((item) => (
-            <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
-              <div className="flex items-baseline gap-3 flex-wrap">
-                <span className="text-xl font-bold text-primary">
-                  {isArabic ? item.termAr : item.termEn}
-                </span>
+        <p className="text-sm text-muted-foreground text-center mb-6">
+          {isArabic
+            ? `${filtered.length} من ${glossaryData.length} مصطلح`
+            : `Showing ${filtered.length} of ${glossaryData.length} terms`}
+        </p>
+
+        {filtered.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            {isArabic
+              ? "لم يتم العثور على مصطلحات مطابقة. جرّب كلمة بحث أخرى."
+              : "No matching terms found. Try a different search."}
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filtered.map((item) => (
+              <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <span className="text-xl font-bold text-primary">
+                    {isArabic ? item.termAr : item.termEn}
+                  </span>
+                </div>
+                <p className="text-foreground">
+                  {isArabic ? item.definitionAr : item.definitionEn}
+                </p>
+                <p className="text-xs opacity-70 border-t pt-2 border-border">
+                  {isArabic ? item.definitionEn : item.definitionAr}
+                </p>
               </div>
-              <p className="text-foreground">
-                {isArabic ? item.definitionAr : item.definitionEn}
-              </p>
-              <p className="text-xs opacity-70 border-t pt-2 border-border">
-                {isArabic ? item.definitionEn : item.definitionAr}
-              </p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
 
       <Footer />
