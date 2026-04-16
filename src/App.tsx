@@ -53,6 +53,7 @@ function App() {
             <Route path="/support-us" element={<SupportUs />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/glossary" element={<Glossary />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
