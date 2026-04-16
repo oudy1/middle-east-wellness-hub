@@ -10,6 +10,11 @@ export const ChatSafetyFooter: React.FC = () => {
       className="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500 space-y-2"
       dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
+      <p className="font-semibold text-destructive">
+        {language === 'ar' 
+          ? 'إذا كانت الحالة طارئة أو كان هناك خطر فوري، اتصلوا بـ 911 أو توجّهوا إلى أقرب قسم طوارئ فوراً.'
+          : 'If this is urgent or someone is in immediate danger, call 911 or go to the nearest emergency department right now.'}
+      </p>
       <p className="italic">
         {language === 'ar' 
           ? 'تنويه: نحن لسنا أطباء. هذا المرشد للمعلومات فقط وليس بديلاً عن الاستشارة الطبية.'
