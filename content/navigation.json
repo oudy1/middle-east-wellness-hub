@@ -24,7 +24,9 @@
       "labelKey": "header.education",
       "children": [
         { "labelKey": "header.diseases", "path": "/diseases" },
-        { "labelKey": "header.webinars", "path": "/recordings" }
+        { "labelKey": "header.webinars", "path": "/recordings" },
+        { "labelKey": "footer.faq", "path": "/faq" },
+        { "labelKey": "common.glossary", "path": "/glossary" }
       ]
     },
     {
