@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
+import MetricsExportButton from "@/components/MetricsExportButton";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -92,6 +93,7 @@ const Index = () => {
         </Suspense>
       </main>
       <Footer />
+      <MetricsExportButton />
     </div>
   );
 };
