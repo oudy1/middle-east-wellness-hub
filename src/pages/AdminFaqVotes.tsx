@@ -221,6 +221,23 @@ const AdminFaqVotes = () => {
 
   const [granularity, setGranularity] = useState<"day" | "week">("day");
   const [trendFaqId, setTrendFaqId] = useState<string>("all");
+  const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const [tzOverride, setTzOverride] = useState<string>("local");
+  const effectiveTz = tzOverride === "local" ? localTz : tzOverride;
+  const tzOptions = [
+    { value: "local", label: `Local (${localTz})` },
+    { value: "UTC", label: "UTC" },
+    { value: "America/Toronto", label: "America/Toronto" },
+    { value: "America/New_York", label: "America/New_York" },
+    { value: "America/Los_Angeles", label: "America/Los_Angeles" },
+    { value: "Europe/London", label: "Europe/London" },
+    { value: "Europe/Berlin", label: "Europe/Berlin" },
+    { value: "Asia/Dubai", label: "Asia/Dubai" },
+    { value: "Asia/Riyadh", label: "Asia/Riyadh" },
+    { value: "Asia/Beirut", label: "Asia/Beirut" },
+    { value: "Asia/Tokyo", label: "Asia/Tokyo" },
+  ];
+
 
   // FAQ ids present in the loaded vote data, with friendly labels.
   const availableFaqIds = useMemo(() => {
@@ -237,24 +254,30 @@ const AdminFaqVotes = () => {
 
   const trendData = useMemo(() => {
     const pad = (n: number) => String(n).padStart(2, "0");
-    const localDateKey = (d: Date) =>
-      `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const wdMap: Record<string, number> = {
+      Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
+    };
+    const tzFmt = new Intl.DateTimeFormat("en-CA", {
+      timeZone: effectiveTz,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "short",
+    });
 
     const bucketKey = (iso: string) => {
-      // DST-safe: extract local Y/M/D, then anchor at local noon before any
-      // date arithmetic. Midnight is unsafe because the "spring forward" hour
-      // doesn't exist locally, which can shift the resulting date by a day.
-      const src = new Date(iso);
-      const y = src.getFullYear();
-      const m = src.getMonth();
-      const dayOfMonth = src.getDate();
-      const d = new Date(y, m, dayOfMonth, 12, 0, 0, 0);
-      if (granularity === "week") {
-        const diff = (d.getDay() + 6) % 7; // days since local Monday
-        d.setDate(d.getDate() - diff);
-      }
-      return localDateKey(d);
+      // Extract Y/M/D and weekday in the chosen timezone, then do calendar
+      // arithmetic in UTC to stay DST-safe (we only subtract whole days).
+      const parts = tzFmt.formatToParts(new Date(iso));
+      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
+      const y = Number(get("year"));
+      const m = Number(get("month"));
+      const d = Number(get("day"));
+      const diff = granularity === "week" ? (wdMap[get("weekday")] ?? 0) : 0;
+      const anchor = new Date(Date.UTC(y, m - 1, d) - diff * 86400000);
+      return `${anchor.getUTCFullYear()}-${pad(anchor.getUTCMonth() + 1)}-${pad(anchor.getUTCDate())}`;
     };
+
 
 
     const buckets = new Map<
@@ -280,7 +303,7 @@ const AdminFaqVotes = () => {
       buckets.set(key, existing);
     }
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [rows, dateFilter, langFilter, granularity, trendFaqId]);
+  }, [rows, dateFilter, langFilter, granularity, trendFaqId, effectiveTz]);
 
   const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
 
@@ -474,19 +497,34 @@ const AdminFaqVotes = () => {
                   </Button>
                 ))}
               </div>
+              <label className="flex items-center gap-1 text-xs text-muted-foreground">
+                TZ
+                <select
+                  className="h-8 rounded-md border border-input bg-background px-2 text-xs"
+                  value={tzOverride}
+                  onChange={(e) => setTzOverride(e.target.value)}
+                >
+                  {tzOptions.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <span
                 className="inline-flex items-center gap-1 rounded-md border border-input bg-muted/50 px-2 py-1 text-[11px] text-muted-foreground"
-                title={`Weekly buckets start on Monday in this timezone. Current offset: UTC${(() => { const o = -new Date().getTimezoneOffset(); const s = o >= 0 ? "+" : "-"; const a = Math.abs(o); return `${s}${String(Math.floor(a/60)).padStart(2,"0")}:${String(a%60).padStart(2,"0")}`; })()}`}
+                title={`Weekly buckets start on Monday in ${effectiveTz}.`}
               >
-                TZ: {Intl.DateTimeFormat().resolvedOptions().timeZone} (UTC
                 {(() => {
-                  const o = -new Date().getTimezoneOffset();
-                  const s = o >= 0 ? "+" : "-";
-                  const a = Math.abs(o);
-                  return `${s}${String(Math.floor(a / 60)).padStart(2, "0")}:${String(a % 60).padStart(2, "0")}`;
+                  const parts = new Intl.DateTimeFormat("en-US", {
+                    timeZone: effectiveTz,
+                    timeZoneName: "shortOffset",
+                  }).formatToParts(new Date());
+                  const off = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+                  return `Bucketing: ${effectiveTz} (${off})`;
                 })()}
-                )
               </span>
+
             </div>
           </div>
           <div className="w-full h-64">
