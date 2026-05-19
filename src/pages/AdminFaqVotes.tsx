@@ -545,7 +545,9 @@ const AdminFaqVotes = () => {
                       borderRadius: 6,
                       fontSize: 12,
                     }}
+                    labelFormatter={(label: string) => formatBucketRange(label, granularity)}
                   />
+
                   <Legend wrapperStyle={{ fontSize: 12 }} />
                   {(langFilter === "all" || langFilter === "en") && (
                     <>
