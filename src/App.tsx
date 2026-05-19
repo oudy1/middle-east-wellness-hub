@@ -56,6 +56,8 @@ function App() {
             <Route path="/programs" element={<Programs />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/glossary" element={<Glossary />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/faq-votes" element={<AdminFaqVotes />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
