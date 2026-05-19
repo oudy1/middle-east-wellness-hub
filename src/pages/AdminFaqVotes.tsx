@@ -254,6 +254,7 @@ const AdminFaqVotes = () => {
 
     for (const r of rows) {
       if (!dateFilter(r)) continue;
+      if (trendFaqId !== "all" && r.faq_id !== trendFaqId) continue;
       const lang = (r.language ?? "en") === "ar" ? "ar" : "en";
       if (langFilter !== "all" && langFilter !== lang) continue;
       const key = bucketKey(r.created_at);
@@ -269,7 +270,7 @@ const AdminFaqVotes = () => {
       buckets.set(key, existing);
     }
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [rows, dateFilter, langFilter, granularity]);
+  }, [rows, dateFilter, langFilter, granularity, trendFaqId]);
 
   const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
 
