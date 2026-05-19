@@ -298,11 +298,23 @@ const Glossary = () => {
           ))}
         </div>
 
-        <p className="text-sm text-muted-foreground text-center mb-4">
-          {isArabic
-            ? `${filtered.length} من ${glossaryData.length} مصطلح`
-            : `Showing ${filtered.length} of ${glossaryData.length} terms`}
-        </p>
+        <div className="flex items-center justify-center gap-3 flex-wrap mb-4">
+          <p className="text-sm text-muted-foreground">
+            {isArabic
+              ? `${filtered.length} من ${glossaryData.length} مصطلح`
+              : `Showing ${filtered.length} of ${glossaryData.length} terms`}
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => openPdf(sortedFiltered)}
+            disabled={sortedFiltered.length === 0}
+            className="h-8 text-xs"
+          >
+            <FileDown className={`h-3.5 w-3.5 ${isArabic ? "ml-1" : "mr-1"}`} />
+            {isArabic ? "تنزيل PDF" : "Download PDF"}
+          </Button>
+        </div>
 
         {/* A-Z Jump Bar */}
         <div
