@@ -6,16 +6,57 @@ interface CalligraphyBackgroundProps {
   heroRef?: RefObject<HTMLElement | null>;
 }
 
+type CalligraphyMetrics = {
+  cachedHit: number;
+  generated: number;
+  ioUnsupported: number;
+  heroMissing: number;
+  skippedNeverIntersected: number;
+  skippedAfterSchedule: number;
+  lastGenerationMs: number | null;
+  lastPhaseMs: Record<string, number>;
+};
+
+const METRICS_KEY = "__calligraphyMetrics";
+
+const getMetrics = (): CalligraphyMetrics => {
+  const w = window as unknown as Record<string, CalligraphyMetrics>;
+  if (!w[METRICS_KEY]) {
+    w[METRICS_KEY] = {
+      cachedHit: 0,
+      generated: 0,
+      ioUnsupported: 0,
+      heroMissing: 0,
+      skippedNeverIntersected: 0,
+      skippedAfterSchedule: 0,
+      lastGenerationMs: null,
+      lastPhaseMs: {},
+    };
+  }
+  return w[METRICS_KEY];
+};
+
+const log = (event: string, detail?: Record<string, unknown>) => {
+  // eslint-disable-next-line no-console
+  console.debug(`[calligraphy] ${event}`, detail ?? "");
+};
+
 const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => {
   useEffect(() => {
+    const metrics = getMetrics();
+
     // Apply cached pattern synchronously — no heavy work on repeat visits.
     const storedBg = localStorage.getItem('calligraphy-bg');
     if (storedBg) {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
+      metrics.cachedHit += 1;
+      log("cached-hit", { total: metrics.cachedHit });
       return;
     }
 
     let cancelled = false;
+    let intersected = false;
+    let scheduled = false;
     const timers: number[] = [];
     let idleHandle: number | null = null;
     let rafHandle: number | null = null;
