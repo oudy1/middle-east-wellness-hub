@@ -581,10 +581,12 @@ const AdminFaqVotes = () => {
                       borderRadius: 6,
                       fontSize: 12,
                     }}
+                    labelFormatter={(label: string) => formatBucketRange(label, granularity)}
                     formatter={(value: number | null) =>
                       value === null ? ["No votes", ""] : [`${value}%`, ""]
                     }
                   />
+
                   <Legend wrapperStyle={{ fontSize: 12 }} />
                   {(langFilter === "all" || langFilter === "en") && (
                     <Line
