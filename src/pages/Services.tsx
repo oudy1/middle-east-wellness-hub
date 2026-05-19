@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEOHead } from "@/components/SEOHead";
 import sickKidsLogo from "@/assets/sickkids-logo.svg";
 
 type FilterCategory = "all" | "mental-health" | "cancer" | "heart-diabetes" | "vaccines-safety" | "education" | "clinical";
