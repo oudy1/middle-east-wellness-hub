@@ -14,6 +14,16 @@ import {
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "@/hooks/use-toast";
 import faqData from "../../content/faq.json";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 type VoteRow = {
   id: string;
