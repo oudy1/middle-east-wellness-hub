@@ -50,6 +50,14 @@ const Services = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={isRTL ? "rtl" : "ltr"}>
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/services"
+        title="Health Resources and Programs | SHAMS"
+        description="Explore Arabic and English health resources, patient rights, mental health supports, diabetes education, newcomer programs, and community services for Middle Eastern societies in Canada."
+        titleAr="الموارد والبرامج الصحية | شمس"
+        descriptionAr="استكشف الموارد الصحية بالعربية والإنجليزية، حقوق المرضى، دعم الصحة النفسية، التثقيف حول السكري، برامج القادمين الجدد، والخدمات المجتمعية للمجتمعات الشرق أوسطية في كندا."
+      />
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
