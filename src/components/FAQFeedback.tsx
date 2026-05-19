@@ -43,6 +43,20 @@ const FAQFeedback = ({ faqId, language, isArabic }: Props) => {
 
     setSubmitting(false);
 
+    // 23505 = unique_violation: this session already voted on this FAQ
+    if (error && (error as { code?: string }).code === "23505") {
+      const votes = loadVotes();
+      votes[faqId] = value;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+      setVote(value);
+      toast({
+        title: isArabic
+          ? "لقد صوّت بالفعل على هذا السؤال"
+          : "You've already voted on this question",
+      });
+      return;
+    }
+
     if (error) {
       toast({
         title: isArabic ? "حدث خطأ" : "Something went wrong",
