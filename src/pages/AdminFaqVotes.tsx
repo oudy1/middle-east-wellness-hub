@@ -207,6 +207,11 @@ const AdminFaqVotes = () => {
     return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
   }, [rows, langFilter, dateFilter]);
 
+  // Reset to first page whenever filters or page size change.
+  useEffect(() => {
+    setPage(1);
+  }, [search, langFilter, startDate, endDate, pageSize]);
+
   const [granularity, setGranularity] = useState<"day" | "week">("day");
 
   const trendData = useMemo(() => {
