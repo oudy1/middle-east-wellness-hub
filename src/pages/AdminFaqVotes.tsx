@@ -259,6 +259,40 @@ const AdminFaqVotes = () => {
               </Button>
             ))}
           </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="text-xs text-muted-foreground flex items-center gap-1">
+              From
+              <Input
+                type="date"
+                value={startDate}
+                max={endDate || undefined}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="h-9 w-auto"
+              />
+            </label>
+            <label className="text-xs text-muted-foreground flex items-center gap-1">
+              To
+              <Input
+                type="date"
+                value={endDate}
+                min={startDate || undefined}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="h-9 w-auto"
+              />
+            </label>
+            {(startDate || endDate) && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setStartDate("");
+                  setEndDate("");
+                }}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
           <span className="text-xs text-muted-foreground ml-auto">
             {aggregates.length} row{aggregates.length === 1 ? "" : "s"}
           </span>
