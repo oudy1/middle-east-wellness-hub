@@ -3,26 +3,46 @@ import { useEffect } from "react";
 
 const CalligraphyBackground = () => {
   useEffect(() => {
-    // Check if we already have a stored background — apply immediately, no heavy work
+    // Apply cached pattern synchronously — no heavy work on repeat visits.
     const storedBg = localStorage.getItem('calligraphy-bg');
     if (storedBg) {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
       return;
     }
 
-    // Defer the expensive canvas generation until after the browser paints
-    // the hero, so it doesn't block LCP on first visit.
+    let cancelled = false;
+    const timers: number[] = [];
+    let idleHandle: number | null = null;
+    let rafHandle: number | null = null;
+
+    // Yield control back to the browser so long work doesn't block input/paint.
+    // Uses scheduler.yield() when available (Chromium), MessageChannel otherwise.
+    const yieldToMain = (): Promise<void> => {
+      const scheduler = (window as any).scheduler;
+      if (scheduler && typeof scheduler.yield === "function") {
+        return scheduler.yield();
+      }
+      return new Promise((resolve) => {
+        const channel = new MessageChannel();
+        channel.port1.onmessage = () => resolve();
+        channel.port2.postMessage(null);
+      });
+    };
+
     const idle =
       (window as any).requestIdleCallback ||
-      ((cb: () => void) => window.setTimeout(cb, 200));
+      ((cb: () => void) => window.setTimeout(cb, 1));
     const cancelIdle =
       (window as any).cancelIdleCallback ||
       ((id: number) => window.clearTimeout(id));
 
-    const handle = idle(() => {
+    // Run the actual generation only after: window 'load' fires, two animation
+    // frames have flushed (hero is on screen), and the browser is idle.
+    const start = async () => {
+      if (cancelled) return;
+
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-
       if (!ctx) return;
     
     canvas.width = 1800;
@@ -276,19 +296,64 @@ const CalligraphyBackground = () => {
     const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
     createOrganizedDistribution(featuredWords, 48, 0.25, 15);
     
-      // Export as image and set to localStorage to avoid regenerating on every reload
+      // Run the heavy painters in phases, yielding to the main thread between
+      // each so input handlers and animation frames can still execute on slow
+      // devices. Each phase becomes its own task.
+      if (cancelled) return;
+      createOrganizedDistribution(arabicTexts, 20, 0.15, 120);
+
+      await yieldToMain();
+      if (cancelled) return;
+      createOrganizedDistribution(healthPhrases, 32, 0.2, 30);
+
+      await yieldToMain();
+      if (cancelled) return;
+      drawGeometricPatterns();
+
+      await yieldToMain();
+      if (cancelled) return;
+      const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
+      createOrganizedDistribution(featuredWords, 48, 0.25, 15);
+
+      await yieldToMain();
+      if (cancelled) return;
+
+      // toDataURL is synchronous and the heaviest single step — run it in its
+      // own task so it never lands inside the LCP critical path.
       const dataUrl = canvas.toDataURL('image/png');
       try {
         localStorage.setItem('calligraphy-bg', dataUrl);
       } catch {
         // Ignore quota errors — pattern is decorative
       }
-
-      // Update the CSS variable for the background
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
-    });
+    };
 
-    return () => cancelIdle(handle);
+    // Schedule chain: window.load → 2x rAF (post first paint) → idle callback.
+    const scheduleAfterPaint = () => {
+      rafHandle = window.requestAnimationFrame(() => {
+        rafHandle = window.requestAnimationFrame(() => {
+          idleHandle = idle(() => {
+            void start();
+          }, { timeout: 4000 });
+        });
+      });
+    };
+
+    if (document.readyState === "complete") {
+      // Page already loaded — wait a beat so we don't compete with hero paint.
+      timers.push(window.setTimeout(scheduleAfterPaint, 0));
+    } else {
+      window.addEventListener("load", scheduleAfterPaint, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleAfterPaint);
+      if (rafHandle !== null) cancelAnimationFrame(rafHandle);
+      if (idleHandle !== null) cancelIdle(idleHandle);
+      timers.forEach((t) => window.clearTimeout(t));
+    };
   }, []);
 
   return null;
