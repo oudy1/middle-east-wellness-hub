@@ -282,19 +282,8 @@ const CalligraphyBackground = () => {
         ctx.restore();
       }
     };
-    
-    // Draw city/country names (small) - increased count from 60 to 120
-    createOrganizedDistribution(arabicTexts, 20, 0.15, 120);
-    
-    // Draw health phrases (medium) - increased from 18 to 30
-    createOrganizedDistribution(healthPhrases, 32, 0.2, 30);
-    
-    // Add geometric patterns
-    drawGeometricPatterns();
-    
-    // Add a few larger featured words for visual interest (larger) - increased from 10 to 15
-    const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
-    createOrganizedDistribution(featuredWords, 48, 0.25, 15);
+
+
     
       // Run the heavy painters in phases, yielding to the main thread between
       // each so input handlers and animation frames can still execute on slow
