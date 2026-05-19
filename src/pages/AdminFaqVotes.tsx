@@ -497,19 +497,34 @@ const AdminFaqVotes = () => {
                   </Button>
                 ))}
               </div>
+              <label className="flex items-center gap-1 text-xs text-muted-foreground">
+                TZ
+                <select
+                  className="h-8 rounded-md border border-input bg-background px-2 text-xs"
+                  value={tzOverride}
+                  onChange={(e) => setTzOverride(e.target.value)}
+                >
+                  {tzOptions.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <span
                 className="inline-flex items-center gap-1 rounded-md border border-input bg-muted/50 px-2 py-1 text-[11px] text-muted-foreground"
-                title={`Weekly buckets start on Monday in this timezone. Current offset: UTC${(() => { const o = -new Date().getTimezoneOffset(); const s = o >= 0 ? "+" : "-"; const a = Math.abs(o); return `${s}${String(Math.floor(a/60)).padStart(2,"0")}:${String(a%60).padStart(2,"0")}`; })()}`}
+                title={`Weekly buckets start on Monday in ${effectiveTz}.`}
               >
-                TZ: {Intl.DateTimeFormat().resolvedOptions().timeZone} (UTC
                 {(() => {
-                  const o = -new Date().getTimezoneOffset();
-                  const s = o >= 0 ? "+" : "-";
-                  const a = Math.abs(o);
-                  return `${s}${String(Math.floor(a / 60)).padStart(2, "0")}:${String(a % 60).padStart(2, "0")}`;
+                  const parts = new Intl.DateTimeFormat("en-US", {
+                    timeZone: effectiveTz,
+                    timeZoneName: "shortOffset",
+                  }).formatToParts(new Date());
+                  const off = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+                  return `Bucketing: ${effectiveTz} (${off})`;
                 })()}
-                )
               </span>
+
             </div>
           </div>
           <div className="w-full h-64">
