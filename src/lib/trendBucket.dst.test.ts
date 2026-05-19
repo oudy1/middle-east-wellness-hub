@@ -44,7 +44,6 @@ describe("weekly bucketing — DST boundary stability", () => {
       // (day, hour) we resolve the precise UTC instant and assert the bucket
       // key equals the DST Monday. Non-existent local times (spring-forward
       // gap) are skipped — they cannot occur in real recorded data.
-      const [y, m, d] = c.expectedMonday.split("-").map(Number);
       let resolvedCount = 0;
       for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
         const local = addDays(c.expectedMonday, dayOffset);
@@ -57,8 +56,6 @@ describe("weekly bucketing — DST boundary stability", () => {
       }
       // Sanity: we must have resolved most of the 7*24=168 hours.
       expect(resolvedCount).toBeGreaterThanOrEqual(165);
-      // Silence unused-var lint for y/m/d kept for readability above.
-      void y; void m; void d;
     });
 
     it(`${c.zone} ${c.label}: 00:00 and 23:00 on each local day stay inside ${c.expectedMonday}`, () => {
