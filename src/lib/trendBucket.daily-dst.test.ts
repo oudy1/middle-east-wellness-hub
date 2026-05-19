@@ -38,16 +38,12 @@ describe("daily bucketing — DST boundary stability", () => {
     it(`${c.zone} ${c.label}: each local day Sat..Tue around the transition buckets to itself`, () => {
       // Check the 4-day window centered on the DST Sunday: Sat, Sun, Mon, Tue.
       for (let offset = -1; offset <= 2; offset++) {
-        const day = shiftDate(c.transitionLocalDate, offset);
+        const day = addDays(c.transitionLocalDate, offset);
         // Probe a wide set of local hours, including the DST switch window.
         for (const h of [0, 1, 2, 3, 4, 6, 12, 18, 23]) {
-          let iso: string;
-          try {
-            iso = utcForLocal(c.zone, day, h);
-          } catch {
-            // 02:00 local doesn't exist on spring-forward Sundays — skip.
-            continue;
-          }
+          const iso = utcForLocal(c.zone, day, h);
+          // 02:00 local doesn't exist on spring-forward Sundays — skip.
+          if (!iso) continue;
           expect(bucketKeyFor(iso, "day", c.zone)).toBe(day);
         }
       }
@@ -55,20 +51,24 @@ describe("daily bucketing — DST boundary stability", () => {
 
     it(`${c.zone} ${c.label}: local midnight on the DST Sunday belongs to that Sunday, not Saturday`, () => {
       const iso = utcForLocal(c.zone, c.transitionLocalDate, 0);
-      expect(bucketKeyFor(iso, "day", c.zone)).toBe(c.transitionLocalDate);
+      expect(iso).not.toBeNull();
+      expect(bucketKeyFor(iso!, "day", c.zone)).toBe(c.transitionLocalDate);
     });
 
     it(`${c.zone} ${c.label}: 23:00 local on the DST Sunday still belongs to that Sunday`, () => {
       const iso = utcForLocal(c.zone, c.transitionLocalDate, 23);
-      expect(bucketKeyFor(iso, "day", c.zone)).toBe(c.transitionLocalDate);
+      expect(iso).not.toBeNull();
+      expect(bucketKeyFor(iso!, "day", c.zone)).toBe(c.transitionLocalDate);
     });
 
     it(`${c.zone} ${c.label}: consecutive local days produce bucket keys exactly 1 day apart`, () => {
-      const prev = shiftDate(c.transitionLocalDate, -1);
-      const next = shiftDate(c.transitionLocalDate, 1);
-      const keys = [prev, c.transitionLocalDate, next].map((d) =>
-        bucketKeyFor(utcForLocal(c.zone, d, 12), "day", c.zone),
-      );
+      const prev = addDays(c.transitionLocalDate, -1);
+      const next = addDays(c.transitionLocalDate, 1);
+      const keys = [prev, c.transitionLocalDate, next].map((d) => {
+        const iso = utcForLocal(c.zone, d, 12);
+        expect(iso, `${d} 12:00 should resolve in ${c.zone}`).not.toBeNull();
+        return bucketKeyFor(iso!, "day", c.zone);
+      });
       const toMs = (k: string) => new Date(`${k}T00:00:00Z`).getTime();
       expect((toMs(keys[1]) - toMs(keys[0])) / 86400000).toBe(1);
       expect((toMs(keys[2]) - toMs(keys[1])) / 86400000).toBe(1);
