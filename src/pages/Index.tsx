@@ -30,12 +30,33 @@ const Index = () => {
     <div className="flex flex-col min-h-screen w-full bg-healthLightGray relative">
       <SEOHead
         lang={language === "ar" ? "ar" : "en"}
-        title="SHAMS | Health Advocacy for Middle Eastern Societies in Canada"
-        description="SHAMS is a youth-led Canadian initiative supporting Middle Eastern and North African societies through health education, research, mentorship, healthcare navigation, and community resources."
+        title="SHAMS | Health Advocacy for MENA Societies in Canada"
+        description="Youth-led Canadian non-profit supporting MENA societies through health education, research, mentorship, healthcare navigation, and community resources."
         titleAr="شمس | المناصرة الصحية للمجتمعات الشرق أوسطية في كندا"
         descriptionAr="شمس مبادرة شبابية كندية تدعم المجتمعات الشرق أوسطية وشمال أفريقيا من خلال التثقيف الصحي، البحث، الإرشاد، والموارد المجتمعية."
         path="/"
         keywords="SHAMS, Middle Eastern health Canada, Arab healthcare Canada, MENA health advocacy, Arabic health education, Project SHAMS"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "SHAMS",
+            alternateName: "Project SHAMS",
+            url: "https://www.projectshams.com",
+            logo: "https://www.projectshams.com/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png",
+            email: "infoprojectshams@gmail.com",
+            sameAs: ["https://www.instagram.com/projectshams/"],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "SHAMS",
+            url: "https://www.projectshams.com",
+            inLanguage: ["en", "ar"],
+            description:
+              "Youth-led Canadian non-profit supporting MENA societies through health education, research, mentorship, and healthcare navigation.",
+          },
+        ]}
       />
       {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
       <CalligraphyBackground />

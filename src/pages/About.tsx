@@ -25,8 +25,8 @@ const About = () => {
       <SEOHead
         lang={language === "ar" ? "ar" : "en"}
         path="/about"
-        title="About SHAMS | Youth-Led Health Advocacy for MENA Societies in Canada"
-        description="Learn about SHAMS, a youth-led Canadian non-profit dedicated to health education, mentorship, and research for Middle Eastern and North African societies across Canada."
+        title="About SHAMS | MENA Health Advocacy in Canada"
+        description="Learn about SHAMS, the youth-led Canadian non-profit advancing health education, mentorship, and research for MENA societies across Canada."
         titleAr="عن شمس | مبادرة شبابية للمناصرة الصحية للمجتمعات الشرق أوسطية في كندا"
         descriptionAr="تعرف على شمس، مبادرة كندية شبابية مكرسة للتثقيف الصحي والإرشاد والبحث للمجتمعات الشرق أوسطية وشمال أفريقيا في كندا."
       />
