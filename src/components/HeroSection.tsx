@@ -1,15 +1,16 @@
 
+import { forwardRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
 const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
 
-const HeroSection = () => {
+const HeroSection = forwardRef<HTMLElement>((_, ref) => {
   const { t, language } = useLanguage();
-  
+
   return (
-    <section className="relative bg-healthDarkBlue py-10 md:py-14 overflow-hidden">
+    <section ref={ref} className="relative bg-healthDarkBlue py-10 md:py-14 overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-calligraphy-pattern opacity-15"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-healthDarkBlue/95 via-healthDarkBlue to-healthDarkBlue/95"></div>
@@ -58,6 +59,8 @@ const HeroSection = () => {
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = "HeroSection";
 
 export default HeroSection;
