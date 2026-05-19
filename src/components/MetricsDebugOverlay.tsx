@@ -17,12 +17,19 @@ type CalligraphyMetrics = {
  *
  * Supports pause/resume of the polling loop and an on-demand refresh.
  */
+const STABILITY_HIDE_MS = 10_000;
+
 const MetricsDebugOverlay = () => {
   const [metrics, setMetrics] = useState<CalligraphyMetrics | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [paused, setPaused] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
   const [phasesOpen, setPhasesOpen] = useState(false);
+  const [autoHide, setAutoHide] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [stableSince, setStableSince] = useState<number | null>(null);
+
+  const lastStatusRef = useRef<string | null>(null);
 
   const read = useCallback(() => {
     const m = (window as unknown as Record<string, CalligraphyMetrics>)
@@ -31,7 +38,6 @@ const MetricsDebugOverlay = () => {
     setLastUpdated(Date.now());
   }, []);
 
-  // Keep latest `read` reference for the interval without restarting it.
   const readRef = useRef(read);
   useEffect(() => {
     readRef.current = read;
@@ -45,8 +51,6 @@ const MetricsDebugOverlay = () => {
     return () => window.clearInterval(id);
   }, [paused]);
 
-  if (!import.meta.env.DEV) return null;
-
   const status = (() => {
     if (!metrics) return { label: "waiting", color: "bg-muted-foreground" };
     if (metrics.cachedHit > 0)
@@ -57,6 +61,47 @@ const MetricsDebugOverlay = () => {
       return { label: "skipped", color: "bg-amber-500" };
     return { label: "pending", color: "bg-muted-foreground" };
   })();
+
+  // Track when the status last changed; reset stability + visibility on change.
+  useEffect(() => {
+    if (lastStatusRef.current !== status.label) {
+      lastStatusRef.current = status.label;
+      setStableSince(Date.now());
+      setHidden(false);
+    }
+  }, [status.label]);
+
+  // Auto-hide after STABILITY_HIDE_MS of unchanged status.
+  useEffect(() => {
+    if (!autoHide || hidden || stableSince == null) return;
+    const elapsed = Date.now() - stableSince;
+    const remaining = Math.max(0, STABILITY_HIDE_MS - elapsed);
+    const id = window.setTimeout(() => setHidden(true), remaining);
+    return () => window.clearTimeout(id);
+  }, [autoHide, hidden, stableSince]);
+
+  if (!import.meta.env.DEV) return null;
+
+  if (hidden) {
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          setHidden(false);
+          setStableSince(Date.now());
+        }}
+        aria-label="Show metrics debug overlay"
+        title="Show metrics debug overlay"
+        className="fixed bottom-3 right-3 z-50 flex h-3 w-3 items-center justify-center rounded-full border border-border bg-background/80 shadow-sm backdrop-blur"
+      >
+        <span
+          className={`h-1.5 w-1.5 rounded-full ${status.color}`}
+          aria-hidden="true"
+        />
+      </button>
+    );
+  }
+
 
   const lastMs =
     metrics?.lastGenerationMs != null
@@ -110,8 +155,30 @@ const MetricsDebugOverlay = () => {
           title="Refresh metrics now"
         >
           ⟳
+          ⟳
+        </button>
+        <button
+          type="button"
+          onClick={() => setAutoHide((a) => !a)}
+          className={`rounded px-1 hover:bg-accent hover:text-accent-foreground ${
+            autoHide ? "text-foreground" : "text-muted-foreground"
+          }`}
+          aria-pressed={autoHide}
+          aria-label={
+            autoHide
+              ? "Disable auto-hide after stable status"
+              : "Enable auto-hide after 10s of stable status"
+          }
+          title={
+            autoHide
+              ? "Auto-hide: on (10s stable)"
+              : "Auto-hide: off"
+          }
+        >
+          {autoHide ? "👁︎" : "👁"}
         </button>
       </div>
+
 
       {!collapsed && (
         <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-muted-foreground">
