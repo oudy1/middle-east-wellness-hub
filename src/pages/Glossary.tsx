@@ -399,6 +399,18 @@ const Glossary = () => {
                               {isArabic ? "إرسال" : "Email"}
                             </span>
                           </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => openPdf([item])}
+                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
+                            aria-label={isArabic ? "تنزيل التعريف PDF" : "Download definition as PDF"}
+                          >
+                            <FileDown className="h-3.5 w-3.5" />
+                            <span className={isArabic ? "mr-1" : "ml-1"}>
+                              {isArabic ? "PDF" : "PDF"}
+                            </span>
+                          </Button>
                         </div>
                       </div>
                       <p className="text-foreground">
