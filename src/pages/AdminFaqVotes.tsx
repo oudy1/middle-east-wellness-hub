@@ -241,17 +241,21 @@ const AdminFaqVotes = () => {
       `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
     const bucketKey = (iso: string) => {
-      // Convert to admin's local time, then bucket by local day (or local
-      // Monday-start week) so weekly buckets line up with calendar weeks.
-      const d = new Date(iso);
+      // DST-safe: extract local Y/M/D, then anchor at local noon before any
+      // date arithmetic. Midnight is unsafe because the "spring forward" hour
+      // doesn't exist locally, which can shift the resulting date by a day.
+      const src = new Date(iso);
+      const y = src.getFullYear();
+      const m = src.getMonth();
+      const dayOfMonth = src.getDate();
+      const d = new Date(y, m, dayOfMonth, 12, 0, 0, 0);
       if (granularity === "week") {
-        const day = d.getDay(); // 0 = Sun .. 6 = Sat (local)
-        const diff = (day + 6) % 7; // days since Monday
+        const diff = (d.getDay() + 6) % 7; // days since local Monday
         d.setDate(d.getDate() - diff);
-        d.setHours(0, 0, 0, 0);
       }
       return localDateKey(d);
     };
+
 
     const buckets = new Map<
       string,
