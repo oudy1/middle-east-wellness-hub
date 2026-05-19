@@ -401,15 +401,32 @@ const AdminFaqVotes = () => {
 
         <section className="border border-border rounded-md bg-card p-4">
           <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
-            <div>
+            <div className="min-w-0">
               <h2 className="text-sm font-semibold text-foreground">Helpful vs Not helpful over time</h2>
-              <p className="text-xs text-muted-foreground">
-                {langFilter === "all"
-                  ? "Per language (EN and AR), respects date and search filters above"
-                  : `Language: ${langFilter.toUpperCase()}`}
+              <p className="text-xs text-muted-foreground truncate">
+                {trendFaqId === "all"
+                  ? langFilter === "all"
+                    ? "All FAQs · EN and AR · respects date filters above"
+                    : `All FAQs · Language ${langFilter.toUpperCase()}`
+                  : `FAQ ${trendFaqId}${langFilter === "all" ? "" : ` · ${langFilter.toUpperCase()}`}`}
               </p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
+              <label className="flex items-center gap-1 text-xs text-muted-foreground">
+                FAQ
+                <select
+                  className="h-8 max-w-[14rem] rounded-md border border-input bg-background px-2 text-xs truncate"
+                  value={trendFaqId}
+                  onChange={(e) => setTrendFaqId(e.target.value)}
+                >
+                  <option value="all">All FAQs</option>
+                  {availableFaqIds.map((f) => (
+                    <option key={f.id} value={f.id}>
+                      {f.id} — {f.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <div className="flex items-center gap-1">
                 {(["day", "week"] as const).map((g) => (
                   <Button
