@@ -257,6 +257,26 @@ const AdminFaqVotes = () => {
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
   }, [rows, dateFilter, langFilter, granularity]);
 
+  const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
+
+  const smoothedTrendData = useMemo(() => {
+    if (smoothing === 0 || trendData.length === 0) return trendData;
+    const keys = ["en_up", "en_down", "ar_up", "ar_down"] as const;
+    const window = smoothing;
+    return trendData.map((_, i) => {
+      const start = Math.max(0, i - window + 1);
+      const slice = trendData.slice(start, i + 1);
+      const out: Record<string, number | string> = { date: trendData[i].date };
+      for (const k of keys) {
+        const sum = slice.reduce((acc, r) => acc + (r[k] as number), 0);
+        out[k] = +(sum / slice.length).toFixed(2);
+      }
+      return out as typeof trendData[number];
+    });
+  }, [trendData, smoothing]);
+
+
+
 
   const exportCsv = () => {
     const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
@@ -339,27 +359,42 @@ const AdminFaqVotes = () => {
                   : `Language: ${langFilter.toUpperCase()}`}
               </p>
             </div>
-            <div className="flex items-center gap-1">
-              {(["day", "week"] as const).map((g) => (
-                <Button
-                  key={g}
-                  variant={granularity === g ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setGranularity(g)}
-                >
-                  {g === "day" ? "Daily" : "Weekly"}
-                </Button>
-              ))}
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1">
+                {(["day", "week"] as const).map((g) => (
+                  <Button
+                    key={g}
+                    variant={granularity === g ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setGranularity(g)}
+                  >
+                    {g === "day" ? "Daily" : "Weekly"}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-muted-foreground">Smoothing</span>
+                {([0, 3, 7] as const).map((s) => (
+                  <Button
+                    key={s}
+                    variant={smoothing === s ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSmoothing(s)}
+                  >
+                    {s === 0 ? "None" : `MA-${s}`}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
           <div className="w-full h-64">
-            {trendData.length === 0 ? (
+            {smoothedTrendData.length === 0 ? (
               <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
                 No votes in the selected range.
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+                <LineChart data={smoothedTrendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis
                     dataKey="date"
