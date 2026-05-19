@@ -13,6 +13,7 @@ import NewsletterSection from "@/components/NewsletterSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
 import UpcomingEventsSection from "@/components/UpcomingEventsSection";
+import FeaturedEventSection from "@/components/FeaturedEventSection";
 import PartnersSection from "@/components/PartnersSection";
 import MeetTeamButton from "@/components/MeetTeamButton";
 import FeaturedNewsSection from "@/components/FeaturedNewsSection";
@@ -31,6 +32,7 @@ const Index = () => {
       <Header />
       <main className="flex-grow relative z-10">
         <HeroSection />
+        <FeaturedEventSection />
         <FeaturedWebinarBanner />
         <ResearchWebinarCarousel />
         <ResourceFinderSection />
