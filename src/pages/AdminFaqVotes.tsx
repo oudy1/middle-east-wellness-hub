@@ -257,6 +257,26 @@ const AdminFaqVotes = () => {
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
   }, [rows, dateFilter, langFilter, granularity]);
 
+  const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
+
+  const smoothedTrendData = useMemo(() => {
+    if (smoothing === 0 || trendData.length === 0) return trendData;
+    const keys = ["en_up", "en_down", "ar_up", "ar_down"] as const;
+    const window = smoothing;
+    return trendData.map((_, i) => {
+      const start = Math.max(0, i - window + 1);
+      const slice = trendData.slice(start, i + 1);
+      const out: Record<string, number | string> = { date: trendData[i].date };
+      for (const k of keys) {
+        const sum = slice.reduce((acc, r) => acc + (r[k] as number), 0);
+        out[k] = +(sum / slice.length).toFixed(2);
+      }
+      return out as typeof trendData[number];
+    });
+  }, [trendData, smoothing]);
+
+
+
 
   const exportCsv = () => {
     const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
