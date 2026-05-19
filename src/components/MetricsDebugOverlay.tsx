@@ -213,8 +213,6 @@ const MetricsDebugOverlay = () => {
           </div>
         );
       })()}
-        </div>
-      )}
     </div>
   );
 };
