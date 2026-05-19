@@ -234,13 +234,31 @@ const Glossary = () => {
                 <div className="space-y-4">
                   {items.map((item) => (
                     <div key={item.id} className="border rounded-lg p-5 bg-card space-y-2">
-                      <div className="flex items-baseline gap-3 flex-wrap">
+                      <div className="flex items-baseline gap-3 flex-wrap justify-between">
                         <span className="text-xl font-bold text-primary">
                           <HighlightText
                             text={isArabic ? item.termAr : item.termEn}
                             query={searchQuery}
                           />
                         </span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleCopy(item)}
+                          className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
+                          aria-label={isArabic ? "نسخ المصطلح والتعريف" : "Copy term and definition"}
+                        >
+                          {copiedId === item.id ? (
+                            <Check className="h-3.5 w-3.5" />
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                          <span className={isArabic ? "mr-1" : "ml-1"}>
+                            {copiedId === item.id
+                              ? isArabic ? "تم النسخ" : "Copied"
+                              : isArabic ? "نسخ" : "Copy"}
+                          </span>
+                        </Button>
                       </div>
                       <p className="text-foreground">
                         <HighlightText
