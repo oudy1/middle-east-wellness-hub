@@ -420,27 +420,31 @@ const AdminFaqVotes = () => {
                   </Button>
                 ))}
               </div>
+              <div className="flex items-center gap-1">
+                {(["counts", "percent"] as const).map((m) => (
+                  <Button
+                    key={m}
+                    variant={chartMode === m ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setChartMode(m)}
+                  >
+                    {m === "counts" ? "Counts" : "Helpful %"}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
           <div className="w-full h-64">
-            {smoothedTrendData.length === 0 ? (
+            {(chartMode === "counts" ? smoothedTrendData : percentTrendData).length === 0 ? (
               <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
                 No votes in the selected range.
               </div>
-            ) : (
+            ) : chartMode === "counts" ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={smoothedTrendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis
-                    dataKey="date"
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={11}
-                  />
-                  <YAxis
-                    allowDecimals={false}
-                    stroke="hsl(var(--muted-foreground))"
-                    fontSize={11}
-                  />
+                  <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                  <YAxis allowDecimals={false} stroke="hsl(var(--muted-foreground))" fontSize={11} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
@@ -452,45 +456,62 @@ const AdminFaqVotes = () => {
                   <Legend wrapperStyle={{ fontSize: 12 }} />
                   {(langFilter === "all" || langFilter === "en") && (
                     <>
-                      <Line
-                        type="monotone"
-                        dataKey="en_up"
-                        name="EN helpful"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="en_down"
-                        name="EN not helpful"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth={2}
-                        strokeDasharray="4 4"
-                        dot={false}
-                      />
+                      <Line type="monotone" dataKey="en_up" name="EN helpful" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
+                      <Line type="monotone" dataKey="en_down" name="EN not helpful" stroke="hsl(var(--primary))" strokeWidth={2} strokeDasharray="4 4" dot={false} />
                     </>
                   )}
                   {(langFilter === "all" || langFilter === "ar") && (
                     <>
-                      <Line
-                        type="monotone"
-                        dataKey="ar_up"
-                        name="AR helpful"
-                        stroke="hsl(var(--accent-foreground))"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="ar_down"
-                        name="AR not helpful"
-                        stroke="hsl(var(--accent-foreground))"
-                        strokeWidth={2}
-                        strokeDasharray="4 4"
-                        dot={false}
-                      />
+                      <Line type="monotone" dataKey="ar_up" name="AR helpful" stroke="hsl(var(--accent-foreground))" strokeWidth={2} dot={false} />
+                      <Line type="monotone" dataKey="ar_down" name="AR not helpful" stroke="hsl(var(--accent-foreground))" strokeWidth={2} strokeDasharray="4 4" dot={false} />
                     </>
+                  )}
+                </LineChart>
+              </ResponsiveContainer>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={percentTrendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                  <YAxis
+                    domain={[0, 100]}
+                    tickFormatter={(v) => `${v}%`}
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: 6,
+                      fontSize: 12,
+                    }}
+                    formatter={(value: number | null) =>
+                      value === null ? ["No votes", ""] : [`${value}%`, ""]
+                    }
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                  {(langFilter === "all" || langFilter === "en") && (
+                    <Line
+                      type="monotone"
+                      dataKey="en_pct"
+                      name="EN helpful %"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth={2}
+                      dot={false}
+                      connectNulls
+                    />
+                  )}
+                  {(langFilter === "all" || langFilter === "ar") && (
+                    <Line
+                      type="monotone"
+                      dataKey="ar_pct"
+                      name="AR helpful %"
+                      stroke="hsl(var(--accent-foreground))"
+                      strokeWidth={2}
+                      dot={false}
+                      connectNulls
+                    />
                   )}
                 </LineChart>
               </ResponsiveContainer>
