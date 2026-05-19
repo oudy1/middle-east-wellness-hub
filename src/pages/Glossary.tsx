@@ -29,6 +29,7 @@ const Glossary = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState<string>("");
 
   const handleCopy = async (item: typeof glossaryData[number]) => {
     const term = isArabic ? item.termAr : item.termEn;
@@ -37,16 +38,24 @@ const Glossary = () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedId(item.id);
+      const msg = isArabic
+        ? `تم نسخ المصطلح والتعريف: ${term}`
+        : `Copied term and definition: ${term}`;
+      setCopyStatus(msg);
       toast({
         title: isArabic ? "تم النسخ" : "Copied",
         description: isArabic ? "تم نسخ المصطلح والتعريف" : "Term and definition copied to clipboard",
       });
       setTimeout(() => setCopiedId((prev) => (prev === item.id ? null : prev)), 2000);
+      setTimeout(() => setCopyStatus(""), 3000);
     } catch {
+      const msg = isArabic ? "فشل نسخ المصطلح" : "Failed to copy term";
+      setCopyStatus(msg);
       toast({
         title: isArabic ? "فشل النسخ" : "Copy failed",
         variant: "destructive",
       });
+      setTimeout(() => setCopyStatus(""), 3000);
     }
   };
 
