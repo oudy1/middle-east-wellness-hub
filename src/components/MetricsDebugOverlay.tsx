@@ -22,6 +22,7 @@ const MetricsDebugOverlay = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [paused, setPaused] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
+  const [phasesOpen, setPhasesOpen] = useState(false);
 
   const read = useCallback(() => {
     const m = (window as unknown as Record<string, CalligraphyMetrics>)
