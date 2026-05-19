@@ -82,10 +82,36 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       (window as any).cancelIdleCallback ||
       ((id: number) => window.clearTimeout(id));
 
+    // Helper: time a phase, store its duration in metrics, and create a
+    // performance.measure entry visible in DevTools.
+    const phase = async <T,>(name: string, fn: () => T | Promise<T>): Promise<T> => {
+      const startMark = `calligraphy:${name}:start`;
+      const endMark = `calligraphy:${name}:end`;
+      try {
+        performance.mark(startMark);
+      } catch {
+        /* ignore */
+      }
+      const t0 = performance.now();
+      const result = await fn();
+      const elapsed = performance.now() - t0;
+      metrics.lastPhaseMs[name] = elapsed;
+      try {
+        performance.mark(endMark);
+        performance.measure(`calligraphy:${name}`, startMark, endMark);
+      } catch {
+        /* ignore */
+      }
+      return result;
+    };
+
     // Run the actual generation only after: window 'load' fires, two animation
     // frames have flushed (hero is on screen), and the browser is idle.
     const start = async () => {
       if (cancelled) return;
+
+      const totalStart = performance.now();
+      log("generation-start");
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
