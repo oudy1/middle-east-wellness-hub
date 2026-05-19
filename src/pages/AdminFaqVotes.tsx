@@ -1,0 +1,310 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { SEOHead } from "@/components/SEOHead";
+import { toast } from "@/hooks/use-toast";
+import faqData from "../../content/faq.json";
+
+type VoteRow = {
+  id: string;
+  faq_id: string;
+  vote: string;
+  language: string | null;
+  session_id: string | null;
+  created_at: string;
+};
+
+type Aggregate = {
+  faq_id: string;
+  questionEn: string;
+  questionAr: string;
+  language: string;
+  up: number;
+  down: number;
+  total: number;
+  helpfulPct: number;
+};
+
+const AdminFaqVotes = () => {
+  const navigate = useNavigate();
+  const [authChecking, setAuthChecking] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [rows, setRows] = useState<VoteRow[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [langFilter, setLangFilter] = useState<"all" | "en" | "ar">("all");
+
+  useEffect(() => {
+    const init = async () => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const session = sessionData.session;
+      if (!session) {
+        navigate("/admin/login", { replace: true });
+        return;
+      }
+      const { data: adminRow } = await supabase
+        .from("app_admins")
+        .select("user_id")
+        .eq("user_id", session.user.id)
+        .maybeSingle();
+      if (!adminRow) {
+        setAuthChecking(false);
+        setIsAdmin(false);
+        return;
+      }
+      setIsAdmin(true);
+      setAuthChecking(false);
+      void loadVotes();
+    };
+    init();
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      if (!session) navigate("/admin/login", { replace: true });
+    });
+    return () => sub.subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadVotes = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("faq_votes")
+      .select("id, faq_id, vote, language, session_id, created_at")
+      .order("created_at", { ascending: false })
+      .limit(1000);
+    setLoading(false);
+    if (error) {
+      toast({ title: "Failed to load votes", description: error.message, variant: "destructive" });
+      return;
+    }
+    setRows((data ?? []) as VoteRow[]);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/admin/login", { replace: true });
+  };
+
+  const faqMap = useMemo(() => {
+    const map = new Map<string, { en: string; ar: string }>();
+    (faqData as Array<{ id: string; questionEn: string; questionAr: string }>).forEach((f) => {
+      map.set(f.id, { en: f.questionEn, ar: f.questionAr });
+    });
+    return map;
+  }, []);
+
+  const aggregates = useMemo<Aggregate[]>(() => {
+    const filtered = rows.filter(
+      (r) => langFilter === "all" || (r.language ?? "en") === langFilter
+    );
+    const buckets = new Map<string, Aggregate>();
+    for (const r of filtered) {
+      const lang = r.language ?? "en";
+      const key = `${r.faq_id}::${lang}`;
+      const q = faqMap.get(r.faq_id) ?? { en: r.faq_id, ar: r.faq_id };
+      const existing =
+        buckets.get(key) ??
+        ({
+          faq_id: r.faq_id,
+          questionEn: q.en,
+          questionAr: q.ar,
+          language: lang,
+          up: 0,
+          down: 0,
+          total: 0,
+          helpfulPct: 0,
+        } as Aggregate);
+      if (r.vote === "up") existing.up += 1;
+      else if (r.vote === "down") existing.down += 1;
+      existing.total = existing.up + existing.down;
+      existing.helpfulPct = existing.total ? Math.round((existing.up / existing.total) * 100) : 0;
+      buckets.set(key, existing);
+    }
+    const list = Array.from(buckets.values()).sort((a, b) => b.total - a.total);
+    const q = search.trim().toLowerCase();
+    if (!q) return list;
+    return list.filter(
+      (a) =>
+        a.faq_id.toLowerCase().includes(q) ||
+        a.questionEn.toLowerCase().includes(q) ||
+        a.questionAr.toLowerCase().includes(q)
+    );
+  }, [rows, langFilter, search, faqMap]);
+
+  const totals = useMemo(() => {
+    let up = 0;
+    let down = 0;
+    for (const r of rows) {
+      if (langFilter !== "all" && (r.language ?? "en") !== langFilter) continue;
+      if (r.vote === "up") up++;
+      else if (r.vote === "down") down++;
+    }
+    const total = up + down;
+    return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
+  }, [rows, langFilter]);
+
+  const exportCsv = () => {
+    const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
+    const lines = [header.join(",")];
+    for (const a of aggregates) {
+      const esc = (v: string | number) => `"${String(v).replace(/"/g, '""')}"`;
+      lines.push(
+        [a.faq_id, a.language, esc(a.questionEn), esc(a.questionAr), a.up, a.down, a.total, a.helpfulPct].join(",")
+      );
+    }
+    const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `faq-votes-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  if (authChecking) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center bg-background text-muted-foreground">
+        Checking access...
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-dvh flex flex-col items-center justify-center bg-background gap-4 px-4 text-center">
+        <h1 className="text-xl font-bold text-foreground">Access denied</h1>
+        <p className="text-sm text-muted-foreground max-w-md">
+          Your account is signed in but is not authorized as a SHAMS administrator.
+        </p>
+        <Button variant="outline" onClick={handleSignOut}>
+          Sign out
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-dvh bg-background">
+      <SEOHead title="FAQ Vote Analytics - SHAMS Admin" description="Admin analytics for FAQ feedback" />
+      <header className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+          <div>
+            <h1 className="text-xl font-bold text-foreground">FAQ Vote Analytics</h1>
+            <p className="text-xs text-muted-foreground">Helpfulness feedback per FAQ and language</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={loadVotes} disabled={loading}>
+              {loading ? "Refreshing..." : "Refresh"}
+            </Button>
+            <Button variant="outline" size="sm" onClick={exportCsv} disabled={aggregates.length === 0}>
+              Export CSV
+            </Button>
+            <Button variant="ghost" size="sm" onClick={handleSignOut}>
+              Sign out
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <StatCard label="Total votes" value={totals.total} />
+          <StatCard label="Helpful" value={totals.up} accent="text-primary" />
+          <StatCard label="Not helpful" value={totals.down} accent="text-muted-foreground" />
+          <StatCard label="Helpful %" value={`${totals.helpfulPct}%`} />
+        </section>
+
+        <section className="flex flex-wrap items-center gap-2">
+          <Input
+            placeholder="Search by FAQ id or question..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="max-w-sm"
+          />
+          <div className="flex items-center gap-1">
+            {(["all", "en", "ar"] as const).map((l) => (
+              <Button
+                key={l}
+                variant={langFilter === l ? "default" : "outline"}
+                size="sm"
+                onClick={() => setLangFilter(l)}
+              >
+                {l === "all" ? "All" : l.toUpperCase()}
+              </Button>
+            ))}
+          </div>
+          <span className="text-xs text-muted-foreground ml-auto">
+            {aggregates.length} row{aggregates.length === 1 ? "" : "s"}
+          </span>
+        </section>
+
+        <section className="border border-border rounded-md overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>FAQ</TableHead>
+                <TableHead className="w-16">Lang</TableHead>
+                <TableHead className="text-right w-20">Helpful</TableHead>
+                <TableHead className="text-right w-24">Not helpful</TableHead>
+                <TableHead className="text-right w-20">Total</TableHead>
+                <TableHead className="text-right w-20">Helpful %</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {aggregates.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                    {loading ? "Loading..." : "No votes yet."}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                aggregates.map((a) => (
+                  <TableRow key={`${a.faq_id}-${a.language}`}>
+                    <TableCell>
+                      <div className="font-medium text-sm text-foreground">
+                        {a.language === "ar" ? a.questionAr : a.questionEn}
+                      </div>
+                      <div className="text-xs text-muted-foreground font-mono">{a.faq_id}</div>
+                    </TableCell>
+                    <TableCell className="uppercase text-xs">{a.language}</TableCell>
+                    <TableCell className="text-right text-primary font-medium">{a.up}</TableCell>
+                    <TableCell className="text-right">{a.down}</TableCell>
+                    <TableCell className="text-right font-medium">{a.total}</TableCell>
+                    <TableCell className="text-right">{a.helpfulPct}%</TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+const StatCard = ({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: string | number;
+  accent?: string;
+}) => (
+  <div className="border border-border rounded-md p-3 bg-card">
+    <div className="text-xs text-muted-foreground">{label}</div>
+    <div className={`text-2xl font-bold ${accent ?? "text-foreground"}`}>{value}</div>
+  </div>
+);
+
+export default AdminFaqVotes;
