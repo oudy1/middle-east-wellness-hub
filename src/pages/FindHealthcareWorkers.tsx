@@ -289,10 +289,12 @@ const FindHealthcareWorkers = () => {
   return (
     <>
       <SEOHead
-        title={isAr ? "ابحث عن مقدمي الرعاية الصحية | SHAMS" : "Find Healthcare Workers | SHAMS"}
-        description={isAr 
-          ? "ابحث عن أطباء ومقدمي رعاية صحية يتحدثون لغتك في منطقتك"
-          : "Find doctors and healthcare providers who speak your language in your area"}
+        lang={isAr ? "ar" : "en"}
+        path="/find-healthcare-workers"
+        title="Find Healthcare Workers | SHAMS"
+        description="Find physicians, family doctors, specialists, and healthcare workers serving Middle Eastern and Arab communities across Canada."
+        titleAr="ابحث عن مقدمي الرعاية الصحية | شمس"
+        descriptionAr="ابحث عن أطباء العائلة والاختصاصيين والعاملين في الرعاية الصحية الذين يخدمون المجتمعات الشرق أوسطية والعربية في جميع أنحاء كندا."
       />
       <div className="flex flex-col min-h-screen bg-background" dir={isAr ? "rtl" : "ltr"}>
         <Header />
