@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { bucketKeyFor } from "@/lib/trendBucket";
+import { addDays, utcForLocal } from "@/lib/__tests__/tzHelpers";
 
 // DST transition reference (all are local Sundays where the clock changes):
 //   America/Toronto  spring forward: 2024-03-10, 2025-03-09, 2026-03-08
@@ -10,14 +11,8 @@ import { bucketKeyFor } from "@/lib/trendBucket";
 //
 // For each transition we verify that every day in the surrounding Mon..Sun
 // week buckets into the same Monday-anchor key, regardless of the DST shift.
-//
-// Probing strategy:
-//   Instead of blindly sweeping UTC offsets (which produces ambiguous "is
-//   this the same local day or not?" samples and risks flakiness on hosts
-//   in unusual zones), we resolve each (localDate, localHour) pair to the
-//   exact UTC instant whose wall-clock in the target zone matches. That
-//   gives precise, deterministic coverage of every sensitive instant —
-//   especially 00:00, 01:00, 02:00, 03:00 on the transition Sunday.
+// Probing uses utcForLocal so every sample is a real wall-clock instant in
+// the target zone — no blind UTC offset sweeps, no host-zone flakiness.
 
 type DstCase = {
   zone: string;
@@ -42,40 +37,6 @@ const DST_CASES: DstCase[] = [
   { zone: "Europe/London",    label: "fall 2025",   transitionLocalDate: "2025-10-26", expectedMonday: "2025-10-20" },
 ];
 
-const pad = (n: number) => String(n).padStart(2, "0");
-
-const formatLocal = (utc: Date, zone: string) => {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: zone,
-    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false,
-  }).formatToParts(utc);
-  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
-  return { date: `${get("year")}-${get("month")}-${get("day")}`, hour: get("hour") };
-};
-
-const addDays = (date: string, days: number): string => {
-  const [y, m, d] = date.split("-").map(Number);
-  const dt = new Date(Date.UTC(y, m - 1, d + days));
-  return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}-${pad(dt.getUTCDate())}`;
-};
-
-// Resolve the UTC instant whose wall-clock in `zone` equals localDate at
-// localHour:00. Returns null when the local time does not exist (spring
-// forward gap, e.g. 02:00 on a US DST Sunday). On fall-back ambiguity we
-// accept the first match — both repeated wall-clock instants belong to the
-// same local calendar day, which is all this suite cares about.
-function utcForLocal(zone: string, localDate: string, localHour: number): string | null {
-  const [y, m, d] = localDate.split("-").map(Number);
-  const targetHour = pad(localHour);
-  // Zones we test fall within UTC-12..+14; scan that range exhaustively.
-  for (let off = -14; off <= 14; off++) {
-    const utc = new Date(Date.UTC(y, m - 1, d, localHour + off, 0, 0));
-    const { date, hour } = formatLocal(utc, zone);
-    if (date === localDate && hour === targetHour) return utc.toISOString();
-  }
-  return null;
-}
-
 describe("weekly bucketing — DST boundary stability", () => {
   for (const c of DST_CASES) {
     it(`${c.zone} ${c.label}: every local hour Mon..Sun buckets to ${c.expectedMonday}`, () => {
@@ -83,7 +44,6 @@ describe("weekly bucketing — DST boundary stability", () => {
       // (day, hour) we resolve the precise UTC instant and assert the bucket
       // key equals the DST Monday. Non-existent local times (spring-forward
       // gap) are skipped — they cannot occur in real recorded data.
-      const [y, m, d] = c.expectedMonday.split("-").map(Number);
       let resolvedCount = 0;
       for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
         const local = addDays(c.expectedMonday, dayOffset);
@@ -96,8 +56,6 @@ describe("weekly bucketing — DST boundary stability", () => {
       }
       // Sanity: we must have resolved most of the 7*24=168 hours.
       expect(resolvedCount).toBeGreaterThanOrEqual(165);
-      // Silence unused-var lint for y/m/d kept for readability above.
-      void y; void m; void d;
     });
 
     it(`${c.zone} ${c.label}: 00:00 and 23:00 on each local day stay inside ${c.expectedMonday}`, () => {
