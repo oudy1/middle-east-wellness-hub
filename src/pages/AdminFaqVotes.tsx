@@ -483,6 +483,8 @@ const AdminFaqVotes = () => {
 
         <PaginatedAggregatesTable
           aggregates={aggregates}
+          rows={rows}
+          dateFilter={dateFilter}
           loading={loading}
           page={page}
           pageSize={pageSize}
