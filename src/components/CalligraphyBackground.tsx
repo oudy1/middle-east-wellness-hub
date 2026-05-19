@@ -497,6 +497,8 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       if (idleHandle !== null) cancelIdle(idleHandle);
       if (observerTimer !== null) window.clearTimeout(observerTimer);
       observer?.disconnect();
+      metrics.ioActive = false;
+      timers.forEach((t) => window.clearTimeout(t));
       timers.forEach((t) => window.clearTimeout(t));
 
       // Categorize the unmount: never intersected vs cancelled mid-flight.
