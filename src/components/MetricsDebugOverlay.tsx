@@ -30,6 +30,7 @@ const MetricsDebugOverlay = () => {
   const [autoHide, setAutoHide] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [stableSince, setStableSince] = useState<number | null>(null);
+  const [heroVisible, setHeroVisible] = useState<boolean | null>(null);
 
   const lastStatusRef = useRef<string | null>(null);
 
@@ -38,6 +39,19 @@ const MetricsDebugOverlay = () => {
       .__calligraphyMetrics;
     setMetrics(m ?? null);
     setLastUpdated(Date.now());
+
+    // Live hero visibility: probe the first <section> against the viewport.
+    const hero = document.querySelector<HTMLElement>("section");
+    if (!hero) {
+      setHeroVisible(null);
+      return;
+    }
+    const rect = hero.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const vw = window.innerWidth || document.documentElement.clientWidth;
+    const visible =
+      rect.bottom > 0 && rect.top < vh && rect.right > 0 && rect.left < vw;
+    setHeroVisible(visible);
   }, []);
 
   const readRef = useRef(read);
