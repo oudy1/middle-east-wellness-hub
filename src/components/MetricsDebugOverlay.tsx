@@ -155,8 +155,30 @@ const MetricsDebugOverlay = () => {
           title="Refresh metrics now"
         >
           ⟳
+          ⟳
+        </button>
+        <button
+          type="button"
+          onClick={() => setAutoHide((a) => !a)}
+          className={`rounded px-1 hover:bg-accent hover:text-accent-foreground ${
+            autoHide ? "text-foreground" : "text-muted-foreground"
+          }`}
+          aria-pressed={autoHide}
+          aria-label={
+            autoHide
+              ? "Disable auto-hide after stable status"
+              : "Enable auto-hide after 10s of stable status"
+          }
+          title={
+            autoHide
+              ? "Auto-hide: on (10s stable)"
+              : "Auto-hide: off"
+          }
+        >
+          {autoHide ? "👁︎" : "👁"}
         </button>
       </div>
+
 
       {!collapsed && (
         <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-muted-foreground">
