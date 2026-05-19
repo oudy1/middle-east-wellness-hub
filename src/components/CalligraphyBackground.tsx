@@ -3,17 +3,27 @@ import { useEffect } from "react";
 
 const CalligraphyBackground = () => {
   useEffect(() => {
-    // Check if we already have a stored background
+    // Check if we already have a stored background — apply immediately, no heavy work
     const storedBg = localStorage.getItem('calligraphy-bg');
     if (storedBg) {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
       return;
     }
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    
-    if (!ctx) return;
+    // Defer the expensive canvas generation until after the browser paints
+    // the hero, so it doesn't block LCP on first visit.
+    const idle =
+      (window as any).requestIdleCallback ||
+      ((cb: () => void) => window.setTimeout(cb, 200));
+    const cancelIdle =
+      (window as any).cancelIdleCallback ||
+      ((id: number) => window.clearTimeout(id));
+
+    const handle = idle(() => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      if (!ctx) return;
     
     canvas.width = 1800;
     canvas.height = 1800;
