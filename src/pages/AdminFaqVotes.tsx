@@ -179,6 +179,45 @@ const AdminFaqVotes = () => {
     return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
   }, [rows, langFilter, dateFilter]);
 
+  const [granularity, setGranularity] = useState<"day" | "week">("day");
+
+  const trendData = useMemo(() => {
+    const bucketKey = (iso: string) => {
+      const d = new Date(iso);
+      if (granularity === "week") {
+        // ISO-ish week start (Monday)
+        const day = d.getUTCDay();
+        const diff = (day + 6) % 7;
+        d.setUTCDate(d.getUTCDate() - diff);
+      }
+      return d.toISOString().slice(0, 10);
+    };
+
+    const buckets = new Map<
+      string,
+      { date: string; en_up: number; en_down: number; ar_up: number; ar_down: number }
+    >();
+
+    for (const r of rows) {
+      if (!dateFilter(r)) continue;
+      const lang = (r.language ?? "en") === "ar" ? "ar" : "en";
+      if (langFilter !== "all" && langFilter !== lang) continue;
+      const key = bucketKey(r.created_at);
+      const existing =
+        buckets.get(key) ??
+        { date: key, en_up: 0, en_down: 0, ar_up: 0, ar_down: 0 };
+      const field = `${lang}_${r.vote === "up" ? "up" : "down"}` as
+        | "en_up"
+        | "en_down"
+        | "ar_up"
+        | "ar_down";
+      if (r.vote === "up" || r.vote === "down") existing[field] += 1;
+      buckets.set(key, existing);
+    }
+    return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
+  }, [rows, dateFilter, langFilter, granularity]);
+
+
   const exportCsv = () => {
     const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
     const lines = [header.join(",")];
