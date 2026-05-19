@@ -236,15 +236,21 @@ const AdminFaqVotes = () => {
   }, [rows, faqMap]);
 
   const trendData = useMemo(() => {
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const localDateKey = (d: Date) =>
+      `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+
     const bucketKey = (iso: string) => {
+      // Convert to admin's local time, then bucket by local day (or local
+      // Monday-start week) so weekly buckets line up with calendar weeks.
       const d = new Date(iso);
       if (granularity === "week") {
-        // ISO-ish week start (Monday)
-        const day = d.getUTCDay();
-        const diff = (day + 6) % 7;
-        d.setUTCDate(d.getUTCDate() - diff);
+        const day = d.getDay(); // 0 = Sun .. 6 = Sat (local)
+        const diff = (day + 6) % 7; // days since Monday
+        d.setDate(d.getDate() - diff);
+        d.setHours(0, 0, 0, 0);
       }
-      return d.toISOString().slice(0, 10);
+      return localDateKey(d);
     };
 
     const buckets = new Map<
