@@ -20,11 +20,23 @@ import FeaturedNewsSection from "@/components/FeaturedNewsSection";
 import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
 import ResearchTeaserSection from "@/components/ResearchTeaserSection";
 import { ResourceFinderSection } from "@/components/ResourceFinder";
+import { SEOHead } from "@/components/SEOHead";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 
 const Index = () => {
+  const { language } = useLanguage();
   return (
     <div className="flex flex-col min-h-screen w-full bg-healthLightGray relative">
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        title="SHAMS | Health Advocacy for Middle Eastern Societies in Canada"
+        description="SHAMS is a youth-led Canadian initiative supporting Middle Eastern and North African societies through health education, research, mentorship, healthcare navigation, and community resources."
+        titleAr="شمس | المناصرة الصحية للمجتمعات الشرق أوسطية في كندا"
+        descriptionAr="شمس مبادرة شبابية كندية تدعم المجتمعات الشرق أوسطية وشمال أفريقيا من خلال التثقيف الصحي، البحث، الإرشاد، والموارد المجتمعية."
+        path="/"
+        keywords="SHAMS, Middle Eastern health Canada, Arab healthcare Canada, MENA health advocacy, Arabic health education, Project SHAMS"
+      />
       {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
       <CalligraphyBackground />
       <LandmarksGenerator />
