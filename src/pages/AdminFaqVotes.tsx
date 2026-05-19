@@ -220,6 +220,20 @@ const AdminFaqVotes = () => {
   }, [search, langFilter, startDate, endDate, pageSize]);
 
   const [granularity, setGranularity] = useState<"day" | "week">("day");
+  const [trendFaqId, setTrendFaqId] = useState<string>("all");
+
+  // FAQ ids present in the loaded vote data, with friendly labels.
+  const availableFaqIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const r of rows) ids.add(r.faq_id);
+    return Array.from(ids)
+      .map((id) => {
+        const q = faqMap.get(id);
+        const label = q?.en ?? id;
+        return { id, label: label.length > 80 ? label.slice(0, 77) + "..." : label };
+      })
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [rows, faqMap]);
 
   const trendData = useMemo(() => {
     const bucketKey = (iso: string) => {
@@ -240,6 +254,7 @@ const AdminFaqVotes = () => {
 
     for (const r of rows) {
       if (!dateFilter(r)) continue;
+      if (trendFaqId !== "all" && r.faq_id !== trendFaqId) continue;
       const lang = (r.language ?? "en") === "ar" ? "ar" : "en";
       if (langFilter !== "all" && langFilter !== lang) continue;
       const key = bucketKey(r.created_at);
@@ -255,7 +270,7 @@ const AdminFaqVotes = () => {
       buckets.set(key, existing);
     }
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [rows, dateFilter, langFilter, granularity]);
+  }, [rows, dateFilter, langFilter, granularity, trendFaqId]);
 
   const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
 
@@ -386,15 +401,32 @@ const AdminFaqVotes = () => {
 
         <section className="border border-border rounded-md bg-card p-4">
           <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
-            <div>
+            <div className="min-w-0">
               <h2 className="text-sm font-semibold text-foreground">Helpful vs Not helpful over time</h2>
-              <p className="text-xs text-muted-foreground">
-                {langFilter === "all"
-                  ? "Per language (EN and AR), respects date and search filters above"
-                  : `Language: ${langFilter.toUpperCase()}`}
+              <p className="text-xs text-muted-foreground truncate">
+                {trendFaqId === "all"
+                  ? langFilter === "all"
+                    ? "All FAQs · EN and AR · respects date filters above"
+                    : `All FAQs · Language ${langFilter.toUpperCase()}`
+                  : `FAQ ${trendFaqId}${langFilter === "all" ? "" : ` · ${langFilter.toUpperCase()}`}`}
               </p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
+              <label className="flex items-center gap-1 text-xs text-muted-foreground">
+                FAQ
+                <select
+                  className="h-8 max-w-[14rem] rounded-md border border-input bg-background px-2 text-xs truncate"
+                  value={trendFaqId}
+                  onChange={(e) => setTrendFaqId(e.target.value)}
+                >
+                  <option value="all">All FAQs</option>
+                  {availableFaqIds.map((f) => (
+                    <option key={f.id} value={f.id}>
+                      {f.id} — {f.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <div className="flex items-center gap-1">
                 {(["day", "week"] as const).map((g) => (
                   <Button
