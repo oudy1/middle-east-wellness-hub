@@ -275,6 +275,41 @@ const AdminFaqVotes = () => {
     });
   }, [trendData, smoothing]);
 
+  const [chartMode, setChartMode] = useState<"counts" | "percent">("counts");
+
+  // Percentage series: helpful / (helpful+not helpful) * 100, with trailing window
+  // matching the smoothing setting so the ratio is stable on low-volume days.
+  const percentTrendData = useMemo(() => {
+    if (trendData.length === 0) return [] as Array<{
+      date: string;
+      en_pct: number | null;
+      en_total: number;
+      ar_pct: number | null;
+      ar_total: number;
+    }>;
+    const window = smoothing === 0 ? 1 : smoothing;
+    return trendData.map((_, i) => {
+      const start = Math.max(0, i - window + 1);
+      const slice = trendData.slice(start, i + 1);
+      const sum = (k: "en_up" | "en_down" | "ar_up" | "ar_down") =>
+        slice.reduce((acc, r) => acc + (r[k] as number), 0);
+      const enUp = sum("en_up");
+      const enDown = sum("en_down");
+      const arUp = sum("ar_up");
+      const arDown = sum("ar_down");
+      const enTotal = enUp + enDown;
+      const arTotal = arUp + arDown;
+      return {
+        date: trendData[i].date,
+        en_pct: enTotal ? +((enUp / enTotal) * 100).toFixed(1) : null,
+        en_total: enTotal,
+        ar_pct: arTotal ? +((arUp / arTotal) * 100).toFixed(1) : null,
+        ar_total: arTotal,
+      };
+    });
+  }, [trendData, smoothing]);
+
+
 
 
 
