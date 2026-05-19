@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Header from "@/components/Header";
 import WebinarSlidesViewer from "@/components/WebinarSlidesViewer";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
