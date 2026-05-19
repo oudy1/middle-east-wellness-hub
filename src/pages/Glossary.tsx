@@ -28,6 +28,28 @@ const Glossary = () => {
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = async (item: typeof glossaryData[number]) => {
+    const term = isArabic ? item.termAr : item.termEn;
+    const definition = isArabic ? item.definitionAr : item.definitionEn;
+    const text = `${term}: ${definition}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(item.id);
+      toast({
+        title: isArabic ? "تم النسخ" : "Copied",
+        description: isArabic ? "تم نسخ المصطلح والتعريف" : "Term and definition copied to clipboard",
+      });
+      setTimeout(() => setCopiedId((prev) => (prev === item.id ? null : prev)), 2000);
+    } catch {
+      toast({
+        title: isArabic ? "فشل النسخ" : "Copy failed",
+        variant: "destructive",
+      });
+    }
+  };
+
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filtered = glossaryData.filter((item) => {
