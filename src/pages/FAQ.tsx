@@ -170,6 +170,7 @@ const FAQ = () => {
                       query={searchQuery}
                     />
                   </p>
+                  <FAQFeedback faqId={item.id} language={language} isArabic={isArabic} />
                 </AccordionContent>
               </AccordionItem>
             ))}
