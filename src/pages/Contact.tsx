@@ -11,6 +11,14 @@ const Contact = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/contact"
+        title="Contact SHAMS | Reach the Middle Eastern Health Advocacy Team"
+        description="Get in touch with SHAMS, the youth-led Canadian non-profit serving Middle Eastern and North African societies. Email us, find us on Instagram, or join our community."
+        titleAr="تواصل مع شمس | فريق المناصرة الصحية للمجتمعات الشرق أوسطية"
+        descriptionAr="تواصل مع شمس، المبادرة الكندية الشبابية للمجتمعات الشرق أوسطية وشمال أفريقيا. راسلنا أو تابعنا على إنستغرام أو انضم إلى مجتمعنا."
+      />
       <Header />
       <main className="flex-grow">
         <section className="py-16 md:py-24">
