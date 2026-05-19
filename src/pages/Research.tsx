@@ -398,6 +398,14 @@ const Research = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray relative">
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/research"
+        title="Research Studies, Opportunities, and Affiliates | SHAMS"
+        description="Browse SHAMS research studies, affiliated researchers, student opportunities, conference presentations, and community-based research focused on MENA health in Canada."
+        titleAr="دراسات وفرص بحثية وباحثون منتسبون | شمس"
+        descriptionAr="استكشف دراسات شمس البحثية، الباحثين المنتسبين، فرص الطلاب، عروض المؤتمرات، والبحوث المجتمعية التي تركز على صحة الشرق الأوسط وشمال أفريقيا في كندا."
+      />
       <CalligraphyBackground />
       <LandmarksGenerator />
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
