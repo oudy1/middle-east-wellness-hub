@@ -62,6 +62,109 @@ const Glossary = () => {
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const buildPdfHtml = (items: typeof glossaryData) => {
+    const dir = isArabic ? "rtl" : "ltr";
+    const lang = isArabic ? "ar" : "en";
+    const fontFamily = isArabic
+      ? "'Cairo', 'Segoe UI', Tahoma, sans-serif"
+      : "'Segoe UI', Helvetica, Arial, sans-serif";
+    const title = isArabic ? "مسرد SHAMS" : "SHAMS Glossary";
+    const subtitle = isArabic
+      ? `${items.length} مصطلح`
+      : `${items.length} term${items.length === 1 ? "" : "s"}`;
+    const footer = isArabic
+      ? "مشروع SHAMS - projectshams.com"
+      : "SHAMS Project - projectshams.com";
+    const altLabel = isArabic ? "English" : "العربية";
+
+    const escapeHtml = (s: string) =>
+      s.replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string)
+      );
+
+    const cards = items
+      .map((item) => {
+        const term = isArabic ? item.termAr : item.termEn;
+        const definition = isArabic ? item.definitionAr : item.definitionEn;
+        const altTerm = isArabic ? item.termEn : item.termAr;
+        const altDef = isArabic ? item.definitionEn : item.definitionAr;
+        const altDir = isArabic ? "ltr" : "rtl";
+        return `
+          <article class="card">
+            <h2>${escapeHtml(term)}</h2>
+            <p class="def">${escapeHtml(definition)}</p>
+            <div class="alt" dir="${altDir}">
+              <span class="alt-label">${altLabel}:</span>
+              <strong>${escapeHtml(altTerm)}</strong> - ${escapeHtml(altDef)}
+            </div>
+          </article>`;
+      })
+      .join("");
+
+    return `<!doctype html>
+<html lang="${lang}" dir="${dir}">
+<head>
+<meta charset="utf-8" />
+<title>${title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 18mm; }
+  * { box-sizing: border-box; }
+  body { font-family: ${fontFamily}; color: #1a1a1a; margin: 0; line-height: 1.55; }
+  header { border-bottom: 2px solid #0f6b6b; padding-bottom: 10px; margin-bottom: 18px; }
+  header h1 { margin: 0; font-size: 22px; color: #0f6b6b; }
+  header p { margin: 4px 0 0; color: #555; font-size: 12px; }
+  .card { border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; page-break-inside: avoid; }
+  .card h2 { margin: 0 0 6px; font-size: 15px; color: #0f6b6b; }
+  .def { margin: 0 0 8px; font-size: 12.5px; }
+  .alt { font-size: 11px; color: #555; border-top: 1px dashed #ddd; padding-top: 6px; }
+  .alt-label { font-weight: 600; margin-${isArabic ? "left" : "right"}: 4px; }
+  footer { margin-top: 18px; padding-top: 8px; border-top: 1px solid #ddd; font-size: 10px; color: #777; text-align: center; }
+  @media print { .no-print { display: none !important; } }
+  .toolbar { position: fixed; top: 10px; ${isArabic ? "left" : "right"}: 10px; background: #0f6b6b; color: #fff; padding: 8px 14px; border-radius: 4px; font-size: 13px; cursor: pointer; border: 0; }
+</style>
+</head>
+<body>
+  <button class="toolbar no-print" onclick="window.print()">${isArabic ? "طباعة / حفظ PDF" : "Print / Save PDF"}</button>
+  <header>
+    <h1>${title}</h1>
+    <p>${subtitle}</p>
+  </header>
+  <main>${cards}</main>
+  <footer>${footer}</footer>
+  <script>
+    window.addEventListener('load', () => { setTimeout(() => window.print(), 600); });
+  <\/script>
+</body>
+</html>`;
+  };
+
+  const openPdf = (items: typeof glossaryData) => {
+    if (!items.length) {
+      toast({
+        title: isArabic ? "لا توجد نتائج" : "No results",
+        variant: "destructive",
+      });
+      return;
+    }
+    const w = window.open("", "_blank");
+    if (!w) {
+      toast({
+        title: isArabic ? "تم حظر النافذة" : "Popup blocked",
+        description: isArabic
+          ? "يرجى السماح بالنوافذ المنبثقة لتنزيل PDF"
+          : "Please allow popups to download the PDF",
+        variant: "destructive",
+      });
+      return;
+    }
+    w.document.open();
+    w.document.write(buildPdfHtml(items));
+    w.document.close();
+  };
+
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filtered = glossaryData.filter((item) => {
