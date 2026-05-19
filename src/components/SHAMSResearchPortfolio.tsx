@@ -159,7 +159,7 @@ const SHAMSResearchPortfolio = () => {
                   {/* Authors */}
                   <p className="text-xs text-muted-foreground">
                     <span className="font-semibold">{isAr ? "المؤلفون:" : "Authors:"}</span>{" "}
-                    Mahmoud Noweir, Mousa El-Sururi
+                    Mousa El-Sururi, Mahmoud Noweir, Abdullah Al Azzawi
                   </p>
                   <p className="text-[10px] text-muted-foreground/70 italic -mt-2">
                     University of Waterloo &nbsp;·&nbsp; University of Toronto
