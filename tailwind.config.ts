@@ -116,8 +116,10 @@ export default {
         noto: ['Noto Sans Arabic', 'sans-serif']
       },
       backgroundImage: {
-        'landmarks-pattern': "url('/src/assets/landmarks-bg.png')",
-        'calligraphy-pattern': "var(--calligraphy-bg, url('/src/assets/landmarks-bg.png'))"
+        // Calligraphy pattern is generated client-side into --calligraphy-bg.
+        // No fallback URL — avoids a 404 above-the-fold request in production.
+        'landmarks-pattern': "var(--calligraphy-bg, none)",
+        'calligraphy-pattern': "var(--calligraphy-bg, none)"
       }
 		}
 	},
