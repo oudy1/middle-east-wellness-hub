@@ -470,6 +470,19 @@ const AdminFaqVotes = () => {
                   </Button>
                 ))}
               </div>
+              <span
+                className="inline-flex items-center gap-1 rounded-md border border-input bg-muted/50 px-2 py-1 text-[11px] text-muted-foreground"
+                title={`Weekly buckets start on Monday in this timezone. Current offset: UTC${(() => { const o = -new Date().getTimezoneOffset(); const s = o >= 0 ? "+" : "-"; const a = Math.abs(o); return `${s}${String(Math.floor(a/60)).padStart(2,"0")}:${String(a%60).padStart(2,"0")}`; })()}`}
+              >
+                TZ: {Intl.DateTimeFormat().resolvedOptions().timeZone} (UTC
+                {(() => {
+                  const o = -new Date().getTimezoneOffset();
+                  const s = o >= 0 ? "+" : "-";
+                  const a = Math.abs(o);
+                  return `${s}${String(Math.floor(a / 60)).padStart(2, "0")}:${String(a % 60).padStart(2, "0")}`;
+                })()}
+                )
+              </span>
             </div>
           </div>
           <div className="w-full h-64">
