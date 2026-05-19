@@ -289,6 +289,107 @@ const AdminFaqVotes = () => {
           <StatCard label="Helpful %" value={`${totals.helpfulPct}%`} />
         </section>
 
+        <section className="border border-border rounded-md bg-card p-4">
+          <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
+            <div>
+              <h2 className="text-sm font-semibold text-foreground">Helpful vs Not helpful over time</h2>
+              <p className="text-xs text-muted-foreground">
+                {langFilter === "all"
+                  ? "Per language (EN and AR), respects date and search filters above"
+                  : `Language: ${langFilter.toUpperCase()}`}
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              {(["day", "week"] as const).map((g) => (
+                <Button
+                  key={g}
+                  variant={granularity === g ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setGranularity(g)}
+                >
+                  {g === "day" ? "Daily" : "Weekly"}
+                </Button>
+              ))}
+            </div>
+          </div>
+          <div className="w-full h-64">
+            {trendData.length === 0 ? (
+              <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
+                No votes in the selected range.
+              </div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis
+                    dataKey="date"
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                  />
+                  <YAxis
+                    allowDecimals={false}
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: 6,
+                      fontSize: 12,
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                  {(langFilter === "all" || langFilter === "en") && (
+                    <>
+                      <Line
+                        type="monotone"
+                        dataKey="en_up"
+                        name="EN helpful"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={2}
+                        dot={false}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="en_down"
+                        name="EN not helpful"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={2}
+                        strokeDasharray="4 4"
+                        dot={false}
+                      />
+                    </>
+                  )}
+                  {(langFilter === "all" || langFilter === "ar") && (
+                    <>
+                      <Line
+                        type="monotone"
+                        dataKey="ar_up"
+                        name="AR helpful"
+                        stroke="hsl(var(--accent-foreground))"
+                        strokeWidth={2}
+                        dot={false}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="ar_down"
+                        name="AR not helpful"
+                        stroke="hsl(var(--accent-foreground))"
+                        strokeWidth={2}
+                        strokeDasharray="4 4"
+                        dot={false}
+                      />
+                    </>
+                  )}
+                </LineChart>
+              </ResponsiveContainer>
+            )}
+          </div>
+        </section>
+
+
+
         <section className="flex flex-wrap items-center gap-2">
           <Input
             placeholder="Search by FAQ id or question..."
