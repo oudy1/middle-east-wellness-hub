@@ -273,30 +273,8 @@ const AdminFaqVotes = () => {
   }, [rows, faqMap]);
 
   const trendData = useMemo(() => {
-    const pad = (n: number) => String(n).padStart(2, "0");
-    const wdMap: Record<string, number> = {
-      Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
-    };
-    const tzFmt = new Intl.DateTimeFormat("en-CA", {
-      timeZone: effectiveTz,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      weekday: "short",
-    });
+    const bucketKey = (iso: string) => bucketKeyFor(iso, granularity, effectiveTz);
 
-    const bucketKey = (iso: string) => {
-      // Extract Y/M/D and weekday in the chosen timezone, then do calendar
-      // arithmetic in UTC to stay DST-safe (we only subtract whole days).
-      const parts = tzFmt.formatToParts(new Date(iso));
-      const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
-      const y = Number(get("year"));
-      const m = Number(get("month"));
-      const d = Number(get("day"));
-      const diff = granularity === "week" ? (wdMap[get("weekday")] ?? 0) : 0;
-      const anchor = new Date(Date.UTC(y, m - 1, d) - diff * 86400000);
-      return `${anchor.getUTCFullYear()}-${pad(anchor.getUTCMonth() + 1)}-${pad(anchor.getUTCDate())}`;
-    };
 
 
 
