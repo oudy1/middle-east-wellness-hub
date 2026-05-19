@@ -509,4 +509,115 @@ const StatCard = ({
   </div>
 );
 
+const PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
+
+const PaginatedAggregatesTable = ({
+  aggregates,
+  loading,
+  page,
+  pageSize,
+  onPageChange,
+  onPageSizeChange,
+}: {
+  aggregates: Aggregate[];
+  loading: boolean;
+  page: number;
+  pageSize: number;
+  onPageChange: (p: number) => void;
+  onPageSizeChange: (n: number) => void;
+}) => {
+  const total = aggregates.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const startIdx = (currentPage - 1) * pageSize;
+  const endIdx = Math.min(startIdx + pageSize, total);
+  const slice = aggregates.slice(startIdx, endIdx);
+
+  return (
+    <section className="border border-border rounded-md overflow-hidden">
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>FAQ</TableHead>
+              <TableHead className="w-16">Lang</TableHead>
+              <TableHead className="text-right w-20">Helpful</TableHead>
+              <TableHead className="text-right w-24">Not helpful</TableHead>
+              <TableHead className="text-right w-20">Total</TableHead>
+              <TableHead className="text-right w-20">Helpful %</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {total === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                  {loading ? "Loading..." : "No votes yet."}
+                </TableCell>
+              </TableRow>
+            ) : (
+              slice.map((a) => (
+                <TableRow key={`${a.faq_id}-${a.language}`}>
+                  <TableCell>
+                    <div className="font-medium text-sm text-foreground">
+                      {a.language === "ar" ? a.questionAr : a.questionEn}
+                    </div>
+                    <div className="text-xs text-muted-foreground font-mono">{a.faq_id}</div>
+                  </TableCell>
+                  <TableCell className="uppercase text-xs">{a.language}</TableCell>
+                  <TableCell className="text-right text-primary font-medium">{a.up}</TableCell>
+                  <TableCell className="text-right">{a.down}</TableCell>
+                  <TableCell className="text-right font-medium">{a.total}</TableCell>
+                  <TableCell className="text-right">{a.helpfulPct}%</TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-card px-3 py-2 text-xs">
+        <div className="text-muted-foreground">
+          {total === 0
+            ? "0 results"
+            : `Showing ${startIdx + 1}–${endIdx} of ${total}`}
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="flex items-center gap-1 text-muted-foreground">
+            Rows
+            <select
+              className="h-8 rounded-md border border-input bg-background px-1 text-xs"
+              value={pageSize}
+              onChange={(e) => onPageSizeChange(Number(e.target.value))}
+            >
+              {PAGE_SIZE_OPTIONS.map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage <= 1}
+          >
+            Prev
+          </Button>
+          <span className="text-muted-foreground">
+            Page {currentPage} / {totalPages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage >= totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default AdminFaqVotes;
