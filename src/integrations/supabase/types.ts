@@ -88,6 +88,33 @@ export type Database = {
           },
         ]
       }
+      faq_votes: {
+        Row: {
+          created_at: string
+          faq_id: string
+          id: string
+          language: string | null
+          session_id: string | null
+          vote: string
+        }
+        Insert: {
+          created_at?: string
+          faq_id: string
+          id?: string
+          language?: string | null
+          session_id?: string | null
+          vote: string
+        }
+        Update: {
+          created_at?: string
+          faq_id?: string
+          id?: string
+          language?: string | null
+          session_id?: string | null
+          vote?: string
+        }
+        Relationships: []
+      }
       follow_up_leads: {
         Row: {
           city: string | null
