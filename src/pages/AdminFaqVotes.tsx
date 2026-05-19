@@ -55,6 +55,9 @@ const AdminFaqVotes = () => {
   const [langFilter, setLangFilter] = useState<"all" | "en" | "ar">("all");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [rawTotal, setRawTotal] = useState<number>(0);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
 
   useEffect(() => {
     const init = async () => {
