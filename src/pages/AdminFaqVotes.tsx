@@ -14,6 +14,16 @@ import {
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "@/hooks/use-toast";
 import faqData from "../../content/faq.json";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 type VoteRow = {
   id: string;
@@ -169,6 +179,45 @@ const AdminFaqVotes = () => {
     return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
   }, [rows, langFilter, dateFilter]);
 
+  const [granularity, setGranularity] = useState<"day" | "week">("day");
+
+  const trendData = useMemo(() => {
+    const bucketKey = (iso: string) => {
+      const d = new Date(iso);
+      if (granularity === "week") {
+        // ISO-ish week start (Monday)
+        const day = d.getUTCDay();
+        const diff = (day + 6) % 7;
+        d.setUTCDate(d.getUTCDate() - diff);
+      }
+      return d.toISOString().slice(0, 10);
+    };
+
+    const buckets = new Map<
+      string,
+      { date: string; en_up: number; en_down: number; ar_up: number; ar_down: number }
+    >();
+
+    for (const r of rows) {
+      if (!dateFilter(r)) continue;
+      const lang = (r.language ?? "en") === "ar" ? "ar" : "en";
+      if (langFilter !== "all" && langFilter !== lang) continue;
+      const key = bucketKey(r.created_at);
+      const existing =
+        buckets.get(key) ??
+        { date: key, en_up: 0, en_down: 0, ar_up: 0, ar_down: 0 };
+      const field = `${lang}_${r.vote === "up" ? "up" : "down"}` as
+        | "en_up"
+        | "en_down"
+        | "ar_up"
+        | "ar_down";
+      if (r.vote === "up" || r.vote === "down") existing[field] += 1;
+      buckets.set(key, existing);
+    }
+    return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
+  }, [rows, dateFilter, langFilter, granularity]);
+
+
   const exportCsv = () => {
     const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
     const lines = [header.join(",")];
@@ -239,6 +288,107 @@ const AdminFaqVotes = () => {
           <StatCard label="Not helpful" value={totals.down} accent="text-muted-foreground" />
           <StatCard label="Helpful %" value={`${totals.helpfulPct}%`} />
         </section>
+
+        <section className="border border-border rounded-md bg-card p-4">
+          <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
+            <div>
+              <h2 className="text-sm font-semibold text-foreground">Helpful vs Not helpful over time</h2>
+              <p className="text-xs text-muted-foreground">
+                {langFilter === "all"
+                  ? "Per language (EN and AR), respects date and search filters above"
+                  : `Language: ${langFilter.toUpperCase()}`}
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              {(["day", "week"] as const).map((g) => (
+                <Button
+                  key={g}
+                  variant={granularity === g ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setGranularity(g)}
+                >
+                  {g === "day" ? "Daily" : "Weekly"}
+                </Button>
+              ))}
+            </div>
+          </div>
+          <div className="w-full h-64">
+            {trendData.length === 0 ? (
+              <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
+                No votes in the selected range.
+              </div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis
+                    dataKey="date"
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                  />
+                  <YAxis
+                    allowDecimals={false}
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: 6,
+                      fontSize: 12,
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: 12 }} />
+                  {(langFilter === "all" || langFilter === "en") && (
+                    <>
+                      <Line
+                        type="monotone"
+                        dataKey="en_up"
+                        name="EN helpful"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={2}
+                        dot={false}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="en_down"
+                        name="EN not helpful"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={2}
+                        strokeDasharray="4 4"
+                        dot={false}
+                      />
+                    </>
+                  )}
+                  {(langFilter === "all" || langFilter === "ar") && (
+                    <>
+                      <Line
+                        type="monotone"
+                        dataKey="ar_up"
+                        name="AR helpful"
+                        stroke="hsl(var(--accent-foreground))"
+                        strokeWidth={2}
+                        dot={false}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="ar_down"
+                        name="AR not helpful"
+                        stroke="hsl(var(--accent-foreground))"
+                        strokeWidth={2}
+                        strokeDasharray="4 4"
+                        dot={false}
+                      />
+                    </>
+                  )}
+                </LineChart>
+              </ResponsiveContainer>
+            )}
+          </div>
+        </section>
+
+
 
         <section className="flex flex-wrap items-center gap-2">
           <Input
