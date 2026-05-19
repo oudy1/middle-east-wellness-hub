@@ -407,6 +407,8 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
 
     // Schedule chain: 2x rAF (post first paint) → idle callback → generate.
     const scheduleAfterPaint = () => {
+      scheduled = true;
+      log("scheduled");
       rafHandle = window.requestAnimationFrame(() => {
         rafHandle = window.requestAnimationFrame(() => {
           idleHandle = idle(() => {
@@ -439,7 +441,15 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
         document.querySelector<HTMLElement>("section");
 
       // Fallback if IntersectionObserver is unavailable or hero isn't mounted.
-      if (typeof IntersectionObserver === "undefined" || !hero) {
+      if (typeof IntersectionObserver === "undefined") {
+        metrics.ioUnsupported += 1;
+        log("io-unsupported", { total: metrics.ioUnsupported });
+        runWhenReady();
+        return;
+      }
+      if (!hero) {
+        metrics.heroMissing += 1;
+        log("hero-missing", { total: metrics.heroMissing });
         runWhenReady();
         return;
       }
@@ -448,6 +458,8 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
+              intersected = true;
+              log("hero-intersected");
               observer?.disconnect();
               observer = null;
               runWhenReady();
@@ -479,6 +491,21 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       if (observerTimer !== null) window.clearTimeout(observerTimer);
       observer?.disconnect();
       timers.forEach((t) => window.clearTimeout(t));
+
+      // Categorize the unmount: never intersected vs cancelled mid-flight.
+      if (!intersected) {
+        metrics.skippedNeverIntersected += 1;
+        log("skipped-never-intersected", {
+          total: metrics.skippedNeverIntersected,
+        });
+      } else if (scheduled && metrics.lastGenerationMs === null) {
+        // Hero did intersect and we scheduled work, but we unmounted before
+        // generation completed.
+        metrics.skippedAfterSchedule += 1;
+        log("skipped-after-schedule", {
+          total: metrics.skippedAfterSchedule,
+        });
+      }
     };
   }, [heroRef]);
 
