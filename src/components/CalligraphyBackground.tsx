@@ -3,17 +3,27 @@ import { useEffect } from "react";
 
 const CalligraphyBackground = () => {
   useEffect(() => {
-    // Check if we already have a stored background
+    // Check if we already have a stored background — apply immediately, no heavy work
     const storedBg = localStorage.getItem('calligraphy-bg');
     if (storedBg) {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
       return;
     }
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    
-    if (!ctx) return;
+    // Defer the expensive canvas generation until after the browser paints
+    // the hero, so it doesn't block LCP on first visit.
+    const idle =
+      (window as any).requestIdleCallback ||
+      ((cb: () => void) => window.setTimeout(cb, 200));
+    const cancelIdle =
+      (window as any).cancelIdleCallback ||
+      ((id: number) => window.clearTimeout(id));
+
+    const handle = idle(() => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      if (!ctx) return;
     
     canvas.width = 1800;
     canvas.height = 1800;
@@ -266,14 +276,21 @@ const CalligraphyBackground = () => {
     const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
     createOrganizedDistribution(featuredWords, 48, 0.25, 15);
     
-    // Export as image and set to localStorage to avoid regenerating on every reload
-    const dataUrl = canvas.toDataURL('image/png');
-    localStorage.setItem('calligraphy-bg', dataUrl);
-    
-    // Update the CSS variable for the background
-    document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+      // Export as image and set to localStorage to avoid regenerating on every reload
+      const dataUrl = canvas.toDataURL('image/png');
+      try {
+        localStorage.setItem('calligraphy-bg', dataUrl);
+      } catch {
+        // Ignore quota errors — pattern is decorative
+      }
+
+      // Update the CSS variable for the background
+      document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+    });
+
+    return () => cancelIdle(handle);
   }, []);
-  
+
   return null;
 };
 

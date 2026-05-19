@@ -19,9 +19,14 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Logo - Large and prominent */}
           <div className="flex justify-center pb-6 md:pb-8">
-            <img 
-              src={SHAMS_LOGO_PRIMARY} 
-              alt="SHAMS Logo" 
+            <img
+              src={SHAMS_LOGO_PRIMARY}
+              alt="SHAMS Logo"
+              width={256}
+              height={256}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               className="h-36 w-36 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-64 lg:w-64 object-contain"
             />
           </div>
