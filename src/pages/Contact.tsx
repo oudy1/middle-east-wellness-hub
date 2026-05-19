@@ -14,10 +14,27 @@ const Contact = () => {
       <SEOHead
         lang={language === "ar" ? "ar" : "en"}
         path="/contact"
-        title="Contact SHAMS | Reach the Middle Eastern Health Advocacy Team"
-        description="Get in touch with SHAMS, the youth-led Canadian non-profit serving Middle Eastern and North African societies. Email us, find us on Instagram, or join our community."
+        title="Contact SHAMS | MENA Health Advocacy Canada"
+        description="Get in touch with SHAMS, the youth-led Canadian non-profit for MENA societies. Email us, find us on Instagram, or join our community."
         titleAr="تواصل مع شمس | فريق المناصرة الصحية للمجتمعات الشرق أوسطية"
         descriptionAr="تواصل مع شمس، المبادرة الكندية الشبابية للمجتمعات الشرق أوسطية وشمال أفريقيا. راسلنا أو تابعنا على إنستغرام أو انضم إلى مجتمعنا."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "SHAMS",
+          url: "https://www.projectshams.com/contact",
+          email: "infoprojectshams@gmail.com",
+          image:
+            "https://www.projectshams.com/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Toronto",
+            addressRegion: "ON",
+            addressCountry: "CA",
+          },
+          areaServed: { "@type": "Country", name: "Canada" },
+          sameAs: ["https://www.instagram.com/projectshams/"],
+        }}
       />
       <Header />
       <main className="flex-grow">
