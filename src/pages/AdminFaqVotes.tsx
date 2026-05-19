@@ -303,7 +303,7 @@ const AdminFaqVotes = () => {
       buckets.set(key, existing);
     }
     return Array.from(buckets.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [rows, dateFilter, langFilter, granularity, trendFaqId]);
+  }, [rows, dateFilter, langFilter, granularity, trendFaqId, effectiveTz]);
 
   const [smoothing, setSmoothing] = useState<0 | 3 | 7>(0);
 
