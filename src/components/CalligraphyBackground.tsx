@@ -463,9 +463,11 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
           for (const entry of entries) {
             if (entry.isIntersecting) {
               intersected = true;
+              metrics.heroEverIntersected = true;
               log("hero-intersected");
               observer?.disconnect();
               observer = null;
+              metrics.ioActive = false;
               runWhenReady();
               return;
             }
@@ -477,6 +479,7 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       );
 
       observer.observe(hero);
+      metrics.ioActive = true;
     };
 
     // If the ref is already populated (typical — refs commit before effects),
