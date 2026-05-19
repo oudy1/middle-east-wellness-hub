@@ -359,35 +359,50 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
     
       // Run the heavy painters in phases, yielding to the main thread between
       // each so input handlers and animation frames can still execute on slow
-      // devices. Each phase becomes its own task.
+      // devices. Each phase becomes its own task and is timed individually.
       if (cancelled) return;
-      createOrganizedDistribution(arabicTexts, 20, 0.15, 120);
+      await phase("draw-cities", () => createOrganizedDistribution(arabicTexts, 20, 0.15, 120));
 
       await yieldToMain();
       if (cancelled) return;
-      createOrganizedDistribution(healthPhrases, 32, 0.2, 30);
+      await phase("draw-phrases", () => createOrganizedDistribution(healthPhrases, 32, 0.2, 30));
 
       await yieldToMain();
       if (cancelled) return;
-      drawGeometricPatterns();
+      await phase("draw-geometric", () => drawGeometricPatterns());
 
       await yieldToMain();
       if (cancelled) return;
       const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
-      createOrganizedDistribution(featuredWords, 48, 0.25, 15);
+      await phase("draw-featured", () => createOrganizedDistribution(featuredWords, 48, 0.25, 15));
 
       await yieldToMain();
       if (cancelled) return;
 
       // toDataURL is synchronous and the heaviest single step — run it in its
       // own task so it never lands inside the LCP critical path.
-      const dataUrl = canvas.toDataURL('image/png');
+      const dataUrl = await phase("to-data-url", () => canvas.toDataURL('image/png'));
+
       try {
         localStorage.setItem('calligraphy-bg', dataUrl);
       } catch {
         // Ignore quota errors — pattern is decorative
       }
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+
+      const totalMs = performance.now() - totalStart;
+      metrics.lastGenerationMs = totalMs;
+      metrics.generated += 1;
+      try {
+        performance.measure("calligraphy:total");
+      } catch {
+        /* ignore */
+      }
+      log("generation-complete", {
+        totalMs: Math.round(totalMs),
+        phases: metrics.lastPhaseMs,
+        generated: metrics.generated,
+      });
     };
 
     // Schedule chain: 2x rAF (post first paint) → idle callback → generate.
