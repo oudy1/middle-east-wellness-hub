@@ -43,6 +43,8 @@ const AdminFaqVotes = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [langFilter, setLangFilter] = useState<"all" | "en" | "ar">("all");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const init = async () => {
@@ -103,9 +105,22 @@ const AdminFaqVotes = () => {
     return map;
   }, []);
 
+  const dateFilter = useMemo(() => {
+    const startMs = startDate ? new Date(startDate + "T00:00:00").getTime() : null;
+    const endMs = endDate ? new Date(endDate + "T23:59:59.999").getTime() : null;
+    return (r: VoteRow) => {
+      const t = new Date(r.created_at).getTime();
+      if (startMs !== null && t < startMs) return false;
+      if (endMs !== null && t > endMs) return false;
+      return true;
+    };
+  }, [startDate, endDate]);
+
   const aggregates = useMemo<Aggregate[]>(() => {
     const filtered = rows.filter(
-      (r) => langFilter === "all" || (r.language ?? "en") === langFilter
+      (r) =>
+        (langFilter === "all" || (r.language ?? "en") === langFilter) &&
+        dateFilter(r)
     );
     const buckets = new Map<string, Aggregate>();
     for (const r of filtered) {
@@ -139,19 +154,20 @@ const AdminFaqVotes = () => {
         a.questionEn.toLowerCase().includes(q) ||
         a.questionAr.toLowerCase().includes(q)
     );
-  }, [rows, langFilter, search, faqMap]);
+  }, [rows, langFilter, search, faqMap, dateFilter]);
 
   const totals = useMemo(() => {
     let up = 0;
     let down = 0;
     for (const r of rows) {
       if (langFilter !== "all" && (r.language ?? "en") !== langFilter) continue;
+      if (!dateFilter(r)) continue;
       if (r.vote === "up") up++;
       else if (r.vote === "down") down++;
     }
     const total = up + down;
     return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
-  }, [rows, langFilter]);
+  }, [rows, langFilter, dateFilter]);
 
   const exportCsv = () => {
     const header = ["faq_id", "language", "question_en", "question_ar", "up", "down", "total", "helpful_pct"];
@@ -242,6 +258,40 @@ const AdminFaqVotes = () => {
                 {l === "all" ? "All" : l.toUpperCase()}
               </Button>
             ))}
+          </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="text-xs text-muted-foreground flex items-center gap-1">
+              From
+              <Input
+                type="date"
+                value={startDate}
+                max={endDate || undefined}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="h-9 w-auto"
+              />
+            </label>
+            <label className="text-xs text-muted-foreground flex items-center gap-1">
+              To
+              <Input
+                type="date"
+                value={endDate}
+                min={startDate || undefined}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="h-9 w-auto"
+              />
+            </label>
+            {(startDate || endDate) && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setStartDate("");
+                  setEndDate("");
+                }}
+              >
+                Clear
+              </Button>
+            )}
           </div>
           <span className="text-xs text-muted-foreground ml-auto">
             {aggregates.length} row{aggregates.length === 1 ? "" : "s"}
