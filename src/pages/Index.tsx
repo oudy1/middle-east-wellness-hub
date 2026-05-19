@@ -30,6 +30,7 @@ const SectionFallback = () => <div className="min-h-[200px]" aria-hidden="true" 
 
 const Index = () => {
   const { language } = useLanguage();
+  const heroRef = useRef<HTMLElement>(null);
   return (
     <div className="flex flex-col min-h-screen w-full bg-healthLightGray relative">
       <SEOHead
@@ -62,13 +63,14 @@ const Index = () => {
           },
         ]}
       />
-      {/* Calligraphy backdrop runs in requestIdleCallback after first paint */}
-      <CalligraphyBackground />
+      {/* Calligraphy backdrop is gated on the hero ref intersecting the viewport */}
+      <CalligraphyBackground heroRef={heroRef} />
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
       <Header />
       <main className="flex-grow relative z-10">
         {/* Hero stays eager — it contains LCP */}
-        <HeroSection />
+        <HeroSection ref={heroRef} />
+
 
         <Suspense fallback={<SectionFallback />}>
           <FeaturedEventSection />
