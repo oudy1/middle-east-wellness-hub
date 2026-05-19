@@ -22,6 +22,8 @@ import SupportUs from "@/pages/SupportUs";
 import Programs from "@/pages/Programs";
 import FAQ from "@/pages/FAQ";
 import Glossary from "@/pages/Glossary";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminFaqVotes from "@/pages/AdminFaqVotes";
 import NotFound from "@/pages/NotFound";
 import ChatWidget from "@/components/chat/ChatWidget";
 import './App.css';
