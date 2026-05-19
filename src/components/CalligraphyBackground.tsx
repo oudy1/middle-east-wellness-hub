@@ -398,7 +398,7 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       observer?.disconnect();
       timers.forEach((t) => window.clearTimeout(t));
     };
-  }, []);
+  }, [heroRef]);
 
   return null;
 };
