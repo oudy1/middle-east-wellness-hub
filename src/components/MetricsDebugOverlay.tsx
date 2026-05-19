@@ -159,6 +159,35 @@ const MetricsDebugOverlay = () => {
         </button>
         <button
           type="button"
+          onClick={() => {
+            const snapshot = {
+              exportedAt: new Date().toISOString(),
+              url: window.location.href,
+              userAgent: navigator.userAgent,
+              calligraphyMetrics:
+                (window as unknown as Record<string, unknown>)
+                  .__calligraphyMetrics ?? null,
+            };
+            const blob = new Blob([JSON.stringify(snapshot, null, 2)], {
+              type: "application/json",
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `calligraphy-metrics-${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+          }}
+          className="rounded px-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+          aria-label="Export metrics snapshot as JSON"
+          title="Export metrics snapshot as JSON"
+        >
+          ⤓
+        </button>
+        <button
+          type="button"
           onClick={() => setAutoHide((a) => !a)}
           className={`rounded px-1 hover:bg-accent hover:text-accent-foreground ${
             autoHide ? "text-foreground" : "text-muted-foreground"
