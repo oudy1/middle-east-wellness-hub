@@ -1,28 +1,32 @@
-
+import { lazy, Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import ResearchWebinarCarousel from "@/components/ResearchWebinarCarousel";
-import WhatIsSHAMS from "@/components/WhatIsSHAMS";
-import FeaturedWebinarBanner from "@/components/FeaturedWebinarBanner";
-import WhatWeDoSection from "@/components/WhatWeDoSection";
-import MissionSection from "@/components/MissionSection";
-import ResourcesSection from "@/components/ResourcesSection";
-import StatsSection from "@/components/StatsSection";
-import NewsletterSection from "@/components/NewsletterSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
-import LandmarksGenerator from "@/components/LandmarksGenerator";
-import UpcomingEventsSection from "@/components/UpcomingEventsSection";
-import FeaturedEventSection from "@/components/FeaturedEventSection";
-import PartnersSection from "@/components/PartnersSection";
-import MeetTeamButton from "@/components/MeetTeamButton";
-import FeaturedNewsSection from "@/components/FeaturedNewsSection";
-import TopicOfTheWeekSection from "@/components/TopicOfTheWeekSection";
-import ResearchTeaserSection from "@/components/ResearchTeaserSection";
-import { ResourceFinderSection } from "@/components/ResourceFinder";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Below-the-fold sections — code-split so they don't block the hero paint.
+const FeaturedEventSection = lazy(() => import("@/components/FeaturedEventSection"));
+const FeaturedWebinarBanner = lazy(() => import("@/components/FeaturedWebinarBanner"));
+const ResearchWebinarCarousel = lazy(() => import("@/components/ResearchWebinarCarousel"));
+const ResourceFinderSection = lazy(() =>
+  import("@/components/ResourceFinder").then((m) => ({ default: m.ResourceFinderSection }))
+);
+const WhatIsSHAMS = lazy(() => import("@/components/WhatIsSHAMS"));
+const WhatWeDoSection = lazy(() => import("@/components/WhatWeDoSection"));
+const UpcomingEventsSection = lazy(() => import("@/components/UpcomingEventsSection"));
+const MissionSection = lazy(() => import("@/components/MissionSection"));
+const TopicOfTheWeekSection = lazy(() => import("@/components/TopicOfTheWeekSection"));
+const ResearchTeaserSection = lazy(() => import("@/components/ResearchTeaserSection"));
+const FeaturedNewsSection = lazy(() => import("@/components/FeaturedNewsSection"));
+const MeetTeamButton = lazy(() => import("@/components/MeetTeamButton"));
+const ResourcesSection = lazy(() => import("@/components/ResourcesSection"));
+const PartnersSection = lazy(() => import("@/components/PartnersSection"));
+const NewsletterSection = lazy(() => import("@/components/NewsletterSection"));
+const LandmarksGenerator = lazy(() => import("@/components/LandmarksGenerator"));
+
+const SectionFallback = () => <div className="min-h-[200px]" aria-hidden="true" />;
 
 const Index = () => {
   const { language } = useLanguage();
@@ -58,28 +62,32 @@ const Index = () => {
           },
         ]}
       />
-      {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
+      {/* Calligraphy backdrop runs in requestIdleCallback after first paint */}
       <CalligraphyBackground />
-      <LandmarksGenerator />
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
       <Header />
       <main className="flex-grow relative z-10">
+        {/* Hero stays eager — it contains LCP */}
         <HeroSection />
-        <FeaturedEventSection />
-        <FeaturedWebinarBanner />
-        <ResearchWebinarCarousel />
-        <ResourceFinderSection />
-        <WhatIsSHAMS />
-        <WhatWeDoSection />
-        <UpcomingEventsSection />
-        <MissionSection />
-        <TopicOfTheWeekSection />
-        <ResearchTeaserSection />
-        <FeaturedNewsSection />
-        <MeetTeamButton />
-        <ResourcesSection />
-        <PartnersSection />
-        <NewsletterSection />
+
+        <Suspense fallback={<SectionFallback />}>
+          <FeaturedEventSection />
+          <FeaturedWebinarBanner />
+          <ResearchWebinarCarousel />
+          <ResourceFinderSection />
+          <WhatIsSHAMS />
+          <WhatWeDoSection />
+          <UpcomingEventsSection />
+          <MissionSection />
+          <TopicOfTheWeekSection />
+          <ResearchTeaserSection />
+          <FeaturedNewsSection />
+          <MeetTeamButton />
+          <ResourcesSection />
+          <PartnersSection />
+          <NewsletterSection />
+          <LandmarksGenerator />
+        </Suspense>
       </main>
       <Footer />
     </div>

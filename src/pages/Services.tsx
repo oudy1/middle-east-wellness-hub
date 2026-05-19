@@ -322,7 +322,7 @@ const Services = () => {
                 {/* Alone in Canada Guide */}
                 <Card className="hover:shadow-lg transition-shadow">
                   <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
-                    <img src="/public/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="Alone in Canada Guide" className="max-h-full max-w-full object-contain" />
+                    <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="Alone in Canada Guide" loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                   </div>
                   <CardHeader className="pb-3">
                     <Badge variant="secondary" className="w-fit mb-2 text-xs">{language === 'ar' ? 'دليل' : 'Guide'}</Badge>
@@ -360,7 +360,7 @@ const Services = () => {
                 {/* Arabic-English Medical Terminology Guide */}
                 <Card className="hover:shadow-lg transition-shadow">
                   <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
-                    <img src="/lovable-uploads/46453847-1b06-4288-b707-464176e53351.png" alt="Arabic-English Medical Terminology Guide" className="max-h-full max-w-full object-contain" />
+                    <img src="/lovable-uploads/46453847-1b06-4288-b707-464176e53351.png" alt="Arabic-English Medical Terminology Guide" loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                   </div>
                   <CardHeader className="pb-3">
                     <Badge variant="secondary" className="w-fit mb-2 text-xs">{language === 'ar' ? 'مرجع طبي' : 'Medical Reference'}</Badge>
@@ -398,7 +398,7 @@ const Services = () => {
                 {/* AboutKidsHealth Arabic Resource */}
                 <Card className="hover:shadow-lg transition-shadow">
                   <div className="aspect-video bg-white flex items-center justify-center p-6">
-                    <img src={sickKidsLogo} alt="SickKids Hospital Logo" className="h-20 w-auto object-contain" />
+                    <img src={sickKidsLogo} alt="SickKids Hospital Logo" loading="lazy" decoding="async" className="h-20 w-auto object-contain" />
                   </div>
                   <CardHeader className="pb-3">
                     <Badge variant="secondary" className="w-fit mb-2 text-xs">{language === 'ar' ? 'صحة الأطفال' : "Children's Health"}</Badge>
