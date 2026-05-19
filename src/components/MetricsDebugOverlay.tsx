@@ -9,6 +9,8 @@ type CalligraphyMetrics = {
   skippedAfterSchedule: number;
   lastGenerationMs: number | null;
   lastPhaseMs: Record<string, number>;
+  ioActive?: boolean;
+  heroEverIntersected?: boolean;
 };
 
 /**
@@ -28,6 +30,7 @@ const MetricsDebugOverlay = () => {
   const [autoHide, setAutoHide] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [stableSince, setStableSince] = useState<number | null>(null);
+  const [heroVisible, setHeroVisible] = useState<boolean | null>(null);
 
   const lastStatusRef = useRef<string | null>(null);
 
@@ -36,6 +39,19 @@ const MetricsDebugOverlay = () => {
       .__calligraphyMetrics;
     setMetrics(m ?? null);
     setLastUpdated(Date.now());
+
+    // Live hero visibility: probe the first <section> against the viewport.
+    const hero = document.querySelector<HTMLElement>("section");
+    if (!hero) {
+      setHeroVisible(null);
+      return;
+    }
+    const rect = hero.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const vw = window.innerWidth || document.documentElement.clientWidth;
+    const visible =
+      rect.bottom > 0 && rect.top < vh && rect.right > 0 && rect.left < vw;
+    setHeroVisible(visible);
   }, []);
 
   const readRef = useRef(read);
@@ -217,6 +233,40 @@ const MetricsDebugOverlay = () => {
           </span>
           <span>updated</span>
           <span className="text-right text-foreground">{updatedAgo} ago</span>
+          <span>hero visible</span>
+          <span
+            className={`text-right ${
+              heroVisible === true
+                ? "text-emerald-500"
+                : heroVisible === false
+                  ? "text-amber-500"
+                  : "text-muted-foreground"
+            }`}
+          >
+            {heroVisible === null
+              ? "no hero"
+              : heroVisible
+                ? "yes"
+                : "off-screen"}
+          </span>
+          <span>IO active</span>
+          <span
+            className={`text-right ${
+              metrics?.ioActive
+                ? "text-sky-500"
+                : metrics?.heroEverIntersected
+                  ? "text-muted-foreground"
+                  : "text-foreground"
+            }`}
+          >
+            {metrics?.ioActive
+              ? "watching"
+              : metrics?.heroEverIntersected
+                ? "done (intersected)"
+                : metrics?.ioUnsupported
+                  ? "unsupported"
+                  : "inactive"}
+          </span>
           {metrics && (
             <>
               <span>cached</span>

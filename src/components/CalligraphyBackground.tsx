@@ -15,6 +15,8 @@ type CalligraphyMetrics = {
   skippedAfterSchedule: number;
   lastGenerationMs: number | null;
   lastPhaseMs: Record<string, number>;
+  ioActive: boolean;
+  heroEverIntersected: boolean;
 };
 
 const METRICS_KEY = "__calligraphyMetrics";
@@ -31,6 +33,8 @@ const getMetrics = (): CalligraphyMetrics => {
       skippedAfterSchedule: 0,
       lastGenerationMs: null,
       lastPhaseMs: {},
+      ioActive: false,
+      heroEverIntersected: false,
     };
   }
   return w[METRICS_KEY];
@@ -459,9 +463,11 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
           for (const entry of entries) {
             if (entry.isIntersecting) {
               intersected = true;
+              metrics.heroEverIntersected = true;
               log("hero-intersected");
               observer?.disconnect();
               observer = null;
+              metrics.ioActive = false;
               runWhenReady();
               return;
             }
@@ -473,6 +479,7 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       );
 
       observer.observe(hero);
+      metrics.ioActive = true;
     };
 
     // If the ref is already populated (typical — refs commit before effects),
@@ -490,6 +497,7 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       if (idleHandle !== null) cancelIdle(idleHandle);
       if (observerTimer !== null) window.clearTimeout(observerTimer);
       observer?.disconnect();
+      metrics.ioActive = false;
       timers.forEach((t) => window.clearTimeout(t));
 
       // Categorize the unmount: never intersected vs cancelled mid-flight.
