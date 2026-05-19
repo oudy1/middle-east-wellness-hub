@@ -52,6 +52,26 @@ type Aggregate = {
   helpfulPct: number;
 };
 
+// Bucket keys are YYYY-MM-DD anchored at UTC midnight (the local-TZ start of
+// the day, or Monday of the week). Render them as a friendly range in the
+// tooltip so admins can see exactly what each point covers.
+const formatBucketRange = (key: string, granularity: "day" | "week") => {
+  const [y, m, d] = key.split("-").map(Number);
+  if (!y || !m || !d) return key;
+  const start = new Date(Date.UTC(y, m - 1, d));
+  const fmt = new Intl.DateTimeFormat(undefined, {
+    timeZone: "UTC",
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  if (granularity === "day") return fmt.format(start);
+  const end = new Date(start.getTime() + 6 * 86400000);
+  return `${fmt.format(start)} — ${fmt.format(end)}`;
+};
+
+
 const AdminFaqVotes = () => {
   const navigate = useNavigate();
   const [authChecking, setAuthChecking] = useState(true);
