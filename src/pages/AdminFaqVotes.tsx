@@ -89,18 +89,43 @@ const AdminFaqVotes = () => {
 
   const loadVotes = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("faq_votes")
-      .select("id, faq_id, vote, language, session_id, created_at")
-      .order("created_at", { ascending: false })
-      .limit(1000);
-    setLoading(false);
-    if (error) {
-      toast({ title: "Failed to load votes", description: error.message, variant: "destructive" });
-      return;
+    const PAGE = 1000;
+    let from = 0;
+    const all: VoteRow[] = [];
+    let serverTotal: number | null = null;
+    // First request: also fetch exact count.
+    while (true) {
+      const query = supabase
+        .from("faq_votes")
+        .select("id, faq_id, vote, language, session_id, created_at", {
+          count: from === 0 ? "exact" : undefined,
+        })
+        .order("created_at", { ascending: false })
+        .range(from, from + PAGE - 1);
+      const { data, error, count } = await query;
+      if (error) {
+        setLoading(false);
+        toast({
+          title: "Failed to load votes",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+      if (from === 0 && typeof count === "number") serverTotal = count;
+      const batch = (data ?? []) as VoteRow[];
+      all.push(...batch);
+      if (batch.length < PAGE) break;
+      from += PAGE;
+      // Safety cap to avoid runaway loops.
+      if (from > 50000) break;
     }
-    setRows((data ?? []) as VoteRow[]);
+    setRows(all);
+    setRawTotal(serverTotal ?? all.length);
+    setPage(1);
+    setLoading(false);
   };
+
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
