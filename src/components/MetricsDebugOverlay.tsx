@@ -9,6 +9,8 @@ type CalligraphyMetrics = {
   skippedAfterSchedule: number;
   lastGenerationMs: number | null;
   lastPhaseMs: Record<string, number>;
+  ioActive?: boolean;
+  heroEverIntersected?: boolean;
 };
 
 /**
