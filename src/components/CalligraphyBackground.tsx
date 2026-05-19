@@ -318,7 +318,7 @@ const CalligraphyBackground = () => {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
     };
 
-    // Schedule chain: window.load → 2x rAF (post first paint) → idle callback.
+    // Schedule chain: 2x rAF (post first paint) → idle callback → generate.
     const scheduleAfterPaint = () => {
       rafHandle = window.requestAnimationFrame(() => {
         rafHandle = window.requestAnimationFrame(() => {
@@ -329,18 +329,64 @@ const CalligraphyBackground = () => {
       });
     };
 
-    if (document.readyState === "complete") {
-      // Page already loaded — wait a beat so we don't compete with hero paint.
-      timers.push(window.setTimeout(scheduleAfterPaint, 0));
-    } else {
-      window.addEventListener("load", scheduleAfterPaint, { once: true });
-    }
+    // Gate: only schedule once the hero section is actually intersecting the
+    // viewport. This avoids spending main-thread time on hidden tabs, prerender,
+    // or routes where the hero was scrolled off before paint.
+    let observer: IntersectionObserver | null = null;
+    let observerTimer: number | null = null;
+
+    const runWhenReady = () => {
+      if (cancelled) return;
+      if (document.readyState === "complete") {
+        scheduleAfterPaint();
+      } else {
+        window.addEventListener("load", scheduleAfterPaint, { once: true });
+      }
+    };
+
+    const setupGate = () => {
+      // Hero is the first <section> rendered by HeroSection.
+      const hero =
+        document.querySelector<HTMLElement>("section") ||
+        document.querySelector<HTMLElement>("main") ||
+        document.body;
+
+      // Fallback if IntersectionObserver is unavailable (very old browsers).
+      if (typeof IntersectionObserver === "undefined" || !hero) {
+        runWhenReady();
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              observer?.disconnect();
+              observer = null;
+              runWhenReady();
+              return;
+            }
+          }
+        },
+        // Fire as soon as any pixel of the hero is on screen, with a generous
+        // root margin so we don't miss it on tall headers.
+        { rootMargin: "200px 0px", threshold: 0 }
+      );
+
+      observer.observe(hero);
+    };
+
+    // Wait one rAF so React has had a chance to mount the hero into the DOM
+    // before we query for it.
+    rafHandle = window.requestAnimationFrame(setupGate);
 
     return () => {
       cancelled = true;
       window.removeEventListener("load", scheduleAfterPaint);
       if (rafHandle !== null) cancelAnimationFrame(rafHandle);
       if (idleHandle !== null) cancelIdle(idleHandle);
+      if (observerTimer !== null) window.clearTimeout(observerTimer);
+      observer?.disconnect();
       timers.forEach((t) => window.clearTimeout(t));
     };
   }, []);
