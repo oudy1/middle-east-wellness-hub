@@ -265,6 +265,9 @@ const Glossary = () => {
       <Header />
 
       <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
+        <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+          {copyStatus}
+        </div>
         <h1 className="text-3xl font-bold text-foreground mb-2 text-center">
           {isArabic ? "المصطلحات" : "Glossary"}
         </h1>
