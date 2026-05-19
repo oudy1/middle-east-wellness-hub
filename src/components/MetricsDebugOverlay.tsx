@@ -17,12 +17,19 @@ type CalligraphyMetrics = {
  *
  * Supports pause/resume of the polling loop and an on-demand refresh.
  */
+const STABILITY_HIDE_MS = 10_000;
+
 const MetricsDebugOverlay = () => {
   const [metrics, setMetrics] = useState<CalligraphyMetrics | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [paused, setPaused] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
   const [phasesOpen, setPhasesOpen] = useState(false);
+  const [autoHide, setAutoHide] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [stableSince, setStableSince] = useState<number | null>(null);
+
+  const lastStatusRef = useRef<string | null>(null);
 
   const read = useCallback(() => {
     const m = (window as unknown as Record<string, CalligraphyMetrics>)
@@ -31,7 +38,6 @@ const MetricsDebugOverlay = () => {
     setLastUpdated(Date.now());
   }, []);
 
-  // Keep latest `read` reference for the interval without restarting it.
   const readRef = useRef(read);
   useEffect(() => {
     readRef.current = read;
