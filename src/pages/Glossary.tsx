@@ -29,6 +29,7 @@ const Glossary = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState<string>("");
 
   const handleCopy = async (item: typeof glossaryData[number]) => {
     const term = isArabic ? item.termAr : item.termEn;
@@ -37,16 +38,24 @@ const Glossary = () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedId(item.id);
+      const msg = isArabic
+        ? `تم نسخ المصطلح والتعريف: ${term}`
+        : `Copied term and definition: ${term}`;
+      setCopyStatus(msg);
       toast({
         title: isArabic ? "تم النسخ" : "Copied",
         description: isArabic ? "تم نسخ المصطلح والتعريف" : "Term and definition copied to clipboard",
       });
       setTimeout(() => setCopiedId((prev) => (prev === item.id ? null : prev)), 2000);
+      setTimeout(() => setCopyStatus(""), 3000);
     } catch {
+      const msg = isArabic ? "فشل نسخ المصطلح" : "Failed to copy term";
+      setCopyStatus(msg);
       toast({
         title: isArabic ? "فشل النسخ" : "Copy failed",
         variant: "destructive",
       });
+      setTimeout(() => setCopyStatus(""), 3000);
     }
   };
 
@@ -256,6 +265,9 @@ const Glossary = () => {
       <Header />
 
       <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
+        <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+          {copyStatus}
+        </div>
         <h1 className="text-3xl font-bold text-foreground mb-2 text-center">
           {isArabic ? "المصطلحات" : "Glossary"}
         </h1>
@@ -373,8 +385,8 @@ const Glossary = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleCopy(item)}
-                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
-                            aria-label={isArabic ? "نسخ المصطلح والتعريف" : "Copy term and definition"}
+                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:text-foreground"
+                            aria-label={isArabic ? `نسخ المصطلح والتعريف: ${item.termAr}` : `Copy term and definition: ${item.termEn}`}
                           >
                             {copiedId === item.id ? (
                               <Check className="h-3.5 w-3.5" />
