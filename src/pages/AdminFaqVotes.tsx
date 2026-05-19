@@ -43,6 +43,8 @@ const AdminFaqVotes = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [langFilter, setLangFilter] = useState<"all" | "en" | "ar">("all");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const init = async () => {
