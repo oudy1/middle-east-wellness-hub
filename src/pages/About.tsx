@@ -22,6 +22,14 @@ const About = () => {
   
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray relative">
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/about"
+        title="About SHAMS | Youth-Led Health Advocacy for MENA Societies in Canada"
+        description="Learn about SHAMS, a youth-led Canadian non-profit dedicated to health education, mentorship, and research for Middle Eastern and North African societies across Canada."
+        titleAr="عن شمس | مبادرة شبابية للمناصرة الصحية للمجتمعات الشرق أوسطية في كندا"
+        descriptionAr="تعرف على شمس، مبادرة كندية شبابية مكرسة للتثقيف الصحي والإرشاد والبحث للمجتمعات الشرق أوسطية وشمال أفريقيا في كندا."
+      />
       {/* These components generate the Arabic calligraphy/landmarks backgrounds */}
       <CalligraphyBackground />
       <LandmarksGenerator />
