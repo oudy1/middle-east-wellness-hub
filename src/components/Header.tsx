@@ -58,9 +58,14 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-3 sm:gap-4">
-              <img 
-                src={SHAMS_LOGO_PRIMARY} 
-                alt="SHAMS Logo" 
+              <img
+                src={SHAMS_LOGO_PRIMARY}
+                alt="SHAMS Logo"
+                width={64}
+                height={64}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 object-contain flex-shrink-0"
               />
               <div className="flex flex-col min-w-0">
