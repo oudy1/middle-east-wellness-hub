@@ -382,8 +382,8 @@ const Glossary = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleCopy(item)}
-                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
-                            aria-label={isArabic ? "نسخ المصطلح والتعريف" : "Copy term and definition"}
+                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:text-foreground"
+                            aria-label={isArabic ? `نسخ المصطلح والتعريف: ${item.termAr}` : `Copy term and definition: ${item.termEn}`}
                           >
                             {copiedId === item.id ? (
                               <Check className="h-3.5 w-3.5" />
