@@ -359,27 +359,42 @@ const AdminFaqVotes = () => {
                   : `Language: ${langFilter.toUpperCase()}`}
               </p>
             </div>
-            <div className="flex items-center gap-1">
-              {(["day", "week"] as const).map((g) => (
-                <Button
-                  key={g}
-                  variant={granularity === g ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setGranularity(g)}
-                >
-                  {g === "day" ? "Daily" : "Weekly"}
-                </Button>
-              ))}
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1">
+                {(["day", "week"] as const).map((g) => (
+                  <Button
+                    key={g}
+                    variant={granularity === g ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setGranularity(g)}
+                  >
+                    {g === "day" ? "Daily" : "Weekly"}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-muted-foreground">Smoothing</span>
+                {([0, 3, 7] as const).map((s) => (
+                  <Button
+                    key={s}
+                    variant={smoothing === s ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSmoothing(s)}
+                  >
+                    {s === 0 ? "None" : `MA-${s}`}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
           <div className="w-full h-64">
-            {trendData.length === 0 ? (
+            {smoothedTrendData.length === 0 ? (
               <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
                 No votes in the selected range.
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+                <LineChart data={smoothedTrendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis
                     dataKey="date"
