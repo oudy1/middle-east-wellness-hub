@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import MetricsExportButton from "@/components/MetricsExportButton";
+import MetricsDebugOverlay from "@/components/MetricsDebugOverlay";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -94,6 +95,7 @@ const Index = () => {
       </main>
       <Footer />
       <MetricsExportButton />
+      <MetricsDebugOverlay />
     </div>
   );
 };
