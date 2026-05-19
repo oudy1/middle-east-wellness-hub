@@ -14,9 +14,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <Link to="/" className="flex items-center gap-4 mb-4" onClick={() => window.scrollTo(0, 0)}>
-              <img 
-                src={SHAMS_LOGO_PRIMARY} 
-                alt="SHAMS Logo" 
+              <img
+                src={SHAMS_LOGO_PRIMARY}
+                alt="SHAMS Logo"
+                width={56}
+                height={56}
+                loading="lazy"
+                decoding="async"
                 className="h-14 w-14 object-contain"
               />
               <h3 className="text-xl font-bold">{t("footer.title")}</h3>

@@ -133,9 +133,13 @@ const ChatWidget: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-healthDarkBlue text-white shrink-0">
           <div className="flex items-center gap-3">
-            <img 
-              src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" 
-              alt="SHAMS" 
+            <img
+              src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png"
+              alt="SHAMS"
+              width={32}
+              height={32}
+              loading="lazy"
+              decoding="async"
               className="h-8 w-8 object-contain"
             />
             <div>
