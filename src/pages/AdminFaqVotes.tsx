@@ -221,6 +221,23 @@ const AdminFaqVotes = () => {
 
   const [granularity, setGranularity] = useState<"day" | "week">("day");
   const [trendFaqId, setTrendFaqId] = useState<string>("all");
+  const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const [tzOverride, setTzOverride] = useState<string>("local");
+  const effectiveTz = tzOverride === "local" ? localTz : tzOverride;
+  const tzOptions = [
+    { value: "local", label: `Local (${localTz})` },
+    { value: "UTC", label: "UTC" },
+    { value: "America/Toronto", label: "America/Toronto" },
+    { value: "America/New_York", label: "America/New_York" },
+    { value: "America/Los_Angeles", label: "America/Los_Angeles" },
+    { value: "Europe/London", label: "Europe/London" },
+    { value: "Europe/Berlin", label: "Europe/Berlin" },
+    { value: "Asia/Dubai", label: "Asia/Dubai" },
+    { value: "Asia/Riyadh", label: "Asia/Riyadh" },
+    { value: "Asia/Beirut", label: "Asia/Beirut" },
+    { value: "Asia/Tokyo", label: "Asia/Tokyo" },
+  ];
+
 
   // FAQ ids present in the loaded vote data, with friendly labels.
   const availableFaqIds = useMemo(() => {
