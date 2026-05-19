@@ -151,6 +151,70 @@ const MetricsDebugOverlay = () => {
           )}
         </div>
       )}
+
+      {!collapsed && metrics && (() => {
+        const entries = Object.entries(metrics.lastPhaseMs ?? {});
+        if (entries.length === 0) return null;
+        const slowest = entries.reduce((a, b) => (b[1] > a[1] ? b : a));
+        return (
+          <div className="mt-1 border-t border-border pt-1">
+            <button
+              type="button"
+              onClick={() => setPhasesOpen((o) => !o)}
+              className="flex w-full items-center justify-between gap-1.5 text-muted-foreground hover:text-foreground"
+              aria-expanded={phasesOpen}
+              aria-label="Toggle phase breakdown"
+            >
+              <span className="font-semibold">phases</span>
+              <span className="text-foreground">
+                {phasesOpen ? "▾" : "▸"} slowest:{" "}
+                <span className="text-amber-500">
+                  {slowest[0]} {Math.round(slowest[1])}ms
+                </span>
+              </span>
+            </button>
+            {phasesOpen && (
+              <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5">
+                {entries
+                  .slice()
+                  .sort((a, b) => b[1] - a[1])
+                  .map(([name, ms]) => {
+                    const isSlowest = name === slowest[0];
+                    return (
+                      <span
+                        key={name}
+                        className="contents"
+                        aria-label={isSlowest ? "slowest phase" : undefined}
+                      >
+                        <span
+                          className={
+                            isSlowest
+                              ? "text-amber-500"
+                              : "text-muted-foreground"
+                          }
+                        >
+                          {isSlowest ? "★ " : ""}
+                          {name}
+                        </span>
+                        <span
+                          className={
+                            isSlowest
+                              ? "text-right text-amber-500"
+                              : "text-right text-foreground"
+                          }
+                        >
+                          {Math.round(ms)}ms
+                        </span>
+                      </span>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+        );
+      })()}
+        </div>
+      )}
     </div>
   );
 };
