@@ -481,45 +481,14 @@ const AdminFaqVotes = () => {
           </span>
         </section>
 
-        <section className="border border-border rounded-md overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>FAQ</TableHead>
-                <TableHead className="w-16">Lang</TableHead>
-                <TableHead className="text-right w-20">Helpful</TableHead>
-                <TableHead className="text-right w-24">Not helpful</TableHead>
-                <TableHead className="text-right w-20">Total</TableHead>
-                <TableHead className="text-right w-20">Helpful %</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {aggregates.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
-                    {loading ? "Loading..." : "No votes yet."}
-                  </TableCell>
-                </TableRow>
-              ) : (
-                aggregates.map((a) => (
-                  <TableRow key={`${a.faq_id}-${a.language}`}>
-                    <TableCell>
-                      <div className="font-medium text-sm text-foreground">
-                        {a.language === "ar" ? a.questionAr : a.questionEn}
-                      </div>
-                      <div className="text-xs text-muted-foreground font-mono">{a.faq_id}</div>
-                    </TableCell>
-                    <TableCell className="uppercase text-xs">{a.language}</TableCell>
-                    <TableCell className="text-right text-primary font-medium">{a.up}</TableCell>
-                    <TableCell className="text-right">{a.down}</TableCell>
-                    <TableCell className="text-right font-medium">{a.total}</TableCell>
-                    <TableCell className="text-right">{a.helpfulPct}%</TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </section>
+        <PaginatedAggregatesTable
+          aggregates={aggregates}
+          loading={loading}
+          page={page}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+        />
       </main>
     </div>
   );
