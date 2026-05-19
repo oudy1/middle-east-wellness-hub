@@ -253,24 +253,38 @@ const Glossary = () => {
                             query={searchQuery}
                           />
                         </span>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleCopy(item)}
-                          className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
-                          aria-label={isArabic ? "نسخ المصطلح والتعريف" : "Copy term and definition"}
-                        >
-                          {copiedId === item.id ? (
-                            <Check className="h-3.5 w-3.5" />
-                          ) : (
-                            <Copy className="h-3.5 w-3.5" />
-                          )}
-                          <span className={isArabic ? "mr-1" : "ml-1"}>
-                            {copiedId === item.id
-                              ? isArabic ? "تم النسخ" : "Copied"
-                              : isArabic ? "نسخ" : "Copy"}
-                          </span>
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleCopy(item)}
+                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
+                            aria-label={isArabic ? "نسخ المصطلح والتعريف" : "Copy term and definition"}
+                          >
+                            {copiedId === item.id ? (
+                              <Check className="h-3.5 w-3.5" />
+                            ) : (
+                              <Copy className="h-3.5 w-3.5" />
+                            )}
+                            <span className={isArabic ? "mr-1" : "ml-1"}>
+                              {copiedId === item.id
+                                ? isArabic ? "تم النسخ" : "Copied"
+                                : isArabic ? "نسخ" : "Copy"}
+                            </span>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleEmail(item)}
+                            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground"
+                            aria-label={isArabic ? "إرسال التعريف بالبريد الإلكتروني" : "Email definition"}
+                          >
+                            <Mail className="h-3.5 w-3.5" />
+                            <span className={isArabic ? "mr-1" : "ml-1"}>
+                              {isArabic ? "إرسال" : "Email"}
+                            </span>
+                          </Button>
+                        </div>
                       </div>
                       <p className="text-foreground">
                         <HighlightText
