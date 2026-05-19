@@ -55,6 +55,9 @@ const AdminFaqVotes = () => {
   const [langFilter, setLangFilter] = useState<"all" | "en" | "ar">("all");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [rawTotal, setRawTotal] = useState<number>(0);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
 
   useEffect(() => {
     const init = async () => {
@@ -89,18 +92,43 @@ const AdminFaqVotes = () => {
 
   const loadVotes = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("faq_votes")
-      .select("id, faq_id, vote, language, session_id, created_at")
-      .order("created_at", { ascending: false })
-      .limit(1000);
-    setLoading(false);
-    if (error) {
-      toast({ title: "Failed to load votes", description: error.message, variant: "destructive" });
-      return;
+    const PAGE = 1000;
+    let from = 0;
+    const all: VoteRow[] = [];
+    let serverTotal: number | null = null;
+    // First request: also fetch exact count.
+    while (true) {
+      const query = supabase
+        .from("faq_votes")
+        .select("id, faq_id, vote, language, session_id, created_at", {
+          count: from === 0 ? "exact" : undefined,
+        })
+        .order("created_at", { ascending: false })
+        .range(from, from + PAGE - 1);
+      const { data, error, count } = await query;
+      if (error) {
+        setLoading(false);
+        toast({
+          title: "Failed to load votes",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+      if (from === 0 && typeof count === "number") serverTotal = count;
+      const batch = (data ?? []) as VoteRow[];
+      all.push(...batch);
+      if (batch.length < PAGE) break;
+      from += PAGE;
+      // Safety cap to avoid runaway loops.
+      if (from > 50000) break;
     }
-    setRows((data ?? []) as VoteRow[]);
+    setRows(all);
+    setRawTotal(serverTotal ?? all.length);
+    setPage(1);
+    setLoading(false);
   };
+
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -178,6 +206,11 @@ const AdminFaqVotes = () => {
     const total = up + down;
     return { up, down, total, helpfulPct: total ? Math.round((up / total) * 100) : 0 };
   }, [rows, langFilter, dateFilter]);
+
+  // Reset to first page whenever filters or page size change.
+  useEffect(() => {
+    setPage(1);
+  }, [search, langFilter, startDate, endDate, pageSize]);
 
   const [granularity, setGranularity] = useState<"day" | "week">("day");
 
@@ -444,49 +477,18 @@ const AdminFaqVotes = () => {
             )}
           </div>
           <span className="text-xs text-muted-foreground ml-auto">
-            {aggregates.length} row{aggregates.length === 1 ? "" : "s"}
+            {aggregates.length} row{aggregates.length === 1 ? "" : "s"} · {rawTotal.toLocaleString()} total vote{rawTotal === 1 ? "" : "s"}
           </span>
         </section>
 
-        <section className="border border-border rounded-md overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>FAQ</TableHead>
-                <TableHead className="w-16">Lang</TableHead>
-                <TableHead className="text-right w-20">Helpful</TableHead>
-                <TableHead className="text-right w-24">Not helpful</TableHead>
-                <TableHead className="text-right w-20">Total</TableHead>
-                <TableHead className="text-right w-20">Helpful %</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {aggregates.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
-                    {loading ? "Loading..." : "No votes yet."}
-                  </TableCell>
-                </TableRow>
-              ) : (
-                aggregates.map((a) => (
-                  <TableRow key={`${a.faq_id}-${a.language}`}>
-                    <TableCell>
-                      <div className="font-medium text-sm text-foreground">
-                        {a.language === "ar" ? a.questionAr : a.questionEn}
-                      </div>
-                      <div className="text-xs text-muted-foreground font-mono">{a.faq_id}</div>
-                    </TableCell>
-                    <TableCell className="uppercase text-xs">{a.language}</TableCell>
-                    <TableCell className="text-right text-primary font-medium">{a.up}</TableCell>
-                    <TableCell className="text-right">{a.down}</TableCell>
-                    <TableCell className="text-right font-medium">{a.total}</TableCell>
-                    <TableCell className="text-right">{a.helpfulPct}%</TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
-        </section>
+        <PaginatedAggregatesTable
+          aggregates={aggregates}
+          loading={loading}
+          page={page}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={setPageSize}
+        />
       </main>
     </div>
   );
@@ -506,5 +508,116 @@ const StatCard = ({
     <div className={`text-2xl font-bold ${accent ?? "text-foreground"}`}>{value}</div>
   </div>
 );
+
+const PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
+
+const PaginatedAggregatesTable = ({
+  aggregates,
+  loading,
+  page,
+  pageSize,
+  onPageChange,
+  onPageSizeChange,
+}: {
+  aggregates: Aggregate[];
+  loading: boolean;
+  page: number;
+  pageSize: number;
+  onPageChange: (p: number) => void;
+  onPageSizeChange: (n: number) => void;
+}) => {
+  const total = aggregates.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const startIdx = (currentPage - 1) * pageSize;
+  const endIdx = Math.min(startIdx + pageSize, total);
+  const slice = aggregates.slice(startIdx, endIdx);
+
+  return (
+    <section className="border border-border rounded-md overflow-hidden">
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>FAQ</TableHead>
+              <TableHead className="w-16">Lang</TableHead>
+              <TableHead className="text-right w-20">Helpful</TableHead>
+              <TableHead className="text-right w-24">Not helpful</TableHead>
+              <TableHead className="text-right w-20">Total</TableHead>
+              <TableHead className="text-right w-20">Helpful %</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {total === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                  {loading ? "Loading..." : "No votes yet."}
+                </TableCell>
+              </TableRow>
+            ) : (
+              slice.map((a) => (
+                <TableRow key={`${a.faq_id}-${a.language}`}>
+                  <TableCell>
+                    <div className="font-medium text-sm text-foreground">
+                      {a.language === "ar" ? a.questionAr : a.questionEn}
+                    </div>
+                    <div className="text-xs text-muted-foreground font-mono">{a.faq_id}</div>
+                  </TableCell>
+                  <TableCell className="uppercase text-xs">{a.language}</TableCell>
+                  <TableCell className="text-right text-primary font-medium">{a.up}</TableCell>
+                  <TableCell className="text-right">{a.down}</TableCell>
+                  <TableCell className="text-right font-medium">{a.total}</TableCell>
+                  <TableCell className="text-right">{a.helpfulPct}%</TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-card px-3 py-2 text-xs">
+        <div className="text-muted-foreground">
+          {total === 0
+            ? "0 results"
+            : `Showing ${startIdx + 1}–${endIdx} of ${total}`}
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="flex items-center gap-1 text-muted-foreground">
+            Rows
+            <select
+              className="h-8 rounded-md border border-input bg-background px-1 text-xs"
+              value={pageSize}
+              onChange={(e) => onPageSizeChange(Number(e.target.value))}
+            >
+              {PAGE_SIZE_OPTIONS.map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage <= 1}
+          >
+            Prev
+          </Button>
+          <span className="text-muted-foreground">
+            Page {currentPage} / {totalPages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage >= totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default AdminFaqVotes;
