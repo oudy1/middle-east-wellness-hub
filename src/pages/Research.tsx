@@ -1,6 +1,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
 import { Button } from "@/components/ui/button";
