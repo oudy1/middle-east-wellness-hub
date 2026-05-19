@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Header from "@/components/Header";
 import WebinarSlidesViewer from "@/components/WebinarSlidesViewer";
 import Footer from "@/components/Footer";
+import { SEOHead } from "@/components/SEOHead";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,14 @@ const Webinars = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray">
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/recordings"
+        title="Webinars and Recordings | SHAMS"
+        description="Watch SHAMS webinars on health, research, women's health, diabetes, nutrition, and community education for Middle Eastern and Arab societies in Canada."
+        titleAr="الندوات والتسجيلات | شمس"
+        descriptionAr="شاهد ندوات شمس حول الصحة، البحث، صحة المرأة، السكري، التغذية، والتثقيف المجتمعي للمجتمعات الشرق أوسطية والعربية في كندا."
+      />
       <Header />
       <main className="flex-grow">
         <section className="py-16 md:py-24">

@@ -39,8 +39,12 @@ const Programs = () => {
   return (
     <div className={`min-h-screen bg-background ${isRTL ? 'rtl' : 'ltr'}`}>
       <SEOHead
-        title="Programs – SHAMS"
-        description="Free and funded mental health support options through trusted partners like Better Life Counselling Centre."
+        lang={isRTL ? "ar" : "en"}
+        path="/programs"
+        title="Mental Health and Community Programs | SHAMS"
+        description="Discover SHAMS programs including free and funded mental health support, partner initiatives, and community offerings for Middle Eastern and Arab societies in Canada."
+        titleAr="البرامج المجتمعية والصحة النفسية | شمس"
+        descriptionAr="اكتشف برامج شمس بما في ذلك دعم الصحة النفسية المجاني والممول، ومبادرات الشركاء، والعروض المجتمعية للمجتمعات الشرق أوسطية والعربية في كندا."
       />
       <Header />
       <main className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
