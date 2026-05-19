@@ -11,6 +11,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "@/hooks/use-toast";
 import faqData from "../../content/faq.json";
