@@ -233,6 +233,40 @@ const MetricsDebugOverlay = () => {
           </span>
           <span>updated</span>
           <span className="text-right text-foreground">{updatedAgo} ago</span>
+          <span>hero visible</span>
+          <span
+            className={`text-right ${
+              heroVisible === true
+                ? "text-emerald-500"
+                : heroVisible === false
+                  ? "text-amber-500"
+                  : "text-muted-foreground"
+            }`}
+          >
+            {heroVisible === null
+              ? "no hero"
+              : heroVisible
+                ? "yes"
+                : "off-screen"}
+          </span>
+          <span>IO active</span>
+          <span
+            className={`text-right ${
+              metrics?.ioActive
+                ? "text-sky-500"
+                : metrics?.heroEverIntersected
+                  ? "text-muted-foreground"
+                  : "text-foreground"
+            }`}
+          >
+            {metrics?.ioActive
+              ? "watching"
+              : metrics?.heroEverIntersected
+                ? "done (intersected)"
+                : metrics?.ioUnsupported
+                  ? "unsupported"
+                  : "inactive"}
+          </span>
           {metrics && (
             <>
               <span>cached</span>
