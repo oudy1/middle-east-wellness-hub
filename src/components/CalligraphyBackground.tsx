@@ -6,16 +6,57 @@ interface CalligraphyBackgroundProps {
   heroRef?: RefObject<HTMLElement | null>;
 }
 
+type CalligraphyMetrics = {
+  cachedHit: number;
+  generated: number;
+  ioUnsupported: number;
+  heroMissing: number;
+  skippedNeverIntersected: number;
+  skippedAfterSchedule: number;
+  lastGenerationMs: number | null;
+  lastPhaseMs: Record<string, number>;
+};
+
+const METRICS_KEY = "__calligraphyMetrics";
+
+const getMetrics = (): CalligraphyMetrics => {
+  const w = window as unknown as Record<string, CalligraphyMetrics>;
+  if (!w[METRICS_KEY]) {
+    w[METRICS_KEY] = {
+      cachedHit: 0,
+      generated: 0,
+      ioUnsupported: 0,
+      heroMissing: 0,
+      skippedNeverIntersected: 0,
+      skippedAfterSchedule: 0,
+      lastGenerationMs: null,
+      lastPhaseMs: {},
+    };
+  }
+  return w[METRICS_KEY];
+};
+
+const log = (event: string, detail?: Record<string, unknown>) => {
+  // eslint-disable-next-line no-console
+  console.debug(`[calligraphy] ${event}`, detail ?? "");
+};
+
 const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => {
   useEffect(() => {
+    const metrics = getMetrics();
+
     // Apply cached pattern synchronously — no heavy work on repeat visits.
     const storedBg = localStorage.getItem('calligraphy-bg');
     if (storedBg) {
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${storedBg})`);
+      metrics.cachedHit += 1;
+      log("cached-hit", { total: metrics.cachedHit });
       return;
     }
 
     let cancelled = false;
+    let intersected = false;
+    let scheduled = false;
     const timers: number[] = [];
     let idleHandle: number | null = null;
     let rafHandle: number | null = null;
@@ -41,10 +82,36 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       (window as any).cancelIdleCallback ||
       ((id: number) => window.clearTimeout(id));
 
+    // Helper: time a phase, store its duration in metrics, and create a
+    // performance.measure entry visible in DevTools.
+    const phase = async <T,>(name: string, fn: () => T | Promise<T>): Promise<T> => {
+      const startMark = `calligraphy:${name}:start`;
+      const endMark = `calligraphy:${name}:end`;
+      try {
+        performance.mark(startMark);
+      } catch {
+        /* ignore */
+      }
+      const t0 = performance.now();
+      const result = await fn();
+      const elapsed = performance.now() - t0;
+      metrics.lastPhaseMs[name] = elapsed;
+      try {
+        performance.mark(endMark);
+        performance.measure(`calligraphy:${name}`, startMark, endMark);
+      } catch {
+        /* ignore */
+      }
+      return result;
+    };
+
     // Run the actual generation only after: window 'load' fires, two animation
     // frames have flushed (hero is on screen), and the browser is idle.
     const start = async () => {
       if (cancelled) return;
+
+      const totalStart = performance.now();
+      log("generation-start");
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -292,39 +359,56 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
     
       // Run the heavy painters in phases, yielding to the main thread between
       // each so input handlers and animation frames can still execute on slow
-      // devices. Each phase becomes its own task.
+      // devices. Each phase becomes its own task and is timed individually.
       if (cancelled) return;
-      createOrganizedDistribution(arabicTexts, 20, 0.15, 120);
+      await phase("draw-cities", () => createOrganizedDistribution(arabicTexts, 20, 0.15, 120));
 
       await yieldToMain();
       if (cancelled) return;
-      createOrganizedDistribution(healthPhrases, 32, 0.2, 30);
+      await phase("draw-phrases", () => createOrganizedDistribution(healthPhrases, 32, 0.2, 30));
 
       await yieldToMain();
       if (cancelled) return;
-      drawGeometricPatterns();
+      await phase("draw-geometric", () => drawGeometricPatterns());
 
       await yieldToMain();
       if (cancelled) return;
       const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
-      createOrganizedDistribution(featuredWords, 48, 0.25, 15);
+      await phase("draw-featured", () => createOrganizedDistribution(featuredWords, 48, 0.25, 15));
 
       await yieldToMain();
       if (cancelled) return;
 
       // toDataURL is synchronous and the heaviest single step — run it in its
       // own task so it never lands inside the LCP critical path.
-      const dataUrl = canvas.toDataURL('image/png');
+      const dataUrl = await phase("to-data-url", () => canvas.toDataURL('image/png'));
+
       try {
         localStorage.setItem('calligraphy-bg', dataUrl);
       } catch {
         // Ignore quota errors — pattern is decorative
       }
       document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+
+      const totalMs = performance.now() - totalStart;
+      metrics.lastGenerationMs = totalMs;
+      metrics.generated += 1;
+      try {
+        performance.measure("calligraphy:total");
+      } catch {
+        /* ignore */
+      }
+      log("generation-complete", {
+        totalMs: Math.round(totalMs),
+        phases: metrics.lastPhaseMs,
+        generated: metrics.generated,
+      });
     };
 
     // Schedule chain: 2x rAF (post first paint) → idle callback → generate.
     const scheduleAfterPaint = () => {
+      scheduled = true;
+      log("scheduled");
       rafHandle = window.requestAnimationFrame(() => {
         rafHandle = window.requestAnimationFrame(() => {
           idleHandle = idle(() => {
@@ -357,7 +441,15 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
         document.querySelector<HTMLElement>("section");
 
       // Fallback if IntersectionObserver is unavailable or hero isn't mounted.
-      if (typeof IntersectionObserver === "undefined" || !hero) {
+      if (typeof IntersectionObserver === "undefined") {
+        metrics.ioUnsupported += 1;
+        log("io-unsupported", { total: metrics.ioUnsupported });
+        runWhenReady();
+        return;
+      }
+      if (!hero) {
+        metrics.heroMissing += 1;
+        log("hero-missing", { total: metrics.heroMissing });
         runWhenReady();
         return;
       }
@@ -366,6 +458,8 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
         (entries) => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
+              intersected = true;
+              log("hero-intersected");
               observer?.disconnect();
               observer = null;
               runWhenReady();
@@ -397,6 +491,21 @@ const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => 
       if (observerTimer !== null) window.clearTimeout(observerTimer);
       observer?.disconnect();
       timers.forEach((t) => window.clearTimeout(t));
+
+      // Categorize the unmount: never intersected vs cancelled mid-flight.
+      if (!intersected) {
+        metrics.skippedNeverIntersected += 1;
+        log("skipped-never-intersected", {
+          total: metrics.skippedNeverIntersected,
+        });
+      } else if (scheduled && metrics.lastGenerationMs === null) {
+        // Hero did intersect and we scheduled work, but we unmounted before
+        // generation completed.
+        metrics.skippedAfterSchedule += 1;
+        log("skipped-after-schedule", {
+          total: metrics.skippedAfterSchedule,
+        });
+      }
     };
   }, [heroRef]);
 
