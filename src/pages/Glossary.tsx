@@ -50,6 +50,18 @@ const Glossary = () => {
     }
   };
 
+  const handleEmail = (item: typeof glossaryData[number]) => {
+    const term = isArabic ? item.termAr : item.termEn;
+    const definition = isArabic ? item.definitionAr : item.definitionEn;
+    const subject = isArabic
+      ? `مصطلح من مسرد SHAMS: ${term}`
+      : `SHAMS Glossary term: ${term}`;
+    const body = isArabic
+      ? `${term}\n\n${definition}\n\nمن مسرد SHAMS: ${window.location.href}`
+      : `${term}\n\n${definition}\n\nFrom the SHAMS Glossary: ${window.location.href}`;
+    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filtered = glossaryData.filter((item) => {
