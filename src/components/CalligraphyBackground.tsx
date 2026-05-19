@@ -15,6 +15,8 @@ type CalligraphyMetrics = {
   skippedAfterSchedule: number;
   lastGenerationMs: number | null;
   lastPhaseMs: Record<string, number>;
+  ioActive: boolean;
+  heroEverIntersected: boolean;
 };
 
 const METRICS_KEY = "__calligraphyMetrics";
@@ -31,6 +33,8 @@ const getMetrics = (): CalligraphyMetrics => {
       skippedAfterSchedule: 0,
       lastGenerationMs: null,
       lastPhaseMs: {},
+      ioActive: false,
+      heroEverIntersected: false,
     };
   }
   return w[METRICS_KEY];
