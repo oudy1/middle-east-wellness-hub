@@ -276,14 +276,21 @@ const CalligraphyBackground = () => {
     const featuredWords = ["الصحة", "العافية", "الطب", "العلاج", "الرعاية الصحية", "المبادرة", "التعاون", "البحث", "التعليم", "المجتمع", "المشاركة", "كندا", "العرب", "الثقة", "المستقبل"];
     createOrganizedDistribution(featuredWords, 48, 0.25, 15);
     
-    // Export as image and set to localStorage to avoid regenerating on every reload
-    const dataUrl = canvas.toDataURL('image/png');
-    localStorage.setItem('calligraphy-bg', dataUrl);
-    
-    // Update the CSS variable for the background
-    document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+      // Export as image and set to localStorage to avoid regenerating on every reload
+      const dataUrl = canvas.toDataURL('image/png');
+      try {
+        localStorage.setItem('calligraphy-bg', dataUrl);
+      } catch {
+        // Ignore quota errors — pattern is decorative
+      }
+
+      // Update the CSS variable for the background
+      document.documentElement.style.setProperty('--calligraphy-bg', `url(${dataUrl})`);
+    });
+
+    return () => cancelIdle(handle);
   }, []);
-  
+
   return null;
 };
 
