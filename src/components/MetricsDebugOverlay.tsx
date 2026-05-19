@@ -51,8 +51,6 @@ const MetricsDebugOverlay = () => {
     return () => window.clearInterval(id);
   }, [paused]);
 
-  if (!import.meta.env.DEV) return null;
-
   const status = (() => {
     if (!metrics) return { label: "waiting", color: "bg-muted-foreground" };
     if (metrics.cachedHit > 0)
@@ -63,6 +61,47 @@ const MetricsDebugOverlay = () => {
       return { label: "skipped", color: "bg-amber-500" };
     return { label: "pending", color: "bg-muted-foreground" };
   })();
+
+  // Track when the status last changed; reset stability + visibility on change.
+  useEffect(() => {
+    if (lastStatusRef.current !== status.label) {
+      lastStatusRef.current = status.label;
+      setStableSince(Date.now());
+      setHidden(false);
+    }
+  }, [status.label]);
+
+  // Auto-hide after STABILITY_HIDE_MS of unchanged status.
+  useEffect(() => {
+    if (!autoHide || hidden || stableSince == null) return;
+    const elapsed = Date.now() - stableSince;
+    const remaining = Math.max(0, STABILITY_HIDE_MS - elapsed);
+    const id = window.setTimeout(() => setHidden(true), remaining);
+    return () => window.clearTimeout(id);
+  }, [autoHide, hidden, stableSince]);
+
+  if (!import.meta.env.DEV) return null;
+
+  if (hidden) {
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          setHidden(false);
+          setStableSince(Date.now());
+        }}
+        aria-label="Show metrics debug overlay"
+        title="Show metrics debug overlay"
+        className="fixed bottom-3 right-3 z-50 flex h-3 w-3 items-center justify-center rounded-full border border-border bg-background/80 shadow-sm backdrop-blur"
+      >
+        <span
+          className={`h-1.5 w-1.5 rounded-full ${status.color}`}
+          aria-hidden="true"
+        />
+      </button>
+    );
+  }
+
 
   const lastMs =
     metrics?.lastGenerationMs != null
