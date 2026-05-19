@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/accordion";
 import faqData from "../../content/faq.json";
 import { HighlightText } from "@/components/HighlightText";
+import FAQFeedback from "@/components/FAQFeedback";
 
 const categories = ["all", "general", "healthcare", "mental-health", "research", "newcomer"] as const;
 
