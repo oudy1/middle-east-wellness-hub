@@ -1,7 +1,12 @@
 
-import { useEffect } from "react";
+import { useEffect, type RefObject } from "react";
 
-const CalligraphyBackground = () => {
+interface CalligraphyBackgroundProps {
+  /** Ref to the hero element. Generation only runs once it intersects the viewport. */
+  heroRef?: RefObject<HTMLElement | null>;
+}
+
+const CalligraphyBackground = ({ heroRef }: CalligraphyBackgroundProps = {}) => {
   useEffect(() => {
     // Apply cached pattern synchronously — no heavy work on repeat visits.
     const storedBg = localStorage.getItem('calligraphy-bg');
@@ -345,13 +350,13 @@ const CalligraphyBackground = () => {
     };
 
     const setupGate = () => {
-      // Hero is the first <section> rendered by HeroSection.
-      const hero =
-        document.querySelector<HTMLElement>("section") ||
-        document.querySelector<HTMLElement>("main") ||
-        document.body;
+      // Use the passed-in hero ref. Fall back to the first <section> only if
+      // no ref was provided (keeps the component usable in isolation).
+      const hero: HTMLElement | null =
+        heroRef?.current ??
+        document.querySelector<HTMLElement>("section");
 
-      // Fallback if IntersectionObserver is unavailable (very old browsers).
+      // Fallback if IntersectionObserver is unavailable or hero isn't mounted.
       if (typeof IntersectionObserver === "undefined" || !hero) {
         runWhenReady();
         return;
@@ -376,9 +381,13 @@ const CalligraphyBackground = () => {
       observer.observe(hero);
     };
 
-    // Wait one rAF so React has had a chance to mount the hero into the DOM
-    // before we query for it.
-    rafHandle = window.requestAnimationFrame(setupGate);
+    // If the ref is already populated (typical — refs commit before effects),
+    // wire up synchronously. Otherwise wait one rAF for React to mount it.
+    if (heroRef?.current) {
+      setupGate();
+    } else {
+      rafHandle = window.requestAnimationFrame(setupGate);
+    }
 
     return () => {
       cancelled = true;
