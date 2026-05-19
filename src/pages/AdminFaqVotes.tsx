@@ -522,6 +522,8 @@ const PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
 
 const PaginatedAggregatesTable = ({
   aggregates,
+  rows,
+  dateFilter,
   loading,
   page,
   pageSize,
@@ -529,6 +531,8 @@ const PaginatedAggregatesTable = ({
   onPageSizeChange,
 }: {
   aggregates: Aggregate[];
+  rows: VoteRow[];
+  dateFilter: (r: VoteRow) => boolean;
   loading: boolean;
   page: number;
   pageSize: number;
@@ -542,6 +546,21 @@ const PaginatedAggregatesTable = ({
   const endIdx = Math.min(startIdx + pageSize, total);
   const slice = aggregates.slice(startIdx, endIdx);
 
+  const [details, setDetails] = useState<Aggregate | null>(null);
+
+  const detailVotes = useMemo(() => {
+    if (!details) return [];
+    return rows
+      .filter(
+        (r) =>
+          r.faq_id === details.faq_id &&
+          (r.language ?? "en") === details.language &&
+          dateFilter(r)
+      )
+      .sort((a, b) => b.created_at.localeCompare(a.created_at))
+      .slice(0, 100);
+  }, [details, rows, dateFilter]);
+
   return (
     <section className="border border-border rounded-md overflow-hidden">
       <div className="overflow-x-auto">
@@ -554,12 +573,13 @@ const PaginatedAggregatesTable = ({
               <TableHead className="text-right w-24">Not helpful</TableHead>
               <TableHead className="text-right w-20">Total</TableHead>
               <TableHead className="text-right w-20">Helpful %</TableHead>
+              <TableHead className="text-right w-24">Details</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {total === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                   {loading ? "Loading..." : "No votes yet."}
                 </TableCell>
               </TableRow>
@@ -577,12 +597,80 @@ const PaginatedAggregatesTable = ({
                   <TableCell className="text-right">{a.down}</TableCell>
                   <TableCell className="text-right font-medium">{a.total}</TableCell>
                   <TableCell className="text-right">{a.helpfulPct}%</TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-xs"
+                      onClick={() => setDetails(a)}
+                    >
+                      View
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))
             )}
           </TableBody>
         </Table>
       </div>
+
+      <Dialog open={!!details} onOpenChange={(o) => !o && setDetails(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-base">
+              {details ? (details.language === "ar" ? details.questionAr : details.questionEn) : ""}
+            </DialogTitle>
+            <DialogDescription className="text-xs font-mono">
+              {details ? `${details.faq_id} · ${details.language.toUpperCase()}` : ""}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="text-xs text-muted-foreground">
+            Showing the {detailVotes.length} most recent vote{detailVotes.length === 1 ? "" : "s"} (max 100) within the current date range.
+          </div>
+          <div className="border border-border rounded-md overflow-x-auto max-h-[60vh] overflow-y-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-40">Date</TableHead>
+                  <TableHead className="w-20">Vote</TableHead>
+                  <TableHead>Session ID</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {detailVotes.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-muted-foreground py-6">
+                      No individual votes to show.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  detailVotes.map((v) => (
+                    <TableRow key={v.id}>
+                      <TableCell className="text-xs whitespace-nowrap">
+                        {new Date(v.created_at).toLocaleString()}
+                      </TableCell>
+                      <TableCell>
+                        <span
+                          className={
+                            v.vote === "up"
+                              ? "text-primary text-xs font-medium"
+                              : "text-muted-foreground text-xs"
+                          }
+                        >
+                          {v.vote === "up" ? "Helpful" : "Not helpful"}
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-xs font-mono break-all">
+                        {v.session_id ?? <span className="text-muted-foreground italic">unavailable</span>}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </DialogContent>
+      </Dialog>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-card px-3 py-2 text-xs">
         <div className="text-muted-foreground">
           {total === 0
