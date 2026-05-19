@@ -477,11 +477,6 @@ const AdminFaqVotes = () => {
             )}
           </div>
           <span className="text-xs text-muted-foreground ml-auto">
-            {aggregates.length} row{aggregates.length === 1 ? "" : "s"}
-          </span>
-        </section>
-
-          <span className="text-xs text-muted-foreground ml-auto">
             {aggregates.length} row{aggregates.length === 1 ? "" : "s"} · {rawTotal.toLocaleString()} total vote{rawTotal === 1 ? "" : "s"}
           </span>
         </section>
