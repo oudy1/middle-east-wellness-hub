@@ -220,6 +220,20 @@ const AdminFaqVotes = () => {
   }, [search, langFilter, startDate, endDate, pageSize]);
 
   const [granularity, setGranularity] = useState<"day" | "week">("day");
+  const [trendFaqId, setTrendFaqId] = useState<string>("all");
+
+  // FAQ ids present in the loaded vote data, with friendly labels.
+  const availableFaqIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const r of rows) ids.add(r.faq_id);
+    return Array.from(ids)
+      .map((id) => {
+        const q = faqMap.get(id);
+        const label = q?.en ?? id;
+        return { id, label: label.length > 80 ? label.slice(0, 77) + "..." : label };
+      })
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [rows, faqMap]);
 
   const trendData = useMemo(() => {
     const bucketKey = (iso: string) => {
