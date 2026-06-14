@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
@@ -56,7 +56,36 @@ const Programs = () => {
           </p>
         </section>
 
-        {/* Program Cards Grid */}
+        {/* SHAMS Mentorship Program — internal featured */}
+        <section className="mb-12">
+          <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/10">
+            <CardHeader>
+              <Badge className="w-fit mb-2 text-xs">SHAMS Program</Badge>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <GraduationCap className="h-6 w-6 text-primary" />
+                SHAMS Mentorship Program
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Connecting MENA students and early-career individuals with healthcare professionals across Canada for guidance, mentorship, and career support.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/programs/mentorship">
+                  <Button>Learn more & apply</Button>
+                </Link>
+                <a href="https://forms.gle/dCyMfPQH8DRSxsxb8" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="gap-2">Become a Mentor <ExternalLink size={14} /></Button>
+                </a>
+                <a href="https://forms.gle/3Xw71e2Y3Hhqn7gF9" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="gap-2">Become a Mentee <ExternalLink size={14} /></Button>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Partner Program Cards Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {programs.map((program) => (
             <Card key={program.title} className="flex flex-col justify-between border border-border">
