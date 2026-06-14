@@ -264,7 +264,7 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent
                 side={isRTL ? "left" : "right"}
-                className="w-full sm:w-[340px] bg-healthDarkBlue text-white border-l border-white/10 p-0 flex flex-col"
+                className="w-full sm:w-[340px] bg-healthDarkBlue text-white border-l border-white/10 p-0 flex flex-col [&>button]:hidden"
                 dir={isRTL ? "rtl" : "ltr"}
               >
                 <SheetHeader className="p-5 pb-3 border-b border-white/10 flex-shrink-0">
