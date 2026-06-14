@@ -167,7 +167,7 @@
   }
   
   [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
-    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
     font-weight: 600;
     line-height: 1.4;
   }
