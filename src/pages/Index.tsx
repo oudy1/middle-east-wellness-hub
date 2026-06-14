@@ -10,6 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 // Below-the-fold sections — code-split so they don't block the hero paint.
 const FeaturedEventSection = lazy(() => import("@/components/FeaturedEventSection"));
+const MentorshipHighlight = lazy(() => import("@/components/MentorshipHighlight"));
 const FeaturedWebinarBanner = lazy(() => import("@/components/FeaturedWebinarBanner"));
 const ResearchWebinarCarousel = lazy(() => import("@/components/ResearchWebinarCarousel"));
 const ResourceFinderSection = lazy(() =>
@@ -76,6 +77,7 @@ const Index = () => {
 
         <Suspense fallback={<SectionFallback />}>
           <FeaturedEventSection />
+          <MentorshipHighlight />
           <FeaturedWebinarBanner />
           <ResearchWebinarCarousel />
           <ResourceFinderSection />

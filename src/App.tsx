@@ -20,6 +20,7 @@ import Contact from "@/pages/Contact";
 import MentorshipBooking from "@/pages/MentorshipBooking";
 import SupportUs from "@/pages/SupportUs";
 import Programs from "@/pages/Programs";
+import Mentorship from "@/pages/Mentorship";
 import FAQ from "@/pages/FAQ";
 import Glossary from "@/pages/Glossary";
 import AdminLogin from "@/pages/AdminLogin";
@@ -54,6 +55,7 @@ function App() {
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/programs/mentorship" element={<Mentorship />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/admin/login" element={<AdminLogin />} />
