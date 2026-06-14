@@ -112,7 +112,7 @@ export default {
 			},
       fontFamily: {
         arabic: ['Amiri', 'serif'],
-        cairo: ['Cairo', 'Noto Sans Arabic', 'sans-serif'],
+        cairo: ['Cairo', 'Cairo-fallback', 'sans-serif'],
         noto: ['Noto Sans Arabic', 'sans-serif']
       },
       backgroundImage: {
