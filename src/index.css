@@ -1,6 +1,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
 
+/* Metric-compatible fallback for Cairo to prevent layout shift (CLS) */
+@font-face {
+  font-family: 'Cairo-fallback';
+  src: local('Noto Sans Arabic'), local('Segoe UI'), local('Arial'), local('Tahoma');
+  size-adjust: 107%;
+  ascent-override: 105%;
+  descent-override: 32%;
+  line-gap-override: 0%;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
