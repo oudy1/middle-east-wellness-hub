@@ -25,7 +25,7 @@ const MentorshipHighlight = () => {
     <section className="py-12 md:py-16 bg-white relative z-10">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="order-1 md:order-1 flex justify-center">
+          <div className="order-1 md:order-2 flex justify-center">
             <img
               src={posterAsset.url}
               alt={title}
@@ -33,7 +33,7 @@ const MentorshipHighlight = () => {
               className="rounded-xl shadow-lg max-w-[280px] sm:max-w-xs md:max-w-sm w-full h-auto object-contain"
             />
           </div>
-          <div className="order-2 md:order-2">
+          <div className="order-2 md:order-1">
             <Badge variant="secondary" className="mb-3">
               {isAr ? "برنامج" : "Program"}
             </Badge>
