@@ -193,7 +193,8 @@
   .bilingual-container .arabic {
     text-align: right;
     direction: rtl;
-    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
+    font-size-adjust: 0.52;
   }
   
   @media (max-width: 768px) {
