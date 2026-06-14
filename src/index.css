@@ -1,6 +1,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
 
+/* Metric-compatible fallback for Cairo to prevent layout shift (CLS) */
+@font-face {
+  font-family: 'Cairo-fallback';
+  src: local('Noto Sans Arabic'), local('Segoe UI'), local('Arial'), local('Tahoma');
+  size-adjust: 107%;
+  ascent-override: 105%;
+  descent-override: 32%;
+  line-gap-override: 0%;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -150,13 +160,14 @@
   
   /* Arabic typography improvements */
   [dir="rtl"] {
-    font-family: 'Cairo', 'Noto Sans Arabic', 'Amiri', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
+    font-size-adjust: 0.52;
     line-height: 1.8;
     letter-spacing: 0.02em;
   }
   
   [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6 {
-    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
     font-weight: 600;
     line-height: 1.4;
   }
@@ -182,7 +193,8 @@
   .bilingual-container .arabic {
     text-align: right;
     direction: rtl;
-    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
+    font-size-adjust: 0.52;
   }
   
   @media (max-width: 768px) {
