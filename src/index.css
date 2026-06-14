@@ -160,7 +160,8 @@
   
   /* Arabic typography improvements */
   [dir="rtl"] {
-    font-family: 'Cairo', 'Noto Sans Arabic', 'Amiri', sans-serif;
+    font-family: 'Cairo', 'Cairo-fallback', sans-serif;
+    font-size-adjust: 0.52;
     line-height: 1.8;
     letter-spacing: 0.02em;
   }
