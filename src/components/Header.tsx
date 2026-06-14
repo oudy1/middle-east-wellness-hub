@@ -284,7 +284,7 @@ const Header = () => {
                   </div>
                 </SheetHeader>
 
-                <nav data-sheet-nav className="flex-1 overflow-y-auto overscroll-contain px-3 py-3 space-y-1">
+                <nav className="flex-1 overflow-y-auto overscroll-contain px-3 py-3 space-y-1">
                   {drawerItems.map((item, idx) => {
                     if (!isGroup(item)) {
                       return (
