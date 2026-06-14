@@ -118,6 +118,13 @@ const Header = () => {
                   >
                     {t("common.programs")}
                   </Link>
+                  <Link
+                    to="/programs/mentorship"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setServicesMenuOpen(false)}
+                  >
+                    {language === "ar" ? "برنامج الإرشاد" : "Mentorship Program"}
+                  </Link>
                 </div>
               )}
             </div>
@@ -344,6 +351,9 @@ const Header = () => {
                       </Link>
                       <Link to="/programs" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
                         {t("common.programs")}
+                      </Link>
+                      <Link to="/programs/mentorship" className="block py-3 px-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[48px] flex items-center touch-manipulation">
+                        {language === "ar" ? "برنامج الإرشاد" : "Mentorship Program"}
                       </Link>
                     </div>
                   </div>
