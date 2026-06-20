@@ -214,15 +214,36 @@ const Services = () => {
     if (cards.length === 0) return;
 
     // Tag with position metadata for assistive tech context.
+    const findParentCard = (el: HTMLElement): HTMLElement | null => {
+      let node: HTMLElement | null = el.parentElement;
+      while (node) {
+        const cls = node.className;
+        if (typeof cls === "string" && cls.includes("rounded-lg") && cls.includes("bg-card")) {
+          return node;
+        }
+        node = node.parentElement;
+      }
+      return null;
+    };
+
     cards.forEach((a, i) => {
       a.setAttribute("data-mp-card", String(i));
       a.setAttribute("aria-label", `${a.textContent?.trim() || "Resource"} (${i + 1}/${cards.length})`);
+      const card = findParentCard(a);
       const onFocus = () => {
         // Keep the card visible without jarring jumps; respects sticky header via scroll-mt on sections.
         a.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        card?.classList.add("mp-card-focus");
+      };
+      const onBlur = () => {
+        card?.classList.remove("mp-card-focus");
       };
       a.addEventListener("focus", onFocus);
-      cleanups.push(() => a.removeEventListener("focus", onFocus));
+      a.addEventListener("blur", onBlur);
+      cleanups.push(() => {
+        a.removeEventListener("focus", onFocus);
+        a.removeEventListener("blur", onBlur);
+      });
     });
 
     // Arrow-key navigation between cards (DOM order, so it stays consistent in RTL).

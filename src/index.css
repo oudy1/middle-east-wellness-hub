@@ -245,3 +245,16 @@
     }
   }
 }
+
+/* Visible focus styling for MedlinePlus keyboard navigation */
+a[data-mp-card]:focus-visible {
+  outline: 3px solid #1A9AAD;
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+.mp-card-focus {
+  box-shadow: 0 0 0 3px rgba(26, 154, 173, 0.35), 0 4px 12px rgba(26, 154, 173, 0.15);
+  border-color: #1A9AAD !important;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
