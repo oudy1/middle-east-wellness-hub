@@ -39,7 +39,7 @@ const JoinUs = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main className="flex-grow" dir={isArabic ? 'rtl' : 'ltr'}>
+      <main id="main-content" className="flex-grow" dir={isArabic ? 'rtl' : 'ltr'}>
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-12 md:py-20">
           <div className="container mx-auto px-4 text-center">

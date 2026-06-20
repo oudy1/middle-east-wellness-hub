@@ -257,7 +257,7 @@ const Mentorship = () => {
         descriptionAr="يربط برنامج الإرشاد من شمس الطلاب والمهنيين في بداية مسيرتهم من خلفيات الشرق الأوسط وشمال أفريقيا بمهنيي الرعاية الصحية في جميع أنحاء كندا."
       />
       <Header />
-      <main className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <main id="main-content" className="py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Hero */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
           <div className="order-2 md:order-1">

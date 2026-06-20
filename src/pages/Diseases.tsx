@@ -62,7 +62,7 @@ const Diseases = () => {
   return (
     <div className={`flex flex-col min-h-screen bg-background ${isRTL ? 'rtl' : 'ltr'}`}>
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">

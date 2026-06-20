@@ -13,7 +13,7 @@ const PostOpportunity = () => {
       
       <Header />
       
-      <main className="flex-grow relative z-10 py-12">
+      <main id="main-content" className="flex-grow relative z-10 py-12">
         <div className="container mx-auto px-4">
           <PostOpportunityForm />
         </div>

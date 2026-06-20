@@ -45,7 +45,7 @@ const FamilyPhysicianCities = () => {
       />
       <Header />
       
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           {/* Header */}
           <div className={`mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>

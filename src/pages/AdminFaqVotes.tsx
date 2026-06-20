@@ -424,7 +424,7 @@ const AdminFaqVotes = () => {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatCard label="Total votes" value={totals.total} />
           <StatCard label="Helpful" value={totals.up} accent="text-primary" />

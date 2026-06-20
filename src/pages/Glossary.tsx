@@ -141,7 +141,7 @@ const Glossary = () => {
     <h1>${title}</h1>
     <p>${subtitle}</p>
   </header>
-  <main>${cards}</main>
+  <main id="main-content" id="main-content">${cards}</main>
   <footer>${footer}</footer>
   <script>
     window.addEventListener('load', () => { setTimeout(() => window.print(), 600); });
@@ -264,7 +264,7 @@ const Glossary = () => {
       />
       <Header />
 
-      <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
+      <main id="main-content" className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
         <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
           {copyStatus}
         </div>

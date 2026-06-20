@@ -31,7 +31,7 @@ const Volunteer = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main className="flex-grow" dir={isArabic ? 'rtl' : 'ltr'}>
+      <main id="main-content" className="flex-grow" dir={isArabic ? 'rtl' : 'ltr'}>
         {/* Header Section */}
         <section className="bg-healthDarkBlue text-white py-8 md:py-12">
           <div className="container mx-auto px-4 text-center">

@@ -309,7 +309,7 @@ const Services = () => {
         descriptionAr="استكشف الموارد الصحية بالعربية والإنجليزية، حقوق المرضى، دعم الصحة النفسية، التثقيف حول السكري، برامج القادمين الجدد، والخدمات المجتمعية للمجتمعات الشرق أوسطية في كندا."
       />
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-12 md:py-16">
           <div className="container mx-auto px-4 text-center">

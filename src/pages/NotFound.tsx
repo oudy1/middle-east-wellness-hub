@@ -20,7 +20,7 @@ const NotFound = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow py-16 md:py-24 bg-healthLightGray">
+      <main id="main-content" className="flex-grow py-16 md:py-24 bg-healthLightGray">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-healthDarkBlue mb-6">{t("notFound.title")}</h1>
           <p className="text-2xl text-gray-600 mb-8">{t("notFound.subtitle")}</p>

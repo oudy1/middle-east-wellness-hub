@@ -49,7 +49,7 @@ const Programs = () => {
       />
       <Header />
       <MentalHealthConventionSection />
-      <main className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <main id="main-content" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Header */}
         <section className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">Programs</h1>

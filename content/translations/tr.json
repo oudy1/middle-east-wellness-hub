@@ -259,5 +259,6 @@
   "contact.inquiryForm": "Bize Soru Gönderin",
   "contact.name": "İsim",
   "contact.send": "Mesaj Gönder",
-  "contact.sending": "Gönderiliyor..."
+  "contact.sending": "Gönderiliyor...",
+  "common.skipToContent": "Skip to content"
 }

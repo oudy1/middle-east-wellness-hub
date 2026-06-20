@@ -298,7 +298,7 @@ const FindHealthcareWorkers = () => {
       />
       <div className="flex flex-col min-h-screen bg-background" dir={isAr ? "rtl" : "ltr"}>
         <Header />
-        <main className="flex-grow">
+        <main id="main-content" className="flex-grow">
           <div className="container mx-auto px-4 py-6 sm:py-8 md:py-12">
             {/* Header */}
             <div className="text-center mb-6 sm:mb-8">

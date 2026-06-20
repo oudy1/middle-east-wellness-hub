@@ -412,7 +412,7 @@ const Research = () => {
       
       <Header />
       
-      <main className="flex-grow relative z-10">
+      <main id="main-content" className="flex-grow relative z-10">
         {/* Hero Section */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4">
