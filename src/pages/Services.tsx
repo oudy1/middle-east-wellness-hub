@@ -439,7 +439,7 @@ const Services = () => {
 
         {/* Breast Cancer Awareness */}
         {isVisible("cancer") && (
-          <section className="py-12 md:py-16 bg-pink-50/30">
+          <section id="breast-cancer-arabic" className="py-12 md:py-16 bg-pink-50/30">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="h-8 w-8 text-pink-500 fill-pink-500" />
@@ -459,19 +459,27 @@ const Services = () => {
                   { title: "بعد تشخيص سرطان الثدي", desc: "كتيب شامل من الجمعية الأمريكية للسرطان يشرح ما يمكن توقعه بعد التشخيص والعلاجات الممكنة.", link: "/lovable-uploads/after-a-breast-cancer-diagnosis.pdf" },
                   { title: "احصل على اختباراتك!", desc: "كتيب حول أهمية فحوصات السرطان الموصى بها حسب العمر، بما في ذلك فحص الثدي.", link: "/lovable-uploads/get-your-tests.pdf" },
                   { title: "برنامج نوفا سكوشا للكشف المبكر عن الثدي", desc: "تعليمات من برنامج نوفا سكوشا حول فحص الماموغرام ومتى يُنصح به للنساء.", link: "/lovable-uploads/NSBSP-ProviderTearPad-Arabic.pdf" },
-                ].map((resource, idx) => (
+                  { title: "ما هو السرطان؟", desc: "مقدمة عربية شاملة لفهم ماهية السرطان وأنواعه وكيفية تطوره وخيارات العلاج المتاحة.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/what-is-cancer.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                  { title: "سرطان الثدي", desc: "ورقة معلومات عربية عن سرطان الثدي وعوامل الخطر والفحص والعلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Breast_Cancer_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "خزعة الثدي", desc: "شرح عربي لإجراء خزعة الثدي وكيفية الاستعداد لها وما يمكن توقعه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/BreastBiopsy_AR.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "التحدث مع طبيبك", desc: "نصائح عربية للتواصل الفعّال مع فريق الرعاية الصحية حول تشخيص السرطان والعلاج.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/talking-with-your-doctor.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                  { title: "العلاج الهرموني للسرطان", desc: "معلومات عربية حول العلاج الهرموني للسرطان وكيفية عمله والآثار الجانبية المحتملة.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/hormone-therapy-for-cancer.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-pink-100">
                     <CardHeader className="pb-3">
                       <Badge variant="secondary" className="w-fit mb-2 text-xs bg-pink-100 text-pink-700">
                         {language === 'ar' ? 'وقاية من السرطان' : 'Cancer Prevention'}
                       </Badge>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-pink-300 text-pink-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر مذكور في الكتيب</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">{resource.source ? `المصدر: ${resource.source}` : 'المصدر مذكور في الكتيب'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
@@ -512,19 +520,28 @@ const Services = () => {
                   { title: "الكوليسترول", desc: "إنفوغرافيك يشرح أهمية التحكم في مستويات الكوليسترول للوقاية من أمراض القلب والشرايين.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/cholesterol-arabic.pdf?sfvrsn=249562a4_1" },
                   { title: "السمنة", desc: "كتيب يسلط الضوء على العلاقة بين السمنة وصحة القلب وكيفية تبني نمط حياة صحي.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/obesity-arabic.pdf?sfvrsn=d8ed4121_2" },
                   { title: "السكتة الدماغية", desc: "كتيب توعوي يوضح علامات السكتة الدماغية وطرق الوقاية منها وأهمية التدخل السريع.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/stroke-arabic.pdf?sfvrsn=972de942_2" },
-                ].map((resource, idx) => (
+                  { title: "الذبحة الصدرية (Angina)", desc: "معلومات عربية حول الذبحة الصدرية وأعراضها وأسبابها وخيارات العلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Angina_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "الرجفان الأذيني", desc: "ورقة عربية تشرح الرجفان الأذيني (Atrial Fibrillation) وكيفية إدارته.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Atrial_Fibrillation_Arabic.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "تخطيط القلب الكهربائي (ECG/EKG)", desc: "شرح عربي لفحص تخطيط القلب الكهربائي وكيفية إجرائه والاستعداد له.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Electrocardiogram_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "جهاز هولتر (Holter Monitor)", desc: "معلومات عربية عن جهاز هولتر لمراقبة كهربية القلب على مدار اليوم.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HolterMonitor_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "النوبة القلبية (Heart Attack)", desc: "ورقة عربية حول علامات النوبة القلبية وما يجب فعله فورًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartAttack_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "قسطرة القلب وتوسيع الشرايين (Angioplasty)", desc: "شرح عربي لإجراء قسطرة القلب وتوسيع الشرايين وما يمكن توقعه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartCathAngioplasty_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-red-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Heart className="h-5 w-5 text-red-500" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-red-300 text-red-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: CardioSmart – American College of Cardiology</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'CardioSmart – American College of Cardiology'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
@@ -563,19 +580,27 @@ const Services = () => {
                   { title: "ما هو مرض السكري؟", desc: "كتيب تعليمي يشرح ما هو مرض السكري، أسبابه، وأنواعه، وكيفية التعامل معه يوميًا.", link: "https://learningaboutdiabetes.org/wp-content/uploads/Whatisdiabetes-AR.pdf" },
                   { title: "متلازمة الأيض", desc: "يوضح هذا الكتيب العلاقة بين متلازمة الأيض وخطر الإصابة بالسكري وأمراض القلب.", link: "https://learningaboutdiabetes.org/wp-content/uploads/MetabolicSyndrome20AR.pdf" },
                   { title: "تعرّف على أعراض السكري", desc: "إنفوغرافيك باللغة العربية يساعد على التعرف على أعراض مرض السكري ومتى يجب مراجعة الطبيب.", link: "https://learningaboutdiabetes.org/wp-content/uploads/Know20The20Symptoms20AR.pdf" },
-                ].map((resource, idx) => (
+                  { title: "اختبار سكر الدم الصائم", desc: "شرح عربي لاختبار سكر الدم الصائم ولماذا يُطلب وكيفية الاستعداد له.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/FastingBloodSugar_Ara.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "كيفية استخدام جهاز قياس السكر", desc: "خطوات عربية مصوّرة لاستخدام جهاز قياس سكر الدم في المنزل بشكل صحيح.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/GlucoseMeter_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "ارتفاع سكر الدم", desc: "ورقة عربية حول أسباب ارتفاع سكر الدم وأعراضه وطرق التعامل معه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HighBloodSugar_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "طرق إدارة وزنك", desc: "نصائح عربية حول التغذية ونمط الحياة لإدارة الوزن والوقاية من السكري.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WaysManageWt_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "السكري وأمراض الكلى", desc: "معلومات عربية حول تأثير السكري على الكلى وكيفية الوقاية من المضاعفات.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/DiabetesKidneyProblems_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-teal-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Activity className="h-5 w-5 text-healthTeal" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-teal-300 text-teal-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: Learning About Diabetes Organization</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Learning About Diabetes Organization'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
@@ -614,19 +639,27 @@ const Services = () => {
                   { title: "كل شيء عن الصدمة النفسية", desc: "كتيب يشرح تأثير الصدمات النفسية على الصحة العقلية والجسدية، مع نصائح للتعامل والدعم.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-All-About-Trauma-arabic.pdf" },
                   { title: "نظافة النوم", desc: "دليل مبسط لتحسين جودة النوم وتبني عادات نوم صحية لتحسين الراحة النفسية والجسدية.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Sleep-Hygiene-arabic.pdf" },
                   { title: "القلق", desc: "كتيب توعوي يشرح طبيعة القلق، أسبابه، وأهم استراتيجيات السيطرة عليه بطريقة مبسطة.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Anxiety-arabic.pdf" },
-                ].map((resource, idx) => (
+                  { title: "المرأة والقلق", desc: "ورقة عربية من إدارة الغذاء والدواء (FDA) حول القلق لدى النساء وخيارات الدعم والعلاج.", link: "https://www.fda.gov/media/169824/download?attachment", source: "MedlinePlus / U.S. FDA", mp: true },
+                  { title: "الشعور بالحزن", desc: "ورقة عربية حول علامات الاكتئاب والشعور بالحزن ومتى تطلب المساعدة.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/FeelingSad_Ara.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "مشاكل النوم الشائعة", desc: "معلومات عربية عن أنماط النوم الشائعة وكيفية التعامل معها.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Common_Sleep_Problems_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "ما يمكنك فعله للنوم بشكل أفضل", desc: "نصائح عربية عملية لتحسين نظافة النوم وجودته.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WhatSleepBetter_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "التوجيهات المسبقة للرعاية", desc: "معلومات عربية عن التوجيهات المسبقة وحقك في اتخاذ قرارات الرعاية الصحية مسبقًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AdvanceDirectives_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-purple-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-purple-300 text-purple-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: Minds Matter Psychiatry – Resources</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Minds Matter Psychiatry – Resources'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
@@ -673,19 +706,24 @@ const Services = () => {
                 {[
                   { title: "HealthLink BC – معلومات حول الحصبة واللقاح", desc: "ملخص مبسّط حول الحصبة وأهمية لقاح الحصبة لحماية الأطفال والبالغين.", link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14b-a.pdf" },
                   { title: "HealthLink BC – معلومات حول لقاح MMRV", desc: "معلومات حول لقاح الحصبة والنكاف والحصبة الألمانية وجدري الماء (MMRV) وفوائده ومواعيد إعطائه.", link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14e-A.pdf" },
-                ].map((resource, idx) => (
+                  { title: "لقاح المكورات الرئوية (PPSV23)", desc: "ورقة معلومات اللقاح (VIS) العربية حول لقاح المكورات الرئوية للبالغين والفئات المعرضة للخطر.", link: "https://www.immunize.org/wp-content/uploads/vis/arabic_ppsv.pdf", source: "MedlinePlus / Immunize.org (CDC VIS)", mp: true },
+                  { title: "الجمرة الخبيثة: ما تحتاج معرفته", desc: "ورقة معلومات عربية عن الجمرة الخبيثة (Anthrax) وطرق الانتقال والوقاية والعلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnthraxFactSheet_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-blue-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Syringe className="h-5 w-5 text-healthDarkBlue" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-blue-300 text-blue-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: HealthLinkBC</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'HealthLinkBC'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
@@ -747,6 +785,35 @@ const Services = () => {
                     </a>
                   </CardContent>
                 </Card>
+
+                {[
+                  { title: "عضّات وخدوش الحيوانات", desc: "ورقة عربية حول الإسعافات الأولية لعضّات وخدوش الحيوانات ومتى تطلب الرعاية الطبية.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnimalBitesScratches_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "التواء الكاحل", desc: "معلومات عربية عن التواء الكاحل والعناية المنزلية والتعافي بأمان.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnkleSprain_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "صحة وسلامة الظهر", desc: "نصائح عربية للوقاية من إصابات الظهر وأوضاع الجسم الصحيحة في العمل والمنزل.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/BackHealthSafety_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "التسمم بأول أكسيد الكربون", desc: "ورقة عربية من مراكز السيطرة على الأمراض (CDC) عن الوقاية من التسمم بأول أكسيد الكربون.", link: "https://www.cdc.gov/carbon-monoxide/media/pdfs/campaign_flyer_AR.pdf", source: "MedlinePlus / U.S. CDC" },
+                ].map((r, idx) => (
+                  <Card key={`mp-safety-${idx}`} className="hover:shadow-lg transition-shadow border-green-100">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-2 justify-end">
+                        <Shield className="h-5 w-5 text-green-600" />
+                      </div>
+                      <Badge variant="outline" className="w-fit mb-2 text-[10px] border-green-300 text-green-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                        {r.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{r.desc}</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {r.source}</p>
+                      <a href={r.link} target="_blank" rel="noopener noreferrer">
+                        <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                          <BookOpen className="h-4 w-4" />
+                          <span className="font-cairo">عرض المورد بالعربية</span>
+                        </Button>
+                      </a>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
               <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed">
                 <span className={`block mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -1006,6 +1073,11 @@ const Services = () => {
                 'جميع الموارد متاحة للجمهور ومشتركة من منظمات طبية موثوقة لدعم التعليم الصحي باللغة العربية.' : 
                 'All resources are publicly available and shared from verified medical organizations to support accessible Arabic-language health education.'
               }
+            </p>
+            <p className={`text-xs text-gray-500 text-center max-w-4xl mx-auto leading-relaxed mt-4 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar'
+                ? 'تنبيه طبي: هذه الموارد للتثقيف الصحي فقط ولا تُغني عن استشارة مقدم رعاية صحية. إذا كانت لديك أعراض عاجلة أو مخاوف طبية، تواصل مع مقدم رعاية صحية أو خدمات الطوارئ. تتوفر موارد MedlinePlus العربية بفضل المكتبة الوطنية الأمريكية للطب / المعاهد الوطنية للصحة.'
+                : 'Medical disclaimer: These resources are for educational purposes only and do not replace advice from a healthcare professional. If you have urgent symptoms or medical concerns, contact a healthcare provider or emergency services. MedlinePlus Arabic resources are provided courtesy of the U.S. National Library of Medicine / NIH.'}
             </p>
           </div>
         </section>
