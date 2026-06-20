@@ -520,19 +520,28 @@ const Services = () => {
                   { title: "الكوليسترول", desc: "إنفوغرافيك يشرح أهمية التحكم في مستويات الكوليسترول للوقاية من أمراض القلب والشرايين.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/cholesterol-arabic.pdf?sfvrsn=249562a4_1" },
                   { title: "السمنة", desc: "كتيب يسلط الضوء على العلاقة بين السمنة وصحة القلب وكيفية تبني نمط حياة صحي.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/obesity-arabic.pdf?sfvrsn=d8ed4121_2" },
                   { title: "السكتة الدماغية", desc: "كتيب توعوي يوضح علامات السكتة الدماغية وطرق الوقاية منها وأهمية التدخل السريع.", link: "https://www.cardiosmart.org/docs/default-source/assets/infographic/arabic/stroke-arabic.pdf?sfvrsn=972de942_2" },
-                ].map((resource, idx) => (
+                  { title: "الذبحة الصدرية (Angina)", desc: "معلومات عربية حول الذبحة الصدرية وأعراضها وأسبابها وخيارات العلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Angina_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "الرجفان الأذيني", desc: "ورقة عربية تشرح الرجفان الأذيني (Atrial Fibrillation) وكيفية إدارته.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Atrial_Fibrillation_Arabic.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "تخطيط القلب الكهربائي (ECG/EKG)", desc: "شرح عربي لفحص تخطيط القلب الكهربائي وكيفية إجرائه والاستعداد له.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Electrocardiogram_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "جهاز هولتر (Holter Monitor)", desc: "معلومات عربية عن جهاز هولتر لمراقبة كهربية القلب على مدار اليوم.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HolterMonitor_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "النوبة القلبية (Heart Attack)", desc: "ورقة عربية حول علامات النوبة القلبية وما يجب فعله فورًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartAttack_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "قسطرة القلب وتوسيع الشرايين (Angioplasty)", desc: "شرح عربي لإجراء قسطرة القلب وتوسيع الشرايين وما يمكن توقعه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartCathAngioplasty_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-red-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Heart className="h-5 w-5 text-red-500" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-red-300 text-red-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: CardioSmart – American College of Cardiology</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'CardioSmart – American College of Cardiology'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
