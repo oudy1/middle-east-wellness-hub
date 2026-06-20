@@ -48,6 +48,7 @@ const Programs = () => {
         descriptionAr="اكتشف برامج شمس بما في ذلك دعم الصحة النفسية المجاني والممول، ومبادرات الشركاء، والعروض المجتمعية للمجتمعات الشرق أوسطية والعربية في كندا."
       />
       <Header />
+      <MentalHealthConventionSection />
       <main className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Header */}
         <section className="text-center mb-12">
