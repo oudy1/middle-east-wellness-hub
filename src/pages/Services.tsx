@@ -580,19 +580,27 @@ const Services = () => {
                   { title: "ما هو مرض السكري؟", desc: "كتيب تعليمي يشرح ما هو مرض السكري، أسبابه، وأنواعه، وكيفية التعامل معه يوميًا.", link: "https://learningaboutdiabetes.org/wp-content/uploads/Whatisdiabetes-AR.pdf" },
                   { title: "متلازمة الأيض", desc: "يوضح هذا الكتيب العلاقة بين متلازمة الأيض وخطر الإصابة بالسكري وأمراض القلب.", link: "https://learningaboutdiabetes.org/wp-content/uploads/MetabolicSyndrome20AR.pdf" },
                   { title: "تعرّف على أعراض السكري", desc: "إنفوغرافيك باللغة العربية يساعد على التعرف على أعراض مرض السكري ومتى يجب مراجعة الطبيب.", link: "https://learningaboutdiabetes.org/wp-content/uploads/Know20The20Symptoms20AR.pdf" },
-                ].map((resource, idx) => (
+                  { title: "اختبار سكر الدم الصائم", desc: "شرح عربي لاختبار سكر الدم الصائم ولماذا يُطلب وكيفية الاستعداد له.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/FastingBloodSugar_Ara.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "كيفية استخدام جهاز قياس السكر", desc: "خطوات عربية مصوّرة لاستخدام جهاز قياس سكر الدم في المنزل بشكل صحيح.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/GlucoseMeter_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "ارتفاع سكر الدم", desc: "ورقة عربية حول أسباب ارتفاع سكر الدم وأعراضه وطرق التعامل معه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HighBloodSugar_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "طرق إدارة وزنك", desc: "نصائح عربية حول التغذية ونمط الحياة لإدارة الوزن والوقاية من السكري.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WaysManageWt_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "السكري وأمراض الكلى", desc: "معلومات عربية حول تأثير السكري على الكلى وكيفية الوقاية من المضاعفات.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/DiabetesKidneyProblems_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-teal-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Activity className="h-5 w-5 text-healthTeal" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-teal-300 text-teal-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: Learning About Diabetes Organization</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Learning About Diabetes Organization'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
