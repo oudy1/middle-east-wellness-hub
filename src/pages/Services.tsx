@@ -245,6 +245,10 @@ const Services = () => {
       if (next) {
         next.focus({ preventScroll: true });
         next.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        if (liveRegionRef.current) {
+          const label = language === 'ar' ? 'مورد' : 'Resource';
+          liveRegionRef.current.textContent = `${label} ${nextIdx + 1} ${language === 'ar' ? 'من' : 'of'} ${cards.length}`;
+        }
       }
     };
 
