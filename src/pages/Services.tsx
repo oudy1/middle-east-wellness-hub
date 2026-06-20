@@ -785,6 +785,35 @@ const Services = () => {
                     </a>
                   </CardContent>
                 </Card>
+
+                {[
+                  { title: "عضّات وخدوش الحيوانات", desc: "ورقة عربية حول الإسعافات الأولية لعضّات وخدوش الحيوانات ومتى تطلب الرعاية الطبية.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnimalBitesScratches_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "التواء الكاحل", desc: "معلومات عربية عن التواء الكاحل والعناية المنزلية والتعافي بأمان.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnkleSprain_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "صحة وسلامة الظهر", desc: "نصائح عربية للوقاية من إصابات الظهر وأوضاع الجسم الصحيحة في العمل والمنزل.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/BackHealthSafety_AR.pdf", source: "MedlinePlus / Health Information Translations" },
+                  { title: "التسمم بأول أكسيد الكربون", desc: "ورقة عربية من مراكز السيطرة على الأمراض (CDC) عن الوقاية من التسمم بأول أكسيد الكربون.", link: "https://www.cdc.gov/carbon-monoxide/media/pdfs/campaign_flyer_AR.pdf", source: "MedlinePlus / U.S. CDC" },
+                ].map((r, idx) => (
+                  <Card key={`mp-safety-${idx}`} className="hover:shadow-lg transition-shadow border-green-100">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-2 justify-end">
+                        <Shield className="h-5 w-5 text-green-600" />
+                      </div>
+                      <Badge variant="outline" className="w-fit mb-2 text-[10px] border-green-300 text-green-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
+                        {r.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{r.desc}</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {r.source}</p>
+                      <a href={r.link} target="_blank" rel="noopener noreferrer">
+                        <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                          <BookOpen className="h-4 w-4" />
+                          <span className="font-cairo">عرض المورد بالعربية</span>
+                        </Button>
+                      </a>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
               <p className="text-sm text-gray-600 text-center mt-8 px-4 leading-relaxed">
                 <span className={`block mb-2 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
