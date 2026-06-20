@@ -156,10 +156,25 @@ const Services = () => {
 
   const goToShortcut = (s: typeof shortcuts[number]) => {
     setActiveFilter(s.filter);
-    setTimeout(() => {
-      const el = document.getElementById(s.anchor);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
+    // Double RAF + timeout ensures React render and layout settle before scrolling,
+    // giving consistent smooth-scroll timing on mobile and RTL.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const el = document.getElementById(s.anchor);
+          if (!el) return;
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          // Focus the first actionable element inside the first card of the section
+          const grid = el.classList.contains("grid") ? el : el.querySelector(".grid");
+          const firstCard = grid?.firstElementChild as HTMLElement | null;
+          const firstAction = firstCard?.querySelector("a, button") as HTMLElement | null;
+          if (firstAction) {
+            firstAction.focus({ preventScroll: true });
+          }
+        }, 150);
+      });
+    });
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -197,7 +212,7 @@ const Services = () => {
         </section>
 
         {/* Quick Access - Need Help Quickly? */}
-        <section id="need-help" className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200">
+        <section id="need-help" className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200 scroll-mt-24 md:scroll-mt-32">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
@@ -498,7 +513,7 @@ const Services = () => {
                   'Access culturally relevant health education resources and guides.'
                 }
               </p>
-              <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 scroll-mt-24 md:scroll-mt-32">
                 {/* Alone in Canada Guide */}
                 <Card className="hover:shadow-lg transition-shadow">
                   <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
@@ -619,7 +634,7 @@ const Services = () => {
 
         {/* Breast Cancer Awareness */}
         {isVisible("cancer") && (
-          <section id="breast-cancer-arabic" className="py-12 md:py-16 bg-pink-50/30">
+          <section id="breast-cancer-arabic" className="py-12 md:py-16 bg-pink-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="h-8 w-8 text-pink-500 fill-pink-500" />
@@ -679,7 +694,7 @@ const Services = () => {
 
         {/* Cardiovascular Health */}
         {isVisible("heart-diabetes") && (
-          <section id="cardio-health" className="py-12 md:py-16 bg-red-50/30">
+          <section id="cardio-health" className="py-12 md:py-16 bg-red-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="h-8 w-8 text-red-500 fill-red-500" />
@@ -741,7 +756,7 @@ const Services = () => {
 
         {/* Diabetes Education */}
         {isVisible("heart-diabetes") && (
-          <section id="diabetes-education" className="py-12 md:py-16 bg-teal-50/30">
+          <section id="diabetes-education" className="py-12 md:py-16 bg-teal-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Activity className="h-8 w-8 text-healthTeal" />
@@ -800,7 +815,7 @@ const Services = () => {
 
         {/* Mental Health & Well-Being */}
         {isVisible("mental-health") && (
-          <section id="mental-health-arabic" className="py-12 md:py-16 bg-purple-50/30">
+          <section id="mental-health-arabic" className="py-12 md:py-16 bg-purple-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Brain className="h-8 w-8 text-[hsl(220,13%,48%)]" />
@@ -868,7 +883,7 @@ const Services = () => {
 
         {/* Vaccines & Immunization */}
         {isVisible("vaccines-safety") && (
-          <section id="vaccines-immunization" className="py-12 md:py-16 bg-blue-50/30">
+          <section id="vaccines-immunization" className="py-12 md:py-16 bg-blue-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Syringe className="h-8 w-8 text-healthDarkBlue" />
@@ -928,7 +943,7 @@ const Services = () => {
 
         {/* Safety & Outdoor Health */}
         {isVisible("vaccines-safety") && (
-          <section id="safety-outdoor-health" className="py-12 md:py-16 bg-green-50/30">
+          <section id="safety-outdoor-health" className="py-12 md:py-16 bg-green-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Shield className="h-8 w-8 text-green-600" />
@@ -1009,7 +1024,7 @@ const Services = () => {
 
         {/* Smoking Cessation & Lung Health */}
         {isVisible("vaccines-safety") && (
-          <section id="smoking-cessation" className="py-12 md:py-16 bg-slate-50/30">
+          <section id="smoking-cessation" className="py-12 md:py-16 bg-slate-50/30 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Wind className="h-8 w-8 text-slate-600" />
@@ -1061,7 +1076,7 @@ const Services = () => {
 
         {/* Clinical Tools */}
         {isVisible("clinical") && (
-          <section id="clinical-tools" className="py-12 md:py-16 bg-gradient-to-br from-healthDarkBlue/5 to-healthTeal/5">
+          <section id="clinical-tools" className="py-12 md:py-16 bg-gradient-to-br from-healthDarkBlue/5 to-healthTeal/5 scroll-mt-24 md:scroll-mt-32">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Stethoscope className="h-8 w-8 text-healthDarkBlue" />
