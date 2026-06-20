@@ -33,7 +33,8 @@ type FilterCategory = "all" | "mental-health" | "cancer" | "heart-diabetes" | "v
 const Services = () => {
   const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
   const filters: { id: FilterCategory; en: string; ar: string }[] = [
@@ -45,6 +46,126 @@ const Services = () => {
     { id: "education", en: "Education & Guides", ar: "التعليم والأدلة" },
     { id: "clinical", en: "Clinical Tools", ar: "أدوات سريرية" },
   ];
+
+  // Keyword index for MedlinePlus Arabic + SHAMS resources.
+  // Each shortcut maps user-typed keywords (EN + AR) to a filter + section anchor.
+  const shortcuts: {
+    id: string;
+    en: string;
+    ar: string;
+    filter: FilterCategory;
+    anchor: string;
+    keywords: string[];
+  }[] = [
+    {
+      id: "cancer",
+      en: "Cancer & Breast Cancer (Arabic)",
+      ar: "السرطان وسرطان الثدي (عربي)",
+      filter: "cancer",
+      anchor: "breast-cancer-arabic",
+      keywords: ["cancer","breast","tumor","tumour","oncology","mammogram","biopsy","chemo","chemotherapy","hormone therapy","سرطان","ثدي","ورم","خزعة","ماموجرام","علاج هرموني","كيماوي"],
+    },
+    {
+      id: "heart",
+      en: "Heart & Cardiovascular (Arabic)",
+      ar: "القلب والأوعية الدموية (عربي)",
+      filter: "heart-diabetes",
+      anchor: "cardio-health",
+      keywords: ["heart","cardiac","cardio","cardiovascular","blood pressure","hypertension","angina","ecg","ekg","holter","heart attack","stroke","cholesterol","قلب","ذبحة","ضغط","تخطيط القلب","نوبة قلبية","جلطة","كوليسترول","شرايين"],
+    },
+    {
+      id: "diabetes",
+      en: "Diabetes & Blood Sugar (Arabic)",
+      ar: "السكري وسكر الدم (عربي)",
+      filter: "heart-diabetes",
+      anchor: "diabetes-education",
+      keywords: ["diabetes","sugar","blood sugar","glucose","insulin","a1c","weight","kidney","سكري","سكر","جلوكوز","أنسولين","وزن","كلى"],
+    },
+    {
+      id: "mental",
+      en: "Mental Health, Anxiety & Sleep (Arabic)",
+      ar: "الصحة النفسية والقلق والنوم (عربي)",
+      filter: "mental-health",
+      anchor: "mental-health-arabic",
+      keywords: ["mental","mental health","anxiety","depression","sad","sadness","stress","sleep","insomnia","wellbeing","well-being","therapy","counselling","counseling","نفسية","قلق","اكتئاب","حزن","ضغط نفسي","توتر","نوم","أرق","علاج نفسي","استشارة"],
+    },
+    {
+      id: "vaccines",
+      en: "Vaccines & Immunization (Arabic)",
+      ar: "التطعيمات والتحصين (عربي)",
+      filter: "vaccines-safety",
+      anchor: "vaccines-immunization",
+      keywords: ["vaccine","vaccines","vaccination","immunization","immunisation","shot","flu","covid","pneumonia","ppsv23","anthrax","لقاح","تطعيم","تحصين","إنفلونزا","كوفيد","المكورات الرئوية"],
+    },
+    {
+      id: "safety",
+      en: "Safety, Asthma & Outdoor Health (Arabic)",
+      ar: "السلامة والربو والصحة الخارجية (عربي)",
+      filter: "vaccines-safety",
+      anchor: "safety-outdoor-health",
+      keywords: ["asthma","lungs","lung","breathing","respiratory","wheeze","inhaler","safety","outdoor","heat","sun","tick","bite","first aid","ربو","رئة","رئتين","تنفس","بخاخ","سلامة","الشمس","حرارة","إسعاف"],
+    },
+    {
+      id: "smoking",
+      en: "Smoking Cessation (Arabic)",
+      ar: "الإقلاع عن التدخين (عربي)",
+      filter: "vaccines-safety",
+      anchor: "smoking-cessation",
+      keywords: ["smoking","smoke","tobacco","cigarette","vape","vaping","nicotine","quit","تدخين","سجائر","نيكوتين","إقلاع"],
+    },
+    {
+      id: "emergency",
+      en: "Emergency & Crisis Help",
+      ar: "الطوارئ والمساعدة العاجلة",
+      filter: "all",
+      anchor: "need-help",
+      keywords: ["emergency","911","988","crisis","urgent","suicide","danger","help now","ambulance","طوارئ","أزمة","انتحار","خطر","مساعدة عاجلة"],
+    },
+    {
+      id: "education",
+      en: "Education & Guides",
+      ar: "التعليم والأدلة",
+      filter: "education",
+      anchor: "educational-materials",
+      keywords: ["education","guide","pamphlet","brochure","learn","patient rights","newcomer","تعليم","دليل","كتيب","حقوق المرضى","قادمين جدد"],
+    },
+    {
+      id: "clinical",
+      en: "Clinical Tools (Professionals)",
+      ar: "الأدوات السريرية (للمهنيين)",
+      filter: "clinical",
+      anchor: "clinical-tools",
+      keywords: ["clinical","physician","doctor","nurse","point of care","template","screening","سريري","طبيب","ممرض","فحص","نقطة الرعاية"],
+    },
+  ];
+
+  const normalize = (s: string) =>
+    s.toLowerCase().normalize("NFKD").replace(/[\u0617-\u061A\u064B-\u0652]/g, "").trim();
+
+  const q = normalize(searchQuery);
+  const matchingShortcuts = q.length === 0
+    ? []
+    : shortcuts.filter(s =>
+        s.keywords.some(k => {
+          const nk = normalize(k);
+          return nk.includes(q) || q.includes(nk);
+        }) ||
+        normalize(s.en).includes(q) ||
+        normalize(s.ar).includes(q)
+      );
+
+  const goToShortcut = (s: typeof shortcuts[number]) => {
+    setActiveFilter(s.filter);
+    setTimeout(() => {
+      const el = document.getElementById(s.anchor);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (matchingShortcuts[0]) goToShortcut(matchingShortcuts[0]);
+  };
 
   const isVisible = (category: FilterCategory) => activeFilter === "all" || activeFilter === category;
 
@@ -76,7 +197,7 @@ const Services = () => {
         </section>
 
         {/* Quick Access - Need Help Quickly? */}
-        <section className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200">
+        <section id="need-help" className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
@@ -151,9 +272,67 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Filter Buttons */}
-        <section className="py-6 bg-white border-b sticky top-0 z-10">
-          <div className="container mx-auto px-4">
+        {/* Search + Filter Buttons */}
+        <section className="py-4 md:py-6 bg-white border-b sticky top-0 z-10">
+          <div className="container mx-auto px-4 space-y-3">
+            {/* Search */}
+            <form onSubmit={handleSearchSubmit} className="max-w-2xl mx-auto" role="search">
+              <label htmlFor="resources-search" className="sr-only">
+                {language === 'ar' ? 'ابحث في الموارد' : 'Search resources'}
+              </label>
+              <div className="relative">
+                <input
+                  id="resources-search"
+                  type="search"
+                  inputMode="search"
+                  autoComplete="off"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={language === 'ar'
+                    ? 'ابحث: السرطان، السكري، القلب، الربو، القلق، الطوارئ...'
+                    : 'Search: cancer, diabetes, heart, asthma, anxiety, emergency...'}
+                  dir={isRTL ? 'rtl' : 'ltr'}
+                  className={`w-full h-11 rounded-full border border-healthTeal/30 bg-white px-4 ${isRTL ? 'pl-12' : 'pr-12'} text-sm text-healthDarkBlue placeholder:text-healthDarkBlue/50 focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-healthTeal ${language === 'ar' ? 'font-cairo' : ''}`}
+                />
+                <Button
+                  type="submit"
+                  size="sm"
+                  className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'left-1' : 'right-1'} h-9 rounded-full bg-healthTeal hover:bg-healthTeal/90 text-white px-4 ${language === 'ar' ? 'font-cairo' : ''}`}
+                  aria-label={language === 'ar' ? 'بحث' : 'Search'}
+                >
+                  {language === 'ar' ? 'بحث' : 'Search'}
+                </Button>
+              </div>
+              {/* Live suggestions */}
+              {q.length > 0 && (
+                <div className="mt-2">
+                  {matchingShortcuts.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {matchingShortcuts.slice(0, 6).map(s => (
+                        <Button
+                          key={s.id}
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => goToShortcut(s)}
+                          className={`rounded-full text-xs border-healthTeal/40 text-healthDarkBlue hover:bg-healthTeal/10 ${language === 'ar' ? 'font-cairo' : ''}`}
+                        >
+                          {language === 'ar' ? s.ar : s.en}
+                        </Button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className={`text-xs text-center text-healthDarkBlue/60 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                      {language === 'ar'
+                        ? 'لا توجد نتائج مطابقة. جرّب: سرطان، سكري، قلب، ربو، قلق، طوارئ.'
+                        : 'No matches. Try: cancer, diabetes, heart, asthma, anxiety, emergency.'}
+                    </p>
+                  )}
+                </div>
+              )}
+            </form>
+
+            {/* Filter chips */}
             <div className="flex flex-wrap gap-2 justify-center">
               {filters.map((filter) => (
                 <Button
@@ -173,6 +352,7 @@ const Services = () => {
             </div>
           </div>
         </section>
+
 
         {/* Join Us CTAs */}
         {isVisible("all") && (
