@@ -31,25 +31,35 @@ test.describe("Skip to content link (English LTR)", () => {
     const link = page.locator(SKIP_SELECTOR).first();
     await expect(link).toHaveCount(1);
 
-    // sr-only: zero-sized before focus
-    const hiddenBox = await link.boundingBox();
-    expect(hiddenBox?.width ?? 0).toBeLessThanOrEqual(1);
-    expect(hiddenBox?.height ?? 0).toBeLessThanOrEqual(1);
+    // Before focus: rendered off-screen (translate-y-16) and fully transparent.
+    const hiddenState = await link.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      const rect = el.getBoundingClientRect();
+      return { opacity: Number(cs.opacity), bottom: rect.bottom };
+    });
+    expect(hiddenState.opacity).toBe(0);
+    expect(hiddenState.bottom).toBeLessThanOrEqual(0);
 
     await focusSkipLink(page);
     await expect(link).toBeFocused();
 
-    // Allow the slide/fade transition to complete.
-    await page.waitForTimeout(400);
+    // Let the slide/fade transition finish.
+    await page.waitForTimeout(500);
 
-    const visibleBox = await link.boundingBox();
-    expect(visibleBox, "skip link should have a layout box once focused").not.toBeNull();
-    expect(visibleBox!.width).toBeGreaterThan(40);
-    expect(visibleBox!.height).toBeGreaterThan(20);
-
-    // Opacity must animate from 0 -> 1 (or be 1 immediately with reduced motion).
-    const opacity = await link.evaluate((el) => getComputedStyle(el).opacity);
-    expect(Number(opacity)).toBeGreaterThan(0.9);
+    const visibleState = await link.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      const rect = el.getBoundingClientRect();
+      return {
+        opacity: Number(cs.opacity),
+        top: rect.top,
+        width: rect.width,
+        height: rect.height,
+      };
+    });
+    expect(visibleState.opacity).toBeGreaterThan(0.9);
+    expect(visibleState.top).toBeGreaterThanOrEqual(0);
+    expect(visibleState.width).toBeGreaterThan(40);
+    expect(visibleState.height).toBeGreaterThan(20);
   });
 
   test("is correctly aligned to the left in LTR", async ({ page }) => {
