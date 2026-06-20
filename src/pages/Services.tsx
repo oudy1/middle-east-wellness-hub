@@ -272,9 +272,67 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Filter Buttons */}
-        <section className="py-6 bg-white border-b sticky top-0 z-10">
-          <div className="container mx-auto px-4">
+        {/* Search + Filter Buttons */}
+        <section className="py-4 md:py-6 bg-white border-b sticky top-0 z-10">
+          <div className="container mx-auto px-4 space-y-3">
+            {/* Search */}
+            <form onSubmit={handleSearchSubmit} className="max-w-2xl mx-auto" role="search">
+              <label htmlFor="resources-search" className="sr-only">
+                {language === 'ar' ? 'ابحث في الموارد' : 'Search resources'}
+              </label>
+              <div className="relative">
+                <input
+                  id="resources-search"
+                  type="search"
+                  inputMode="search"
+                  autoComplete="off"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={language === 'ar'
+                    ? 'ابحث: السرطان، السكري، القلب، الربو، القلق، الطوارئ...'
+                    : 'Search: cancer, diabetes, heart, asthma, anxiety, emergency...'}
+                  dir={isRTL ? 'rtl' : 'ltr'}
+                  className={`w-full h-11 rounded-full border border-healthTeal/30 bg-white px-4 ${isRTL ? 'pl-12' : 'pr-12'} text-sm text-healthDarkBlue placeholder:text-healthDarkBlue/50 focus:outline-none focus:ring-2 focus:ring-healthTeal focus:border-healthTeal ${language === 'ar' ? 'font-cairo' : ''}`}
+                />
+                <Button
+                  type="submit"
+                  size="sm"
+                  className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? 'left-1' : 'right-1'} h-9 rounded-full bg-healthTeal hover:bg-healthTeal/90 text-white px-4 ${language === 'ar' ? 'font-cairo' : ''}`}
+                  aria-label={language === 'ar' ? 'بحث' : 'Search'}
+                >
+                  {language === 'ar' ? 'بحث' : 'Search'}
+                </Button>
+              </div>
+              {/* Live suggestions */}
+              {q.length > 0 && (
+                <div className="mt-2">
+                  {matchingShortcuts.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {matchingShortcuts.slice(0, 6).map(s => (
+                        <Button
+                          key={s.id}
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => goToShortcut(s)}
+                          className={`rounded-full text-xs border-healthTeal/40 text-healthDarkBlue hover:bg-healthTeal/10 ${language === 'ar' ? 'font-cairo' : ''}`}
+                        >
+                          {language === 'ar' ? s.ar : s.en}
+                        </Button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className={`text-xs text-center text-healthDarkBlue/60 ${language === 'ar' ? 'font-cairo' : ''}`}>
+                      {language === 'ar'
+                        ? 'لا توجد نتائج مطابقة. جرّب: سرطان، سكري، قلب، ربو، قلق، طوارئ.'
+                        : 'No matches. Try: cancer, diabetes, heart, asthma, anxiety, emergency.'}
+                    </p>
+                  )}
+                </div>
+              )}
+            </form>
+
+            {/* Filter chips */}
             <div className="flex flex-wrap gap-2 justify-center">
               {filters.map((filter) => (
                 <Button
@@ -294,6 +352,7 @@ const Services = () => {
             </div>
           </div>
         </section>
+
 
         {/* Join Us CTAs */}
         {isVisible("all") && (
