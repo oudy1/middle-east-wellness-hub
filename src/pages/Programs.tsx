@@ -8,6 +8,7 @@ import { ExternalLink, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
+import MentalHealthConventionSection from "@/components/MentalHealthConventionSection";
 
 const programs = [
   {
@@ -47,6 +48,7 @@ const Programs = () => {
         descriptionAr="اكتشف برامج شمس بما في ذلك دعم الصحة النفسية المجاني والممول، ومبادرات الشركاء، والعروض المجتمعية للمجتمعات الشرق أوسطية والعربية في كندا."
       />
       <Header />
+      <MentalHealthConventionSection />
       <main className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Header */}
         <section className="text-center mb-12">
