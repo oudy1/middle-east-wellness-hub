@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -181,6 +181,52 @@ const Services = () => {
     e.preventDefault();
     if (matchingShortcuts[0]) goToShortcut(matchingShortcuts[0]);
   };
+
+  // MedlinePlus card keyboard navigation:
+  // - Collapse each card to a single Tab stop (Tab/Shift+Tab move card-to-card in DOM order).
+  // - Smoothly scroll the focused card into view so context is never lost on mobile or RTL.
+  const MP_SECTION_IDS = [
+    "breast-cancer-arabic",
+    "cardio-health",
+    "diabetes-education",
+    "mental-health-arabic",
+    "vaccines-immunization",
+  ];
+
+  useEffect(() => {
+    // Skip the inner <Button> inside each card's <a> so Tab stops once per card.
+    const cleanups: Array<() => void> = [];
+    const cards: HTMLAnchorElement[] = [];
+
+    MP_SECTION_IDS.forEach((id) => {
+      const section = document.getElementById(id);
+      if (!section) return;
+      section.querySelectorAll<HTMLAnchorElement>("a[href][target='_blank']").forEach((a) => {
+        a.querySelectorAll<HTMLButtonElement>("button").forEach((b) => {
+          b.tabIndex = -1;
+        });
+        cards.push(a);
+      });
+    });
+
+    if (cards.length === 0) return;
+
+    // Tag with position metadata for assistive tech context.
+    cards.forEach((a, i) => {
+      a.setAttribute("data-mp-card", String(i));
+      a.setAttribute("aria-label", `${a.textContent?.trim() || "Resource"} (${i + 1}/${cards.length})`);
+      const onFocus = () => {
+        // Keep the card visible without jarring jumps; respects sticky header via scroll-mt on sections.
+        a.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      };
+      a.addEventListener("focus", onFocus);
+      cleanups.push(() => a.removeEventListener("focus", onFocus));
+    });
+
+    return () => {
+      cleanups.forEach((fn) => fn());
+    };
+  }, [activeFilter, language, searchQuery]);
 
   const isVisible = (category: FilterCategory) => activeFilter === "all" || activeFilter === category;
 
