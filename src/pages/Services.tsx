@@ -470,13 +470,16 @@ const Services = () => {
                       <Badge variant="secondary" className="w-fit mb-2 text-xs bg-pink-100 text-pink-700">
                         {language === 'ar' ? 'وقاية من السرطان' : 'Cancer Prevention'}
                       </Badge>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-pink-300 text-pink-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر مذكور في الكتيب</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">{resource.source ? `المصدر: ${resource.source}` : 'المصدر مذكور في الكتيب'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
