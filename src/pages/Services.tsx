@@ -459,7 +459,12 @@ const Services = () => {
                   { title: "بعد تشخيص سرطان الثدي", desc: "كتيب شامل من الجمعية الأمريكية للسرطان يشرح ما يمكن توقعه بعد التشخيص والعلاجات الممكنة.", link: "/lovable-uploads/after-a-breast-cancer-diagnosis.pdf" },
                   { title: "احصل على اختباراتك!", desc: "كتيب حول أهمية فحوصات السرطان الموصى بها حسب العمر، بما في ذلك فحص الثدي.", link: "/lovable-uploads/get-your-tests.pdf" },
                   { title: "برنامج نوفا سكوشا للكشف المبكر عن الثدي", desc: "تعليمات من برنامج نوفا سكوشا حول فحص الماموغرام ومتى يُنصح به للنساء.", link: "/lovable-uploads/NSBSP-ProviderTearPad-Arabic.pdf" },
-                ].map((resource, idx) => (
+                  { title: "ما هو السرطان؟", desc: "مقدمة عربية شاملة لفهم ماهية السرطان وأنواعه وكيفية تطوره وخيارات العلاج المتاحة.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/what-is-cancer.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                  { title: "سرطان الثدي", desc: "ورقة معلومات عربية عن سرطان الثدي وعوامل الخطر والفحص والعلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Breast_Cancer_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "خزعة الثدي", desc: "شرح عربي لإجراء خزعة الثدي وكيفية الاستعداد لها وما يمكن توقعه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/BreastBiopsy_AR.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "التحدث مع طبيبك", desc: "نصائح عربية للتواصل الفعّال مع فريق الرعاية الصحية حول تشخيص السرطان والعلاج.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/talking-with-your-doctor.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                  { title: "العلاج الهرموني للسرطان", desc: "معلومات عربية حول العلاج الهرموني للسرطان وكيفية عمله والآثار الجانبية المحتملة.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/hormone-therapy-for-cancer.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-pink-100">
                     <CardHeader className="pb-3">
                       <Badge variant="secondary" className="w-fit mb-2 text-xs bg-pink-100 text-pink-700">
