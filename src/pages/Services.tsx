@@ -710,6 +710,9 @@ const Services = () => {
           </section>
         )}
 
+        {/* Live region for keyboard navigation announcements */}
+        <div ref={liveRegionRef} aria-live="polite" aria-atomic="true" className="sr-only" />
+
         {/* Breast Cancer Awareness */}
         {isVisible("cancer") && (
           <section id="breast-cancer-arabic" className="py-12 md:py-16 bg-pink-50/30 scroll-mt-24 md:scroll-mt-32">
