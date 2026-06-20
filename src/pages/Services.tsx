@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,7 @@ const Services = () => {
   const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const liveRegionRef = useRef<HTMLDivElement>(null);
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
@@ -244,6 +245,10 @@ const Services = () => {
       if (next) {
         next.focus({ preventScroll: true });
         next.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        if (liveRegionRef.current) {
+          const label = language === 'ar' ? 'مورد' : 'Resource';
+          liveRegionRef.current.textContent = `${label} ${nextIdx + 1} ${language === 'ar' ? 'من' : 'of'} ${cards.length}`;
+        }
       }
     };
 
@@ -704,6 +709,9 @@ const Services = () => {
             </div>
           </section>
         )}
+
+        {/* Live region for keyboard navigation announcements */}
+        <div ref={liveRegionRef} aria-live="polite" aria-atomic="true" className="sr-only" />
 
         {/* Breast Cancer Awareness */}
         {isVisible("cancer") && (
