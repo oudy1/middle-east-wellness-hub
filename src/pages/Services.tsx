@@ -35,6 +35,7 @@ const Services = () => {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const liveRegionRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
@@ -226,6 +227,20 @@ const Services = () => {
 
     // Arrow-key navigation between cards (DOM order, so it stays consistent in RTL).
     const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        const current = document.activeElement as HTMLElement | null;
+        const idx = cards.findIndex((c) => c === current);
+        if (idx !== -1) {
+          e.preventDefault();
+          searchInputRef.current?.focus();
+          if (liveRegionRef.current) {
+            liveRegionRef.current.textContent = language === 'ar'
+              ? 'تم إغلاق التنقل بين الموارد والعودة إلى البحث'
+              : 'Exited resource navigation and returned to search';
+          }
+        }
+        return;
+      }
       if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
       const current = document.activeElement as HTMLElement | null;
       const idx = cards.findIndex((c) => c === current);
@@ -375,6 +390,7 @@ const Services = () => {
               </label>
               <div className="relative">
                 <input
+                  ref={searchInputRef}
                   id="resources-search"
                   type="search"
                   inputMode="search"
