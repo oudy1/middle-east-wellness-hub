@@ -439,7 +439,7 @@ const Services = () => {
 
         {/* Breast Cancer Awareness */}
         {isVisible("cancer") && (
-          <section className="py-12 md:py-16 bg-pink-50/30">
+          <section id="breast-cancer-arabic" className="py-12 md:py-16 bg-pink-50/30">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="h-8 w-8 text-pink-500 fill-pink-500" />
