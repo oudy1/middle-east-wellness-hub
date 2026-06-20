@@ -156,10 +156,25 @@ const Services = () => {
 
   const goToShortcut = (s: typeof shortcuts[number]) => {
     setActiveFilter(s.filter);
-    setTimeout(() => {
-      const el = document.getElementById(s.anchor);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
+    // Double RAF + timeout ensures React render and layout settle before scrolling,
+    // giving consistent smooth-scroll timing on mobile and RTL.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const el = document.getElementById(s.anchor);
+          if (!el) return;
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          // Focus the first actionable element inside the first card of the section
+          const grid = el.classList.contains("grid") ? el : el.querySelector(".grid");
+          const firstCard = grid?.firstElementChild as HTMLElement | null;
+          const firstAction = firstCard?.querySelector("a, button") as HTMLElement | null;
+          if (firstAction) {
+            firstAction.focus({ preventScroll: true });
+          }
+        }, 150);
+      });
+    });
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
