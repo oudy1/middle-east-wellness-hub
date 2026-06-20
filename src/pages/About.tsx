@@ -37,7 +37,7 @@ const About = () => {
       
       <Header />
       
-      <main className="flex-grow relative z-10">
+      <main id="main-content" className="flex-grow relative z-10">
         {/* Hero Section */}
         <section className="py-12 md:py-16 lg:py-24">
           <div className="container mx-auto px-4">

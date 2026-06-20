@@ -29,7 +29,7 @@ const Webinars = () => {
         descriptionAr="شاهد ندوات شمس حول الصحة، البحث، صحة المرأة، السكري، التغذية، والتثقيف المجتمعي للمجتمعات الشرق أوسطية والعربية في كندا."
       />
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">

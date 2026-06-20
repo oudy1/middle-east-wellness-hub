@@ -106,7 +106,7 @@ const PhysicianDirectory = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-healthDarkBlue">
             {t("physicians.directoryTitle")}

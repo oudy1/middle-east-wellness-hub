@@ -1006,7 +1006,7 @@ const HealthcareWorkersDirectory = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-12">
             <h1 className={`text-4xl md:text-5xl font-bold mb-4 text-healthDarkBlue ${language === 'ar' ? 'font-cairo' : ''}`}>

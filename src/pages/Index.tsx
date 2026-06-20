@@ -71,7 +71,7 @@ const Index = () => {
       <CalligraphyBackground heroRef={heroRef} />
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
       <Header />
-      <main className="flex-grow relative z-10">
+      <main id="main-content" className="flex-grow relative z-10">
         {/* Hero stays eager — it contains LCP */}
         <HeroSection ref={heroRef} />
 

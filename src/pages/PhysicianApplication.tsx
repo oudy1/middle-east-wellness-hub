@@ -10,7 +10,7 @@ const PhysicianApplication = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-16">
           <div className="container mx-auto px-4 text-center">
