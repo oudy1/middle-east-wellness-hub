@@ -706,19 +706,24 @@ const Services = () => {
                 {[
                   { title: "HealthLink BC – معلومات حول الحصبة واللقاح", desc: "ملخص مبسّط حول الحصبة وأهمية لقاح الحصبة لحماية الأطفال والبالغين.", link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14b-a.pdf" },
                   { title: "HealthLink BC – معلومات حول لقاح MMRV", desc: "معلومات حول لقاح الحصبة والنكاف والحصبة الألمانية وجدري الماء (MMRV) وفوائده ومواعيد إعطائه.", link: "https://www.healthlinkbc.ca/sites/default/files/documents/hfile14e-A.pdf" },
-                ].map((resource, idx) => (
+                  { title: "لقاح المكورات الرئوية (PPSV23)", desc: "ورقة معلومات اللقاح (VIS) العربية حول لقاح المكورات الرئوية للبالغين والفئات المعرضة للخطر.", link: "https://www.immunize.org/wp-content/uploads/vis/arabic_ppsv.pdf", source: "MedlinePlus / Immunize.org (CDC VIS)", mp: true },
+                  { title: "الجمرة الخبيثة: ما تحتاج معرفته", desc: "ورقة معلومات عربية عن الجمرة الخبيثة (Anthrax) وطرق الانتقال والوقاية والعلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnthraxFactSheet_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-blue-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Syringe className="h-5 w-5 text-healthDarkBlue" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-blue-300 text-blue-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: HealthLinkBC</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'HealthLinkBC'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
