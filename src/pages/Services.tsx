@@ -390,6 +390,7 @@ const Services = () => {
               </label>
               <div className="relative">
                 <input
+                  ref={searchInputRef}
                   id="resources-search"
                   type="search"
                   inputMode="search"
