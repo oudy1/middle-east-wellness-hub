@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,7 @@ const Services = () => {
   const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const liveRegionRef = useRef<HTMLDivElement>(null);
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
