@@ -99,6 +99,11 @@ With anchors:
 - /services#educational-materials - Educational materials
 - /services#topic-request - Suggest a topic
 - /services#resources - CME training and clinical tools
+- /services#cardio-health - Arabic cardiovascular/heart resources (incl. MedlinePlus: angina, EKG, Holter, atrial fibrillation, heart attack)
+- /services#diabetes-education - Arabic diabetes & nutrition resources (incl. MedlinePlus: glucose meter, fasting blood sugar, weight management)
+- /services#mental-health-arabic - Arabic mental health & sleep resources (incl. MedlinePlus: anxiety, depression, sleep, advance directives)
+- /services#vaccines-immunization - Arabic vaccines & infection prevention (incl. MedlinePlus: pneumococcal VIS, anthrax)
+- /services#safety-outdoor-health - Arabic safety, injuries & emergency resources (incl. MedlinePlus: animal bites, ankle sprain, carbon monoxide)
 - /research#studies - Active research studies
 
 ### HEALTHCARE WORKER SEARCH
