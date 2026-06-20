@@ -225,13 +225,17 @@ const Services = () => {
 
     // Arrow-key navigation between cards (DOM order, so it stays consistent in RTL).
     const onKeyDown = (e: KeyboardEvent) => {
-      if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+      if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
       const current = document.activeElement as HTMLElement | null;
       const idx = cards.findIndex((c) => c === current);
       if (idx === -1) return;
       e.preventDefault();
       let nextIdx = idx;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      if (e.key === "Home") {
+        nextIdx = 0;
+      } else if (e.key === "End") {
+        nextIdx = cards.length - 1;
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         nextIdx = Math.min(cards.length - 1, idx + 1);
       } else {
         nextIdx = Math.max(0, idx - 1);
@@ -242,6 +246,7 @@ const Services = () => {
         next.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
       }
     };
+
     document.addEventListener("keydown", onKeyDown);
     cleanups.push(() => document.removeEventListener("keydown", onKeyDown));
 
