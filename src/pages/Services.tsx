@@ -223,6 +223,28 @@ const Services = () => {
       cleanups.push(() => a.removeEventListener("focus", onFocus));
     });
 
+    // Arrow-key navigation between cards (DOM order, so it stays consistent in RTL).
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+      const current = document.activeElement as HTMLElement | null;
+      const idx = cards.findIndex((c) => c === current);
+      if (idx === -1) return;
+      e.preventDefault();
+      let nextIdx = idx;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        nextIdx = Math.min(cards.length - 1, idx + 1);
+      } else {
+        nextIdx = Math.max(0, idx - 1);
+      }
+      const next = cards[nextIdx];
+      if (next) {
+        next.focus({ preventScroll: true });
+        next.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    cleanups.push(() => document.removeEventListener("keydown", onKeyDown));
+
     return () => {
       cleanups.forEach((fn) => fn());
     };
