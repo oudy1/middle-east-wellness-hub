@@ -197,7 +197,7 @@ const Services = () => {
         </section>
 
         {/* Quick Access - Need Help Quickly? */}
-        <section className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200">
+        <section id="need-help" className="py-6 md:py-8 bg-red-50 border-b-2 border-red-200">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
