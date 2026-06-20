@@ -104,18 +104,23 @@ test.describe("Skip to content link (English LTR)", () => {
 
     const link = page.locator(SKIP_SELECTOR).first();
 
-    // motion-reduce:transition-none should zero out transition-duration.
+    // motion-reduce:transition-none should disable transitions (transition-property: none).
     await focusSkipLink(page);
-    const duration = await link.evaluate((el) => getComputedStyle(el).transitionDuration);
-    const durations = duration.split(",").map((d) => parseFloat(d.trim()));
-    for (const d of durations) {
-      expect(d).toBe(0);
-    }
+    const transitionProperty = await link.evaluate(
+      (el) => getComputedStyle(el).transitionProperty,
+    );
+    expect(transitionProperty).toBe("none");
 
-    // Link still becomes visible immediately and is usable.
-    const box = await link.boundingBox();
-    expect(box!.width).toBeGreaterThan(40);
-    expect(box!.height).toBeGreaterThan(20);
+    // Link is immediately visible (no animation in progress) and usable.
+    const state = await link.evaluate((el) => {
+      const cs = getComputedStyle(el);
+      const rect = el.getBoundingClientRect();
+      return { opacity: Number(cs.opacity), top: rect.top, width: rect.width, height: rect.height };
+    });
+    expect(state.opacity).toBeGreaterThan(0.9);
+    expect(state.top).toBeGreaterThanOrEqual(0);
+    expect(state.width).toBeGreaterThan(40);
+    expect(state.height).toBeGreaterThan(20);
 
     await page.keyboard.press("Enter");
     await expect(page).toHaveURL(/#main-content$/);
