@@ -259,5 +259,6 @@
   "contact.inquiryForm": "أرسل لنا استفسارًا",
   "contact.name": "الاسم",
   "contact.send": "إرسال الرسالة",
-  "contact.sending": "جاري الإرسال..."
+  "contact.sending": "جاري الإرسال...",
+  "common.skipToContent": "تخطي إلى المحتوى"
 }
