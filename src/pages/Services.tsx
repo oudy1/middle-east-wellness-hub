@@ -639,19 +639,27 @@ const Services = () => {
                   { title: "كل شيء عن الصدمة النفسية", desc: "كتيب يشرح تأثير الصدمات النفسية على الصحة العقلية والجسدية، مع نصائح للتعامل والدعم.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-All-About-Trauma-arabic.pdf" },
                   { title: "نظافة النوم", desc: "دليل مبسط لتحسين جودة النوم وتبني عادات نوم صحية لتحسين الراحة النفسية والجسدية.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Sleep-Hygiene-arabic.pdf" },
                   { title: "القلق", desc: "كتيب توعوي يشرح طبيعة القلق، أسبابه، وأهم استراتيجيات السيطرة عليه بطريقة مبسطة.", link: "https://mindsmatterpsychiatry.com/wp-content/uploads/2024/08/MMP-Anxiety-arabic.pdf" },
-                ].map((resource, idx) => (
+                  { title: "المرأة والقلق", desc: "ورقة عربية من إدارة الغذاء والدواء (FDA) حول القلق لدى النساء وخيارات الدعم والعلاج.", link: "https://www.fda.gov/media/169824/download?attachment", source: "MedlinePlus / U.S. FDA", mp: true },
+                  { title: "الشعور بالحزن", desc: "ورقة عربية حول علامات الاكتئاب والشعور بالحزن ومتى تطلب المساعدة.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/FeelingSad_Ara.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "مشاكل النوم الشائعة", desc: "معلومات عربية عن أنماط النوم الشائعة وكيفية التعامل معها.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/Common_Sleep_Problems_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "ما يمكنك فعله للنوم بشكل أفضل", desc: "نصائح عربية عملية لتحسين نظافة النوم وجودته.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WhatSleepBetter_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                  { title: "التوجيهات المسبقة للرعاية", desc: "معلومات عربية عن التوجيهات المسبقة وحقك في اتخاذ قرارات الرعاية الصحية مسبقًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AdvanceDirectives_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
+                ].map((resource: any, idx) => (
                   <Card key={idx} className="hover:shadow-lg transition-shadow border-purple-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
                       </div>
+                      {resource.mp && (
+                        <Badge variant="outline" className="w-fit mb-2 text-[10px] border-purple-300 text-purple-700">MedlinePlus · {language === 'ar' ? 'مورد عربي' : 'Arabic Resource'}</Badge>
+                      )}
                       <CardTitle className="text-healthDarkBlue text-lg leading-tight text-right font-cairo" dir="rtl">
                         {resource.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
-                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: Minds Matter Psychiatry – Resources</p>
+                      <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Minds Matter Psychiatry – Resources'}</p>
                       <a href={resource.link} target="_blank" rel="noopener noreferrer">
                         <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
                           <BookOpen className="h-4 w-4" />
