@@ -1074,6 +1074,11 @@ const Services = () => {
                 'All resources are publicly available and shared from verified medical organizations to support accessible Arabic-language health education.'
               }
             </p>
+            <p className={`text-xs text-gray-500 text-center max-w-4xl mx-auto leading-relaxed mt-4 ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              {language === 'ar'
+                ? 'تنبيه طبي: هذه الموارد للتثقيف الصحي فقط ولا تُغني عن استشارة مقدم رعاية صحية. إذا كانت لديك أعراض عاجلة أو مخاوف طبية، تواصل مع مقدم رعاية صحية أو خدمات الطوارئ. تتوفر موارد MedlinePlus العربية بفضل المكتبة الوطنية الأمريكية للطب / المعاهد الوطنية للصحة.'
+                : 'Medical disclaimer: These resources are for educational purposes only and do not replace advice from a healthcare professional. If you have urgent symptoms or medical concerns, contact a healthcare provider or emergency services. MedlinePlus Arabic resources are provided courtesy of the U.S. National Library of Medicine / NIH.'}
+            </p>
           </div>
         </section>
       </main>
