@@ -35,6 +35,7 @@ const Services = () => {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const liveRegionRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
