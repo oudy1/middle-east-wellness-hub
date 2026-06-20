@@ -259,5 +259,6 @@
   "contact.inquiryForm": "Send us an Inquiry",
   "contact.name": "Name",
   "contact.send": "Send Message",
-  "contact.sending": "Sending..."
+  "contact.sending": "Sending...",
+  "common.skipToContent": "Skip to content"
 }
