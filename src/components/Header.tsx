@@ -112,11 +112,23 @@ const Header = () => {
   const isActive = (to: string) => location.pathname === to;
 
   return (
-    <header
-      className="bg-healthDarkBlue text-white sticky top-0 z-50 w-full shadow-lg border-b border-healthTeal/20"
-      dir={isRTL ? "rtl" : "ltr"}
-    >
-      <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+    <>
+      <a
+        href="#main-content"
+        className={cn(
+          "fixed top-0 z-[60] bg-healthDarkBlue text-white px-4 py-2 font-medium text-sm",
+          "transform -translate-y-full focus:translate-y-0 transition-transform duration-200",
+          "border-b border-healthTeal/20 shadow-lg outline-none focus:ring-2 focus:ring-healthTeal",
+          isRTL ? "right-0 rounded-bl-md" : "left-0 rounded-br-md"
+        )}
+      >
+        {t("common.skipToContent")}
+      </a>
+      <header
+        className="bg-healthDarkBlue text-white sticky top-0 z-50 w-full shadow-lg border-b border-healthTeal/20"
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         <div className="flex items-center justify-between h-12 sm:h-auto gap-2">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 min-w-0">
