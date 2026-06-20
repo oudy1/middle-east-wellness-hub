@@ -113,17 +113,28 @@ const Header = () => {
 
   return (
     <>
-      <a
-        href="#main-content"
-        className={cn(
-          "fixed top-0 z-[60] bg-healthDarkBlue text-white px-4 py-2 font-medium text-sm",
-          "transform -translate-y-full focus:translate-y-0 transition-transform duration-200",
-          "border-b border-healthTeal/20 shadow-lg outline-none focus:ring-2 focus:ring-healthTeal",
-          isRTL ? "right-0 rounded-bl-md" : "left-0 rounded-br-md"
-        )}
-      >
-        {t("common.skipToContent")}
-      </a>
+      {(() => {
+        const isRtlLang = ["ar", "ku", "fa"].includes(language);
+        return (
+          <a
+            href="#main-content"
+            dir={isRtlLang ? "rtl" : "ltr"}
+            lang={language}
+            className={cn(
+              "fixed top-2 z-[60] bg-healthDarkBlue text-white px-4 py-2 font-medium text-sm",
+              "sr-only focus:not-sr-only focus:inline-flex items-center",
+              "transform -translate-y-16 opacity-0 focus:translate-y-0 focus:opacity-100",
+              "transition-all duration-300 ease-out motion-reduce:transition-none",
+              "border border-healthTeal/30 shadow-lg outline-none focus:ring-2 focus:ring-healthTeal focus:ring-offset-2 focus:ring-offset-healthDarkBlue",
+              "rounded-md",
+              language === "ar" && "font-cairo",
+              isRtlLang ? "right-2 text-right" : "left-2 text-left"
+            )}
+          >
+            {t("common.skipToContent")}
+          </a>
+        );
+      })()}
       <header
         className="bg-healthDarkBlue text-white sticky top-0 z-50 w-full shadow-lg border-b border-healthTeal/20"
         dir={isRTL ? "rtl" : "ltr"}
