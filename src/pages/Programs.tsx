@@ -8,6 +8,7 @@ import { ExternalLink, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
+import MentalHealthConventionSection from "@/components/MentalHealthConventionSection";
 
 const programs = [
   {
