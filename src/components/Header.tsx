@@ -166,7 +166,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-center flex-1 gap-6 mx-6">
+          <nav className="hidden lg:flex items-center justify-center flex-1 gap-6 mx-6 bg-healthDarkBlue text-white">
             {desktopLinks.slice(0, 5).map((link) => (
               <Link
                 key={link.to + link.label}
