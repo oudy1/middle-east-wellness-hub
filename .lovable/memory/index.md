@@ -14,6 +14,7 @@ Content: CMS-like JSON layer under /content/. Translations, webinars, studies ex
 
 ## Memories
 - [Bilingual RTL Guidelines](mem://style/bilingual-rtl-guidelines) — RTL formatting, Arabic typography, translation fallbacks
+- [Color Contrast Tokens](mem://style/color-contrast-tokens) — WCAG AA-safe brand colors; teal split tokens, amber primary, slate muted
 - [Security Architecture](mem://technical/security-architecture) — RLS policies, session-id for chat isolation, app_admins
 - [Healthcare Directory](mem://features/healthcare-directory) — City-based search filters without external map APIs
 - [Volunteer Flow](mem://features/volunteer-flow) — External Google Form integration for volunteers
