@@ -172,8 +172,8 @@ const Header = () => {
                 key={link.to + link.label}
                 to={link.to}
                 className={cn(
-                  "hover:text-healthTeal transition-colors font-medium text-sm whitespace-nowrap",
-                  isActive(link.to) && "text-healthTeal"
+                  "hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap",
+                  isActive(link.to) && "text-healthTealLight"
                 )}
               >
                 {link.label}
@@ -188,7 +188,7 @@ const Header = () => {
             >
               <button
                 onClick={() => setDesktopEducationOpen((v) => !v)}
-                className="flex items-center gap-1 hover:text-healthTeal transition-colors font-medium text-sm"
+                className="flex items-center gap-1 hover:text-healthTealLight transition-colors font-medium text-sm"
                 aria-haspopup="menu"
                 aria-expanded={desktopEducationOpen}
               >
@@ -222,8 +222,8 @@ const Header = () => {
                 key={link.to + link.label}
                 to={link.to}
                 className={cn(
-                  "hover:text-healthTeal transition-colors font-medium text-sm whitespace-nowrap",
-                  isActive(link.to) && "text-healthTeal"
+                  "hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap",
+                  isActive(link.to) && "text-healthTealLight"
                 )}
               >
                 {link.label}
