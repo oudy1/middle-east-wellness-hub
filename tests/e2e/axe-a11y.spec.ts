@@ -27,8 +27,24 @@ function formatViolations(violations: Awaited<ReturnType<AxeBuilder["analyze"]>>
     .join("\n\n");
 }
 
+// Third-party embeds (Instagram, YouTube, Google Slides) ship their own
+// a11y issues that we cannot fix from the SHAMS codebase. Exclude their
+// iframes from the scan so the suite only reports project-owned regressions.
+const THIRD_PARTY_EXCLUDES: string[][] = [
+  ["iframe[src*='instagram.com']"],
+  ["iframe[src*='youtube.com']"],
+  ["iframe[src*='youtube-nocookie.com']"],
+  ["iframe[src*='docs.google.com']"],
+];
+
+function builder(page: Page) {
+  let b = new AxeBuilder({ page }).withTags(WCAG_TAGS);
+  for (const sel of THIRD_PARTY_EXCLUDES) b = b.exclude(sel);
+  return b;
+}
+
 async function runAxe(page: Page, label: string) {
-  const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
+  const results = await builder(page).analyze();
   if (results.violations.length > 0) {
     // eslint-disable-next-line no-console
     console.log(`\nAxe violations on ${label}:\n${formatViolations(results.violations)}\n`);
