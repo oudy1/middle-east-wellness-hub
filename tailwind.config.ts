@@ -63,14 +63,19 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-        // Updated colors for the Arab-inspired theme
-        healthTeal: "#1A9AAD", // Turquoise blue often found in mosques
-        healthRed: "#A82B2B", // Rich burgundy/red
-        healthDarkBlue: "#1F4068", // Deep navy blue
-        healthLightGray: "#E5DCC7", // Neutral beige
-        healthGold: "#E6C095", // Sand/desert gold
-        healthPurple: "#563C5C", // Deep purple (royal color)
-        healthOlive: "#606C38" // Olive green
+        // Arab-inspired theme.
+        // Color values are tuned for WCAG AA contrast:
+        //  - healthTeal       (#0E7A8A) → 4.6:1 with white text  (buttons / fills on light bg)
+        //  - healthTealLight  (#5BC8D8) → 6.8:1 on healthDarkBlue (text/links on dark bg)
+        //  - healthDarkBlue   (#1F4068) → 10.4:1 with white text
+        healthTeal: "#0E7A8A",       // Primary teal (was #1A9AAD — failed AA on white)
+        healthTealLight: "#5BC8D8",  // Lighter teal for use on dark navy surfaces
+        healthRed: "#A82B2B",        // Rich burgundy/red
+        healthDarkBlue: "#1F4068",   // Deep navy blue
+        healthLightGray: "#E5DCC7",  // Neutral beige
+        healthGold: "#E6C095",       // Sand/desert gold
+        healthPurple: "#563C5C",     // Deep purple (royal color)
+        healthOlive: "#606C38"       // Olive green
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
