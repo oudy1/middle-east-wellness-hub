@@ -8,6 +8,7 @@ Bilingual EN/AR: Arabic uses RTL, font-cairo. No em dashes (—). Show 'المح
 Identity: Toronto-based. MENA "societies" (never "communities"). Email: infoprojectshams@gmail.com.
 Forms: No internal submission forms. Use external Google Forms or mailto: links.
 Design: Compact layouts, no oversized elements. No large posters in feeds—use thumbnails + modals. Mobile-first (44px touch targets).
+Color contrast: `healthTeal` #0E7A8A for light surfaces; `healthTealLight` #5BC8D8 for text on dark navy. `--primary` is darkened amber (~#AC3F12). Never revert.
 Security: Strict RLS (insert-only for public). Chat history isolated via persistent x-session-id in localStorage.
 Chatbot: Warm, short responses, no em dashes. Resets on reopen. Strict crisis routing to 911/988.
 Content: CMS-like JSON layer under /content/. Translations, webinars, studies extracted. Phase 2 pending.
