@@ -26,7 +26,8 @@
     --popover: 36 20% 98%;
     --popover-foreground: 24 13% 9%;
 
-    --primary: 25 95% 53%;
+    /* Darkened from `25 95% 53%` (#F97316 → 2.66:1 w/ white) to a deeper amber (#AC3F12 → ~6:1 w/ white) for WCAG AA. */
+    --primary: 18 82% 37%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 36 30% 94%;
