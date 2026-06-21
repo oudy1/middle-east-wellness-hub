@@ -72,10 +72,8 @@ test.describe("Axe a11y scans", () => {
       const locator = page.locator(selector).first();
       await expect(locator).toBeVisible();
 
-      const results = await new AxeBuilder({ page })
-        .include(selector)
-        .withTags(WCAG_TAGS)
-        .analyze();
+      let b = builder(page).include(selector);
+      const results = await b.analyze();
 
       if (results.violations.length > 0) {
         // eslint-disable-next-line no-console
