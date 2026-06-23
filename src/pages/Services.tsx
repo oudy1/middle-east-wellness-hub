@@ -40,16 +40,9 @@ const Services = () => {
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
-  // Smooth-scroll to deep-linked section when hash changes (e.g. /services#resources).
-  useEffect(() => {
-    if (!location.hash) return;
-    const id = location.hash.slice(1);
-    const t = window.setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-    return () => window.clearTimeout(t);
-  }, [location.hash, location.key]);
+  // Accessible smooth-scroll + focus + SR announcement on hash navigation.
+  useHashScroll();
+
 
   const filters: { id: FilterCategory; en: string; ar: string }[] = [
     { id: "all", en: "All", ar: "الكل" },

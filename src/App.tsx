@@ -64,6 +64,15 @@ function App() {
           </Routes>
           <ChatWidget />
           <Toaster />
+          {/* Global polite live region for route/hash navigation announcements. */}
+          <div
+            id="route-live-region"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="sr-only"
+          />
+
         </div>
       </Router>
     </LanguageProvider>
