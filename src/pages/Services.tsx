@@ -36,8 +36,20 @@ const Services = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const liveRegionRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const location = useLocation();
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
+
+  // Smooth-scroll to deep-linked section when hash changes (e.g. /services#resources).
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    const t = window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+    return () => window.clearTimeout(t);
+  }, [location.hash, location.key]);
 
   const filters: { id: FilterCategory; en: string; ar: string }[] = [
     { id: "all", en: "All", ar: "الكل" },
