@@ -25,7 +25,8 @@ import {
   Brain
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -154,6 +155,19 @@ const Research = () => {
   const { language, t } = useLanguage();
   const [expandedResearcher, setExpandedResearcher] = useState<string | null>(null);
   const [activeStudyDetail, setActiveStudyDetail] = useState<string | null>(null);
+  const location = useLocation();
+
+  // Scroll to the requested section when the URL hash changes (e.g. /research#researchers).
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    // Defer so lazy sections have time to mount.
+    const t = window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+    return () => window.clearTimeout(t);
+  }, [location.hash, location.key]);
 
   const toggleResearcher = (id: string) => {
     setExpandedResearcher(expandedResearcher === id ? null : id);
@@ -426,10 +440,13 @@ const Research = () => {
         </section>
 
         {/* SHAMS Research Portfolio */}
-        <SHAMSResearchPortfolio />
+        <section id="portfolio" className="scroll-mt-24">
+          <SHAMSResearchPortfolio />
+        </section>
 
         {/* Research Studies - Compact Grid */}
-        <section id="studies" className="py-12 bg-white">
+        <section id="studies" className="py-12 bg-white scroll-mt-24">
+
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center mb-2 gap-2">
               <GraduationCap className="h-8 w-8 text-primary" />
@@ -483,7 +500,7 @@ const Research = () => {
         </section>
 
         {/* Researchers Associated with SHAMS Section */}
-        <section className="py-12 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <section id="researchers" className="py-12 bg-gradient-to-br from-primary/5 to-secondary/5 scroll-mt-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-3 gap-2">
@@ -521,7 +538,7 @@ const Research = () => {
         </section>
 
         {/* Publications & Knowledge Hub */}
-        <section className="py-12 bg-white">
+        <section id="publications" className="py-12 bg-white scroll-mt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">{t("resources.publicationsHub")}</h2>
             <p className="text-muted-foreground max-w-3xl mx-auto text-center mb-6">{t("resources.publicationsDescription")}</p>
