@@ -232,10 +232,23 @@ const Header = () => {
   ];
 
   const closeDrawer = () => setMobileMenuOpen(false);
+  const activeSectionId = useActiveSection();
+  // A link is "active" when its pathname matches the current route AND, if
+  // it carries a `#hash`, that hash matches the section currently in view.
+  // Plain (no-hash) links to the current route are only the active match
+  // when no section is in view, so the highlight follows the user as they
+  // scroll through anchored subsections.
   const isActivePath = useCallback(
-    (to: string) => location.pathname === to,
-    [location.pathname]
+    (to: string) => {
+      const [path, hash] = to.split("#");
+      if (path !== location.pathname) return false;
+      if (hash) return activeSectionId === hash;
+      // No hash: active only when no hashed sibling is currently in view.
+      return activeSectionId === "";
+    },
+    [location.pathname, activeSectionId]
   );
+
 
   // Close language dropdown on outside click / escape
   useEffect(() => {
