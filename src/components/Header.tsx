@@ -193,19 +193,19 @@ const Header = () => {
       children: [
         { to: "/resources", label: L.resources },
         { to: "/programs", label: L.programs },
-        { to: "/resources", label: L.patientRights },
-        { to: "/services", label: L.communityServices },
+        { to: "/services#mental-health-arabic", label: L.patientRights },
+        { to: "/services#resources", label: L.communityServices },
       ],
     },
     {
       label: L.research,
       to: "/research",
       children: [
-        { to: "/research", label: L.researchStudies },
-        { to: "/research", label: L.researchOpps },
-        { to: "/research", label: L.associatedResearchers },
-        { to: "/research", label: L.conferences },
-        { to: "/research", label: L.abstracts },
+        { to: "/research#studies", label: L.researchStudies },
+        { to: "/research#studies", label: L.researchOpps },
+        { to: "/research#researchers", label: L.associatedResearchers },
+        { to: "/research#portfolio", label: L.conferences },
+        { to: "/research#publications", label: L.abstracts },
       ],
     },
     {
