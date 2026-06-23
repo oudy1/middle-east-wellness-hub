@@ -6,9 +6,12 @@ import { useLocation } from "react-router-dom";
  * "active band" (just below the sticky header). Returns the id (without `#`)
  * of the active section, or `""` if none.
  *
- * Uses IntersectionObserver with a rootMargin that biases toward the top of
- * the viewport, so the active section is the one a reader is currently on,
- * not whatever sliver appears at the bottom.
+ * The active band is computed dynamically from the actual sticky header's
+ * bounding rect, so it stays correct when the header height changes — e.g.
+ * mobile vs. desktop breakpoints, condensed-on-scroll headers, drawer/sheet
+ * opening that toggles header layout, or font/zoom changes. We rebuild the
+ * IntersectionObserver whenever the header's measured height bucket changes
+ * (rounded to the nearest 4px to avoid churn).
  */
 export function useActiveSection(): string {
   const { pathname } = useLocation();
@@ -19,36 +22,61 @@ export function useActiveSection(): string {
       return;
     }
 
-    // Defer so lazy-mounted sections have time to register.
     let cancelled = false;
     const visibility = new Map<string, number>();
+    let observer: IntersectionObserver | null = null;
+    let sections: HTMLElement[] = [];
+    let currentHeaderBucket = -1;
+    let resizeObserver: ResizeObserver | null = null;
+    let rebuildRaf = 0;
 
-    const setup = () => {
-      if (cancelled) return () => {};
+    const measureHeaderHeight = (): number => {
+      const header =
+        document.querySelector<HTMLElement>("header[class*='sticky']") ||
+        document.querySelector<HTMLElement>("header");
+      if (!header) return 80;
+      const h = header.getBoundingClientRect().height;
+      // Expose for any other consumer that wants the live header offset.
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${Math.round(h)}px`
+      );
+      return h;
+    };
+
+    const recompute = () => {
+      let bestId = "";
+      let bestRatio = 0;
+      for (const el of sections) {
+        const ratio = visibility.get(el.id) ?? 0;
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = el.id;
+        }
+      }
+      setActiveId((prev) => (prev === bestId ? prev : bestId));
+    };
+
+    const buildObserver = () => {
+      if (cancelled) return;
       const root =
         document.getElementById("main-content") ||
         document.querySelector("main");
-      if (!root) return () => {};
+      if (!root) return;
 
-      const sections = Array.from(root.querySelectorAll<HTMLElement>("[id]"));
-      if (sections.length === 0) return () => {};
+      sections = Array.from(root.querySelectorAll<HTMLElement>("[id]"));
+      if (sections.length === 0) return;
 
-      const recompute = () => {
-        // Pick the section with the largest visible ratio; tie-break by
-        // earliest position in the document.
-        let bestId = "";
-        let bestRatio = 0;
-        for (const el of sections) {
-          const ratio = visibility.get(el.id) ?? 0;
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = el.id;
-          }
-        }
-        setActiveId((prev) => (prev === bestId ? prev : bestId));
-      };
+      const headerH = measureHeaderHeight();
+      // Bucket to nearest 4px to avoid rebuilding on sub-pixel changes.
+      const bucket = Math.round(headerH / 4) * 4;
+      if (bucket === currentHeaderBucket && observer) return;
+      currentHeaderBucket = bucket;
 
-      const observer = new IntersectionObserver(
+      observer?.disconnect();
+      visibility.clear();
+
+      observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
             const id = (entry.target as HTMLElement).id;
@@ -58,29 +86,57 @@ export function useActiveSection(): string {
           recompute();
         },
         {
-          // Active band sits just below the sticky header.
-          rootMargin: "-96px 0px -55% 0px",
+          // Top margin matches the live header height so the "active band"
+          // starts exactly where content becomes visible below the header.
+          rootMargin: `-${bucket}px 0px -55% 0px`,
           threshold: [0, 0.25, 0.5, 0.75, 1],
         }
       );
 
-      sections.forEach((el) => observer.observe(el));
-      return () => observer.disconnect();
+      sections.forEach((el) => observer!.observe(el));
     };
 
-    // Wait one frame, then a short timeout, to let Suspense fallbacks resolve.
-    let cleanup: (() => void) | undefined;
+    const scheduleRebuild = () => {
+      if (rebuildRaf) cancelAnimationFrame(rebuildRaf);
+      rebuildRaf = requestAnimationFrame(() => {
+        rebuildRaf = 0;
+        buildObserver();
+      });
+    };
+
+    // Initial build, deferred so lazy sections can mount.
     const raf = window.requestAnimationFrame(() => {
       const t = window.setTimeout(() => {
-        cleanup = setup();
+        buildObserver();
+
+        // Watch the header for height changes (breakpoint, condensed-on-scroll,
+        // drawer open shifting layout, dynamic content).
+        const header =
+          document.querySelector<HTMLElement>("header[class*='sticky']") ||
+          document.querySelector<HTMLElement>("header");
+        if (header && "ResizeObserver" in window) {
+          resizeObserver = new ResizeObserver(() => scheduleRebuild());
+          resizeObserver.observe(header);
+        }
       }, 150);
-      cleanup = () => window.clearTimeout(t);
+      // Stash cleanup of the timeout via closure on the outer cleanup below.
+      (buildObserver as unknown as { _t?: number })._t = t;
     });
+
+    // Viewport changes also affect header height (mobile rotation, browser UI).
+    window.addEventListener("resize", scheduleRebuild);
+    window.addEventListener("orientationchange", scheduleRebuild);
 
     return () => {
       cancelled = true;
       window.cancelAnimationFrame(raf);
-      cleanup?.();
+      if (rebuildRaf) cancelAnimationFrame(rebuildRaf);
+      const t = (buildObserver as unknown as { _t?: number })._t;
+      if (t) window.clearTimeout(t);
+      window.removeEventListener("resize", scheduleRebuild);
+      window.removeEventListener("orientationchange", scheduleRebuild);
+      resizeObserver?.disconnect();
+      observer?.disconnect();
       setActiveId("");
     };
   }, [pathname]);
