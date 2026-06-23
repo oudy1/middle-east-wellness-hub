@@ -26,13 +26,15 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { studies } from "@/lib/studyData";
+import { useHashScroll } from "@/hooks/useHashScroll";
+
 import StudyCard from "@/components/StudyCard";
 import SawaFlyerCarousel from "@/components/SawaFlyerCarousel";
 import SHAMSResearchPortfolio from "@/components/SHAMSResearchPortfolio";
@@ -155,19 +157,11 @@ const Research = () => {
   const { language, t } = useLanguage();
   const [expandedResearcher, setExpandedResearcher] = useState<string | null>(null);
   const [activeStudyDetail, setActiveStudyDetail] = useState<string | null>(null);
-  const location = useLocation();
+  
 
-  // Scroll to the requested section when the URL hash changes (e.g. /research#researchers).
-  useEffect(() => {
-    if (!location.hash) return;
-    const id = location.hash.slice(1);
-    // Defer so lazy sections have time to mount.
-    const t = window.setTimeout(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
-    return () => window.clearTimeout(t);
-  }, [location.hash, location.key]);
+  // Accessible smooth-scroll + focus + SR announcement on hash navigation.
+  useHashScroll();
+
 
   const toggleResearcher = (id: string) => {
     setExpandedResearcher(expandedResearcher === id ? null : id);
