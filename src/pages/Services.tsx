@@ -1316,7 +1316,7 @@ const Services = () => {
         )}
 
         {/* Clinical Resources Section */}
-        <section id="resources" className="py-12 bg-white">
+        <section id="resources" className="py-12 bg-white scroll-mt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               {language === 'ar' ? 'التدريب المستمر والأدوات السريرية' : 'CME & Clinical Tools'}
