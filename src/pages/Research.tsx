@@ -157,7 +157,7 @@ const Research = () => {
   const { language, t } = useLanguage();
   const [expandedResearcher, setExpandedResearcher] = useState<string | null>(null);
   const [activeStudyDetail, setActiveStudyDetail] = useState<string | null>(null);
-  const location = useLocation();
+  
 
   // Accessible smooth-scroll + focus + SR announcement on hash navigation.
   useHashScroll();
