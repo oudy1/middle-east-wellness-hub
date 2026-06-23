@@ -23,7 +23,7 @@ import {
   AlertTriangle,
   GraduationCap
 } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import sickKidsLogo from "@/assets/sickkids-logo.svg";
@@ -38,7 +38,7 @@ const Services = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const liveRegionRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const location = useLocation();
+  
 
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
