@@ -33,6 +33,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { studies } from "@/lib/studyData";
+import { useHashScroll } from "@/hooks/useHashScroll";
+
 import StudyCard from "@/components/StudyCard";
 import SawaFlyerCarousel from "@/components/SawaFlyerCarousel";
 import SHAMSResearchPortfolio from "@/components/SHAMSResearchPortfolio";

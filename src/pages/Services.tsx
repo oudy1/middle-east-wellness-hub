@@ -27,6 +27,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import sickKidsLogo from "@/assets/sickkids-logo.svg";
+import { useHashScroll } from "@/hooks/useHashScroll";
+
 
 type FilterCategory = "all" | "mental-health" | "cancer" | "heart-diabetes" | "vaccines-safety" | "education" | "clinical";
 
