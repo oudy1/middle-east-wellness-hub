@@ -90,7 +90,7 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
     >
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={openNow}
         onFocus={openNow}
         className={cn(
           "flex items-center gap-1 hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap py-2",
