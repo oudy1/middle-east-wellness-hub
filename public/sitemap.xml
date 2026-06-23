@@ -11,21 +11,21 @@
   </url>
   <url><loc>https://www.projectshams.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.projectshams.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.projectshams.com/resources</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.projectshams.com/programs</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.projectshams.com/programs/mentorship</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.projectshams.com/mentorship-booking</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.projectshams.com/research</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.projectshams.com/recordings</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.projectshams.com/webinars</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.projectshams.com/find-healthcare-workers</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.projectshams.com/physicians/family</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.projectshams.com/physicians/family/cities</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.projectshams.com/family-physician</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.projectshams.com/resources</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.projectshams.com/diseases</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.projectshams.com/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.projectshams.com/glossary</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.projectshams.com/physician-directory</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.projectshams.com/physicians/family</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.projectshams.com/physicians/family/cities</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.projectshams.com/join-us</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.projectshams.com/volunteer</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.projectshams.com/contact</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.projectshams.com/support-us</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.projectshams.com/mentorship-booking</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.projectshams.com/contact</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
 </urlset>
