@@ -17,6 +17,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import { useActiveSection } from "@/hooks/useActiveSection";
+
 
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
 const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
@@ -117,21 +119,26 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
           )}
         >
           <div className="bg-white rounded-md shadow-lg py-1 border border-gray-200">
-            {item.children.map((l) => (
-              <Link
-                key={l.to + l.label}
-                to={l.to}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-healthDarkBlue transition-colors",
-                  isRTL ? "text-right" : "text-left",
-                  isActivePath(l.to) && "bg-healthTeal/10 text-healthDarkBlue font-medium"
-                )}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {item.children.map((l) => {
+              const active = isActivePath(l.to);
+              return (
+                <Link
+                  key={l.to + l.label}
+                  to={l.to}
+                  role="menuitem"
+                  aria-current={active ? "location" : undefined}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-healthDarkBlue transition-colors border-l-2 border-transparent",
+                    isRTL ? "text-right border-l-0 border-r-2" : "text-left",
+                    active && "bg-healthTeal/10 text-healthDarkBlue font-medium border-healthTeal"
+                  )}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
+
           </div>
         </div>
       )}
@@ -230,10 +237,23 @@ const Header = () => {
   ];
 
   const closeDrawer = () => setMobileMenuOpen(false);
+  const activeSectionId = useActiveSection();
+  // A link is "active" when its pathname matches the current route AND, if
+  // it carries a `#hash`, that hash matches the section currently in view.
+  // Plain (no-hash) links to the current route are only the active match
+  // when no section is in view, so the highlight follows the user as they
+  // scroll through anchored subsections.
   const isActivePath = useCallback(
-    (to: string) => location.pathname === to,
-    [location.pathname]
+    (to: string) => {
+      const [path, hash] = to.split("#");
+      if (path !== location.pathname) return false;
+      if (hash) return activeSectionId === hash;
+      // No hash: active only when no hashed sibling is currently in view.
+      return activeSectionId === "";
+    },
+    [location.pathname, activeSectionId]
   );
+
 
   // Close language dropdown on outside click / escape
   useEffect(() => {
@@ -319,6 +339,7 @@ const Header = () => {
                 <Link
                   key={item.to + idx}
                   to={item.to}
+                  aria-current={isActivePath(item.to) ? "page" : undefined}
                   className={cn(
                     "hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap py-2",
                     isActivePath(item.to) && "text-healthTealLight"
@@ -327,6 +348,7 @@ const Header = () => {
                   {item.label}
                 </Link>
               );
+
             })}
           </nav>
 
@@ -485,19 +507,25 @@ const Header = () => {
                             "py-1 space-y-1 border-healthTeal/30",
                             isRTL ? "border-r-2 mr-2" : "border-l-2 ml-2"
                           )}>
-                            {item.children.map((child, i) => (
-                              <Link
-                                key={child.to + child.label + i}
-                                to={child.to}
-                                onClick={closeDrawer}
-                                className={cn(
-                                  "block py-2.5 px-4 rounded-md hover:bg-healthTeal/20 transition-colors text-sm min-h-[44px] flex items-center touch-manipulation",
-                                  isRTL ? "text-right" : "text-left"
-                                )}
-                              >
-                                {child.label}
-                              </Link>
-                            ))}
+                            {item.children.map((child, i) => {
+                              const active = isActivePath(child.to);
+                              return (
+                                <Link
+                                  key={child.to + child.label + i}
+                                  to={child.to}
+                                  onClick={closeDrawer}
+                                  aria-current={active ? "location" : undefined}
+                                  className={cn(
+                                    "block py-2.5 px-4 rounded-md hover:bg-healthTeal/20 transition-colors text-sm min-h-[44px] flex items-center touch-manipulation",
+                                    isRTL ? "text-right" : "text-left",
+                                    active && "bg-healthTeal/20 text-white font-medium"
+                                  )}
+                                >
+                                  {child.label}
+                                </Link>
+                              );
+                            })}
+
                           </div>
                         </CollapsibleContent>
                       </Collapsible>
