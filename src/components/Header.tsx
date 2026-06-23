@@ -193,7 +193,7 @@ const Header = () => {
       children: [
         { to: "/resources", label: L.resources },
         { to: "/programs", label: L.programs },
-        { to: "/services#mental-health-arabic", label: L.patientRights },
+        { to: "/resources", label: L.patientRights },
         { to: "/services#resources", label: L.communityServices },
       ],
     },
