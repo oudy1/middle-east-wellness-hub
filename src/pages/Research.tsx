@@ -538,7 +538,7 @@ const Research = () => {
         </section>
 
         {/* Publications & Knowledge Hub */}
-        <section className="py-12 bg-white">
+        <section id="publications" className="py-12 bg-white scroll-mt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">{t("resources.publicationsHub")}</h2>
             <p className="text-muted-foreground max-w-3xl mx-auto text-center mb-6">{t("resources.publicationsDescription")}</p>
