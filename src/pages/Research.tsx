@@ -500,7 +500,7 @@ const Research = () => {
         </section>
 
         {/* Researchers Associated with SHAMS Section */}
-        <section className="py-12 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <section id="researchers" className="py-12 bg-gradient-to-br from-primary/5 to-secondary/5 scroll-mt-24">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-3 gap-2">
