@@ -440,10 +440,13 @@ const Research = () => {
         </section>
 
         {/* SHAMS Research Portfolio */}
-        <SHAMSResearchPortfolio />
+        <section id="portfolio" className="scroll-mt-24">
+          <SHAMSResearchPortfolio />
+        </section>
 
         {/* Research Studies - Compact Grid */}
-        <section id="studies" className="py-12 bg-white">
+        <section id="studies" className="py-12 bg-white scroll-mt-24">
+
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center mb-2 gap-2">
               <GraduationCap className="h-8 w-8 text-primary" />
