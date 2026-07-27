@@ -78,7 +78,7 @@ const FeaturedEventSection = () => {
 
         <div
           ref={containerRef}
-          className="max-w-[400px] mx-auto"
+          className="w-full max-w-[400px] mx-auto overflow-hidden ig-reel-embed"
           dir="ltr"
         >
           {!embedFailed ? (
@@ -93,9 +93,9 @@ const FeaturedEventSection = () => {
                 boxShadow:
                   "0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
                 margin: "0 auto",
-                maxWidth: "400px",
-                minWidth: "280px",
+                maxWidth: "100%",
                 width: "100%",
+                minWidth: 0,
                 padding: 0,
               }}
             >
