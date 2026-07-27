@@ -77,7 +77,6 @@ const Index = () => {
 
 
         <Suspense fallback={<SectionFallback />}>
-          <MentalHealthConventionSection />
           <FeaturedEventSection />
           <MentorshipHighlight />
           <FeaturedWebinarBanner />
