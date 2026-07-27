@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const REEL_URL =
-  "https://www.instagram.com/reel/DZYnmHTs4pG/?utm_source=ig_web_copy_link";
+  "https://www.instagram.com/reel/DbCMtfkuVQK/?utm_source=ig_web_copy_link";
+const REEL_LINK = "https://www.instagram.com/reel/DbCMtfkuVQK/";
 
 declare global {
   interface Window {
@@ -22,13 +23,14 @@ const FeaturedEventSection = () => {
   const sectionTitle = isAr
     ? "من أبرز الفعاليات السابقة"
     : "Past Event Highlight";
-  const subtitle = isAr
-    ? "فعالية التواصل للعرب في القطاع الصحي"
-    : "Arabs in Healthcare Networking Event";
+  const recapTitle = isAr
+    ? "ملخص مؤتمر الصحة النفسية"
+    : "Mental Health Convention Recap";
   const description = isAr
-    ? "شاهدوا أبرز لحظات فعالية شمس للتواصل بين العرب في القطاع الصحي، حيث اجتمع المختصون والطلاب في المجال الصحي للتعارف ومشاركة الخبرات وبناء مجتمع متماسك."
-    : "Catch highlights from our SHAMS Arabs in Healthcare networking event, where healthcare professionals and students came together to connect, share experiences, and build community.";
+    ? "شكراً لكل من شارك في مؤتمر شمس للصحة النفسية. جمع هذا الحدث أفراد المجتمع، والعاملين في الرعاية الصحية، والطلاب، والمنظمات في جلسات حوارية وورش عمل وتواصل مجتمعي ونقاشات حول وصمة الصحة النفسية والدعم المتاح."
+    : "Thank you to everyone who joined SHAMS for our Mental Health Convention. This event brought together community members, healthcare professionals, students, and organizations for panels, workshops, networking, and conversations around mental health stigma and support.";
   const watchCta = isAr ? "شاهد على إنستغرام" : "Watch on Instagram";
+  const watchRecapCta = isAr ? "شاهد الملخص على إنستغرام" : "Watch Recap on Instagram";
   const badge = isAr ? "فعالية سابقة" : "Past Event";
 
   useEffect(() => {
@@ -67,7 +69,7 @@ const FeaturedEventSection = () => {
             {sectionTitle}
           </h2>
           <p className="text-base md:text-lg font-semibold text-primary">
-            {subtitle}
+            {recapTitle}
           </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
             {description}
@@ -106,17 +108,30 @@ const FeaturedEventSection = () => {
               <div className="mx-auto w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center">
                 <Instagram className="h-7 w-7 text-white" />
               </div>
-              <p className="text-sm text-muted-foreground">{subtitle}</p>
+              <p className="text-sm text-muted-foreground">{recapTitle}</p>
               <Button
                 asChild
                 className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white"
               >
-                <a href={REEL_URL} target="_blank" rel="noopener noreferrer">
-                  {watchCta}
+                <a href={REEL_LINK} target="_blank" rel="noopener noreferrer">
+                  {watchRecapCta}
                 </a>
               </Button>
             </div>
           )}
+        </div>
+
+        <div className="flex justify-center mt-5">
+          <Button
+            asChild
+            variant="outline"
+            className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/5"
+          >
+            <a href={REEL_LINK} target="_blank" rel="noopener noreferrer">
+              <Instagram className={`h-4 w-4 ${isRTL ? "ml-2" : "mr-2"}`} />
+              {watchCta}
+            </a>
+          </Button>
         </div>
       </div>
     </section>
