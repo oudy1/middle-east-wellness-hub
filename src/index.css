@@ -260,3 +260,20 @@ a[data-mp-card]:focus-visible {
   border-color: #1A9AAD !important;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
+
+/* Instagram Reel embed: keep centered, responsive, and never overflow small mobile screens */
+.ig-reel-embed .instagram-media {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.ig-reel-embed .instagram-media iframe,
+.ig-reel-embed iframe.instagram-media {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  display: block;
+  margin: 0 auto;
+}
