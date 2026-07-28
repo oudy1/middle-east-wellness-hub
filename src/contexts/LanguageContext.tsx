@@ -19,6 +19,9 @@ const translationsByLang: Record<Language, Record<string, string>> = { en, ar, k
 
 const rtlLanguages: Language[] = ["ar", "ku", "fa"];
 
+/** Localized notice shown when an Arabic/RTL translation is missing, per project rules. */
+export const MISSING_TRANSLATION_AR = "المحتوى قيد الترجمة";
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
