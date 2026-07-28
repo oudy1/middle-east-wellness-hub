@@ -35,11 +35,24 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const t = (key: string): string => {
     const value = translationsByLang[language]?.[key];
-    if (!value) {
-      console.warn(`Translation key not found: ${key}`);
-      return key;
+    if (value) return value;
+    // Fallback: try English, then localized "content in translation" notice for RTL langs.
+    const englishValue = translationsByLang.en?.[key];
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn(`[i18n] Missing "${language}" translation for key: ${key}`);
+      if (typeof window !== "undefined") {
+        // Track missing keys for later audit: `window.__missingI18n`
+        // @ts-expect-error - dev-only global
+        const set: Set<string> = (window.__missingI18n ||= new Set());
+        set.add(`${language}:${key}`);
+      }
     }
-    return value;
+    if (language === "en") return englishValue || key;
+    // For non-English languages, prefer the localized "content in translation" notice
+    // rather than leaking English into an RTL layout.
+    if (rtlLanguages.includes(language)) return MISSING_TRANSLATION_AR;
+    return englishValue || key;
   };
 
   return (
