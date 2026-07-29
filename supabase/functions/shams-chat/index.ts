@@ -268,9 +268,9 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "google/gemini-3.6-flash",
         messages: [
-          { role: "system", content: SHAMS_SYSTEM_PROMPT + languageContext },
+          { role: "system", content: SHAMS_SYSTEM_PROMPT + languageContext + retrievalContext },
           ...messages,
         ],
         stream: true,
