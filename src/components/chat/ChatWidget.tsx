@@ -7,6 +7,7 @@ import { ChatInput, ChatInputRef } from './ChatInput';
 import { ChatQuickReplies } from './ChatQuickReplies';
 import { ChatSafetyFooter } from './ChatSafetyFooter';
 import { useChatSession } from '@/hooks/useChatSession';
+import suggestions from '../../../content/chatbot-suggestions.json';
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
