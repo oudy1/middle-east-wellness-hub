@@ -60,36 +60,11 @@ const ChatWidget: React.FC = () => {
     document.body.style.overflow = '';
   }, []);
 
-  // Bilingual welcome message
-  const welcomeMessage = 
-    "Hi, I'm the SHAMS Guide. I can help you find resources, browse our pages, or connect with our team.\n\nمرحباً، أنا مساعد SHAMS. أقدر أساعدك تلاقي مصادر، توصل لصفحات الموقع، أو تتواصل مع فريقنا.";
+  const welcomeMessage = language === 'ar'
+    ? suggestions.greeting.ar
+    : suggestions.greeting.en;
 
-  const quickReplies = [
-    { 
-      label: language === 'ar' ? 'ابحث عن الموارد الصحية بالعربية' : 'Find Arabic health resources',
-      message: language === 'ar' ? 'ابحث عن الموارد الصحية بالعربية' : 'Find Arabic health resources'
-    },
-    { 
-      label: language === 'ar' ? 'شاهد تسجيل ندوة' : 'Watch a webinar recording',
-      message: language === 'ar' ? 'شاهد تسجيل ندوة' : 'Watch a webinar recording'
-    },
-    { 
-      label: language === 'ar' ? 'تصفّح الدراسات البحثية' : 'Browse research studies',
-      message: language === 'ar' ? 'تصفّح الدراسات البحثية' : 'Browse research studies'
-    },
-    { 
-      label: language === 'ar' ? 'ابحث عن مقدم رعاية صحية' : 'Find a healthcare worker',
-      message: language === 'ar' ? 'ابحث عن مقدم رعاية صحية' : 'Find a healthcare worker'
-    },
-    { 
-      label: language === 'ar' ? 'اطّلع على برامج شمس' : 'View SHAMS programs',
-      message: language === 'ar' ? 'اطّلع على برامج شمس' : 'View SHAMS programs'
-    },
-    { 
-      label: language === 'ar' ? 'تواصل مع شمس' : 'Contact SHAMS',
-      message: language === 'ar' ? 'تواصل مع شمس' : 'Contact SHAMS'
-    },
-  ];
+  const quickReplies = (language === 'ar' ? suggestions.quickReplies.ar : suggestions.quickReplies.en);
 
   const handleQuickReply = (message: string) => {
     sendMessage(message);
