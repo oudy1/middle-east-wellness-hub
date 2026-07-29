@@ -41,9 +41,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'السكري',
     keywords_en: ['diabetes', 'diabetic', 'blood sugar', 'glucose', 'insulin', 'type 1', 'type 2', 'A1C'],
     keywords_ar: ['سكري', 'سكر', 'دم', 'جلوكوز', 'أنسولين'],
-    url: '/diseases',
-    category: 'topics',
-    anchor: 'diabetes'
+    url: '/services#diabetes-education',
+    category: 'topics'
   },
   {
     id: 'vaccines',
@@ -51,9 +50,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'اللقاحات',
     keywords_en: ['vaccine', 'vaccination', 'immunization', 'flu shot', 'COVID', 'booster', 'shots'],
     keywords_ar: ['لقاح', 'تطعيم', 'تحصين', 'إنفلونزا', 'كوفيد', 'جرعة'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'vaccines'
+    url: '/services#vaccines-immunization',
+    category: 'topics'
   },
   {
     id: 'smoking-cessation',
@@ -66,14 +64,22 @@ export const searchableResources: SearchableResource[] = [
     anchor: 'smoking'
   },
   {
+    id: 'patient-rights',
+    title_en: 'Patient Rights',
+    title_ar: 'حقوق المريض',
+    keywords_en: ['rights', 'ohip', 'insurance', 'coverage', 'advocacy', 'ontario health', 'athome'],
+    keywords_ar: ['حقوق', 'المريض', 'تأمين', 'أوهيب'],
+    url: '/services#patient-rights',
+    category: 'services'
+  },
+  {
     id: 'newcomer-navigation',
     title_en: 'Newcomer System Navigation',
     title_ar: 'دليل النظام الصحي للقادمين الجدد',
-    keywords_en: ['newcomer', 'immigrant', 'refugee', 'new to Canada', 'navigation', 'system', 'healthcare system', 'OHIP', 'health card'],
+    keywords_en: ['newcomer', 'immigrant', 'refugee', 'new to Canada', 'navigation', 'system', 'healthcare system', 'OHIP', 'health card', 'IFHP'],
     keywords_ar: ['قادم جديد', 'مهاجر', 'لاجئ', 'كندا', 'نظام', 'صحي', 'بطاقة صحية'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'newcomer'
+    url: '/services#community-services',
+    category: 'topics'
   },
 
   // Healthcare Workers
@@ -83,16 +89,16 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'ابحث عن مقدمي الرعاية الصحية',
     keywords_en: ['doctor', 'physician', 'family doctor', 'therapist', 'clinic', 'Arabic doctor', 'healthcare worker', 'nurse', 'specialist', 'dentist', 'find', 'search'],
     keywords_ar: ['طبيب', 'دكتور', 'عيادة', 'معالج', 'طبيب عائلة', 'طبيب عربي', 'ممرض', 'أخصائي', 'طبيب أسنان', 'بحث'],
-    url: '/physician-directory',
+    url: '/find-healthcare-workers',
     category: 'healthcare'
   },
   {
     id: 'family-physician',
     title_en: 'Family Physician Directory',
     title_ar: 'دليل أطباء العائلة',
-    keywords_en: ['family physician', 'family doctor', 'GP', 'general practitioner', 'primary care'],
-    keywords_ar: ['طبيب عائلة', 'طبيب عام', 'رعاية أولية'],
-    url: '/physicians/family',
+    keywords_en: ['family physician', 'family doctor', 'GP', 'general practitioner', 'primary care', 'kitchener', 'toronto', 'ottawa', 'mississauga', 'london', 'city'],
+    keywords_ar: ['طبيب عائلة', 'طبيب عام', 'رعاية أولية', 'مدينة'],
+    url: '/find-healthcare-workers#family-physicians',
     category: 'healthcare'
   },
 
