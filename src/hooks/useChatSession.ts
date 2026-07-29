@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
+import { searchKnowledge } from '@/lib/knowledgeIndex';
 
 interface Message {
   id: string;
