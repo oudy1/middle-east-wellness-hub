@@ -138,14 +138,21 @@ interface ChatMessage {
   content: string;
 }
 
-function validatePayload(data: unknown): { messages: ChatMessage[]; language: string } | null {
+interface ContextItem {
+  title?: string;
+  description?: string;
+  category?: string;
+  url?: string;
+}
+
+function validatePayload(data: unknown): { messages: ChatMessage[]; language: string; context: ContextItem[] } | null {
   if (!data || typeof data !== 'object') return null;
-  
+
   const payload = data as Record<string, unknown>;
-  
+
   if (!Array.isArray(payload.messages)) return null;
   if (payload.messages.length === 0 || payload.messages.length > 50) return null;
-  
+
   for (const msg of payload.messages) {
     if (!msg || typeof msg !== 'object') return null;
     const m = msg as Record<string, unknown>;
@@ -153,14 +160,31 @@ function validatePayload(data: unknown): { messages: ChatMessage[]; language: st
     if (typeof m.content !== 'string') return null;
     if (m.content.length > 10000) return null;
   }
-  
-  const language = typeof payload.language === 'string' && ['en', 'ar'].includes(payload.language) 
-    ? payload.language 
+
+  const language = typeof payload.language === 'string' && ['en', 'ar'].includes(payload.language)
+    ? payload.language
     : 'en';
-  
-  return { 
-    messages: payload.messages as ChatMessage[], 
-    language 
+
+  let context: ContextItem[] = [];
+  if (Array.isArray(payload.context)) {
+    context = (payload.context as unknown[])
+      .slice(0, 8)
+      .filter((c) => c && typeof c === 'object')
+      .map((c) => {
+        const obj = c as Record<string, unknown>;
+        return {
+          title: typeof obj.title === 'string' ? obj.title.slice(0, 200) : undefined,
+          description: typeof obj.description === 'string' ? obj.description.slice(0, 400) : undefined,
+          category: typeof obj.category === 'string' ? obj.category.slice(0, 50) : undefined,
+          url: typeof obj.url === 'string' && obj.url.length < 300 ? obj.url : undefined,
+        };
+      });
+  }
+
+  return {
+    messages: payload.messages as ChatMessage[],
+    language,
+    context,
   };
 }
 
