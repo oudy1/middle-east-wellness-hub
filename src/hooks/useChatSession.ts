@@ -37,6 +37,15 @@ export const useChatSession = () => {
         content: m.content
       }));
 
+      // Local retrieval: send top matching knowledge items as grounding context
+      const contextResults = searchKnowledge(userMessage.content, language as 'en' | 'ar', 5);
+      const context = contextResults.map(r => ({
+        title: language === 'ar' ? r.item.title_ar : r.item.title_en,
+        description: language === 'ar' ? r.item.description_ar : r.item.description_en,
+        category: r.item.category,
+        url: r.item.url,
+      }));
+
       // Stream response from edge function
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/shams-chat`,
@@ -46,7 +55,7 @@ export const useChatSession = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ messages: apiMessages, language }),
+          body: JSON.stringify({ messages: apiMessages, language, context }),
         }
       );
 
