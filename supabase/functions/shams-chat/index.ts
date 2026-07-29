@@ -240,18 +240,26 @@ serve(async (req) => {
       );
     }
     
-    const { messages, language } = validated;
+    const { messages, language, context } = validated;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    
+
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const languageContext = language === 'ar' 
-      ? "\n\nThe user's interface is set to Arabic. Default to Arabic responses unless they write in English."
-      : "\n\nThe user's interface is set to English. Default to English responses unless they write in Arabic.";
+    const languageContext = language === 'ar'
+      ? "\n\nThe user's interface is Arabic. Respond in Arabic with RTL-friendly text."
+      : "\n\nThe user's interface is English. Respond in English unless the user writes in Arabic.";
 
-    console.log(`Processing chat request from ${clientIp} with ${messages.length} messages, language: ${language}`);
+    let retrievalContext = "";
+    if (context.length > 0) {
+      retrievalContext = "\n\n## CONTEXT (grounded content from the SHAMS site, prefer these when relevant)\n" +
+        context.map((c, i) =>
+          `${i + 1}. ${c.title ?? ''} [${c.category ?? ''}] -> ${c.url ?? ''}\n   ${c.description ?? ''}`
+        ).join("\n");
+    }
+
+    console.log(`Processing chat request from ${clientIp}: ${messages.length} msgs, lang=${language}, ctx=${context.length}`);
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
