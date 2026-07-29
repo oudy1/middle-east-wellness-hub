@@ -1,68 +1,57 @@
+## SHAMS Assistant & Search Upgrade Plan
 
-# Translation System Audit & Fix
+This is a large upgrade. I'll ship it in ordered phases so you can review after each. Each phase is self-contained and testable.
 
-Goal: Every user-visible string translates when switching EN ↔ AR, with correct RTL, consistent terminology, and a clear fallback for missing keys. No redesign.
+### Phase 1 — Unified Content Index (foundation)
+Build a single searchable knowledge layer the chatbot and search bar both consume.
 
-## Approach
+- Add `content/chatbot-routes.json` with the approved route map from your spec.
+- Add `content/chatbot-suggestions.json` (quick replies EN/AR + follow-up prompts).
+- Add `src/lib/knowledgeIndex.ts` that aggregates existing JSON (`studies.json`, `webinars.json`, `programs.json`, `researchers.json`, `faq.json`, MedlinePlus items, healthcare workers, family physicians, patient rights anchors, community services) into one normalized array:
+  ```ts
+  { id, title_en, title_ar, description_en, description_ar, category, tags[], keywords[], language, url, source, type }
+  ```
+- Keep sources file-based (no new DB tables) — matches your CMS-lite pattern in `content/`.
 
-Fix in **priority tiers**, ship each tier as a discrete pass so you can review before moving on. This avoids one massive change and keeps risk low.
+### Phase 2 — Smart Search Bar
+Upgrade `ResourceFinder` to use the unified index.
 
----
+- Replace `resourceFinderData.ts` scoring with a fuzzy + synonym + Arabic-aware matcher (typo tolerance via lightweight Levenshtein, synonym map for medical terms, city matching).
+- Grouped results: Resources / Programs / Studies / Webinars / Healthcare Workers / Pages.
+- Result cards: title, short description, category chip, Arabic badge when applicable, "View" button.
+- Header stays as compact search icon → overlay (existing pattern preserved).
+- Empty state: "No results found" + contact CTA.
 
-## Tier 1 — Foundation (safe, immediate)
+### Phase 3 — Chatbot Retrieval + Personality
+Rewire `supabase/functions/shams-chat` for content-grounded answers.
 
-1. **Standardize glossary**: add a `glossary.*` namespace to `content/translations/en.json` and `ar.json` with your exact required translations (Home → الرئيسية, About → من نحن, Learn More → اعرف المزيد, Submit → إرسال, etc. — all 25 terms you listed). Any component using these labels will read from the glossary so wording stays identical everywhere.
-2. **Fix the missing-key fallback** in `src/contexts/LanguageContext.tsx`:
-   - When `language === "ar"` and a key resolves to English (or is missing), return `المحتوى قيد الترجمة` instead of leaking the raw key/English.
-   - In dev only, `console.warn` the missing key and log to a `window.__missingI18n` set so we can enumerate gaps.
-3. **RTL font/direction sanity**: verify `<html dir>` and `font-cairo` toggling still works; confirm no hardcoded `text-left`/`ml-*`/`mr-*` in header, drawer, footer, chatbot (replace with `text-start`/`ms-*`/`me-*` where they break RTL).
+- Client sends user query + language; edge function performs local retrieval over a static bundled snapshot of the knowledge index (bundled at deploy) and injects top 5 matches into the system prompt as grounding context.
+- New system prompt: warm, short, culturally respectful; enforces approved-route linking only; single-question follow-ups; medical safety escalation; fallback to `infoprojectshams@gmail.com`.
+- Model: keep `google/gemini-3.6-flash` (fast, bilingual, multimodal) via Lovable AI Gateway. No OpenAI key needed — Lovable AI covers it and keeps the key server-side per your spec.
+- Rate limiting: simple per-session-id token bucket in the edge function (in-memory + short-lived, ~20 msgs/min).
+- Fallback: on model failure, return the deterministic "safest next step is to contact SHAMS" message with contact email.
 
-## Tier 2 — Untranslated files
+### Phase 4 — Chat UI polish
+- New default greeting (EN/AR) matching your spec.
+- Quick-reply buttons rendered from `chatbot-suggestions.json` (6 EN, 6 AR).
+- Response rendering: markdown links + action button chips parsed from a lightweight `[[action:route|Label]]` convention the model emits.
+- Reset on reopen already in place (`useChatSession` starts fresh) — verify + document.
+- Mobile: ensure chat window uses `100dvh` safe-area, bubble avoids bottom nav, quick replies wrap.
 
-Convert these 4 pages/forms (the only ones with zero i18n hookup) to use `useLanguage` + `t()`:
-- `src/pages/Resources.tsx`
-- `src/pages/MentorshipBooking.tsx`
-- `src/pages/PostOpportunity.tsx`
-- `src/components/PhysicianApplicationForm.tsx`, `PostOpportunityForm.tsx`, `TopicRequestForm.tsx` (form labels, placeholders, errors, success toasts)
+### Phase 5 — QA
+- Manual pass through your 11 test queries.
+- Playwright smoke test: greeting appears, quick reply click sends message, Arabic toggle flips RTL, search overlay opens/closes, grouped results render.
+- Confirm no broken routes (all bot links validated against `chatbot-routes.json`).
 
-Skip admin-only surfaces (`AdminLogin`, `MetricsDebug*`) — not public.
+### Technical notes
+- No new database tables — content stays in `content/*.json`, matching existing architecture.
+- Semantic search is done via keyword+synonym+fuzzy scoring locally, not embeddings, to keep it fast, offline, and free. If you later want true embeddings I can add pgvector in a follow-up.
+- Approved-route enforcement: edge function post-processes model output and strips/rewrites any link not in the route map.
+- Bilingual: all new strings routed through `LanguageContext`; missing content shows `المحتوى قيد الترجمة`.
 
-## Tier 3 — Leak sweep across translated files
+### Out of scope (won't touch)
+- Website visual redesign
+- Existing pages beyond wiring anchors already listed in the route map
+- Auth, admin dashboards, DB migrations
 
-Automated scan + manual fix in the 54 files that already use `useLanguage`:
-- Ripgrep for JSX text nodes and common attributes (`placeholder=`, `aria-label=`, `title=`, `alt=`) containing English letters that are NOT wrapped in `t()` or a `language === "ar" ? ... : ...` ternary.
-- Fix by either: (a) adding a key to `en.json`/`ar.json` and swapping to `t("…")`, or (b) extending the inline ternary if it's already bilingual but missing one branch.
-- Priority order matches your QA checklist: Home → Header/dropdowns → Mobile drawer → Services/Resources → Research → Recordings → Healthcare Workers → Chatbot → Footer.
-
-## Tier 4 — Dynamic content sources
-
-Content JSON files (`content/faq.json`, `glossary.json`, `navigation.json`, `studies.json`, `webinars.json`) and data modules (`src/lib/physicianData.ts`, `resourceFinderData.ts`, `studyData.ts`): verify each item has both `titleEn/titleAr` (or equivalent) fields and that the consuming component picks the right one based on `language`. Where an AR field is empty, render the fallback string instead of leaking English.
-
-## Tier 5 — QA pass
-
-Run a scripted Playwright pass that:
-1. Loads each route from your checklist in AR mode.
-2. Confirms `dir="rtl"` and font-cairo present.
-3. Extracts visible text and flags any Latin-only substrings longer than N chars that aren't in a whitelist (emails, URLs, brand names like SHAMS/MedlinePlus/HealthLinkBC, medical acronyms).
-4. Opens each header dropdown + mobile drawer + chatbot; screenshots for visual confirmation of no overflow/cutoff.
-5. Reports a per-page diff of remaining English leaks.
-
-## Deliverables per tier
-
-- Tier 1–2: code changes + updated JSON files.
-- Tier 3: PR-style summary listing every key added and every string replaced.
-- Tier 4: table of dynamic content files with AR coverage status.
-- Tier 5: Playwright report saved to `/tmp/browser/i18n-audit/report.md` with screenshots.
-
-## Technical notes
-
-- Fallback string constant `MISSING_AR = "المحتوى قيد الترجمة"` exported from `LanguageContext` so anything (including data files) can use it consistently.
-- Keep names, emails, URLs, `SHAMS`, `MedlinePlus`, `HealthLinkBC`, ICD/CPT codes in English in both modes — whitelist these in the QA scanner.
-- No visual redesign: RTL fixes stay limited to logical properties (`ms-*`, `me-*`, `text-start`, `text-end`), no layout restructure.
-- `content/translations/{ku,fa,tr}.json` are out of scope for this pass unless you say otherwise; fallback rule still applies to them so they won't regress.
-
-## Rough size
-
-~30–60 new translation keys, ~15–25 files touched in Tier 3, ~5 files in Tier 2. Tier 5 is the honest verification — expect a second small cleanup pass after the report.
-
-**Please confirm you want me to proceed tier-by-tier (I'll ship Tier 1+2 first, then pause for review), or if you want everything in one pass.**
+Approve and I'll start with Phase 1.

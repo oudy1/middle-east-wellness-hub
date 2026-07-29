@@ -1,0 +1,32 @@
+{
+  "greeting": {
+    "en": "Hi, I'm the SHAMS assistant. What are you looking for today, resources, a webinar, a healthcare worker, a research study, or a program?",
+    "ar": "مرحباً، أنا مساعد شمس. ماذا تبحث عنه اليوم، موارد، ندوة، مقدم رعاية صحية، دراسة بحثية، أم برنامج؟"
+  },
+  "quickReplies": {
+    "en": [
+      { "label": "Find Arabic Resources", "message": "Show me Arabic health resources" },
+      { "label": "Watch a Webinar", "message": "I want to watch a webinar" },
+      { "label": "Browse Research Studies", "message": "Show me research studies I can join" },
+      { "label": "Find a Healthcare Worker", "message": "Help me find a healthcare worker" },
+      { "label": "Explore Programs", "message": "What programs does SHAMS offer?" },
+      { "label": "Contact SHAMS", "message": "How can I contact SHAMS?" }
+    ],
+    "ar": [
+      { "label": "الموارد العربية", "message": "أرني الموارد الصحية بالعربية" },
+      { "label": "شاهد ندوة", "message": "أريد مشاهدة ندوة" },
+      { "label": "الدراسات البحثية", "message": "أرني الدراسات البحثية" },
+      { "label": "ابحث عن مقدم رعاية صحية", "message": "ساعدني في إيجاد مقدم رعاية صحية" },
+      { "label": "البرامج", "message": "ما هي برامج شمس؟" },
+      { "label": "تواصل مع شمس", "message": "كيف أتواصل مع شمس؟" }
+    ]
+  },
+  "fallback": {
+    "en": "I don't want to guess. The safest next step is to contact SHAMS at infoprojectshams@gmail.com.",
+    "ar": "لا أريد أن أعطيك معلومة غير مؤكدة. الأفضل التواصل مع شمس مباشرة على infoprojectshams@gmail.com."
+  },
+  "medicalSafety": {
+    "en": "I can share general resources, but I can't diagnose or give medical advice. If this is urgent or someone is in danger, call 911 or go to the nearest emergency department. For mental health support in Canada, call or text 988.",
+    "ar": "يمكنني مشاركة موارد عامة، لكن لا يمكنني تشخيص الحالة أو تقديم نصيحة طبية مباشرة. إذا كانت الحالة طارئة أو يوجد خطر فوري، اتصل بـ 911 أو توجّه إلى أقرب قسم طوارئ. للدعم النفسي في كندا، اتصل أو أرسل 988."
+  }
+}

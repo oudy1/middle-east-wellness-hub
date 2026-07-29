@@ -41,9 +41,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'السكري',
     keywords_en: ['diabetes', 'diabetic', 'blood sugar', 'glucose', 'insulin', 'type 1', 'type 2', 'A1C'],
     keywords_ar: ['سكري', 'سكر', 'دم', 'جلوكوز', 'أنسولين'],
-    url: '/diseases',
-    category: 'topics',
-    anchor: 'diabetes'
+    url: '/services#diabetes-education',
+    category: 'topics'
   },
   {
     id: 'vaccines',
@@ -51,9 +50,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'اللقاحات',
     keywords_en: ['vaccine', 'vaccination', 'immunization', 'flu shot', 'COVID', 'booster', 'shots'],
     keywords_ar: ['لقاح', 'تطعيم', 'تحصين', 'إنفلونزا', 'كوفيد', 'جرعة'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'vaccines'
+    url: '/services#vaccines-immunization',
+    category: 'topics'
   },
   {
     id: 'smoking-cessation',
@@ -66,14 +64,22 @@ export const searchableResources: SearchableResource[] = [
     anchor: 'smoking'
   },
   {
+    id: 'patient-rights',
+    title_en: 'Patient Rights',
+    title_ar: 'حقوق المريض',
+    keywords_en: ['rights', 'ohip', 'insurance', 'coverage', 'advocacy', 'ontario health', 'athome'],
+    keywords_ar: ['حقوق', 'المريض', 'تأمين', 'أوهيب'],
+    url: '/services#patient-rights',
+    category: 'services'
+  },
+  {
     id: 'newcomer-navigation',
     title_en: 'Newcomer System Navigation',
     title_ar: 'دليل النظام الصحي للقادمين الجدد',
-    keywords_en: ['newcomer', 'immigrant', 'refugee', 'new to Canada', 'navigation', 'system', 'healthcare system', 'OHIP', 'health card'],
+    keywords_en: ['newcomer', 'immigrant', 'refugee', 'new to Canada', 'navigation', 'system', 'healthcare system', 'OHIP', 'health card', 'IFHP'],
     keywords_ar: ['قادم جديد', 'مهاجر', 'لاجئ', 'كندا', 'نظام', 'صحي', 'بطاقة صحية'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'newcomer'
+    url: '/services#community-services',
+    category: 'topics'
   },
 
   // Healthcare Workers
@@ -83,16 +89,16 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'ابحث عن مقدمي الرعاية الصحية',
     keywords_en: ['doctor', 'physician', 'family doctor', 'therapist', 'clinic', 'Arabic doctor', 'healthcare worker', 'nurse', 'specialist', 'dentist', 'find', 'search'],
     keywords_ar: ['طبيب', 'دكتور', 'عيادة', 'معالج', 'طبيب عائلة', 'طبيب عربي', 'ممرض', 'أخصائي', 'طبيب أسنان', 'بحث'],
-    url: '/physician-directory',
+    url: '/find-healthcare-workers',
     category: 'healthcare'
   },
   {
     id: 'family-physician',
     title_en: 'Family Physician Directory',
     title_ar: 'دليل أطباء العائلة',
-    keywords_en: ['family physician', 'family doctor', 'GP', 'general practitioner', 'primary care'],
-    keywords_ar: ['طبيب عائلة', 'طبيب عام', 'رعاية أولية'],
-    url: '/physicians/family',
+    keywords_en: ['family physician', 'family doctor', 'GP', 'general practitioner', 'primary care', 'kitchener', 'toronto', 'ottawa', 'mississauga', 'london', 'city'],
+    keywords_ar: ['طبيب عائلة', 'طبيب عام', 'رعاية أولية', 'مدينة'],
+    url: '/find-healthcare-workers#family-physicians',
     category: 'healthcare'
   },
 
@@ -198,26 +204,70 @@ export const categoryLabels = {
   forms: { en: 'Forms', ar: 'النماذج' }
 };
 
-// Search function
+// Synonym map for smarter matching
+const SYNONYMS: Record<string, string[]> = {
+  doctor: ['physician', 'gp', 'clinician', 'family doctor'],
+  therapist: ['counselor', 'counsellor', 'psychologist', 'psychiatrist'],
+  heart: ['cardio', 'cardiac', 'cardiovascular', 'ekg', 'ecg'],
+  mental: ['anxiety', 'depression', 'stress', 'psychology'],
+  webinar: ['recording', 'video', 'seminar', 'workshop'],
+  study: ['research', 'trial', 'survey'],
+  opportunity: ['volunteer', 'role', 'opportunities'],
+  refugee: ['newcomer', 'immigrant', 'ifhp'],
+  rights: ['ohip', 'insurance', 'coverage'],
+};
+
+function editDist(a: string, b: string): number {
+  if (Math.abs(a.length - b.length) > 2) return 3;
+  const dp: number[] = Array(b.length + 1).fill(0).map((_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = i - 1;
+    dp[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = dp[j];
+      dp[j] = a[i - 1] === b[j - 1] ? prev : Math.min(prev, dp[j], dp[j - 1]) + 1;
+      prev = tmp;
+    }
+  }
+  return dp[b.length];
+}
+
+function expandQuery(q: string): string[] {
+  const tokens = q.toLowerCase().split(/\s+/).filter(t => t.length > 1);
+  const out = new Set<string>(tokens);
+  for (const t of tokens) {
+    for (const [key, syns] of Object.entries(SYNONYMS)) {
+      if (t === key || syns.includes(t)) {
+        out.add(key);
+        syns.forEach(s => out.add(s));
+      }
+    }
+  }
+  return Array.from(out);
+}
+
+// Search function with synonym + fuzzy support
 export function searchResources(query: string, language: 'en' | 'ar'): SearchableResource[] {
   if (!query.trim()) return [];
-  
+
   const normalizedQuery = query.toLowerCase().trim();
-  
+  const tokens = expandQuery(normalizedQuery);
+
   return searchableResources.filter(resource => {
-    const title = language === 'ar' ? resource.title_ar : resource.title_en;
-    const keywords = language === 'ar' ? resource.keywords_ar : resource.keywords_en;
-    
-    // Check title match
-    if (title.toLowerCase().includes(normalizedQuery)) return true;
-    
-    // Check keywords match
-    if (keywords.some(keyword => keyword.toLowerCase().includes(normalizedQuery))) return true;
-    
-    // Also check the other language keywords for flexibility
-    const otherKeywords = language === 'ar' ? resource.keywords_en : resource.keywords_ar;
-    if (otherKeywords.some(keyword => keyword.toLowerCase().includes(normalizedQuery))) return true;
-    
+    const title = (language === 'ar' ? resource.title_ar : resource.title_en).toLowerCase();
+    const allKeywords = [...resource.keywords_en, ...resource.keywords_ar].map(k => k.toLowerCase());
+
+    // Direct substring match on title or keywords
+    if (title.includes(normalizedQuery)) return true;
+    if (allKeywords.some(k => k.includes(normalizedQuery) || normalizedQuery.includes(k))) return true;
+
+    // Token / synonym match
+    for (const t of tokens) {
+      if (title.includes(t)) return true;
+      if (allKeywords.some(k => k.includes(t))) return true;
+      // Fuzzy match for typos on longer tokens
+      if (t.length > 4 && allKeywords.some(k => k.length > 3 && editDist(t, k) <= 1)) return true;
+    }
     return false;
   });
 }
