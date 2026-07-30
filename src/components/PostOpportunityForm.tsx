@@ -14,9 +14,11 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Upload } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import DOMPurify from "dompurify";
 
 const PostOpportunityForm = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     form: "postOpportunity",
     firstName: "",
@@ -89,21 +91,13 @@ const PostOpportunityForm = () => {
           !validateInput(value, field === "projectDescription" ? 2000 : 200))
       ) {
         toast({
-          title: "Invalid input",
-          description: `Please check the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`,
+          title: t("form.invalidInput"),
+          description: t("form.invalidInputDesc"),
           variant: "destructive",
         });
         return;
       }
     }
-
-    toast({
-      title: "Research Opportunity Submitted",
-      description:
-        "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
-    });
-
-    console.log(formData);
 
     try {
       if (file) {
@@ -134,8 +128,8 @@ const PostOpportunityForm = () => {
     });
     setFile(null);
         toast({
-        title: "Submitting your application...",
-        description: "Please wait while we process your submission.",
+        title: t("form.submittingTitle"),
+        description: t("form.submittingDesc"),
       });
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbzxUiC1xIfECzNeVmuUsxJapZWHNJ0Gz5XJSMJFz0YpRKfZqQhDcUu4pZlRVrL4vXDg/exec",
@@ -150,18 +144,16 @@ const PostOpportunityForm = () => {
       );
 
       toast({
-        title: "Research Opportunity Submitted",
-        description:
-          "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
+        title: t("opportunityForm.successTitle"),
+        description: t("opportunityForm.successDesc"),
       });
 
       setSubmitted(true);
     } catch (error) {
       console.error("Failed to submit:", error);
       toast({
-        title: "Submission failed",
-        description:
-          "There was an error submitting your opportunity. Try again later.",
+        title: t("form.submissionFailed"),
+        description: t("opportunityForm.failureDesc"),
         variant: "destructive",
       });
     }
@@ -198,10 +190,14 @@ const PostOpportunityForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
+    if (!selectedFile) {
+      setFile(null);
+      return;
+    }
     if (selectedFile.size >= 10 * 1024 * 1024) {
       toast({
-        title: "Submission failed",
-        description: "File size too big!",
+        title: t("form.submissionFailed"),
+        description: t("opportunityForm.fileTooBigToast"),
         variant: "destructive",
       });
     }
@@ -212,27 +208,25 @@ const PostOpportunityForm = () => {
     <Card className="w-full max-w-4xl mx-auto">
             {submitted ? (
         <CardContent className="flex flex-col items-center justify-center py-16">
-          <h2 className="text-3xl font-bold text-healthDarkBlue mb-4 text-center">Thank you for submitting this form!</h2>
-          <p className="text-lg text-gray-700 text-center">We will get back to you shortly.</p>
+          <h2 className="text-3xl font-bold text-healthDarkBlue mb-4 text-center">{t("opportunityForm.thankYou")}</h2>
+          <p className="text-lg text-gray-700 text-center">{t("opportunityForm.backSoon")}</p>
         </CardContent>
       ) : (
         <>
               <CardHeader>
         <CardTitle className="text-3xl font-bold text-center text-healthDarkBlue">
-          Share a Research Opportunity
+          {t("opportunityForm.title")}
         </CardTitle>
         <p className="text-center text-gray-600 mt-4">
-          Are you a researcher looking to recruit students? Submit your research
-          opportunity and connect with motivated Arab and Middle Eastern
-          students across Canada who are eager to get involved.
+          {t("opportunityForm.subtitle")}
         </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Section */}
           <div className="space-y-2">
-            <Label className="text-base font-medium">
-              Name <span className="text-red-500">*</span>
+            <Label className="text-base font-medium text-start block">
+              {t("opportunityForm.name")} <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -241,7 +235,7 @@ const PostOpportunityForm = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  placeholder="First Name"
+                  placeholder={t("contact.firstName")}
                 />
               </div>
               <div>
@@ -250,7 +244,7 @@ const PostOpportunityForm = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  placeholder="Last Name"
+                  placeholder={t("contact.lastName")}
                 />
               </div>
             </div>
@@ -258,22 +252,24 @@ const PostOpportunityForm = () => {
 
           {/* Email */}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-base font-medium">
-              Email <span className="text-red-500">*</span>
+            <Label htmlFor="email" className="text-base font-medium text-start block">
+              {t("contact.email")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="email"
               name="email"
               type="email"
+              dir="ltr"
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="your.email@example.com"
+              placeholder={t("opportunityForm.emailPlaceholder")}
+              className="text-start"
             />
           </div>
 
           {/* Newsletter Signup */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <Checkbox
               id="newsletter"
               name="newsletter"
@@ -286,29 +282,31 @@ const PostOpportunityForm = () => {
               }
             />
             <Label htmlFor="newsletter" className="text-sm">
-              Sign up for news and updates
+              {t("form.newsletter")}
             </Label>
           </div>
 
           {/* Phone */}
           <div className="space-y-2">
-            <Label htmlFor="phone" className="text-base font-medium">
-              Phone
+            <Label htmlFor="phone" className="text-base font-medium text-start block">
+              {t("form.phone")}
             </Label>
             <Input
               id="phone"
               name="phone"
               type="tel"
+              dir="ltr"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Your phone number"
+              placeholder={t("opportunityForm.phonePlaceholder")}
+              className="text-start"
             />
           </div>
 
           {/* Institution */}
           <div className="space-y-2">
-            <Label htmlFor="institution" className="text-base font-medium">
-              Institution / Affiliation <span className="text-red-500">*</span>
+            <Label htmlFor="institution" className="text-base font-medium text-start block">
+              {t("opportunityForm.institution")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="institution"
@@ -316,14 +314,14 @@ const PostOpportunityForm = () => {
               value={formData.institution}
               onChange={handleChange}
               required
-              placeholder="University, hospital, or research center"
+              placeholder={t("opportunityForm.institutionPlaceholder")}
             />
           </div>
 
           {/* Project Title */}
           <div className="space-y-2">
-            <Label htmlFor="projectTitle" className="text-base font-medium">
-              Project Title <span className="text-red-500">*</span>
+            <Label htmlFor="projectTitle" className="text-base font-medium text-start block">
+              {t("opportunityForm.projectTitle")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="projectTitle"
@@ -331,7 +329,7 @@ const PostOpportunityForm = () => {
               value={formData.projectTitle}
               onChange={handleChange}
               required
-              placeholder="Title of your research project"
+              placeholder={t("opportunityForm.projectTitlePlaceholder")}
             />
           </div>
 
@@ -339,9 +337,9 @@ const PostOpportunityForm = () => {
           <div className="space-y-2">
             <Label
               htmlFor="projectDescription"
-              className="text-base font-medium"
+              className="text-base font-medium text-start block"
             >
-              Project Description <span className="text-red-500">*</span>
+              {t("opportunityForm.projectDescription")} <span className="text-red-500">*</span>
             </Label>
             <Textarea
               id="projectDescription"
@@ -349,7 +347,7 @@ const PostOpportunityForm = () => {
               value={formData.projectDescription}
               onChange={handleChange}
               required
-              placeholder="A short paragraph about the project and goals"
+              placeholder={t("opportunityForm.projectDescriptionPlaceholder")}
               rows={4}
             />
           </div>
@@ -358,23 +356,23 @@ const PostOpportunityForm = () => {
           <div className="space-y-2">
             <Label
               htmlFor="preferredBackground"
-              className="text-base font-medium"
+              className="text-base font-medium text-start block"
             >
-              Preferred Background
+              {t("opportunityForm.preferredBackground")}
             </Label>
             <Input
               id="preferredBackground"
               name="preferredBackground"
               value={formData.preferredBackground}
               onChange={handleChange}
-              placeholder='e.g., "Public Health, Psychology, Arabic-speaking preferred"'
+              placeholder={t("opportunityForm.preferredBackgroundPlaceholder")}
             />
           </div>
 
           {/* Deadline */}
           <div className="space-y-2">
-            <Label htmlFor="deadline" className="text-base font-medium">
-              Deadline to Apply <span className="text-red-500">*</span>
+            <Label htmlFor="deadline" className="text-base font-medium text-start block">
+              {t("opportunityForm.deadline")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="deadline"
@@ -383,13 +381,14 @@ const PostOpportunityForm = () => {
               value={formData.deadline}
               onChange={handleChange}
               required
+              className="text-start"
             />
           </div>
 
           {/* Is Paid */}
           <div className="space-y-2">
-            <Label className="text-base font-medium">
-              Is this a paid opportunity?{" "}
+            <Label className="text-base font-medium text-start block">
+              {t("opportunityForm.isPaid")}{" "}
               <span className="text-red-500">*</span>
             </Label>
             <Select
@@ -398,17 +397,17 @@ const PostOpportunityForm = () => {
               required
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select an option" />
+                <SelectValue placeholder={t("form.selectOption")} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="yes">
-                  Yes, this is a paid opportunity
+                  {t("opportunityForm.paid.yes")}
                 </SelectItem>
                 <SelectItem value="no">
-                  No, this is an unpaid/volunteer opportunity
+                  {t("opportunityForm.paid.no")}
                 </SelectItem>
                 <SelectItem value="stipend">
-                  Stipend/partial compensation provided
+                  {t("opportunityForm.paid.stipend")}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -416,10 +415,10 @@ const PostOpportunityForm = () => {
 
           {/* File Upload */}
           <div className="space-y-2">
-            <Label htmlFor="file" className="text-base font-medium">
-              Upload a Flyer or PDF
+            <Label htmlFor="file" className="text-base font-medium text-start block">
+              {t("opportunityForm.fileUpload")}
             </Label>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               <Input
                 id="file"
                 type="file"
@@ -430,26 +429,26 @@ const PostOpportunityForm = () => {
               <Upload className="h-5 w-5 text-gray-400" />
             </div>
             {file && file.size <= 10 * 1024 * 1024 && (
-              <p className="text-sm text-green-600">Selected: {file.name}</p>
+              <p className="text-sm text-green-600">{t("opportunityForm.fileSelected")}: {file.name}</p>
             )}
             {file && file.size >= 10 * 1024 * 1024 && (
               <p className="text-sm text-red-600">
-                File: {file.name} too big! File must be under 10MB!
+                {file.name}: {t("opportunityForm.fileTooBig")}
               </p>
             )}
           </div>
 
           {/* Study Website */}
           <div className="space-y-2">
-            <Label htmlFor="studyWebsite" className="text-base font-medium">
-              Study website
+            <Label htmlFor="studyWebsite" className="text-base font-medium text-start block">
+              {t("opportunityForm.studyWebsite")}
             </Label>
             <Input
               id="studyWebsite"
               name="studyWebsite"
               value={formData.studyWebsite}
               onChange={handleChange}
-              placeholder="Link the study website if available"
+              placeholder={t("opportunityForm.studyWebsitePlaceholder")}
             />
           </div>
 
@@ -457,7 +456,7 @@ const PostOpportunityForm = () => {
             type="submit"
             className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white py-3 text-lg"
           >
-            Submit Research Opportunity
+            {t("opportunityForm.submit")}
           </Button>
         </form>
       </CardContent>
