@@ -10,8 +10,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { GraduationCap, Stethoscope, Pill, Smile, Info } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MentorshipBooking = () => {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,37 +30,48 @@ const MentorshipBooking = () => {
   const mentorshipTypes = [
     {
       value: "md",
-      label: "Medical Doctor (MD)",
-      description: "Guidance for medical school applications, medical training, and physician career paths",
+      label: t("mentorshipBooking.type.md.label"),
+      description: t("mentorshipBooking.type.md.desc"),
       icon: <Stethoscope className="h-6 w-6" />
     },
     {
       value: "pharmacy",
-      label: "Pharmacy",
-      description: "Support for pharmacy school, pharmaceutical career development, and clinical pharmacy",
+      label: t("mentorshipBooking.type.pharmacy.label"),
+      description: t("mentorshipBooking.type.pharmacy.desc"),
       icon: <Pill className="h-6 w-6" />
     },
     {
       value: "dentistry",
-      label: "Dentistry",
-      description: "Mentorship for dental school preparation and dental practice careers",
+      label: t("mentorshipBooking.type.dentistry.label"),
+      description: t("mentorshipBooking.type.dentistry.desc"),
       icon: <Smile className="h-6 w-6" />
     },
     {
       value: "general",
-      label: "General Health Information",
-      description: "Basic health literacy, healthcare navigation, and community health resources",
+      label: t("mentorshipBooking.type.general.label"),
+      description: t("mentorshipBooking.type.general.desc"),
       icon: <Info className="h-6 w-6" />
     }
   ];
 
   const currentLevels = [
-    "High School Student",
-    "Undergraduate Student",
-    "Graduate Student",
-    "Recent Graduate",
-    "Career Changer",
-    "Healthcare Professional"
+    { value: "High School Student", labelKey: "mentorshipBooking.level.highSchool" },
+    { value: "Undergraduate Student", labelKey: "mentorshipBooking.level.undergraduate" },
+    { value: "Graduate Student", labelKey: "mentorshipBooking.level.graduate" },
+    { value: "Recent Graduate", labelKey: "mentorshipBooking.level.recentGraduate" },
+    { value: "Career Changer", labelKey: "mentorshipBooking.level.careerChanger" },
+    { value: "Healthcare Professional", labelKey: "mentorshipBooking.level.healthcareProfessional" }
+  ];
+
+  const interestOptions = [
+    { value: "Application Process", labelKey: "mentorshipBooking.interest.applicationProcess" },
+    { value: "Interview Preparation", labelKey: "mentorshipBooking.interest.interviewPrep" },
+    { value: "Research Opportunities", labelKey: "mentorshipBooking.interest.researchOpportunities" },
+    { value: "Clinical Experience", labelKey: "mentorshipBooking.interest.clinicalExperience" },
+    { value: "Networking", labelKey: "mentorshipBooking.interest.networking" },
+    { value: "Work-Life Balance", labelKey: "mentorshipBooking.interest.workLifeBalance" },
+    { value: "Cultural Considerations", labelKey: "mentorshipBooking.interest.culturalConsiderations" },
+    { value: "Financial Planning", labelKey: "mentorshipBooking.interest.financialPlanning" }
   ];
 
   const handleInterestChange = (interest: string, checked: boolean) => {
@@ -77,16 +90,16 @@ const MentorshipBooking = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.mentorshipType) {
-      toast.error("Please fill in all required fields");
+      toast.error(t("form.requiredFieldsError"));
       return;
     }
 
     // Here you would typically send the data to your backend
     console.log("Mentorship booking submitted:", formData);
-    toast.success("Your mentorship request has been submitted! We'll be in touch soon.");
-    
+    toast.success(t("mentorshipBooking.successToast"));
+
     // Reset form
     setFormData({
       firstName: "",
@@ -103,20 +116,19 @@ const MentorshipBooking = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-healthLightGray">
+    <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
       <main id="main-content" className="flex-grow">
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-16">
           <div className="container mx-auto px-4">
             <div className="text-center">
-              <GraduationCap className="h-16 w-16 text-healthTeal mx-auto mb-6" />
+              <GraduationCap className="h-16 w-16 text-healthTealLight mx-auto mb-6" />
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Book a Mentorship Session
+                {t("mentorshipBooking.heroTitle")}
               </h1>
               <p className="text-xl max-w-3xl mx-auto">
-                Connect with experienced professionals who understand your cultural background 
-                and can guide you through your healthcare career journey.
+                {t("mentorshipBooking.heroSubtitle")}
               </p>
             </div>
           </div>
@@ -129,12 +141,12 @@ const MentorshipBooking = () => {
               {/* Personal Information */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-healthDarkBlue">Personal Information</CardTitle>
+                  <CardTitle className="text-healthDarkBlue text-start">{t("mentorshipBooking.personalInfo")}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName">First Name *</Label>
+                      <Label htmlFor="firstName">{t("contact.firstName")} *</Label>
                       <Input
                         id="firstName"
                         value={formData.firstName}
@@ -143,7 +155,7 @@ const MentorshipBooking = () => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Label htmlFor="lastName">{t("contact.lastName")} *</Label>
                       <Input
                         id="lastName"
                         value={formData.lastName}
@@ -154,20 +166,24 @@ const MentorshipBooking = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="email">{t("contact.email")} *</Label>
                       <Input
                         id="email"
                         type="email"
+                        dir="ltr"
+                        className="text-start"
                         value={formData.email}
                         onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                         required
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Phone Number</Label>
+                      <Label htmlFor="phone">{t("form.phone")}</Label>
                       <Input
                         id="phone"
                         type="tel"
+                        dir="ltr"
+                        className="text-start"
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                       />
@@ -179,7 +195,7 @@ const MentorshipBooking = () => {
               {/* Mentorship Type */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-healthDarkBlue">Type of Mentorship *</CardTitle>
+                  <CardTitle className="text-healthDarkBlue text-start">{t("mentorshipBooking.typeTitle")} *</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <RadioGroup
@@ -188,9 +204,9 @@ const MentorshipBooking = () => {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {mentorshipTypes.map((type) => (
-                        <div key={type.value} className="flex items-center space-x-2 border rounded-lg p-4 hover:bg-gray-50">
-                          <RadioGroupItem value={type.value} id={type.value} />
-                          <Label htmlFor={type.value} className="flex-grow cursor-pointer">
+                        <div key={type.value} className="flex items-start gap-3 border rounded-lg p-4 hover:bg-gray-50">
+                          <RadioGroupItem value={type.value} id={type.value} className="mt-1" />
+                          <Label htmlFor={type.value} className="flex-grow cursor-pointer text-start">
                             <div className="flex items-center gap-3 mb-2">
                               <div className="text-healthTeal">
                                 {type.icon}
@@ -209,7 +225,7 @@ const MentorshipBooking = () => {
               {/* Current Level */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-healthDarkBlue">Current Education/Career Level</CardTitle>
+                  <CardTitle className="text-healthDarkBlue text-start">{t("mentorshipBooking.currentLevel")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <RadioGroup
@@ -218,9 +234,9 @@ const MentorshipBooking = () => {
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {currentLevels.map((level) => (
-                        <div key={level} className="flex items-center space-x-2">
-                          <RadioGroupItem value={level} id={level} />
-                          <Label htmlFor={level} className="cursor-pointer">{level}</Label>
+                        <div key={level.value} className="flex items-center gap-2">
+                          <RadioGroupItem value={level.value} id={level.value} />
+                          <Label htmlFor={level.value} className="cursor-pointer text-start">{t(level.labelKey)}</Label>
                         </div>
                       ))}
                     </div>
@@ -231,27 +247,18 @@ const MentorshipBooking = () => {
               {/* Areas of Interest */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-healthDarkBlue">Areas of Interest</CardTitle>
+                  <CardTitle className="text-healthDarkBlue text-start">{t("mentorshipBooking.interestsTitle")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {[
-                      "Application Process",
-                      "Interview Preparation",
-                      "Research Opportunities",
-                      "Clinical Experience",
-                      "Networking",
-                      "Work-Life Balance",
-                      "Cultural Considerations",
-                      "Financial Planning"
-                    ].map((interest) => (
-                      <div key={interest} className="flex items-center space-x-2">
+                    {interestOptions.map((interest) => (
+                      <div key={interest.value} className="flex items-center gap-2">
                         <Checkbox
-                          id={interest}
-                          checked={formData.interests.includes(interest)}
-                          onCheckedChange={(checked) => handleInterestChange(interest, checked as boolean)}
+                          id={interest.value}
+                          checked={formData.interests.includes(interest.value)}
+                          onCheckedChange={(checked) => handleInterestChange(interest.value, checked as boolean)}
                         />
-                        <Label htmlFor={interest} className="cursor-pointer">{interest}</Label>
+                        <Label htmlFor={interest.value} className="cursor-pointer text-start">{t(interest.labelKey)}</Label>
                       </div>
                     ))}
                   </div>
@@ -261,36 +268,36 @@ const MentorshipBooking = () => {
               {/* Goals and Additional Information */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-healthDarkBlue">Additional Information</CardTitle>
+                  <CardTitle className="text-healthDarkBlue text-start">{t("mentorshipBooking.additionalInfoTitle")}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="goals">What are your main goals for this mentorship? *</Label>
+                    <Label htmlFor="goals">{t("mentorshipBooking.goals")} *</Label>
                     <Textarea
                       id="goals"
                       value={formData.goals}
                       onChange={(e) => setFormData(prev => ({ ...prev, goals: e.target.value }))}
-                      placeholder="Please describe what you hope to achieve through mentorship..."
+                      placeholder={t("mentorshipBooking.goalsPlaceholder")}
                       rows={3}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="availability">Preferred meeting times/availability</Label>
+                    <Label htmlFor="availability">{t("mentorshipBooking.availability")}</Label>
                     <Textarea
                       id="availability"
                       value={formData.availability}
                       onChange={(e) => setFormData(prev => ({ ...prev, availability: e.target.value }))}
-                      placeholder="e.g., Weekday evenings, weekend mornings, specific time zones..."
+                      placeholder={t("mentorshipBooking.availabilityPlaceholder")}
                       rows={2}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="additionalInfo">Any additional information you'd like to share</Label>
+                    <Label htmlFor="additionalInfo">{t("mentorshipBooking.additionalField")}</Label>
                     <Textarea
                       id="additionalInfo"
                       value={formData.additionalInfo}
                       onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
-                      placeholder="Background, specific challenges, preferred communication style, etc."
+                      placeholder={t("mentorshipBooking.additionalPlaceholder")}
                       rows={3}
                     />
                   </div>
@@ -299,14 +306,14 @@ const MentorshipBooking = () => {
 
               {/* Submit Button */}
               <div className="text-center">
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="bg-healthTeal hover:bg-healthTeal/90 text-white px-8 py-3 text-lg"
                 >
-                  Submit Mentorship Request
+                  {t("mentorshipBooking.submit")}
                 </Button>
                 <p className="text-sm text-gray-600 mt-4">
-                  * Required fields. We'll review your request and match you with an appropriate mentor within 5-7 business days.
+                  {t("mentorshipBooking.requiredNote")}
                 </p>
               </div>
             </form>
