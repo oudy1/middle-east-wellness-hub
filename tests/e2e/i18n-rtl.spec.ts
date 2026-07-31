@@ -137,7 +137,8 @@ test.describe("Arabic RTL — desktop", () => {
       await nav.getByRole("button", { name: trigger }).click();
       const menu = page.getByRole("menu");
       await expect(menu).toBeVisible();
-      await expect(menu).toHaveAttribute("dir", "rtl");
+      // Direction is inherited from the RTL header, not set via a dir attr.
+      await expect(menu).toHaveCSS("direction", "rtl");
 
       const items = menu.getByRole("menuitem");
       expect(await items.count()).toBeGreaterThan(0);
