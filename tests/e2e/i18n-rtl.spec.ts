@@ -59,6 +59,9 @@ async function clippedText(scope: Locator): Promise<string[]> {
           const s = window.getComputedStyle(el);
           if (s.display === "none" || s.visibility === "hidden") return false;
           if (el.closest(".truncate")) return false; // intentional ellipsis
+          if (el.closest(".sr-only")) return false; // visually hidden a11y text
+          const r = el.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) return false; // not rendered
           if (!(el.textContent ?? "").trim()) return false;
           return el.scrollWidth > el.clientWidth + 2;
         })
