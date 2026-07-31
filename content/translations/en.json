@@ -424,5 +424,6 @@
   "opportunityForm.successDesc": "Thank you for sharing your research opportunity! We'll review it and connect you with interested students.",
   "opportunityForm.failureDesc": "There was an error submitting your opportunity. Try again later.",
   "opportunityForm.thankYou": "Thank you for submitting this form!",
-  "opportunityForm.backSoon": "We will get back to you shortly."
+  "opportunityForm.backSoon": "We will get back to you shortly.",
+  "contact.subject": "Subject"
 }
