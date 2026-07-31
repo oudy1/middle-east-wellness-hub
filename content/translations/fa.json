@@ -260,5 +260,6 @@
   "contact.name": "نام",
   "contact.send": "ارسال پیام",
   "contact.sending": "در حال ارسال...",
-  "common.skipToContent": "Skip to content"
+  "common.skipToContent": "پرش به محتوا",
+  "contact.subject": "موضوع"
 }

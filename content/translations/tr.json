@@ -260,5 +260,6 @@
   "contact.name": "İsim",
   "contact.send": "Mesaj Gönder",
   "contact.sending": "Gönderiliyor...",
-  "common.skipToContent": "Skip to content"
+  "common.skipToContent": "İçeriğe atla",
+  "contact.subject": "Konu"
 }

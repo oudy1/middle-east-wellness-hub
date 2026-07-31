@@ -424,5 +424,6 @@
   "opportunityForm.successDesc": "شكرًا لمشاركة فرصتك البحثية! سنراجعها ونوصلك بالطلاب المهتمين.",
   "opportunityForm.failureDesc": "حدث خطأ أثناء إرسال فرصتك. حاول مرة أخرى لاحقًا.",
   "opportunityForm.thankYou": "شكرًا لإرسال هذا النموذج!",
-  "opportunityForm.backSoon": "سنعاود التواصل معك قريبًا."
+  "opportunityForm.backSoon": "سنعاود التواصل معك قريبًا.",
+  "contact.subject": "الموضوع"
 }
