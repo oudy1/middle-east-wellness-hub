@@ -157,7 +157,10 @@ test.describe("Arabic RTL — desktop", () => {
   test("desktop search overlay is Arabic, RTL, and unclipped", async ({
     page,
   }) => {
-    await page.getByRole("button", { name: "بحث", exact: true }).click();
+    await page
+      .locator("header")
+      .getByRole("button", { name: "بحث", exact: true })
+      .click();
 
     const input = page.getByPlaceholder(new RegExp(AR.searchPlaceholder));
     await expect(input).toBeVisible();
