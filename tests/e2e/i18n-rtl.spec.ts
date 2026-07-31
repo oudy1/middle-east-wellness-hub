@@ -162,7 +162,10 @@ test.describe("Arabic RTL — desktop", () => {
       .getByRole("button", { name: "بحث", exact: true })
       .click();
 
-    const input = page.getByPlaceholder(new RegExp(AR.searchPlaceholder));
+    // Scope to the header overlay — the homepage also renders a full finder.
+    const input = page
+      .locator("header")
+      .getByPlaceholder(new RegExp(AR.searchPlaceholder));
     await expect(input).toBeVisible();
 
     // The input sits inside an RTL container.
