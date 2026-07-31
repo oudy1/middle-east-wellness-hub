@@ -176,7 +176,9 @@ test.describe("Arabic RTL — desktop", () => {
 
     // Popular searches panel renders in Arabic on focus.
     await input.click();
-    await expect(page.getByText(AR.popularSearches)).toBeVisible();
+    await expect(
+      page.locator("header").getByText(AR.popularSearches, { exact: true })
+    ).toBeVisible();
 
     // Arabic keyword search returns Arabic suggestions without clipping.
     await input.fill("سكري");
