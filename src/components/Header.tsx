@@ -388,7 +388,7 @@ const Header = () => {
               <button
                 onClick={() => setLanguageMenuOpen((v) => !v)}
                 className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-healthTeal/30 transition-colors text-sm"
-                aria-label="Select language"
+                aria-label={isRTL ? "اختيار اللغة" : "Select language"}
                 aria-expanded={languageMenuOpen}
               >
                 <Languages size={16} />
@@ -437,7 +437,7 @@ const Header = () => {
               <SheetTrigger asChild>
                 <button
                   className="text-white p-3 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[44px] min-w-[44px] touch-manipulation flex items-center justify-center"
-                  aria-label="Open menu"
+                  aria-label={isRTL ? "فتح القائمة" : "Open menu"}
                 >
                   <Menu size={24} />
                 </button>
@@ -456,7 +456,7 @@ const Header = () => {
                       {t("common.menu") || (isRTL ? "القائمة" : "Menu")}
                     </SheetTitle>
                     <SheetClose
-                      aria-label="Close menu"
+                      aria-label={isRTL ? "إغلاق القائمة" : "Close menu"}
                       className="p-2 rounded-md hover:bg-healthTeal/20 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                     >
                       <X size={22} />
