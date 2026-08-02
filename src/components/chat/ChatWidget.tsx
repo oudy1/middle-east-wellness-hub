@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { MessageCircle, X, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,12 +7,11 @@ import { ChatInput, ChatInputRef } from './ChatInput';
 import { ChatQuickReplies } from './ChatQuickReplies';
 import { ChatSafetyFooter } from './ChatSafetyFooter';
 import { useChatSession } from '@/hooks/useChatSession';
-import suggestions from '../../../content/chatbot-suggestions.json';
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<ChatInputRef>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -61,11 +60,18 @@ const ChatWidget: React.FC = () => {
     document.body.style.overflow = '';
   }, []);
 
-  const welcomeMessage = language === 'ar'
-    ? suggestions.greeting.ar
-    : suggestions.greeting.en;
+  const welcomeMessage = t('chatbot.greeting');
 
-  const quickReplies = (language === 'ar' ? suggestions.quickReplies.ar : suggestions.quickReplies.en);
+  const quickReplies = useMemo(
+    () =>
+      [1, 2, 3, 4, 5, 6].map((i) => ({
+        label: t(`chatbot.qr.${i}.label`),
+        message: t(`chatbot.qr.${i}.message`),
+      })),
+    // t is recreated each render; language is the meaningful dependency
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [language]
+  );
 
   const handleQuickReply = (message: string) => {
     sendMessage(message);
@@ -78,7 +84,7 @@ const ChatWidget: React.FC = () => {
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg touch-manipulation active:scale-95"
         style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
-        aria-label={language === 'ar' ? 'افتح المحادثة' : 'Open chat'}
+        aria-label={t('chatbot.openChat')}
       >
         <MessageCircle className="h-6 w-6 text-healthDarkBlue" />
       </Button>
@@ -119,10 +125,8 @@ const ChatWidget: React.FC = () => {
               className="h-8 w-8 object-contain"
             />
             <div>
-              <h3 className="font-semibold text-sm">SHAMS Guide</h3>
-              <p className="text-xs text-white/70">
-                {language === 'ar' ? 'متاح للمساعدة' : 'Here to help'}
-              </p>
+              <h3 className="font-semibold text-sm">{t('chatbot.title')}</h3>
+              <p className="text-xs text-white/70">{t('chatbot.subtitle')}</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
@@ -131,6 +135,7 @@ const ChatWidget: React.FC = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMinimized(!isMinimized)}
+              aria-label={t('chatbot.minimize')}
               className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
             >
               <Minimize2 className="h-4 w-4" />
@@ -140,6 +145,7 @@ const ChatWidget: React.FC = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(false)}
+              aria-label={t('chatbot.closeChat')}
               className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
             >
               <X className="h-4 w-4" />
@@ -162,7 +168,7 @@ const ChatWidget: React.FC = () => {
                     </p>
                   </div>
                   <div className="text-xs text-center text-muted-foreground mb-2">
-                    {language === 'ar' ? 'روابط سريعة | Quick links' : 'Quick links | روابط سريعة'}
+                    {t('chatbot.quickLinksLabel')}
                   </div>
                   <ChatQuickReplies 
                     replies={quickReplies} 
@@ -187,7 +193,7 @@ const ChatWidget: React.FC = () => {
                 ref={chatInputRef}
                 onSend={sendMessage}
                 disabled={isLoading}
-                placeholder={language === 'ar' ? 'اكتب رسالتك...' : 'Type your message...'}
+                placeholder={t('chatbot.placeholder')}
               />
             </div>
           </>

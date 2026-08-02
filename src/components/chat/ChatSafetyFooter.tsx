@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Instagram, Mail } from 'lucide-react';
 
 export const ChatSafetyFooter: React.FC = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <div 
@@ -11,14 +11,10 @@ export const ChatSafetyFooter: React.FC = () => {
       dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
       <p className="font-semibold text-destructive">
-        {language === 'ar' 
-          ? 'إذا كانت الحالة طارئة أو كان هناك خطر فوري، اتصلوا بـ 911 أو توجّهوا إلى أقرب قسم طوارئ فوراً.'
-          : 'If this is urgent or someone is in immediate danger, call 911 or go to the nearest emergency department right now.'}
+        {t('chatbot.safetyUrgent')}
       </p>
       <p className="italic">
-        {language === 'ar' 
-          ? 'تنويه: نحن لسنا أطباء. هذا المرشد للمعلومات فقط وليس بديلاً عن الاستشارة الطبية.'
-          : 'Disclaimer: We are not medical doctors. This guide is for information only and not a substitute for medical advice.'}
+        {t('chatbot.safetyDisclaimer')}
       </p>
       
       <div className="flex items-center gap-3 flex-wrap">
