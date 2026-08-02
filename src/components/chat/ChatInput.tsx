@@ -1,6 +1,7 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -15,6 +16,7 @@ export interface ChatInputRef {
 
 export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
   ({ onSend, disabled, placeholder }, ref) => {
+    const { t } = useLanguage();
     const [input, setInput] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
@@ -74,6 +76,7 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={placeholder}
+            aria-label={placeholder}
             disabled={disabled}
             inputMode="text"
             enterKeyHint="send"
@@ -88,6 +91,7 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
             type="submit"
             disabled={disabled || !input.trim()}
             size="icon"
+            aria-label={t('chatbot.send')}
             className="h-11 w-11 min-h-[44px] min-w-[44px] bg-healthGold hover:bg-healthGold/90 text-healthDarkBlue shrink-0 touch-manipulation active:scale-95 rounded-xl"
           >
             <Send className="h-5 w-5" />
