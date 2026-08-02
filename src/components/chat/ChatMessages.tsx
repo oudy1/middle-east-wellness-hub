@@ -38,7 +38,7 @@ const APPROVED_ROUTES: Record<string, boolean> = {
 };
 
 export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading, onNavigate }) => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
 
   // Check if last message contains emergency keywords
@@ -188,7 +188,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
             <div className="whitespace-pre-wrap">{parts}</div>
           )}
           <div className="text-xs text-muted-foreground mb-1">
-            {language === 'ar' ? 'روابط سريعة | Quick links' : 'Quick links | روابط سريعة'}
+            {t('chatbot.quickLinksLabel')}
           </div>
           <div className="flex flex-wrap gap-2" style={{ pointerEvents: 'auto' }}>
             {buttons}
@@ -208,12 +208,10 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
           dir={language === 'ar' ? 'rtl' : 'ltr'}
         >
           <p className="font-bold mb-1">
-            {language === 'ar' ? '⚠️ إذا كنت في خطر فوري:' : '⚠️ If you are in immediate danger:'}
+            ⚠️ {t('chatbot.emergencyTitle')}
           </p>
           <p>
-            {language === 'ar' 
-              ? 'اتصل بـ 911 أو اذهب إلى أقرب غرفة طوارئ. في كندا، اتصل أو أرسل رسالة إلى 988 للدعم النفسي.'
-              : 'Call 911 or go to your nearest emergency room. In Canada, call or text 988 for mental health support.'}
+            {t('chatbot.emergencyBody')}
           </p>
         </div>
       )}
@@ -244,7 +242,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
             <div className="flex items-center gap-2 text-gray-500">
               <Loader2 className="h-4 w-4 animate-spin" />
               <span className="text-sm">
-                {language === 'ar' ? 'جاري الكتابة...' : 'Typing...'}
+                {t('chatbot.typing')}
               </span>
             </div>
           </div>

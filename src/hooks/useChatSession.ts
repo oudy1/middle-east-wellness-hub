@@ -13,7 +13,7 @@ export const useChatSession = () => {
   // Start fresh every time - no persistence
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const { toast } = useToast();
 
   const sendMessage = useCallback(async (content: string) => {
@@ -121,10 +121,8 @@ export const useChatSession = () => {
     } catch (error) {
       console.error('Chat error:', error);
       toast({
-        title: language === 'ar' ? 'خطأ' : 'Error',
-        description: language === 'ar' 
-          ? 'حدث خطأ. يرجى المحاولة مرة أخرى.'
-          : 'Something went wrong. Please try again.',
+        title: t('chatbot.errorTitle'),
+        description: t('chatbot.errorBody'),
         variant: 'destructive',
       });
       // Remove the user message if there was an error
@@ -132,7 +130,7 @@ export const useChatSession = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [messages, language, isLoading, toast]);
+  }, [messages, language, isLoading, toast, t]);
 
   return {
     messages,
