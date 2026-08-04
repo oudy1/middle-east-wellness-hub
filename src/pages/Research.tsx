@@ -75,6 +75,7 @@ interface ResearcherCardProps {
   locationEn?: string;
   locationAr?: string;
   tags: string[];
+  links?: { labelEn: string; labelAr: string; href: string }[];
   id: string;
   expandedResearcher: string | null;
   toggleResearcher: (id: string) => void;
@@ -86,7 +87,7 @@ interface ResearcherCardProps {
 
 const ResearcherCard = ({
   nameEn, nameAr, roleEn, roleAr, orgEn, orgAr, bioEn, bioAr,
-  email, locationEn, locationAr, tags, id, expandedResearcher, toggleResearcher,
+  email, locationEn, locationAr, tags, links, id, expandedResearcher, toggleResearcher,
   colorAccent, icon, expandedContent, isAr
 }: ResearcherCardProps) => {
   const s = accentStyles[colorAccent] || accentStyles.healthTeal;
@@ -125,6 +126,23 @@ const ResearcherCard = ({
           <div className="flex flex-wrap gap-1">
             {tags.map((tag, idx) => (
               <span key={idx} className={`px-1.5 py-0.5 ${s.tagBg} ${s.text} rounded-full text-[10px]`}>{tag}</span>
+            ))}
+          </div>
+        )}
+
+        {links && links.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1 px-2 py-1 rounded-md border ${s.border} ${s.text} text-[10px] font-medium hover:bg-muted transition-colors`}
+              >
+                <ExternalLink className="h-3 w-3" />
+                {isAr ? link.labelAr : link.labelEn}
+              </a>
             ))}
           </div>
         )}
@@ -512,6 +530,8 @@ const Research = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 max-w-7xl mx-auto">
+              <ResearcherCard nameEn="Dr. Redab Al-Janaideh, PhD" nameAr="الدكتورة رداب الجنايدة، دكتوراه" roleEn="Researcher, Educator, and Consultant" roleAr="باحثة ومربية ومستشارة" orgEn="YRDSB & University of Toronto" orgAr="مجلس مدارس منطقة يورك وجامعة تورنتو" bioEn="Researcher, educator, and consultant specializing in developmental psychology, educational psychology, mental health, and equity. Her work focuses on improving the health, well-being, learning, and inclusion of children, youth, families, and underserved communities." bioAr="باحثة ومربية ومستشارة متخصصة في علم النفس النمائي، وعلم النفس التربوي، والصحة النفسية، والإنصاف. يركز عملها على تحسين صحة ورفاه وتعلّم واندماج الأطفال والشباب والعائلات والمجتمعات غير المخدومة بشكل كافٍ من خلال البحث والتعليم والشراكات المجتمعية." tags={isAr ? ['علم النفس النمائي', 'علم النفس التربوي', 'رفاه الأطفال والشباب'] : ['Developmental Psychology', 'Educational Psychology', 'Child & Youth Well-Being']} links={[{ labelEn: 'LinkedIn', labelAr: 'LinkedIn', href: 'https://www.linkedin.com/in/redab-al-janaideh-phd-ece-285bb9256' }, { labelEn: 'Google Scholar', labelAr: 'Google Scholar', href: 'https://scholar.google.ca/citations?user=7hPvP4EAAAAJ&hl=en' }]} id="redab" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? 'لديها خبرة واسعة في قيادة الأبحاث متعددة التخصصات وتقييم البرامج بالتعاون مع المدارس والشركاء المجتمعيين، مع اهتمام خاص بدعم الأقليات واللاجئين والوافدين الجدد.' : 'She has extensive experience leading interdisciplinary research and program evaluation with schools and community partners, with particular expertise in supporting minority, refugee, and newcomer communities.'}</p><p className="text-xs text-muted-foreground">{isAr ? '🏛️ الأدوار المهنية:' : '🏛️ Professional Roles:'}</p><ul className="space-y-1 text-xs text-muted-foreground">{(isAr ? ['مديرة مشاريع بحثية، مركز القيادة والتعلم، مجلس مدارس منطقة يورك', 'محاضرة، جامعة تورنتو', 'مؤسِّسة ومستشارة رئيسية، Elevate Learning and Leadership', 'نائبة رئيس جمعية باحثي التعليم في أونتاريو (AERO)'] : ['Research Project Manager, Centre for Leadership and Learning, York Region District School Board', 'Lecturer, University of Toronto', 'Founder and Principal Consultant, Elevate Learning and Leadership', 'Vice President, Association of Educational Researchers of Ontario (AERO)']).map((role, i) => (<li key={i} className="flex items-start gap-1.5"><span className="text-primary">•</span><span>{role}</span></li>))}</ul><p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات الخبرة:' : '🔬 Areas of Expertise:'}</p><div className="flex flex-wrap gap-1">{(isAr ? ['علم النفس النمائي', 'علم النفس التربوي', 'رفاه الأطفال والشباب', 'اللاجئون والوافدون الجدد', 'المجتمعات غير المخدومة بشكل كافٍ', 'الإنصاف والتنوع والاندماج والانتماء', 'البحث المجتمعي', 'تقييم البرامج', 'تعبئة المعرفة'] : ['Developmental Psychology', 'Educational Psychology', 'Child and Youth Well-Being', 'Refugee and Newcomer Communities', 'Minority and Underserved Communities', 'Equity, Diversity, Inclusion, and Belonging', 'Community-Engaged Research', 'Program Evaluation', 'Knowledge Mobilization']).map((area, i) => (<span key={i} className="px-1.5 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-[10px]">{area}</span>))}</div><p className="text-xs text-muted-foreground italic">{isAr ? 'الموقع الشخصي: قريباً' : 'Personal website: coming soon'}</p></div>} isAr={isAr} />
+
               <ResearcherCard nameEn="Jesus (Jesse) Chavarria, PhD" nameAr="د. خيسوس (جيسي) تشافارّيا" roleEn="Assistant Professor, Clinical Psychology" roleAr="أستاذ مساعد، علم النفس السريري" orgEn="Western University" orgAr="جامعة ويسترن" bioEn="Studies risk factors and mechanisms contributing to substance use disorders. Uses clinical and quantitative methods to identify targets for intervention." bioAr="يدرس العوامل والآليات التي تسهم في اضطرابات تعاطي المواد. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل." email="jchavarr@uwo.ca" locationEn="London, Ontario, Canada" locationAr="لندن، أونتاريو، كندا" tags={isAr ? ['تعاطي المواد', 'الإدمان', 'آليات الخطر'] : ['Substance Use', 'Addiction', 'Risk Mechanisms']} id="chavarria" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? '🏛️ الانتماءات:' : '🏛️ Affiliations:'}</p><p className="text-xs text-muted-foreground">{isAr ? 'قسم علم النفس، جامعة ويسترن' : 'Department of Psychology, Western University'}</p><p className="text-xs text-muted-foreground">{isAr ? 'معهد أبحاث سياسات الصحة النفسية، CAMH' : 'Institute for Mental Health Policy Research, CAMH'}</p></div>} isAr={isAr} />
 
               <ResearcherCard nameEn="Menna Komeiha" nameAr="منة قميحة" roleEn="Researcher" roleAr="باحثة" orgEn="Health Equity Research" orgAr="بحث المساواة الصحية" bioEn="Health equity researcher specializing in dentistry and applied health sciences. Focuses on digital health and patient-centered care." bioAr="باحثة في المساواة الصحية متخصصة في طب الأسنان والعلوم الصحية التطبيقية." email="komeiham@mcmaster.ca" tags={[]} id="menna" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<FlaskConical className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><div className="grid grid-cols-2 gap-2"><div><p className="text-xs text-muted-foreground">{isAr ? 'الخبرة' : 'Experience'}</p><p className="text-xs font-semibold">{isAr ? '٤ سنوات' : '4 years'}</p></div><div><p className="text-xs text-muted-foreground">{isAr ? 'اللغات' : 'Languages'}</p><p className="text-xs font-semibold">{isAr ? 'العربية، الإنجليزية' : 'Arabic, English'}</p></div></div></div>} isAr={isAr} />
