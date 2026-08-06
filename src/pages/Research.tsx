@@ -208,7 +208,7 @@ const Research = () => {
       <div className="grid md:grid-cols-2 gap-4">
         <a href="/lovable-uploads/projectshams-flyer-1.5gen-oct8.pdf" target="_blank" rel="noopener noreferrer" className="block">
           <img src="/lovable-uploads/dream-deferred-flyer-en.png" alt="Canadian Dream Deferred Study Flyer" className="w-full max-w-xs mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer" loading="lazy" />
-          <p className="text-xs text-muted-foreground text-center mt-2">English Poster</p>
+          <p className="text-xs text-muted-foreground text-center mt-2">{isAr ? 'الملصق الإنجليزي' : 'English Poster'}</p>
         </a>
         <a href="/lovable-uploads/ar-projectshams-flyer-1.5gen-oct8.pdf" target="_blank" rel="noopener noreferrer" className="block">
           <img src="/lovable-uploads/dream-deferred-flyer-ar.png" alt="ملصق دراسة الحلم الكندي المؤجل" className="w-full max-w-xs mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer" loading="lazy" />

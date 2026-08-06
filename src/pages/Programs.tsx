@@ -10,31 +10,15 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import MentalHealthConventionSection from "@/components/MentalHealthConventionSection";
 
-const programs = [
-  {
-    title: "IFHP – Interim Federal Health Program",
-    summary: "Free counselling for eligible refugee claimants. Multilingual and culturally sensitive support.",
-    link: "https://blcc.ca/interim-federal-health-program-ifhp",
-  },
-  {
-    title: "VQRP – Victim Quick Response Program",
-    summary: "Short-term, immediate counselling support after violence, crime, or traumatic events.",
-    link: "https://blcc.ca/victim-quick-response-program-vqrp",
-  },
-  {
-    title: "Newcomer Mental Wellness Program",
-    summary: "Free short-term counselling for newcomers and immigrants to support settlement stress and adjustment.",
-    link: "https://blcc.ca/newcomer-mental-wellness-program",
-  },
-  {
-    title: "LDEEP – Empowerment Employment Project",
-    summary: "Free counselling sessions to support job readiness, confidence, and coping during career transitions.",
-    link: "https://blcc.ca/empowerment-employment-project",
-  },
+const partnerPrograms = [
+  { id: "ifhp", link: "https://blcc.ca/interim-federal-health-program-ifhp" },
+  { id: "vqrp", link: "https://blcc.ca/victim-quick-response-program-vqrp" },
+  { id: "newcomer", link: "https://blcc.ca/newcomer-mental-wellness-program" },
+  { id: "ldeep", link: "https://blcc.ca/empowerment-employment-project" },
 ];
 
 const Programs = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const isRTL = language === 'ar' || language === 'fa' || language === 'ku';
 
   return (
@@ -52,35 +36,35 @@ const Programs = () => {
       <main id="main-content" className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Header */}
         <section className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Programs</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-4">{t("programs.title")}</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Free and funded mental health support options through trusted partners.
+            {t("programs.subtitle")}
           </p>
         </section>
 
-        {/* SHAMS Mentorship Program — internal featured */}
+        {/* SHAMS Mentorship Program (internal featured card) */}
         <section className="mb-12">
           <Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/10">
             <CardHeader>
-              <Badge className="w-fit mb-2 text-xs">SHAMS Program</Badge>
+              <Badge className="w-fit mb-2 text-xs">{t("programs.shamsBadge")}</Badge>
               <CardTitle className="text-2xl flex items-center gap-2">
-                <GraduationCap className="h-6 w-6 text-primary" />
-                SHAMS Mentorship Program
+                <GraduationCap className="h-6 w-6 text-primary shrink-0" />
+                {t("programs.mentorshipTitle")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
-                Connecting MENA students and early-career individuals with healthcare professionals across Canada for guidance, mentorship, and career support.
+                {t("programs.mentorshipDesc")}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link to="/programs/mentorship">
-                  <Button>Learn more & apply</Button>
+                  <Button>{t("programs.learnMoreApply")}</Button>
                 </Link>
                 <a href="https://forms.gle/dCyMfPQH8DRSxsxb8" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="gap-2">Become a Mentor <ExternalLink size={14} /></Button>
+                  <Button variant="outline" className="gap-2">{t("programs.becomeMentor")} <ExternalLink size={14} /></Button>
                 </a>
                 <a href="https://forms.gle/3Xw71e2Y3Hhqn7gF9" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="gap-2">Become a Mentee <ExternalLink size={14} /></Button>
+                  <Button variant="outline" className="gap-2">{t("programs.becomeMentee")} <ExternalLink size={14} /></Button>
                 </a>
               </div>
             </CardContent>
@@ -89,19 +73,19 @@ const Programs = () => {
 
         {/* Partner Program Cards Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {programs.map((program) => (
-            <Card key={program.title} className="flex flex-col justify-between border border-border">
+          {partnerPrograms.map((program) => (
+            <Card key={program.id} className="flex flex-col justify-between border border-border">
               <CardHeader>
                 <Badge variant="secondary" className="w-fit mb-2 text-xs">
-                  Partner Program (External)
+                  {t("programs.partnerBadge")}
                 </Badge>
-                <CardTitle className="text-xl">{program.title}</CardTitle>
+                <CardTitle className="text-xl">{t(`programs.${program.id}.title`)}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-4 flex-1 justify-between">
-                <p className="text-muted-foreground">{program.summary}</p>
+                <p className="text-muted-foreground">{t(`programs.${program.id}.summary`)}</p>
                 <a href={program.link} target="_blank" rel="noopener noreferrer">
                   <Button className="gap-2 w-full sm:w-auto">
-                    Learn more <ExternalLink size={14} />
+                    {t("programs.learnMore")} <ExternalLink size={14} />
                   </Button>
                 </a>
               </CardContent>
@@ -111,12 +95,12 @@ const Programs = () => {
 
         {/* Callout */}
         <section className="rounded-lg border border-border bg-muted/50 p-8 text-center">
-          <h2 className="text-2xl font-semibold text-foreground mb-3">Need help choosing a program?</h2>
+          <h2 className="text-2xl font-semibold text-foreground mb-3">{t("programs.calloutTitle")}</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            If you are not sure what fits, contact SHAMS and we can point you to the right option.
+            {t("programs.calloutDesc")}
           </p>
           <Link to="/contact">
-            <Button size="lg">Contact SHAMS</Button>
+            <Button size="lg">{t("programs.contactShams")}</Button>
           </Link>
         </section>
       </main>
