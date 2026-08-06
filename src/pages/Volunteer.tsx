@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -8,35 +7,18 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScOQ9BciASkaPC6PogtbdeN1NvnuUDJpdjh9Uqtexcwjf-waw/viewform";
 
 const Volunteer = () => {
-  const { language } = useLanguage();
-  const isArabic = language === 'ar';
-
-  const content = {
-    en: {
-      title: "Volunteer Application",
-      fallbackText: "If the form doesn't load, you can open it in a new tab:",
-      fallbackButton: "Open the form in a new tab",
-      loading: "Loading application form...",
-    },
-    ar: {
-      title: "طلب التطوع",
-      fallbackText: "إذا لم يتم تحميل النموذج، يمكنك فتحه في نافذة جديدة:",
-      fallbackButton: "افتح النموذج في نافذة جديدة",
-      loading: "جارٍ تحميل نموذج الطلب...",
-    },
-  };
-
-  const t = isArabic ? content.ar : content.en;
+  const { language, t } = useLanguage();
+  const isRTL = language === 'ar' || language === 'fa' || language === 'ku';
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
-      <main id="main-content" className="flex-grow" dir={isArabic ? 'rtl' : 'ltr'}>
+      <main id="main-content" className="flex-grow" dir={isRTL ? 'rtl' : 'ltr'}>
         {/* Header Section */}
         <section className="bg-healthDarkBlue text-white py-8 md:py-12">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              {t.title}
+              {t("volunteer.title")}
             </h1>
           </div>
         </section>
@@ -44,15 +26,15 @@ const Volunteer = () => {
         {/* Fallback Button */}
         <section className="py-4 md:py-6 bg-muted/30">
           <div className="container mx-auto px-4">
-            <div className={`flex flex-col sm:flex-row items-center gap-3 ${isArabic ? 'sm:flex-row-reverse' : ''}`}>
+            <div className="flex flex-col sm:flex-row items-center gap-3">
               <p className="text-muted-foreground text-sm">
-                {t.fallbackText}
+                {t("volunteer.fallbackText")}
               </p>
               <Button
                 asChild
                 variant="outline"
                 size="sm"
-                className="gap-2"
+                className="gap-2 shrink-0"
               >
                 <a
                   href={GOOGLE_FORM_URL}
@@ -60,7 +42,7 @@ const Volunteer = () => {
                   rel="noopener noreferrer"
                 >
                   <ExternalLink className="h-4 w-4" />
-                  {t.fallbackButton}
+                  {t("volunteer.fallbackButton")}
                 </a>
               </Button>
             </div>
@@ -73,7 +55,7 @@ const Volunteer = () => {
             <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
               <iframe
                 src={GOOGLE_FORM_URL}
-                title={t.title}
+                title={t("volunteer.title")}
                 className="w-full border-0"
                 style={{
                   minHeight: '900px',
@@ -81,7 +63,7 @@ const Volunteer = () => {
                 }}
                 loading="lazy"
               >
-                {t.loading}
+                {t("volunteer.loading")}
               </iframe>
             </div>
           </div>
