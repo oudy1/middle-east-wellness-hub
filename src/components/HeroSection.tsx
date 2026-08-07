@@ -27,7 +27,6 @@ const HeroSection = forwardRef<HTMLElement>((_, ref) => {
               height={256}
               loading="eager"
               decoding="async"
-              fetchPriority="high"
               className="h-36 w-36 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-64 lg:w-64 object-contain"
             />
           </div>
