@@ -305,7 +305,6 @@ const Header = () => {
                 height={56}
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
                 className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain flex-shrink-0"
               />
               <div className="flex flex-col min-w-0">
