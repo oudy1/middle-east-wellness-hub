@@ -28,7 +28,7 @@
   "webinars": "/recordings",
   "weekly_topics": "/recordings#topic-request",
   "healthcare_workers": "/find-healthcare-workers",
-  "family_physicians": "/find-healthcare-workers#family-physicians",
+  "family_physicians": "/find-healthcare-workers?specialty=Family%20Physician",
   "browse_by_city": "/find-healthcare-workers#browse-by-city",
   "contact": "/contact",
   "volunteer": "/volunteer",
