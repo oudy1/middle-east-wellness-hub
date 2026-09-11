@@ -493,7 +493,7 @@ const Research = () => {
             </Dialog>
 
             {/* Submit opportunity via email */}
-            <div className="text-center py-8 mt-8">
+            <div id="opportunities" className="text-center py-8 mt-8 scroll-mt-24">
               <Search className="h-10 w-10 text-primary mx-auto mb-3" />
               <h3 className="text-lg font-semibold mb-1">{t("resources.opportunitiesComingSoon")}</h3>
               <p className="text-sm text-muted-foreground mb-4">
