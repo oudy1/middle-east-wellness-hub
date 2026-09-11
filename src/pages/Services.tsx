@@ -554,6 +554,7 @@ const Services = () => {
         )}
 
         {/* Patient Rights */}
+        <div id="patient-rights" className="scroll-mt-24 md:scroll-mt-32" />
         {isVisible("education") && (
           <section className="py-12 md:py-16 bg-white">
             <div className="container mx-auto px-4">
