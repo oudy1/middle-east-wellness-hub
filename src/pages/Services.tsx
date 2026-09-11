@@ -318,7 +318,7 @@ const Services = () => {
       <Header />
       <main id="main-content" className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-healthDarkBlue text-white py-12 md:py-16">
+        <section id="community-services" className="bg-healthDarkBlue text-white py-12 md:py-16 scroll-mt-24 md:scroll-mt-32">
           <div className="container mx-auto px-4 text-center">
             <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 leading-tight ${language === 'ar' ? 'font-cairo' : ''}`}>
               {language === 'ar' ? 'الخدمات المجتمعية' : 'Community Services'}
