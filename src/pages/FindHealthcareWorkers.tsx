@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -101,6 +102,7 @@ const FindHealthcareWorkers = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  useHashScroll();
   
   // Search form state
   const [city, setCity] = useState(searchParams.get("city") || "");
@@ -313,7 +315,7 @@ const FindHealthcareWorkers = () => {
             </div>
 
           {/* Search Form */}
-          <Card className="mb-8">
+          <Card id="browse-by-city" className="mb-8 scroll-mt-24 md:scroll-mt-32">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* City */}
@@ -347,12 +349,15 @@ const FindHealthcareWorkers = () => {
                 {/* Provider Type */}
                 <div className="space-y-2">
                   <Label>{isAr ? "نوع مقدم الخدمة" : "Provider Type"}</Label>
-                  <Select value={providerType} onValueChange={setProviderType}>
+                  <Select
+                    value={providerType || "all"}
+                    onValueChange={(v) => setProviderType(v === "all" ? "" : v)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder={isAr ? "الكل" : "All"} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">{isAr ? "الكل" : "All"}</SelectItem>
+                      <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
                       {PROVIDER_TYPES.map((pt) => (
                         <SelectItem key={pt.value} value={pt.value}>
                           {isAr ? pt.label_ar : pt.label_en}
@@ -365,12 +370,15 @@ const FindHealthcareWorkers = () => {
                 {/* Language */}
                 <div className="space-y-2">
                   <Label>{isAr ? "اللغة المطلوبة" : "Language Needed"}</Label>
-                  <Select value={languageFilter} onValueChange={setLanguageFilter}>
+                  <Select
+                    value={languageFilter || "all"}
+                    onValueChange={(v) => setLanguageFilter(v === "all" ? "" : v)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder={isAr ? "الكل" : "All"} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">{isAr ? "الكل" : "All"}</SelectItem>
+                      <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
                       {LANGUAGES_OPTIONS.map((lang) => (
                         <SelectItem key={lang.value} value={lang.value}>
                           {isAr ? lang.label_ar : lang.label_en}

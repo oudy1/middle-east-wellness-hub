@@ -50,30 +50,46 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
   };
 }
 
+// Mirror of content/chatbot-routes.json (edge functions cannot import from src).
+// Keep both files in sync: this is the only list the model may link to.
 const APPROVED_ROUTES: Record<string, string> = {
   home: "/",
   about: "/about",
   services: "/services",
   resources: "/services#resources",
-  programs: "/programs",
-  patient_rights: "/services#patient-rights",
+  educational_materials: "/services#educational-materials",
   community_services: "/services#community-services",
+  patient_rights: "/services#patient-rights",
+  clinical_tools: "/services#clinical-tools",
+  emergency_help: "/services#need-help",
+  diabetes: "/services#diabetes-education",
+  mental_health: "/services#mental-health-arabic",
+  breast_cancer: "/services#breast-cancer-arabic",
+  heart_health: "/services#cardio-health",
+  vaccines: "/services#vaccines-immunization",
+  smoking_cessation: "/services#smoking-cessation",
+  programs: "/programs",
+  mentorship: "/programs/mentorship",
   research: "/research",
+  research_portfolio: "/research#portfolio",
+  conferences: "/research#portfolio",
   research_studies: "/research#studies",
   research_opportunities: "/research#opportunities",
   researchers: "/research#researchers",
-  conferences: "/research#conferences",
+  abstracts: "/research#publications",
+  publications: "/research#publications",
   recordings: "/recordings",
   webinars: "/recordings",
+  weekly_topics: "/recordings#topic-request",
   healthcare_workers: "/find-healthcare-workers",
-  family_physicians: "/find-healthcare-workers#family-physicians",
+  family_physicians: "/find-healthcare-workers?specialty=Family%20Physician",
   browse_by_city: "/find-healthcare-workers#browse-by-city",
   contact: "/contact",
   volunteer: "/volunteer",
   join_us: "/join-us",
   support_us: "/support-us",
   faq: "/faq",
-  mentorship: "/programs/mentorship",
+  glossary: "/glossary",
 };
 
 const APPROVED_URL_SET = new Set(Object.values(APPROVED_ROUTES));
@@ -101,6 +117,13 @@ AR: "مرحباً، أنا مساعد شمس. ماذا تبحث عنه اليو�
 - Only use links from the APPROVED ROUTES list below, or from the CONTEXT the user's app provides.
 - Never invent URLs, doctor names, study titles, dates, or programs.
 - If you don't have grounded information, say the fallback: "I don't want to guess. The safest next step is to contact SHAMS at infoprojectshams@gmail.com." / "لا أريد أن أعطيك معلومة غير مؤكدة. الأفضل التواصل مع شمس مباشرة على infoprojectshams@gmail.com."
+- Never invent or guess a SHAMS URL. Only use URLs from the approved route map or the provided CONTEXT.
+- If you know the topic but have no approved route, say: "I found the topic, but I don't have a verified direct link. You can browse the relevant section here." then link the nearest approved parent page.
+
+## Email actions (removed pages)
+- Submitting an opportunity: use [Email SHAMS](mailto:infoprojectshams@gmail.com?subject=Opportunity%20Submission%20%E2%80%93%20SHAMS). There is no submission form page.
+- Joining the healthcare worker directory: use [Email SHAMS](mailto:infoprojectshams@gmail.com?subject=Healthcare%20Worker%20Listing%20Request%20%E2%80%93%20SHAMS).
+- General questions: use [Contact SHAMS](/contact) or [Email SHAMS](mailto:infoprojectshams@gmail.com?subject=General%20Inquiry%20%E2%80%93%20SHAMS).
 
 ## Approved routes
 ${Object.entries(APPROVED_ROUTES).map(([k, v]) => `- ${k}: ${v}`).join("\n")}

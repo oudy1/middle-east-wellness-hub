@@ -10,11 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { Play, Calendar, Mail, Globe, FileText, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import TopicRequestForm from "@/components/TopicRequestForm";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import webinarsData from "../../content/webinars.json";
 
 const Webinars = () => {
   const { language, t } = useLanguage();
   const [webinarLang, setWebinarLang] = useState<'en' | 'ar'>('en');
+  useHashScroll();
 
   const webinars = webinarsData;
 
@@ -179,7 +181,7 @@ const Webinars = () => {
             ))}
             
             {/* Topic Request Section */}
-            <div className="bg-white p-8 rounded-lg shadow-md mb-12">
+            <div id="topic-request" className="bg-white p-8 rounded-lg shadow-md mb-12 scroll-mt-24 md:scroll-mt-32">
               <h2 className="text-2xl font-bold mb-6 text-center text-healthDarkBlue">
                 {t("webinars.requestTitle")}
               </h2>

@@ -6,6 +6,7 @@ import studies from "../../content/studies.json";
 import webinars from "../../content/webinars.json";
 import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
+import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
 
 export type KnowledgeCategory =
   | "resources"
@@ -349,8 +350,10 @@ export function searchKnowledge(query: string, language: "en" | "ar" = "en", lim
     .slice(0, limit);
 }
 
+// Single validator shared with the chatbot so search results, quick replies and
+// recommended links can never diverge from the approved route map.
 export function isApprovedUrl(url: string): boolean {
   if (!url) return false;
-  if (url.startsWith("http")) return true; // external links from content are allowed
-  return Object.values(approvedRoutes).some((r) => r === url || url.startsWith(r + "?") || url === r);
+  if (isSafeExternalUrl(url) || isMailtoOrTel(url)) return true;
+  return isApprovedInternalUrl(url);
 }
