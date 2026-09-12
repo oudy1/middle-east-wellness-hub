@@ -370,12 +370,15 @@ const FindHealthcareWorkers = () => {
                 {/* Language */}
                 <div className="space-y-2">
                   <Label>{isAr ? "اللغة المطلوبة" : "Language Needed"}</Label>
-                  <Select value={languageFilter} onValueChange={setLanguageFilter}>
+                  <Select
+                    value={languageFilter || "all"}
+                    onValueChange={(v) => setLanguageFilter(v === "all" ? "" : v)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder={isAr ? "الكل" : "All"} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">{isAr ? "الكل" : "All"}</SelectItem>
+                      <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
                       {LANGUAGES_OPTIONS.map((lang) => (
                         <SelectItem key={lang.value} value={lang.value}>
                           {isAr ? lang.label_ar : lang.label_en}
