@@ -6,6 +6,7 @@ import studies from "../../content/studies.json";
 import webinars from "../../content/webinars.json";
 import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
+import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
 
 export type KnowledgeCategory =
   | "resources"
