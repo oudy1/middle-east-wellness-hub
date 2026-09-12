@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -101,6 +102,7 @@ const FindHealthcareWorkers = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  useHashScroll();
   
   // Search form state
   const [city, setCity] = useState(searchParams.get("city") || "");
