@@ -313,7 +313,7 @@ const FindHealthcareWorkers = () => {
             </div>
 
           {/* Search Form */}
-          <Card className="mb-8">
+          <Card id="browse-by-city" className="mb-8 scroll-mt-24 md:scroll-mt-32">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* City */}
