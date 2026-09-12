@@ -349,12 +349,15 @@ const FindHealthcareWorkers = () => {
                 {/* Provider Type */}
                 <div className="space-y-2">
                   <Label>{isAr ? "نوع مقدم الخدمة" : "Provider Type"}</Label>
-                  <Select value={providerType} onValueChange={setProviderType}>
+                  <Select
+                    value={providerType || "all"}
+                    onValueChange={(v) => setProviderType(v === "all" ? "" : v)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder={isAr ? "الكل" : "All"} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">{isAr ? "الكل" : "All"}</SelectItem>
+                      <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
                       {PROVIDER_TYPES.map((pt) => (
                         <SelectItem key={pt.value} value={pt.value}>
                           {isAr ? pt.label_ar : pt.label_en}
