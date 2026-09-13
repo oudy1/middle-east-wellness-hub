@@ -189,6 +189,8 @@ export type Database = {
           province: string
           source: string | null
           specialty: string | null
+          submitted_by_email: string | null
+          verified: boolean
           virtual_available: boolean | null
           website: string | null
         }
@@ -209,6 +211,8 @@ export type Database = {
           province: string
           source?: string | null
           specialty?: string | null
+          submitted_by_email?: string | null
+          verified?: boolean
           virtual_available?: boolean | null
           website?: string | null
         }
@@ -229,6 +233,8 @@ export type Database = {
           province?: string
           source?: string | null
           specialty?: string | null
+          submitted_by_email?: string | null
+          verified?: boolean
           virtual_available?: boolean | null
           website?: string | null
         }
