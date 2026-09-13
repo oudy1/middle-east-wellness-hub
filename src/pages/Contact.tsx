@@ -5,6 +5,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, MapPin, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ContactForm from "@/components/ContactForm";
 
 const Contact = () => {
   const { language, t } = useLanguage();
@@ -49,7 +50,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="max-w-lg mx-auto">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
               {/* Contact Information */}
               <div className="space-y-6">
                 <Card className="shadow-lg">
@@ -97,6 +98,8 @@ const Contact = () => {
                 </Card>
 
               </div>
+
+              <ContactForm />
             </div>
           </div>
         </section>

@@ -6,7 +6,7 @@ Updated: just now
 ## Core
 Bilingual EN/AR: Arabic uses RTL, font-cairo. No em dashes (—). Show 'المحتوى قيد الترجمة' for missing translations.
 Identity: Toronto-based. MENA "societies" (never "communities"). Email: infoprojectshams@gmail.com.
-Forms: No internal submission forms. Use external Google Forms or mailto: links.
+Forms: External Google Forms or mailto: links everywhere, except the real Contact page form (approved exception).
 Design: Compact layouts, no oversized elements. No large posters in feeds—use thumbnails + modals. Mobile-first (44px touch targets).
 Color contrast: `healthTeal` #0E7A8A for light surfaces; `healthTealLight` #5BC8D8 for text on dark navy. `--primary` is darkened amber (~#AC3F12). Never revert.
 Security: Strict RLS (insert-only for public). Chat history isolated via persistent x-session-id in localStorage.
@@ -29,6 +29,7 @@ Content: CMS-like JSON layer under /content/. Translations, webinars, studies ex
 - [Patient Rights Section](mem://features/patient-rights-section) — Direct links to Ontario Health atHome EN/AR guidance
 - [Partner Programs Page](mem://features/partner-programs-page) — Layout for mental health support initiatives like BLCC
 - [Contact Page Design](mem://features/contact-page-design) — Streamlined hub directing users to external contact methods
+- [Contact Form](mem://features/contact-form) — Real on-site contact form emailing SHAMS via Resend
 - [Services Page Structure](mem://features/services-page-structure) — Categorized grid, sticky filter bar, emergency quick-access
 - [Research Studies System](mem://features/research-studies-system) — Compact study cards, modal integration, and carousel displays
 - [Submission Workflow](mem://features/submission-workflow-redesign) — Direct email-based application processes
