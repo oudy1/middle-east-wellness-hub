@@ -98,6 +98,8 @@ const Contact = () => {
                 </Card>
 
               </div>
+
+              <ContactForm />
             </div>
           </div>
         </section>
