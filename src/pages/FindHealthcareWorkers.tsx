@@ -95,6 +95,7 @@ interface HealthcareWorker {
   accepting_new_patients: boolean | null;
   virtual_available: boolean | null;
   notes: string | null;
+  verified: boolean | null;
 }
 
 const FindHealthcareWorkers = () => {
@@ -496,6 +497,16 @@ const FindHealthcareWorkers = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-2 mt-4">
+                          {worker.verified ? (
+                            <span className="inline-flex items-center gap-1 text-xs bg-healthTeal/10 text-healthTeal px-2 py-1 rounded-full">
+                              <UserCheck className="h-3 w-3" />
+                              {isAr ? "تم التحقق من قبل شمس" : "Verified by SHAMS"}
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 text-xs bg-amber-100 text-amber-900 px-2 py-1 rounded-full">
+                              {isAr ? "مُدرج ذاتيًا، لم يتم التحقق بعد" : "Self-listed, not yet verified"}
+                            </span>
+                          )}
                           {worker.accepting_new_patients && (
                             <span className="inline-flex items-center gap-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
                               <UserCheck className="h-3 w-3" />
