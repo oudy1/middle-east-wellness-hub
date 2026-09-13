@@ -29,6 +29,7 @@ Content: CMS-like JSON layer under /content/. Translations, webinars, studies ex
 - [Patient Rights Section](mem://features/patient-rights-section) — Direct links to Ontario Health atHome EN/AR guidance
 - [Partner Programs Page](mem://features/partner-programs-page) — Layout for mental health support initiatives like BLCC
 - [Contact Page Design](mem://features/contact-page-design) — Streamlined hub directing users to external contact methods
+- [Contact Form](mem://features/contact-form) — Real on-site contact form emailing SHAMS via Resend
 - [Services Page Structure](mem://features/services-page-structure) — Categorized grid, sticky filter bar, emergency quick-access
 - [Research Studies System](mem://features/research-studies-system) — Compact study cards, modal integration, and carousel displays
 - [Submission Workflow](mem://features/submission-workflow-redesign) — Direct email-based application processes
