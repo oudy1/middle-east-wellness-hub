@@ -240,6 +240,75 @@ export type Database = {
         }
         Relationships: []
       }
+      opportunities: {
+        Row: {
+          created_at: string
+          deadline: string | null
+          email: string
+          first_name: string
+          id: string
+          institution: string
+          is_paid: string | null
+          language: string
+          last_name: string
+          newsletter: boolean
+          phone: string | null
+          preferred_background: string | null
+          project_description: string
+          project_title: string
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          study_website: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          deadline?: string | null
+          email: string
+          first_name: string
+          id?: string
+          institution: string
+          is_paid?: string | null
+          language?: string
+          last_name: string
+          newsletter?: boolean
+          phone?: string | null
+          preferred_background?: string | null
+          project_description: string
+          project_title: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          study_website?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          deadline?: string | null
+          email?: string
+          first_name?: string
+          id?: string
+          institution?: string
+          is_paid?: string | null
+          language?: string
+          last_name?: string
+          newsletter?: boolean
+          phone?: string | null
+          preferred_background?: string | null
+          project_description?: string
+          project_title?: string
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          study_website?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       provider_suggestions: {
         Row: {
           city: string

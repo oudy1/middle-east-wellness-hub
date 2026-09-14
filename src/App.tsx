@@ -26,6 +26,8 @@ import FAQ from "@/pages/FAQ";
 import Glossary from "@/pages/Glossary";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminFaqVotes from "@/pages/AdminFaqVotes";
+import AdminOpportunities from "@/pages/AdminOpportunities";
+import PostOpportunity from "@/pages/PostOpportunity";
 import NotFound from "@/pages/NotFound";
 import ChatWidget from "@/components/chat/ChatWidget";
 import './App.css';
@@ -62,6 +64,8 @@ function App() {
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/faq-votes" element={<AdminFaqVotes />} />
+            <Route path="/admin/opportunities" element={<AdminOpportunities />} />
+            <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatWidget />
