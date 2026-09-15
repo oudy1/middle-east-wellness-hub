@@ -11,9 +11,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { GraduationCap, Stethoscope, Pill, Smile, Info } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 
 const MentorshipBooking = () => {
   const { t, language } = useLanguage();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -88,31 +91,82 @@ const MentorshipBooking = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.mentorshipType) {
       toast.error(t("form.requiredFieldsError"));
       return;
     }
 
-    // Here you would typically send the data to your backend
-    console.log("Mentorship booking submitted:", formData);
-    toast.success(t("mentorshipBooking.successToast"));
+    const selectedType =
+      mentorshipTypes.find((type) => type.value === formData.mentorshipType)?.label ||
+      formData.mentorshipType;
 
-    // Reset form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      mentorshipType: "",
-      currentLevel: "",
-      interests: [],
-      goals: "",
-      availability: "",
-      additionalInfo: ""
-    });
+    const message = [
+      `Name: ${formData.firstName} ${formData.lastName}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone || "-"}`,
+      `Mentorship type: ${selectedType}`,
+      `Current level: ${formData.currentLevel || "-"}`,
+      `Areas of interest: ${formData.interests.length ? formData.interests.join(", ") : "-"}`,
+      "",
+      `Goals: ${formData.goals || "-"}`,
+      "",
+      `Availability: ${formData.availability || "-"}`,
+      "",
+      `Additional information: ${formData.additionalInfo || "-"}`,
+      "",
+      `Submitted in: ${language}`,
+    ].join("\n");
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: `${formData.firstName} ${formData.lastName}`.trim().slice(0, 100),
+          email: formData.email.trim(),
+          subject: `Mentorship request - ${selectedType}`.slice(0, 200),
+          message,
+        },
+      });
+
+      if (error) {
+        const details =
+          error instanceof FunctionsHttpError ? await error.context.text() : error.message;
+        console.error("Mentorship request failed:", details);
+        toast.error(
+          language === "ar"
+            ? "لم يتم الإرسال. يمكنك مراسلتنا على infoprojectshams@gmail.com."
+            : "Could not send. You can email us at infoprojectshams@gmail.com.",
+        );
+        return;
+      }
+
+      toast.success(t("mentorshipBooking.successToast"));
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        mentorshipType: "",
+        currentLevel: "",
+        interests: [],
+        goals: "",
+        availability: "",
+        additionalInfo: ""
+      });
+    } catch (err) {
+      console.error("Mentorship request failed:", err);
+      toast.error(
+        language === "ar"
+          ? "لم يتم الإرسال. يمكنك مراسلتنا على infoprojectshams@gmail.com."
+          : "Could not send. You can email us at infoprojectshams@gmail.com.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
