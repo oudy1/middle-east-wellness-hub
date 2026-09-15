@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import DOMPurify from 'dompurify';
 
 const InquiryForm = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isAr = language === "ar";
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -24,7 +27,7 @@ const InquiryForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const maxLength = name === 'message' ? 2000 : 200;
-    
+
     if (value.length <= maxLength) {
       setFormData({
         ...formData,
@@ -35,7 +38,7 @@ const InquiryForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate all fields
     const validations = [
       { field: 'name', value: formData.name, maxLength: 100 },
@@ -43,9 +46,9 @@ const InquiryForm = () => {
       { field: 'subject', value: formData.subject, maxLength: 200 },
       { field: 'message', value: formData.message, maxLength: 2000 }
     ];
-    
+
     for (const validation of validations) {
-      if (!validateInput(validation.value, validation.maxLength)) {
+      if (!validation.value.trim() || !validateInput(validation.value, validation.maxLength)) {
         toast({
           title: "Invalid input",
           description: `Please check your ${validation.field} field.`,
@@ -54,31 +57,51 @@ const InquiryForm = () => {
         return;
       }
     }
-    
+
     setIsSubmitting(true);
-    
-    // Sanitize all form data before submission
+
     const sanitizedData = {
       name: DOMPurify.sanitize(formData.name.trim()),
       email: DOMPurify.sanitize(formData.email.trim()),
       subject: DOMPurify.sanitize(formData.subject.trim()),
       message: DOMPurify.sanitize(formData.message.trim())
     };
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: sanitizedData,
       });
+      if (error) {
+        const details =
+          error instanceof FunctionsHttpError ? await error.context.text() : error.message;
+        console.error("send-contact-email failed:", details);
+        toast({
+          title: isAr ? "لم يتم الإرسال" : "Could not send",
+          description: isAr
+            ? "حدث خطأ. يمكنك مراسلتنا على infoprojectshams@gmail.com."
+            : "Something went wrong. You can email us at infoprojectshams@gmail.com.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setFormData({ name: '', email: '', subject: '', message: '' });
       toast({
         title: "Message sent!",
         description: "Thank you for your inquiry! We will get back to you soon."
       });
-    }, 1000);
+    } catch (err) {
+      console.error("send-contact-email failed:", err);
+      toast({
+        title: isAr ? "لم يتم الإرسال" : "Could not send",
+        description: isAr
+          ? "حدث خطأ. يمكنك مراسلتنا على infoprojectshams@gmail.com."
+          : "Something went wrong. You can email us at infoprojectshams@gmail.com.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -118,7 +141,7 @@ const InquiryForm = () => {
               />
             </div>
           </div>
-          
+
           <div>
             <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
               {t("contact.subject")} *
@@ -134,7 +157,7 @@ const InquiryForm = () => {
               maxLength={200}
             />
           </div>
-          
+
           <div>
             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
               {t("contact.message")} *
@@ -150,10 +173,10 @@ const InquiryForm = () => {
               maxLength={2000}
             />
           </div>
-          
+
           <div className="text-center">
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
               className="bg-healthTeal hover:bg-healthTeal/80 text-white px-8 py-3"
             >
