@@ -362,9 +362,14 @@ const MentorshipBooking = () => {
               <div className="text-center">
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="bg-healthTeal hover:bg-healthTeal/90 text-white px-8 py-3 text-lg"
                 >
-                  {t("mentorshipBooking.submit")}
+                  {isSubmitting
+                    ? language === "ar"
+                      ? "جارٍ الإرسال..."
+                      : "Sending..."
+                    : t("mentorshipBooking.submit")}
                 </Button>
                 <p className="text-sm text-gray-600 mt-4">
                   {t("mentorshipBooking.requiredNote")}
