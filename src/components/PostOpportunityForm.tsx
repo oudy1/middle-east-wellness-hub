@@ -106,6 +106,35 @@ const PostOpportunityForm = () => {
 
       if (error) throw error;
 
+      // Notify the SHAMS inbox as well, so submissions are never missed.
+      try {
+        await supabase.functions.invoke("send-contact-email", {
+          body: {
+            name: `${formData.firstName} ${formData.lastName}`.trim().slice(0, 100),
+            email: formData.email.trim(),
+            subject: `New research opportunity - ${formData.projectTitle.trim()}`.slice(0, 200),
+            message: [
+              `Name: ${formData.firstName} ${formData.lastName}`,
+              `Email: ${formData.email}`,
+              `Phone: ${formData.phone || "-"}`,
+              `Institution: ${formData.institution}`,
+              `Project title: ${formData.projectTitle}`,
+              `Preferred background: ${formData.preferredBackground || "-"}`,
+              `Deadline: ${formData.deadline || "-"}`,
+              `Paid: ${formData.isPaid || "-"}`,
+              `Study website: ${formData.studyWebsite || "-"}`,
+              `Newsletter opt-in: ${formData.newsletter ? "yes" : "no"}`,
+              `Submitted in: ${language}`,
+              "",
+              "Description:",
+              formData.projectDescription,
+            ].join("\n"),
+          },
+        });
+      } catch (notifyError) {
+        console.error("Opportunity notification email failed:", notifyError);
+      }
+
       setFormData({ ...emptyForm });
       toast({
         title: t("opportunityForm.successTitle"),
