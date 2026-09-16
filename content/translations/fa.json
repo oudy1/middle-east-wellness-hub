@@ -278,7 +278,7 @@
   "chatbot.emergencyBody": "Call 911 or go to your nearest emergency room. In Canada, call or text 988 for mental health support.",
   "chatbot.safetyUrgent": "If this is urgent or someone is in immediate danger, call 911 or go to the nearest emergency department right now.",
   "chatbot.safetyDisclaimer": "Disclaimer: We are not medical doctors. This guide is for information only and not a substitute for medical advice.",
-  "chatbot.fallback": "I don't want to guess. The safest next step is to contact SHAMS at infoprojectshams@gmail.com.",
+  "chatbot.fallback": "I don't want to guess. The safest next step is to send SHAMS a message using the contact form.",
   "chatbot.medicalSafety": "I can share general resources, but I can't diagnose or give medical advice. If this is urgent or someone is in danger, call 911 or go to the nearest emergency department. For mental health support in Canada, call or text 988.",
   "chatbot.qr.1.label": "Find Arabic Resources",
   "chatbot.qr.1.message": "Show me Arabic health resources",
