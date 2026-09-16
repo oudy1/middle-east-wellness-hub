@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -50,7 +51,26 @@ const ContactForm = () => {
     sentAgain: isAr ? "إرسال رسالة أخرى" : "Send another message",
   };
 
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  // The chatbot sends people here with ?topic=..., so the subject arrives prefilled.
+  const [searchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
+  const topicSubjects: Record<string, { en: string; ar: string }> = {
+    general: { en: "General inquiry", ar: "استفسار عام" },
+    opportunity: { en: "Opportunity submission", ar: "تقديم فرصة" },
+    "healthcare-listing": {
+      en: "Healthcare worker listing request",
+      ar: "طلب إضافة مقدم رعاية صحية",
+    },
+    mentorship: { en: "Mentorship question", ar: "سؤال عن الإرشاد" },
+  };
+  const prefilledSubject = topic && topicSubjects[topic] ? topicSubjects[topic][isAr ? "ar" : "en"] : "";
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: prefilledSubject,
+    message: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 

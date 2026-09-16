@@ -6,9 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, MapPin, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ContactForm from "@/components/ContactForm";
+import { useHashScroll } from "@/hooks/useHashScroll";
 
 const Contact = () => {
   const { language, t } = useLanguage();
+  useHashScroll();
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
@@ -99,7 +101,9 @@ const Contact = () => {
 
               </div>
 
-              <ContactForm />
+              <div id="contact-form" className="scroll-mt-24">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </section>
