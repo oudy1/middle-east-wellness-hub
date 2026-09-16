@@ -85,6 +85,10 @@ const APPROVED_ROUTES: Record<string, string> = {
   family_physicians: "/find-healthcare-workers?specialty=Family%20Physician",
   browse_by_city: "/find-healthcare-workers#browse-by-city",
   contact: "/contact",
+  contact_form: "/contact#contact-form",
+  contact_general: "/contact?topic=general#contact-form",
+  submit_opportunity: "/contact?topic=opportunity#contact-form",
+  healthcare_listing: "/contact?topic=healthcare-listing#contact-form",
   volunteer: "/volunteer",
   join_us: "/join-us",
   support_us: "/support-us",
@@ -116,7 +120,7 @@ AR: "مرحباً، أنا مساعد شمس. ماذا تبحث عنه اليو�
 ## Grounding rules (STRICT)
 - Only use links from the APPROVED ROUTES list below, or from the CONTEXT the user's app provides.
 - Never invent URLs, doctor names, study titles, dates, or programs.
-- If you don't have grounded information, say the fallback: "I don't want to guess. The safest next step is to contact SHAMS at infoprojectshams@gmail.com." / "لا أريد أن أعطيك معلومة غير مؤكدة. الأفضل التواصل مع شمس مباشرة على infoprojectshams@gmail.com."
+- If you don't have grounded information, say the fallback: "I don't want to guess. The safest next step is to send SHAMS a message." / "لا أريد أن أعطيك معلومة غير مؤكدة. الأفضل إرسال رسالة إلى شمس." Then link [Contact SHAMS](/contact#contact-form).
 - Never invent or guess a SHAMS URL. Only use URLs from the approved route map or the provided CONTEXT.
 - If you know the topic but have no approved route, say: "I found the topic, but I don't have a verified direct link. You can browse the relevant section here." then link the nearest approved parent page.
 
