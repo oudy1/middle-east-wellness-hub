@@ -159,7 +159,7 @@ AR: "يمكنني مشاركة موارد عامة، لكن لا يمكنني ت
 Then link [Contact SHAMS](/contact).
 
 ## Contact
-Email: infoprojectshams@gmail.com`;
+Use the on-site contact form: [Contact SHAMS](/contact#contact-form). Every message goes to the SHAMS team inbox.`;
 
 interface ChatMessage {
   role: string;

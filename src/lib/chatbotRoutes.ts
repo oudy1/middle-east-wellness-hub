@@ -29,16 +29,20 @@ export const approvedHashes: Record<string, Set<string>> = Object.values(approve
   {} as Record<string, Set<string>>
 );
 
-/** Approved mailto actions with prefilled subjects. */
 export const SHAMS_EMAIL = "infoprojectshams@gmail.com";
 
-export const mailtoActions = {
-  general: `mailto:${SHAMS_EMAIL}?subject=${encodeURIComponent("General Inquiry – SHAMS")}`,
-  opportunity: `mailto:${SHAMS_EMAIL}?subject=${encodeURIComponent("Opportunity Submission – SHAMS")}`,
-  healthcare_listing: `mailto:${SHAMS_EMAIL}?subject=${encodeURIComponent(
-    "Healthcare Worker Listing Request – SHAMS"
-  )}`,
+/**
+ * Contact actions route to the on-site contact form (which emails the SHAMS
+ * inbox through the same sender) instead of opening the visitor's mail app.
+ */
+export const contactActions = {
+  general: "/contact?topic=general#contact-form",
+  opportunity: "/contact?topic=opportunity#contact-form",
+  healthcare_listing: "/contact?topic=healthcare-listing#contact-form",
 } as const;
+
+/** Contact topics the form can prefill. */
+export type ContactTopic = keyof typeof contactActions;
 
 /** Nearest verified parent page for a given internal URL. */
 export function parentRoute(url: string): string {
