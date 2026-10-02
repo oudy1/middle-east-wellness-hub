@@ -492,21 +492,9 @@ const Research = () => {
               </DialogContent>
             </Dialog>
 
-            {/* Submit opportunity via email */}
-            <div id="opportunities" className="text-center py-8 mt-8 scroll-mt-24">
-              <Search className="h-10 w-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold mb-1">{t("resources.opportunitiesComingSoon")}</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                {isAr
-                  ? 'إذا كنت ترغب في مشاركة فرصة بحثية أو وظيفية مع مجتمع شمس، يرجى مراسلتنا بالتفاصيل.'
-                  : 'If you would like to share a research position, job, or opportunity with the SHAMS community, please email us with the details.'}
-              </p>
-              <a href="mailto:infoprojectshams@gmail.com?subject=Opportunity%20Submission%20%E2%80%93%20SHAMS">
-                <Button className="bg-destructive hover:bg-destructive/90 text-destructive-foreground">
-                  <Mail className="h-4 w-4 mr-2" />
-                  {isAr ? 'أرسل فرصة' : 'Submit an Opportunity'}
-                </Button>
-              </a>
+            {/* Approved community opportunities */}
+            <div id="opportunities" className="py-8 mt-8 scroll-mt-24">
+              <ResearchOpportunitiesList />
             </div>
           </div>
         </section>
