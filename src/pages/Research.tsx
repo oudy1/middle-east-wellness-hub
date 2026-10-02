@@ -38,6 +38,7 @@ import { useHashScroll } from "@/hooks/useHashScroll";
 import StudyCard from "@/components/StudyCard";
 import SawaFlyerCarousel from "@/components/SawaFlyerCarousel";
 import SHAMSResearchPortfolio from "@/components/SHAMSResearchPortfolio";
+import ResearchOpportunitiesList from "@/components/ResearchOpportunitiesList";
 
 // Color maps for Tailwind JIT safety
 const accentStyles: Record<string, { border: string; borderHover: string; gradFrom: string; gradTo: string; circle: string; circleGrad: string; text: string; tagBg: string; }> = {
