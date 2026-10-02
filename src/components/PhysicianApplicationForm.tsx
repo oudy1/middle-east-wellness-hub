@@ -10,24 +10,43 @@ import { UserCheck, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import DOMPurify from "dompurify";
+import { supabase } from "@/integrations/supabase/client";
+
+const emptyForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  signUpForNews: false,
+  phone: "",
+  providerType: "",
+  city: "",
+  province: "",
+  specialty: "",
+  hospitalAffiliation: "",
+  experience: "",
+  languagesSpoken: "",
+  culturalBackground: "",
+  availability: "",
+  message: "",
+};
+
+const PROVINCES = ["ON", "QC", "BC", "AB", "MB", "SK", "NS", "NB", "NL", "PE", "YT", "NT", "NU"];
+const PROVIDER_TYPES = [
+  { value: "Family Physician", ar: "طبيب أسرة" },
+  { value: "Specialist", ar: "طبيب أخصائي" },
+  { value: "Nurse Practitioner", ar: "ممرض ممارس" },
+  { value: "Psychologist", ar: "أخصائي نفسي" },
+  { value: "Therapist", ar: "معالج" },
+  { value: "Pharmacist", ar: "صيدلي" },
+  { value: "Dentist", ar: "طبيب أسنان" },
+  { value: "Other", ar: "أخرى" },
+];
 
 const PhysicianApplicationForm = () => {
   const { toast } = useToast();
-  const { t } = useLanguage();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    signUpForNews: false,
-    phone: "",
-    specialty: "",
-    hospitalAffiliation: "",
-    experience: "",
-    languagesSpoken: "",
-    culturalBackground: "",
-    availability: "",
-    message: "",
-  });
+  const { t, language } = useLanguage();
+  const isAr = language === "ar";
+  const [formData, setFormData] = useState(emptyForm);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -140,39 +159,69 @@ const PhysicianApplicationForm = () => {
         return;
       }
     }
+    if (!formData.city.trim() || formData.city.trim().length < 2 || !formData.province || !formData.providerType) {
+      toast({
+        title: t("form.invalidInput"),
+        description: t("form.invalidInputDesc"),
+        variant: "destructive",
+      });
+      return;
+    }
     setIsSubmitting(true);
     try {
-      const payload = { ...formData, form: "physicianApplication" };
-
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      signUpForNews: false,
-      phone: "",
-      specialty: "",
-      hospitalAffiliation: "",
-      experience: "",
-      languagesSpoken: "",
-      culturalBackground: "",
-      availability: "",
-      message: "",
-    });
-        toast({
-        title: t("form.submittingTitle"),
-        description: t("form.submittingDesc"),
+      const fd = formData;
+      const fullName = `${fd.firstName.trim()} ${fd.lastName.trim()}`.slice(0, 120);
+      const specialtyLabel = specialtyOptions.find((o) => o.value === fd.specialty);
+      const notes = [
+        `Experience: ${fd.experience} years`,
+        `Availability: ${fd.availability}`,
+        fd.culturalBackground ? `Background: ${fd.culturalBackground}` : "",
+        `Message: ${fd.message}`,
+      ].filter(Boolean).join("\n").slice(0, 1000);
+      const { error } = await supabase.from("healthcare_workers").insert({
+        full_name: fullName,
+        provider_type: fd.providerType,
+        specialty: specialtyLabel ? t(specialtyLabel.labelKey) : fd.specialty,
+        languages: fd.languagesSpoken.split(/[,،]/).map((s) => s.trim()).filter(Boolean).slice(0, 10),
+        city: fd.city.trim().slice(0, 80),
+        province: fd.province,
+        clinic_name: fd.hospitalAffiliation.trim().slice(0, 200),
+        phone: fd.phone.trim() ? fd.phone.trim().slice(0, 40) : null,
+        email: fd.email.trim().slice(0, 255),
+        submitted_by_email: fd.email.trim().slice(0, 255),
+        notes,
+        source: "self-submitted",
+        verified: false,
       });
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbzxUiC1xIfECzNeVmuUsxJapZWHNJ0Gz5XJSMJFz0YpRKfZqQhDcUu4pZlRVrL4vXDg/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
+      if (error) throw error;
+
+      try {
+        await supabase.functions.invoke("send-contact-email", {
+          body: {
+            name: fullName,
+            email: fd.email.trim(),
+            subject: `Physician directory application - ${fd.city.trim()}, ${fd.province}`.slice(0, 200),
+            message: [
+              `Name: ${fullName}`,
+              `Email: ${fd.email}`,
+              `Phone: ${fd.phone || "-"}`,
+              `Provider type: ${fd.providerType}`,
+              `Specialty: ${fd.specialty}`,
+              `City: ${fd.city}, ${fd.province}`,
+              `Clinic/Hospital: ${fd.hospitalAffiliation}`,
+              `Languages: ${fd.languagesSpoken}`,
+              `Newsletter: ${fd.signUpForNews ? "yes" : "no"}`,
+              notes,
+              "",
+              "Saved to the directory as unverified. Verify it in the admin area before it shows as Verified by SHAMS.",
+            ].join("\n"),
           },
-          body: JSON.stringify(payload),
-        }
-      );
+        });
+      } catch (mailErr) {
+        console.error("Notification email failed");
+      }
+
+      setFormData(emptyForm);
       setIsSubmitting(false);
       setSubmitted(true);
       toast({
@@ -297,6 +346,46 @@ const PhysicianApplicationForm = () => {
             <label htmlFor="signUpForNews" className="text-sm text-gray-700">
               {t("form.newsletter")}
             </label>
+          </div>
+
+          {/* Provider type, city, province */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 md:mb-2 text-start">
+                {isAr ? "نوع مقدم الرعاية" : "Provider type"} *
+              </label>
+              <Select value={formData.providerType} onValueChange={(v) => handleInputChange("providerType", v)}>
+                <SelectTrigger aria-label={isAr ? "نوع مقدم الرعاية" : "Provider type"}>
+                  <SelectValue placeholder={t("form.selectOption")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {PROVIDER_TYPES.map((p) => (
+                    <SelectItem key={p.value} value={p.value}>{isAr ? p.ar : p.value}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1 md:mb-2 text-start">
+                {isAr ? "المدينة" : "City"} *
+              </label>
+              <Input id="city" name="city" value={formData.city} onChange={handleChange} required maxLength={80} className="w-full" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 md:mb-2 text-start">
+                {isAr ? "المقاطعة" : "Province"} *
+              </label>
+              <Select value={formData.province} onValueChange={(v) => handleInputChange("province", v)}>
+                <SelectTrigger aria-label={isAr ? "المقاطعة" : "Province"}>
+                  <SelectValue placeholder={t("form.selectOption")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {PROVINCES.map((p) => (
+                    <SelectItem key={p} value={p}>{p}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Medical Specialty */}
