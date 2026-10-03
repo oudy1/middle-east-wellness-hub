@@ -23,31 +23,33 @@ const PartnersSection = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  const isAr = language === 'ar';
+
   const partners = [
     {
       name: "Canadian Arab Institute",
       logo: "/lovable-uploads/ca74b069-e656-4ce3-944e-98915200f6b6.png",
-      description: "Institut Canado-Arabe",
+      description: isAr ? "المعهد الكندي العربي" : "Institut Canado-Arabe",
       link: "https://www.canadianarabinstitute.org"
     },
     {
       name: "Mississauga Registered Community Group",
       logo: "/lovable-uploads/mississauga-community-group.jpg",
-      description: language === 'ar' ? 'دعم المجتمعات المتنوعة في ميسيساغا' : "Supporting diverse communities in Mississauga",
+      description: isAr ? 'دعم المجتمعات المتنوعة في ميسيساغا' : "Supporting diverse communities in Mississauga",
       link: "#"
     },
   ];
 
   const clubs = [
-    { name: "ESA", logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png", description: "Egyptian Students Association", link: "#" },
-    { name: "North African Student Association of UW and Laurier", logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png", description: "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University", link: "#" },
-    { name: "MYOM", logo: "/lovable-uploads/myom-logo.png", description: "Moroccan Youth of Montreal", link: "#" },
-    { name: "CASA", logo: "/lovable-uploads/casa-logo.png", description: "Christian Arab Student Association - University of Alberta", link: "#" },
-    { name: "PCC", logo: "/lovable-uploads/pcc-logo.png", description: "Palestinian Cultural Club - University of Alberta", link: "#" },
-    { name: "APS UTM", logo: "/lovable-uploads/aps-utm-logo.png", description: "Association of Palestinian Students - UofT Mississauga", link: "#" },
-    { name: "McMaster Muslims in Healthcare Club", logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg", description: "McMaster University student club supporting Muslim healthcare professionals", link: "#" },
-    { name: "LESA", logo: "/lovable-uploads/lesa-western-logo.jpg", description: "The Levant Students' Association - Western University", link: "#" },
-    { name: "Women in Medicine", logo: "/lovable-uploads/club-logo-women-in-medicine-uottawa.png", description: "Women in Medicine - University of Ottawa", link: "#" }
+    { name: "ESA", logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png", description: isAr ? "جمعية الطلاب المصريين" : "Egyptian Students Association", link: "#" },
+    { name: "North African Student Association of UW and Laurier", logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png", description: isAr ? "جمعية طلابية تخدم مجتمعات شمال أفريقيا في جامعة واترلو وجامعة ويلفريد لورييه" : "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University", link: "#" },
+    { name: "MYOM", logo: "/lovable-uploads/myom-logo.png", description: isAr ? "شباب المغرب في مونتريال" : "Moroccan Youth of Montreal", link: "#" },
+    { name: "CASA", logo: "/lovable-uploads/casa-logo.png", description: isAr ? "جمعية الطلاب العرب المسيحيين - جامعة ألبرتا" : "Christian Arab Student Association - University of Alberta", link: "#" },
+    { name: "PCC", logo: "/lovable-uploads/pcc-logo.png", description: isAr ? "النادي الثقافي الفلسطيني - جامعة ألبرتا" : "Palestinian Cultural Club - University of Alberta", link: "#" },
+    { name: "APS UTM", logo: "/lovable-uploads/aps-utm-logo.png", description: isAr ? "جمعية الطلاب الفلسطينيين - جامعة تورنتو ميسيساغا" : "Association of Palestinian Students - UofT Mississauga", link: "#" },
+    { name: "McMaster Muslims in Healthcare Club", logo: "/lovable-uploads/mcmaster-muslims-healthcare.jpg", description: isAr ? "نادي طلابي في جامعة ماكماستر يدعم المسلمين العاملين في الرعاية الصحية" : "McMaster University student club supporting Muslim healthcare professionals", link: "#" },
+    { name: "LESA", logo: "/lovable-uploads/lesa-western-logo.jpg", description: isAr ? "جمعية طلاب بلاد الشام - جامعة وسترن" : "The Levant Students' Association - Western University", link: "#" },
+    { name: "Women in Medicine", logo: "/lovable-uploads/club-logo-women-in-medicine-uottawa.png", description: isAr ? "النساء في الطب - جامعة أوتاوا" : "Women in Medicine - University of Ottawa", link: "#" }
   ];
 
   const renderPartnerCard = (item: typeof partners[0], index: number) => (

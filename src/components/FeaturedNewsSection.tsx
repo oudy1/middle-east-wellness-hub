@@ -8,13 +8,19 @@ const FeaturedNewsSection = () => {
   const { language, t } = useLanguage();
   const isRTL = language === 'ar' || language === 'ku' || language === 'fa';
 
+  const isAr = language === 'ar';
+
   const newsItems = [
     {
       id: 1,
       title: "Middle East Emerges as Global Hub for Digital Health Innovation",
+      titleAr: "الشرق الأوسط يبرز كمركز عالمي للابتكار في الصحة الرقمية",
       excerpt: "The UAE's digital health market is projected to reach $2.6bn by 2030, growing at 23.5% annually. Dubai leads the charge with massive AI investments and innovation platforms.",
+      excerptAr: "من المتوقع أن يصل سوق الصحة الرقمية في الإمارات إلى 2.6 مليار دولار بحلول عام 2030، بنمو سنوي يبلغ 23.5%. وتقود دبي هذا التوجه باستثمارات ضخمة في الذكاء الاصطناعي ومنصات الابتكار.",
       date: "July 8, 2025",
+      dateAr: "8 يوليو 2025",
       category: "Digital Health",
+      categoryAr: "الصحة الرقمية",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center",
       url: "https://gulfbusiness.com/middle-east-the-emerging-global-hub-for-digital-health-innovation/",
       featured: true
@@ -22,18 +28,26 @@ const FeaturedNewsSection = () => {
     {
       id: 2,
       title: "Climate Change Linked to Rising Women's Cancer Rates in MENA",
+      titleAr: "تغير المناخ مرتبط بارتفاع معدلات إصابة النساء بالسرطان في الشرق الأوسط وشمال أفريقيا",
       excerpt: "New research reveals that rising temperatures in Middle East and North Africa correlate with increased rates of breast, ovarian, uterine and cervical cancers.",
+      excerptAr: "يكشف بحث جديد أن ارتفاع درجات الحرارة في الشرق الأوسط وشمال أفريقيا يرتبط بزيادة معدلات سرطان الثدي والمبيض والرحم وعنق الرحم.",
       date: "May 27, 2025",
+      dateAr: "27 مايو 2025",
       category: "Public Health",
+      categoryAr: "الصحة العامة",
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop",
       url: "https://www.frontiersin.org/news/2025/05/27/global-warming-could-be-driving-womens-cancer-risk-frontiers-public-health"
     },
     {
       id: 3,
       title: "Health Canada Introduces New Nutrition Warning Labels",
+      titleAr: "الصحة الكندية تقدم ملصقات تحذير غذائية جديدة",
       excerpt: "Black-and-white labels now alert consumers to foods high in sugar, sodium, and saturated fat, supporting healthier dietary choices across Canadian communities.",
+      excerptAr: "تنبه الملصقات بالأبيض والأسود المستهلكين إلى الأطعمة الغنية بالسكر والصوديوم والدهون المشبعة، مما يدعم خيارات غذائية أكثر صحة في المجتمعات الكندية.",
       date: "July 1, 2025",
+      dateAr: "1 يوليو 2025",
       category: "Nutrition Policy",
+      categoryAr: "السياسة الغذائية",
       image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop",
       url: "https://www.cbc.ca/news/canada/nova-scotia/health-canada-front-of-package-nutrition-warning-labels-1.7563212"
     }
