@@ -30,6 +30,16 @@ const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Allow other parts of the app (e.g. homepage Arabic prompt) to open the chat
+  useEffect(() => {
+    const openChat = () => {
+      setIsOpen(true);
+      setIsMinimized(false);
+    };
+    window.addEventListener('shams-open-chat', openChat);
+    return () => window.removeEventListener('shams-open-chat', openChat);
+  }, []);
+
   // Focus input when chat opens (with delay for mobile)
   useEffect(() => {
     if (!isOpen || isMinimized) return;
