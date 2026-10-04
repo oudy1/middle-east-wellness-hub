@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SHAMS//Know Your Rights Webinar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:know-your-rights-2026-10-21@projectshams.com
+DTSTAMP:20261004T141400Z
+DTSTART:20261021T220000Z
+DTEND:20261021T233000Z
+SUMMARY:Know Your Rights: Speaking Up About Your Healthcare (SHAMS Webinar)
+DESCRIPTION:Interactive SHAMS community webinar on patient rights\, communicating with healthcare providers\, referrals\, second opinions\, advocacy\, and navigating the healthcare system. Online via Zoom. Register: https://forms.gle/XgzS5fjHRYmHN2k16
+LOCATION:Online via Zoom
+URL:https://forms.gle/XgzS5fjHRYmHN2k16
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:SHAMS Know Your Rights webinar starts in 30 minutes
+END:VALARM
+END:VEVENT
+END:VCALENDAR
