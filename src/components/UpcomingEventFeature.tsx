@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Calendar, Clock, Video, ExternalLink, Info } from "lucide-react";
+import { Calendar, CalendarPlus, Clock, Download, Video, ExternalLink, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,6 +26,17 @@ export const REGISTER_URL = "https://forms.gle/XgzS5fjHRYmHN2k16";
 export const EVENT_END = new Date("2026-10-22T04:00:00Z");
 
 export const isEventUpcoming = (now: Date = new Date()) => now < EVENT_END;
+
+// 6:00-7:30 PM ET on Oct 21, 2026 (EDT, UTC-4)
+const EVENT_START_UTC = "20261021T220000Z";
+const EVENT_END_UTC = "20261021T233000Z";
+export const ICS_URL = "/know-your-rights-webinar.ics";
+export const GOOGLE_CALENDAR_URL =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("Know Your Rights: Speaking Up About Your Healthcare (SHAMS Webinar)") +
+  `&dates=${EVENT_START_UTC}/${EVENT_END_UTC}` +
+  "&details=" + encodeURIComponent("Interactive SHAMS community webinar on patient rights, communicating with healthcare providers, referrals, second opinions, and navigating the healthcare system. Register: " + REGISTER_URL) +
+  "&location=" + encodeURIComponent("Online via Zoom");
 
 const copy = {
   en: {
