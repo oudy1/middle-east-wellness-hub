@@ -7,6 +7,7 @@ import MetricsExportButton from "@/components/MetricsExportButton";
 import MetricsDebugOverlay from "@/components/MetricsDebugOverlay";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
+import UpcomingEventFeature from "@/components/UpcomingEventFeature";
 
 // Below-the-fold sections — code-split so they don't block the hero paint.
 
@@ -75,6 +76,8 @@ const Index = () => {
         {/* Hero stays eager — it contains LCP */}
         <HeroSection ref={heroRef} />
 
+
+        <UpcomingEventFeature />
 
         <Suspense fallback={<SectionFallback />}>
           <FeaturedEventSection />
