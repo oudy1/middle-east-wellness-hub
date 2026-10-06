@@ -25,6 +25,7 @@ const MissionSection = lazy(() => import("@/components/MissionSection"));
 const TopicOfTheWeekSection = lazy(() => import("@/components/TopicOfTheWeekSection"));
 const ResearchTeaserSection = lazy(() => import("@/components/ResearchTeaserSection"));
 const FeaturedNewsSection = lazy(() => import("@/components/FeaturedNewsSection"));
+const ArabicChatPrompt = lazy(() => import("@/components/ArabicChatPrompt"));
 const MeetTeamButton = lazy(() => import("@/components/MeetTeamButton"));
 const ResourcesSection = lazy(() => import("@/components/ResourcesSection"));
 const PartnersSection = lazy(() => import("@/components/PartnersSection"));
@@ -80,6 +81,7 @@ const Index = () => {
         <UpcomingEventFeature />
 
         <Suspense fallback={<SectionFallback />}>
+          <ArabicChatPrompt />
           <FeaturedEventSection />
           <MentorshipHighlight />
           <FeaturedWebinarBanner />

@@ -53,7 +53,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("footer.contactUs")}</h3>
             <address className="not-italic text-gray-300">
-              <p className="mb-2">Toronto, Canada</p>
+              <p className="mb-2">{isAr ? "تورونتو، كندا" : "Toronto, Canada"}</p>
               <p className="mb-2">infoprojectshams@gmail.com</p>
             </address>
           </div>

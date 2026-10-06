@@ -81,7 +81,7 @@ const FeaturedNewsSection = () => {
                   <div className="relative">
                     <img 
                       src={featuredNews.image} 
-                      alt={featuredNews.title}
+                      alt={isAr ? featuredNews.titleAr : featuredNews.title}
                       className="w-full h-64 object-cover"
                       loading="lazy"
                     />
@@ -94,12 +94,12 @@ const FeaturedNewsSection = () => {
                   <CardContent className="p-6">
                     <div className={`flex items-center text-sm text-muted-foreground mb-3`}>
                       <Calendar className={`${isRTL ? 'ml-2' : 'mr-2'} h-4 w-4`} />
-                      {featuredNews.date}
+                      {isAr ? featuredNews.dateAr : featuredNews.date}
                       <span className="mx-2">•</span>
-                      <span className="text-healthTeal font-medium">{featuredNews.category}</span>
+                      <span className="text-healthTeal font-medium">{isAr ? featuredNews.categoryAr : featuredNews.category}</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-foreground">{featuredNews.title}</h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">{featuredNews.excerpt}</p>
+                    <h3 className={`text-2xl font-bold mb-3 text-foreground ${isAr ? 'font-cairo' : ''}`}>{isAr ? featuredNews.titleAr : featuredNews.title}</h3>
+                    <p className={`text-muted-foreground mb-4 leading-relaxed ${isAr ? 'font-cairo' : ''}`}>{isAr ? featuredNews.excerptAr : featuredNews.excerpt}</p>
                     <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white">
                       {t("news.readFullStory")}
                       <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
@@ -117,17 +117,17 @@ const FeaturedNewsSection = () => {
                   <div className="flex">
                     <img 
                       src={item.image} 
-                      alt={item.title}
+                      alt={isAr ? item.titleAr : item.title}
                       className="w-24 h-24 object-cover flex-shrink-0"
                       loading="lazy"
                     />
                     <CardContent className="p-4 flex-1">
                       <div className={`flex items-center text-xs text-muted-foreground mb-2`}>
                         <Calendar className={`${isRTL ? 'ml-1' : 'mr-1'} h-3 w-3`} />
-                        {item.date}
+                        {isAr ? item.dateAr : item.date}
                       </div>
-                      <h4 className="font-bold text-foreground mb-2 text-sm leading-tight">{item.title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{item.excerpt}</p>
+                      <h4 className={`font-bold text-foreground mb-2 text-sm leading-tight ${isAr ? 'font-cairo' : ''}`}>{isAr ? item.titleAr : item.title}</h4>
+                      <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${isAr ? 'font-cairo' : ''}`}>{isAr ? item.excerptAr : item.excerpt}</p>
                     </CardContent>
                   </div>
                 </a>
