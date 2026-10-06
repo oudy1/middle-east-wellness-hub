@@ -80,6 +80,8 @@ const copy = {
     altAr: "Arabic version of the SHAMS Know Your Rights webinar poster, October 21, 2026.",
     openDetails: "Open event details",
     newTab: "(opens in a new tab)",
+    addToGoogle: "Add to Google Calendar",
+    downloadIcs: "Download to calendar",
   },
   ar: {
     section: "فعالية شمس القادمة",
@@ -122,6 +124,8 @@ const copy = {
     altAr: "النسخة العربية من ملصق ندوة شمس: اعرف حقوقك، 21 أكتوبر 2026.",
     openDetails: "افتح تفاصيل الفعالية",
     newTab: "(يفتح في علامة تبويب جديدة)",
+    addToGoogle: "أضف إلى تقويم Google",
+    downloadIcs: "حمّل إلى التقويم",
   },
 };
 
@@ -238,6 +242,21 @@ const UpcomingEventFeature = () => {
                 {c.details}
               </Button>
             </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button asChild variant="outline" size="sm" className="min-h-[44px] w-full sm:w-auto">
+                <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
+                  <CalendarPlus className="h-4 w-4" aria-hidden="true" />
+                  {c.addToGoogle}
+                  <span className="sr-only">{c.newTab}</span>
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="min-h-[44px] w-full sm:w-auto">
+                <a href={ICS_URL} download="know-your-rights-webinar.ics">
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  {c.downloadIcs}
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -275,6 +294,21 @@ const UpcomingEventFeature = () => {
               </ul>
             </div>
             <RegisterButton full />
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button asChild variant="outline" size="sm" className="min-h-[44px] w-full sm:w-auto">
+                <a href={GOOGLE_CALENDAR_URL} target="_blank" rel="noopener noreferrer">
+                  <CalendarPlus className="h-4 w-4" aria-hidden="true" />
+                  {c.addToGoogle}
+                  <span className="sr-only">{c.newTab}</span>
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="min-h-[44px] w-full sm:w-auto">
+                <a href={ICS_URL} download="know-your-rights-webinar.ics">
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  {c.downloadIcs}
+                </a>
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
