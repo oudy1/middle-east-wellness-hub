@@ -188,6 +188,7 @@ const Header = () => {
     healthcareDirectory: isRTL ? "دليل العاملين في الرعاية الصحية" : "Healthcare Workers Directory",
     familyPhysicians: isRTL ? "أطباء الأسرة" : "Family Physicians",
     browseByCity: isRTL ? "التصفح حسب المدينة" : "Browse by City",
+    directoryMap: isRTL ? "الدليل مع الخريطة" : "Directory & Map",
   };
 
   // Unified nav structure used by both desktop and mobile
@@ -231,6 +232,7 @@ const Header = () => {
         { to: "/physician-directory", label: L.healthcareDirectory },
         { to: "/physicians/family", label: L.familyPhysicians },
         { to: "/physicians/family/cities", label: L.browseByCity },
+        { to: "/directory", label: L.directoryMap },
       ],
     },
     { to: "/contact", label: L.contact },
