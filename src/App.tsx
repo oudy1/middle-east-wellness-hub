@@ -14,6 +14,7 @@ import FamilyPhysician from "@/pages/FamilyPhysician";
 import FamilyPhysicianDirectory from "@/pages/FamilyPhysicianDirectory";
 import FamilyPhysicianCities from "@/pages/FamilyPhysicianCities";
 import FindHealthcareWorkers from "@/pages/FindHealthcareWorkers";
+import Directory from "@/pages/Directory";
 import PhysicianApplication from "@/pages/PhysicianApplication";
 import JoinUs from "@/pages/JoinUs";
 import Volunteer from "@/pages/Volunteer";
@@ -49,6 +50,7 @@ function App() {
             <Route path="/physician-directory" element={<PhysicianDirectory />} />
             <Route path="/family-physician" element={<FamilyPhysician />} />
             <Route path="/find-healthcare-workers" element={<FindHealthcareWorkers />} />
+            <Route path="/directory" element={<Directory />} />
             <Route path="/physicians/family" element={<FamilyPhysicianDirectory />} />
             <Route path="/physicians/family/cities" element={<FamilyPhysicianCities />} />
             <Route path="/physicians/family/:citySlug" element={<FamilyPhysicianDirectory />} />

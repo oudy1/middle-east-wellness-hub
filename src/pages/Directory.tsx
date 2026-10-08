@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
@@ -41,6 +40,67 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
 });
+
+type CityMarker = {
+  coord: [number, number];
+  city: string;
+  province: string;
+  items: { id: string; full_name: string; provider_type: string }[];
+};
+
+/** Plain-Leaflet map (no react-leaflet) so it stays compatible with React 18. */
+const DirectoryMap = ({
+  markers,
+  mapCenter,
+  mapZoom,
+  isAr,
+}: {
+  markers: CityMarker[];
+  mapCenter: [number, number];
+  mapZoom: number;
+  isAr: boolean;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const map = L.map(containerRef.current, { scrollWheelZoom: false }).setView(
+      mapCenter,
+      mapZoom,
+    );
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    for (const m of markers) {
+      // Build popup content with DOM nodes so user-submitted names are never
+      // injected as HTML.
+      const popupEl = document.createElement("div");
+      popupEl.className = "text-sm";
+      popupEl.dir = isAr ? "rtl" : "ltr";
+      const title = document.createElement("p");
+      title.className = "font-bold mb-1";
+      title.textContent = `${m.city}, ${m.province}`;
+      popupEl.appendChild(title);
+      const ul = document.createElement("ul");
+      ul.className = "space-y-1";
+      for (const w of m.items) {
+        const li = document.createElement("li");
+        li.textContent = `${w.full_name} - ${w.provider_type}`;
+        ul.appendChild(li);
+      }
+      popupEl.appendChild(ul);
+      L.marker(m.coord).addTo(map).bindPopup(popupEl);
+    }
+
+    return () => {
+      map.remove();
+    };
+  }, [markers, mapCenter, mapZoom, isAr]);
+
+  return <div ref={containerRef} className="h-full w-full" />;
+};
 
 const PROVINCES = [
   { value: "ON", label_en: "Ontario", label_ar: "أونتاريو" },
@@ -361,36 +421,12 @@ const Directory = () => {
             {/* Map */}
             <Card className="mb-8 overflow-hidden">
               <div className="h-[320px] sm:h-[420px] w-full" dir="ltr">
-                <MapContainer
-                  key={`${mapCenter[0]}-${mapCenter[1]}-${mapZoom}`}
-                  center={mapCenter}
-                  zoom={mapZoom}
-                  scrollWheelZoom={false}
-                  className="h-full w-full"
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  {markers.map((m) => (
-                    <Marker key={`${m.city}-${m.province}`} position={m.coord}>
-                      <Popup>
-                        <div className="text-sm" dir={isAr ? "rtl" : "ltr"}>
-                          <p className="font-bold mb-1">
-                            {m.city}, {m.province}
-                          </p>
-                          <ul className="space-y-1">
-                            {m.items.map((w) => (
-                              <li key={w.id}>
-                                {w.full_name} — {w.provider_type}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </Popup>
-                    </Marker>
-                  ))}
-                </MapContainer>
+                <DirectoryMap
+                  markers={markers}
+                  mapCenter={mapCenter}
+                  mapZoom={mapZoom}
+                  isAr={isAr}
+                />
               </div>
             </Card>
 
