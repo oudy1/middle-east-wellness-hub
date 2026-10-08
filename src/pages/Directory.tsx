@@ -41,6 +41,67 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+type CityMarker = {
+  coord: [number, number];
+  city: string;
+  province: string;
+  items: { id: string; full_name: string; provider_type: string }[];
+};
+
+/** Plain-Leaflet map (no react-leaflet) so it stays compatible with React 18. */
+const DirectoryMap = ({
+  markers,
+  mapCenter,
+  mapZoom,
+  isAr,
+}: {
+  markers: CityMarker[];
+  mapCenter: [number, number];
+  mapZoom: number;
+  isAr: boolean;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const map = L.map(containerRef.current, { scrollWheelZoom: false }).setView(
+      mapCenter,
+      mapZoom,
+    );
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    for (const m of markers) {
+      // Build popup content with DOM nodes so user-submitted names are never
+      // injected as HTML.
+      const popupEl = document.createElement("div");
+      popupEl.className = "text-sm";
+      popupEl.dir = isAr ? "rtl" : "ltr";
+      const title = document.createElement("p");
+      title.className = "font-bold mb-1";
+      title.textContent = `${m.city}, ${m.province}`;
+      popupEl.appendChild(title);
+      const ul = document.createElement("ul");
+      ul.className = "space-y-1";
+      for (const w of m.items) {
+        const li = document.createElement("li");
+        li.textContent = `${w.full_name} - ${w.provider_type}`;
+        ul.appendChild(li);
+      }
+      popupEl.appendChild(ul);
+      L.marker(m.coord).addTo(map).bindPopup(popupEl);
+    }
+
+    return () => {
+      map.remove();
+    };
+  }, [markers, mapCenter, mapZoom, isAr]);
+
+  return <div ref={containerRef} className="h-full w-full" />;
+};
+
 const PROVINCES = [
   { value: "ON", label_en: "Ontario", label_ar: "أونتاريو" },
   { value: "BC", label_en: "British Columbia", label_ar: "بريتيش كولومبيا" },
