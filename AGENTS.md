@@ -1,0 +1,1 @@
+Keep volunteer response reads in the admin-authenticated `volunteer-sheet` Edge Function; Google Sheets credentials stay server-side, and the admin page only renders authorized responses.
