@@ -43,6 +43,9 @@ const AdminVolunteers = () => {
     empty: isAr
       ? "الصق رابط جدول الردود ثم اضغط تحميل الردود."
       : "Paste your responses sheet link, then press Load responses.",
+    linkHint: isAr
+      ? "استخدم جدول الردود المرتبط من تبويب الردود في نموذج Google، وليس رابط النموذج نفسه."
+      : "Use the response spreadsheet linked from your Google Form’s Responses tab, not the form link.",
     noRows: isAr ? "لا توجد ردود بعد." : "No responses yet.",
     total: isAr ? "إجمالي الردود" : "Total responses",
     loadFailed: isAr ? "تعذر تحميل الردود" : "Could not load responses",
@@ -135,6 +138,7 @@ const AdminVolunteers = () => {
               placeholder={t.sheetLinkPlaceholder}
               className="min-h-11"
             />
+            <p className="mt-1 text-sm text-muted-foreground">{t.linkHint}</p>
           </div>
           <Button onClick={handleLoad} disabled={loading} className="min-h-11">
             {loading ? t.loading : t.load}

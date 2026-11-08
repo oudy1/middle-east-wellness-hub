@@ -1,11 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
+import { z } from "npm:zod@3";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/google_sheets/v4";
 
@@ -20,7 +16,7 @@ function extractSpreadsheetId(input: string): string | null {
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return new Response("ok", { headers: corsHeaders });
   }
 
   const json = (body: unknown, status = 200) =>
@@ -50,8 +46,11 @@ serve(async (req) => {
       .maybeSingle();
     if (!adminRow) return json({ error: "Admins only" }, 403);
 
-    const { sheetUrl } = await req.json();
-    const spreadsheetId = extractSpreadsheetId(String(sheetUrl ?? ""));
+    const bodyResult = z.object({ sheetUrl: z.string().trim().min(1).max(500) }).safeParse(await req.json());
+    if (!bodyResult.success) {
+      return json({ error: "Please provide a valid Google Sheets link" }, 400);
+    }
+    const spreadsheetId = extractSpreadsheetId(bodyResult.data.sheetUrl);
     if (!spreadsheetId) {
       return json({ error: "That does not look like a Google Sheets link" }, 400);
     }
@@ -72,8 +71,8 @@ serve(async (req) => {
       headers: gatewayHeaders,
     });
     if (!metaRes.ok) {
-      const body = await metaRes.text();
-      console.error(`Sheets metadata failed [${metaRes.status}]: ${body}`);
+      const details = await metaRes.text();
+      console.error(`Sheets metadata failed [${metaRes.status}]: ${details}`);
       return json(
         {
           error:
@@ -81,6 +80,7 @@ serve(async (req) => {
               ? "Sheet not found. Check the link and that it is shared with the connected Google account."
               : "Could not open the sheet. Check the link and sharing settings.",
           status: metaRes.status,
+          details,
         },
         metaRes.status === 404 ? 404 : 502,
       );
@@ -89,15 +89,15 @@ serve(async (req) => {
     const firstSheetTitle: string | undefined = meta?.sheets?.[0]?.properties?.title;
     if (!firstSheetTitle) return json({ error: "The sheet has no tabs" }, 400);
 
-    const range = `'${firstSheetTitle.replace(/'/g, "\\'")}'!A1:Z1000`;
+    const range = `'${firstSheetTitle.replace(/'/g, "''")}'!A1:Z1000`;
     const valuesRes = await fetch(
       `${GATEWAY_URL}/spreadsheets/${spreadsheetId}/values/${range}`,
       { headers: gatewayHeaders },
     );
     if (!valuesRes.ok) {
-      const body = await valuesRes.text();
-      console.error(`Sheets values failed [${valuesRes.status}]: ${body}`);
-      return json({ error: "Could not read the sheet rows", status: valuesRes.status }, 502);
+      const details = await valuesRes.text();
+      console.error(`Sheets values failed [${valuesRes.status}]: ${details}`);
+      return json({ error: "Could not read the sheet rows", status: valuesRes.status, details }, 502);
     }
     const valuesData = await valuesRes.json();
     const values: string[][] = valuesData.values ?? [];

@@ -1,0 +1,3 @@
+- [x] Build the admin-only volunteer response table and secure sheet reader.
+- [x] Register `/admin/volunteers` without exposing the private page in the sitemap.
+- [ ] Connect the actual response spreadsheet and verify a real response appears; waiting for the Google Sheets response-sheet URL (the provided link opens the form).
