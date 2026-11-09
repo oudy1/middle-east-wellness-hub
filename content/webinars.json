@@ -1,20 +1,84 @@
 [
   {
+    "id": "know-your-rights",
+    "youtubeId": "_n4qjMmzMGw",
+    "date": "October 21, 2026",
+    "en": {
+      "title": "Know Your Rights: Speaking Up About Your Healthcare",
+      "description": "What are your rights as a patient in Canada? What can you do when you feel unheard by your healthcare provider? How can you navigate referrals, specialist wait times, and second opinions?\n\nIn this SHAMS webinar, healthcare professionals discuss patient rights, healthcare navigation, shared decision-making, and self-advocacy within the Canadian healthcare system. It was designed with MENA, newcomer, immigrant, and underserved societies in mind.",
+      "speakers": [
+        "Dr. Ritika Goel, Family Physician and Health Equity Advocate",
+        "Dr. Tarek Abdelhalim, General Internal Medicine Physician, University Health Network",
+        "Haifa Staiti, MSW, RSW, Registered Social Worker"
+      ],
+      "topics": [
+        "Understanding patient rights in Canada",
+        "Communicating effectively with healthcare providers",
+        "Shared decision-making and patient advocacy",
+        "What to do when patients feel dismissed or misunderstood",
+        "Navigating referrals and specialist wait times",
+        "Requesting second opinions",
+        "Transitions between family physicians, specialists, and hospitals",
+        "Cultural barriers, language challenges, and discrimination",
+        "Finding healthcare and community support"
+      ],
+      "watchButton": "Watch on YouTube"
+    },
+    "ar": {
+      "title": "اعرف حقوقك: كيف تعبّر عن احتياجاتك في الرعاية الصحية",
+      "description": "شاهد تسجيل ندوة شمس حول حقوق المرضى في كندا، وكيفية التواصل بفعالية مع مقدمي الرعاية الصحية، وفهم الإحالات الطبية، وطلب رأي طبي ثانٍ، والتعامل مع التحديات والحواجز الثقافية واللغوية في نظام الرعاية الصحية.",
+      "speakers": [
+        "Dr. Ritika Goel، طبيبة أسرة ومناصرة للعدالة الصحية",
+        "Dr. Tarek Abdelhalim، طبيب باطني عام، University Health Network",
+        "Haifa Staiti, MSW, RSW، أخصائية اجتماعية مسجلة"
+      ],
+      "topics": [
+        "فهم حقوق المرضى في كندا",
+        "التواصل بفعالية مع مقدمي الرعاية الصحية",
+        "اتخاذ القرار المشترك ومناصرة المريض",
+        "ماذا تفعل إذا شعرت بالتجاهل أو بعدم الفهم",
+        "الإحالات وأوقات انتظار الأخصائيين",
+        "طلب رأي طبي ثانٍ",
+        "الانتقال بين طبيب الأسرة والأخصائيين والمستشفيات",
+        "الحواجز الثقافية واللغوية والتمييز",
+        "إيجاد الدعم الصحي والمجتمعي"
+      ],
+      "watchButton": "شاهد على يوتيوب"
+    },
+    "tags": [
+      "Past Webinar",
+      "Patient Rights",
+      "Healthcare Navigation",
+      "Second Opinions",
+      "Patient Advocacy",
+      "Referrals",
+      "حقوق المرضى"
+    ]
+  },
+  {
     "id": "womens-health",
     "youtubeId": "",
     "en": {
       "title": "Women's Health Across Life Stages",
       "description": "A space to talk about hormones, healing, and support. This webinar focused on women's health topics relevant to Middle Eastern communities, including visible and invisible conditions, access to care, and culturally relevant health experiences.",
-      "speakers": ["Project SHAMS Health Team"],
+      "speakers": [
+        "Project SHAMS Health Team"
+      ],
       "watchButton": "Watch Recording"
     },
     "ar": {
       "title": "صحة المرأة عبر مراحل الحياة",
       "description": "مساحة للحديث عن الهرمونات، التعافي، والدعم. ركزت هذه الندوة على مواضيع صحة المرأة ذات الصلة بالمجتمعات الشرق أوسطية، بما في ذلك الحالات الظاهرة وغير الظاهرة، وإمكانية الوصول إلى الرعاية الصحية.",
-      "speakers": ["فريق مشروع شمس الصحي"],
+      "speakers": [
+        "فريق مشروع شمس الصحي"
+      ],
       "watchButton": "شاهد التسجيل"
     },
-    "tags": ["Women's Health", "Hormones", "Community Health"],
+    "tags": [
+      "Women's Health",
+      "Hormones",
+      "Community Health"
+    ],
     "slidesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
     "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf"
   },
@@ -39,7 +103,12 @@
       ],
       "watchButton": "شاهد التسجيل"
     },
-    "tags": ["Research", "Students", "Career", "Q&A"]
+    "tags": [
+      "Research",
+      "Students",
+      "Career",
+      "Q&A"
+    ]
   },
   {
     "id": "nutrition-diabetes",
@@ -63,6 +132,12 @@
       ],
       "watchButton": "شاهد الندوة"
     },
-    "tags": ["Diabetes", "Nutrition", "Immigration", "Newcomer Health", "Middle Eastern Societies"]
+    "tags": [
+      "Diabetes",
+      "Nutrition",
+      "Immigration",
+      "Newcomer Health",
+      "Middle Eastern Societies"
+    ]
   }
 ]
