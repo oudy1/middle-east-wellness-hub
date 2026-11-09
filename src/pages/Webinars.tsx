@@ -46,7 +46,7 @@ const Webinars = () => {
 
             {/* Webinar Cards */}
             {webinars.map((webinar) => (
-              <div key={webinar.id} className="max-w-5xl mx-auto mb-16">
+              <div key={webinar.id} id={`webinar-${webinar.id}`} className="max-w-5xl mx-auto mb-16 scroll-mt-24">
                 <Card className="overflow-hidden border-none shadow-lg">
                   {/* Language Toggle */}
                   <div className="bg-healthDarkBlue p-4 flex justify-center gap-2">
@@ -75,6 +75,8 @@ const Webinars = () => {
                           src={`https://www.youtube.com/embed/${webinar.youtubeId}`}
                           title={webinar.en.title}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          loading="lazy"
+                          referrerPolicy="strict-origin-when-cross-origin"
                           allowFullScreen
                         />
                       </div>
@@ -105,6 +107,22 @@ const Webinars = () => {
                       <p className="text-muted-foreground leading-relaxed mb-6 whitespace-pre-line" style={{ maxWidth: '65ch', lineHeight: '1.6' }}>
                         {webinar[webinarLang].description}
                       </p>
+
+                      {(webinar[webinarLang] as any).topics && (
+                        <div className="mb-6">
+                          <h3 className="text-xl font-bold text-healthDarkBlue mb-3">
+                            {webinarLang === 'ar' ? 'المواضيع' : 'Topics Covered'}
+                          </h3>
+                          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                            {((webinar[webinarLang] as any).topics as string[]).map((tp) => (
+                              <li key={tp} className="text-muted-foreground flex items-start gap-2">
+                                <span className="text-healthTeal">•</span>
+                                <span>{tp}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
                       {/* Speakers */}
                       <div className="mb-6">

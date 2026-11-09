@@ -26,7 +26,7 @@ const AdminVolunteers = () => {
 
   const [authChecking, setAuthChecking] = useState(true);
   const [sheetUrl, setSheetUrl] = useState(
-    () => localStorage.getItem(STORAGE_KEY) ?? "",
+    () => localStorage.getItem(STORAGE_KEY) ?? "https://docs.google.com/spreadsheets/d/1H_ExntnVop3lTt2FTmY6_dX4HP1O1s9ejKfN3ObJwhU/edit",
   );
   const [data, setData] = useState<SheetData | null>(null);
   const [loading, setLoading] = useState(false);
