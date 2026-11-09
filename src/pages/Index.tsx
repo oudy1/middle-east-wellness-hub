@@ -8,6 +8,7 @@ import MetricsDebugOverlay from "@/components/MetricsDebugOverlay";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 import UpcomingEventFeature from "@/components/UpcomingEventFeature";
+import PastWebinarFeature from "@/components/PastWebinarFeature";
 
 // Below-the-fold sections — code-split so they don't block the hero paint.
 
@@ -79,6 +80,7 @@ const Index = () => {
 
 
         <UpcomingEventFeature />
+        <PastWebinarFeature />
 
         <Suspense fallback={<SectionFallback />}>
           <ArabicChatPrompt />
