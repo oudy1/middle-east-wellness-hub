@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { Loader2, CheckCircle } from "lucide-react";
 import { z } from "zod";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -71,6 +72,7 @@ const ContactForm = () => {
     subject: prefilledSubject,
     message: "",
   });
+  const { trap, guardFields } = useSpamGuard();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -90,7 +92,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
     try {
       const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: parsed.data,
+        body: { ...parsed.data, ...guardFields() },
       });
       if (error) {
         const details =
@@ -126,7 +128,8 @@ const ContactForm = () => {
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 relative">
+            {trap}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="contact-name">{L.name}</Label>

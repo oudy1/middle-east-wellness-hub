@@ -537,16 +537,12 @@ const Services = () => {
                       'Become part of our mission to improve healthcare access for Middle Eastern societies.'
                     }
                   </p>
-                  <a 
-                    href="https://docs.google.com/forms/d/17O_p-Malu1ei9M6ItZZ85zRjEX7Pff3Kq6yuk0B89hE/edit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <Link to="/volunteer">
                     <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
                       <Users className="h-6 w-6" />
                       {language === 'ar' ? 'تقديم طلب للانضمام إلينا' : 'Apply to Join Us'}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </section>

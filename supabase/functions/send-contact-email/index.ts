@@ -9,7 +9,35 @@ const BodySchema = z.object({
   email: z.string().trim().email().max(255),
   subject: z.string().trim().min(1).max(200),
   message: z.string().trim().min(1).max(8000),
+  // Spam guard fields sent by the site's forms
+  website: z.string().max(500).optional(),
+  elapsedMs: z.number().int().nonnegative().optional(),
 });
+
+// Best-effort per-visitor limit (kept in memory, resets when the function restarts)
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const MIN_FILL_MS = 3000;
+const hits = new Map<string, number[]>();
+
+const isRateLimited = (ip: string) => {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    hits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return false;
+};
+
+const json = (body: unknown, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
 
 const escapeHtml = (value: string) =>
   value
@@ -43,13 +71,25 @@ Deno.serve(async (req) => {
 
     const parsed = BodySchema.safeParse(await req.json());
     if (!parsed.success) {
-      return new Response(JSON.stringify({ error: parsed.error.flatten().fieldErrors }), {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      return json({ error: 'Please check the form fields and try again.' }, 400);
     }
 
-    const { name, email, subject, message } = parsed.data;
+    const { name, email, subject, message, website, elapsedMs } = parsed.data;
+
+    // Bots fill the hidden field or submit instantly: pretend success, send nothing
+    if ((website && website.trim() !== '') || (elapsedMs !== undefined && elapsedMs < MIN_FILL_MS)) {
+      console.warn('send-contact-email: spam guard triggered');
+      return json({ success: true });
+    }
+
+    const ip =
+      req.headers.get('cf-connecting-ip') ??
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+      'unknown';
+    if (isRateLimited(ip)) {
+      console.warn('send-contact-email: rate limit reached');
+      return json({ error: 'Too many messages. Please wait a few minutes and try again.' }, 429);
+    }
 
     const html = `
       <h2>New contact form message from the SHAMS website</h2>
@@ -79,10 +119,8 @@ Deno.serve(async (req) => {
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(`Resend request failed [${response.status}]: ${errorBody}`);
-      return new Response(
-        JSON.stringify({ error: 'Email delivery failed', status: response.status, details: errorBody }),
-        { status: response.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-      );
+      // Provider details stay in the private logs, never sent to the visitor
+      return json({ error: 'Email delivery failed. Please try again later.' }, 502);
     }
 
     const data = await response.json();
