@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
