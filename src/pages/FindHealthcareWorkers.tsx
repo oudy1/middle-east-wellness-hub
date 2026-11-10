@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHashScroll } from "@/hooks/useHashScroll";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -131,6 +131,12 @@ const FindHealthcareWorkers = () => {
     submitted_by_name: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Spam protection: hidden trap field + time the dialog was opened
+  const [suggestionTrap, setSuggestionTrap] = useState("");
+  const suggestionOpenedAt = useRef<number>(0);
+  useEffect(() => {
+    if (suggestionOpen) suggestionOpenedAt.current = Date.now();
+  }, [suggestionOpen]);
 
   const isAr = language === "ar";
 
@@ -249,21 +255,29 @@ const FindHealthcareWorkers = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    try {
-      const { error } = await supabase
-        .from("provider_suggestions")
-        .insert([suggestionData]);
+    const clean = {
+      provider_name: suggestionData.provider_name.trim().slice(0, 120),
+      provider_type: suggestionData.provider_type.trim().slice(0, 80) || null,
+      city: suggestionData.city.trim().slice(0, 80),
+      province: suggestionData.province,
+      contact_info: suggestionData.contact_info.trim().slice(0, 200) || null,
+      notes: suggestionData.notes.trim().slice(0, 1000) || null,
+    };
 
-      if (error) throw error;
-
+    if (clean.provider_name.length < 2 || clean.city.length < 2) {
       toast({
-        title: language === "ar" ? "شكراً!" : "Thank you!",
-        description: language === "ar" 
-          ? "تم إرسال اقتراحك بنجاح" 
-          : "Your suggestion has been submitted",
+        title: isAr ? "مطلوب" : "Required",
+        description: isAr
+          ? "يجب أن يتكون الاسم والمدينة من حرفين على الأقل"
+          : "Name and city must be at least 2 characters",
+        variant: "destructive",
       });
+      return;
+    }
+
+    const resetForm = () => {
       setSuggestionOpen(false);
+      setSuggestionTrap("");
       setSuggestionData({
         provider_name: "",
         provider_type: "",
@@ -274,6 +288,43 @@ const FindHealthcareWorkers = () => {
         submitted_by_email: "",
         submitted_by_name: "",
       });
+    };
+
+    // Bots fill the hidden field or submit instantly: pretend success, save nothing
+    if (suggestionTrap || Date.now() - suggestionOpenedAt.current < 3000) {
+      toast({
+        title: isAr ? "شكراً!" : "Thank you!",
+        description: isAr ? "تم إرسال اقتراحك بنجاح" : "Your suggestion has been submitted",
+      });
+      resetForm();
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from("provider_suggestions")
+        .insert([clean]);
+
+      if (error && (error as { code?: string }).code === "23505") {
+        toast({
+          title: isAr ? "تم استلامه مسبقاً" : "Already received",
+          description: isAr
+            ? "وصلنا اقتراح لهذا المقدم في هذه المدينة اليوم. شكراً لك!"
+            : "We already received a suggestion for this provider in this city today. Thank you!",
+        });
+        resetForm();
+        return;
+      }
+      if (error) throw error;
+
+      toast({
+        title: language === "ar" ? "شكراً!" : "Thank you!",
+        description: language === "ar" 
+          ? "تم إرسال اقتراحك بنجاح" 
+          : "Your suggestion has been submitted",
+      });
+      resetForm();
     } catch (error) {
       console.error("Suggestion error:", error);
       toast({
@@ -568,6 +619,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "اسم مقدم الخدمة *" : "Provider Name *"}</Label>
                               <Input
                                 value={suggestionData.provider_name}
+                                maxLength={120}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, provider_name: e.target.value }))}
                                 placeholder={isAr ? "الاسم الكامل" : "Full name"}
                               />
@@ -577,6 +629,7 @@ const FindHealthcareWorkers = () => {
                                 <Label>{isAr ? "المدينة *" : "City *"}</Label>
                                 <Input
                                   value={suggestionData.city}
+                                maxLength={80}
                                   onChange={(e) => setSuggestionData(prev => ({ ...prev, city: e.target.value }))}
                                 />
                               </div>
@@ -603,6 +656,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "نوع مقدم الخدمة" : "Provider Type"}</Label>
                               <Input
                                 value={suggestionData.provider_type}
+                                maxLength={80}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, provider_type: e.target.value }))}
                                 placeholder={isAr ? "مثال: طبيب عائلة" : "e.g., Family Physician"}
                               />
@@ -611,6 +665,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "معلومات الاتصال" : "Contact Info"}</Label>
                               <Input
                                 value={suggestionData.contact_info}
+                                maxLength={200}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, contact_info: e.target.value }))}
                                 placeholder={isAr ? "رقم الهاتف أو العنوان" : "Phone or address"}
                               />
@@ -619,9 +674,21 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "ملاحظات" : "Notes"}</Label>
                               <Textarea
                                 value={suggestionData.notes}
+                                maxLength={1000}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, notes: e.target.value }))}
                                 placeholder={isAr ? "أي معلومات إضافية" : "Any additional info"}
                                 rows={2}
+                              />
+                            </div>
+                            <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+                              <label htmlFor="suggestion-website">Website</label>
+                              <input
+                                id="suggestion-website"
+                                type="text"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={suggestionTrap}
+                                onChange={(e) => setSuggestionTrap(e.target.value)}
                               />
                             </div>
                             <Button 
