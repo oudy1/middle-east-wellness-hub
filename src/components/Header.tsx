@@ -210,7 +210,7 @@ const Header = () => {
       to: "/research",
       children: [
         { to: "/research#studies", label: L.researchStudies },
-        { to: "/research#studies", label: L.researchOpps },
+        { to: "/research#opportunities", label: L.researchOpps },
         { to: "/research#researchers", label: L.associatedResearchers },
         { to: "/research#portfolio", label: L.conferences },
         { to: "/research#publications", label: L.abstracts },
