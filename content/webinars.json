@@ -28,9 +28,9 @@
       "title": "اعرف حقوقك: كيف تعبّر عن احتياجاتك في الرعاية الصحية",
       "description": "شاهد تسجيل ندوة شمس حول حقوق المرضى في كندا، وكيفية التواصل بفعالية مع مقدمي الرعاية الصحية، وفهم الإحالات الطبية، وطلب رأي طبي ثانٍ، والتعامل مع التحديات والحواجز الثقافية واللغوية في نظام الرعاية الصحية.",
       "speakers": [
-        "Dr. Ritika Goel، طبيبة أسرة ومناصرة للعدالة الصحية",
-        "Dr. Tarek Abdelhalim، طبيب باطني عام، University Health Network",
-        "Haifa Staiti, MSW, RSW، أخصائية اجتماعية مسجلة"
+        "د. ريتيكا غويل، طبيبة أسرة ومناصرة للعدالة الصحية",
+        "د. طارق عبد الحليم، طبيب باطني عام، University Health Network",
+        "هيفاء ستيتي، أخصائية اجتماعية مسجلة (MSW, RSW)"
       ],
       "topics": [
         "فهم حقوق المرضى في كندا",
@@ -51,9 +51,17 @@
       "Healthcare Navigation",
       "Second Opinions",
       "Patient Advocacy",
-      "Referrals",
-      "حقوق المرضى"
-    ]
+      "Referrals"
+    ],
+    "tagsAr": [
+      "ندوة سابقة",
+      "حقوق المرضى",
+      "التنقل في نظام الرعاية الصحية",
+      "الرأي الطبي الثاني",
+      "مناصرة المريض",
+      "الإحالات الطبية"
+    ],
+    "dateAr": "21 أكتوبر 2026"
   },
   {
     "id": "womens-health",
@@ -80,7 +88,12 @@
       "Community Health"
     ],
     "slidesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
-    "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf"
+    "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
+    "tagsAr": [
+      "صحة المرأة",
+      "الهرمونات",
+      "صحة المجتمع"
+    ]
   },
   {
     "id": "intro-research",
@@ -89,8 +102,8 @@
       "title": "Intro to Research: How to Get Your First Role + Mistakes to Avoid (SHAMS Webinar)",
       "description": "Project SHAMS hosted a free Intro to Research webinar for students who want research experience but don't know where to start.\n\nIn this session, two researchers explain in clear, practical terms: what research looks like day-to-day, skills that matter early, common mistakes students make, how to land your first opportunity, and a live Q&A.",
       "speakers": [
-        "Dr. Mahmoud El-Maklizi — University Health Network",
-        "Maha Khawaja — PhD Student, McMaster University"
+        "Dr. Mahmoud El-Maklizi, University Health Network",
+        "Maha Khawaja, PhD Student, McMaster University"
       ],
       "watchButton": "Watch Recording"
     },
@@ -98,8 +111,8 @@
       "title": "مقدمة في البحث العلمي: كيف تحصل على أول فرصة + أخطاء يجب تجنبها (ندوة شمس)",
       "description": "استضاف مشروع شمس ندوة مجانية حول مقدمة في البحث العلمي للطلاب الذين يرغبون في اكتساب خبرة بحثية لكن لا يعرفون من أين يبدأون.\n\nفي هذه الجلسة، يشرح باحثان بأسلوب عملي وواضح: كيف يبدو البحث يوميًا، المهارات المهمة في البداية، الأخطاء الشائعة، وكيفية الحصول على أول فرصة، مع جلسة أسئلة وأجوبة.",
       "speakers": [
-        "الدكتور محمود المكليزي — شبكة الصحة الجامعية",
-        "مها خواجة — طالبة دكتوراه، جامعة ماكماستر"
+        "الدكتور محمود المكليزي، شبكة الصحة الجامعية",
+        "مها خواجة، طالبة دكتوراه، جامعة ماكماستر"
       ],
       "watchButton": "شاهد التسجيل"
     },
@@ -108,17 +121,23 @@
       "Students",
       "Career",
       "Q&A"
+    ],
+    "tagsAr": [
+      "البحث العلمي",
+      "الطلاب",
+      "المسار المهني",
+      "أسئلة وأجوبة"
     ]
   },
   {
     "id": "nutrition-diabetes",
     "youtubeId": "veBBeJx_3HI",
-    "date": "November 26, 2025 — 7:00 PM EST",
+    "date": "November 26, 2025, 7:00 PM EST",
     "en": {
       "title": "East to West: Nutrition & Diabetes Post-Immigration",
       "description": "Immigrating to a new country brings major changes to food habits, lifestyle, stress, and overall health. This webinar explores how Middle Eastern and Arab families can navigate diabetes management and healthy nutrition after settling in Canada. The session includes practical, culturally relevant tips with a Q&A segment.",
       "speakers": [
-        "Dr. Muhammad Z. Shrayyef, Endocrinologist, Assistant Professor of Clinical Medicine — University of Toronto",
+        "Dr. Muhammad Z. Shrayyef, Endocrinologist, Assistant Professor of Clinical Medicine, University of Toronto",
         "Hiba Al-Masri, Registered Dietitian"
       ],
       "watchButton": "Watch Webinar"
@@ -127,8 +146,8 @@
       "title": "من الشرق إلى الغرب: التغذية والسكري بعد الهجرة",
       "description": "تغيّر الهجرة العادات الغذائية، مستوى الضغط، والبيئة الصحية. تقدم هذه الندوة شرحًا بسيطًا وعمليًا لإدارة السكري والتغذية الصحية بعد الانتقال إلى كندا، مع نصائح مناسبة للعائلات العربية والشرق أوسطية وفقرة للأسئلة والأجوبة.",
       "speakers": [
-        "الدكتور محمد شريّف — استشاري الغدد الصماء، أستاذ مساعد بجامعة تورونتو",
-        "هيبا المصري — أخصائية تغذية مسجّلة"
+        "الدكتور محمد شريّف، استشاري الغدد الصماء، أستاذ مساعد بجامعة تورونتو",
+        "هيبا المصري، أخصائية تغذية مسجّلة"
       ],
       "watchButton": "شاهد الندوة"
     },
@@ -138,6 +157,14 @@
       "Immigration",
       "Newcomer Health",
       "Middle Eastern Societies"
-    ]
+    ],
+    "tagsAr": [
+      "السكري",
+      "التغذية",
+      "الهجرة",
+      "صحة القادمين الجدد",
+      "المجتمعات الشرق أوسطية"
+    ],
+    "dateAr": "26 نوفمبر 2025، الساعة 7:00 مساءً بتوقيت شرق كندا"
   }
 ]
