@@ -51,9 +51,17 @@
       "Healthcare Navigation",
       "Second Opinions",
       "Patient Advocacy",
-      "Referrals",
-      "حقوق المرضى"
-    ]
+      "Referrals"
+    ],
+    "tagsAr": [
+      "ندوة سابقة",
+      "حقوق المرضى",
+      "التنقل في نظام الرعاية الصحية",
+      "الرأي الطبي الثاني",
+      "مناصرة المريض",
+      "الإحالات الطبية"
+    ],
+    "dateAr": "21 أكتوبر 2026"
   },
   {
     "id": "womens-health",
@@ -80,7 +88,12 @@
       "Community Health"
     ],
     "slidesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
-    "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf"
+    "resourcesUrl": "/lovable-uploads/womens-health-webinar-poster.pdf",
+    "tagsAr": [
+      "صحة المرأة",
+      "الهرمونات",
+      "صحة المجتمع"
+    ]
   },
   {
     "id": "intro-research",
@@ -108,12 +121,18 @@
       "Students",
       "Career",
       "Q&A"
+    ],
+    "tagsAr": [
+      "البحث العلمي",
+      "الطلاب",
+      "المسار المهني",
+      "أسئلة وأجوبة"
     ]
   },
   {
     "id": "nutrition-diabetes",
     "youtubeId": "veBBeJx_3HI",
-    "date": "November 26, 2025 — 7:00 PM EST",
+    "date": "November 26, 2025, 7:00 PM EST",
     "en": {
       "title": "East to West: Nutrition & Diabetes Post-Immigration",
       "description": "Immigrating to a new country brings major changes to food habits, lifestyle, stress, and overall health. This webinar explores how Middle Eastern and Arab families can navigate diabetes management and healthy nutrition after settling in Canada. The session includes practical, culturally relevant tips with a Q&A segment.",
@@ -138,6 +157,14 @@
       "Immigration",
       "Newcomer Health",
       "Middle Eastern Societies"
-    ]
+    ],
+    "tagsAr": [
+      "السكري",
+      "التغذية",
+      "الهجرة",
+      "صحة القادمين الجدد",
+      "المجتمعات الشرق أوسطية"
+    ],
+    "dateAr": "26 نوفمبر 2025، الساعة 7:00 مساءً بتوقيت شرق كندا"
   }
 ]
