@@ -334,7 +334,7 @@ const Directory = () => {
         lang={isAr ? "ar" : "en"}
         path="/directory"
         title="Healthcare Directory Map | SHAMS"
-        description="Browse all healthcare providers serving Middle Eastern and Arab communities in Canada on an interactive map and searchable list."
+        description="Browse all healthcare providers serving Middle Eastern and Arab societies in Canada on an interactive map and searchable list."
         titleAr="خريطة دليل مقدمي الرعاية الصحية | شمس"
         descriptionAr="تصفح جميع مقدمي الرعاية الصحية الذين يخدمون المجتمعات الشرق أوسطية والعربية في كندا على خريطة تفاعلية وقائمة قابلة للبحث."
       />

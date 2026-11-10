@@ -42,7 +42,7 @@ const PartnersSection = () => {
 
   const clubs = [
     { name: "ESA", logo: "/lovable-uploads/39e9c9bb-c2c1-4501-ade8-cb84677e5f05.png", description: isAr ? "جمعية الطلاب المصريين" : "Egyptian Students Association", link: "#" },
-    { name: "North African Student Association of UW and Laurier", logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png", description: isAr ? "جمعية طلابية تخدم مجتمعات شمال أفريقيا في جامعة واترلو وجامعة ويلفريد لورييه" : "Student association serving North African communities at University of Waterloo and Wilfrid Laurier University", link: "#" },
+    { name: "North African Student Association of UW and Laurier", logo: "/lovable-uploads/9bcba8eb-2b6e-41ec-8425-6962c2273f5d.png", description: isAr ? "جمعية طلابية تخدم مجتمعات شمال أفريقيا في جامعة واترلو وجامعة ويلفريد لورييه" : "Student association serving North African societies at University of Waterloo and Wilfrid Laurier University", link: "#" },
     { name: "MYOM", logo: "/lovable-uploads/myom-logo.png", description: isAr ? "شباب المغرب في مونتريال" : "Moroccan Youth of Montreal", link: "#" },
     { name: "CASA", logo: "/lovable-uploads/casa-logo.png", description: isAr ? "جمعية الطلاب العرب المسيحيين - جامعة ألبرتا" : "Christian Arab Student Association - University of Alberta", link: "#" },
     { name: "PCC", logo: "/lovable-uploads/pcc-logo.png", description: isAr ? "النادي الثقافي الفلسطيني - جامعة ألبرتا" : "Palestinian Cultural Club - University of Alberta", link: "#" },

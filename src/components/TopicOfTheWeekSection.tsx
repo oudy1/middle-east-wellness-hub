@@ -12,7 +12,7 @@ const TopicOfTheWeekSection = () => {
   const topic = {
     titleEn: "Stress & Mental Health During Exams",
     titleAr: "التوتر والصحة النفسية خلال فترة الامتحانات",
-    subtitleEn: "This week's focus highlights stress management and mental health support for students during exam periods, with tips and resources relevant to Middle Eastern and North African communities in Canada.",
+    subtitleEn: "This week's focus highlights stress management and mental health support for students during exam periods, with tips and resources relevant to Middle Eastern and North African societies in Canada.",
     subtitleAr: "يسلّط موضوع هذا الأسبوع الضوء على إدارة التوتر ودعم الصحة النفسية للطلاب خلال فترة الامتحانات، مع نصائح وموارد ذات صلة بالمجتمعات الشرق أوسطية وشمال أفريقيا في كندا.",
     altEn: "Stress & Mental Health During Exams - SHAMS weekly topic",
     altAr: "التوتر والصحة النفسية خلال فترة الامتحانات - موضوع الأسبوع من شمس",
