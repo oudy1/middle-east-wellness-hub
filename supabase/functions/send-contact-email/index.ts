@@ -76,12 +76,6 @@ Deno.serve(async (req) => {
 
     const { name, email, subject, message, website, elapsedMs } = parsed.data;
 
-    // Bots fill the hidden field or submit instantly: pretend success, send nothing
-    if ((website && website.trim() !== '') || (elapsedMs !== undefined && elapsedMs < MIN_FILL_MS)) {
-      console.warn('send-contact-email: spam guard triggered');
-      return json({ success: true });
-    }
-
     const ip =
       req.headers.get('cf-connecting-ip') ??
       req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
@@ -90,6 +84,13 @@ Deno.serve(async (req) => {
       console.warn('send-contact-email: rate limit reached');
       return json({ error: 'Too many messages. Please wait a few minutes and try again.' }, 429);
     }
+
+    // Bots fill the hidden field or submit instantly: pretend success, send nothing
+    if ((website && website.trim() !== '') || (elapsedMs !== undefined && elapsedMs < MIN_FILL_MS)) {
+      console.warn('send-contact-email: spam guard triggered');
+      return json({ success: true });
+    }
+
 
     const html = `
       <h2>New contact form message from the SHAMS website</h2>
