@@ -9,12 +9,16 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import MentalHealthConventionSection from "@/components/MentalHealthConventionSection";
+import NewcomerInitiativeCard from "@/components/NewcomerInitiativeCard";
 
+// BLCC removed the individual program pages (410 Gone), so every card points
+// to the BLCC homepage, where visitors can check current availability.
+const BLCC_HOME = "https://blcc.ca/";
 const partnerPrograms = [
-  { id: "ifhp", link: "https://blcc.ca/interim-federal-health-program-ifhp" },
-  { id: "vqrp", link: "https://blcc.ca/victim-quick-response-program-vqrp" },
-  { id: "newcomer", link: "https://blcc.ca/newcomer-mental-wellness-program" },
-  { id: "ldeep", link: "https://blcc.ca/empowerment-employment-project" },
+  { id: "ifhp", link: BLCC_HOME },
+  { id: "vqrp", link: BLCC_HOME },
+  { id: "newcomer", link: BLCC_HOME },
+  { id: "ldeep", link: BLCC_HOME },
 ];
 
 const Programs = () => {
@@ -71,6 +75,11 @@ const Programs = () => {
           </Card>
         </section>
 
+        {/* Newcomer and Refugee Health Education Initiative (SHAMS) */}
+        <section id="newcomer-initiative" className="mb-12 scroll-mt-24">
+          <NewcomerInitiativeCard />
+        </section>
+
         {/* Partner Program Cards Grid */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {partnerPrograms.map((program) => (
@@ -83,6 +92,11 @@ const Programs = () => {
               </CardHeader>
               <CardContent className="flex flex-col gap-4 flex-1 justify-between">
                 <p className="text-muted-foreground">{t(`programs.${program.id}.summary`)}</p>
+                <p className="text-xs text-muted-foreground">
+                  {language === "ar"
+                    ? "يُقدَّم من عيادة السود القانونية (BLCC). تحقّق من موقعهم لمعرفة توفّر البرنامج حاليًا."
+                    : "Offered by the Black Legal Action Centre partner clinic (BLCC). Check their website for current availability."}
+                </p>
                 <a href={program.link} target="_blank" rel="noopener noreferrer">
                   <Button className="gap-2 w-full sm:w-auto">
                     {t("programs.learnMore")} <ExternalLink size={14} />
