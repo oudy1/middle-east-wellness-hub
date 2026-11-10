@@ -1,3 +1,5 @@
 - Keep volunteer response reads in the admin-authenticated `volunteer-sheet` Edge Function; Google Sheets credentials stay server-side, and the admin page only renders authorized responses.
 - Public-submission tables accept anonymous inserts only through RLS policies with explicit length/format checks (never `WITH CHECK (true)`); intake tables no site form uses stay closed to the public, so they cannot be flooded.
 - Public forms that send email pass `useSpamGuard` fields (hidden trap + fill time) to `send-contact-email`, which silently drops bot hits, applies a best-effort per-IP limit, and never returns provider error details to the browser.
+- Admin access is granted only by the `grant_allowlisted_admin` trigger when a confirmed sign-in email matches the service-only `admin_email_allowlist`; add admins by inserting into that list, never from client code.
+- Time-limited events (e.g. `src/lib/newcomerWorkshop.ts`) keep their date in one module and hide themselves by comparing the Toronto calendar date, so homepage and Programs never show a past event as upcoming.
