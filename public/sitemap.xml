@@ -29,4 +29,5 @@
   <url><loc>https://www.projectshams.com/volunteer</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.projectshams.com/support-us</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.projectshams.com/contact</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.projectshams.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

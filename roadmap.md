@@ -1,9 +1,19 @@
 - [x] Build the admin-only volunteer response table and secure sheet reader.
 - [x] Register `/admin/volunteers` without exposing the private page in the sitemap.
 - [x] Recording of Know Your Rights webinar on homepage + recordings page.
-- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.- [x] Batch 1: Programs convention turned into a recap (no sign-up).
+- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.
+- [x] Batch 1: Programs convention turned into a recap (no sign-up).
 - [x] Batch 1: spam guard (hidden trap, fill-time check, 5 per 10 min per visitor) on all forms that send email.
 - [x] Batch 1: email errors no longer show provider details to visitors.
 - [x] Batch 1: Join Our Team button points to /volunteer.
-- [ ] Batch 1: add admins. Blocked: no sign-in accounts exist yet; need the admin email list from the user.
 - [ ] User action: close the old Mental Health Convention Google Form in Google Forms.
+- [x] Batch 1: admins via allowlist (default: infoprojectshams@gmail.com) + create-account on admin sign-in.
+- [x] Batch 2: Scadding Court workshop card (text only, no partner logo, hides after Nov 19).
+- [x] Batch 2: Newcomer and Refugee Health Education Initiative card on Programs.
+- [x] Batch 2: BLCC dead links -> BLCC homepage; remove Persram dead link.
+- [x] Batch 2: Weekly Topic renamed Featured Health Topic; news replaced with 2026 SHAMS updates.
+- [x] Batch 2: newsletter replaced with Follow us on Instagram.
+- [x] Batch 2: bilingual Privacy & Terms page; fix footer links.
+- [x] Batch 2: "societies" sweep + official name in hero/footer; inquiry success message translated; hide expired opportunities.
+- [ ] User action: infoprojectshams@gmail.com creates an account at /admin/login and confirms the email (admin access is then automatic).
+- [ ] User review: Privacy page wording; Scadding Court workshop details and partner approval; newcomer initiative description.

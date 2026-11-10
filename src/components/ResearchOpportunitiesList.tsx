@@ -35,6 +35,8 @@ const ResearchOpportunitiesList = () => {
           "id, institution, project_title, project_description, preferred_background, deadline, is_paid, study_website, email, created_at",
         )
         .eq("status", "approved")
+        // Hide opportunities whose deadline has passed (Toronto date)
+        .or(`deadline.is.null,deadline.gte.${new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" })}`)
         .order("created_at", { ascending: false })
         .limit(30);
       if (!active) return;

@@ -346,7 +346,7 @@ const FindHealthcareWorkers = () => {
         lang={isAr ? "ar" : "en"}
         path="/find-healthcare-workers"
         title="Find Healthcare Workers | SHAMS"
-        description="Find physicians, family doctors, specialists, and healthcare workers serving Middle Eastern and Arab communities across Canada."
+        description="Find physicians, family doctors, specialists, and healthcare workers serving Middle Eastern and Arab societies across Canada."
         titleAr="ابحث عن مقدمي الرعاية الصحية | شمس"
         descriptionAr="ابحث عن أطباء العائلة والاختصاصيين والعاملين في الرعاية الصحية الذين يخدمون المجتمعات الشرق أوسطية والعربية في جميع أنحاء كندا."
       />

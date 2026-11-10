@@ -134,7 +134,7 @@ const About = () => {
                   <p className={`text-sm md:text-base text-gray-600 leading-relaxed ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                     {language === 'ar' ? 
                       'ندافع عن الرعاية الصحية التي تفهم وتحترم الخلفيات الثقافية للمجتمعات العربية وشرق الأوسطية.' : 
-                      'We advocate for healthcare that understands and respects the cultural backgrounds of Arab and Middle Eastern communities.'
+                      'We advocate for healthcare that understands and respects the cultural backgrounds of Arab and Middle Eastern societies.'
                     }
                   </p>
                 </CardContent>

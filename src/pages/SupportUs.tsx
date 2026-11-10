@@ -64,7 +64,7 @@ const SupportUs = () => {
             <p className="text-xl max-w-3xl mx-auto mb-12 text-gray-600">
               {language === 'ar' ? 
                 'انضم إلينا في مهمتنا لتحسين النتائج الصحية للمجتمعات الشرق أوسطية والعربية في كندا' : 
-                'Join us in our mission to improve health outcomes for Middle Eastern and Arab communities in Canada'}
+                'Join us in our mission to improve health outcomes for Middle Eastern and Arab societies in Canada'}
             </p>
           </div>
         </section>

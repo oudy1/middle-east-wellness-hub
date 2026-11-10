@@ -89,8 +89,10 @@ const InquiryForm = () => {
 
       setFormData({ name: '', email: '', subject: '', message: '' });
       toast({
-        title: "Message sent!",
-        description: "Thank you for your inquiry! We will get back to you soon."
+        title: isAr ? "تم إرسال رسالتك" : "Message sent!",
+        description: isAr
+          ? "شكرًا لاستفسارك. سنعود إليك قريبًا."
+          : "Thank you for your inquiry! We will get back to you soon."
       });
     } catch (err) {
       console.error("send-contact-email failed:", err);

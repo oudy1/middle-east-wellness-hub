@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper, ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
+import kyrEn from "@/assets/know-your-rights-en.png.asset.json";
+import kyrAr from "@/assets/know-your-rights-ar.png.asset.json";
+import mhcPoster from "@/assets/mhc-poster.png.asset.json";
+import mhcPanelists from "@/assets/mhc-panelists.png.asset.json";
 
 const FeaturedNewsSection = () => {
   const { language, t } = useLanguage();
@@ -10,48 +15,59 @@ const FeaturedNewsSection = () => {
 
   const isAr = language === 'ar';
 
+  // SHAMS updates (newest first). Internal links start with "/".
   const newsItems = [
     {
       id: 1,
-      title: "Middle East Emerges as Global Hub for Digital Health Innovation",
-      titleAr: "الشرق الأوسط يبرز كمركز عالمي للابتكار في الصحة الرقمية",
-      excerpt: "The UAE's digital health market is projected to reach $2.6bn by 2030, growing at 23.5% annually. Dubai leads the charge with massive AI investments and innovation platforms.",
-      excerptAr: "من المتوقع أن يصل سوق الصحة الرقمية في الإمارات إلى 2.6 مليار دولار بحلول عام 2030، بنمو سنوي يبلغ 23.5%. وتقود دبي هذا التوجه باستثمارات ضخمة في الذكاء الاصطناعي ومنصات الابتكار.",
-      date: "July 8, 2025",
-      dateAr: "8 يوليو 2025",
-      category: "Digital Health",
-      categoryAr: "الصحة الرقمية",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=400&fit=crop&crop=center",
-      url: "https://gulfbusiness.com/middle-east-the-emerging-global-hub-for-digital-health-innovation/",
+      title: "Know Your Rights Webinar Recording Now Available",
+      titleAr: "تسجيل ندوة اعرف حقوقك متاح الآن",
+      excerpt: "Missed our October webinar on speaking up in healthcare? Watch the full recording with Dr. Ritika Goel, Dr. Tarek Abdelhalim and Haifa Staiti on patient rights, referrals and second opinions.",
+      excerptAr: "فاتتك ندوتنا في أكتوبر حول التعبير عن احتياجاتك في الرعاية الصحية؟ شاهد التسجيل الكامل مع د. ريتيكا غويل ود. طارق عبد الحليم وهيفاء ستيتي حول حقوق المرضى والإحالات والرأي الطبي الثاني.",
+      date: "October 21, 2026",
+      dateAr: "21 أكتوبر 2026",
+      category: "Webinar",
+      categoryAr: "ندوة",
+      image: kyrEn.url,
+      imageAr: kyrAr.url,
+      url: "/recordings#webinar-know-your-rights",
       featured: true
     },
     {
       id: 2,
-      title: "Climate Change Linked to Rising Women's Cancer Rates in MENA",
-      titleAr: "تغير المناخ مرتبط بارتفاع معدلات إصابة النساء بالسرطان في الشرق الأوسط وشمال أفريقيا",
-      excerpt: "New research reveals that rising temperatures in Middle East and North Africa correlate with increased rates of breast, ovarian, uterine and cervical cancers.",
-      excerptAr: "يكشف بحث جديد أن ارتفاع درجات الحرارة في الشرق الأوسط وشمال أفريقيا يرتبط بزيادة معدلات سرطان الثدي والمبيض والرحم وعنق الرحم.",
-      date: "May 27, 2025",
-      dateAr: "27 مايو 2025",
-      category: "Public Health",
-      categoryAr: "الصحة العامة",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop",
-      url: "https://www.frontiersin.org/news/2025/05/27/global-warming-could-be-driving-womens-cancer-risk-frontiers-public-health"
+      title: "Mental Health Convention: Uncovering Stigma",
+      titleAr: "مؤتمر الصحة النفسية: كشف الوصمة",
+      excerpt: "Families, students and healthcare professionals joined SHAMS at the University of Toronto Mississauga to talk openly about mental health stigma. Watch the recap.",
+      excerptAr: "انضمت العائلات والطلاب والعاملون في الرعاية الصحية إلى شمس في جامعة تورنتو ميسيساغا للحديث بصراحة عن وصمة الصحة النفسية. شاهد الملخص.",
+      date: "July 18, 2026",
+      dateAr: "18 يوليو 2026",
+      category: "Event Recap",
+      categoryAr: "ملخص فعالية",
+      image: mhcPoster.url,
+      imageAr: mhcPoster.url,
+      url: "https://www.instagram.com/reel/DbCMtfkuVQK/"
     },
     {
       id: 3,
-      title: "Health Canada Introduces New Nutrition Warning Labels",
-      titleAr: "الصحة الكندية تقدم ملصقات تحذير غذائية جديدة",
-      excerpt: "Black-and-white labels now alert consumers to foods high in sugar, sodium, and saturated fat, supporting healthier dietary choices across Canadian communities.",
-      excerptAr: "تنبه الملصقات بالأبيض والأسود المستهلكين إلى الأطعمة الغنية بالسكر والصوديوم والدهون المشبعة، مما يدعم خيارات غذائية أكثر صحة في المجتمعات الكندية.",
-      date: "July 1, 2025",
-      dateAr: "1 يوليو 2025",
-      category: "Nutrition Policy",
-      categoryAr: "السياسة الغذائية",
-      image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400&h=250&fit=crop",
-      url: "https://www.cbc.ca/news/canada/nova-scotia/health-canada-front-of-package-nutrition-warning-labels-1.7563212"
+      title: "New: Healthcare Directory with Map",
+      titleAr: "جديد: دليل مقدمي الرعاية الصحية مع الخريطة",
+      excerpt: "Find doctors and healthcare workers serving Middle Eastern societies across Canada, filter by city, province and provider type, and see them on a map.",
+      excerptAr: "اعثر على أطباء وعاملين في الرعاية الصحية يخدمون المجتمعات الشرق أوسطية في كندا، وابحث حسب المدينة والمقاطعة ونوع مقدم الرعاية، وشاهدهم على الخريطة.",
+      date: "November 2026",
+      dateAr: "نوفمبر 2026",
+      category: "SHAMS Update",
+      categoryAr: "تحديث من شمس",
+      image: mhcPanelists.url,
+      imageAr: mhcPanelists.url,
+      url: "/directory"
     }
   ];
+
+  const NewsLink = ({ url, className, children }: { url: string; className?: string; children: React.ReactNode }) =>
+    url.startsWith("/") ? (
+      <Link to={url} className={className}>{children}</Link>
+    ) : (
+      <a href={url} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
+    );
 
   const featuredNews = newsItems.find(item => item.featured);
   const regularNews = newsItems.filter(item => !item.featured);
@@ -77,12 +93,12 @@ const FeaturedNewsSection = () => {
           {featuredNews && (
             <div className="lg:col-span-2">
               <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full cursor-pointer">
-                <a href={featuredNews.url} target="_blank" rel="noopener noreferrer" className="block">
+                <NewsLink url={featuredNews.url} className="block">
                   <div className="relative">
                     <img 
-                      src={featuredNews.image} 
+                      src={isAr ? featuredNews.imageAr : featuredNews.image} 
                       alt={isAr ? featuredNews.titleAr : featuredNews.title}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-64 object-contain bg-muted"
                       loading="lazy"
                     />
                     <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'}`}>
@@ -105,7 +121,7 @@ const FeaturedNewsSection = () => {
                       <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
                     </Button>
                   </CardContent>
-                </a>
+                </NewsLink>
               </Card>
             </div>
           )}
@@ -113,10 +129,10 @@ const FeaturedNewsSection = () => {
           <div className="space-y-6">
             {regularNews.map((item) => (
               <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="block">
+                <NewsLink url={item.url} className="block">
                   <div className="flex">
                     <img 
-                      src={item.image} 
+                      src={isAr ? item.imageAr : item.image} 
                       alt={isAr ? item.titleAr : item.title}
                       className="w-24 h-24 object-cover flex-shrink-0"
                       loading="lazy"
@@ -130,7 +146,7 @@ const FeaturedNewsSection = () => {
                       <p className={`text-muted-foreground text-xs leading-relaxed line-clamp-2 ${isAr ? 'font-cairo' : ''}`}>{isAr ? item.excerptAr : item.excerpt}</p>
                     </CardContent>
                   </div>
-                </a>
+                </NewsLink>
               </Card>
             ))}
           </div>
@@ -138,7 +154,7 @@ const FeaturedNewsSection = () => {
 
         <div className="text-center">
           <Button asChild variant="outline" className="border-healthTeal text-healthTeal hover:bg-healthTeal hover:text-white">
-            <a href="https://www.canada.ca/en/health-canada.html" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/projectshams/" target="_blank" rel="noopener noreferrer">
               {t("news.viewAll")}
               <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4`} />
             </a>

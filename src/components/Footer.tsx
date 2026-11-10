@@ -63,10 +63,10 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">&copy; {currentYear} {t("footer.copyright")}</p>
             <div className="mt-4 md:mt-0">
-              <ul className="flex space-x-6 text-sm text-gray-400">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-400">
                 <li><Link to="/privacy" className="hover:text-healthTealLight transition-colors">{t("footer.privacy")}</Link></li>
-                <li><Link to="/terms" className="hover:text-healthTealLight transition-colors">{t("footer.terms")}</Link></li>
-                <li><Link to="/cookies" className="hover:text-healthTealLight transition-colors">{t("footer.cookies")}</Link></li>
+                <li><Link to="/privacy#terms" className="hover:text-healthTealLight transition-colors">{t("footer.terms")}</Link></li>
+                <li><Link to="/privacy#cookies" className="hover:text-healthTealLight transition-colors">{t("footer.cookies")}</Link></li>
               </ul>
             </div>
           </div>
