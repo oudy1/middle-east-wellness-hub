@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import PhysicianApplicationForm from "@/components/PhysicianApplicationForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 const benefitKeys = [
   { id: 1, titleKey: "physicianApply.benefit1Title", descKey: "physicianApply.benefit1Desc" },
   { id: 2, titleKey: "physicianApply.benefit2Title", descKey: "physicianApply.benefit2Desc" },
@@ -17,6 +18,14 @@ const PhysicianApplication = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={isRTL ? "rtl" : "ltr"}>
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/physicians/apply"
+        title="Join the SHAMS Physician Directory | SHAMS"
+        description="Healthcare providers can apply to be listed in the SHAMS directory so Middle Eastern and North African patients in Canada can find them by city."
+        titleAr="انضم إلى دليل أطباء شمس | شمس"
+        descriptionAr="يمكن لمقدمي الرعاية الصحية التقدم لإدراجهم في دليل شمس ليتمكن مرضى الشرق الأوسط وشمال أفريقيا في كندا من إيجادهم حسب المدينة."
+      />
       <main id="main-content" className="flex-grow">
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-16">

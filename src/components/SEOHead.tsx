@@ -14,6 +14,8 @@ type SEOHeadProps = {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   /** Override active language. Defaults to <html lang="..."> attribute. */
   lang?: 'en' | 'ar';
+  /** Ask search engines not to list this page (admin, 404, password pages). */
+  noIndex?: boolean;
 };
 
 const SITE_ORIGIN = 'https://www.projectshams.com';
@@ -30,6 +32,7 @@ export const SEOHead = ({
   path,
   jsonLd,
   lang,
+  noIndex = false,
 }: SEOHeadProps) => {
   useEffect(() => {
     const activeLang =
@@ -54,6 +57,7 @@ export const SEOHead = ({
     };
 
     setMeta('description', resolvedDescription);
+    setMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow');
     if (keywords) setMeta('keywords', keywords);
 
     setMeta('og:title', resolvedTitle, true);
@@ -113,7 +117,7 @@ export const SEOHead = ({
       const stale = document.getElementById(jsonLdId);
       if (stale) stale.remove();
     };
-  }, [title, description, titleAr, descriptionAr, keywords, ogImage, canonicalUrl, path, jsonLd, lang]);
+  }, [title, description, titleAr, descriptionAr, keywords, ogImage, canonicalUrl, path, jsonLd, lang, noIndex]);
 
   return null;
 };

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
+import { SEOHead } from "@/components/SEOHead";
 const Diseases = () => {
   const { t, language } = useLanguage();
   const isRTL = language === 'ar';
@@ -62,6 +63,14 @@ const Diseases = () => {
   return (
     <div className={`flex flex-col min-h-screen bg-background ${isRTL ? 'rtl' : 'ltr'}`}>
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/diseases"
+        title="Common Health Conditions in MENA Societies | SHAMS"
+        description="Plain-language guides to diabetes, heart disease, mental health and other conditions common in Middle Eastern and North African societies in Canada, in English and Arabic."
+        titleAr="الحالات الصحية الشائعة | شمس"
+        descriptionAr="أدلة مبسطة عن السكري وأمراض القلب والصحة النفسية وحالات أخرى شائعة في مجتمعات الشرق الأوسط وشمال أفريقيا في كندا."
+      />
       <main id="main-content" className="flex-grow">
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">

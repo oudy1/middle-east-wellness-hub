@@ -18,3 +18,5 @@
 - [ ] User action: infoprojectshams@gmail.com creates an account at /admin/login and confirms the email (admin access is then automatic).
 - [x] Fixed admin sign-in loop (admin list rule checked itself, so every admin page said Not authorized); added forgot-password + /reset-password.
 - [ ] User review: Privacy page wording; Scadding Court workshop details and partner approval; newcomer initiative description.
+- [x] Audit S1-S4: own title/description/canonical on 9 pages (EN+AR); 404 + admin pages hidden from search; sitemap cleaned (+find-healthcare-workers, physicians/apply, post-opportunity; -resources, -webinars); robots blocks /admin; English recordings heading "Webinars and Recordings" (Arabic kept as-is per user).
+- [ ] Next audit items: hide ku/fa/tr until translated (needs approval), homepage length/reorder (needs design approval), load pages on demand (performance).

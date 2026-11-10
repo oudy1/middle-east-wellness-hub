@@ -49,7 +49,7 @@ const ResetPassword = () => {
 
   return (
     <div className="min-h-dvh flex items-center justify-center bg-background px-4">
-      <SEOHead title="Reset Password - SHAMS" description="Set a new password for your SHAMS admin account" />
+      <SEOHead noIndex title="Reset Password - SHAMS" description="Set a new password for your SHAMS admin account" />
       <main id="main-content" className="w-full max-w-sm">
         {ready ? (
           <form onSubmit={handleSubmit} className="space-y-4 border border-border rounded-lg p-6 bg-card">

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 const SupportUs = () => {
   const { language } = useLanguage();
 
@@ -50,6 +51,14 @@ const SupportUs = () => {
       <div className="absolute inset-0 bg-calligraphy-pattern opacity-10 pointer-events-none"></div>
       
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/support-us"
+        title="Support SHAMS | SHAMS"
+        description="Ways to support SHAMS, a Toronto non-profit improving health advocacy and access for Middle Eastern and North African societies in Canada."
+        titleAr="ادعم شمس | شمس"
+        descriptionAr="طرق دعم شمس، المنظمة غير الربحية في تورنتو التي تعمل على تحسين المناصرة الصحية والوصول إلى الرعاية لمجتمعات الشرق الأوسط وشمال أفريقيا في كندا."
+      />
       
       <main id="main-content" className="flex-grow relative z-10">
         {/* Hero Section */}

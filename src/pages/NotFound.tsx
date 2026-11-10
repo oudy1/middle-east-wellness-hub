@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEOHead } from "@/components/SEOHead";
 
 const NotFound = () => {
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     console.error(
@@ -20,6 +21,7 @@ const NotFound = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <SEOHead noIndex lang={language === "ar" ? "ar" : "en"} title="Page not found | SHAMS" description="This page does not exist on the SHAMS website." titleAr="الصفحة غير موجودة | شمس" descriptionAr="هذه الصفحة غير موجودة على موقع شمس." />
       <main id="main-content" className="flex-grow py-16 md:py-24 bg-healthLightGray">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-healthDarkBlue mb-6">{t("notFound.title")}</h1>

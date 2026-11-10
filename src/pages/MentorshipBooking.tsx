@@ -15,6 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSpamGuard } from "@/hooks/useSpamGuard";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 
+import { SEOHead } from "@/components/SEOHead";
 const MentorshipBooking = () => {
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -175,6 +176,14 @@ const MentorshipBooking = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/mentorship-booking"
+        title="Book a Mentorship Session | SHAMS"
+        description="Request a mentorship session with SHAMS healthcare professionals and students for guidance on medical school, careers and research in Canada."
+        titleAr="احجز جلسة إرشاد | شمس"
+        descriptionAr="اطلب جلسة إرشاد مع مختصين صحيين وطلاب من شمس للحصول على توجيه حول كلية الطب والمسار المهني والبحث في كندا."
+      />
       <main id="main-content" className="flex-grow">
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-16">

@@ -403,7 +403,7 @@ const AdminFaqVotes = () => {
 
   return (
     <div className="min-h-dvh bg-background">
-      <SEOHead title="FAQ Vote Analytics - SHAMS Admin" description="Admin analytics for FAQ feedback" />
+      <SEOHead noIndex title="FAQ Vote Analytics - SHAMS Admin" description="Admin analytics for FAQ feedback" />
       <header className="border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
           <div>
