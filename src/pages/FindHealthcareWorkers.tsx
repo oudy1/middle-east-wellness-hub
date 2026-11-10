@@ -324,17 +324,7 @@ const FindHealthcareWorkers = () => {
           ? "تم إرسال اقتراحك بنجاح" 
           : "Your suggestion has been submitted",
       });
-      setSuggestionOpen(false);
-      setSuggestionData({
-        provider_name: "",
-        provider_type: "",
-        city: "",
-        province: "",
-        contact_info: "",
-        notes: "",
-        submitted_by_email: "",
-        submitted_by_name: "",
-      });
+      resetForm();
     } catch (error) {
       console.error("Suggestion error:", error);
       toast({
@@ -629,6 +619,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "اسم مقدم الخدمة *" : "Provider Name *"}</Label>
                               <Input
                                 value={suggestionData.provider_name}
+                                maxLength={120}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, provider_name: e.target.value }))}
                                 placeholder={isAr ? "الاسم الكامل" : "Full name"}
                               />
@@ -638,6 +629,7 @@ const FindHealthcareWorkers = () => {
                                 <Label>{isAr ? "المدينة *" : "City *"}</Label>
                                 <Input
                                   value={suggestionData.city}
+                                maxLength={80}
                                   onChange={(e) => setSuggestionData(prev => ({ ...prev, city: e.target.value }))}
                                 />
                               </div>
@@ -664,6 +656,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "نوع مقدم الخدمة" : "Provider Type"}</Label>
                               <Input
                                 value={suggestionData.provider_type}
+                                maxLength={80}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, provider_type: e.target.value }))}
                                 placeholder={isAr ? "مثال: طبيب عائلة" : "e.g., Family Physician"}
                               />
@@ -672,6 +665,7 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "معلومات الاتصال" : "Contact Info"}</Label>
                               <Input
                                 value={suggestionData.contact_info}
+                                maxLength={200}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, contact_info: e.target.value }))}
                                 placeholder={isAr ? "رقم الهاتف أو العنوان" : "Phone or address"}
                               />
@@ -680,9 +674,21 @@ const FindHealthcareWorkers = () => {
                               <Label>{isAr ? "ملاحظات" : "Notes"}</Label>
                               <Textarea
                                 value={suggestionData.notes}
+                                maxLength={1000}
                                 onChange={(e) => setSuggestionData(prev => ({ ...prev, notes: e.target.value }))}
                                 placeholder={isAr ? "أي معلومات إضافية" : "Any additional info"}
                                 rows={2}
+                              />
+                            </div>
+                            <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+                              <label htmlFor="suggestion-website">Website</label>
+                              <input
+                                id="suggestion-website"
+                                type="text"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={suggestionTrap}
+                                onChange={(e) => setSuggestionTrap(e.target.value)}
                               />
                             </div>
                             <Button 
