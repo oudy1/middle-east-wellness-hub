@@ -27,6 +27,7 @@ import Mentorship from "@/pages/Mentorship";
 import FAQ from "@/pages/FAQ";
 import Glossary from "@/pages/Glossary";
 import AdminLogin from "@/pages/AdminLogin";
+import ResetPassword from "@/pages/ResetPassword";
 import AdminFaqVotes from "@/pages/AdminFaqVotes";
 import AdminOpportunities from "@/pages/AdminOpportunities";
 import AdminVolunteers from "@/pages/AdminVolunteers";
@@ -70,6 +71,7 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin/faq-votes" element={<AdminFaqVotes />} />
             <Route path="/admin/opportunities" element={<AdminOpportunities />} />
             <Route path="/admin/volunteers" element={<AdminVolunteers />} />
