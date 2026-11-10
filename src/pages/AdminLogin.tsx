@@ -71,7 +71,7 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-dvh flex items-center justify-center bg-background px-4">
-      <SEOHead title="Admin Login - SHAMS" description="SHAMS admin sign-in" />
+      <SEOHead noIndex title="Admin Login - SHAMS" description="SHAMS admin sign-in" />
       {resetSent ? (
         <div className="w-full max-w-sm space-y-3 border border-border rounded-lg p-6 bg-card" role="status">
           <h1 className="text-xl font-bold text-foreground">Check your email</h1>

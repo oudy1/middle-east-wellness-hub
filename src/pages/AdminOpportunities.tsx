@@ -165,7 +165,7 @@ const AdminOpportunities = () => {
   if (!isAdmin) {
     return (
       <div className="min-h-dvh flex flex-col items-center justify-center gap-4 px-4 text-center">
-        <SEOHead title="Opportunity Inbox - SHAMS" description="SHAMS admin opportunity inbox" />
+        <SEOHead noIndex title="Opportunity Inbox - SHAMS" description="SHAMS admin opportunity inbox" />
         <h1 className="text-xl font-bold text-foreground">Not authorized</h1>
         <p className="text-muted-foreground">
           This account is not a SHAMS administrator.
@@ -177,7 +177,7 @@ const AdminOpportunities = () => {
 
   return (
     <div className="min-h-dvh bg-background">
-      <SEOHead title="Opportunity Inbox - SHAMS" description="SHAMS admin opportunity inbox" />
+      <SEOHead noIndex title="Opportunity Inbox - SHAMS" description="SHAMS admin opportunity inbox" />
       <main id="main-content" className="container mx-auto px-4 py-8 max-w-5xl">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <div>

@@ -121,7 +121,7 @@ const AdminVolunteers = () => {
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10" dir={isAr ? "rtl" : "ltr"}>
-      <SEOHead title={t.title} description={t.title} />
+      <SEOHead noIndex title={t.title} description={t.title} />
       <h1 className="mb-6 text-2xl font-bold">{t.title}</h1>
 
       <Card className="mb-6">
