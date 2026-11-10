@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "@/components/Header";
 import WebinarSlidesViewer from "@/components/WebinarSlidesViewer";
 import Footer from "@/components/Footer";
@@ -15,7 +15,10 @@ import webinarsData from "../../content/webinars.json";
 
 const Webinars = () => {
   const { language, t } = useLanguage();
-  const [webinarLang, setWebinarLang] = useState<'en' | 'ar'>('en');
+  const [webinarLang, setWebinarLang] = useState<'en' | 'ar'>(language === 'ar' ? 'ar' : 'en');
+  useEffect(() => {
+    setWebinarLang(language === 'ar' ? 'ar' : 'en');
+  }, [language]);
   useHashScroll();
 
   const webinars = webinarsData;
@@ -49,10 +52,12 @@ const Webinars = () => {
               <div key={webinar.id} id={`webinar-${webinar.id}`} className="max-w-5xl mx-auto mb-16 scroll-mt-24">
                 <Card className="overflow-hidden border-none shadow-lg">
                   {/* Language Toggle */}
-                  <div className="bg-healthDarkBlue p-4 flex justify-center gap-2">
+                  <div className="bg-healthDarkBlue p-4 flex justify-center gap-2" dir="ltr">
                     <Button
                       variant={webinarLang === 'en' ? 'default' : 'ghost'}
                       onClick={() => setWebinarLang('en')}
+                      aria-pressed={webinarLang === 'en'}
+                      lang="en"
                       className={webinarLang === 'en' ? 'bg-healthGold text-healthDarkBlue hover:bg-healthGold/90' : 'text-white hover:bg-white/10'}
                     >
                       English
@@ -60,6 +65,8 @@ const Webinars = () => {
                     <Button
                       variant={webinarLang === 'ar' ? 'default' : 'ghost'}
                       onClick={() => setWebinarLang('ar')}
+                      aria-pressed={webinarLang === 'ar'}
+                      lang="ar"
                       className={webinarLang === 'ar' ? 'bg-healthGold text-healthDarkBlue hover:bg-healthGold/90' : 'text-white hover:bg-white/10'}
                     >
                       العربية
@@ -73,7 +80,7 @@ const Webinars = () => {
                         <iframe
                           className="absolute top-0 left-0 w-full h-full"
                           src={`https://www.youtube.com/embed/${webinar.youtubeId}`}
-                          title={webinar.en.title}
+                          title={webinar[webinarLang].title}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           loading="lazy"
                           referrerPolicy="strict-origin-when-cross-origin"
@@ -89,16 +96,16 @@ const Webinars = () => {
                       </h2>
 
                       {/* Date & Time (if available) */}
-                      {webinar.date && (
-                        <div className={`flex items-center gap-2 text-muted-foreground mb-6 ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      {(webinarLang === 'ar' ? (webinar as any).dateAr ?? webinar.date : webinar.date) && (
+                        <div className={`flex items-center gap-2 text-muted-foreground mb-6`}>
                           <Calendar className="h-5 w-5" />
-                          <span className="font-semibold">{webinar.date}</span>
+                          <span className="font-semibold">{webinarLang === 'ar' ? (webinar as any).dateAr ?? webinar.date : webinar.date}</span>
                         </div>
                       )}
 
                       {/* Tags */}
-                      <div className={`flex flex-wrap gap-2 mb-6 ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                        {webinar.tags.map((tag) => (
+                      <div className={`flex flex-wrap gap-2 mb-6`}>
+                        {((webinarLang === 'ar' ? (webinar as any).tagsAr : null) ?? webinar.tags).map((tag: string) => (
                           <Badge key={tag} className="bg-healthTeal text-white">{tag}</Badge>
                         ))}
                       </div>
@@ -140,13 +147,13 @@ const Webinars = () => {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className={`flex flex-wrap gap-2 mb-8 ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <div className={`flex flex-wrap gap-2 mb-8`}>
                         {webinar.youtubeId && (
                           <Button 
                             className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white"
                             onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
                           >
-                            <Play className="mr-2 h-4 w-4" />
+                            <Play className="me-2 h-4 w-4" />
                             {webinar[webinarLang].watchButton}
                           </Button>
                         )}
@@ -178,14 +185,14 @@ const Webinars = () => {
                             href="https://www.projectshams.com" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className={`flex items-center gap-2 text-healthTeal hover:underline ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}
+                            className={`flex items-center gap-2 text-healthTeal hover:underline`}
                           >
                             <Globe className="h-4 w-4" />
                             <span>www.projectshams.com</span>
                           </a>
                           <a 
                             href="mailto:infoprojectshams@gmail.com"
-                            className={`flex items-center gap-2 text-healthTeal hover:underline ${webinarLang === 'ar' ? 'flex-row-reverse' : ''}`}
+                            className={`flex items-center gap-2 text-healthTeal hover:underline`}
                           >
                             <Mail className="h-4 w-4" />
                             <span>infoprojectshams@gmail.com</span>
