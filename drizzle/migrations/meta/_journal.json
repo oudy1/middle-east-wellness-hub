@@ -15,6 +15,13 @@
       "when": 1794269440058,
       "tag": "0001_harden_public_forms",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794270203487,
+      "tag": "0002_admin_email_allowlist",
+      "breakpoints": true
     }
   ]
 }

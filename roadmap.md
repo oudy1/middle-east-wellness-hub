@@ -7,3 +7,11 @@
 - [x] Batch 1: Join Our Team button points to /volunteer.
 - [ ] Batch 1: add admins. Blocked: no sign-in accounts exist yet; need the admin email list from the user.
 - [ ] User action: close the old Mental Health Convention Google Form in Google Forms.
+- [ ] Batch 1: admins via allowlist (default: infoprojectshams@gmail.com) + create-account on admin sign-in.
+- [ ] Batch 2: Scadding Court workshop card (text only, no partner logo, hides after Nov 19).
+- [ ] Batch 2: Newcomer and Refugee Health Education Initiative card on Programs.
+- [ ] Batch 2: BLCC dead links -> BLCC homepage; remove Persram dead link.
+- [ ] Batch 2: Weekly Topic renamed Featured Health Topic; news replaced with 2026 SHAMS updates.
+- [ ] Batch 2: newsletter replaced with Follow us on Instagram.
+- [ ] Batch 2: bilingual Privacy & Terms page; fix footer links.
+- [ ] Batch 2: "societies" sweep + official name in hero/footer; inquiry success message translated; hide expired opportunities.
