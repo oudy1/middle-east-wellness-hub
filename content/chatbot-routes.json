@@ -39,5 +39,14 @@
   "join_us": "/join-us",
   "support_us": "/support-us",
   "faq": "/faq",
-  "glossary": "/glossary"
+  "glossary": "/glossary",
+  "directory_map": "/directory",
+  "physician_apply": "/physicians/apply",
+  "post_opportunity": "/post-opportunity",
+  "newcomer_initiative": "/programs#newcomer-initiative",
+  "privacy": "/privacy",
+  "webinar_know_your_rights": "/recordings#webinar-know-your-rights",
+  "webinar_womens_health": "/recordings#webinar-womens-health",
+  "webinar_intro_research": "/recordings#webinar-intro-research",
+  "webinar_nutrition_diabetes": "/recordings#webinar-nutrition-diabetes"
 }

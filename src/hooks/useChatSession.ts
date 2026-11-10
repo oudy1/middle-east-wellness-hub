@@ -132,9 +132,15 @@ export const useChatSession = () => {
     }
   }, [messages, language, isLoading, toast, t]);
 
+  // Closing the chat starts a fresh conversation next time it opens.
+  const resetConversation = useCallback(() => {
+    setMessages([]);
+  }, []);
+
   return {
     messages,
     isLoading,
     sendMessage,
+    resetConversation,
   };
 };

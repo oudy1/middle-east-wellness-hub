@@ -20,7 +20,18 @@ const ChatWidget: React.FC = () => {
     messages,
     isLoading,
     sendMessage,
+    resetConversation,
   } = useChatSession();
+
+  // Explicit close (X button or tapping outside) ends the conversation, so
+  // reopening always starts fresh. Following a chatbot link only hides the
+  // window and keeps the conversation.
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    setIsMinimized(false);
+    resetConversation();
+    document.body.style.overflow = '';
+  }, [resetConversation]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -106,7 +117,7 @@ const ChatWidget: React.FC = () => {
       {/* Backdrop for mobile - lower z-index than chat window */}
       <div 
         className="fixed inset-0 z-[55] bg-black/30 sm:hidden"
-        onClick={() => setIsOpen(false)}
+        onClick={handleClose}
         aria-hidden="true"
         style={{ pointerEvents: 'auto' }}
       />
@@ -154,7 +165,7 @@ const ChatWidget: React.FC = () => {
               type="button"
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-label={t('chatbot.closeChat')}
               className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
             >
