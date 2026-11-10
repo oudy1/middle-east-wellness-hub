@@ -16,4 +16,5 @@
 - [x] Batch 2: bilingual Privacy & Terms page; fix footer links.
 - [x] Batch 2: "societies" sweep + official name in hero/footer; inquiry success message translated; hide expired opportunities.
 - [ ] User action: infoprojectshams@gmail.com creates an account at /admin/login and confirms the email (admin access is then automatic).
+- [x] Fixed admin sign-in loop (admin list rule checked itself, so every admin page said Not authorized); added forgot-password + /reset-password.
 - [ ] User review: Privacy page wording; Scadding Court workshop details and partner approval; newcomer initiative description.
