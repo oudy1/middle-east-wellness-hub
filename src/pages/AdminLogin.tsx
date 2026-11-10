@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { SEOHead } from "@/components/SEOHead";
 
-type Mode = "signin" | "signup";
+type Mode = "signin" | "signup" | "forgot";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -36,6 +37,18 @@ const AdminLogin = () => {
       if (error) {
         toast({ title: "Sign-in failed", description: "Check your email and password, and confirm your email if you just signed up.", variant: "destructive" });
       }
+      return;
+    }
+    if (mode === "forgot") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      setLoading(false);
+      if (error) {
+        toast({ title: "Could not send reset email", description: "Please try again in a few minutes.", variant: "destructive" });
+        return;
+      }
+      setResetSent(true);
       return;
     }
     if (password.length < 8) {
@@ -59,7 +72,17 @@ const AdminLogin = () => {
   return (
     <div className="min-h-dvh flex items-center justify-center bg-background px-4">
       <SEOHead title="Admin Login - SHAMS" description="SHAMS admin sign-in" />
-      {checkEmail ? (
+      {resetSent ? (
+        <div className="w-full max-w-sm space-y-3 border border-border rounded-lg p-6 bg-card" role="status">
+          <h1 className="text-xl font-bold text-foreground">Check your email</h1>
+          <p className="text-sm text-muted-foreground">
+            If an account exists for {email.trim()}, we sent a link to set a new password.
+          </p>
+          <Button variant="outline" className="w-full min-h-[44px]" onClick={() => { setResetSent(false); setMode("signin"); }}>
+            Back to sign in
+          </Button>
+        </div>
+      ) : checkEmail ? (
         <div className="w-full max-w-sm space-y-3 border border-border rounded-lg p-6 bg-card" role="status">
           <h1 className="text-xl font-bold text-foreground">Check your email</h1>
           <p className="text-sm text-muted-foreground">
@@ -74,7 +97,7 @@ const AdminLogin = () => {
         <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4 border border-border rounded-lg p-6 bg-card">
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              {mode === "signin" ? "Admin sign in" : "Create an admin account"}
+              {mode === "signin" ? "Admin sign in" : mode === "signup" ? "Create an admin account" : "Reset your password"}
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
               Restricted area. Authorized SHAMS administrators only.
@@ -84,6 +107,7 @@ const AdminLogin = () => {
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" maxLength={255} />
           </div>
+          {mode !== "forgot" && (
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input
@@ -96,8 +120,9 @@ const AdminLogin = () => {
               autoComplete={mode === "signin" ? "current-password" : "new-password"}
             />
           </div>
+          )}
           <Button type="submit" className="w-full min-h-[44px]" disabled={loading}>
-            {loading ? "Please wait..." : mode === "signin" ? "Sign in" : "Create account"}
+            {loading ? "Please wait..." : mode === "signin" ? "Sign in" : mode === "signup" ? "Create account" : "Send reset link"}
           </Button>
           <button
             type="button"
@@ -106,6 +131,15 @@ const AdminLogin = () => {
           >
             {mode === "signin" ? "First time here? Create an account" : "Already have an account? Sign in"}
           </button>
+          {mode === "signin" && (
+            <button
+              type="button"
+              className="w-full text-sm text-muted-foreground underline-offset-4 hover:underline min-h-[44px]"
+              onClick={() => setMode("forgot")}
+            >
+              Forgot your password?
+            </button>
+          )}
         </form>
       )}
     </div>
