@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import DOMPurify from "dompurify";
 import { supabase } from "@/integrations/supabase/client";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 
 const emptyForm = {
   firstName: "",
@@ -49,6 +50,7 @@ const PhysicianApplicationForm = () => {
   const [formData, setFormData] = useState(emptyForm);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { trap, guardFields } = useSpamGuard();
 
   const specialtyOptions = [
     { value: "family-medicine", labelKey: "physicianForm.specialty.familyMedicine" },
@@ -200,6 +202,7 @@ const PhysicianApplicationForm = () => {
           body: {
             name: fullName,
             email: fd.email.trim(),
+            ...guardFields(),
             subject: `Physician directory application - ${fd.city.trim()}, ${fd.province}`.slice(0, 200),
             message: [
               `Name: ${fullName}`,
@@ -268,7 +271,8 @@ const PhysicianApplicationForm = () => {
         </p>
       </CardHeader>
       <CardContent className="p-4 md:p-6 lg:p-8">
-        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 relative">
+          {trap}
           {/* Name Section */}
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">

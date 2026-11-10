@@ -12,11 +12,13 @@ import { toast } from "sonner";
 import { GraduationCap, Stethoscope, Pill, Smile, Info } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 
 const MentorshipBooking = () => {
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { trap, guardFields } = useSpamGuard();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -129,6 +131,7 @@ const MentorshipBooking = () => {
           email: formData.email.trim(),
           subject: `Mentorship request - ${selectedType}`.slice(0, 200),
           message,
+          ...guardFields(),
         },
       });
 
@@ -191,7 +194,8 @@ const MentorshipBooking = () => {
         {/* Form Section */}
         <section className="py-16">
           <div className="container mx-auto px-4 max-w-4xl">
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 relative">
+              {trap}
               {/* Personal Information */}
               <Card>
                 <CardHeader>

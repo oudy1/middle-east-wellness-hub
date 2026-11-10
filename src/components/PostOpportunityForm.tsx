@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 import DOMPurify from "dompurify";
 
 const emptyForm = {
@@ -38,6 +39,7 @@ const PostOpportunityForm = () => {
   const [formData, setFormData] = useState({ ...emptyForm });
   const [submitted, setSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
+  const { trap, guardFields } = useSpamGuard();
   const { toast } = useToast();
 
   const validateInput = (value: string, maxLength: number = 200) => {
@@ -112,6 +114,7 @@ const PostOpportunityForm = () => {
           body: {
             name: `${formData.firstName} ${formData.lastName}`.trim().slice(0, 100),
             email: formData.email.trim(),
+            ...guardFields(),
             subject: `New research opportunity - ${formData.projectTitle.trim()}`.slice(0, 200),
             message: [
               `Name: ${formData.firstName} ${formData.lastName}`,
@@ -199,7 +202,8 @@ const PostOpportunityForm = () => {
             </p>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 relative">
+              {trap}
               {/* Name */}
               <div className="space-y-2">
                 <Label className="text-base font-medium text-start block">

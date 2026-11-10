@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import DOMPurify from 'dompurify';
 
@@ -19,6 +20,7 @@ const InquiryForm = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { trap, guardFields } = useSpamGuard();
 
   const validateInput = (value: string, maxLength: number = 500) => {
     return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
@@ -69,7 +71,7 @@ const InquiryForm = () => {
 
     try {
       const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: sanitizedData,
+        body: { ...sanitizedData, ...guardFields() },
       });
       if (error) {
         const details =
@@ -108,7 +110,8 @@ const InquiryForm = () => {
     <Card className="w-full max-w-2xl mx-auto">
       <CardContent className="p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">{t("contact.inquiryForm")}</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 relative">
+          {trap}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
