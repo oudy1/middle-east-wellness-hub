@@ -21,9 +21,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'الصحة النفسية',
     keywords_en: ['mental', 'health', 'depression', 'anxiety', 'stress', 'therapy', 'counseling', 'psychology', 'psychiatry'],
     keywords_ar: ['نفسية', 'صحة', 'اكتئاب', 'قلق', 'توتر', 'علاج', 'استشارة', 'نفسي'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'mental-health'
+    url: '/services#mental-health-arabic',
+    category: 'topics'
   },
   {
     id: 'womens-health',
@@ -32,8 +31,7 @@ export const searchableResources: SearchableResource[] = [
     keywords_en: ['women', 'woman', 'female', 'pregnancy', 'maternal', 'breast', 'gynecology', 'menstrual', 'reproductive'],
     keywords_ar: ['مرأة', 'نساء', 'حمل', 'أمومة', 'ثدي', 'نسائية', 'دورة', 'إنجاب'],
     url: '/services',
-    category: 'topics',
-    anchor: 'womens-health'
+    category: 'topics'
   },
   {
     id: 'diabetes',
@@ -59,9 +57,8 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'الإقلاع عن التدخين',
     keywords_en: ['smoking', 'quit', 'tobacco', 'nicotine', 'cigarette', 'vaping', 'cessation', 'stop smoking'],
     keywords_ar: ['تدخين', 'إقلاع', 'تبغ', 'نيكوتين', 'سجائر', 'سيجارة'],
-    url: '/services',
-    category: 'topics',
-    anchor: 'smoking'
+    url: '/services#smoking-cessation',
+    category: 'topics'
   },
   {
     id: 'patient-rights',
@@ -98,7 +95,7 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'دليل أطباء العائلة',
     keywords_en: ['family physician', 'family doctor', 'GP', 'general practitioner', 'primary care', 'kitchener', 'toronto', 'ottawa', 'mississauga', 'london', 'city'],
     keywords_ar: ['طبيب عائلة', 'طبيب عام', 'رعاية أولية', 'مدينة'],
-    url: '/find-healthcare-workers#family-physicians',
+    url: '/find-healthcare-workers?specialty=Family%20Physician',
     category: 'healthcare'
   },
 
@@ -110,8 +107,7 @@ export const searchableResources: SearchableResource[] = [
     keywords_en: ['research', 'study', 'RA', 'research assistant', 'clinical trial', 'survey', 'participate', 'academic'],
     keywords_ar: ['بحث', 'أبحاث', 'دراسة', 'مساعد بحث', 'تجربة سريرية', 'استبيان', 'مشاركة', 'أكاديمي'],
     url: '/research',
-    category: 'research',
-    anchor: 'research'
+    category: 'research'
   },
 
   // Events
@@ -150,7 +146,7 @@ export const searchableResources: SearchableResource[] = [
     title_ar: 'اقترح موضوعاً',
     keywords_en: ['suggest', 'topic', 'request', 'idea', 'suggestion'],
     keywords_ar: ['اقتراح', 'موضوع', 'طلب', 'فكرة'],
-    url: '/services#topic-request',
+    url: '/recordings#topic-request',
     category: 'forms'
   },
 
@@ -182,6 +178,69 @@ export const searchableResources: SearchableResource[] = [
     url: '/about',
     category: 'services'
   }
+  {
+    id: 'mentorship',
+    title_en: 'Mentorship Program',
+    title_ar: 'برنامج الإرشاد',
+    keywords_en: ['mentorship', 'mentor', 'mentee', 'mentoring', 'student', 'medical school', 'career'],
+    keywords_ar: ['إرشاد', 'مرشد', 'طالب', 'طلاب', 'كلية الطب'],
+    url: '/programs/mentorship',
+    category: 'services'
+  },
+  {
+    id: 'newcomer-initiative',
+    title_en: 'Newcomer and Refugee Health Education Initiative',
+    title_ar: 'مبادرة التثقيف الصحي للقادمين الجدد واللاجئين',
+    keywords_en: ['newcomer', 'refugee', 'immigrant', 'workshop', 'ohip', 'ifhp', 'scadding', 'health card', 'initiative'],
+    keywords_ar: ['قادم', 'القادمين', 'لاجئ', 'اللاجئين', 'ورشة', 'مبادرة', 'بطاقة صحية'],
+    url: '/programs#newcomer-initiative',
+    category: 'events'
+  },
+  {
+    id: 'directory-map',
+    title_en: 'Healthcare Directory with Map',
+    title_ar: 'دليل مقدمي الرعاية مع الخريطة',
+    keywords_en: ['directory', 'map', 'near me', 'city', 'arabic doctor', 'arabic-speaking', 'physician', 'toronto', 'kitchener', 'mississauga', 'ottawa'],
+    keywords_ar: ['دليل', 'خريطة', 'طبيب', 'أطباء', 'مدينة'],
+    url: '/directory',
+    category: 'healthcare'
+  },
+  {
+    id: 'know-your-rights',
+    title_en: 'Know Your Rights Webinar Recording',
+    title_ar: 'تسجيل ندوة اعرف حقوقك',
+    keywords_en: ['know your rights', 'patient rights', 'rights', 'recording', 'webinar', 'advocacy', 'second opinion', 'referral'],
+    keywords_ar: ['حقوق', 'حقوق المرضى', 'اعرف حقوقك', 'تسجيل', 'ندوة'],
+    url: '/recordings#webinar-know-your-rights',
+    category: 'events'
+  },
+  {
+    id: 'physician-apply',
+    title_en: 'Join the Directory (Healthcare Providers)',
+    title_ar: 'انضم إلى الدليل (لمقدمي الرعاية)',
+    keywords_en: ['get listed', 'listing', 'join directory', 'provider application', 'apply'],
+    keywords_ar: ['إدراج', 'انضم إلى الدليل', 'تسجيل طبيب'],
+    url: '/physicians/apply',
+    category: 'forms'
+  },
+  {
+    id: 'post-opportunity',
+    title_en: 'Submit a Research Opportunity',
+    title_ar: 'أرسل فرصة بحثية',
+    keywords_en: ['submit study', 'post study', 'post opportunity', 'recruit', 'recruiting', 'participants', 'researcher'],
+    keywords_ar: ['أرسل فرصة', 'نشر دراسة', 'مشاركين', 'باحث'],
+    url: '/post-opportunity',
+    category: 'forms'
+  },
+  {
+    id: 'research-opportunities',
+    title_en: 'Research Opportunities and Studies',
+    title_ar: 'الفرص والدراسات البحثية',
+    keywords_en: ['research opportunities', 'studies', 'recruiting', 'participants', 'join a study', 'clinical trial'],
+    keywords_ar: ['فرص بحثية', 'دراسات', 'مشاركين', 'المشاركة في دراسة'],
+    url: '/research#studies',
+    category: 'research'
+  },
 ];
 
 // Popular searches for quick access chips
@@ -246,30 +305,44 @@ function expandQuery(q: string): string[] {
   return Array.from(out);
 }
 
-// Search function with synonym + fuzzy support
+// Words that appear in almost every query and would match unrelated entries.
+const STOPWORDS = new Set([
+  'a', 'an', 'and', 'are', 'at', 'for', 'from', 'how', 'i', 'in', 'is', 'me', 'my', 'need', 'of', 'on', 'or',
+  'the', 'to', 'want', 'what', 'where', 'with', 'shams', 'find', 'about', 'can', 'do', 'get',
+  'في', 'من', 'على', 'إلى', 'عن', 'هل', 'ما', 'أين', 'كيف', 'أريد', 'أحتاج', 'شمس', 'بالعربي', 'بالعربية',
+]);
+
+// Search function with synonym + fuzzy support, ranked so the best match comes first.
 export function searchResources(query: string, language: 'en' | 'ar'): SearchableResource[] {
   if (!query.trim()) return [];
 
   const normalizedQuery = query.toLowerCase().trim();
-  const tokens = expandQuery(normalizedQuery);
+  const tokens = expandQuery(normalizedQuery).filter(t => !STOPWORDS.has(t));
 
-  return searchableResources.filter(resource => {
+  const scored = searchableResources.map(resource => {
+    const titles = `${resource.title_en} ${resource.title_ar}`.toLowerCase();
     const title = (language === 'ar' ? resource.title_ar : resource.title_en).toLowerCase();
     const allKeywords = [...resource.keywords_en, ...resource.keywords_ar].map(k => k.toLowerCase());
+    let score = 0;
 
-    // Direct substring match on title or keywords
-    if (title.includes(normalizedQuery)) return true;
-    if (allKeywords.some(k => k.includes(normalizedQuery) || normalizedQuery.includes(k))) return true;
-
-    // Token / synonym match
-    for (const t of tokens) {
-      if (title.includes(t)) return true;
-      if (allKeywords.some(k => k.includes(t))) return true;
-      // Fuzzy match for typos on longer tokens
-      if (t.length > 4 && allKeywords.some(k => k.length > 3 && editDist(t, k) <= 1)) return true;
+    if (title.includes(normalizedQuery)) score += 10;
+    // Whole keyword phrases found in the query ("family doctor", "know your rights")
+    for (const k of allKeywords) {
+      if (k.length > 2 && normalizedQuery.includes(k)) score += 3 + k.split(/\s+/).length;
     }
-    return false;
+    for (const t of tokens) {
+      if (titles.includes(t)) score += 2;
+      if (allKeywords.some(k => k === t || k.split(/\s+/).includes(t))) score += 2;
+      else if (t.length > 3 && allKeywords.some(k => k.startsWith(t))) score += 1;
+      else if (t.length > 4 && allKeywords.some(k => k.length > 3 && editDist(t, k) <= 1)) score += 1;
+    }
+    return { resource, score };
   });
+
+  return scored
+    .filter(r => r.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(r => r.resource);
 }
 
 // Get resource by ID (for popular searches)
