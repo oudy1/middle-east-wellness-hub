@@ -177,7 +177,7 @@ export const searchableResources: SearchableResource[] = [
     keywords_ar: ['عن', 'من', 'رسالة', 'رؤية', 'فريق', 'منظمة', 'غير ربحية'],
     url: '/about',
     category: 'services'
-  }
+  },
   {
     id: 'mentorship',
     title_en: 'Mentorship Program',
