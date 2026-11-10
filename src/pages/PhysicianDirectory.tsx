@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 // Enhanced Physician type with comprehensive information
 type Physician = {
   id: number;
@@ -1006,6 +1007,14 @@ const HealthcareWorkersDirectory = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/physician-directory"
+        title="Arabic-Speaking Physician Directory | SHAMS"
+        description="Find physicians and specialists in Canada who speak Arabic and other Middle Eastern languages, with clinic details and contact information."
+        titleAr="دليل الأطباء الناطقين بالعربية | شمس"
+        descriptionAr="ابحث عن أطباء واختصاصيين في كندا يتحدثون العربية ولغات شرق أوسطية أخرى، مع تفاصيل العيادات ومعلومات التواصل."
+      />
       <main id="main-content" className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-12">

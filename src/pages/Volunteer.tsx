@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScOQ9BciASkaPC6PogtbdeN1NvnuUDJpdjh9Uqtexcwjf-waw/viewform";
 
 const Volunteer = () => {
@@ -13,6 +14,14 @@ const Volunteer = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/volunteer"
+        title="Volunteer with SHAMS | SHAMS"
+        description="Apply to volunteer with SHAMS in Toronto. Support health education, events, translation and outreach for Middle Eastern and North African societies."
+        titleAr="تطوّع مع شمس | شمس"
+        descriptionAr="قدّم طلب التطوع مع شمس في تورنتو وادعم التثقيف الصحي والفعاليات والترجمة والتواصل مع مجتمعات الشرق الأوسط وشمال أفريقيا."
+      />
       <main id="main-content" className="flex-grow" dir={isRTL ? 'rtl' : 'ltr'}>
         {/* Header Section */}
         <section className="bg-healthDarkBlue text-white py-8 md:py-12">

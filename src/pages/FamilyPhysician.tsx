@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { MapPin, Stethoscope, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 // Define the Physician type
 type Physician = {
   id: number;
@@ -106,6 +107,14 @@ const PhysicianDirectory = () => {
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray" dir={language === "ar" ? "rtl" : "ltr"}>
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/family-physician"
+        title="Find a Family Physician | SHAMS"
+        description="Search for family physicians in Canada who speak Arabic and other Middle Eastern languages, and learn how to find one accepting new patients."
+        titleAr="ابحث عن طبيب عائلة | شمس"
+        descriptionAr="ابحث عن أطباء عائلة في كندا يتحدثون العربية ولغات شرق أوسطية أخرى، وتعرّف على طرق إيجاد طبيب يقبل مرضى جددًا."
+      />
       <main id="main-content" className="flex-grow">
         <div className="container mx-auto px-4 py-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-healthDarkBlue">

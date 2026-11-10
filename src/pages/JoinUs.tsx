@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Users, Heart, ExternalLink, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import { SEOHead } from "@/components/SEOHead";
 const JoinUs = () => {
   const { language, t } = useLanguage();
   const isRTL = language === 'ar' || language === 'fa' || language === 'ku';
@@ -13,6 +14,14 @@ const JoinUs = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
+      <SEOHead
+        lang={language === "ar" ? "ar" : "en"}
+        path="/join-us"
+        title="Join the SHAMS Team | SHAMS"
+        description="Join SHAMS as a volunteer, student or healthcare professional and help improve health access for Middle Eastern and North African societies in Canada."
+        titleAr="انضم إلى فريق شمس | شمس"
+        descriptionAr="انضم إلى شمس متطوعًا أو طالبًا أو مختصًا صحيًا وساعد في تحسين الوصول إلى الرعاية الصحية لمجتمعات الشرق الأوسط وشمال أفريقيا في كندا."
+      />
       <main id="main-content" className="flex-grow" dir={isRTL ? 'rtl' : 'ltr'}>
         {/* Hero Section */}
         <section className="bg-healthDarkBlue text-white py-12 md:py-20">
