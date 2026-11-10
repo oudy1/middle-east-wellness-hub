@@ -131,6 +131,12 @@ const FindHealthcareWorkers = () => {
     submitted_by_name: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Spam protection: hidden trap field + time the dialog was opened
+  const [suggestionTrap, setSuggestionTrap] = useState("");
+  const suggestionOpenedAt = useRef<number>(0);
+  useEffect(() => {
+    if (suggestionOpen) suggestionOpenedAt.current = Date.now();
+  }, [suggestionOpen]);
 
   const isAr = language === "ar";
 
@@ -249,12 +255,67 @@ const FindHealthcareWorkers = () => {
       return;
     }
 
+    const clean = {
+      provider_name: suggestionData.provider_name.trim().slice(0, 120),
+      provider_type: suggestionData.provider_type.trim().slice(0, 80) || null,
+      city: suggestionData.city.trim().slice(0, 80),
+      province: suggestionData.province,
+      contact_info: suggestionData.contact_info.trim().slice(0, 200) || null,
+      notes: suggestionData.notes.trim().slice(0, 1000) || null,
+    };
+
+    if (clean.provider_name.length < 2 || clean.city.length < 2) {
+      toast({
+        title: isAr ? "مطلوب" : "Required",
+        description: isAr
+          ? "يجب أن يتكون الاسم والمدينة من حرفين على الأقل"
+          : "Name and city must be at least 2 characters",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const resetForm = () => {
+      setSuggestionOpen(false);
+      setSuggestionTrap("");
+      setSuggestionData({
+        provider_name: "",
+        provider_type: "",
+        city: "",
+        province: "",
+        contact_info: "",
+        notes: "",
+        submitted_by_email: "",
+        submitted_by_name: "",
+      });
+    };
+
+    // Bots fill the hidden field or submit instantly: pretend success, save nothing
+    if (suggestionTrap || Date.now() - suggestionOpenedAt.current < 3000) {
+      toast({
+        title: isAr ? "شكراً!" : "Thank you!",
+        description: isAr ? "تم إرسال اقتراحك بنجاح" : "Your suggestion has been submitted",
+      });
+      resetForm();
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const { error } = await supabase
         .from("provider_suggestions")
-        .insert([suggestionData]);
+        .insert([clean]);
 
+      if (error && (error as { code?: string }).code === "23505") {
+        toast({
+          title: isAr ? "تم استلامه مسبقاً" : "Already received",
+          description: isAr
+            ? "وصلنا اقتراح لهذا المقدم في هذه المدينة اليوم. شكراً لك!"
+            : "We already received a suggestion for this provider in this city today. Thank you!",
+        });
+        resetForm();
+        return;
+      }
       if (error) throw error;
 
       toast({
