@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, MapPin, Clock, ExternalLink, ChevronRight, ChevronLeft } from "lucide-react";
+import { Calendar, MapPin, Clock, ExternalLink, ChevronRight, ChevronLeft, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/carousel";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import poster from "@/assets/mhc-poster.png.asset.json";
 import panelists from "@/assets/mhc-panelists.png.asset.json";
 import activities from "@/assets/mhc-activities.png.asset.json";
 
-const SIGNUP_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfb2eS42uODV08A7GowqG-bHLzwh_17Q_4adbhoOyxJ-Ckumw/viewform";
+// The convention took place on July 18, 2026; this section is now a recap.
+const RECAP_REEL_URL = "https://www.instagram.com/reel/DbCMtfkuVQK/";
 
 const slides = [
   { src: poster.url, altEn: "Mental Health Convention poster", altAr: "ملصق مؤتمر الصحة النفسية" },
@@ -40,21 +41,21 @@ const MentalHealthConventionSection = () => {
   }, [api]);
 
   const t = {
-    badge: isAr ? "فعالية مميزة" : "Featured Event",
+    badge: isAr ? "فعالية سابقة" : "Past Event",
     title: isAr
       ? "مؤتمر شمس للصحة النفسية: كشف الوصمة"
       : "SHAMS Mental Health Convention: Uncovering Stigma",
     description: isAr
-      ? "انضموا إلى مشروع شمس في مؤتمر مجتمعي يركز على فهم وصمة الصحة النفسية، وبناء الوعي، وربط العائلات والطلاب والعاملين في الرعاية الصحية بالموارد والدعم المناسب."
-      : "Join SHAMS for a community-centered Mental Health Convention focused on uncovering stigma, building understanding, and connecting families, students, healthcare professionals, and community members with meaningful resources and support.",
+      ? "جمع مؤتمر شمس للصحة النفسية العائلات والطلاب والعاملين في الرعاية الصحية لكشف وصمة الصحة النفسية وبناء الوعي والتعريف بالموارد والدعم المتاح. شكرًا لكل من حضر وشارك."
+      : "The SHAMS Mental Health Convention brought together families, students, healthcare professionals and members of our societies to uncover stigma, build understanding and share meaningful resources and support. Thank you to everyone who joined us.",
     date: isAr ? "١٨ يوليو ٢٠٢٦" : "July 18, 2026",
-    time: isAr ? "١:٠٠ – ٥:٠٠ مساءً" : "1:00 PM – 5:00 PM",
+    time: isAr ? "١:٠٠ إلى ٥:٠٠ مساءً" : "1:00 PM to 5:00 PM",
     location: isAr ? "جامعة تورنتو ميسيساغا" : "University of Toronto Mississauga",
     chips: isAr
-      ? ["جلسات حوارية", "ورش عمل", "تواصل مجتمعي", "موارد", "مجاني للحضور"]
-      : ["Panels", "Workshops", "Networking", "Resources", "Free to Attend"],
-    signup: isAr ? "سجّل الآن" : "Sign Up Now",
-    learnMore: isAr ? "اعرف المزيد" : "Learn More",
+      ? ["جلسات حوارية", "ورش عمل", "تواصل مجتمعي", "موارد"]
+      : ["Panels", "Workshops", "Networking", "Resources"],
+    recap: isAr ? "شاهد ملخص المؤتمر" : "Watch the Recap",
+    contact: isAr ? "تواصل معنا" : "Contact SHAMS",
     prev: isAr ? "السابق" : "Previous slide",
     next: isAr ? "التالي" : "Next slide",
   };
@@ -170,9 +171,10 @@ const MentalHealthConventionSection = () => {
                 size="lg"
                 className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white shadow-md min-h-[48px]"
               >
-                <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer">
-                  {t.signup}
-                  <ExternalLink className={`w-4 h-4 ${isRTL ? "mr-2" : "ml-2"}`} />
+                <a href={RECAP_REEL_URL} target="_blank" rel="noopener noreferrer">
+                  <PlayCircle className="w-4 h-4 me-2" aria-hidden="true" />
+                  {t.recap}
+                  <ExternalLink className="w-4 h-4 ms-2" aria-hidden="true" />
                 </a>
               </Button>
               <Button
@@ -181,7 +183,7 @@ const MentalHealthConventionSection = () => {
                 size="lg"
                 className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/5 min-h-[48px]"
               >
-                <a href="#mental-health-convention">{t.learnMore}</a>
+                <Link to="/contact#contact-form">{t.contact}</Link>
               </Button>
             </div>
           </div>
