@@ -94,8 +94,8 @@ const Programs = () => {
                 <p className="text-muted-foreground">{t(`programs.${program.id}.summary`)}</p>
                 <p className="text-xs text-muted-foreground">
                   {language === "ar"
-                    ? "يُقدَّم من عيادة السود القانونية (BLCC). تحقّق من موقعهم لمعرفة توفّر البرنامج حاليًا."
-                    : "Offered by the Black Legal Action Centre partner clinic (BLCC). Check their website for current availability."}
+                    ? "يقدّمه مركز Better Life Counselling Centre (BLCC). تحقّق من موقعهم لمعرفة توفّر البرنامج حاليًا."
+                    : "Offered by Better Life Counselling Centre (BLCC). Check their website for current availability."}
                 </p>
                 <a href={program.link} target="_blank" rel="noopener noreferrer">
                   <Button className="gap-2 w-full sm:w-auto">
