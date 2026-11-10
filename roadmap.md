@@ -1,4 +1,4 @@
 - [x] Build the admin-only volunteer response table and secure sheet reader.
 - [x] Register `/admin/volunteers` without exposing the private page in the sitemap.
 - [x] Recording of Know Your Rights webinar on homepage + recordings page.
-- [ ] Volunteer sheet: link saved, but the sheet is not shared with the connected Google account (403). Waiting on user to share it.
+- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.
