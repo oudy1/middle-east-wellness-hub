@@ -1,2 +1,3 @@
 - Keep volunteer response reads in the admin-authenticated `volunteer-sheet` Edge Function; Google Sheets credentials stay server-side, and the admin page only renders authorized responses.
 - Public-submission tables accept anonymous inserts only through RLS policies with explicit length/format checks (never `WITH CHECK (true)`); intake tables no site form uses stay closed to the public, so they cannot be flooded.
+- Public forms that send email pass `useSpamGuard` fields (hidden trap + fill time) to `send-contact-email`, which silently drops bot hits, applies a best-effort per-IP limit, and never returns provider error details to the browser.

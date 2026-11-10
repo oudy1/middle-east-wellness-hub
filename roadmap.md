@@ -1,4 +1,9 @@
 - [x] Build the admin-only volunteer response table and secure sheet reader.
 - [x] Register `/admin/volunteers` without exposing the private page in the sitemap.
 - [x] Recording of Know Your Rights webinar on homepage + recordings page.
-- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.
+- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.- [x] Batch 1: Programs convention turned into a recap (no sign-up).
+- [x] Batch 1: spam guard (hidden trap, fill-time check, 5 per 10 min per visitor) on all forms that send email.
+- [x] Batch 1: email errors no longer show provider details to visitors.
+- [x] Batch 1: Join Our Team button points to /volunteer.
+- [ ] Batch 1: add admins. Blocked: no sign-in accounts exist yet; need the admin email list from the user.
+- [ ] User action: close the old Mental Health Convention Google Form in Google Forms.
