@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "@/pages/Index";
@@ -19,6 +19,7 @@ import PhysicianApplication from "@/pages/PhysicianApplication";
 import JoinUs from "@/pages/JoinUs";
 import Volunteer from "@/pages/Volunteer";
 import Contact from "@/pages/Contact";
+import Privacy from "@/pages/Privacy";
 import MentorshipBooking from "@/pages/MentorshipBooking";
 import SupportUs from "@/pages/SupportUs";
 import Programs from "@/pages/Programs";
@@ -59,6 +60,9 @@ function App() {
             <Route path="/join-us" element={<JoinUs />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Navigate to="/privacy#terms" replace />} />
+            <Route path="/cookies" element={<Navigate to="/privacy#cookies" replace />} />
             <Route path="/mentorship-booking" element={<MentorshipBooking />} />
             <Route path="/support-us" element={<SupportUs />} />
             <Route path="/programs" element={<Programs />} />

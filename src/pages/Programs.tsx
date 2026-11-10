@@ -8,6 +8,7 @@ import { ExternalLink, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import MentalHealthConventionSection from "@/components/MentalHealthConventionSection";
 import NewcomerInitiativeCard from "@/components/NewcomerInitiativeCard";
 
@@ -24,6 +25,7 @@ const partnerPrograms = [
 const Programs = () => {
   const { language, t } = useLanguage();
   const isRTL = language === 'ar' || language === 'fa' || language === 'ku';
+  useHashScroll();
 
   return (
     <div className={`min-h-screen bg-background ${isRTL ? 'rtl' : 'ltr'}`}>
