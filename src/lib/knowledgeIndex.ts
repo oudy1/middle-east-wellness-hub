@@ -7,6 +7,7 @@ import webinars from "../../content/webinars.json";
 import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
 import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
+import { NEWCOMER_WORKSHOP } from "./newcomerWorkshop";
 
 export type KnowledgeCategory =
   | "resources"
@@ -33,6 +34,8 @@ export interface KnowledgeItem {
   url: string;
   source?: string;
   type?: string;
+  /** Last day (YYYY-MM-DD, Toronto) this item may be recommended, for time-limited events. */
+  activeUntil?: string;
 }
 
 export const approvedRoutes: Record<string, string> = routes as Record<string, string>;
@@ -47,7 +50,9 @@ export const synonyms: Record<string, string[]> = {
   mental: ["mental health", "anxiety", "depression", "stress", "psychiatry", "نفسية", "قلق", "اكتئاب"],
   webinar: ["recording", "video", "watch", "seminar", "workshop", "ندوة", "تسجيل"],
   research: ["study", "trial", "survey", "بحث", "دراسة"],
-  opportunity: ["volunteer", "role", "position", "opportunities", "فرصة", "فرص"],
+  opportunity: ["role", "position", "opportunities", "فرصة", "فرص"],
+  volunteer: ["volunteering", "volunteers", "get involved", "تطوع", "متطوع"],
+  event: ["events", "upcoming", "next", "happening", "workshop", "فعالية", "فعاليات", "ورشة"],
   refugee: ["newcomer", "immigrant", "ifhp", "asylum", "لاجئ", "قادم جديد"],
   rights: ["ohip", "insurance", "coverage", "advocacy", "حقوق"],
   contact: ["email", "reach", "message", "تواصل"],
@@ -177,6 +182,79 @@ const curated: KnowledgeItem[] = [
     language: "both",
     url: approvedRoutes.about,
   },
+  {
+    id: "newcomer-workshop",
+    title_en: `${NEWCOMER_WORKSHOP.en.title} (${NEWCOMER_WORKSHOP.en.date}, ${NEWCOMER_WORKSHOP.en.time})`,
+    title_ar: `${NEWCOMER_WORKSHOP.ar.title} (${NEWCOMER_WORKSHOP.ar.date}، ${NEWCOMER_WORKSHOP.ar.time})`,
+    description_en: `Upcoming SHAMS event at ${NEWCOMER_WORKSHOP.en.place}. ${NEWCOMER_WORKSHOP.en.summary} Free registration: ${NEWCOMER_WORKSHOP.registerUrl}`,
+    description_ar: `فعالية قادمة من شمس في ${NEWCOMER_WORKSHOP.ar.place}. ${NEWCOMER_WORKSHOP.ar.summary} التسجيل مجاني: ${NEWCOMER_WORKSHOP.registerUrl}`,
+    category: "programs",
+    tags: ["event", "upcoming", "workshop", "newcomer", "refugee"],
+    keywords: ["event", "upcoming", "next", "happening", "workshop", "newcomer", "refugee", "scadding", "ohip", "ifhp", "register", "فعالية", "ورشة", "لاجئ", "قادم"],
+    language: "both",
+    url: approvedRoutes.newcomer_initiative,
+    activeUntil: NEWCOMER_WORKSHOP.dateIso,
+  },
+  {
+    id: "newcomer-initiative",
+    title_en: "Newcomer and Refugee Health Education Initiative",
+    title_ar: "مبادرة التثقيف الصحي للقادمين الجدد واللاجئين",
+    description_en: "A SHAMS initiative that helps newcomers and refugees understand OHIP and IFHP coverage, find a family doctor or clinic, and get help in their language.",
+    description_ar: "مبادرة من شمس تساعد القادمين الجدد واللاجئين على فهم تغطية OHIP وIFHP وإيجاد طبيب أسرة أو عيادة والحصول على المساعدة بلغتهم.",
+    category: "programs",
+    tags: ["newcomer", "refugee", "initiative"],
+    keywords: ["newcomer", "refugee", "immigrant", "initiative", "ohip", "ifhp", "settlement", "لاجئ", "قادم", "مبادرة"],
+    language: "both",
+    url: approvedRoutes.newcomer_initiative,
+  },
+  {
+    id: "directory-map",
+    title_en: "Healthcare Directory with Map",
+    title_ar: "دليل مقدمي الرعاية مع الخريطة",
+    description_en: "See every SHAMS directory listing on a map and filter by city, province, provider type, and accepting new patients.",
+    description_ar: "اعرض جميع قوائم دليل شمس على الخريطة وصفِّ حسب المدينة والمقاطعة ونوع مقدم الرعاية وقبول مرضى جدد.",
+    category: "healthcare_workers",
+    tags: ["directory", "map"],
+    keywords: ["directory", "map", "listing", "provider", "دليل", "خريطة"],
+    language: "both",
+    url: approvedRoutes.directory_map,
+  },
+  {
+    id: "physician-apply",
+    title_en: "Join the SHAMS Healthcare Directory (for providers)",
+    title_ar: "انضم إلى دليل شمس (لمقدمي الرعاية)",
+    description_en: "Healthcare providers can apply to be listed in the SHAMS directory. Listings appear as self-listed until SHAMS verifies them.",
+    description_ar: "يمكن لمقدمي الرعاية التقدم لإدراجهم في دليل شمس. تظهر القوائم كمدرجة ذاتيًا حتى تتحقق منها شمس.",
+    category: "healthcare_workers",
+    tags: ["provider", "listing", "apply"],
+    keywords: ["listed", "listing", "apply", "join directory", "provider", "physician", "doctor", "إدراج", "انضم"],
+    language: "both",
+    url: approvedRoutes.physician_apply,
+  },
+  {
+    id: "post-opportunity",
+    title_en: "Submit a Research Opportunity (for researchers)",
+    title_ar: "أرسل فرصة بحثية (للباحثين)",
+    description_en: "Researchers can submit a study or opportunity. SHAMS reviews each one before it appears on the Research Opportunities list.",
+    description_ar: "يمكن للباحثين إرسال دراسة أو فرصة. تراجع شمس كل طلب قبل نشره في قائمة الفرص البحثية.",
+    category: "programs",
+    tags: ["researcher", "submit", "post"],
+    keywords: ["submit", "post", "researcher", "recruit", "participants", "study", "listing", "أرسل", "باحث"],
+    language: "both",
+    url: approvedRoutes.post_opportunity,
+  },
+  {
+    id: "volunteer",
+    title_en: "Volunteer with SHAMS",
+    title_ar: "تطوّع مع شمس",
+    description_en: "Apply to volunteer with SHAMS through the volunteer application form.",
+    description_ar: "قدّم طلب التطوع مع شمس عبر نموذج التطوع.",
+    category: "pages",
+    tags: ["volunteer"],
+    keywords: ["volunteer", "volunteering", "help", "join", "تطوع", "متطوع"],
+    language: "both",
+    url: approvedRoutes.volunteer,
+  },
 ];
 
 interface StudyRaw {
@@ -231,7 +309,7 @@ const webinarItems: KnowledgeItem[] = (webinars as WebinarRaw[]).map((w) => ({
     w.en.title.toLowerCase(),
   ],
   language: "both",
-  url: approvedRoutes.recordings,
+  url: approvedRoutes[`webinar_${w.id.replace(/-/g, "_")}`] ?? approvedRoutes.recordings,
 }));
 
 interface FaqRaw {
@@ -294,12 +372,21 @@ function expandTokens(tokens: string[]): string[] {
   return Array.from(out);
 }
 
+// Common words that match almost every entry and drown out the real topic.
+const STOPWORDS = new Set([
+  "a", "an", "and", "are", "at", "be", "can", "do", "does", "for", "from", "get", "how", "i", "if", "in",
+  "is", "it", "me", "my", "need", "of", "on", "or", "please", "the", "there", "to", "want", "what", "where",
+  "which", "who", "with", "you", "your", "shams", "any", "some", "about", "find", "looking", "s",
+  "في", "من", "على", "إلى", "الى", "عن", "أن", "ان", "هل", "ما", "ماذا", "أين", "كيف", "أريد", "اريد",
+  "أحتاج", "احتاج", "لي", "مع", "شمس",
+]);
+
 function tokenize(q: string): string[] {
   return q
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s]+/gu, " ")
     .split(/\s+/)
-    .filter((t) => t.length > 1);
+    .filter((t) => t.length > 1 && !STOPWORDS.has(t));
 }
 
 export interface SearchResult {
@@ -312,7 +399,10 @@ export function searchKnowledge(query: string, language: "en" | "ar" = "en", lim
   const rawTokens = tokenize(query);
   const tokens = expandTokens(rawTokens);
 
-  const results: SearchResult[] = knowledgeIndex.map((item) => {
+  const torontoToday = new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
+  const results: SearchResult[] = knowledgeIndex
+    .filter((item) => !item.activeUntil || torontoToday <= item.activeUntil)
+    .map((item) => {
     const haystack = [
       item.title_en,
       item.title_ar,
