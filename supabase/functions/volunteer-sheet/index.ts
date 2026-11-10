@@ -56,33 +56,42 @@ serve(async (req) => {
     }
 
     const lovableKey = Deno.env.get("LOVABLE_API_KEY");
-    const sheetsKey = Deno.env.get("GOOGLE_SHEETS_API_KEY");
-    if (!lovableKey || !sheetsKey) {
+    const sheetsKeys = [
+      Deno.env.get("GOOGLE_SHEETS_API_KEY_1"),
+      Deno.env.get("GOOGLE_SHEETS_API_KEY"),
+    ].filter((k): k is string => !!k);
+    if (!lovableKey || sheetsKeys.length === 0) {
       return json({ error: "Google Sheets connection is not set up" }, 500);
     }
 
-    const gatewayHeaders = {
-      Authorization: `Bearer ${lovableKey}`,
-      "X-Connection-Api-Key": sheetsKey,
-    };
-
-    // Get spreadsheet metadata to find the first sheet's title
-    const metaRes = await fetch(`${GATEWAY_URL}/spreadsheets/${spreadsheetId}`, {
-      headers: gatewayHeaders,
-    });
-    if (!metaRes.ok) {
-      const details = await metaRes.text();
-      console.error(`Sheets metadata failed [${metaRes.status}]: ${details}`);
+    // Try each linked Google account until one can open the sheet
+    let gatewayHeaders: Record<string, string> = {};
+    let metaRes: Response | null = null;
+    let lastDetails = "";
+    for (const key of sheetsKeys) {
+      const headers = { Authorization: `Bearer ${lovableKey}`, "X-Connection-Api-Key": key };
+      const res = await fetch(`${GATEWAY_URL}/spreadsheets/${spreadsheetId}`, { headers });
+      if (res.ok) {
+        gatewayHeaders = headers;
+        metaRes = res;
+        break;
+      }
+      lastDetails = await res.text();
+      console.error(`Sheets metadata failed [${res.status}]: ${lastDetails}`);
+      metaRes = res;
+    }
+    if (!metaRes || !metaRes.ok) {
+      const status = metaRes?.status ?? 502;
       return json(
         {
           error:
-            metaRes.status === 404
+            status === 404
               ? "Sheet not found. Check the link and that it is shared with the connected Google account."
-              : "Could not open the sheet. Check the link and sharing settings.",
-          status: metaRes.status,
-          details,
+              : "Could not open the sheet. Share it with the connected Google account and try again.",
+          status,
+          details: lastDetails,
         },
-        metaRes.status === 404 ? 404 : 502,
+        status === 404 ? 404 : 502,
       );
     }
     const meta = await metaRes.json();
