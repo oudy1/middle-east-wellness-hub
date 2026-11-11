@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Menu, Languages, ChevronDown, X, Search } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { AVAILABLE_LANGUAGES, type Language } from "@/i18n";
 import { HeaderSearchButton } from "@/components/ResourceFinder";
 import {
   Sheet,
