@@ -49,8 +49,8 @@ if (!i18n.isInitialized) {
     interpolation: { escapeValue: false }, // React already escapes
     react: { useSuspense: false },
     // Called only when no language (after fallbacks) has the key.
-    parseMissingKeyHandler: (key: string) =>
-      isRtlLanguage(i18n.language) ? MISSING_TRANSLATION_AR : key,
+    parseMissingKeyHandler: (key: string, _defaultValue?: string, options?: { lng?: string }) =>
+      isRtlLanguage(options?.lng ?? i18n.language) ? MISSING_TRANSLATION_AR : key,
     initAsync: false,
   });
 }
