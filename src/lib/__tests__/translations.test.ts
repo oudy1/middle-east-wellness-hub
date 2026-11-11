@@ -93,7 +93,7 @@ describe("missing translation fallbacks (unchanged rules)", () => {
     expect(i18n.t(trMissing, { lng: "tr" })).toBe(en[trMissing]);
   });
   it("English shows the key name only when the text truly does not exist", () => {
-    expect(i18n.t("nav.home", { lng: "en" })).toBe(en["nav.home"]);
+    expect(i18n.t("chatbot.minimize", { lng: "en" })).toBe("Minimize chat");
     expect(i18n.t("test.key.that.does.not.exist", { lng: "en" })).toBe("test.key.that.does.not.exist");
   });
 });
