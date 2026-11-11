@@ -370,9 +370,18 @@ export function queryWords(query: string): string[] {
   return toWords(query).filter((w) => w.length > 1 && !STOPWORDS.has(w));
 }
 
-// Synonym groups as normalized single words, so "الصحة النفسية" and "نفسيه" hit the same group.
+// Synonym groups as normalized single words, so "نفسية" and "نفسيه" hit the same group.
+// Multi-word synonyms ("mental health") are left out: splitting them would turn
+// generic words like "health" into synonyms of everything.
 const synonymGroups: string[][] = Object.entries(synonyms).map(([key, syns]) =>
-  Array.from(new Set([key, ...syns].flatMap(toWords)))
+  Array.from(
+    new Set(
+      [key, ...syns]
+        .map(toWords)
+        .filter((w) => w.length === 1)
+        .map((w) => w[0])
+    )
+  )
 );
 
 /** Extra words implied by synonyms (excluding the words already typed). */
