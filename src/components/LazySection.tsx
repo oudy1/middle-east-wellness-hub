@@ -14,7 +14,7 @@ interface LazySectionProps {
  * when the browser has no IntersectionObserver or the page was opened with a
  * #section link (so jump links always find their target).
  */
-export default function LazySection({ children, minHeight = 240, margin = 800 }: LazySectionProps) {
+export default function LazySection({ children, minHeight = 600, margin = 600 }: LazySectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(
     () =>
