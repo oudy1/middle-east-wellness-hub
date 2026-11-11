@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, ReactNode, useEffect, useCa
 import { I18nextProvider } from "react-i18next";
 import i18n, {
   Language,
-  LANGUAGES,
+  AVAILABLE_LANGUAGES,
   isRtlLanguage,
   hasOwnTranslation,
   reportMissing,
@@ -26,15 +26,20 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const readSavedLanguage = (): Language => {
   const saved = localStorage.getItem("shams-language");
-  return LANGUAGES.includes(saved as Language) ? (saved as Language) : "en";
+  // A saved choice of a hidden (not yet fully translated) language falls back to English.
+  return AVAILABLE_LANGUAGES.includes(saved as Language) ? (saved as Language) : "en";
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(() => {
+  const [language, setLanguageState] = useState<Language>(() => {
     const initial = readSavedLanguage();
     i18n.changeLanguage(initial);
     return initial;
   });
+
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(AVAILABLE_LANGUAGES.includes(lang) ? lang : "en");
+  }, []);
 
   useEffect(() => {
     if (i18n.language !== language) i18n.changeLanguage(language);
@@ -55,7 +60,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     [language]
   );
 
-  const value = useMemo(() => ({ language, setLanguage, t }), [language, t]);
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 
   return (
     <I18nextProvider i18n={i18n}>

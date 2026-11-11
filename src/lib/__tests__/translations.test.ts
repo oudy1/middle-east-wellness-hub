@@ -97,3 +97,17 @@ describe("missing translation fallbacks (unchanged rules)", () => {
     expect(i18n.t("test.key.that.does.not.exist", { lng: "en" })).toBe("test.key.that.does.not.exist");
   });
 });
+
+describe("language menu only offers fully translated languages", () => {
+  it("shows English and Arabic, hides Kurdish, Persian and Turkish while incomplete", async () => {
+    const { AVAILABLE_LANGUAGES } = await import("@/i18n");
+    expect(AVAILABLE_LANGUAGES).toEqual(["en", "ar"]);
+  });
+  it("a language appears once every text is translated", async () => {
+    const { isFullyTranslated } = await import("@/i18n");
+    const full = { en: { a: "A", b: "B" }, tr: { a: "Bir", b: "İki" } };
+    const partial = { en: { a: "A", b: "B" }, tr: { a: "Bir", b: " " } };
+    expect(isFullyTranslated("tr", full)).toBe(true);
+    expect(isFullyTranslated("tr", partial)).toBe(false);
+  });
+});
