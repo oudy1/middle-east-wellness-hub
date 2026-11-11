@@ -183,7 +183,7 @@ test.describe("Arabic RTL — desktop", () => {
     // Arabic keyword search returns Arabic suggestions without clipping.
     await input.fill("سكري");
     await expect(
-      page.getByRole("button", { name: AR.diabetes }).first()
+      page.locator("header").getByRole("option", { name: new RegExp(AR.diabetes) }).first()
     ).toBeVisible();
     const resultsPanel = page
       .locator("div[dir='rtl']")
