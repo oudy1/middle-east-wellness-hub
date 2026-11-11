@@ -310,7 +310,7 @@ test.describe("Arabic RTL — mobile drawer & search", () => {
     // Arabic keyword search works and stays inside the viewport.
     await input.fill("سكري");
     await expect(
-      dialog.getByRole("button", { name: AR.diabetes }).first()
+      dialog.getByRole("option", { name: new RegExp(AR.diabetes) }).first()
     ).toBeVisible();
     expect(await clippedText(dialog)).toEqual([]);
     await expectWithinViewportX(dialog, page);
