@@ -42,7 +42,11 @@ describe("typo tolerance", () => {
 describe("one search list for the site", () => {
   it("finds the past Mental Health Convention, which only the chatbot knew", () => {
     const urls = searchSite("mental health convention", "en").map((r) => r.url);
-    expect(urls).toContain("/programs#mental-health-convention");
+    expect(urls[0]).toBe("/programs#mental-health-convention");
+  });
+  it("drops results that match only one of several typed words", () => {
+    const ids = searchSite("mental health convention", "en").map((r) => r.id);
+    expect(ids).not.toContain("womens-health");
   });
   it("keeps the curated Know Your Rights entry first and does not repeat it", () => {
     const results = searchSite("Know Your Rights recording", "en");

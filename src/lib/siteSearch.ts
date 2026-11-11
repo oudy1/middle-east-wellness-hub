@@ -2,8 +2,8 @@
 // destinations in resourceFinderData first, then matching chatbot knowledge
 // (webinars, studies, FAQ, programs, events) that the curated list lacks.
 import { searchResources, SearchableResource } from "./resourceFinderData";
-import { searchKnowledge, KnowledgeCategory, queryWords } from "./knowledgeIndex";
-import { isApprovedUrl } from "./knowledgeIndex";
+import { searchKnowledge, KnowledgeCategory, queryWords, synonymWords, isApprovedUrl } from "./knowledgeIndex";
+import { matchWord, toWords } from "./searchText";
 
 const KNOWLEDGE_GROUP: Record<KnowledgeCategory, SearchableResource["category"]> = {
   resources: "topics",
@@ -32,6 +32,7 @@ export function searchSite(query: string, language: "en" | "ar"): SearchableReso
   const perCategory: Partial<Record<KnowledgeCategory, number>> = {};
 
   const extra: SearchableResource[] = [];
+  const extraKeywords = new Map<string, string[]>();
   for (const { item, score } of searchKnowledge(query, language, 20)) {
     if (score < MIN_KNOWLEDGE_SCORE || !isApprovedUrl(item.url)) continue;
     const titleKey = item.title_en.toLowerCase();
@@ -45,6 +46,7 @@ export function searchSite(query: string, language: "en" | "ar"): SearchableReso
     perCategory[item.category] = count + 1;
     seenTitles.add(titleKey);
     seenUrls.add(urlKey(item.url));
+    extraKeywords.set(`k-${item.id}`, [...(item.tags ?? []), ...(item.keywords ?? [])]);
     extra.push({
       id: `k-${item.id}`,
       title_en: item.title_en,
@@ -58,7 +60,34 @@ export function searchSite(query: string, language: "en" | "ar"): SearchableReso
     });
   }
 
-  return [...curated, ...extra].slice(0, MAX_RESULTS);
+  return rankByMatchedWords(query, [...curated, ...extra], extraKeywords).slice(0, MAX_RESULTS);
+}
+
+/**
+ * Meilisearch-style "words" rule: results matching more of the typed words come
+ * first (ties keep curated-first order). When several words are typed, results
+ * that match only one of them while others match more are dropped as noise.
+ */
+function rankByMatchedWords(
+  query: string,
+  results: SearchableResource[],
+  extraKeywords: Map<string, string[]>
+): SearchableResource[] {
+  const words = queryWords(query);
+  if (words.length < 2) return results;
+  const variants = words.map((w) => [w, ...synonymWords([w])]);
+  const counted = results.map((r, order) => {
+    const docWords = toWords(
+      [r.title_en, r.title_ar, ...r.keywords_en, ...r.keywords_ar, ...(extraKeywords.get(r.id) ?? [])].join(" ")
+    );
+    const matched = variants.filter((vs) => vs.some((v) => matchWord(v, docWords))).length;
+    return { r, matched, order };
+  });
+  const best = Math.max(...counted.map((c) => c.matched));
+  return counted
+    .filter((c) => best < 2 || c.matched >= best - 1)
+    .sort((a, b) => b.matched - a.matched || a.order - b.order)
+    .map((c) => c.r);
 }
 
 export interface ResultGroup {
