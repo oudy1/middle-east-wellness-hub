@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, RefreshCw } from "lucide-react";
+import { FileUp, Loader2, RefreshCw } from "lucide-react";
+import { parseCsv } from "@/lib/parseCsv";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const STORAGE_KEY = "shams-volunteer-sheet-url";
@@ -17,7 +18,10 @@ type SheetData = {
   headers: string[];
   rows: string[][];
   total: number;
+  source?: "sheet" | "csv";
 };
+
+const MAX_CSV_BYTES = 5 * 1024 * 1024;
 
 const AdminVolunteers = () => {
   const navigate = useNavigate();
@@ -41,14 +45,25 @@ const AdminVolunteers = () => {
     refresh: isAr ? "تحديث" : "Refresh",
     search: isAr ? "بحث في الردود..." : "Search responses...",
     empty: isAr
-      ? "الصق رابط جدول الردود ثم اضغط تحميل الردود."
-      : "Paste your responses sheet link, then press Load responses.",
+      ? "الصق رابط جدول الردود ثم اضغط تحميل الردود، أو افتح ملف CSV مُصدَّر."
+      : "Paste your responses sheet link and press Load responses, or open a CSV export.",
     linkHint: isAr
       ? "استخدم جدول الردود المرتبط من تبويب الردود في نموذج Google، وليس رابط النموذج نفسه."
       : "Use the response spreadsheet linked from your Google Form’s Responses tab, not the form link.",
     noRows: isAr ? "لا توجد ردود بعد." : "No responses yet.",
     total: isAr ? "إجمالي الردود" : "Total responses",
     loadFailed: isAr ? "تعذر تحميل الردود" : "Could not load responses",
+    csvLabel: isAr ? "أو افتح ملف CSV مُصدَّر" : "Or open a CSV export",
+    csvButton: isAr ? "اختر ملف CSV" : "Choose CSV file",
+    csvHint: isAr
+      ? "في Google Sheets: ملف ثم تنزيل ثم قيم مفصولة بفواصل (CSV). يُقرأ الملف على هذا الجهاز فقط ولا يُرفع إلى الموقع، ويختفي عند إغلاق الصفحة."
+      : "In Google Sheets: File, then Download, then Comma-separated values (.csv). The file is read on this device only, is not uploaded to the website, and disappears when you close the page.",
+    csvFailed: isAr ? "تعذر قراءة الملف" : "Could not read the file",
+    csvNotCsv: isAr ? "اختر ملفًا بصيغة CSV." : "Please choose a .csv file.",
+    csvTooBig: isAr ? "الملف أكبر من 5 ميغابايت." : "The file is larger than 5 MB.",
+    csvEmpty: isAr ? "لم نجد عناوين أعمدة في الملف." : "No column headers were found in the file.",
+    fromCsv: isAr ? "من ملف" : "From file",
+    fromSheet: isAr ? "من جدول Google" : "From Google Sheet",
   };
 
   const load = useCallback(
@@ -102,6 +117,29 @@ const AdminVolunteers = () => {
     load(sheetUrl);
   };
 
+  const handleCsvFile = async (file: File | undefined) => {
+    if (!file) return;
+    const fail = (description: string) =>
+      toast({ title: t.csvFailed, description, variant: "destructive" });
+    if (!/\.csv$/i.test(file.name) && file.type !== "text/csv") return fail(t.csvNotCsv);
+    if (file.size > MAX_CSV_BYTES) return fail(t.csvTooBig);
+    try {
+      const { headers, rows } = parseCsv(await file.text());
+      if (headers.length === 0) return fail(t.csvEmpty);
+      setSearch("");
+      setData({
+        title: file.name,
+        sheet: file.name,
+        headers,
+        rows,
+        total: rows.length,
+        source: "csv",
+      });
+    } catch {
+      fail(t.csvEmpty);
+    }
+  };
+
   const filteredRows = useMemo(() => {
     if (!data) return [];
     const q = search.trim().toLowerCase();
@@ -146,6 +184,28 @@ const AdminVolunteers = () => {
         </CardContent>
       </Card>
 
+      <Card className="mb-6">
+        <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
+          <div className="flex-1">
+            <p className="mb-1 text-sm font-medium">{t.csvLabel}</p>
+            <p className="text-sm text-muted-foreground">{t.csvHint}</p>
+          </div>
+          <label className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus-within:ring-2 focus-within:ring-ring">
+            <FileUp className="h-4 w-4" aria-hidden="true" />
+            {t.csvButton}
+            <input
+              type="file"
+              accept=".csv,text/csv"
+              className="sr-only"
+              onChange={(e) => {
+                handleCsvFile(e.target.files?.[0]);
+                e.target.value = "";
+              }}
+            />
+          </label>
+        </CardContent>
+      </Card>
+
       {!data && !loading && (
         <p className="text-muted-foreground">{t.empty}</p>
       )}
@@ -154,6 +214,8 @@ const AdminVolunteers = () => {
         <>
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted-foreground">
+              {data.source === "csv" ? `${t.fromCsv}: ${data.title}` : t.fromSheet}
+              {" · "}
               {t.total}: {data.total}
             </p>
             <div className="flex gap-2">
@@ -163,6 +225,7 @@ const AdminVolunteers = () => {
                 placeholder={t.search}
                 className="min-h-11 sm:w-64"
               />
+              {data.source !== "csv" && (
               <Button
                 variant="outline"
                 onClick={() => load(sheetUrl)}
@@ -172,6 +235,7 @@ const AdminVolunteers = () => {
               >
                 <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
               </Button>
+              )}
             </div>
           </div>
 
