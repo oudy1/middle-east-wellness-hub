@@ -1,69 +1,68 @@
+import React, { createContext, useState, useContext, ReactNode, useEffect, useCallback, useMemo } from "react";
+import { I18nextProvider } from "react-i18next";
+import i18n, {
+  Language,
+  LANGUAGES,
+  isRtlLanguage,
+  hasOwnTranslation,
+  reportMissing,
+  MISSING_TRANSLATION_AR,
+} from "@/i18n";
 
-import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
+export { MISSING_TRANSLATION_AR };
+export type { Language };
 
-import en from "../../content/translations/en.json";
-import ar from "../../content/translations/ar.json";
-import ku from "../../content/translations/ku.json";
-import fa from "../../content/translations/fa.json";
-import tr from "../../content/translations/tr.json";
-
-type Language = "en" | "ar" | "ku" | "fa" | "tr";
+/** Values for `{{name}}` placeholders, plus `count` to pick a plural form. */
+export type TranslateOptions = { count?: number } & Record<string, string | number | undefined>;
 
 type LanguageContextType = {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  /** Translate a key. Pass `{ count }` for keys with plural forms (key_one, key_other, ...). */
+  t: (key: string, options?: TranslateOptions) => string;
 };
-
-const translationsByLang: Record<Language, Record<string, string>> = { en, ar, ku, fa, tr };
-
-const rtlLanguages: Language[] = ["ar", "ku", "fa"];
-
-/** Localized notice shown when an Arabic/RTL translation is missing, per project rules. */
-export const MISSING_TRANSLATION_AR = "المحتوى قيد الترجمة";
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const readSavedLanguage = (): Language => {
+  const saved = localStorage.getItem("shams-language");
+  return LANGUAGES.includes(saved as Language) ? (saved as Language) : "en";
+};
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const savedLanguage = localStorage.getItem("shams-language");
-  const initialLanguage = (savedLanguage as Language) || "en";
-  
-  const [language, setLanguage] = useState<Language>(initialLanguage);
+  const [language, setLanguage] = useState<Language>(() => {
+    const initial = readSavedLanguage();
+    i18n.changeLanguage(initial);
+    return initial;
+  });
 
   useEffect(() => {
+    if (i18n.language !== language) i18n.changeLanguage(language);
     localStorage.setItem("shams-language", language);
     document.documentElement.setAttribute("lang", language);
-    document.documentElement.setAttribute("dir", rtlLanguages.includes(language) ? "rtl" : "ltr");
+    document.documentElement.setAttribute("dir", isRtlLanguage(language) ? "rtl" : "ltr");
   }, [language]);
 
-  const t = (key: string): string => {
-    const value = translationsByLang[language]?.[key];
-    if (value) return value;
-    // Fallback: try English, then localized "content in translation" notice for RTL langs.
-    const englishValue = translationsByLang.en?.[key];
-    if (import.meta.env.DEV) {
-      // eslint-disable-next-line no-console
-      console.warn(`[i18n] Missing "${language}" translation for key: ${key}`);
-      if (typeof window !== "undefined") {
-        // Track missing keys for later audit: `window.__missingI18n`
-        // @ts-expect-error - dev-only global
-        const set: Set<string> = (window.__missingI18n ||= new Set());
-        set.add(`${language}:${key}`);
+  const t = useCallback(
+    (key: string, options?: TranslateOptions): string => {
+      if (import.meta.env.DEV && !hasOwnTranslation(language, key, options?.count)) {
+        reportMissing(language, key);
       }
-    }
-    if (language === "en") return englishValue || key;
-    // For non-English languages, prefer the localized "content in translation" notice
-    // rather than leaking English into an RTL layout.
-    if (rtlLanguages.includes(language)) return MISSING_TRANSLATION_AR;
-    return englishValue || key;
-  };
+      return i18n.t(key, { ...options, lng: language }) as string;
+    },
+    [language]
+  );
+
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, t]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      <div dir={rtlLanguages.includes(language) ? "rtl" : "ltr"} className={language === "ar" ? "font-cairo" : ""}>
-        {children}
-      </div>
-    </LanguageContext.Provider>
+    <I18nextProvider i18n={i18n}>
+      <LanguageContext.Provider value={value}>
+        <div dir={isRtlLanguage(language) ? "rtl" : "ltr"} className={language === "ar" ? "font-cairo" : ""}>
+          {children}
+        </div>
+      </LanguageContext.Provider>
+    </I18nextProvider>
   );
 };
 
