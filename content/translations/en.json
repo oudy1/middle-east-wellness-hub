@@ -509,5 +509,19 @@
   "physicians.count_one": "{{count}} physician",
   "physicians.count_other": "{{count}} physicians",
   "directory.providerCount_one": "{{count}} provider",
-  "directory.providerCount_other": "{{count}} providers"
+  "directory.providerCount_other": "{{count}} providers",
+  "supportUs.title": "Support Us",
+  "supportUs.intro": "Join us in our mission to improve health outcomes for Middle Eastern and Arab societies in Canada",
+  "supportUs.waysTitle": "Ways to Support SHAMS",
+  "supportUs.waysIntro": "There are many ways you can contribute to our mission and make a meaningful impact on community health",
+  "supportUs.sponsor.title": "Sponsor an Event",
+  "supportUs.sponsor.description": "Support our educational webinars, community health workshops, and networking events that bring together healthcare professionals and community members.",
+  "supportUs.fund.title": "Fund Our Initiatives",
+  "supportUs.fund.description": "Help us develop new research programs, educational resources, and outreach initiatives that address health disparities in Middle Eastern societies.",
+  "supportUs.collaborate.title": "Collaborate on Projects",
+  "supportUs.collaborate.description": "Partner with us on research studies, policy advocacy, or community health programs that align with your organization's mission and values.",
+  "supportUs.volunteer.title": "Volunteer Your Services",
+  "supportUs.volunteer.description": "Share your expertise as a healthcare professional, researcher, or community leader to help us achieve our mission of improving health outcomes.",
+  "supportUs.workTogetherTitle": "Let's Work Together",
+  "supportUs.workTogetherBody": "Please connect with us using the form below and we'll respond promptly. Thank you for your interest in supporting SHAMS. We look forward to working together towards a brighter future!"
 }
