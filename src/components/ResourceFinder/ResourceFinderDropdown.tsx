@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
-  SearchableResource, 
   categoryLabels,
   popularSearches,
   getResourceById
 } from '@/lib/resourceFinderData';
+import type { ResultGroup } from '@/lib/siteSearch';
+import HighlightMatch from './HighlightMatch';
+import { useOpenResource } from './useOpenResource';
 import { 
   FileText, 
   Stethoscope, 
@@ -14,6 +16,7 @@ import {
   Users, 
   Calendar, 
   ClipboardList,
+  GraduationCap,
   TrendingUp,
   Compass,
   MessageSquare,
@@ -22,15 +25,23 @@ import {
 import { Button } from '@/components/ui/button';
 
 interface ResourceFinderDropdownProps {
-  results: SearchableResource[];
+  groups: ResultGroup[];
   query: string;
+  /** Normalized words of the query, used to highlight matches. */
+  matchWords: string[];
   onSelect: () => void;
   showNoResults: boolean;
+  listboxId: string;
+  activeIndex: number;
+  onActiveChange: (index: number) => void;
 }
+
+export const optionId = (listboxId: string, index: number) => `${listboxId}-opt-${index}`;
 
 const categoryIcons: Record<string, React.ReactNode> = {
   topics: <FileText className="h-4 w-4" />,
   services: <Stethoscope className="h-4 w-4" />,
+  programs: <GraduationCap className="h-4 w-4" />,
   research: <FlaskConical className="h-4 w-4" />,
   healthcare: <Users className="h-4 w-4" />,
   events: <Calendar className="h-4 w-4" />,
@@ -38,41 +49,24 @@ const categoryIcons: Record<string, React.ReactNode> = {
 };
 
 const ResourceFinderDropdown: React.FC<ResourceFinderDropdownProps> = ({
-  results,
+  groups,
   query,
+  matchWords,
   onSelect,
-  showNoResults
+  showNoResults,
+  listboxId,
+  activeIndex,
+  onActiveChange,
 }) => {
   const { language } = useLanguage();
   const navigate = useNavigate();
+  const openResource = useOpenResource();
   const isRTL = language === 'ar';
+  const resultCount = groups.reduce((n, g) => n + g.items.length, 0);
 
-  // Group results by category
-  const groupedResults = results.reduce((acc, resource) => {
-    if (!acc[resource.category]) {
-      acc[resource.category] = [];
-    }
-    acc[resource.category].push(resource);
-    return acc;
-  }, {} as Record<string, SearchableResource[]>);
-
-  const handleNavigate = (resource: SearchableResource) => {
+  const handleNavigate = (resource: Parameters<typeof openResource>[0]) => {
     onSelect();
-    
-    if (resource.isExternal) {
-      window.open(resource.url, '_blank', 'noopener,noreferrer');
-    } else if (resource.anchor) {
-      navigate(resource.url);
-      // Small delay to allow navigation, then scroll to anchor
-      setTimeout(() => {
-        const element = document.getElementById(resource.anchor!);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      navigate(resource.url);
-    }
+    openResource(resource);
   };
 
   const handlePopularClick = (searchId: string) => {
@@ -114,7 +108,7 @@ const ResourceFinderDropdown: React.FC<ResourceFinderDropdownProps> = ({
   }
 
   // Show no results message
-  if (showNoResults && results.length === 0) {
+  if (showNoResults && resultCount === 0) {
     return (
       <div 
         className={`bg-white border border-gray-200 rounded-lg shadow-lg p-4 ${isRTL ? 'text-right' : 'text-left'}`}
@@ -159,34 +153,62 @@ const ResourceFinderDropdown: React.FC<ResourceFinderDropdownProps> = ({
     );
   }
 
-  // Show grouped results
+  // Show grouped results (single listbox so arrow keys move through every result)
+  let index = -1;
   return (
-    <div 
-      className={`bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto ${isRTL ? 'text-right' : 'text-left'}`}
+    <div
+      className={`bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto ${isRTL ? 'text-right' : 'text-left'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      {Object.entries(groupedResults).map(([category, items]) => (
-        <div key={category} className="border-b border-gray-100 last:border-b-0">
-          <div className={`flex items-center gap-2 px-4 py-2 bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wide ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {categoryIcons[category]}
-            <span>{categoryLabels[category as keyof typeof categoryLabels][isRTL ? 'ar' : 'en']}</span>
-          </div>
-          {items.map((resource) => (
-            <button
-              key={resource.id}
-              onClick={() => handleNavigate(resource)}
-              className={`w-full px-4 py-3 hover:bg-healthTeal/5 transition-colors flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}
+      <p className="sr-only" role="status" aria-live="polite">
+        {isRTL ? `${resultCount} نتيجة` : `${resultCount} result${resultCount === 1 ? '' : 's'}`}
+      </p>
+      <ul id={listboxId} role="listbox" aria-label={isRTL ? 'نتائج البحث' : 'Search results'}>
+        {groups.map(({ category, items }) => (
+          <li key={category} role="presentation" className="border-b border-gray-100 last:border-b-0">
+            <div
+              role="presentation"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wide"
             >
-              <span className="flex-1 text-healthDarkBlue font-medium">
-                {isRTL ? resource.title_ar : resource.title_en}
-              </span>
-              {resource.isExternal && (
-                <ExternalLink className="h-3 w-3 text-gray-400" />
-              )}
-            </button>
-          ))}
-        </div>
-      ))}
+              {categoryIcons[category]}
+              <span>{categoryLabels[category][isRTL ? 'ar' : 'en']}</span>
+            </div>
+            <ul role="group" aria-label={categoryLabels[category][isRTL ? 'ar' : 'en']}>
+              {items.map((resource) => {
+                index += 1;
+                const i = index;
+                const active = i === activeIndex;
+                const title = isRTL ? resource.title_ar : resource.title_en;
+                const description = isRTL ? resource.description_ar : resource.description_en;
+                return (
+                  <li
+                    key={resource.id}
+                    id={optionId(listboxId, i)}
+                    role="option"
+                    aria-selected={active}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onMouseEnter={() => onActiveChange(i)}
+                    onClick={() => handleNavigate(resource)}
+                    className={`w-full min-h-[44px] px-4 py-2.5 cursor-pointer transition-colors flex items-center gap-3 ${
+                      active ? 'bg-healthTeal/10' : 'hover:bg-healthTeal/5'
+                    }`}
+                  >
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-healthDarkBlue font-medium">
+                        <HighlightMatch text={title} words={matchWords} />
+                      </span>
+                      {description && (
+                        <span className="block text-xs text-gray-600 truncate">{description}</span>
+                      )}
+                    </span>
+                    {resource.isExternal && <ExternalLink className="h-3 w-3 text-gray-500 shrink-0" />}
+                  </li>
+                );
+              })}
+            </ul>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

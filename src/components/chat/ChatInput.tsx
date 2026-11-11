@@ -1,5 +1,5 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -7,6 +7,9 @@ interface ChatInputProps {
   onSend: (message: string) => void;
   disabled: boolean;
   placeholder: string;
+  /** While an answer is arriving, the send button becomes a stop button. */
+  isStreaming?: boolean;
+  onStop?: () => void;
 }
 
 export interface ChatInputRef {
@@ -15,7 +18,7 @@ export interface ChatInputRef {
 }
 
 export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
-  ({ onSend, disabled, placeholder }, ref) => {
+  ({ onSend, disabled, placeholder, isStreaming = false, onStop }, ref) => {
     const { t } = useLanguage();
     const [input, setInput] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
@@ -87,6 +90,18 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
             className="flex-1 min-h-[44px] px-4 py-2 text-base border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-healthGold focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation appearance-none"
             style={{ fontSize: '16px' }} // Prevents iOS zoom on focus
           />
+          {isStreaming && onStop ? (
+            <Button
+              type="button"
+              onClick={onStop}
+              size="icon"
+              aria-label={t('chatbot.stop')}
+              title={t('chatbot.stop')}
+              className="h-11 w-11 min-h-[44px] min-w-[44px] bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white shrink-0 touch-manipulation active:scale-95 rounded-xl"
+            >
+              <Square className="h-4 w-4 fill-current" />
+            </Button>
+          ) : (
           <Button
             type="submit"
             disabled={disabled || !input.trim()}
@@ -96,6 +111,7 @@ export const ChatInput = forwardRef<ChatInputRef, ChatInputProps>(
           >
             <Send className="h-5 w-5" />
           </Button>
+          )}
         </form>
       </div>
     );

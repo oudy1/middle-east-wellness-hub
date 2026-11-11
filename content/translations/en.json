@@ -496,5 +496,8 @@
   "physicianApply.benefit2Title": "Community Impact",
   "physicianApply.benefit2Desc": "Make a meaningful difference in the health outcomes of underserved Middle Eastern populations.",
   "physicianApply.benefit3Title": "Network Growth",
-  "physicianApply.benefit3Desc": "Connect with like-minded healthcare professionals and expand your referral network."
+  "physicianApply.benefit3Desc": "Connect with like-minded healthcare professionals and expand your referral network.",
+  "chatbot.newConversation": "New conversation",
+  "chatbot.stop": "Stop answer",
+  "chatbot.retry": "Try again"
 }

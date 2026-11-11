@@ -1,6 +1,9 @@
 // Resource Finder searchable destinations
 // Add new resources by editing this single list
 
+import { normalizeText, matchWord, toWords } from './searchText';
+import { queryWords, synonymWords } from './knowledgeIndex';
+
 export interface SearchableResource {
   id: string;
   title_en: string;
@@ -8,7 +11,10 @@ export interface SearchableResource {
   keywords_en: string[];
   keywords_ar: string[];
   url: string;
-  category: 'topics' | 'services' | 'research' | 'healthcare' | 'events' | 'forms';
+  category: 'topics' | 'services' | 'programs' | 'research' | 'healthcare' | 'events' | 'forms';
+  /** Short one-line description shown under the title in search results. */
+  description_en?: string;
+  description_ar?: string;
   anchor?: string;
   isExternal?: boolean;
 }
@@ -257,86 +263,67 @@ export const popularSearches = [
 export const categoryLabels = {
   topics: { en: 'Topics', ar: 'المواضيع' },
   services: { en: 'Services', ar: 'الخدمات' },
+  programs: { en: 'Programs', ar: 'البرامج' },
   research: { en: 'Research', ar: 'الأبحاث' },
   healthcare: { en: 'Healthcare Workers', ar: 'مقدمو الرعاية' },
   events: { en: 'Events', ar: 'الفعاليات' },
   forms: { en: 'Forms', ar: 'النماذج' }
 };
 
-// Synonym map for smarter matching
-const SYNONYMS: Record<string, string[]> = {
-  doctor: ['physician', 'gp', 'clinician', 'family doctor'],
-  therapist: ['counselor', 'counsellor', 'psychologist', 'psychiatrist'],
-  heart: ['cardio', 'cardiac', 'cardiovascular', 'ekg', 'ecg'],
-  mental: ['anxiety', 'depression', 'stress', 'psychology'],
-  webinar: ['recording', 'video', 'seminar', 'workshop'],
-  study: ['research', 'trial', 'survey'],
-  opportunity: ['volunteer', 'role', 'opportunities'],
-  refugee: ['newcomer', 'immigrant', 'ifhp'],
-  rights: ['ohip', 'insurance', 'coverage'],
-};
-
-function editDist(a: string, b: string): number {
-  if (Math.abs(a.length - b.length) > 2) return 3;
-  const dp: number[] = Array(b.length + 1).fill(0).map((_, i) => i);
-  for (let i = 1; i <= a.length; i++) {
-    let prev = i - 1;
-    dp[0] = i;
-    for (let j = 1; j <= b.length; j++) {
-      const tmp = dp[j];
-      dp[j] = a[i - 1] === b[j - 1] ? prev : Math.min(prev, dp[j], dp[j - 1]) + 1;
-      prev = tmp;
-    }
-  }
-  return dp[b.length];
+interface IndexedResource {
+  resource: SearchableResource;
+  titleWords: string[];
+  keywordWords: string[];
+  keywordPhrases: string[];
 }
 
-function expandQuery(q: string): string[] {
-  const tokens = q.toLowerCase().split(/\s+/).filter(t => t.length > 1);
-  const out = new Set<string>(tokens);
-  for (const t of tokens) {
-    for (const [key, syns] of Object.entries(SYNONYMS)) {
-      if (t === key || syns.includes(t)) {
-        out.add(key);
-        syns.forEach(s => out.add(s));
-      }
-    }
+let indexedResources: IndexedResource[] | null = null;
+function getIndexedResources(): IndexedResource[] {
+  if (!indexedResources) {
+    indexedResources = searchableResources.map((resource) => {
+      const keywords = [...resource.keywords_en, ...resource.keywords_ar];
+      return {
+        resource,
+        titleWords: Array.from(new Set(toWords(`${resource.title_en} ${resource.title_ar}`))),
+        keywordWords: Array.from(new Set(keywords.flatMap(toWords))),
+        keywordPhrases: keywords.map((k) => toWords(k).join(" ")).filter((k) => k.length > 2),
+      };
+    });
   }
-  return Array.from(out);
+  return indexedResources;
 }
 
-// Words that appear in almost every query and would match unrelated entries.
-const STOPWORDS = new Set([
-  'a', 'an', 'and', 'are', 'at', 'for', 'from', 'how', 'i', 'in', 'is', 'me', 'my', 'need', 'of', 'on', 'or',
-  'the', 'to', 'want', 'what', 'where', 'with', 'shams', 'find', 'about', 'can', 'do', 'get',
-  'في', 'من', 'على', 'إلى', 'عن', 'هل', 'ما', 'أين', 'كيف', 'أريد', 'أحتاج', 'شمس', 'بالعربي', 'بالعربية',
-]);
+const TITLE_POINTS = { exact: 2, prefix: 2, typo: 1 } as const;
+const KEYWORD_POINTS = { exact: 2, prefix: 1, typo: 1 } as const;
 
-// Search function with synonym + fuzzy support, ranked so the best match comes first.
+// Search with synonyms, Arabic normalization and length-based typo tolerance,
+// ranked so the best match comes first.
 export function searchResources(query: string, language: 'en' | 'ar'): SearchableResource[] {
   if (!query.trim()) return [];
 
-  const normalizedQuery = query.toLowerCase().trim();
-  const tokens = expandQuery(normalizedQuery).filter(t => !STOPWORDS.has(t));
+  const normalizedQuery = normalizeText(query);
+  const allWords = ` ${toWords(query).join(' ')} `;
+  const words = queryWords(query);
+  const extra = synonymWords(words);
 
-  const scored = searchableResources.map(resource => {
-    const titles = `${resource.title_en} ${resource.title_ar}`.toLowerCase();
-    const title = (language === 'ar' ? resource.title_ar : resource.title_en).toLowerCase();
-    const allKeywords = [...resource.keywords_en, ...resource.keywords_ar].map(k => k.toLowerCase());
+  const scored = getIndexedResources().map((entry) => {
+    const title = normalizeText(language === 'ar' ? entry.resource.title_ar : entry.resource.title_en);
     let score = 0;
 
-    if (title.includes(normalizedQuery)) score += 10;
+    if (normalizedQuery.length >= 2 && title.includes(normalizedQuery)) score += 10;
     // Whole keyword phrases found in the query ("family doctor", "know your rights")
-    for (const k of allKeywords) {
-      if (k.length > 2 && normalizedQuery.includes(k)) score += 3 + k.split(/\s+/).length;
+    for (const k of entry.keywordPhrases) {
+      if (allWords.includes(` ${k} `)) score += 3 + k.split(' ').length;
     }
-    for (const t of tokens) {
-      if (titles.includes(t)) score += 2;
-      if (allKeywords.some(k => k === t || k.split(/\s+/).includes(t))) score += 2;
-      else if (t.length > 3 && allKeywords.some(k => k.startsWith(t))) score += 1;
-      else if (t.length > 4 && allKeywords.some(k => k.length > 3 && editDist(t, k) <= 1)) score += 1;
-    }
-    return { resource, score };
+    const scoreWord = (w: string, weight: number) => {
+      const t = matchWord(w, entry.titleWords);
+      if (t) score += TITLE_POINTS[t] * weight;
+      const k = matchWord(w, entry.keywordWords);
+      if (k) score += KEYWORD_POINTS[k] * weight;
+    };
+    words.forEach((w) => scoreWord(w, 1));
+    extra.forEach((w) => scoreWord(w, 0.5));
+    return { resource: entry.resource, score };
   });
 
   return scored

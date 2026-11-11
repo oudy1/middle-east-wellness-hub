@@ -5,3 +5,4 @@
 - Time-limited events (e.g. `src/lib/newcomerWorkshop.ts`) keep their date in one module and hide themselves by comparing the Toronto calendar date, so homepage and Programs never show a past event as upcoming.
 - Every internal link the chatbot, its knowledge index or the header search can produce must be listed in `content/chatbot-routes.json` (mirrored in the `shams-chat` function); `chatbotSearch.test.ts` fails on any unlisted address, so invented or dead anchors cannot ship.
 - Time-limited chatbot knowledge entries carry `activeUntil` (Toronto date) from the event's own module, so the assistant stops recommending an event after it ends.
+- Site search and chatbot retrieval share `src/lib/searchText.ts` (Arabic normalization, length-based typos, prefix match) and the header/home finder uses `searchSite` in `src/lib/siteSearch.ts` (curated list + knowledge index, ranked by matched words), so both stay in step without a search server or paid service.

@@ -8,6 +8,7 @@ import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
 import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
 import { NEWCOMER_WORKSHOP } from "./newcomerWorkshop";
+import { MATCH_POINTS, matchWord, toWords } from "./searchText";
 
 export type KnowledgeCategory =
   | "resources"
@@ -353,52 +354,71 @@ export const knowledgeIndex: KnowledgeItem[] = [
   ...faqItems,
 ];
 
-// Very small Levenshtein for typo tolerance on short tokens
-function editDistance(a: string, b: string): number {
-  if (Math.abs(a.length - b.length) > 2) return 3;
-  const dp: number[] = Array(b.length + 1)
-    .fill(0)
-    .map((_, i) => i);
-  for (let i = 1; i <= a.length; i++) {
-    let prev = i - 1;
-    dp[0] = i;
-    for (let j = 1; j <= b.length; j++) {
-      const tmp = dp[j];
-      dp[j] = a[i - 1] === b[j - 1] ? prev : Math.min(prev, dp[j], dp[j - 1]) + 1;
-      prev = tmp;
-    }
-  }
-  return dp[b.length];
+// Common words that match almost every entry and drown out the real topic.
+const STOPWORDS = new Set(
+  [
+    "a", "an", "and", "are", "at", "be", "can", "do", "does", "for", "from", "get", "how", "i", "if", "in",
+    "is", "it", "me", "my", "need", "of", "on", "or", "please", "the", "there", "to", "want", "what", "where",
+    "which", "who", "with", "you", "your", "shams", "any", "some", "about", "find", "looking", "s",
+    "في", "من", "على", "إلى", "الى", "عن", "أن", "ان", "هل", "ما", "ماذا", "أين", "كيف", "أريد", "اريد",
+    "أحتاج", "احتاج", "لي", "مع", "شمس",
+  ].flatMap(toWords)
+);
+
+/** Query words without stopwords (normalized + Arabic article stripped). */
+export function queryWords(query: string): string[] {
+  return toWords(query).filter((w) => w.length > 1 && !STOPWORDS.has(w));
 }
 
-function expandTokens(tokens: string[]): string[] {
-  const out = new Set(tokens);
-  for (const t of tokens) {
-    for (const [key, syns] of Object.entries(synonyms)) {
-      if (t === key || syns.includes(t)) {
-        out.add(key);
-        syns.forEach((s) => out.add(s));
-      }
-    }
+// Synonym groups as normalized single words, so "نفسية" and "نفسيه" hit the same group.
+// Multi-word synonyms ("mental health") are left out: splitting them would turn
+// generic words like "health" into synonyms of everything.
+const synonymGroups: string[][] = Object.entries(synonyms).map(([key, syns]) =>
+  Array.from(
+    new Set(
+      [key, ...syns]
+        .map(toWords)
+        .filter((w) => w.length === 1)
+        .map((w) => w[0])
+    )
+  )
+);
+
+/** Extra words implied by synonyms (excluding the words already typed). */
+export function synonymWords(words: string[]): string[] {
+  const typed = new Set(words);
+  const out = new Set<string>();
+  for (const group of synonymGroups) {
+    if (group.some((g) => typed.has(g))) group.forEach((g) => !typed.has(g) && out.add(g));
   }
   return Array.from(out);
 }
 
-// Common words that match almost every entry and drown out the real topic.
-const STOPWORDS = new Set([
-  "a", "an", "and", "are", "at", "be", "can", "do", "does", "for", "from", "get", "how", "i", "if", "in",
-  "is", "it", "me", "my", "need", "of", "on", "or", "please", "the", "there", "to", "want", "what", "where",
-  "which", "who", "with", "you", "your", "shams", "any", "some", "about", "find", "looking", "s",
-  "في", "من", "على", "إلى", "الى", "عن", "أن", "ان", "هل", "ما", "ماذا", "أين", "كيف", "أريد", "اريد",
-  "أحتاج", "احتاج", "لي", "مع", "شمس",
-]);
+interface IndexedItem {
+  item: KnowledgeItem;
+  primary: string[];
+  secondary: string[];
+}
 
-function tokenize(q: string): string[] {
-  return q
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s]+/gu, " ")
-    .split(/\s+/)
-    .filter((t) => t.length > 1 && !STOPWORDS.has(t));
+let indexed: IndexedItem[] | null = null;
+function getIndexed(): IndexedItem[] {
+  if (!indexed) {
+    indexed = knowledgeIndex.map((item) => ({
+      item,
+      primary: Array.from(
+        new Set(toWords([item.title_en, item.title_ar, ...(item.tags ?? []), ...(item.keywords ?? [])].join(" ")))
+      ),
+      secondary: Array.from(new Set(toWords(`${item.description_en} ${item.description_ar}`))),
+    }));
+  }
+  return indexed;
+}
+
+function wordScore(word: string, entry: IndexedItem): number {
+  const p = matchWord(word, entry.primary);
+  if (p) return MATCH_POINTS[p];
+  const s = matchWord(word, entry.secondary);
+  return s ? MATCH_POINTS[s] * 0.6 : 0;
 }
 
 export interface SearchResult {
@@ -408,45 +428,21 @@ export interface SearchResult {
 
 export function searchKnowledge(query: string, language: "en" | "ar" = "en", limit = 8): SearchResult[] {
   if (!query.trim()) return [];
-  const rawTokens = tokenize(query);
-  const tokens = expandTokens(rawTokens);
+  const words = queryWords(query);
+  if (words.length === 0) return [];
+  const extra = synonymWords(words);
 
   const torontoToday = new Date().toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
-  const results: SearchResult[] = knowledgeIndex
-    .filter((item) => !item.activeUntil || torontoToday <= item.activeUntil)
-    .map((item) => {
-    const haystack = [
-      item.title_en,
-      item.title_ar,
-      item.description_en,
-      item.description_ar,
-      ...(item.tags ?? []),
-      ...(item.keywords ?? []),
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    let score = 0;
-    for (const t of tokens) {
-      if (!t) continue;
-      if (haystack.includes(t)) {
-        score += 3;
-      } else {
-        // fuzzy token match
-        for (const kw of item.keywords) {
-          if (kw.length > 3 && editDistance(t, kw) <= 1) {
-            score += 1.5;
-            break;
-          }
-        }
-      }
-    }
-    // small boost for language-matching content
-    if (item.language === language || item.language === "both") score += 0.5;
-    return { item, score };
-  });
-
-  return results
+  return getIndexed()
+    .filter(({ item }) => !item.activeUntil || torontoToday <= item.activeUntil)
+    .map((entry) => {
+      let score = 0;
+      for (const w of words) score += wordScore(w, entry);
+      for (const w of extra) score += wordScore(w, entry) * 0.75;
+      // small boost for language-matching content, only for real matches
+      if (score > 0 && (entry.item.language === language || entry.item.language === "both")) score += 0.5;
+      return { item: entry.item, score };
+    })
     .filter((r) => r.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
