@@ -26,5 +26,5 @@
 - [x] Volunteer list: CSV export fallback on /admin/volunteers (read on the device only, not stored).
 - [x] Modernization brief: researched the 19 readable GitHub projects; report in Files.
 - [ ] Modernization brief items 20-26 and its task list: waiting on user to paste the missing part.
-- [ ] Optional (needs approval): move translations to react-i18next.
+- [x] Translations moved to i18next (plural forms, missing-translation checks); Support Us page translated to Arabic; EN/AR pages re-tested.
 - [x] Modernization: chatbot New conversation, Stop, Try again; one shared search list with Arabic spelling + typo tolerance, grouped/highlighted results, arrow keys.
