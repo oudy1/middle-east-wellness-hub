@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { MessageCircle, X, Minimize2 } from 'lucide-react';
+import { MessageCircle, X, Minimize2, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChatMessages } from './ChatMessages';
@@ -19,9 +19,18 @@ const ChatWidget: React.FC = () => {
   const {
     messages,
     isLoading,
+    failedMessage,
     sendMessage,
+    retry,
+    stop,
     resetConversation,
   } = useChatSession();
+
+  // Start over without closing the window.
+  const handleNewConversation = useCallback(() => {
+    resetConversation();
+    setTimeout(() => chatInputRef.current?.focus(), 50);
+  }, [resetConversation]);
 
   // Explicit close (X button or tapping outside) ends the conversation, so
   // reopening always starts fresh. Following a chatbot link only hides the
@@ -151,6 +160,19 @@ const ChatWidget: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-1">
+            {messages.length > 0 && !isMinimized && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={handleNewConversation}
+                aria-label={t('chatbot.newConversation')}
+                title={t('chatbot.newConversation')}
+                className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
+              >
+                <RotateCcw className="h-4 w-4" />
+              </Button>
+            )}
             <Button
               type="button"
               variant="ghost"
@@ -203,6 +225,8 @@ const ChatWidget: React.FC = () => {
                   messages={messages} 
                   isLoading={isLoading}
                   onNavigate={handleNavigationClose}
+                  failed={!!failedMessage && !isLoading}
+                  onRetry={retry}
                 />
               )}
               <div ref={messagesEndRef} className="h-1" />
@@ -214,6 +238,8 @@ const ChatWidget: React.FC = () => {
                 ref={chatInputRef}
                 onSend={sendMessage}
                 disabled={isLoading}
+                isStreaming={isLoading}
+                onStop={stop}
                 placeholder={t('chatbot.placeholder')}
               />
             </div>
