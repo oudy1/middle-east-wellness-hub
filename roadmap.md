@@ -22,7 +22,9 @@
 - [ ] Next audit items: hide ku/fa/tr until translated (needs approval), homepage length/reorder (needs design approval), load pages on demand (performance).
 - [x] AI Assistant audit (brief 2.0): report written; safe fixes done (OHIP FAQ, chat reset on close, Research Opportunities menu, 6 dead search anchors, ranked search, workshop/newcomer/directory/provider/researcher knowledge, webinar anchors, new greeting, tests).
 - [x] AI Assistant: chatbot server update deployed (approved): synced links, provider/researcher forms, shorter answers, 3 safety replies, past convention, official sources, 20s timeout, no error leaks. 29/29 questions pass.
-- [ ] AI Assistant (Batch 3, not started): New conversation button, merged search list, grouped search results.
+- [x] AI Assistant (Batch 3): New conversation button, merged search list, grouped search results.
 - [x] Volunteer list: CSV export fallback on /admin/volunteers (read on the device only, not stored).
-- [ ] Modernization brief (3.0, cut off at item 19 of 26): research the 19 listed GitHub projects (README, license, upkeep) and write a short findings report. Items 20-26 + the rest of the brief: waiting on user to paste them.
-- [ ] Modernization: chatbot New conversation button; typo-tolerant shared search (EN/AR); grouped search results.
+- [x] Modernization brief: researched the 19 readable GitHub projects; report in Files.
+- [ ] Modernization brief items 20-26 and its task list: waiting on user to paste the missing part.
+- [ ] Optional (needs approval): move translations to react-i18next.
+- [x] Modernization: chatbot New conversation, Stop, Try again; one shared search list with Arabic spelling + typo tolerance, grouped/highlighted results, arrow keys.
