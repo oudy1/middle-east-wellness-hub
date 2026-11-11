@@ -21,6 +21,22 @@ export const MISSING_TRANSLATION_AR = "المحتوى قيد الترجمة";
 
 export const dictionaries: Record<Language, Record<string, string>> = { en, ar, ku, fa, tr };
 
+/** True when the language has a non-empty text for every English key. */
+export function isFullyTranslated(
+  lang: Language,
+  dicts: Record<string, Record<string, string>> = dictionaries
+): boolean {
+  if (lang === "en") return true;
+  const dict = dicts[lang] ?? {};
+  return Object.keys(dicts.en).every((k) => Boolean(dict[k]?.trim()));
+}
+
+/**
+ * Languages visitors can choose. A language stays hidden until it is fully
+ * translated, then appears automatically (no code change needed).
+ */
+export const AVAILABLE_LANGUAGES: Language[] = LANGUAGES.filter((l) => isFullyTranslated(l));
+
 /** Dev-only record of missing keys, readable in the browser console as `window.__missingI18n`. */
 export function reportMissing(lang: string, key: string) {
   if (!import.meta.env.DEV) return;

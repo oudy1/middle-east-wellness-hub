@@ -154,13 +154,14 @@ const Header = () => {
   const location = useLocation();
   const isRTL = language === "ar";
 
+  // Kurdish, Persian and Turkish stay hidden until fully translated (see AVAILABLE_LANGUAGES).
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'ar', name: 'العربية', flag: '🇸🇦' },
     { code: 'ku', name: 'کوردی', flag: '' },
     { code: 'fa', name: 'فارسی', flag: '🇮🇷' },
     { code: 'tr', name: 'Türkçe', flag: '🇹🇷' }
-  ];
+  ].filter((lang) => AVAILABLE_LANGUAGES.includes(lang.code as Language));
   const currentLanguage = languages.find(lang => lang.code === language);
 
   // Localized labels
