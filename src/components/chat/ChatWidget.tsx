@@ -1,252 +1,58 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { MessageCircle, X, Minimize2, RotateCcw } from 'lucide-react';
+import React, { Suspense, useEffect, useState } from 'react';
+import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ChatMessages } from './ChatMessages';
-import { ChatInput, ChatInputRef } from './ChatInput';
-import { ChatQuickReplies } from './ChatQuickReplies';
-import { ChatSafetyFooter } from './ChatSafetyFooter';
-import { useChatSession } from '@/hooks/useChatSession';
+import { lazyWithRetry } from '@/lib/lazyWithRetry';
 
+const loadChatWindow = () => import('./ChatWindow');
+const ChatWindow = lazyWithRetry(loadChatWindow);
+
+/**
+ * Chat launcher. Only the round button loads with the page; the chat window
+ * (and its search knowledge) downloads the first time it is opened, or after
+ * the page has settled so opening still feels instant.
+ */
 const ChatWidget: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const { language, t } = useLanguage();
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatInputRef = useRef<ChatInputRef>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  
-  const {
-    messages,
-    isLoading,
-    failedMessage,
-    sendMessage,
-    retry,
-    stop,
-    resetConversation,
-  } = useChatSession();
+  const [activated, setActivated] = useState(false);
+  const { t } = useLanguage();
 
-  // Start over without closing the window.
-  const handleNewConversation = useCallback(() => {
-    resetConversation();
-    setTimeout(() => chatInputRef.current?.focus(), 50);
-  }, [resetConversation]);
-
-  // Explicit close (X button or tapping outside) ends the conversation, so
-  // reopening always starts fresh. Following a chatbot link only hides the
-  // window and keeps the conversation.
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
-    setIsMinimized(false);
-    resetConversation();
-    document.body.style.overflow = '';
-  }, [resetConversation]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
+  // Other parts of the site (e.g. the homepage Arabic prompt) can open the chat.
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (activated) return;
+    const open = () => setActivated(true);
+    window.addEventListener('shams-open-chat', open);
+    return () => window.removeEventListener('shams-open-chat', open);
+  }, [activated]);
 
-  // Allow other parts of the app (e.g. homepage Arabic prompt) to open the chat
+  // Warm the download once the page is idle, without competing with first paint.
   useEffect(() => {
-    const openChat = () => {
-      setIsOpen(true);
-      setIsMinimized(false);
-    };
-    window.addEventListener('shams-open-chat', openChat);
-    return () => window.removeEventListener('shams-open-chat', openChat);
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    const timer = window.setTimeout(() => {
+      if (w.requestIdleCallback) w.requestIdleCallback(() => void loadChatWindow());
+      else void loadChatWindow();
+    }, 5000);
+    return () => window.clearTimeout(timer);
   }, []);
 
-  // Focus input when chat opens (with delay for mobile)
-  useEffect(() => {
-    if (!isOpen || isMinimized) return;
-    const timer = setTimeout(() => {
-      chatInputRef.current?.focus();
-    }, 150);
-    return () => clearTimeout(timer);
-  }, [isOpen, isMinimized]);
-
-  // Prevent body scroll when chat is open on mobile
-  useEffect(() => {
-    if (isOpen && !isMinimized) {
-      const isMobile = window.innerWidth < 640;
-      if (isMobile) {
-        document.body.style.overflow = 'hidden';
-      }
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen, isMinimized]);
-
-  // Close chat when navigating - passed to ChatMessages
-  const handleNavigationClose = useCallback(() => {
-    setIsOpen(false);
-    document.body.style.overflow = '';
-  }, []);
-
-  const welcomeMessage = t('chatbot.greeting');
-
-  const quickReplies = useMemo(
-    () =>
-      [1, 2, 3, 4, 5, 6].map((i) => ({
-        label: t(`chatbot.qr.${i}.label`),
-        message: t(`chatbot.qr.${i}.message`),
-      })),
-    // t is recreated each render; language is the meaningful dependency
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [language]
+  const launcher = (
+    <Button
+      type="button"
+      onClick={() => setActivated(true)}
+      onPointerEnter={() => void loadChatWindow()}
+      className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg touch-manipulation active:scale-95"
+      style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
+      aria-label={t('chatbot.openChat')}
+      aria-busy={activated || undefined}
+    >
+      <MessageCircle className="h-6 w-6 text-healthDarkBlue" />
+    </Button>
   );
 
-  const handleQuickReply = (message: string) => {
-    sendMessage(message);
-  };
-
-  if (!isOpen) {
-    return (
-      <Button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg touch-manipulation active:scale-95"
-        style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
-        aria-label={t('chatbot.openChat')}
-      >
-        <MessageCircle className="h-6 w-6 text-healthDarkBlue" />
-      </Button>
-    );
-  }
-
+  if (!activated) return launcher;
   return (
-    <>
-      {/* Backdrop for mobile - lower z-index than chat window */}
-      <div 
-        className="fixed inset-0 z-[55] bg-black/30 sm:hidden"
-        onClick={handleClose}
-        aria-hidden="true"
-        style={{ pointerEvents: 'auto' }}
-      />
-      
-      <div 
-        ref={chatContainerRef}
-        className={`fixed z-[60] bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-300 flex flex-col ${
-          isMinimized ? 'h-14' : 'h-[100dvh] sm:h-[600px] sm:max-h-[calc(100vh-48px)]'
-        } w-full sm:w-[400px] sm:max-w-[calc(100vw-48px)] bottom-0 right-0 sm:bottom-6 sm:right-6`}
-        style={{ 
-          maxHeight: isMinimized ? '56px' : 'calc(100dvh - env(safe-area-inset-top, 0px))',
-          pointerEvents: 'auto',
-        }}
-        dir={language === 'ar' ? 'rtl' : 'ltr'}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-healthDarkBlue text-white shrink-0">
-          <div className="flex items-center gap-3">
-            <img
-              src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png"
-              alt="SHAMS"
-              width={32}
-              height={32}
-              loading="lazy"
-              decoding="async"
-              className="h-8 w-8 object-contain"
-            />
-            <div>
-              <h3 className="font-semibold text-sm">{t('chatbot.title')}</h3>
-              <p className="text-xs text-white/70">{t('chatbot.subtitle')}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            {messages.length > 0 && !isMinimized && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                onClick={handleNewConversation}
-                aria-label={t('chatbot.newConversation')}
-                title={t('chatbot.newConversation')}
-                className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
-              >
-                <RotateCcw className="h-4 w-4" />
-              </Button>
-            )}
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMinimized(!isMinimized)}
-              aria-label={t('chatbot.minimize')}
-              className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
-            >
-              <Minimize2 className="h-4 w-4" />
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={handleClose}
-              aria-label={t('chatbot.closeChat')}
-              className="h-10 w-10 text-white hover:bg-white/10 touch-manipulation"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {!isMinimized && (
-          <>
-            {/* Messages area - scrollable */}
-            <div 
-              className="flex-1 overflow-y-auto p-4 bg-gray-50 overscroll-contain"
-              style={{ pointerEvents: 'auto' }}
-            >
-              {messages.length === 0 ? (
-                <div className="space-y-4">
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                      {welcomeMessage}
-                    </p>
-                  </div>
-                  <div className="text-xs text-center text-muted-foreground mb-2">
-                    {t('chatbot.quickLinksLabel')}
-                  </div>
-                  <ChatQuickReplies 
-                    replies={quickReplies} 
-                    onSelect={handleQuickReply}
-                    disabled={isLoading}
-                  />
-                  <ChatSafetyFooter />
-                </div>
-              ) : (
-                <ChatMessages 
-                  messages={messages} 
-                  isLoading={isLoading}
-                  onNavigate={handleNavigationClose}
-                  failed={!!failedMessage && !isLoading}
-                  onRetry={retry}
-                />
-              )}
-              <div ref={messagesEndRef} className="h-1" />
-            </div>
-
-            {/* Input area - fixed at bottom */}
-            <div className="shrink-0">
-              <ChatInput 
-                ref={chatInputRef}
-                onSend={sendMessage}
-                disabled={isLoading}
-                isStreaming={isLoading}
-                onStop={stop}
-                placeholder={t('chatbot.placeholder')}
-              />
-            </div>
-          </>
-        )}
-      </div>
-    </>
+    <Suspense fallback={launcher}>
+      <ChatWindow initiallyOpen />
+    </Suspense>
   );
 };
 
