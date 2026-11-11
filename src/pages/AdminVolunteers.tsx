@@ -45,8 +45,8 @@ const AdminVolunteers = () => {
     refresh: isAr ? "تحديث" : "Refresh",
     search: isAr ? "بحث في الردود..." : "Search responses...",
     empty: isAr
-      ? "الصق رابط جدول الردود ثم اضغط تحميل الردود."
-      : "Paste your responses sheet link, then press Load responses.",
+      ? "الصق رابط جدول الردود ثم اضغط تحميل الردود، أو افتح ملف CSV مُصدَّر."
+      : "Paste your responses sheet link and press Load responses, or open a CSV export.",
     linkHint: isAr
       ? "استخدم جدول الردود المرتبط من تبويب الردود في نموذج Google، وليس رابط النموذج نفسه."
       : "Use the response spreadsheet linked from your Google Form’s Responses tab, not the form link.",
