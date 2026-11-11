@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
-  SearchableResource, 
   categoryLabels,
   popularSearches,
   getResourceById
 } from '@/lib/resourceFinderData';
+import type { ResultGroup } from '@/lib/siteSearch';
+import HighlightMatch from './HighlightMatch';
+import { useOpenResource } from './useOpenResource';
 import { 
   FileText, 
   Stethoscope, 
