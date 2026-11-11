@@ -13,7 +13,7 @@ export { MISSING_TRANSLATION_AR };
 export type { Language };
 
 /** Values for `{{name}}` placeholders, plus `count` to pick a plural form. */
-export type TranslateOptions = { count?: number } & Record<string, string | number | undefined>;
+export type TranslateOptions = { count?: number; lng?: Language } & Record<string, string | number | undefined>;
 
 type LanguageContextType = {
   language: Language;
@@ -45,10 +45,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const t = useCallback(
     (key: string, options?: TranslateOptions): string => {
-      if (import.meta.env.DEV && !hasOwnTranslation(language, key, options?.count)) {
-        reportMissing(language, key);
+      // Pages written only in English/Arabic may pin `lng` so counts match the page text.
+      const lng = (options?.lng as Language | undefined) ?? language;
+      if (import.meta.env.DEV && !hasOwnTranslation(lng, key, options?.count)) {
+        reportMissing(lng, key);
       }
-      return i18n.t(key, { ...options, lng: language }) as string;
+      return i18n.t(key, { ...options, lng }) as string;
     },
     [language]
   );

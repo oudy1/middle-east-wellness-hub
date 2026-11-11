@@ -499,5 +499,15 @@
   "physicianApply.benefit3Desc": "Connect with like-minded healthcare professionals and expand your referral network.",
   "chatbot.newConversation": "New conversation",
   "chatbot.stop": "Stop answer",
-  "chatbot.retry": "Try again"
+  "chatbot.retry": "Try again",
+  "common.resultCount_one": "{{count}} result",
+  "common.resultCount_other": "{{count}} results",
+  "common.resultsFound_one": "Found {{count}} result",
+  "common.resultsFound_other": "Found {{count}} results",
+  "glossary.termCount_one": "{{count}} term",
+  "glossary.termCount_other": "{{count}} terms",
+  "physicians.count_one": "{{count}} physician",
+  "physicians.count_other": "{{count}} physicians",
+  "directory.providerCount_one": "{{count}} provider",
+  "directory.providerCount_other": "{{count}} providers"
 }

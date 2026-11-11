@@ -24,7 +24,7 @@ const categoryLabels: Record<string, { en: string; ar: string }> = {
 };
 
 const Glossary = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const isArabic = language === "ar";
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -78,9 +78,7 @@ const Glossary = () => {
       ? "'Cairo', 'Segoe UI', Tahoma, sans-serif"
       : "'Segoe UI', Helvetica, Arial, sans-serif";
     const title = isArabic ? "مسرد SHAMS" : "SHAMS Glossary";
-    const subtitle = isArabic
-      ? `${items.length} مصطلح`
-      : `${items.length} term${items.length === 1 ? "" : "s"}`;
+    const subtitle = t("glossary.termCount", { count: items.length, lng: isArabic ? "ar" : "en" });
     const footer = isArabic
       ? "مشروع SHAMS - projectshams.com"
       : "SHAMS Project - projectshams.com";

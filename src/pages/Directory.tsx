@@ -202,7 +202,7 @@ const cityKey = (city: string, province: string) =>
   `${city.trim().toLowerCase()}|${province.trim().toLowerCase()}`;
 
 const Directory = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const isAr = language === "ar";
 
   const [workers, setWorkers] = useState<HealthcareWorker[]>([]);
@@ -440,9 +440,7 @@ const Directory = () => {
             ) : (
               <>
                 <p className="text-muted-foreground mb-4">
-                  {isAr
-                    ? `${filtered.length} مقدم خدمة`
-                    : `${filtered.length} provider${filtered.length !== 1 ? "s" : ""}`}
+                  {t("directory.providerCount", { count: filtered.length, lng: isAr ? "ar" : "en" })}
                 </p>
                 {filtered.length === 0 ? (
                   <Card>
