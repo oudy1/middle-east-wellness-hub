@@ -57,3 +57,29 @@ describe("OHIP FAQ accuracy", () => {
     expect(entry.answerAr).not.toMatch(/3 أشهر/);
   });
 });
+
+describe("chatbot server link list matches the site", () => {
+  it("lists every approved route in the shams-chat function", async () => {
+    const { readFileSync } = await import("node:fs");
+    const routes = (await import("../../../content/chatbot-routes.json")).default as Record<string, string>;
+    const server = readFileSync("supabase/functions/shams-chat/index.ts", "utf8");
+    for (const [key, url] of Object.entries(routes)) {
+      expect(server, key).toContain(`${key}: "${url}"`);
+    }
+  });
+  it("sends providers and researchers to their real forms, not the contact form", async () => {
+    const { readFileSync } = await import("node:fs");
+    const server = readFileSync("supabase/functions/shams-chat/index.ts", "utf8");
+    expect(server).toContain("[Join the directory](/physicians/apply)");
+    expect(server).toContain("[Submit an opportunity](/post-opportunity)");
+    expect(server).not.toContain("error.message");
+  });
+});
+
+describe("past Mental Health Convention", () => {
+  it("is offered as a recap, never as registration", () => {
+    const top = searchKnowledge("register for the mental health convention")[0].item;
+    expect(top.id).toBe("mental-health-convention-recap");
+    expect(top.url).toBe("/programs#mental-health-convention");
+  });
+});

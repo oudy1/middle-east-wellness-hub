@@ -21,4 +21,5 @@
 - [x] Audit S1-S4: own title/description/canonical on 9 pages (EN+AR); 404 + admin pages hidden from search; sitemap cleaned (+find-healthcare-workers, physicians/apply, post-opportunity; -resources, -webinars); robots blocks /admin; English recordings heading "Webinars and Recordings" (Arabic kept as-is per user).
 - [ ] Next audit items: hide ku/fa/tr until translated (needs approval), homepage length/reorder (needs design approval), load pages on demand (performance).
 - [x] AI Assistant audit (brief 2.0): report written; safe fixes done (OHIP FAQ, chat reset on close, Research Opportunities menu, 6 dead search anchors, ranked search, workshop/newcomer/directory/provider/researcher knowledge, webinar anchors, new greeting, tests).
-- [ ] AI Assistant: chatbot server update (prompt, route list, provider/researcher forms, no error leaks, shorter answers) waiting for user approval to deploy.
+- [x] AI Assistant: chatbot server update deployed (approved): synced links, provider/researcher forms, shorter answers, 3 safety replies, past convention, official sources, 20s timeout, no error leaks. 29/29 questions pass.
+- [ ] AI Assistant (Batch 3, not started): New conversation button, merged search list, grouped search results.
