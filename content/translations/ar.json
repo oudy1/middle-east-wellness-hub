@@ -496,5 +496,8 @@
   "physicianApply.benefit2Title": "التأثير المجتمعي",
   "physicianApply.benefit2Desc": "أحدث فرقاً هادفاً في النتائج الصحية للمجتمعات الشرق أوسطية التي لا تحصل على خدمات كافية.",
   "physicianApply.benefit3Title": "توسيع الشبكة المهنية",
-  "physicianApply.benefit3Desc": "تواصل مع مختصي رعاية صحية يشاركونك الرؤية ووسع شبكة الإحالات الخاصة بك."
+  "physicianApply.benefit3Desc": "تواصل مع مختصي رعاية صحية يشاركونك الرؤية ووسع شبكة الإحالات الخاصة بك.",
+  "chatbot.newConversation": "محادثة جديدة",
+  "chatbot.stop": "إيقاف الرد",
+  "chatbot.retry": "حاول مرة أخرى"
 }

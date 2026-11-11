@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Loader2 } from 'lucide-react';
+import { Loader2, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ChatSafetyFooter } from './ChatSafetyFooter';
 import {
@@ -21,9 +21,12 @@ interface ChatMessagesProps {
   messages: Message[];
   isLoading: boolean;
   onNavigate?: () => void; // Callback to close chat on navigation
+  /** The last question did not get an answer. */
+  failed?: boolean;
+  onRetry?: () => void;
 }
 
-export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading, onNavigate }) => {
+export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading, onNavigate, failed = false, onRetry }) => {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [navError, setNavError] = useState<{ message: string; fallback: string } | null>(null);
@@ -235,7 +238,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
         </div>
       )}
       
-      {messages.map((message) => (
+      {messages.filter((m) => m.role === 'user' || m.content.trim()).map((message) => (
         <div
           key={message.id}
           className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -274,7 +277,27 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
         </div>
       )}
 
-      {isLoading && (
+      {failed && onRetry && (
+        <div
+          className="bg-amber-50 border border-amber-300 rounded-lg p-3 text-sm text-amber-900"
+          role="alert"
+          dir={language === 'ar' ? 'rtl' : 'ltr'}
+        >
+          <p className="mb-2">{t('chatbot.errorBody')}</p>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={onRetry}
+            className="text-xs min-h-[44px] px-4 py-2 bg-white gap-2"
+          >
+            <RotateCcw className="h-4 w-4" />
+            {t('chatbot.retry')}
+          </Button>
+        </div>
+      )}
+
+      {isLoading && (messages[messages.length - 1]?.role !== 'assistant' || !messages[messages.length - 1]?.content.trim()) && (
         <div className="flex justify-start">
           <div className="bg-white rounded-lg px-4 py-3 shadow-sm border border-gray-100">
             <div className="flex items-center gap-2 text-gray-500">
