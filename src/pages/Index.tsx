@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import CalligraphyBackground from "@/components/CalligraphyBackground";
 import MetricsExportButton from "@/components/MetricsExportButton";
 import MetricsDebugOverlay from "@/components/MetricsDebugOverlay";
+import LazySection from "@/components/LazySection";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 import UpcomingEventFeature from "@/components/UpcomingEventFeature";
@@ -86,24 +87,49 @@ const Index = () => {
 
         <Suspense fallback={<SectionFallback />}>
           <ArabicChatPrompt />
-          <FeaturedEventSection />
-          <MentorshipHighlight />
-          <FeaturedWebinarBanner />
-          <ResearchWebinarCarousel />
-          <ResourceFinderSection />
-          <WhatIsSHAMS />
-          <WhatWeDoSection />
-          <UpcomingEventsSection />
-          <MissionSection />
-          <TopicOfTheWeekSection />
-          <ResearchTeaserSection />
-          <FeaturedNewsSection />
-          <MeetTeamButton />
-          <ResourcesSection />
-          <PartnersSection />
-          <NewsletterSection />
-          <LandmarksGenerator />
         </Suspense>
+        {/* Lower sections download only when the visitor scrolls near them */}
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <FeaturedEventSection />
+            <MentorshipHighlight />
+            <FeaturedWebinarBanner />
+          </Suspense>
+        </LazySection>
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <ResearchWebinarCarousel />
+            <ResourceFinderSection />
+            <WhatIsSHAMS />
+          </Suspense>
+        </LazySection>
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <WhatWeDoSection />
+            <UpcomingEventsSection />
+            <MissionSection />
+          </Suspense>
+        </LazySection>
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <TopicOfTheWeekSection />
+            <ResearchTeaserSection />
+            <FeaturedNewsSection />
+          </Suspense>
+        </LazySection>
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <MeetTeamButton />
+            <ResourcesSection />
+            <PartnersSection />
+          </Suspense>
+        </LazySection>
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <NewsletterSection />
+            <LandmarksGenerator />
+          </Suspense>
+        </LazySection>
       </main>
       <Footer />
       <MetricsExportButton />
