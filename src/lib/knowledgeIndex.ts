@@ -244,6 +244,18 @@ const curated: KnowledgeItem[] = [
     url: approvedRoutes.post_opportunity,
   },
   {
+    id: "mental-health-convention-recap",
+    title_en: "SHAMS Mental Health Convention (past event, July 18, 2026)",
+    title_ar: "مؤتمر شمس للصحة النفسية (فعالية سابقة، 18 يوليو 2026)",
+    description_en: "This event has already taken place at the University of Toronto Mississauga. Registration is closed. Visitors can watch the recap on the Programs page.",
+    description_ar: "أُقيمت هذه الفعالية بالفعل في جامعة تورنتو ميسيساغا. التسجيل مغلق. يمكن مشاهدة ملخص المؤتمر في صفحة البرامج.",
+    category: "programs",
+    tags: ["event", "past", "convention", "recap"],
+    keywords: ["convention", "mental health convention", "stigma", "recap", "register", "sign up", "registration", "مؤتمر", "وصمة", "ملخص"],
+    language: "both",
+    url: approvedRoutes.mental_health_convention,
+  },
+  {
     id: "volunteer",
     title_en: "Volunteer with SHAMS",
     title_ar: "تطوّع مع شمس",
