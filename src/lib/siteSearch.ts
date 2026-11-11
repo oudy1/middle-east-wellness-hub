@@ -65,8 +65,8 @@ export function searchSite(query: string, language: "en" | "ar"): SearchableReso
 
 /**
  * Meilisearch-style "words" rule: results matching more of the typed words come
- * first (ties keep curated-first order). When several words are typed, results
- * that match only one of them while others match more are dropped as noise.
+ * first (ties keep curated-first order). When several words are typed and some
+ * result matches at least two, results matching only one word are dropped as noise.
  */
 function rankByMatchedWords(
   query: string,
@@ -85,7 +85,7 @@ function rankByMatchedWords(
   });
   const best = Math.max(...counted.map((c) => c.matched));
   return counted
-    .filter((c) => best < 2 || c.matched >= best - 1)
+    .filter((c) => best < 2 || c.matched >= Math.max(2, best - 1))
     .sort((a, b) => b.matched - a.matched || a.order - b.order)
     .map((c) => c.r);
 }

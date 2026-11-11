@@ -47,6 +47,7 @@ describe("one search list for the site", () => {
   it("drops results that match only one of several typed words", () => {
     const ids = searchSite("mental health convention", "en").map((r) => r.id);
     expect(ids).not.toContain("womens-health");
+    expect(searchSite("الصحه النفسيه", "ar").map((r) => r.id)).not.toContain("womens-health");
   });
   it("keeps the curated Know Your Rights entry first and does not repeat it", () => {
     const results = searchSite("Know Your Rights recording", "en");
