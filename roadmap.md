@@ -23,3 +23,4 @@
 - [x] AI Assistant audit (brief 2.0): report written; safe fixes done (OHIP FAQ, chat reset on close, Research Opportunities menu, 6 dead search anchors, ranked search, workshop/newcomer/directory/provider/researcher knowledge, webinar anchors, new greeting, tests).
 - [x] AI Assistant: chatbot server update deployed (approved): synced links, provider/researcher forms, shorter answers, 3 safety replies, past convention, official sources, 20s timeout, no error leaks. 29/29 questions pass.
 - [ ] AI Assistant (Batch 3, not started): New conversation button, merged search list, grouped search results.
+- [x] Volunteer list: CSV export fallback on /admin/volunteers (read on the device only, not stored).
