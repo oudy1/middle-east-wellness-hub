@@ -51,7 +51,7 @@ if (!i18n.isInitialized) {
     // Called only when no language (after fallbacks) has the key.
     parseMissingKeyHandler: (key: string) =>
       isRtlLanguage(i18n.language) ? MISSING_TRANSLATION_AR : key,
-    initImmediate: false,
+    initAsync: false,
   });
 }
 
