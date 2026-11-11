@@ -31,7 +31,7 @@ import {
 const ITEMS_PER_PAGE = 20;
 
 const FamilyPhysicianDirectory = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const { citySlug } = useParams<{ citySlug?: string }>();
   const isRTL = language === 'ar';
@@ -315,9 +315,7 @@ const FamilyPhysicianDirectory = () => {
 
               {/* Results Count */}
               <p className={`text-sm text-muted-foreground mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {isRTL 
-                  ? `${filteredPhysicians.length} نتيجة`
-                  : `${filteredPhysicians.length} results`}
+                {t('common.resultCount', { count: filteredPhysicians.length, lng: isRTL ? 'ar' : 'en' })}
               </p>
 
               {/* Physician Cards */}

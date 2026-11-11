@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getCitiesWithCounts } from "@/lib/physicianData";
 
 const FamilyPhysicianCities = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const isRTL = language === 'ar';
   
@@ -116,9 +116,7 @@ const FamilyPhysicianCities = () => {
                                 {city}
                               </h3>
                               <p className={`text-sm text-muted-foreground ${isRTL ? 'text-right' : 'text-left'}`}>
-                                {isRTL 
-                                  ? `${count} ${count === 1 ? 'طبيب' : 'أطباء'}`
-                                  : `${count} ${count === 1 ? 'physician' : 'physicians'}`}
+                                {t('physicians.count', { count, lng: isRTL ? 'ar' : 'en' })}
                               </p>
                             </div>
                           </div>

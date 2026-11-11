@@ -58,7 +58,7 @@ const ResourceFinderDropdown: React.FC<ResourceFinderDropdownProps> = ({
   activeIndex,
   onActiveChange,
 }) => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const openResource = useOpenResource();
   const isRTL = language === 'ar';
@@ -161,7 +161,7 @@ const ResourceFinderDropdown: React.FC<ResourceFinderDropdownProps> = ({
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <p className="sr-only" role="status" aria-live="polite">
-        {isRTL ? `${resultCount} نتيجة` : `${resultCount} result${resultCount === 1 ? '' : 's'}`}
+        {t('common.resultCount', { count: resultCount, lng: isRTL ? 'ar' : 'en' })}
       </p>
       <ul id={listboxId} role="listbox" aria-label={isRTL ? 'نتائج البحث' : 'Search results'}>
         {groups.map(({ category, items }) => (

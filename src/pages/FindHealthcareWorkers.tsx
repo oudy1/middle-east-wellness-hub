@@ -99,7 +99,7 @@ interface HealthcareWorker {
 }
 
 const FindHealthcareWorkers = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -474,9 +474,7 @@ const FindHealthcareWorkers = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <p className="text-muted-foreground">
-                  {isAr 
-                    ? `تم العثور على ${workers.length} نتيجة` 
-                    : `Found ${workers.length} result${workers.length !== 1 ? "s" : ""}`}
+                  {t("common.resultsFound", { count: workers.length, lng: isAr ? "ar" : "en" })}
                 </p>
               </div>
 
