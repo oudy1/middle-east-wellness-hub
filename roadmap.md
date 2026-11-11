@@ -24,3 +24,5 @@
 - [x] AI Assistant: chatbot server update deployed (approved): synced links, provider/researcher forms, shorter answers, 3 safety replies, past convention, official sources, 20s timeout, no error leaks. 29/29 questions pass.
 - [ ] AI Assistant (Batch 3, not started): New conversation button, merged search list, grouped search results.
 - [x] Volunteer list: CSV export fallback on /admin/volunteers (read on the device only, not stored).
+- [ ] Modernization brief (3.0, cut off at item 19 of 26): research the 19 listed GitHub projects (README, license, upkeep) and write a short findings report. Items 20-26 + the rest of the brief: waiting on user to paste them.
+- [ ] Modernization: chatbot New conversation button; typo-tolerant shared search (EN/AR); grouped search results.
