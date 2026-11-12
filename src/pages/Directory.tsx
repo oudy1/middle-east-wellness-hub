@@ -22,7 +22,6 @@ import {
   Globe,
   MapPin,
   MessageCircle,
-  UserCheck,
   Video,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
