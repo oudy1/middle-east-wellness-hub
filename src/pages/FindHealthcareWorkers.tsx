@@ -38,6 +38,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { SEOHead } from "@/components/SEOHead";
+import { ListingTrust, DirectoryDisclaimer } from "@/components/directory/ListingTrust";
+import { PUBLIC_WORKER_COLUMNS, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
 
 const PROVINCES = [
   { value: "ON", label_en: "Ontario", label_ar: "أونتاريو" },
@@ -79,24 +81,7 @@ const PROVIDER_TYPES = [
   { value: "Social Worker", label_en: "Social Worker", label_ar: "أخصائي اجتماعي" },
 ];
 
-interface HealthcareWorker {
-  id: string;
-  full_name: string;
-  provider_type: string;
-  specialty: string | null;
-  languages: string[] | null;
-  city: string;
-  province: string;
-  clinic_name: string | null;
-  phone: string | null;
-  email: string | null;
-  website: string | null;
-  address: string | null;
-  accepting_new_patients: boolean | null;
-  virtual_available: boolean | null;
-  notes: string | null;
-  verified: boolean | null;
-}
+type HealthcareWorker = PublicHealthcareWorker;
 
 const FindHealthcareWorkers = () => {
   const { language, t } = useLanguage();
@@ -159,7 +144,8 @@ const FindHealthcareWorkers = () => {
     try {
       let query = supabase
         .from("healthcare_workers")
-        .select("*")
+        .select(PUBLIC_WORKER_COLUMNS)
+        .eq("status", "published")
         .ilike("city", `%${cityParam.trim()}%`)
         .eq("province", provinceParam);
 
@@ -207,7 +193,8 @@ const FindHealthcareWorkers = () => {
     try {
       let query = supabase
         .from("healthcare_workers")
-        .select("*")
+        .select(PUBLIC_WORKER_COLUMNS)
+        .eq("status", "published")
         .ilike("city", `%${city.trim()}%`)
         .eq("province", province);
 
@@ -478,6 +465,7 @@ const FindHealthcareWorkers = () => {
                 </p>
               </div>
 
+              {workers.length > 0 && <DirectoryDisclaimer />}
               {workers.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {workers.map((worker) => (
@@ -546,16 +534,6 @@ const FindHealthcareWorkers = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-2 mt-4">
-                          {worker.verified ? (
-                            <span className="inline-flex items-center gap-1 text-xs bg-healthTeal/10 text-healthTeal px-2 py-1 rounded-full">
-                              <UserCheck className="h-3 w-3" />
-                              {isAr ? "تم التحقق من قبل شمس" : "Verified by SHAMS"}
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-1 text-xs bg-amber-100 text-amber-900 px-2 py-1 rounded-full">
-                              {isAr ? "مُدرج ذاتيًا، لم يتم التحقق بعد" : "Self-listed, not yet verified"}
-                            </span>
-                          )}
                           {worker.accepting_new_patients && (
                             <span className="inline-flex items-center gap-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
                               <UserCheck className="h-3 w-3" />
@@ -575,6 +553,7 @@ const FindHealthcareWorkers = () => {
                             {worker.notes}
                           </p>
                         )}
+                        <ListingTrust worker={worker} />
                       </CardContent>
                     </Card>
                   ))}

@@ -28,6 +28,8 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
+import { ListingTrust, DirectoryDisclaimer } from "@/components/directory/ListingTrust";
+import { PUBLIC_WORKER_COLUMNS, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
 
 // Fix Leaflet's default marker icons (broken by bundlers)
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -178,23 +180,7 @@ const PROVINCE_COORDS: Record<string, [number, number]> = {
   NU: [70.3, -83.1],
 };
 
-interface HealthcareWorker {
-  id: string;
-  full_name: string;
-  provider_type: string;
-  specialty: string | null;
-  languages: string[] | null;
-  city: string;
-  province: string;
-  clinic_name: string | null;
-  phone: string | null;
-  email: string | null;
-  website: string | null;
-  address: string | null;
-  accepting_new_patients: boolean | null;
-  virtual_available: boolean | null;
-  verified: boolean | null;
-}
+type HealthcareWorker = PublicHealthcareWorker;
 
 type CoordMap = Record<string, [number, number]>;
 
@@ -224,7 +210,8 @@ const Directory = () => {
       try {
         const { data, error } = await supabase
           .from("healthcare_workers")
-          .select("*")
+          .select(PUBLIC_WORKER_COLUMNS)
+          .eq("status", "published")
           .order("province")
           .order("city")
           .order("full_name");
@@ -442,6 +429,7 @@ const Directory = () => {
                 <p className="text-muted-foreground mb-4">
                   {t("directory.providerCount", { count: filtered.length, lng: isAr ? "ar" : "en" })}
                 </p>
+                {filtered.length > 0 && <DirectoryDisclaimer />}
                 {filtered.length === 0 ? (
                   <Card>
                     <CardContent className="p-8 text-center text-muted-foreground">
@@ -513,16 +501,6 @@ const Directory = () => {
                             )}
                           </div>
                           <div className="flex flex-wrap gap-2 mt-4">
-                            {worker.verified ? (
-                              <span className="inline-flex items-center gap-1 text-xs bg-healthTeal/10 text-healthTeal px-2 py-1 rounded-full">
-                                <UserCheck className="h-3 w-3" />
-                                {isAr ? "موثق من شمس" : "Verified by SHAMS"}
-                              </span>
-                            ) : (
-                              <span className="inline-flex items-center gap-1 text-xs bg-amber-500/10 text-amber-700 dark:text-amber-400 px-2 py-1 rounded-full">
-                                {isAr ? "مسجل ذاتياً، غير موثق بعد" : "Self-listed, not yet verified"}
-                              </span>
-                            )}
                             {worker.accepting_new_patients && (
                               <span className="text-xs bg-healthGold/10 text-healthDarkBlue dark:text-healthGold px-2 py-1 rounded-full">
                                 {isAr ? "يقبل مرضى جدد" : "Accepting new patients"}
@@ -535,6 +513,7 @@ const Directory = () => {
                               </span>
                             )}
                           </div>
+                          <ListingTrust worker={worker} />
                         </CardContent>
                       </Card>
                     ))}
