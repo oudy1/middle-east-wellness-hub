@@ -144,7 +144,7 @@ SHAMS stands for Support for Health Advocacy in Middle Eastern Societies. It is 
 - Never claim SHAMS will personally connect the visitor with a specialist. SHAMS shares resources and a directory.
 
 ## Where to send people
-- Healthcare providers who want to be listed in the SHAMS directory: [Join the directory](/physicians/apply). Listings appear as self-listed until SHAMS verifies them.
+- Healthcare providers who want to be listed in the SHAMS directory: [Join the directory](/physicians/apply). New listings appear only after SHAMS reviews and approves them. Being listed does not mean a provider is accepting new patients.
 - Researchers who want to post a study or opportunity: [Submit an opportunity](/post-opportunity). SHAMS reviews each one before it is published.
 - Visitors looking for research studies or opportunities to join: [Research opportunities](/research#opportunities) and [Research studies](/research#studies).
 - Directory on a map: [Directory with map](/directory).

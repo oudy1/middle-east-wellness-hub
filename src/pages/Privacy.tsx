@@ -31,7 +31,7 @@ const content: Record<"en" | "ar", { title: string; updated: string; intro: stri
         title: "Terms of use",
         body: [
           "Health information on this site is for education only. It does not replace advice from a doctor, nurse or other qualified professional. In an emergency, call 911. For a mental health crisis, call or text 988.",
-          "The healthcare directory lists providers as a convenience. Listings marked \"self-listed\" have not been verified by SHAMS. Always confirm details directly with the provider.",
+          "The healthcare directory lists providers as a convenience. New listings appear only after SHAMS reviews them, and being listed does not mean a provider is available or accepting new patients. Always confirm details directly with the provider.",
           "Links to other websites are provided for convenience. SHAMS is not responsible for their content.",
           "Please do not submit false, offensive or promotional content through our forms. We may remove any submission.",
         ],
@@ -70,7 +70,7 @@ const content: Record<"en" | "ar", { title: string; updated: string; intro: stri
         title: "شروط الاستخدام",
         body: [
           "المعلومات الصحية في هذا الموقع للتثقيف فقط، ولا تغني عن استشارة الطبيب أو الممرض أو أي مختص مؤهل. في حالات الطوارئ اتصل بالرقم 911. وفي أزمات الصحة النفسية اتصل أو أرسل رسالة إلى 988.",
-          "يعرض دليل الرعاية الصحية مقدمي الرعاية للتسهيل فقط. القوائم المعلَّمة بأنها \"مُدرجة ذاتيًا\" لم تتحقق منها شمس. تأكّد دائمًا من التفاصيل مباشرة مع مقدم الرعاية.",
+          "يعرض دليل الرعاية الصحية مقدمي الرعاية للتسهيل فقط. لا تظهر القوائم الجديدة إلا بعد أن تراجعها شمس، ووجود مقدم الرعاية في الدليل لا يعني أنه متاح أو يقبل مرضى جددًا. تأكّد دائمًا من التفاصيل مباشرة مع مقدم الرعاية.",
           "الروابط إلى مواقع أخرى مقدّمة للتسهيل، وشمس غير مسؤولة عن محتواها.",
           "يرجى عدم إرسال محتوى كاذب أو مسيء أو ترويجي عبر نماذجنا. يجوز لنا حذف أي طلب.",
         ],
