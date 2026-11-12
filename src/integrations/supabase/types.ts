@@ -186,6 +186,75 @@ export type Database = {
           },
         ]
       }
+      healthcare_worker_history: {
+        Row: {
+          action: string
+          changed_at: string
+          changed_by: string | null
+          changed_fields: string[] | null
+          details: Json | null
+          id: string
+          new_status: string | null
+          old_status: string | null
+          worker_id: string
+        }
+        Insert: {
+          action: string
+          changed_at?: string
+          changed_by?: string | null
+          changed_fields?: string[] | null
+          details?: Json | null
+          id?: string
+          new_status?: string | null
+          old_status?: string | null
+          worker_id: string
+        }
+        Update: {
+          action?: string
+          changed_at?: string
+          changed_by?: string | null
+          changed_fields?: string[] | null
+          details?: Json | null
+          id?: string
+          new_status?: string | null
+          old_status?: string | null
+          worker_id?: string
+        }
+        Relationships: []
+      }
+      healthcare_worker_reviews: {
+        Row: {
+          applicant_notes: string | null
+          reverify_reason: string | null
+          review_notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          submitted_by_email: string | null
+          updated_at: string
+          worker_id: string
+        }
+        Insert: {
+          applicant_notes?: string | null
+          reverify_reason?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          submitted_by_email?: string | null
+          updated_at?: string
+          worker_id: string
+        }
+        Update: {
+          applicant_notes?: string | null
+          reverify_reason?: string | null
+          review_notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          submitted_by_email?: string | null
+          updated_at?: string
+          worker_id?: string
+        }
+        Relationships: []
+      }
       healthcare_workers: {
         Row: {
           accepting_new_patients: boolean | null
@@ -198,12 +267,16 @@ export type Database = {
           id: string
           languages: string[] | null
           last_verified_at: string | null
+          needs_reverification: boolean
           notes: string | null
           phone: string | null
           provider_type: string
           province: string
+          published_at: string | null
           source: string | null
           specialty: string | null
+          status: string
+          status_changed_at: string
           submitted_by_email: string | null
           verified: boolean
           virtual_available: boolean | null
@@ -220,12 +293,16 @@ export type Database = {
           id?: string
           languages?: string[] | null
           last_verified_at?: string | null
+          needs_reverification?: boolean
           notes?: string | null
           phone?: string | null
           provider_type?: string
           province: string
+          published_at?: string | null
           source?: string | null
           specialty?: string | null
+          status?: string
+          status_changed_at?: string
           submitted_by_email?: string | null
           verified?: boolean
           virtual_available?: boolean | null
@@ -242,12 +319,16 @@ export type Database = {
           id?: string
           languages?: string[] | null
           last_verified_at?: string | null
+          needs_reverification?: boolean
           notes?: string | null
           phone?: string | null
           provider_type?: string
           province?: string
+          published_at?: string | null
           source?: string | null
           specialty?: string | null
+          status?: string
+          status_changed_at?: string
           submitted_by_email?: string | null
           verified?: boolean
           virtual_available?: boolean | null
@@ -441,7 +522,7 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      is_app_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

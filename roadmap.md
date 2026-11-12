@@ -30,3 +30,10 @@
 - [ ] Modernization brief items 20-26 and its task list: waiting on user to paste the missing part.
 - [x] Translations moved to i18next (plural forms, missing-translation checks); Support Us page translated to Arabic; EN/AR pages re-tested.
 - [x] Modernization: chatbot New conversation, Stop, Try again; one shared search list with Arabic spelling + typo tolerance, grouped/highlighted results, arrow keys.
+
+## Modernization Phase 2 brief (uploaded Nov 12)
+- [ ] P0 Batch A: research GitHub refs 20-26 (report only, no new installs unless needed).
+- [ ] P0 Batch A: doctor listing approval workflow in the database (statuses, admin-only approval, reviewer + history, re-verification flag, no public duplicates, private applicant details).
+- [ ] P0 Batch A: admin review page for listings; Report incorrect information link + "listing does not guarantee availability" note on directory pages.
+- [ ] P0 Batch A: tests proving unapproved listings cannot be read or self-published through the public API.
+- [ ] Later batches (need go-ahead per brief): guided healthcare navigation, resource finder filters, glossary review status, webinar library filters, programs status, research tracker expiry, Get Involved hub, FAQ, page feedback, homepage reorder, chatbot intent/sources, 60-scenario test suite, privacy-conscious error monitoring.
