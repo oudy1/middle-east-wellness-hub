@@ -187,6 +187,9 @@ const AdminOpportunities = () => {
             </p>
           </div>
           <div className="flex gap-2">
+            <Button variant="outline" onClick={() => navigate("/admin/healthcare-workers")}>
+              Directory listings
+            </Button>
             <Button variant="outline" onClick={() => navigate("/admin/faq-votes")}>
               FAQ analytics
             </Button>
