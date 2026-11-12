@@ -523,5 +523,10 @@
   "supportUs.volunteer.title": "Volunteer Your Services",
   "supportUs.volunteer.description": "Share your expertise as a healthcare professional, researcher, or community leader to help us achieve our mission of improving health outcomes.",
   "supportUs.workTogetherTitle": "Let's Work Together",
-  "supportUs.workTogetherBody": "Please connect with us using the form below and we'll respond promptly. Thank you for your interest in supporting SHAMS. We look forward to working together towards a brighter future!"
+  "supportUs.workTogetherBody": "Please connect with us using the form below and we'll respond promptly. Thank you for your interest in supporting SHAMS. We look forward to working together towards a brighter future!",
+  "directory.disclaimer": "Being listed does not mean a provider is available or accepting new patients. Please call the office to confirm before you visit.",
+  "directory.reportIncorrect": "Report incorrect information",
+  "directory.reportIncorrectLabel": "Report incorrect information for {{name}} by email",
+  "directory.verifiedBySHAMS": "Verified by SHAMS",
+  "directory.lastChecked": "Last checked {{date}}"
 }

@@ -216,7 +216,7 @@ const PhysicianApplicationForm = () => {
               `Newsletter: ${fd.signUpForNews ? "yes" : "no"}`,
               notes,
               "",
-              "Saved to the directory as unverified. Verify it in the admin area before it shows as Verified by SHAMS.",
+              "Saved as Pending review. It stays hidden from the public until an admin publishes it at /admin/healthcare-workers.",
             ].join("\n"),
           },
         });

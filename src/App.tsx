@@ -39,6 +39,7 @@ const ResetPassword = lazyWithRetry(() => import("@/pages/ResetPassword"));
 const AdminFaqVotes = lazyWithRetry(() => import("@/pages/AdminFaqVotes"));
 const AdminOpportunities = lazyWithRetry(() => import("@/pages/AdminOpportunities"));
 const AdminVolunteers = lazyWithRetry(() => import("@/pages/AdminVolunteers"));
+const AdminHealthcareWorkers = lazyWithRetry(() => import("@/pages/AdminHealthcareWorkers"));
 const PostOpportunity = lazyWithRetry(() => import("@/pages/PostOpportunity"));
 const NotFound = lazyWithRetry(() => import("@/pages/NotFound"));
 
@@ -90,6 +91,7 @@ function App() {
             <Route path="/admin/faq-votes" element={<AdminFaqVotes />} />
             <Route path="/admin/opportunities" element={<AdminOpportunities />} />
             <Route path="/admin/volunteers" element={<AdminVolunteers />} />
+            <Route path="/admin/healthcare-workers" element={<AdminHealthcareWorkers />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
