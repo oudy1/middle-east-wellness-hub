@@ -7,8 +7,10 @@ import { isPublished } from "./contentStatus";
 type Lang = "en" | "ar";
 
 export type ResearcherDetail =
-  | { type: "text" | "note"; en: string; ar: string }
-  | { type: "list" | "chips"; en: string[]; ar: string[] }
+  | { type: "text"; en: string; ar: string }
+  | { type: "note"; en: string; ar: string }
+  | { type: "list"; en: string[]; ar: string[] }
+  | { type: "chips"; en: string[]; ar: string[] }
   | { type: "facts"; items: { label_en: string; label_ar: string; value_en: string; value_ar: string }[] };
 
 export interface Researcher {
