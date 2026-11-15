@@ -46,9 +46,6 @@ const Webinars = () => {
               </p>
             </div>
             
-            {/* Women's Health Slides Viewer */}
-            <WebinarSlidesViewer />
-
             {/* Webinar Cards */}
             {webinars.map((webinar) => (
               <div key={webinar.id} id={`webinar-${webinar.id}`} className="max-w-5xl mx-auto mb-16 scroll-mt-24">
@@ -79,6 +76,8 @@ const Webinars = () => {
                     {/* YouTube Embed - only show if youtubeId exists */}
                     {webinar.youtubeId ? (
                       <YouTubePlayer videoId={webinar.youtubeId} title={webinar[webinarLang].title} lang={webinarLang} />
+                    ) : webinar.id === "womens-health" ? (
+                      <WebinarSlidesViewer embedded />
                     ) : null}
 
                     {/* Webinar Details */}

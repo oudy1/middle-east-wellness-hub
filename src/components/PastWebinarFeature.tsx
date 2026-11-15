@@ -56,24 +56,24 @@ const PastWebinarFeature = () => {
     <section
       aria-labelledby="past-webinar-heading"
       dir={isAr ? "rtl" : "ltr"}
-      className={`py-8 md:py-10 ${isAr ? "font-cairo text-right" : ""}`}
+      className={`py-6 md:py-8 ${isAr ? "font-cairo text-right" : ""}`}
     >
       <div className="container mx-auto px-4 max-w-5xl">
-        <h2 id="past-webinar-heading" className="text-2xl md:text-3xl font-bold text-healthDarkBlue mb-4">
+        <h2 id="past-webinar-heading" className="text-xl md:text-2xl font-bold text-healthDarkBlue mb-3">
           {c.section}
         </h2>
-        <div className="bg-card rounded-xl shadow-md overflow-hidden grid md:grid-cols-[220px_1fr] gap-0">
+        <div className="bg-card rounded-xl shadow-md overflow-hidden grid md:grid-cols-[180px_1fr] gap-0">
           <button
             type="button"
             onClick={() => setOpen(true)}
             aria-label={c.alt}
             className="bg-muted flex items-center justify-center p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healthTeal"
           >
-            <img src={poster} alt="" loading="lazy" decoding="async" width={720} height={isAr ? 960 : 932} className="max-h-64 w-auto h-auto object-contain rounded transition-transform duration-200 motion-safe:md:hover:scale-[1.02]" />
+            <img src={poster} alt="" loading="lazy" decoding="async" width={720} height={isAr ? 960 : 932} className="max-h-44 md:max-h-52 w-auto h-auto object-contain rounded transition-transform duration-200 motion-safe:md:hover:scale-[1.02]" />
           </button>
-          <div className="p-5 md:p-6">
+          <div className="p-4 md:p-5">
             <Badge className="bg-healthTeal text-primary-foreground mb-2">{c.label}</Badge>
-            <h3 className="text-xl md:text-2xl font-bold text-healthDarkBlue mb-2">{c.title}</h3>
+            <h3 className="text-lg md:text-xl font-bold text-healthDarkBlue mb-2">{c.title}</h3>
             <p className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
               <Calendar className="h-4 w-4" aria-hidden="true" />
               {c.date}

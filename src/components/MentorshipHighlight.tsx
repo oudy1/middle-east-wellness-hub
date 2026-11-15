@@ -22,24 +22,24 @@ const MentorshipHighlight = () => {
     : "The SHAMS Mentorship Program connects students and early-career individuals from Middle Eastern and North African backgrounds with healthcare professionals across Canada for guidance, mentorship, and career support.";
 
   return (
-    <section className={`py-12 bg-background relative z-10 ${isRTL ? "rtl" : "ltr"}`} dir={isRTL ? "rtl" : "ltr"}>
+    <section className={`py-8 md:py-10 bg-background relative z-10 ${isRTL ? "rtl" : "ltr"}`} dir={isRTL ? "rtl" : "ltr"}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-center">
           <div className="order-1 md:order-2 flex justify-center">
             <img
               src={posterAsset.url}
               alt={title}
               loading="lazy"
-              className="rounded-xl shadow-lg max-w-full w-full sm:max-w-sm h-auto object-contain"
+              className="rounded-xl shadow-lg w-auto max-h-56 sm:max-h-72 md:max-h-80 h-auto max-w-full object-contain"
             />
           </div>
           <div className="order-2 md:order-1">
             <Badge variant="secondary" className="mb-3">
               {isAr ? "برنامج" : "Program"}
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">{title}</h2>
-            <p className="text-lg text-muted-foreground mb-6">{subtitle}</p>
-            <p className="text-muted-foreground mb-6 leading-relaxed">{desc}</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">{title}</h2>
+            <p className="text-base sm:text-lg text-muted-foreground mb-3">{subtitle}</p>
+            <p className="text-muted-foreground mb-5 leading-relaxed">{desc}</p>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg" className="gap-2">
                 <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
