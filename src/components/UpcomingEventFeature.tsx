@@ -18,8 +18,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { useLanguage } from "@/contexts/LanguageContext";
-import posterEn from "@/assets/know-your-rights-en.png.asset.json";
-import posterAr from "@/assets/know-your-rights-ar.png.asset.json";
+import posterEn from "@/assets/know-your-rights-en.webp.asset.json";
+import posterAr from "@/assets/know-your-rights-ar.webp.asset.json";
 
 export const REGISTER_URL = "https://forms.gle/XgzS5fjHRYmHN2k16";
 // End of Oct 21, 2026 in Toronto (EDT, UTC-4)

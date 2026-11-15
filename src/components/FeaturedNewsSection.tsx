@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper, ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import kyrEn from "@/assets/know-your-rights-en.png.asset.json";
-import kyrAr from "@/assets/know-your-rights-ar.png.asset.json";
+import kyrEn from "@/assets/know-your-rights-en.webp.asset.json";
+import kyrAr from "@/assets/know-your-rights-ar.webp.asset.json";
 import mhcPoster from "@/assets/mhc-poster.png.asset.json";
 import mhcPanelists from "@/assets/mhc-panelists.png.asset.json";
 

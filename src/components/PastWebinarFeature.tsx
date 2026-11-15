@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isEventUpcoming } from "@/components/UpcomingEventFeature";
-import posterEn from "@/assets/know-your-rights-en.png.asset.json";
-import posterAr from "@/assets/know-your-rights-ar.png.asset.json";
+import posterEn from "@/assets/know-your-rights-en.webp.asset.json";
+import posterAr from "@/assets/know-your-rights-ar.webp.asset.json";
 
 const YT_ID = "_n4qjMmzMGw";
 const YT_URL = `https://youtu.be/${YT_ID}`;
@@ -67,7 +67,7 @@ const PastWebinarFeature = () => {
             aria-label={c.alt}
             className="bg-muted flex items-center justify-center p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healthTeal"
           >
-            <img src={poster} alt="" loading="lazy" className="max-h-64 w-auto object-contain rounded" />
+            <img src={poster} alt="" loading="lazy" decoding="async" width={720} height={isAr ? 960 : 932} className="max-h-64 w-auto h-auto aspect-[3/4] object-contain rounded transition-transform duration-200 motion-safe:md:hover:scale-[1.02]" />
           </button>
           <div className="p-5 md:p-6">
             <Badge className="bg-healthTeal text-primary-foreground mb-2">{c.label}</Badge>
