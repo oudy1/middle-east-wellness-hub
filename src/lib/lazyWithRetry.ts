@@ -23,3 +23,17 @@ export function lazyWithRetry<T extends ComponentType<any>>(load: () => Promise<
     }
   });
 }
+
+/**
+ * Start a download early (on idle or hover) without ever logging an error.
+ * After a new version is published the old file may be gone; that is fine
+ * here, because the real load goes through lazyWithRetry, which refreshes the
+ * page once to pick up the new files.
+ */
+export function preloadQuietly(load: () => Promise<unknown>): void {
+  try {
+    load().catch(() => {});
+  } catch {
+    // ignore: the real load reports problems
+  }
+}

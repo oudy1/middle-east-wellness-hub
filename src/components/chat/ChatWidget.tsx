@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { lazyWithRetry } from '@/lib/lazyWithRetry';
+import { lazyWithRetry, preloadQuietly } from '@/lib/lazyWithRetry';
 
 const loadChatWindow = () => import('./ChatWindow');
 const ChatWindow = lazyWithRetry(loadChatWindow);
@@ -28,8 +28,8 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
     const timer = window.setTimeout(() => {
-      if (w.requestIdleCallback) w.requestIdleCallback(() => void loadChatWindow());
-      else void loadChatWindow();
+      if (w.requestIdleCallback) w.requestIdleCallback(() => preloadQuietly(loadChatWindow));
+      else preloadQuietly(loadChatWindow);
     }, 5000);
     return () => window.clearTimeout(timer);
   }, []);
@@ -38,7 +38,7 @@ const ChatWidget: React.FC = () => {
     <Button
       type="button"
       onClick={() => setActivated(true)}
-      onPointerEnter={() => void loadChatWindow()}
+      onPointerEnter={() => preloadQuietly(loadChatWindow)}
       className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-healthGold hover:bg-healthGold/90 shadow-lg touch-manipulation active:scale-95"
       style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
       aria-label={t('chatbot.openChat')}
