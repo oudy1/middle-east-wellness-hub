@@ -109,10 +109,6 @@ const Index = () => {
         </LazySection>
         <LazySection>
           <Suspense fallback={<SectionFallback />}>
-          </Suspense>
-        </LazySection>
-        <LazySection>
-          <Suspense fallback={<SectionFallback />}>
             <TopicOfTheWeekSection />
             <ResearchTeaserSection />
             <FeaturedNewsSection />
