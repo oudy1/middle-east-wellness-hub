@@ -95,12 +95,12 @@ const HeroSection = forwardRef<HTMLElement>((_, ref) => {
             </Button>
           </div>
           <nav aria-label={c.quickLabel} data-testid="hero-quick-links" className="mt-4 rise-in" style={{ animationDelay: "500ms" }}>
-            <ul className="flex flex-wrap gap-2 justify-center md:justify-start">
+            <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center md:justify-start">
               {HERO_QUICK_KEYS.map((key, i) => (
                 <li key={key}>
                   <Link
                     to={homeRoute(key)}
-                    className="inline-flex items-center min-h-[44px] px-3.5 rounded-full border border-sun-blue/25 bg-sun-cream/80 text-sm font-medium text-sun-blue hover:bg-sun-cream hover:border-sun-orange/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange"
+                    className="flex h-full w-full items-center justify-center text-center leading-tight min-h-[44px] px-3 py-1.5 rounded-full sm:w-auto border border-sun-blue/25 bg-sun-cream/80 text-sm font-medium text-sun-blue hover:bg-sun-cream hover:border-sun-orange/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange"
                   >
                     {c.quick[i]}
                   </Link>
