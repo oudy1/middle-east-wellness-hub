@@ -1,0 +1,319 @@
+[
+  {
+    "id": "redab",
+    "status": "published",
+    "name_en": "Dr. Redab Al-Janaideh, PhD",
+    "name_ar": "الدكتورة رداب الجنايدة، دكتوراه",
+    "role_en": "Researcher, Educator, and Consultant",
+    "role_ar": "باحثة ومربية ومستشارة",
+    "org_en": "YRDSB & University of Toronto",
+    "org_ar": "مجلس مدارس منطقة يورك وجامعة تورنتو",
+    "bio_en": "Researcher, educator, and consultant specializing in developmental psychology, educational psychology, mental health, and equity. Her work focuses on improving the health, well-being, learning, and inclusion of children, youth, families, and underserved communities.",
+    "bio_ar": "باحثة ومربية ومستشارة متخصصة في علم النفس النمائي، وعلم النفس التربوي، والصحة النفسية، والإنصاف. يركز عملها على تحسين صحة ورفاه وتعلّم واندماج الأطفال والشباب والعائلات والمجتمعات غير المخدومة بشكل كافٍ من خلال البحث والتعليم والشراكات المجتمعية.",
+    "tags_ar": [
+      "علم النفس النمائي",
+      "علم النفس التربوي",
+      "رفاه الأطفال والشباب"
+    ],
+    "tags_en": [
+      "Developmental Psychology",
+      "Educational Psychology",
+      "Child & Youth Well-Being"
+    ],
+    "links": [
+      {
+        "label_en": "LinkedIn",
+        "label_ar": "LinkedIn",
+        "href": "https://www.linkedin.com/in/redab-al-janaideh-phd-ece-285bb9256"
+      },
+      {
+        "label_en": "Google Scholar",
+        "label_ar": "Google Scholar",
+        "href": "https://scholar.google.ca/citations?user=7hPvP4EAAAAJ&hl=en"
+      }
+    ],
+    "accent": "healthDarkBlue",
+    "icon": "graduation",
+    "details": [
+      {
+        "type": "text",
+        "en": "She has extensive experience leading interdisciplinary research and program evaluation with schools and community partners, with particular expertise in supporting minority, refugee, and newcomer communities.",
+        "ar": "لديها خبرة واسعة في قيادة الأبحاث متعددة التخصصات وتقييم البرامج بالتعاون مع المدارس والشركاء المجتمعيين، مع اهتمام خاص بدعم الأقليات واللاجئين والوافدين الجدد."
+      },
+      {
+        "type": "text",
+        "en": "🏛️ Professional Roles:",
+        "ar": "🏛️ الأدوار المهنية:"
+      },
+      {
+        "type": "list",
+        "en": [
+          "Research Project Manager, Centre for Leadership and Learning, York Region District School Board",
+          "Lecturer, University of Toronto",
+          "Founder and Principal Consultant, Elevate Learning and Leadership",
+          "Vice President, Association of Educational Researchers of Ontario (AERO)"
+        ],
+        "ar": [
+          "مديرة مشاريع بحثية، مركز القيادة والتعلم، مجلس مدارس منطقة يورك",
+          "محاضرة، جامعة تورنتو",
+          "مؤسِّسة ومستشارة رئيسية، Elevate Learning and Leadership",
+          "نائبة رئيس جمعية باحثي التعليم في أونتاريو (AERO)"
+        ]
+      },
+      {
+        "type": "text",
+        "en": "🔬 Areas of Expertise:",
+        "ar": "🔬 مجالات الخبرة:"
+      },
+      {
+        "type": "chips",
+        "en": [
+          "Developmental Psychology",
+          "Educational Psychology",
+          "Child and Youth Well-Being",
+          "Refugee and Newcomer Communities",
+          "Minority and Underserved Communities",
+          "Equity, Diversity, Inclusion, and Belonging",
+          "Community-Engaged Research",
+          "Program Evaluation",
+          "Knowledge Mobilization"
+        ],
+        "ar": [
+          "علم النفس النمائي",
+          "علم النفس التربوي",
+          "رفاه الأطفال والشباب",
+          "اللاجئون والوافدون الجدد",
+          "المجتمعات غير المخدومة بشكل كافٍ",
+          "الإنصاف والتنوع والاندماج والانتماء",
+          "البحث المجتمعي",
+          "تقييم البرامج",
+          "تعبئة المعرفة"
+        ]
+      },
+      {
+        "type": "note",
+        "en": "Personal website: coming soon",
+        "ar": "الموقع الشخصي: قريباً"
+      }
+    ]
+  },
+  {
+    "id": "chavarria",
+    "status": "published",
+    "name_en": "Jesus (Jesse) Chavarria, PhD",
+    "name_ar": "د. خيسوس (جيسي) تشافارّيا",
+    "role_en": "Assistant Professor, Clinical Psychology",
+    "role_ar": "أستاذ مساعد، علم النفس السريري",
+    "org_en": "Western University",
+    "org_ar": "جامعة ويسترن",
+    "bio_en": "Studies risk factors and mechanisms contributing to substance use disorders. Uses clinical and quantitative methods to identify targets for intervention.",
+    "bio_ar": "يدرس العوامل والآليات التي تسهم في اضطرابات تعاطي المواد. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل.",
+    "email": "jchavarr@uwo.ca",
+    "location_en": "London, Ontario, Canada",
+    "location_ar": "لندن، أونتاريو، كندا",
+    "tags_ar": [
+      "تعاطي المواد",
+      "الإدمان",
+      "آليات الخطر"
+    ],
+    "tags_en": [
+      "Substance Use",
+      "Addiction",
+      "Risk Mechanisms"
+    ],
+    "accent": "healthTeal",
+    "icon": "graduation",
+    "details": [
+      {
+        "type": "text",
+        "en": "🏛️ Affiliations:",
+        "ar": "🏛️ الانتماءات:"
+      },
+      {
+        "type": "text",
+        "en": "Department of Psychology, Western University",
+        "ar": "قسم علم النفس، جامعة ويسترن"
+      },
+      {
+        "type": "text",
+        "en": "Institute for Mental Health Policy Research, CAMH",
+        "ar": "معهد أبحاث سياسات الصحة النفسية، CAMH"
+      }
+    ]
+  },
+  {
+    "id": "menna",
+    "status": "published",
+    "name_en": "Menna Komeiha",
+    "name_ar": "منة قميحة",
+    "role_en": "Researcher",
+    "role_ar": "باحثة",
+    "org_en": "Health Equity Research",
+    "org_ar": "بحث المساواة الصحية",
+    "bio_en": "Health equity researcher specializing in dentistry and applied health sciences. Focuses on digital health and patient-centered care.",
+    "bio_ar": "باحثة في المساواة الصحية متخصصة في طب الأسنان والعلوم الصحية التطبيقية.",
+    "email": "komeiham@mcmaster.ca",
+    "tags_en": [],
+    "tags_ar": [],
+    "accent": "healthTeal",
+    "icon": "flask",
+    "details": [
+      {
+        "type": "facts",
+        "items": [
+          {
+            "label_en": "Experience",
+            "label_ar": "الخبرة",
+            "value_en": "4 years",
+            "value_ar": "٤ سنوات"
+          },
+          {
+            "label_en": "Languages",
+            "label_ar": "اللغات",
+            "value_en": "Arabic, English",
+            "value_ar": "العربية، الإنجليزية"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mahmoud",
+    "status": "published",
+    "name_en": "Mahmoud El-Maklizi",
+    "name_ar": "محمود المقلزي",
+    "role_en": "Postdoctoral Fellow",
+    "role_ar": "باحث ما بعد الدكتوراه",
+    "org_en": "TGHRI, UHN",
+    "org_ar": "TGHRI, UHN",
+    "bio_en": "Researcher at Toronto General Hospital Research Institute specializing in immunology. Studies regulatory plasma cells.",
+    "bio_ar": "باحث في معهد أبحاث مستشفى تورونتو العام متخصص في علم المناعة.",
+    "location_en": "Toronto, Ontario",
+    "location_ar": "تورونتو، أونتاريو",
+    "tags_en": [],
+    "tags_ar": [],
+    "accent": "healthPurple",
+    "icon": "flask"
+  },
+  {
+    "id": "delaney",
+    "status": "published",
+    "name_en": "Dr. Delaney Glass",
+    "name_ar": "د. ديلاني غلاس",
+    "role_en": "Assistant Professor",
+    "role_ar": "أستاذ مساعد",
+    "org_en": "University of Toronto",
+    "org_ar": "جامعة تورنتو",
+    "bio_en": "Medical and biocultural anthropologist specializing in adolescent health and Arab diaspora.",
+    "bio_ar": "عالمة أنثروبولوجيا طبية وبيولوجية متخصصة في صحة المراهقين والشتات العربي.",
+    "email": "delaney.glass@utoronto.ca",
+    "tags_ar": [
+      "الأنثروبولوجيا",
+      "الصحة العامة"
+    ],
+    "tags_en": [
+      "Anthropology",
+      "Public Health"
+    ],
+    "accent": "healthDarkBlue",
+    "icon": "graduation"
+  },
+  {
+    "id": "emine",
+    "status": "published",
+    "name_en": "Dr. Emine Fidan Elcioglu",
+    "name_ar": "د. إمين فيدان إلسيوغلو",
+    "role_en": "Associate Professor",
+    "role_ar": "أستاذ مشارك",
+    "org_en": "Sociology, U of T",
+    "org_ar": "علم الاجتماع، جامعة تورنتو",
+    "bio_en": "Sociology professor specializing in immigration politics, race, and ethnicity studies.",
+    "bio_ar": "أستاذ علم الاجتماع متخصص في سياسات الهجرة ودراسات العرق والإثنية.",
+    "tags_en": [],
+    "tags_ar": [],
+    "accent": "healthTeal",
+    "icon": "graduation"
+  },
+  {
+    "id": "rania",
+    "status": "published",
+    "name_en": "Dr. Rania Salem",
+    "name_ar": "د. رانيا سالم",
+    "role_en": "Associate Professor",
+    "role_ar": "أستاذ مشارك",
+    "org_en": "Sociology, U of T",
+    "org_ar": "علم الاجتماع، جامعة تورنتو",
+    "bio_en": "Sociology professor specializing in families, gender, and Middle East studies.",
+    "bio_ar": "أستاذ علم الاجتماع متخصص في الأسرة والنوع الاجتماعي ودراسات الشرق الأوسط.",
+    "tags_ar": [
+      "الأسرة",
+      "النوع الاجتماعي",
+      "الشرق الأوسط"
+    ],
+    "tags_en": [
+      "Families",
+      "Gender",
+      "Middle East"
+    ],
+    "accent": "healthPurple",
+    "icon": "graduation"
+  },
+  {
+    "id": "persram",
+    "status": "published",
+    "name_en": "Dr. Ryan Persram",
+    "name_ar": "د. ريان بيرسرام",
+    "role_en": "Assistant Professor",
+    "role_ar": "أستاذ مساعد",
+    "org_en": "Toronto Metropolitan University",
+    "org_ar": "جامعة تورنتو متروبوليتان",
+    "bio_en": "Developmental psychology researcher studying youth interpersonal relationships and how sibling, peer, and romantic experiences shape adolescent development and mental health.",
+    "bio_ar": "باحث في علم النفس التنموي يدرس العلاقات الشخصية للشباب وكيف تشكل تجارب الأشقاء والأقران والعلاقات العاطفية نمو المراهقين وصحتهم النفسية.",
+    "email": "ryan.persram@torontomu.ca",
+    "tags_ar": [
+      "علم النفس التنموي",
+      "علاقات الشباب"
+    ],
+    "tags_en": [
+      "Developmental Psychology",
+      "Youth Relationships"
+    ],
+    "accent": "healthTeal",
+    "icon": "graduation",
+    "details": [
+      {
+        "type": "text",
+        "en": "🔬 Research Areas:",
+        "ar": "🔬 مجالات البحث:"
+      },
+      {
+        "type": "text",
+        "en": "Developmental psychology, adolescent relationships, sibling relationships, peer relationships, friendships, romantic relationships, psychosocial adjustment",
+        "ar": "علم النفس التنموي، علاقات المراهقين، الأشقاء، الأقران، الصداقات، العلاقات العاطفية، التكيف النفسي الاجتماعي"
+      }
+    ]
+  },
+  {
+    "id": "jason",
+    "status": "published",
+    "name_en": "Jason Chung, M.Sc.",
+    "name_ar": "جيسون تشانغ",
+    "role_en": "PhD Candidate",
+    "role_ar": "طالب دكتوراه",
+    "org_en": "Clinical Science & Psychopathology",
+    "org_ar": "علم النفس الإكلينيكي وعِلم الاعتلال النفسي",
+    "bio_en": "Self-injury, substance use, suicide, and eating pathology, especially among racialized and LGBTQ+ populations.",
+    "bio_ar": "إيذاء النفس، تعاطي المواد، الانتحار، واضطرابات الأكل، مع التركيز على الفئات المُهمَّشة.",
+    "email": "jchun264@uwo.ca",
+    "tags_ar": [
+      "الصحة النفسية",
+      "المساواة"
+    ],
+    "tags_en": [
+      "Mental Health",
+      "Equity"
+    ],
+    "accent": "healthDarkBlue",
+    "icon": "brain"
+  }
+]

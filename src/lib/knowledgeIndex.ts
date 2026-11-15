@@ -10,6 +10,7 @@ import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatb
 import { NEWCOMER_WORKSHOP } from "./newcomerWorkshop";
 import { isPublished } from "./contentStatus";
 import { TEAMS, TEAM_MEMBERS, teamSummary } from "./team";
+import { RESEARCHERS, researcherDescription, researcherKeywords } from "./researchers";
 import { MATCH_POINTS, matchWord, toWords } from "./searchText";
 
 export type KnowledgeCategory =
@@ -145,7 +146,7 @@ const curated: KnowledgeItem[] = [
     description_ar: "تعرف على الباحثين المنتسبين لشمس وأعمالهم.",
     category: "researchers",
     tags: ["researchers", "team"],
-    keywords: ["researcher", "researchers", "team", "affiliated", "باحث", "باحثون"],
+    keywords: ["researcher", "researchers", "affiliated", "باحث", "باحثون", "الباحثون"],
     language: "both",
     url: approvedRoutes.researchers,
   },
@@ -374,8 +375,23 @@ const faqItems: KnowledgeItem[] = (faq as FaqRaw[]).map((f) => ({
   url: approvedRoutes.faq,
 }));
 
+// One entry per affiliated researcher, so a name or topic finds the person.
+const researcherItems: KnowledgeItem[] = RESEARCHERS.map((r) => ({
+  id: `researcher-${r.id}`,
+  title_en: r.name_en,
+  title_ar: r.name_ar,
+  description_en: researcherDescription(r, "en"),
+  description_ar: researcherDescription(r, "ar"),
+  category: "researchers",
+  tags: r.tags_en,
+  keywords: [...researcherKeywords(r), "researcher", "باحث"],
+  language: "both",
+  url: approvedRoutes.researchers,
+}));
+
 export const knowledgeIndex: KnowledgeItem[] = [
   ...curated,
+  ...researcherItems,
   ...studyItems,
   ...webinarItems,
   ...faqItems,
