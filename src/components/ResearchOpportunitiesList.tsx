@@ -25,10 +25,14 @@ const ResearchOpportunitiesList = () => {
   const isAr = language === "ar";
   const [items, setItems] = useState<Opportunity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let active = true;
     const load = async () => {
+      setLoading(true);
+      setFailed(false);
       const { data, error } = await supabase
         .from("opportunities")
         .select(
@@ -40,7 +44,8 @@ const ResearchOpportunitiesList = () => {
         .order("created_at", { ascending: false })
         .limit(30);
       if (!active) return;
-      if (error) console.error("Failed to load opportunities:", error);
+      if (error) console.error("Failed to load opportunities:", error.message);
+      setFailed(!!error);
       setItems((data ?? []) as Opportunity[]);
       setLoading(false);
     };
@@ -48,7 +53,7 @@ const ResearchOpportunitiesList = () => {
     return () => {
       active = false;
     };
-  }, []);
+  }, [attempt]);
 
   const paidLabel = (value: string | null) => {
     if (value === "yes") return isAr ? "مدفوعة" : "Paid";
@@ -68,7 +73,19 @@ const ResearchOpportunitiesList = () => {
     <div className={isAr ? "font-cairo" : ""} dir={isAr ? "rtl" : "ltr"}>
       {loading ? (
         <div className="flex justify-center py-8 text-muted-foreground">
-          <Loader2 className="h-6 w-6 animate-spin" />
+          <Loader2 className="h-6 w-6 animate-spin" aria-hidden="true" />
+          <span className="sr-only">{isAr ? "جارٍ التحميل" : "Loading"}</span>
+        </div>
+      ) : failed ? (
+        <div role="alert" className="text-center mb-6 space-y-3">
+          <p className="text-sm text-muted-foreground">
+            {isAr
+              ? "تعذّر تحميل الفرص البحثية الآن. تحقق من اتصالك وحاول مرة أخرى."
+              : "We couldn't load research opportunities right now. Check your connection and try again."}
+          </p>
+          <Button variant="outline" className="min-h-[44px]" onClick={() => setAttempt((n) => n + 1)}>
+            {isAr ? "حاول مرة أخرى" : "Try again"}
+          </Button>
         </div>
       ) : items.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center mb-6">
