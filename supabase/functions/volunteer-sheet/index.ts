@@ -1,6 +1,12 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
+import { corsHeaders as baseCors } from "npm:@supabase/supabase-js@2/cors";
+
+// The site's client sends x-session-id on every call, so it must be allowed here too
+const corsHeaders = {
+  ...baseCors,
+  "Access-Control-Allow-Headers": `${baseCors["Access-Control-Allow-Headers"]}, x-session-id`,
+};
 import { z } from "npm:zod@3";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/google_sheets/v4";
