@@ -38,15 +38,15 @@ export default function HelpBentoGrid() {
                   style={big ? { background: "linear-gradient(150deg, hsl(var(--sun-blue)), hsl(var(--sun-teal)))" } : undefined}
                 >
                   <span aria-hidden="true" className="pointer-events-none absolute -end-10 -top-10 h-32 w-32 rounded-full bg-sun-gold/20 blur-2xl transition-opacity opacity-60 group-hover:opacity-100" />
-                  <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:rotate-3 ${big ? "bg-sun-gold/20 text-sun-gold" : "bg-sun-peach/60 text-sun-orange"}`}>
-                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  <span className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:rotate-3 md:h-11 md:w-11 ${big ? "bg-sun-gold/20 text-sun-gold" : "bg-sun-peach/60 text-sun-orange"}`}>
+                    <Icon className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                   </span>
-                  <span>
-                    <span className={`flex items-center gap-1 font-semibold ${big ? "text-2xl" : "text-lg"}`}>
+                  <span className="min-w-0 flex-1">
+                    <span className={`flex items-center gap-1 font-semibold ${big ? "text-lg md:text-2xl" : "text-base md:text-lg"}`}>
                       {title}
-                      <ArrowUpRight className="h-4 w-4 opacity-60 rtl:-scale-x-100" aria-hidden="true" />
+                      <ArrowUpRight className="h-4 w-4 shrink-0 opacity-60 rtl:-scale-x-100" aria-hidden="true" />
                     </span>
-                    <span className={`mt-1 block text-sm ${big ? "text-sun-cream/85" : "text-muted-foreground"}`}>{desc}</span>
+                    <span className={`mt-0.5 block text-sm leading-snug line-clamp-2 md:mt-1 ${big ? "text-sun-cream/85" : "text-muted-foreground"}`}>{desc}</span>
                   </span>
                 </Link>
               </li>
