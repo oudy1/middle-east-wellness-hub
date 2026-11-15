@@ -1,5 +1,6 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3.23.8';
+import { createClient } from 'npm:@supabase/supabase-js@2';
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/resend';
 const TO_EMAIL = 'infoprojectshams@gmail.com';
@@ -9,6 +10,11 @@ const BodySchema = z.object({
   email: z.string().trim().email().max(255),
   subject: z.string().trim().min(1).max(200),
   message: z.string().trim().min(1).max(8000),
+  // 'topic_request' = webinar topic form: saved first, then emailed
+  kind: z.enum(['contact', 'topic_request']).optional(),
+  topic: z.string().trim().min(2).max(200).optional(),
+  description: z.string().trim().max(1000).optional(),
+  language: z.enum(['en', 'ar']).optional(),
   // Spam guard fields sent by the site's forms
   website: z.string().max(500).optional(),
   elapsedMs: z.number().int().nonnegative().optional(),
@@ -74,7 +80,7 @@ Deno.serve(async (req) => {
       return json({ error: 'Please check the form fields and try again.' }, 400);
     }
 
-    const { name, email, subject, message, website, elapsedMs } = parsed.data;
+    const { name, email, subject, message, website, elapsedMs, kind, topic, description, language } = parsed.data;
 
     const ip =
       req.headers.get('cf-connecting-ip') ??
@@ -92,7 +98,29 @@ Deno.serve(async (req) => {
     }
 
 
-    const html = `
+    if (kind === 'topic_request') {
+      if (!topic) return json({ error: 'Please check the form fields and try again.' }, 400);
+      const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+      const { error: saveError } = await admin.from('webinar_topic_requests').insert({
+        name, email, topic, description: description || null, language: language ?? 'en',
+      });
+      if (saveError) {
+        console.error('topic request save failed:', saveError.message);
+        return json({ error: 'Could not save your request. Please try again later.' }, 500);
+      }
+    }
+
+    const isTopic = kind === 'topic_request';
+    const html = isTopic ? `
+      <h2>New webinar topic request from the SHAMS website</h2>
+      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Topic:</strong> ${escapeHtml(topic ?? '')}</p>
+      <p><strong>Why it matters:</strong></p>
+      <p style="white-space:pre-wrap">${escapeHtml(description || '(not given)')}</p>
+      <p><strong>Site language:</strong> ${language === 'ar' ? 'Arabic' : 'English'}</p>
+      <p style="color:#666">Saved in the admin area under Topic requests.</p>
+    ` : `
       <h2>New contact form message from the SHAMS website</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
@@ -112,7 +140,7 @@ Deno.serve(async (req) => {
         from: 'SHAMS Website <onboarding@resend.dev>',
         to: [TO_EMAIL],
         reply_to: email,
-        subject: `[SHAMS Contact] ${subject}`,
+        subject: isTopic ? `[SHAMS Topic Request] ${topic}` : `[SHAMS Contact] ${subject}`,
         html,
       }),
     });
@@ -121,6 +149,8 @@ Deno.serve(async (req) => {
       const errorBody = await response.text();
       console.error(`Resend request failed [${response.status}]: ${errorBody}`);
       // Provider details stay in the private logs, never sent to the visitor
+      // A saved topic request is not lost if the email fails; the visitor still gets thanks
+      if (isTopic) return json({ success: true, emailed: false });
       return json({ error: 'Email delivery failed. Please try again later.' }, 502);
     }
 
