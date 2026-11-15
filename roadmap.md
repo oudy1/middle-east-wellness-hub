@@ -57,3 +57,7 @@
 - [x] Programs card shows Upcoming, then Completed (registration closed) after Nov 19; search + chatbot use the same record.
 - [x] QR codes checked: both posters use a different short link (J6Jsy...) that opens the same Google Form as the new link.
 - [ ] Publishing needs user approval.
+
+## Modernization 5.0 brief (uploaded Nov 15, planning only)
+- [x] Plan and assessment written (report in Files); no code changed.
+- [ ] Batch 1 (waiting on approval): saved 60-question chatbot test, quick fixes (chat preload error, youtube-nocookie, reduced motion, long dashes if approved), chat source cards, research study status labels (needs real statuses from user).
