@@ -33,6 +33,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { studies } from "@/lib/studyData";
+import { RESEARCHERS, type ResearcherDetail } from "@/lib/researchers";
 import { useHashScroll } from "@/hooks/useHashScroll";
 
 import StudyCard from "@/components/StudyCard";
@@ -60,6 +61,50 @@ const accentStyles: Record<string, { border: string; borderHover: string; gradFr
     circle: 'from-healthDarkBlue', circleGrad: 'to-healthDarkBlue/70',
     text: 'text-healthDarkBlue', tagBg: 'bg-healthDarkBlue/10',
   },
+};
+
+const RESEARCHER_ICONS = { graduation: GraduationCap, flask: FlaskConical, brain: Brain } as const;
+
+/** "Read more" content for a researcher, drawn from content/researchers.json. */
+const ResearcherDetails = ({ details, accent, isAr }: { details: ResearcherDetail[]; accent: string; isAr: boolean }) => {
+  const s = accentStyles[accent] || accentStyles.healthTeal;
+  return (
+    <div className="space-y-2">
+      {details.map((d, i) => {
+        if (d.type === "text" || d.type === "note") {
+          return <p key={i} className={`text-xs text-muted-foreground ${d.type === "note" ? "italic" : ""}`}>{isAr ? d.ar : d.en}</p>;
+        }
+        if (d.type === "list") {
+          return (
+            <ul key={i} className="space-y-1 text-xs text-muted-foreground">
+              {(isAr ? d.ar : d.en).map((item) => (
+                <li key={item} className="flex items-start gap-1.5"><span className="text-primary">•</span><span>{item}</span></li>
+              ))}
+            </ul>
+          );
+        }
+        if (d.type === "chips") {
+          return (
+            <div key={i} className="flex flex-wrap gap-1">
+              {(isAr ? d.ar : d.en).map((item) => (
+                <span key={item} className={`px-1.5 py-0.5 ${s.tagBg} ${s.text} rounded-full text-[10px]`}>{item}</span>
+              ))}
+            </div>
+          );
+        }
+        return (
+          <div key={i} className="grid grid-cols-2 gap-2">
+            {d.items.map((f) => (
+              <div key={f.label_en}>
+                <p className="text-xs text-muted-foreground">{isAr ? f.label_ar : f.label_en}</p>
+                <p className="text-xs font-semibold">{isAr ? f.value_ar : f.value_en}</p>
+              </div>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 // Reusable Researcher Card Component
@@ -519,23 +564,21 @@ const Research = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 max-w-7xl mx-auto">
-              <ResearcherCard nameEn="Dr. Redab Al-Janaideh, PhD" nameAr="الدكتورة رداب الجنايدة، دكتوراه" roleEn="Researcher, Educator, and Consultant" roleAr="باحثة ومربية ومستشارة" orgEn="YRDSB & University of Toronto" orgAr="مجلس مدارس منطقة يورك وجامعة تورنتو" bioEn="Researcher, educator, and consultant specializing in developmental psychology, educational psychology, mental health, and equity. Her work focuses on improving the health, well-being, learning, and inclusion of children, youth, families, and underserved communities." bioAr="باحثة ومربية ومستشارة متخصصة في علم النفس النمائي، وعلم النفس التربوي، والصحة النفسية، والإنصاف. يركز عملها على تحسين صحة ورفاه وتعلّم واندماج الأطفال والشباب والعائلات والمجتمعات غير المخدومة بشكل كافٍ من خلال البحث والتعليم والشراكات المجتمعية." tags={isAr ? ['علم النفس النمائي', 'علم النفس التربوي', 'رفاه الأطفال والشباب'] : ['Developmental Psychology', 'Educational Psychology', 'Child & Youth Well-Being']} links={[{ labelEn: 'LinkedIn', labelAr: 'LinkedIn', href: 'https://www.linkedin.com/in/redab-al-janaideh-phd-ece-285bb9256' }, { labelEn: 'Google Scholar', labelAr: 'Google Scholar', href: 'https://scholar.google.ca/citations?user=7hPvP4EAAAAJ&hl=en' }]} id="redab" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? 'لديها خبرة واسعة في قيادة الأبحاث متعددة التخصصات وتقييم البرامج بالتعاون مع المدارس والشركاء المجتمعيين، مع اهتمام خاص بدعم الأقليات واللاجئين والوافدين الجدد.' : 'She has extensive experience leading interdisciplinary research and program evaluation with schools and community partners, with particular expertise in supporting minority, refugee, and newcomer communities.'}</p><p className="text-xs text-muted-foreground">{isAr ? '🏛️ الأدوار المهنية:' : '🏛️ Professional Roles:'}</p><ul className="space-y-1 text-xs text-muted-foreground">{(isAr ? ['مديرة مشاريع بحثية، مركز القيادة والتعلم، مجلس مدارس منطقة يورك', 'محاضرة، جامعة تورنتو', 'مؤسِّسة ومستشارة رئيسية، Elevate Learning and Leadership', 'نائبة رئيس جمعية باحثي التعليم في أونتاريو (AERO)'] : ['Research Project Manager, Centre for Leadership and Learning, York Region District School Board', 'Lecturer, University of Toronto', 'Founder and Principal Consultant, Elevate Learning and Leadership', 'Vice President, Association of Educational Researchers of Ontario (AERO)']).map((role, i) => (<li key={i} className="flex items-start gap-1.5"><span className="text-primary">•</span><span>{role}</span></li>))}</ul><p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات الخبرة:' : '🔬 Areas of Expertise:'}</p><div className="flex flex-wrap gap-1">{(isAr ? ['علم النفس النمائي', 'علم النفس التربوي', 'رفاه الأطفال والشباب', 'اللاجئون والوافدون الجدد', 'المجتمعات غير المخدومة بشكل كافٍ', 'الإنصاف والتنوع والاندماج والانتماء', 'البحث المجتمعي', 'تقييم البرامج', 'تعبئة المعرفة'] : ['Developmental Psychology', 'Educational Psychology', 'Child and Youth Well-Being', 'Refugee and Newcomer Communities', 'Minority and Underserved Communities', 'Equity, Diversity, Inclusion, and Belonging', 'Community-Engaged Research', 'Program Evaluation', 'Knowledge Mobilization']).map((area, i) => (<span key={i} className="px-1.5 py-0.5 bg-healthDarkBlue/10 text-healthDarkBlue rounded-full text-[10px]">{area}</span>))}</div><p className="text-xs text-muted-foreground italic">{isAr ? 'الموقع الشخصي: قريباً' : 'Personal website: coming soon'}</p></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Jesus (Jesse) Chavarria, PhD" nameAr="د. خيسوس (جيسي) تشافارّيا" roleEn="Assistant Professor, Clinical Psychology" roleAr="أستاذ مساعد، علم النفس السريري" orgEn="Western University" orgAr="جامعة ويسترن" bioEn="Studies risk factors and mechanisms contributing to substance use disorders. Uses clinical and quantitative methods to identify targets for intervention." bioAr="يدرس العوامل والآليات التي تسهم في اضطرابات تعاطي المواد. يستخدم أساليب سريرية وكمّية لتحديد أهداف للتدخل." email="jchavarr@uwo.ca" locationEn="London, Ontario, Canada" locationAr="لندن، أونتاريو، كندا" tags={isAr ? ['تعاطي المواد', 'الإدمان', 'آليات الخطر'] : ['Substance Use', 'Addiction', 'Risk Mechanisms']} id="chavarria" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? '🏛️ الانتماءات:' : '🏛️ Affiliations:'}</p><p className="text-xs text-muted-foreground">{isAr ? 'قسم علم النفس، جامعة ويسترن' : 'Department of Psychology, Western University'}</p><p className="text-xs text-muted-foreground">{isAr ? 'معهد أبحاث سياسات الصحة النفسية، CAMH' : 'Institute for Mental Health Policy Research, CAMH'}</p></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Menna Komeiha" nameAr="منة قميحة" roleEn="Researcher" roleAr="باحثة" orgEn="Health Equity Research" orgAr="بحث المساواة الصحية" bioEn="Health equity researcher specializing in dentistry and applied health sciences. Focuses on digital health and patient-centered care." bioAr="باحثة في المساواة الصحية متخصصة في طب الأسنان والعلوم الصحية التطبيقية." email="komeiham@mcmaster.ca" tags={[]} id="menna" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<FlaskConical className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><div className="grid grid-cols-2 gap-2"><div><p className="text-xs text-muted-foreground">{isAr ? 'الخبرة' : 'Experience'}</p><p className="text-xs font-semibold">{isAr ? '٤ سنوات' : '4 years'}</p></div><div><p className="text-xs text-muted-foreground">{isAr ? 'اللغات' : 'Languages'}</p><p className="text-xs font-semibold">{isAr ? 'العربية، الإنجليزية' : 'Arabic, English'}</p></div></div></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Mahmoud El-Maklizi" nameAr="محمود المقلزي" roleEn="Postdoctoral Fellow" roleAr="باحث ما بعد الدكتوراه" orgEn="TGHRI, UHN" orgAr="TGHRI, UHN" bioEn="Researcher at Toronto General Hospital Research Institute specializing in immunology. Studies regulatory plasma cells." bioAr="باحث في معهد أبحاث مستشفى تورونتو العام متخصص في علم المناعة." email={undefined} locationEn="Toronto, Ontario" locationAr="تورونتو، أونتاريو" tags={[]} id="mahmoud" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthPurple" icon={<FlaskConical className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Delaney Glass" nameAr="د. ديلاني غلاس" roleEn="Assistant Professor" roleAr="أستاذ مساعد" orgEn="University of Toronto" orgAr="جامعة تورنتو" bioEn="Medical and biocultural anthropologist specializing in adolescent health and Arab diaspora." bioAr="عالمة أنثروبولوجيا طبية وبيولوجية متخصصة في صحة المراهقين والشتات العربي." email="delaney.glass@utoronto.ca" tags={isAr ? ['الأنثروبولوجيا', 'الصحة العامة'] : ['Anthropology', 'Public Health']} id="delaney" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Emine Fidan Elcioglu" nameAr="د. إمين فيدان إلسيوغلو" roleEn="Associate Professor" roleAr="أستاذ مشارك" orgEn="Sociology, U of T" orgAr="علم الاجتماع، جامعة تورنتو" bioEn="Sociology professor specializing in immigration politics, race, and ethnicity studies." bioAr="أستاذ علم الاجتماع متخصص في سياسات الهجرة ودراسات العرق والإثنية." email={undefined} tags={[]} id="emine" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Rania Salem" nameAr="د. رانيا سالم" roleEn="Associate Professor" roleAr="أستاذ مشارك" orgEn="Sociology, U of T" orgAr="علم الاجتماع، جامعة تورنتو" bioEn="Sociology professor specializing in families, gender, and Middle East studies." bioAr="أستاذ علم الاجتماع متخصص في الأسرة والنوع الاجتماعي ودراسات الشرق الأوسط." email={undefined} tags={isAr ? ['الأسرة', 'النوع الاجتماعي', 'الشرق الأوسط'] : ['Families', 'Gender', 'Middle East']} id="rania" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthPurple" icon={<GraduationCap className="h-10 w-10 text-white" />} isAr={isAr} />
-
-              <ResearcherCard nameEn="Dr. Ryan Persram" nameAr="د. ريان بيرسرام" roleEn="Assistant Professor" roleAr="أستاذ مساعد" orgEn="Toronto Metropolitan University" orgAr="جامعة تورنتو متروبوليتان" bioEn="Developmental psychology researcher studying youth interpersonal relationships and how sibling, peer, and romantic experiences shape adolescent development and mental health." bioAr="باحث في علم النفس التنموي يدرس العلاقات الشخصية للشباب وكيف تشكل تجارب الأشقاء والأقران والعلاقات العاطفية نمو المراهقين وصحتهم النفسية." email="ryan.persram@torontomu.ca" tags={isAr ? ['علم النفس التنموي', 'علاقات الشباب'] : ['Developmental Psychology', 'Youth Relationships']} id="persram" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthTeal" icon={<GraduationCap className="h-10 w-10 text-white" />} expandedContent={<div className="space-y-2"><p className="text-xs text-muted-foreground">{isAr ? '🔬 مجالات البحث:' : '🔬 Research Areas:'}</p><p className="text-xs text-muted-foreground">{isAr ? 'علم النفس التنموي، علاقات المراهقين، الأشقاء، الأقران، الصداقات، العلاقات العاطفية، التكيف النفسي الاجتماعي' : 'Developmental psychology, adolescent relationships, sibling relationships, peer relationships, friendships, romantic relationships, psychosocial adjustment'}</p></div>} isAr={isAr} />
-
-              <ResearcherCard nameEn="Jason Chung, M.Sc." nameAr="جيسون تشانغ" roleEn="PhD Candidate" roleAr="طالب دكتوراه" orgEn="Clinical Science & Psychopathology" orgAr="علم النفس الإكلينيكي وعِلم الاعتلال النفسي" bioEn="Self-injury, substance use, suicide, and eating pathology, especially among racialized and LGBTQ+ populations." bioAr="إيذاء النفس، تعاطي المواد، الانتحار، واضطرابات الأكل، مع التركيز على الفئات المُهمَّشة." email="jchun264@uwo.ca" tags={isAr ? ['الصحة النفسية', 'المساواة'] : ['Mental Health', 'Equity']} id="jason" expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher} colorAccent="healthDarkBlue" icon={<Brain className="h-10 w-10 text-white" />} isAr={isAr} />
+              {RESEARCHERS.map((r) => (
+                <ResearcherCard
+                  key={r.id}
+                  nameEn={r.name_en} nameAr={r.name_ar} roleEn={r.role_en} roleAr={r.role_ar}
+                  orgEn={r.org_en} orgAr={r.org_ar} bioEn={r.bio_en} bioAr={r.bio_ar}
+                  email={r.email} locationEn={r.location_en} locationAr={r.location_ar}
+                  tags={isAr ? r.tags_ar : r.tags_en}
+                  links={r.links?.map((l) => ({ labelEn: l.label_en, labelAr: l.label_ar, href: l.href }))}
+                  id={r.id} expandedResearcher={expandedResearcher} toggleResearcher={toggleResearcher}
+                  colorAccent={r.accent}
+                  icon={(() => { const Icon = RESEARCHER_ICONS[r.icon]; return <Icon className="h-10 w-10 text-white" />; })()}
+                  expandedContent={r.details?.length ? <ResearcherDetails details={r.details} accent={r.accent} isAr={isAr} /> : undefined}
+                  isAr={isAr}
+                />
+              ))}
             </div>
           </div>
         </section>
