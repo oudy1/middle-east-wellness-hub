@@ -132,7 +132,13 @@ const CITIES: { name: string; province: string; aliases: string[] }[] = [
 ].map((c) => ({ ...c, aliases: phrases(c.aliases) }));
 
 export function findCity(message: string) {
-  const padded = ` ${normalizeText(message)} `;
+  const normalized = normalizeText(message);
+  // Arabic often joins "in/to/and" to the city: بتورنتو, لميسيساغا, وكيتشنر.
+  const unjoined = normalized
+    .split(" ")
+    .map((w) => (/^[\u0628\u0644\u0648\u0641]/.test(w) && w.length >= 5 ? w.slice(1) : w))
+    .join(" ");
+  const padded = ` ${normalized} ${unjoined} `;
   return CITIES.find((c) => hasPhrase(padded, c.aliases)) ?? null;
 }
 
