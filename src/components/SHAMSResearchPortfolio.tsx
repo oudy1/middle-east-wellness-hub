@@ -80,10 +80,13 @@ const SHAMSResearchPortfolio = () => {
                 <div className="md:w-[220px] flex-shrink-0 bg-muted/30 p-4 flex flex-col items-center justify-start gap-2">
                   <div className="relative w-full max-w-[200px]">
                     <button
+                      type="button"
                       onClick={() => {
                         if (images[activeImage].clickable) setPosterOpen(true);
                       }}
-                      className={`block w-full rounded-lg overflow-hidden shadow ${images[activeImage].clickable ? "hover:shadow-lg cursor-pointer" : "cursor-default"} transition-shadow`}
+                      disabled={!images[activeImage].clickable}
+                      aria-label={images[activeImage].clickable ? (isAr ? `افتح بحجم أكبر: ${images[activeImage].caption}` : `Open larger: ${images[activeImage].caption}`) : undefined}
+                      className={`block w-full rounded-lg overflow-hidden shadow ${images[activeImage].clickable ? "hover:shadow-lg cursor-zoom-in" : "cursor-default"} transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`}
                     >
                       <img
                         src={images[activeImage].src}
@@ -93,34 +96,40 @@ const SHAMSResearchPortfolio = () => {
                       />
                     </button>
                     {/* Navigation arrows */}
-                    <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center justify-between mt-2" dir="ltr">
                       <button
                         onClick={() => setActiveImage((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
-                        className="p-1 rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors"
-                        aria-label="Previous image"
+                        type="button"
+                        className="h-11 w-11 shrink-0 flex items-center justify-center rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        aria-label={isAr ? "الصورة السابقة" : "Previous image"}
                       >
                         <ChevronLeft className="h-4 w-4 text-muted-foreground" />
                       </button>
-                      <p className="text-[10px] text-muted-foreground text-center flex-1 px-1">
+                      <p className="text-[11px] text-muted-foreground text-center flex-1 px-1" dir={isAr ? "rtl" : "ltr"}>
                         {images[activeImage].caption}
                       </p>
                       <button
                         onClick={() => setActiveImage((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
-                        className="p-1 rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors"
-                        aria-label="Next image"
+                        type="button"
+                        className="h-11 w-11 shrink-0 flex items-center justify-center rounded-full bg-muted hover:bg-muted-foreground/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        aria-label={isAr ? "الصورة التالية" : "Next image"}
                       >
                         <ChevronRight className="h-4 w-4 text-muted-foreground" />
                       </button>
                     </div>
                     {/* Dots */}
-                    <div className="flex justify-center gap-1.5 mt-1">
+                    <div className="flex justify-center gap-0.5" dir="ltr">
                       {images.map((_, i) => (
                         <button
                           key={i}
+                          type="button"
                           onClick={() => setActiveImage(i)}
-                          className={`w-1.5 h-1.5 rounded-full transition-colors ${i === activeImage ? "bg-primary" : "bg-muted-foreground/30"}`}
-                          aria-label={`Image ${i + 1}`}
-                        />
+                          aria-current={i === activeImage}
+                          className="h-11 w-11 flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          aria-label={isAr ? `الصورة ${i + 1}` : `Image ${i + 1}`}
+                        >
+                          <span className={`block h-2 rounded-full transition-all ${i === activeImage ? "w-5 bg-primary" : "w-2 bg-muted-foreground/40"}`} />
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -175,8 +184,10 @@ const SHAMSResearchPortfolio = () => {
                   </div>
 
                   <button
+                    type="button"
                     onClick={() => setShowAbstract(!showAbstract)}
-                    className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 font-medium transition-colors"
+                    aria-expanded={showAbstract}
+                    className="inline-flex items-center gap-1 min-h-[44px] text-sm text-primary hover:text-primary/80 font-medium transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     {showAbstract
                       ? isAr ? "إخفاء" : "Show Less"
