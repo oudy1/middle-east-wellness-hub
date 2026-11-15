@@ -17,8 +17,11 @@ import poster from "@/assets/mhc-poster.png.asset.json";
 import panelists from "@/assets/mhc-panelists.png.asset.json";
 import activities from "@/assets/mhc-activities.png.asset.json";
 
-// The convention took place on July 18, 2026; this section is now a recap.
-const RECAP_REEL_URL = "https://www.instagram.com/reel/DbCMtfkuVQK/";
+import { getEvent } from "@/lib/events";
+
+// The convention took place (confirmed in content/events.json); this section is now a recap.
+const EVENT = getEvent("mental-health-convention-2026-07-18");
+const RECAP_REEL_URL = EVENT.recapUrl ?? "https://www.instagram.com/projectshams/";
 
 const slides = [
   { src: poster.url, altEn: "Mental Health Convention poster", altAr: "ملصق مؤتمر الصحة النفسية" },
@@ -42,15 +45,13 @@ const MentalHealthConventionSection = () => {
 
   const t = {
     badge: isAr ? "فعالية سابقة" : "Past Event",
-    title: isAr
-      ? "مؤتمر شمس للصحة النفسية: كشف الوصمة"
-      : "SHAMS Mental Health Convention: Uncovering Stigma",
+    title: isAr ? EVENT.ar.title : EVENT.en.title,
     description: isAr
       ? "جمع مؤتمر شمس للصحة النفسية العائلات والطلاب والعاملين في الرعاية الصحية لكشف وصمة الصحة النفسية وبناء الوعي والتعريف بالموارد والدعم المتاح. شكرًا لكل من حضر وشارك."
       : "The SHAMS Mental Health Convention brought together families, students, healthcare professionals and members of our societies to uncover stigma, build understanding and share meaningful resources and support. Thank you to everyone who joined us.",
-    date: isAr ? "١٨ يوليو ٢٠٢٦" : "July 18, 2026",
-    time: isAr ? "١:٠٠ إلى ٥:٠٠ مساءً" : "1:00 PM to 5:00 PM",
-    location: isAr ? "جامعة تورنتو ميسيساغا" : "University of Toronto Mississauga",
+    date: isAr ? EVENT.ar.date : EVENT.en.date,
+    time: isAr ? EVENT.ar.time : EVENT.en.time,
+    location: isAr ? EVENT.ar.place : EVENT.en.place,
     chips: isAr
       ? ["جلسات حوارية", "ورش عمل", "تواصل مجتمعي", "موارد"]
       : ["Panels", "Workshops", "Networking", "Resources"],
