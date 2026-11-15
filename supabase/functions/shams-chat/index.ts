@@ -203,10 +203,8 @@ interface ContextItem {
 
 // Mirrors replyLanguage in src/lib/chatInstantAnswers.ts.
 function detectReplyLanguage(message: string, uiLanguage: 'en' | 'ar'): 'en' | 'ar' {
-  const ar = (message.match(/[\u0600-\u06FF]/g) || []).length;
-  const en = (message.match(/[a-z]/gi) || []).length;
-  if (ar > en) return 'ar';
-  if (en > ar) return 'en';
+  if (/[\u0600-\u06FF]/.test(message)) return 'ar';
+  if (/[a-z]/i.test(message)) return 'en';
   return uiLanguage;
 }
 
