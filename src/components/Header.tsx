@@ -410,7 +410,7 @@ const Header = () => {
                 <div className="text-base sm:text-lg font-bold truncate leading-tight">
                   {t("footer.title")}
                 </div>
-                <div className="text-[11px] text-healthGold opacity-90 hidden sm:block leading-tight">
+                <div className="text-[11px] text-healthGold opacity-90 hidden sm:block lg:hidden xl:block leading-tight">
                   {t("hero.tagline")}
                 </div>
               </div>
@@ -419,7 +419,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden lg:flex items-center justify-center flex-1 gap-5 xl:gap-7 mx-4 bg-healthDarkBlue text-white"
+            className="hidden lg:flex items-center justify-center flex-1 min-w-0 gap-3 xl:gap-7 mx-2 xl:mx-4 bg-healthDarkBlue text-white"
             aria-label="Primary"
           >
             {navItems.map((item, idx) => {
