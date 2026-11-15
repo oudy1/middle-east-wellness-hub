@@ -14,12 +14,22 @@ async function openSawa(page: Page, lang: "en" | "ar") {
   return page.getByRole("dialog");
 }
 
-test("English: English flyer first, 44px arrows, swipe-free arrow navigation and enlarge", async ({ page }) => {
+test("English: English: English flyer first, swipe, 44px arrows and enlarge", async ({ page }) => {
   const dialog = await openSawa(page, "en");
   const region = dialog.getByRole("region", { name: "SAWA study flyers" });
   await expect(region).toBeVisible();
   const first = region.getByRole("group").first().locator("img");
   await expect(first).toHaveAttribute("alt", "Parent Flyer (English)");
+
+  // Swipe (drag) left moves to the second flyer.
+  const img = await first.boundingBox();
+  await page.mouse.move(img!.x + img!.width * 0.8, img!.y + img!.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(img!.x + img!.width * 0.1, img!.y + img!.height / 2, { steps: 8 });
+  await page.mouse.up();
+  await expect(dialog.getByRole("button", { name: "Flyer 2" })).toHaveAttribute("aria-current", "true");
+  await dialog.getByRole("button", { name: "Flyer 1" }).click();
+  await expect(dialog.getByRole("button", { name: "Flyer 1" })).toHaveAttribute("aria-current", "true");
 
   const next = region.getByRole("button", { name: "Next flyer" });
   const box = await next.boundingBox();
