@@ -56,13 +56,13 @@ const StudyCard = ({ study, onViewDetail }: StudyCardProps) => {
             <Button
               variant="outline"
               size="sm"
-              className="text-xs border-primary text-primary hover:bg-primary/10"
+              className="text-xs min-h-[44px] border-primary text-primary hover:bg-primary/10"
               onClick={() => onViewDetail(study.id)}
             >
               {isAr ? 'عرض التفاصيل' : 'View Details'}
             </Button>
           )}
-          <Button asChild size="sm" className="text-xs bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button asChild size="sm" className="text-xs min-h-[44px] bg-primary hover:bg-primary/90 text-primary-foreground">
             <a href={study.linkUrl} target="_blank" rel="noopener noreferrer">
               {isAr ? study.linkLabelAr : study.linkLabelEn}
               <ExternalLink className={`h-3 w-3 ${isAr ? 'mr-1' : 'ml-1'}`} />

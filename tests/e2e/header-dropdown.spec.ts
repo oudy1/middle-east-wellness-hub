@@ -93,4 +93,63 @@ test.describe("Desktop header dropdowns", () => {
     await expect(servicesMenu(page)).toBeHidden();
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
+
+  test("tabbing past a menu button does not open it", async ({ page }) => {
+    const trigger = servicesTrigger(page);
+    await page.mouse.move(0, 0);
+    await trigger.focus();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("keyboard: Enter opens and focuses the first link, arrows move, Escape returns focus", async ({ page }) => {
+    const trigger = servicesTrigger(page);
+    await page.mouse.move(0, 0);
+    await trigger.focus();
+    await page.keyboard.press("Enter");
+    const menu = servicesMenu(page);
+    await expect(menu).toBeVisible();
+    const items = menu.getByRole("menuitem");
+    await expect(items.first()).toBeFocused();
+    await expect(items.first()).toHaveText("Services overview");
+    await page.keyboard.press("ArrowDown");
+    await expect(items.nth(1)).toBeFocused();
+    await page.keyboard.press("ArrowUp");
+    await page.keyboard.press("ArrowUp");
+    await expect(items.last()).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(menu).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+
+  test("keyboard: Tab out of an open menu closes it", async ({ page }) => {
+    const trigger = servicesTrigger(page);
+    await page.mouse.move(0, 0);
+    await trigger.focus();
+    await page.keyboard.press("ArrowDown");
+    const menu = servicesMenu(page);
+    await expect(menu).toBeVisible();
+    const count = await menu.getByRole("menuitem").count();
+    for (let i = 0; i < count; i++) await page.keyboard.press("Tab");
+    await expect(menu).toBeHidden();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
+
+  for (const width of [1024, 1280]) {
+    test(`every dropdown stays inside a ${width}px wide window`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.mouse.move(0, 0);
+      const triggers = primaryNav(page).locator('button[aria-haspopup="menu"]');
+      const n = await triggers.count();
+      expect(n).toBeGreaterThan(0);
+      for (let i = 0; i < n; i++) {
+        await triggers.nth(i).click();
+        const box = await page.getByRole("menu").first().boundingBox();
+        expect(box).not.toBeNull();
+        expect(box!.x).toBeGreaterThanOrEqual(0);
+        expect(box!.x + box!.width).toBeLessThanOrEqual(width);
+        await page.keyboard.press("Escape");
+      }
+    });
+  }
 });
+
