@@ -56,6 +56,7 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
 const APPROVED_ROUTES: Record<string, string> = {
   home: "/",
   about: "/about",
+  about_team: "/about#team",
   services: "/services",
   resources: "/services#resources",
   educational_materials: "/services#educational-materials",

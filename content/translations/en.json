@@ -528,5 +528,19 @@
   "directory.reportIncorrect": "Report incorrect information",
   "directory.reportIncorrectLabel": "Report incorrect information for {{name}} by email",
   "directory.verifiedBySHAMS": "Verified by SHAMS",
-  "directory.lastChecked": "Last checked {{date}}"
+  "directory.lastChecked": "Last checked {{date}}",
+  "team.meetHeading": "Meet the SHAMS Team",
+  "team.intro": "The people who run SHAMS programs, research, outreach, content and events.",
+  "team.leadership": "Founder and Leadership",
+  "team.membersHeading": "Team Members",
+  "team.searchLabel": "Search team members",
+  "team.searchPlaceholder": "Search by name or team",
+  "team.filterLabel": "Filter by team",
+  "team.allMembers": "All Members",
+  "team.memberCount_one": "{{count}} team member",
+  "team.memberCount_other": "{{count}} team members",
+  "team.noResults": "No team members match your search.",
+  "team.clearSearch": "Clear search",
+  "team.shamsTeam": "SHAMS Team",
+  "team.affiliatedPhysicians": "Affiliated Physicians"
 }
