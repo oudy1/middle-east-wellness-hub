@@ -1,27 +1,123 @@
-// Scadding Court newcomer healthcare workshop (Newcomer and Refugee Health
-// Education Initiative). Shown until the end of the event day in Toronto.
+// "Healthcare Coverage & Access: A Newcomer's Guide" workshop with Scadding
+// Court Community Centre (Newcomer and Refugee Health Education Initiative).
+// This is the one shared record used by the homepage card, the Programs page,
+// site search and the chatbot. Promotion stops after the event day in Toronto.
+
+export const NEWCOMER_WORKSHOP_REGISTER_URL = "https://forms.gle/ipEVd8Np1tDy1GVD7";
+
+const ADDRESS_EN = "707 Dundas Street West, Toronto, Ontario, Canada";
+const VENUE_EN = "Scadding Court Community Centre";
+
 export const NEWCOMER_WORKSHOP = {
   dateIso: "2026-11-19",
-  registerUrl: "https://forms.gle/cfQVzbssWp2fTJdo7",
+  // 3:00 to 5:00 PM in Toronto. Nov 19, 2026 is after the DST change, so EST (UTC-5).
+  startUtc: "20261119T200000Z",
+  endUtc: "20261119T220000Z",
+  registerUrl: NEWCOMER_WORKSHOP_REGISTER_URL,
+  learnMorePath: "/programs#newcomer-initiative",
+  directionsUrl:
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(`${VENUE_EN}, ${ADDRESS_EN}`),
   en: {
-    title: "Newcomer Healthcare Workshop",
+    title: "Healthcare Coverage & Access: A Newcomer's Guide",
+    organizer: "Project SHAMS in collaboration with Scadding Court Community Centre",
     date: "Thursday, November 19, 2026",
-    time: "3:00 PM to 5:00 PM",
-    place: "Scadding Court Community Centre, 707 Dundas St W, Toronto",
+    time: "3:00 PM to 5:00 PM Toronto time (EST)",
+    venue: VENUE_EN,
+    address: ADDRESS_EN,
+    place: `${VENUE_EN}, 707 Dundas St W, Toronto`,
+    cost: "Free",
+    format: "In-person healthcare education workshop",
+    audience:
+      "Newcomers, refugees, immigrant families and community members who want to understand Ontario's healthcare system.",
     summary:
-      "A free, friendly workshop for newcomers and refugees: how OHIP and IFHP coverage work, how to find a family doctor or walk-in clinic, and where to get help in your language.",
+      "A free, interactive workshop to help newcomers and refugees understand Ontario's healthcare system, learn about healthcare coverage, and find essential health and community services.",
+    description:
+      "Navigating healthcare in a new country can be challenging. Join Project SHAMS and Scadding Court Community Centre for a free, interactive workshop designed to help newcomers and refugees better understand Ontario's healthcare system, learn about healthcare coverage, and find essential health and community services.",
+    topics: [
+      "Understanding Ontario healthcare coverage, including OHIP and IFHP",
+      "Applying for and renewing health cards",
+      "Finding family doctors and walk-in clinics",
+      "Understanding healthcare services and patient rights",
+      "Accessing local healthcare and community resources",
+      "Practical demonstrations of healthcare coverage applications",
+      "Interactive activities and opportunities to ask questions",
+    ],
   },
   ar: {
-    title: "ورشة الرعاية الصحية للقادمين الجدد",
+    title: "الرعاية الصحية في كندا: دليل للوافدين الجدد",
+    organizer: "مشروع شمس بالتعاون مع مركز سكادينغ كورت المجتمعي",
     date: "الخميس 19 نوفمبر 2026",
-    time: "3:00 إلى 5:00 مساءً",
-    place: "مركز سكادينغ كورت المجتمعي، 707 شارع دانداس الغربي، تورونتو",
+    time: "من 3:00 إلى 5:00 مساءً بتوقيت تورونتو",
+    venue: "مركز سكادينغ كورت المجتمعي",
+    address: "707 شارع دونداس الغربي، تورونتو، أونتاريو، كندا",
+    place: "مركز سكادينغ كورت المجتمعي، 707 شارع دونداس الغربي، تورونتو",
+    cost: "مجاناً",
+    format: "ورشة تثقيف صحي حضورية",
+    audience:
+      "الوافدون الجدد واللاجئون وعائلات المهاجرين وأفراد المجتمع الراغبون في فهم نظام الرعاية الصحية في أونتاريو.",
     summary:
-      "ورشة مجانية وودّية للقادمين الجدد واللاجئين: كيف تعمل تغطية OHIP وIFHP، وكيف تجد طبيب أسرة أو عيادة بدون موعد، وأين تحصل على المساعدة بلغتك.",
+      "ورشة عمل مجانية وتفاعلية تساعد الوافدين الجدد واللاجئين على فهم نظام الرعاية الصحية في أونتاريو، والتعرّف على خيارات التغطية الصحية، والوصول إلى الخدمات الصحية والمجتمعية الأساسية.",
+    description:
+      "انضموا إلى مشروع شمس ومركز سكادينغ كورت المجتمعي في ورشة عمل مجانية وتفاعلية تهدف إلى مساعدة الوافدين الجدد واللاجئين على فهم نظام الرعاية الصحية في أونتاريو، والتعرّف على خيارات التغطية الصحية، وكيفية الوصول إلى الخدمات الصحية والمجتمعية الأساسية.",
+    topics: [
+      "التعرّف على التغطية الصحية في أونتاريو، بما في ذلك OHIP وIFHP",
+      "كيفية التقديم للحصول على البطاقة الصحية وتجديدها",
+      "البحث عن طبيب أسرة والوصول إلى العيادات دون موعد",
+      "فهم الخدمات الصحية وحقوق المرضى",
+      "التعرّف على الموارد الصحية والمجتمعية المحلية",
+      "عروض تطبيقية حول إجراءات التغطية الصحية",
+      "أنشطة تفاعلية وفرصة لطرح الأسئلة",
+    ],
   },
 };
 
-export const isNewcomerWorkshopUpcoming = (now: Date = new Date()) => {
+export type NewcomerWorkshopStatus = "upcoming" | "completed";
+
+/** Upcoming through the whole event day in Toronto, completed from the next Toronto day. */
+export const newcomerWorkshopStatus = (now: Date = new Date()): NewcomerWorkshopStatus => {
   const torontoToday = now.toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
-  return torontoToday <= NEWCOMER_WORKSHOP.dateIso;
+  return torontoToday <= NEWCOMER_WORKSHOP.dateIso ? "upcoming" : "completed";
 };
+
+export const isNewcomerWorkshopUpcoming = (now: Date = new Date()) =>
+  newcomerWorkshopStatus(now) === "upcoming";
+
+const calendarDetails = () =>
+  `${NEWCOMER_WORKSHOP.en.description} Free. Register: ${NEWCOMER_WORKSHOP.registerUrl}`;
+
+/** Google Calendar link with fixed UTC times, so it shows 3 to 5 PM Toronto time in any time zone. */
+export const NEWCOMER_WORKSHOP_GOOGLE_CALENDAR_URL =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent(`${NEWCOMER_WORKSHOP.en.title} (SHAMS Workshop)`) +
+  `&dates=${NEWCOMER_WORKSHOP.startUtc}/${NEWCOMER_WORKSHOP.endUtc}` +
+  "&ctz=America/Toronto" +
+  "&details=" + encodeURIComponent(calendarDetails()) +
+  "&location=" + encodeURIComponent(`${VENUE_EN}, ${ADDRESS_EN}`);
+
+export const NEWCOMER_WORKSHOP_ICS_PATH = "/newcomer-workshop-2026-11-19.ics";
+
+const icsEscape = (v: string) => v.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+
+/** Calendar file contents; public/newcomer-workshop-2026-11-19.ics must match this exactly (checked by a test). */
+export const buildNewcomerWorkshopIcs = () =>
+  [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//SHAMS//Newcomer Healthcare Workshop//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    "UID:newcomer-workshop-2026-11-19@projectshams.com",
+    "DTSTAMP:20261115T120000Z",
+    `DTSTART:${NEWCOMER_WORKSHOP.startUtc}`,
+    `DTEND:${NEWCOMER_WORKSHOP.endUtc}`,
+    `SUMMARY:${icsEscape(`${NEWCOMER_WORKSHOP.en.title} (SHAMS Workshop)`)}`,
+    `DESCRIPTION:${icsEscape(calendarDetails())}`,
+    `LOCATION:${icsEscape(`${VENUE_EN}, ${ADDRESS_EN}`)}`,
+    `URL:${NEWCOMER_WORKSHOP.registerUrl}`,
+    "STATUS:CONFIRMED",
+    "END:VEVENT",
+    "END:VCALENDAR",
+    "",
+  ].join("\r\n");
