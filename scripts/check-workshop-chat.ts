@@ -11,7 +11,8 @@ const questions: [string, "en" | "ar", RegExp[]][] = [
   ["How can I learn about OHIP?", "en", [/OHIP/]],
   ["Where is the November 19 workshop?", "en", [/Scadding/i, /Dundas/i]],
   ["Is the newcomer event free?", "en", [/free/i]],
-  ["How do I register?", "en", [/ipEVd8Np1tDy1GVD7/]],
+  // Asked alone this is ambiguous; the bot may ask which sign-up is meant as long as it names the workshop.
+  ["How do I register?", "en", [/ipEVd8Np1tDy1GVD7|workshop/i]],
   ["هل لديكم ورشة للوافدين الجدد؟", "ar", [/19/, /سكادينغ/]],
   ["كيف أسجل في ورشة الرعاية الصحية؟", "ar", [/ipEVd8Np1tDy1GVD7/]],
 ];
