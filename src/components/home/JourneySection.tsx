@@ -51,10 +51,9 @@ export default function JourneySection() {
         </h2>
         <div ref={wrap} className="relative max-w-3xl mx-auto">
           {/* Path: vertical line on the start side, drawn by scroll */}
-          <svg aria-hidden="true" className="absolute top-0 bottom-0 start-5 md:start-1/2 h-full w-2 -translate-x-1/2 rtl:translate-x-1/2 overflow-visible" preserveAspectRatio="none" viewBox="0 0 2 100">
-            <line x1="1" y1="0" x2="1" y2="100" stroke="hsl(var(--sun-gold) / 0.3)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-            <line x1="1" y1="0" x2="1" y2="100" stroke="hsl(var(--sun-orange))" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" pathLength={1} strokeDasharray="1" strokeDashoffset={animated ? 1 - p : 0} />
-          </svg>
+          <div aria-hidden="true" className="absolute top-0 bottom-0 start-5 md:start-1/2 w-1 -translate-x-1/2 rtl:translate-x-1/2 rounded-full bg-sun-gold/30">
+            <div className="h-full w-full origin-top rounded-full bg-sun-orange" style={{ transform: `scaleY(${animated ? p : 1})` }} />
+          </div>
           {animated && (
             <span aria-hidden="true" className="absolute start-5 md:start-1/2 h-4 w-4 -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 rounded-full bg-sun-gold shadow-[0_0_14px_4px_hsl(var(--sun-gold)/0.7)]" style={{ top: `${p * 100}%` }} />
           )}

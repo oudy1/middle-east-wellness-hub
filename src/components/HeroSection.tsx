@@ -71,7 +71,7 @@ const HeroSection = forwardRef<HTMLElement>((_, ref) => {
             height={256}
             loading="eager"
             decoding="async"
-            className="h-20 w-20 md:h-24 md:w-24 object-contain mx-auto md:mx-0 mb-4 rise-in"
+            className="h-28 w-28 md:h-36 md:w-36 object-contain mx-auto md:mx-0 mb-4 rise-in"
           />
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-sun-blue leading-tight mb-4 rise-in" style={{ animationDelay: "80ms" }}>
             {c.title}
