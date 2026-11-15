@@ -5,20 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { isEventUpcoming } from "@/components/UpcomingEventFeature";
-import posterEn from "@/assets/know-your-rights-en.webp.asset.json";
-import posterAr from "@/assets/know-your-rights-ar.webp.asset.json";
+import YouTubePlayer from "@/components/YouTubePlayer";
+import { eventPhase, getEvent, postersFor, recordingFor } from "@/lib/events";
 
-const YT_ID = "_n4qjMmzMGw";
-const YT_URL = `https://youtu.be/${YT_ID}`;
-const DETAILS = "/recordings#webinar-know-your-rights";
+// Event, poster and recording come from content/events.json + content/webinars.json.
+const EVENT = getEvent("know-your-rights-2026-10-21");
+const DETAILS = EVENT.detailsPath;
 
 const copy = {
   en: {
     section: "In Case You Missed It: SHAMS Webinars",
     label: "Past Webinar | Watch the Recording",
-    title: "Know Your Rights: Speaking Up About Your Healthcare",
-    date: "October 21, 2026",
+    title: EVENT.en.title,
+    date: EVENT.en.date,
     short:
       "Missed our Know Your Rights webinar? Watch our discussion with healthcare professionals about patient rights, navigating the Canadian healthcare system, communicating with providers, and advocating for your healthcare needs.",
     watch: "Watch Recording",
@@ -30,8 +29,8 @@ const copy = {
   ar: {
     section: "فاتتك؟ ندوات شمس",
     label: "ندوة سابقة | شاهد التسجيل",
-    title: "اعرف حقوقك: كيف تعبّر عن احتياجاتك في الرعاية الصحية",
-    date: "21 أكتوبر 2026",
+    title: EVENT.ar.title,
+    date: EVENT.ar.date,
     short:
       "شاهد تسجيل ندوة شمس حول حقوق المرضى في كندا، وكيفية التواصل بفعالية مع مقدمي الرعاية الصحية، وفهم الإحالات الطبية، وطلب رأي طبي ثانٍ، والتعامل مع التحديات والحواجز الثقافية واللغوية في نظام الرعاية الصحية.",
     watch: "شاهد التسجيل",
@@ -45,10 +44,13 @@ const copy = {
 const PastWebinarFeature = () => {
   const { language } = useLanguage();
   const [open, setOpen] = useState(false);
-  if (isEventUpcoming()) return null;
+  const recording = recordingFor(EVENT);
+  // Shown only once a recording is actually published, never just because the date passed.
+  if (eventPhase(EVENT) !== "recording" || !recording) return null;
   const isAr = language === "ar";
   const c = isAr ? copy.ar : copy.en;
-  const poster = isAr ? posterAr.url : posterEn.url;
+  const poster = postersFor(EVENT, isAr ? "ar" : "en")[0]?.url;
+  const ytUrl = `https://www.youtube.com/watch?v=${recording.youtubeId}`;
 
   return (
     <section
@@ -99,23 +101,13 @@ const PastWebinarFeature = () => {
             <DialogTitle className={isAr ? "text-right" : ""}>{c.title}</DialogTitle>
             <DialogDescription className={isAr ? "text-right" : ""}>{c.date}</DialogDescription>
           </DialogHeader>
-          <div className="relative w-full aspect-video bg-muted rounded overflow-hidden">
-            {open && (
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${YT_ID}`}
-                title={c.title}
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            )}
+          <div className="rounded overflow-hidden">
+            {open && <YouTubePlayer videoId={recording.youtubeId} title={c.title} lang={isAr ? "ar" : "en"} startLoaded hideFallbackLink />}
           </div>
           <p className="text-xs text-muted-foreground">{c.fallback}</p>
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="outline" className="min-h-[44px] gap-2">
-              <a href={YT_URL} target="_blank" rel="noopener noreferrer">
+              <a href={ytUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 {c.youtube}
               </a>
