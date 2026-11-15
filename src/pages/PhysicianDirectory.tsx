@@ -88,7 +88,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     address: "Toronto, Ontario Canada",
     coordinates: [-79.4013, 43.6568] as [number, number],
     phone: "",
-    email: "raed.hawa@uhn.ca",
+    email: "",
     officeHours: "By Appointment",
     telehealthAvailable: false,
     accepting: true,
@@ -110,7 +110,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     address: "Toronto, Ontario Canada",
     coordinates: [-79.3902, 43.6596] as [number, number],
     phone: "",
-    email: "albiruni.razak@uhn.ca",
+    email: "",
     officeHours: "By Appointment",
     telehealthAvailable: false,
     accepting: true,
@@ -264,7 +264,7 @@ const SAMPLE_PHYSICIANS: Physician[] = [
     address: "Toronto, Ontario, Canada",
     coordinates: [-79.3874, 43.6596] as [number, number],
     phone: "(416) 586-4800 ext. 7396",
-    email: "adel.mohamed@sinaihealthsystem.ca",
+    email: "",
     officeHours: "By Appointment",
     telehealthAvailable: false,
     accepting: true,
@@ -537,7 +537,7 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     languages: ["Arabic", "English"],
     location: "Ottawa, ON",
     contact: {
-      email: "almasrihiba@outlook.com"
+      email: ""
     },
     credentials: ["RD"],
     experience: 5,
@@ -551,7 +551,7 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     specialty: "Fertility Nutrition and Women's Health",
     languages: ["Arabic", "English"],
     contact: {
-      email: "dahlia.abouelh@gmail.com"
+      email: ""
     },
     credentials: ["MScFN", "RD"],
     experience: 7,
@@ -566,7 +566,7 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     languages: ["Arabic", "English"],
     location: "North York, ON",
     contact: {
-      email: "noorassadi@live.com"
+      email: ""
     },
     credentials: ["RP"],
     experience: 6,
@@ -580,7 +580,7 @@ const SAMPLE_HEALTHCARE_WORKERS: HealthcareWorker[] = [
     specialty: "Diabetes Education",
     languages: ["Arabic", "English"],
     contact: {
-      email: "naylasalameh@hotmail.com"
+      email: ""
     },
     credentials: ["MSc", "RD", "CDE"],
     experience: 8,
@@ -811,12 +811,19 @@ const HealthcareWorkersDirectory = () => {
               <MapPin className="h-4 w-4 text-healthTeal mr-2" />
               <span>{physician.address}</span>
             </div>
-            <div className="flex items-center text-sm">
-              <Phone className="h-4 w-4 text-healthTeal mr-2" />
-              <a href={`tel:${physician.phone}`} className="text-healthTeal hover:underline">
-                {physician.phone}
-              </a>
-            </div>
+            {physician.phone && (
+              <div className="flex items-center text-sm">
+                <Phone className="h-4 w-4 text-healthTeal mr-2" />
+                <a href={`tel:${physician.phone}`} className="text-healthTeal hover:underline">
+                  {physician.phone}
+                </a>
+              </div>
+            )}
+            {!physician.phone && !physician.email && (
+              <p className="text-sm text-muted-foreground" data-testid="contact-via-clinic">
+                {language === 'ar' ? 'للتواصل، اتصل بالعيادة أو المستشفى المذكور أعلاه.' : 'To get in touch, contact the clinic or hospital listed above.'}
+              </p>
+            )}
             {physician.email && (
               <div className="flex items-center text-sm">
                 <Mail className="h-4 w-4 text-healthTeal mr-2" />
@@ -949,6 +956,13 @@ const HealthcareWorkersDirectory = () => {
             </div>
           )}
           
+          {!worker.contact.phone && !worker.contact.email && !worker.contact.website && (
+            <p className="text-sm text-muted-foreground" data-testid="contact-via-shams">
+              {language === 'ar' ? 'لطلب بيانات التواصل، ' : 'For contact details, '}
+              <a href="/contact" className="text-healthTeal hover:underline">{language === 'ar' ? 'تواصل مع شمس' : 'contact SHAMS'}</a>.
+            </p>
+          )}
+
           {worker.contact.website && (
             <div className="flex items-center text-sm">
               <ExternalLink className="h-4 w-4 text-healthTeal mr-2" />

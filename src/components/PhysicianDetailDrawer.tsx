@@ -141,6 +141,15 @@ export const PhysicianDetailDrawer = ({ physician, open, onClose }: PhysicianDet
             </>
           )}
 
+          {!hasContact && (
+            <>
+              <p className={`text-sm text-muted-foreground ${isRTL ? 'text-right' : 'text-left'}`} data-testid="contact-via-clinic">
+                {isRTL ? `للتواصل، اتصل بـ ${physician.clinicName}.` : `To get in touch, contact ${physician.clinicName}.`}
+              </p>
+              <Separator />
+            </>
+          )}
+
           {/* Office Hours */}
           <div>
             <h3 className={`text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>

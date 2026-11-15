@@ -358,6 +358,11 @@ const FamilyPhysicianDirectory = () => {
                                 <span>{physician.phone}</span>
                               </a>
                             )}
+                            {!physician.phone && !physician.email && (
+                              <p className="text-muted-foreground" data-testid="contact-via-clinic">
+                                {isRTL ? 'للتواصل، اتصل بالعيادة أو المستشفى المذكور.' : 'Contact the clinic or hospital listed.'}
+                              </p>
+                            )}
                             {physician.email && (
                               <a 
                                 href={`mailto:${physician.email}`}
