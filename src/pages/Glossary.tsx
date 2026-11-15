@@ -339,7 +339,7 @@ const Glossary = () => {
                   key={letter}
                   onClick={() => enabled && scrollToLetter(letter)}
                   disabled={!enabled}
-                  className={`min-w-[28px] h-7 px-1.5 rounded text-xs font-semibold transition-colors ${
+                  className={`min-w-[44px] h-11 px-2 rounded-md text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     enabled
                       ? "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground cursor-pointer"
                       : "text-muted-foreground/40 cursor-not-allowed"

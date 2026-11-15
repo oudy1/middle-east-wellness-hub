@@ -517,7 +517,7 @@ const Services = () => {
                       ? 'إذا كنت متخصصاً في الرعاية الصحية وترغب في الانضمام إلى منصة شمس أو التعاون معنا، يرجى مراسلتنا بمعلوماتك.'
                       : 'If you are a healthcare professional interested in being listed on the SHAMS platform or collaborating with us, please email us with your information.'}
                   </p>
-                  <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white h-auto min-h-[44px] whitespace-normal text-center gap-2 text-base md:text-xl px-6 md:px-12 py-3 md:py-4">
                     <a href="mailto:infoprojectshams@gmail.com?subject=Physician%20Listing%20Request%20%E2%80%93%20SHAMS">
                       <UserPlus className="h-6 w-6" />
                       {language === 'ar' ? 'انضم إلى شبكة أطباء شمس' : 'Join the SHAMS Physician Network'}
@@ -541,7 +541,7 @@ const Services = () => {
                       'Become part of our mission to improve healthcare access for Middle Eastern societies.'
                     }
                   </p>
-                  <Button asChild className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <Button asChild className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white h-auto min-h-[44px] whitespace-normal text-center gap-2 text-base md:text-xl px-6 md:px-12 py-3 md:py-4">
                     <Link to="/volunteer">
                       <Users className="h-6 w-6" />
                       {language === 'ar' ? 'تقديم طلب للانضمام إلينا' : 'Apply to Join Us'}
@@ -1329,7 +1329,7 @@ const Services = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {language === 'ar' ? 'برامج التعليم الطبي المستمر من مركز سيناي الصحي.' : 'Continuing medical education programs from Sinai Health.'}
                 </p>
-                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block">
+                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <a href="https://www.sinaihealth.ca/education-and-training/continuing-education" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     {language === 'ar' ? 'الوصول للتدريب' : 'Access Training'}
@@ -1344,7 +1344,7 @@ const Services = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {language === 'ar' ? 'برامج التعليم الطبي المستمر من جامعة كالغاري.' : 'Continuing medical education programs from the University of Calgary.'}
                 </p>
-                <Button asChild className="bg-destructive hover:bg-destructive/90 text-destructive-foreground inline-block">
+                <Button asChild className="bg-destructive hover:bg-destructive/90 text-destructive-foreground">
                   <a href="https://cumming.ucalgary.ca/cme/about/strategy" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     {language === 'ar' ? 'عرض البرامج' : 'View Programs'}
@@ -1372,7 +1372,7 @@ const Services = () => {
                       ? 'قوالب للمشاكل السريرية الشائعة تشمل قوائم القبول، نماذج جمع التاريخ المرضي، التشخيص التفريقي، وعبارات التقييم والخطة.'
                       : 'Templates for common clinical problems including admission checklists, HPI intakes, differentials, and A&P dotphrases.'}
                   </p>
-                  <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 text-sm inline-block">
+                  <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 text-sm">
                     <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4" />{language === 'ar' ? 'افتح القوالب' : 'Open templates'}
                     </a>
