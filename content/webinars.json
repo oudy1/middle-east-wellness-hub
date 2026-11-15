@@ -1,8 +1,8 @@
 [
   {
     "id": "know-your-rights",
+    "status": "published",
     "youtubeId": "_n4qjMmzMGw",
-    "date": "October 21, 2026",
     "en": {
       "title": "Know Your Rights: Speaking Up About Your Healthcare",
       "description": "What are your rights as a patient in Canada? What can you do when you feel unheard by your healthcare provider? How can you navigate referrals, specialist wait times, and second opinions?\n\nIn this SHAMS webinar, healthcare professionals discuss patient rights, healthcare navigation, shared decision-making, and self-advocacy within the Canadian healthcare system. It was designed with MENA, newcomer, immigrant, and underserved societies in mind.",
@@ -61,10 +61,11 @@
       "مناصرة المريض",
       "الإحالات الطبية"
     ],
-    "dateAr": "21 أكتوبر 2026"
+    "eventId": "know-your-rights-2026-10-21"
   },
   {
     "id": "womens-health",
+    "status": "published",
     "youtubeId": "",
     "en": {
       "title": "Women's Health Across Life Stages",
@@ -97,6 +98,7 @@
   },
   {
     "id": "intro-research",
+    "status": "published",
     "youtubeId": "3q-R60RmeLI",
     "en": {
       "title": "Intro to Research: How to Get Your First Role + Mistakes to Avoid (SHAMS Webinar)",
@@ -131,6 +133,7 @@
   },
   {
     "id": "nutrition-diabetes",
+    "status": "published",
     "youtubeId": "veBBeJx_3HI",
     "date": "November 26, 2025, 7:00 PM EST",
     "en": {
