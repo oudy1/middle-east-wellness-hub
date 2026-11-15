@@ -44,3 +44,10 @@
 - [x] Replace public team with approved 28-person roster, subteams, leads, filters, search (EN/AR), Dr. Hawa kept
 - [ ] Owner approval of the new About page before publishing (waiting on user)
 - [ ] Confirm teams for Yasameen Ihsan, Zohra Ahmadzai, Barekah Vistro, Hanin Gamour (waiting on user)
+
+## Modernization 4.0 brief (uploaded Nov 15)
+- [x] Verify earlier search/chatbot/loading features still pass their tests.
+- [x] "How Can We Help You?" guided navigator on Services, links only from the approved address list.
+- [x] Directory: language filter (from listed languages only).
+- [x] Report: GitHub 20 verdicts, audit findings, what was done, next batches.
+- [ ] Later batches (need go-ahead): homepage reorder, research status labels, webinar archive search, event calendar, site feedback form, content workflow, 60-scenario tests.

@@ -28,7 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
 import { ListingTrust, DirectoryDisclaimer } from "@/components/directory/ListingTrust";
-import { PUBLIC_WORKER_COLUMNS, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
+import { PUBLIC_WORKER_COLUMNS, languageLabel, listedLanguagesOf, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
 
 // Fix Leaflet's default marker icons (broken by bundlers)
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -198,6 +198,7 @@ const Directory = () => {
   const [province, setProvince] = useState("");
   const [providerType, setProviderType] = useState("");
   const [acceptingOnly, setAcceptingOnly] = useState(false);
+  const [languageFilter, setLanguageFilter] = useState("");
 
   const [coords, setCoords] = useState<CoordMap>({});
   const geocodeCache = useRef<CoordMap>({});
@@ -276,6 +277,7 @@ const Directory = () => {
       if (province && w.province !== province) return false;
       if (providerType && w.provider_type !== providerType) return false;
       if (acceptingOnly && !w.accepting_new_patients) return false;
+      if (languageFilter && !(w.languages || []).includes(languageFilter)) return false;
       if (q) {
         const haystack = [
           w.full_name,
@@ -292,7 +294,14 @@ const Directory = () => {
       }
       return true;
     });
-  }, [workers, query, province, providerType, acceptingOnly]);
+  }, [workers, query, province, providerType, acceptingOnly, languageFilter]);
+
+  // Only languages that appear on published listings, so the filter never
+  // offers a language no provider has listed.
+  const listedLanguages = useMemo(
+    () => listedLanguagesOf(workers),
+    [workers]
+  );
 
   // Group filtered listings by city for map markers
   const markers = useMemo(() => {
@@ -342,7 +351,7 @@ const Directory = () => {
             {/* Filters */}
             <Card className="mb-6">
               <CardContent className="p-4 sm:p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="directory-search">{isAr ? "بحث" : "Search"}</Label>
                     <Input
@@ -385,6 +394,25 @@ const Directory = () => {
                         {PROVIDER_TYPES.map((pt) => (
                           <SelectItem key={pt.value} value={pt.value}>
                             {isAr ? pt.label_ar : pt.label_en}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="directory-language">{isAr ? "اللغة" : "Language"}</Label>
+                    <Select
+                      value={languageFilter || "all"}
+                      onValueChange={(v) => setLanguageFilter(v === "all" ? "" : v)}
+                    >
+                      <SelectTrigger id="directory-language">
+                        <SelectValue placeholder={isAr ? "الكل" : "All"} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
+                        {listedLanguages.map((lang) => (
+                          <SelectItem key={lang} value={lang}>
+                            {languageLabel(lang, isAr)}
                           </SelectItem>
                         ))}
                       </SelectContent>

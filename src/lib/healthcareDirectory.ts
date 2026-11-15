@@ -101,3 +101,35 @@ export function reportListingMailto(
       : `What is incorrect?\n\nSuggested correction (if known):\n\nListing ID: ${worker.id}`;
   return `mailto:${SHAMS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+/** Distinct languages listed on the given listings, trimmed and sorted. */
+export function listedLanguagesOf(workers: { languages?: string[] | null }[]): string[] {
+  const seen = new Map<string, string>();
+  for (const w of workers) {
+    for (const raw of w.languages || []) {
+      const lang = raw.trim();
+      if (lang && !seen.has(lang.toLowerCase())) seen.set(lang.toLowerCase(), lang);
+    }
+  }
+  return [...seen.values()].sort((a, b) => a.localeCompare(b));
+}
+
+const LANGUAGE_NAMES_AR: Record<string, string> = {
+  arabic: "العربية",
+  english: "الإنجليزية",
+  french: "الفرنسية",
+  farsi: "الفارسية",
+  persian: "الفارسية",
+  kurdish: "الكردية",
+  turkish: "التركية",
+  urdu: "الأردية",
+  somali: "الصومالية",
+  armenian: "الأرمنية",
+  hebrew: "العبرية",
+  spanish: "الإسبانية",
+};
+
+/** Language name as shown to visitors; Arabic names for common languages. */
+export function languageLabel(lang: string, isAr: boolean): string {
+  return isAr ? LANGUAGE_NAMES_AR[lang.trim().toLowerCase()] ?? lang : lang;
+}
