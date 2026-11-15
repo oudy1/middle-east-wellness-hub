@@ -9,6 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 import { CheckCircle } from "lucide-react";
 import DOMPurify from 'dompurify';
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 
 const TopicRequestForm = () => {
   const { language } = useLanguage();
@@ -27,14 +29,20 @@ const TopicRequestForm = () => {
     descPh: isAr
       ? "أخبرنا لماذا هذا الموضوع مهم لك ولمجتمعك..."
       : "Tell us more about why this topic is important to you and your community...",
-    submit: isAr ? "أرسل الاقتراح عبر البريد الإلكتروني" : "Send Topic Request by Email",
+    submit: isAr ? "أرسل الاقتراح" : "Send Topic Request",
+    sending: isAr ? "جارٍ الإرسال..." : "Sending...",
     sendNote: isAr
-      ? "سيفتح تطبيق البريد لديك ورسالتك جاهزة للإرسال إلى infoprojectshams@gmail.com."
-      : "Your email app will open with your request ready to send to infoprojectshams@gmail.com.",
-    thanksTitle: isAr ? "خطوة أخيرة: اضغط إرسال في بريدك" : "One last step: press Send in your email",
+      ? "يصل اقتراحك مباشرة إلى فريق شمس."
+      : "Your suggestion goes straight to the SHAMS team.",
+    thanksTitle: isAr ? "شكرًا لك، وصلنا اقتراحك" : "Thank you, we received your suggestion",
     thanksBody: isAr
-      ? "فتحنا رسالتك في تطبيق البريد. لن يصلنا الاقتراح حتى ترسلها. إذا لم يفتح التطبيق، راسلنا على infoprojectshams@gmail.com."
-      : "We opened your message in your email app. We only receive it once you send it. If nothing opened, email infoprojectshams@gmail.com.",
+      ? "سيطّلع فريق شمس على اقتراحك. قد نتواصل معك عبر بريدك الإلكتروني."
+      : "The SHAMS team will review your suggestion. We may reply by email.",
+    failTitle: isAr ? "تعذّر الإرسال" : "Could not send",
+    failBody: isAr
+      ? "حدث خطأ. حاول مرة أخرى، أو راسلنا مباشرة عبر البريد الإلكتروني."
+      : "Something went wrong. Please try again, or email us directly.",
+    emailInstead: isAr ? "راسلنا عبر البريد الإلكتروني" : "Email us instead",
     another: isAr ? "إرسال اقتراح آخر" : "Submit Another Request",
     invalidTitle: isAr ? "إدخال غير صالح" : "Invalid input",
     invalidField: (f: string) =>
@@ -42,10 +50,6 @@ const TopicRequestForm = () => {
     descTooLong: isAr
       ? "الوصف طويل جدًا أو يحتوي على رموز غير مسموح بها."
       : "Description is too long or contains invalid characters.",
-    successTitle: isAr ? "تم فتح البريد الإلكتروني" : "Email opened",
-    successBody: isAr
-      ? "اضغط إرسال في تطبيق البريد لإيصال اقتراحك إلينا."
-      : "Press Send in your email app so your suggestion reaches us.",
     fieldLabels: {
       name: isAr ? "الاسم" : "name",
       email: isAr ? "البريد الإلكتروني" : "email",
@@ -61,13 +65,16 @@ const TopicRequestForm = () => {
     description: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const { trap, guardFields, reset } = useSpamGuard();
   const { toast } = useToast();
 
   const validateInput = (value: string, maxLength: number = 200) => {
     return value.length <= maxLength && DOMPurify.sanitize(value.trim()) === value.trim();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validations = [
       { field: 'name', value: formData.name, maxLength: 100 },
@@ -90,21 +97,35 @@ const TopicRequestForm = () => {
       }
     }
 
-    // The site does not store or send this itself: it opens the visitor's own
-    // email app with the request filled in, addressed to the SHAMS inbox.
-    const subject = `Webinar topic request: ${formData.topic.trim()}`;
-    const body = [
-      `Name: ${formData.name.trim()}`,
-      `Email: ${formData.email.trim()}`,
-      `Proposed topic: ${formData.topic.trim()}`,
-      formData.description.trim() ? `\nWhy it matters:\n${formData.description.trim()}` : "",
-    ].join("\n");
-    window.location.href = `mailto:infoprojectshams@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
+    setSending(true);
+    setFailed(false);
+    const topic = formData.topic.trim();
+    const description = formData.description.trim();
+    const { data, error } = await supabase.functions.invoke("send-contact-email", {
+      body: {
+        kind: "topic_request",
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        subject: `Webinar topic request: ${topic}`,
+        message: description || topic,
+        topic,
+        description: description || undefined,
+        language: isAr ? "ar" : "en",
+        ...guardFields(),
+      },
+    });
+    setSending(false);
+    if (error || !data?.success) {
+      setFailed(true);
+      toast({ title: L.failTitle, description: L.failBody, variant: "destructive" });
+      return;
+    }
     setFormData({ name: '', email: '', topic: '', description: '' });
+    reset();
     setSubmitted(true);
-    toast({ title: L.successTitle, description: L.successBody });
   };
+
+  const mailtoHref = `mailto:infoprojectshams@gmail.com?subject=${encodeURIComponent(`Webinar topic request: ${formData.topic.trim()}`)}&body=${encodeURIComponent(`Name: ${formData.name.trim()}\nProposed topic: ${formData.topic.trim()}\n\n${formData.description.trim()}`)}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -137,7 +158,8 @@ const TopicRequestForm = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 relative">
+          {trap}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">{L.name}</Label>
@@ -160,9 +182,15 @@ const TopicRequestForm = () => {
           </div>
 
           <p className="text-xs text-muted-foreground text-center">{L.sendNote}</p>
-          <Button type="submit" className="w-full min-h-[44px] bg-healthTeal hover:bg-healthTeal/90 text-white">
-            {L.submit}
+          <Button type="submit" disabled={sending} className="w-full min-h-[44px] bg-healthTeal hover:bg-healthTeal/90 text-white">
+            {sending ? L.sending : L.submit}
           </Button>
+          {failed && (
+            <p role="alert" className="text-sm text-center text-destructive">
+              {L.failBody}{" "}
+              <a href={mailtoHref} className="underline font-medium">{L.emailInstead}</a>
+            </p>
+          )}
         </form>
       </CardContent>
     </Card>

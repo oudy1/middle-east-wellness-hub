@@ -230,6 +230,7 @@ const AdminHealthcareWorkers = () => {
           </div>
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" onClick={() => navigate("/admin/opportunities")}>Opportunities</Button>
+            <Button variant="outline" onClick={() => navigate("/admin/topic-requests")}>Topic requests</Button>
             <Button variant="outline" onClick={handleSignOut}>Sign out</Button>
           </div>
         </div>
