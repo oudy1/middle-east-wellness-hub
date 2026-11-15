@@ -15,7 +15,7 @@ const MeetTeamButton = () => {
             asChild
             className="bg-healthRed hover:bg-red-700 text-white px-8 py-6 text-lg flex items-center shadow-lg hover:shadow-xl transition-all"
           >
-            <Link to="/about">
+            <Link to="/about#team">
               <UsersRound className="mr-2 h-6 w-6" />
               {t("team.meetOurTeam")}
             </Link>

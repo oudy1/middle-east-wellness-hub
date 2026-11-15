@@ -8,6 +8,7 @@ import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
 import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
 import { NEWCOMER_WORKSHOP } from "./newcomerWorkshop";
+import { TEAMS, TEAM_MEMBERS, teamSummary } from "./team";
 import { MATCH_POINTS, matchWord, toWords } from "./searchText";
 
 export type KnowledgeCategory =
@@ -182,6 +183,22 @@ const curated: KnowledgeItem[] = [
     keywords: ["about", "mission", "team", "عن"],
     language: "both",
     url: approvedRoutes.about,
+  },
+  {
+    id: "team",
+    title_en: "Meet the SHAMS team",
+    title_ar: "تعرّف على فريق شمس",
+    description_en: teamSummary("en"),
+    description_ar: teamSummary("ar"),
+    category: "pages",
+    tags: ["team", "leadership", "founder"],
+    keywords: [
+      "team", "members", "founder", "lead", "leader", "فريق", "أعضاء", "المؤسس", "قائد",
+      ...TEAMS.flatMap((t) => [t.short_en, t.short_ar]),
+      ...TEAM_MEMBERS.map((m) => m.name),
+    ],
+    language: "both",
+    url: approvedRoutes.about_team,
   },
   {
     id: "newcomer-workshop",

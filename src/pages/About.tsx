@@ -6,6 +6,7 @@ import CalligraphyBackground from "@/components/CalligraphyBackground";
 import LandmarksGenerator from "@/components/LandmarksGenerator";
 import TeamSection from "@/components/TeamSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useHashScroll } from "@/hooks/useHashScroll";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Heart, Globe, MapPin } from "lucide-react";
 import {
@@ -19,6 +20,7 @@ const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312
 
 const About = () => {
   const { language, t } = useLanguage();
+  useHashScroll();
   
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray relative">
@@ -157,7 +159,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Team Section - Now using the TeamSection component */}
+        {/* Team: one source in content/team.json */}
         <TeamSection />
       </main>
       
