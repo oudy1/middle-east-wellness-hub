@@ -43,14 +43,40 @@ test.describe("Research opportunities", () => {
 });
 
 test.describe("Webinar topic request", () => {
-  test("opens the visitor's email app instead of pretending it was sent", async ({ page }) => {
+  const SERVICE = "**/functions/v1/send-contact-email**";
+
+  test("saves the request through the email service and thanks the visitor, without opening their email app", async ({ page }) => {
+    let sent: Record<string, unknown> | null = null;
+    await page.route(SERVICE, (r) => {
+      sent = JSON.parse(r.request().postData() ?? "{}");
+      return r.fulfill({ status: 200, contentType: "application/json", body: '{"success":true}' });
+    });
     await page.goto("/recordings#topic-request");
     const form = page.locator("#topic-request");
     await form.getByLabel("Name").fill("Test Visitor");
     await form.getByLabel("Email").fill("visitor@example.com");
     await form.getByLabel("Proposed Topic").fill("Sleep and shift work");
-    await form.getByRole("button", { name: "Send Topic Request by Email" }).click();
-    await expect(form.getByText("One last step: press Send in your email")).toBeVisible();
-    await expect(page.getByText("Topic Request Submitted")).toHaveCount(0);
+    await form.getByRole("button", { name: "Send Topic Request" }).click();
+    await expect(page.getByText("Thank you, we received your suggestion")).toBeVisible();
+    await expect(form.getByRole("link", { name: "Email us instead" })).toHaveCount(0);
+    await expect.poll(() => sent).toMatchObject({
+      kind: "topic_request",
+      topic: "Sleep and shift work",
+      language: "en",
+    });
+  });
+
+  test("if sending fails, it says so and offers the email fallback", async ({ page }) => {
+    await page.route(SERVICE, (r) => r.fulfill({ status: 500, contentType: "application/json", body: '{"message":"down"}' }));
+    await page.goto("/recordings#topic-request");
+    const form = page.locator("#topic-request");
+    await form.getByLabel("Name").fill("Test Visitor");
+    await form.getByLabel("Email").fill("visitor@example.com");
+    await form.getByLabel("Proposed Topic").fill("Sleep and shift work");
+    await form.getByRole("button", { name: "Send Topic Request" }).click();
+    const alert = form.getByRole("alert");
+    await expect(alert).toBeVisible();
+    await expect(page.getByText("Thank you, we received your suggestion")).toHaveCount(0);
+    await expect(alert.getByRole("link", { name: "Email us instead" })).toHaveAttribute("href", /^mailto:infoprojectshams@gmail\.com/);
   });
 });

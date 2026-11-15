@@ -20,12 +20,12 @@ export default function HelpBentoGrid() {
   const isAr = language === "ar";
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section aria-labelledby="help-grid-title" className="bg-sun-cream py-10 md:py-14">
+    <section aria-labelledby="help-grid-title" className="bg-sun-cream py-6 md:py-14">
       <div ref={ref} className={`reveal container mx-auto px-4 ${isAr ? "font-cairo" : ""}`}>
-        <h2 id="help-grid-title" className="text-2xl md:text-3xl font-bold text-sun-blue mb-6 text-center md:text-start">
+        <h2 id="help-grid-title" className="text-2xl md:text-3xl font-bold text-sun-blue mb-4 md:mb-6 text-center md:text-start">
           {isAr ? "كيف يمكن لشمس أن تساعدك؟" : "What can SHAMS help you with?"}
         </h2>
-        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[minmax(150px,auto)]">
+        <ul className="grid gap-2.5 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[minmax(150px,auto)]">
           {ITEMS.map(({ key, icon: Icon, span, en, ar }, i) => {
             const [title, desc] = isAr ? ar : en;
             const big = i === 0;
@@ -34,19 +34,19 @@ export default function HelpBentoGrid() {
                 <Link
                   to={homeRoute(key)}
                   data-bento-key={key}
-                  className={`group relative flex h-full min-h-[44px] flex-col justify-between gap-4 overflow-hidden rounded-2xl border border-sun-orange/20 p-5 transition-[transform,box-shadow,border-color] duration-200 hover:border-sun-orange/60 hover:shadow-[var(--shadow-sun)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange focus-visible:ring-offset-2 ${big ? "text-sun-cream" : "bg-background text-sun-blue"}`}
+                  className={`group relative flex h-full min-h-[44px] flex-row items-center gap-3 p-3.5 md:flex-col md:justify-between md:gap-4 md:p-5 overflow-hidden rounded-2xl border border-sun-orange/20 transition-[transform,box-shadow,border-color] duration-200 hover:border-sun-orange/60 hover:shadow-[var(--shadow-sun)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange focus-visible:ring-offset-2 ${big ? "text-sun-cream" : "bg-background text-sun-blue"}`}
                   style={big ? { background: "linear-gradient(150deg, hsl(var(--sun-blue)), hsl(var(--sun-teal)))" } : undefined}
                 >
                   <span aria-hidden="true" className="pointer-events-none absolute -end-10 -top-10 h-32 w-32 rounded-full bg-sun-gold/20 blur-2xl transition-opacity opacity-60 group-hover:opacity-100" />
-                  <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:rotate-3 ${big ? "bg-sun-gold/20 text-sun-gold" : "bg-sun-peach/60 text-sun-orange"}`}>
-                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  <span className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:rotate-3 md:h-11 md:w-11 ${big ? "bg-sun-gold/20 text-sun-gold" : "bg-sun-peach/60 text-sun-orange"}`}>
+                    <Icon className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                   </span>
-                  <span>
-                    <span className={`flex items-center gap-1 font-semibold ${big ? "text-2xl" : "text-lg"}`}>
+                  <span className="min-w-0 flex-1">
+                    <span className={`flex items-center gap-1 font-semibold ${big ? "text-lg md:text-2xl" : "text-base md:text-lg"}`}>
                       {title}
-                      <ArrowUpRight className="h-4 w-4 opacity-60 rtl:-scale-x-100" aria-hidden="true" />
+                      <ArrowUpRight className="h-4 w-4 shrink-0 opacity-60 rtl:-scale-x-100" aria-hidden="true" />
                     </span>
-                    <span className={`mt-1 block text-sm ${big ? "text-sun-cream/85" : "text-muted-foreground"}`}>{desc}</span>
+                    <span className={`mt-0.5 block text-sm leading-snug line-clamp-2 md:mt-1 ${big ? "text-sun-cream/85" : "text-muted-foreground"}`}>{desc}</span>
                   </span>
                 </Link>
               </li>

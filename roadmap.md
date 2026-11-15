@@ -72,8 +72,13 @@
 - [x] One shared event record (Know Your Rights, Convention, Nov 19 workshop) used by homepage, Programs, Recordings, news, chatbot and approved links.
 - [x] Review statuses on events, recordings and studies; only published shown; tests flag missing Arabic.
 - [x] Lifecycle: after the date "Registration closed" until SHAMS confirms; recordings/recaps replace sign-up buttons.
-- [x] Lighter YouTube player with fallback link; research opportunities error + Try again; topic request form now opens email instead of faking success.
+- [x] Lighter YouTube player with fallback link; research opportunities error + Try again; topic request form saves the request and emails the team (spam-guarded), with an email fallback if sending fails.
 - [x] Shared status labels on admin review pages.
 - [ ] After Nov 19: confirm the workshop took place, and send any recording or recap link (waiting on user).
 - [ ] Real recruitment status of the 4 research studies (waiting on user).
 - [x] Removed the whole admin area (sign-in, password reset, all admin pages) at user request.
+
+## Homepage 5.0 visual redesign (uploaded Nov 15)
+- [x] Sunrise opening, six topic cards, "From Questions to Clarity" steps, "Learn with SHAMS", top progress line; duplicate blocks removed. Not published.
+- [x] Topic cards made compact on phones (rows instead of tall stacks; 749px section, cards 75-99px, all above the 44px tap size); new browser check tests/e2e/bento-compact.spec.ts.
+- [ ] Still open from the brief: restyle the weekly topic card and the convention recap card, smooth the header, move the "Start here" links into the new cards.
