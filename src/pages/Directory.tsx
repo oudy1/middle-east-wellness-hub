@@ -28,7 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
 import { ListingTrust, DirectoryDisclaimer } from "@/components/directory/ListingTrust";
-import { PUBLIC_WORKER_COLUMNS, listedLanguagesOf, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
+import { PUBLIC_WORKER_COLUMNS, languageLabel, listedLanguagesOf, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
 
 // Fix Leaflet's default marker icons (broken by bundlers)
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -412,7 +412,7 @@ const Directory = () => {
                         <SelectItem value="all">{isAr ? "الكل" : "All"}</SelectItem>
                         {listedLanguages.map((lang) => (
                           <SelectItem key={lang} value={lang}>
-                            {lang}
+                            {languageLabel(lang, isAr)}
                           </SelectItem>
                         ))}
                       </SelectContent>

@@ -65,3 +65,12 @@ describe("directory language filter", () => {
     ).toEqual(["Arabic", "English", "French"]);
   });
 });
+
+describe("directory language names", () => {
+  it("shows Arabic names in Arabic and keeps the listed name otherwise", async () => {
+    const { languageLabel } = await import("@/lib/healthcareDirectory");
+    expect(languageLabel("Arabic", true)).toBe("العربية");
+    expect(languageLabel("English", false)).toBe("English");
+    expect(languageLabel("Tigrinya", true)).toBe("Tigrinya");
+  });
+});

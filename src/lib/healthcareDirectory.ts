@@ -113,3 +113,23 @@ export function listedLanguagesOf(workers: { languages?: string[] | null }[]): s
   }
   return [...seen.values()].sort((a, b) => a.localeCompare(b));
 }
+
+const LANGUAGE_NAMES_AR: Record<string, string> = {
+  arabic: "العربية",
+  english: "الإنجليزية",
+  french: "الفرنسية",
+  farsi: "الفارسية",
+  persian: "الفارسية",
+  kurdish: "الكردية",
+  turkish: "التركية",
+  urdu: "الأردية",
+  somali: "الصومالية",
+  armenian: "الأرمنية",
+  hebrew: "العبرية",
+  spanish: "الإسبانية",
+};
+
+/** Language name as shown to visitors; Arabic names for common languages. */
+export function languageLabel(lang: string, isAr: boolean): string {
+  return isAr ? LANGUAGE_NAMES_AR[lang.trim().toLowerCase()] ?? lang : lang;
+}
