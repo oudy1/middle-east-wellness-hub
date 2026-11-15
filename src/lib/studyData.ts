@@ -1,7 +1,10 @@
 import studiesData from "../../content/studies.json";
+import { isPublished } from "./contentStatus";
 
 export interface StudyData {
   id: string;
+  /** Only "published" studies are shown (see src/lib/contentStatus.ts). */
+  status: string;
   titleEn: string;
   titleAr: string;
   summaryEn: string;
@@ -16,4 +19,4 @@ export interface StudyData {
   detailComponent?: string;
 }
 
-export const studies: StudyData[] = studiesData as StudyData[];
+export const studies: StudyData[] = (studiesData as StudyData[]).filter((s) => isPublished(s.status));

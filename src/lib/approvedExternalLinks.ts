@@ -10,6 +10,7 @@
 import studies from "../../content/studies.json";
 import webinars from "../../content/webinars.json";
 import { EVENTS, eventRecapUrls, isRegistrationOpen } from "./events";
+import { isPublished } from "./contentStatus";
 
 /** Official sources the assistant cites (mirrors OFFICIAL_SOURCES in the shams-chat function). */
 export const OFFICIAL_SOURCES = {
@@ -27,8 +28,8 @@ const strip = (u: string) => u.trim().replace(/\/+$/, "");
 /** Exact links published on the site (no expiry). */
 const SITE_LINKS = new Set<string>(
   [
-    ...(studies as { linkUrl?: string }[]).map((s) => s.linkUrl).filter((u): u is string => !!u),
-    ...(webinars as { youtubeId?: string }[]).flatMap((w) =>
+    ...(studies as { linkUrl?: string; status?: string }[]).filter((s) => isPublished(s.status)).map((s) => s.linkUrl).filter((u): u is string => !!u),
+    ...(webinars as { youtubeId?: string; status?: string }[]).filter((w) => isPublished(w.status)).flatMap((w) =>
       w.youtubeId
         ? [`https://www.youtube.com/watch?v=${w.youtubeId}`, `https://youtu.be/${w.youtubeId}`]
         : []

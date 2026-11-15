@@ -8,6 +8,7 @@ import faq from "../../content/faq.json";
 import routes from "../../content/chatbot-routes.json";
 import { isApprovedInternalUrl, isMailtoOrTel, isSafeExternalUrl } from "./chatbotRoutes";
 import { NEWCOMER_WORKSHOP } from "./newcomerWorkshop";
+import { isPublished } from "./contentStatus";
 import { TEAMS, TEAM_MEMBERS, teamSummary } from "./team";
 import { MATCH_POINTS, matchWord, toWords } from "./searchText";
 
@@ -304,7 +305,7 @@ interface StudyRaw {
   tags?: { labelEn: string; labelAr: string }[];
 }
 
-const studyItems: KnowledgeItem[] = (studies as StudyRaw[]).map((s) => ({
+const studyItems: KnowledgeItem[] = (studies as StudyRaw[]).filter((s) => isPublished(s.status)).map((s) => ({
   id: `study-${s.id}`,
   title_en: s.titleEn,
   title_ar: s.titleAr,
@@ -325,12 +326,13 @@ const studyItems: KnowledgeItem[] = (studies as StudyRaw[]).map((s) => ({
 
 interface WebinarRaw {
   id: string;
+  status?: string;
   en: { title: string; description: string };
   ar: { title: string; description: string };
   tags?: string[];
 }
 
-const webinarItems: KnowledgeItem[] = (webinars as WebinarRaw[]).map((w) => ({
+const webinarItems: KnowledgeItem[] = (webinars as WebinarRaw[]).filter((w) => isPublished(w.status)).map((w) => ({
   id: `webinar-${w.id}`,
   title_en: w.en.title,
   title_ar: w.ar.title,
