@@ -40,7 +40,7 @@ const AdminTopicRequests = () => {
 
   return (
     <main className="container mx-auto px-4 py-8 max-w-3xl" dir={isAr ? "rtl" : "ltr"}>
-      <SEOHead title={t.title} description={t.title} noindex />
+      <SEOHead title={t.title} description={t.title} noIndex />
       <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
         <h1 className="text-2xl font-bold text-foreground">{t.title}</h1>
         <div className="flex gap-2">
