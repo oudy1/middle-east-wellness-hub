@@ -543,5 +543,7 @@
   "team.clearSearch": "Clear search",
   "team.shamsTeam": "SHAMS Team",
   "team.affiliatedPhysicians": "Affiliated Physicians",
-  "chatbot.sources": "Sources"
+  "chatbot.sources": "Sources",
+  "footer.programs": "Programs",
+  "footer.recordings": "Recordings"
 }

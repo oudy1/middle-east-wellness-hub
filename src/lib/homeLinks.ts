@@ -9,5 +9,7 @@ export function homeRoute(key: string): string {
 }
 
 export const HERO_LINKS = { primary: "resources", secondary: "about" } as const;
+// Compact row under the hero: the four main destinations.
+export const HERO_QUICK_KEYS = ["resources", "programs", "healthcare_workers", "research"] as const;
 export const BENTO_KEYS = ["resources", "newcomer_initiative", "healthcare_workers", "mentorship", "research", "recordings"] as const;
 export const JOURNEY_KEYS = ["educational_materials", "healthcare_workers", "programs"] as const;

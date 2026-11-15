@@ -41,11 +41,21 @@ const Footer = () => {
           
           <div>
             <h3 className="text-lg font-semibold mb-4">{t("footer.quickLinks")}</h3>
-            <ul className="space-y-0">
-              <li><Link to="/" className="inline-flex items-center min-h-[44px] text-gray-300 hover:text-healthTealLight transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.home")}</Link></li>
-              <li><Link to="/about" className="inline-flex items-center min-h-[44px] text-gray-300 hover:text-healthTealLight transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.aboutUs")}</Link></li>
-              <li><Link to="/services" className="inline-flex items-center min-h-[44px] text-gray-300 hover:text-healthTealLight transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.forCommunity")}</Link></li>
-              <li><Link to="/contact" className="inline-flex items-center min-h-[44px] text-gray-300 hover:text-healthTealLight transition-colors" onClick={() => window.scrollTo(0, 0)}>{t("header.contact")}</Link></li>
+            <ul className="grid grid-cols-2 gap-x-4 md:grid-cols-1">
+              {([
+                ["/", t("header.home")],
+                ["/about", t("header.aboutUs")],
+                ["/resources", t("footer.resources")],
+                ["/services", t("header.forCommunity")],
+                ["/programs", t("footer.programs")],
+                ["/research", t("footer.research")],
+                ["/recordings", t("footer.recordings")],
+                ["/contact", t("header.contact")],
+              ] as const).map(([to, label]) => (
+                <li key={to}>
+                  <Link to={to} className="inline-flex items-center min-h-[44px] text-gray-300 hover:text-healthTealLight transition-colors" onClick={() => window.scrollTo(0, 0)}>{label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
           
