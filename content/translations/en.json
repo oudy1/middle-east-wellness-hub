@@ -542,5 +542,6 @@
   "team.noResults": "No team members match your search.",
   "team.clearSearch": "Clear search",
   "team.shamsTeam": "SHAMS Team",
-  "team.affiliatedPhysicians": "Affiliated Physicians"
+  "team.affiliatedPhysicians": "Affiliated Physicians",
+  "chatbot.sources": "Sources"
 }

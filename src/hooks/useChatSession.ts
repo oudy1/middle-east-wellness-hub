@@ -181,13 +181,12 @@ export const useChatSession = () => {
         console.error('Chat error:', error);
         // Keep the question on screen, show the best matching verified pages,
         // and offer "Try again" instead of losing it.
-        const fallbackLang = replyLanguage(userMessage.content, language === 'ar' ? 'ar' : 'en');
         const fallbackLinks = contextForFallback
           .filter(c => c.url && isApprovedInternalUrl(c.url))
           .map(c => ({ label: c.title ?? c.url!, url: c.url! }));
         setMessages(prev => [
           ...prev.filter(m => m.id !== assistantId),
-          { id: crypto.randomUUID(), role: 'assistant', content: offlineFallback(fallbackLang, fallbackLinks), origin: 'fallback' },
+          { id: crypto.randomUUID(), role: 'assistant', content: offlineFallback(fbLang, fallbackLinks), origin: 'fallback' },
         ]);
         setFailedMessage(userMessage);
       }
