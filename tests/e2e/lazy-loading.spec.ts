@@ -44,3 +44,23 @@ test("menu links open other pages without a full reload", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   expect(await page.evaluate(() => (window as any).__noReload)).toBe(true);
 });
+
+test("background chat download fails quietly after a site update, and opening the chat still recovers", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  // Simulate a stale page after publishing: the old chat window file is gone.
+  await page.route(/components\/chat\/ChatWindow/, (r) => r.fulfill({ status: 404, body: "" }));
+  await page.goto("/");
+  await expect(page.locator("#main-content")).toBeVisible();
+  const launcher = page.getByRole("button", { name: /open chat/i });
+  await launcher.hover(); // pointer warm-up
+  await page.waitForTimeout(7000); // idle warm-up runs after 5 seconds
+  expect(errors.filter((e) => /ChatWindow|dynamically imported module|Failed to fetch/i.test(e))).toEqual([]);
+
+  // A real tap with the file back (as after the one-time refresh) opens the chat.
+  await page.unroute(/components\/chat\/ChatWindow/);
+  await page.reload();
+  await page.getByRole("button", { name: /open chat/i }).click();
+  await expect(page.getByRole("textbox").last()).toBeVisible();
+});
