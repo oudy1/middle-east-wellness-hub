@@ -25,7 +25,7 @@ async function ask(q: string, language: "en" | "ar") {
   }));
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}`, apikey: key },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}`, apikey: key, Origin: "https://www.projectshams.com" },
     body: JSON.stringify({ messages: [{ role: "user", content: q }], language, context }),
   });
   const raw = await res.text();
