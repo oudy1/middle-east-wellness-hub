@@ -8,8 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import posterAsset from "@/assets/mentorship-poster.jpg.asset.json";
 
-const MENTOR_FORM = "https://forms.gle/dCyMfPQH8DRSxsxb8";
-const MENTEE_FORM = "https://forms.gle/3Xw71e2Y3Hhqn7gF9";
+import { MENTOR_FORM_URL as MENTOR_FORM, MENTEE_FORM_URL as MENTEE_FORM } from "@/lib/programLinks";
 const LINKTREE = "https://linktr.ee/ProjectSHAMS";
 
 const Mentorship = () => {
