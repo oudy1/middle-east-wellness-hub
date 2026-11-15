@@ -113,3 +113,13 @@ export function helpLinkHref(link: HelpLink): string | null {
   }
   return null;
 }
+
+/** Six quick entry points shown under the homepage search; same approved route keys. */
+export const QUICK_ENTRIES: { id: string; routeKey: string; en: string; ar: string }[] = [
+  { id: "newcomer", routeKey: "newcomer_initiative", en: "Newcomer health", ar: "صحة القادمين الجدد" },
+  { id: "arabic-info", routeKey: "educational_materials", en: "Arabic health information", ar: "معلومات صحية بالعربية" },
+  { id: "family-doctors", routeKey: "family_physicians", en: "Family doctors", ar: "أطباء الأسرة" },
+  { id: "research", routeKey: "research_opportunities", en: "Research opportunities", ar: "الفرص البحثية" },
+  { id: "programs", routeKey: "programs", en: "Programs", ar: "البرامج" },
+  { id: "recordings", routeKey: "recordings", en: "Webinar recordings", ar: "تسجيلات الندوات" },
+];
