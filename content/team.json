@@ -1,0 +1,57 @@
+{
+  "_note": "Single source for the public SHAMS team. Only name, team affiliation and confirmed leadership title. Never add phone numbers, personal emails, tasks or internal notes. Former members live in content/team-archive.json, which the site never loads.",
+  "teams": [
+    { "id": "research", "short_en": "Research", "short_ar": "البحث العلمي", "label_en": "Research Team", "label_ar": "فريق البحث العلمي", "lead": "Mousa Sururi" },
+    { "id": "outreach", "short_en": "Outreach", "short_ar": "التواصل والشراكات", "label_en": "Outreach Team", "label_ar": "فريق التواصل والشراكات", "lead": "Saif Arabiat" },
+    { "id": "social-media-research", "short_en": "Social Media Research", "short_ar": "البحث للمحتوى الرقمي", "label_en": "Social Media Research", "label_ar": "فريق البحث للمحتوى الرقمي", "lead": "Marta Mhanna" },
+    { "id": "content-creation", "short_en": "Content Creation", "short_ar": "صناعة المحتوى", "label_en": "Content Creation & Social Media", "label_ar": "فريق صناعة المحتوى ووسائل التواصل الاجتماعي", "lead": "Zeina Issa" },
+    { "id": "events", "short_en": "Events", "short_ar": "الفعاليات", "label_en": "Events Team", "label_ar": "فريق الفعاليات", "lead": "Haneen Al Jayashy" }
+  ],
+  "founder": { "name": "Mahmoud Noweir", "title_en": "Founder, SHAMS", "title_ar": "المؤسس، شمس" },
+  "members": [
+    { "name": "Adeeb Mokamel", "teams": ["research", "events"] },
+    { "name": "Hasan Sheather", "teams": ["research", "outreach", "social-media-research", "content-creation"] },
+    { "name": "Karim Salhab", "teams": ["research", "social-media-research", "content-creation"] },
+    { "name": "Mahmoud Noweir", "teams": [] },
+    { "name": "Mariam Ihab Abdallah", "teams": ["content-creation"] },
+    { "name": "Marta Mhanna", "teams": ["research", "social-media-research", "content-creation"] },
+    { "name": "Mohammad Sururi", "teams": ["outreach", "social-media-research", "content-creation"] },
+    { "name": "Mousa Sururi", "teams": ["research"] },
+    { "name": "Mumtaz Hajjo Alrifai", "teams": ["research", "events"] },
+    { "name": "Omair Bohio", "teams": ["outreach"] },
+    { "name": "Saif Arabiat", "teams": ["outreach"] },
+    { "name": "Sarah Durrani", "teams": ["outreach"] },
+    { "name": "Sofia Sarwary", "teams": ["research"] },
+    { "name": "Talia Deratani", "teams": ["research"] },
+    { "name": "Yara Hassan", "teams": ["content-creation", "events"] },
+    { "name": "Yasameen Ihsan", "teams": [] },
+    { "name": "Haneen Al Jayashy", "teams": ["events"] },
+    { "name": "Zohra Ahmadzai", "teams": [] },
+    { "name": "Barekah Vistro", "teams": [] },
+    { "name": "Anum Mudassar", "teams": ["content-creation"] },
+    { "name": "Abdullah Al-Azzawi", "teams": ["research"] },
+    { "name": "Tala Seifi", "teams": ["outreach"] },
+    { "name": "Fatima Sharif-Zada", "teams": ["outreach"] },
+    { "name": "Hanin Gamour", "teams": [] },
+    { "name": "Zeina Issa", "teams": ["content-creation"] },
+    { "name": "Housam Alamour", "teams": ["outreach"] },
+    { "name": "Mohammad Almhissen", "teams": ["content-creation", "events"] },
+    { "name": "Leen Dahlan", "teams": ["social-media-research", "events"] }
+  ],
+  "leadTitles": {
+    "Mousa Sururi": { "en": "Research Team Lead", "ar": "قائد فريق البحث العلمي" },
+    "Saif Arabiat": { "en": "Outreach Team Lead", "ar": "قائد فريق التواصل والشراكات" },
+    "Marta Mhanna": { "en": "Social Media Research Team Lead", "ar": "قائدة فريق البحث للمحتوى الرقمي" },
+    "Zeina Issa": { "en": "Social Media Content Creation Team Lead", "ar": "قائدة فريق صناعة المحتوى ووسائل التواصل الاجتماعي" },
+    "Haneen Al Jayashy": { "en": "Events Team Lead", "ar": "قائدة فريق الفعاليات" }
+  },
+  "affiliatedPhysicians": [
+    {
+      "name": "Dr. Raed Hawa",
+      "role_en": "Affiliated Physician",
+      "role_ar": "طبيب منتسب",
+      "specialization_en": "Consultation liaison psychiatry, sleep medicine and obesity medicine",
+      "specialization_ar": "الطب النفسي الاستشاري، طب النوم وطب السمنة"
+    }
+  ]
+}

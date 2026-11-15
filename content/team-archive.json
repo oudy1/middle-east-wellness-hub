@@ -1,0 +1,21 @@
+{
+  "_note": "Former names from the public team list, kept for the record only (removed November 2026 when the approved 28-person roster replaced it). Nothing on the site loads this file. Spelling corrections to current members are listed separately.",
+  "removedFromPublicTeam": [
+    { "name": "Amr Al Masri", "previousListing": "Events" },
+    { "name": "Darah Freije", "previousListing": "Outreach" },
+    { "name": "Alanoud", "previousListing": "Graphic Designer" },
+    { "name": "Lodi Sinanios", "previousListing": "Technology and digital initiatives" },
+    { "name": "Riad Sankari", "previousListing": "Healthcare advocacy and outreach" }
+  ],
+  "spellingCorrected": [
+    { "old": "Hassan Sheather", "new": "Hasan Sheather" },
+    { "old": "Abdullah Azzawi", "new": "Abdullah Al-Azzawi" },
+    { "old": "Karim Sahlab", "new": "Karim Salhab" },
+    { "old": "Mariam Ihab", "new": "Mariam Ihab Abdallah" },
+    { "old": "Mousa El-Sururi", "new": "Mousa Sururi" },
+    { "old": "Sarah Durani", "new": "Sarah Durrani" }
+  ],
+  "titlesDropped": [
+    { "name": "Sofia Sarwary", "oldTitle": "Project Manager", "reason": "Not among the confirmed leadership titles in the November 2026 brief" }
+  ]
+}
