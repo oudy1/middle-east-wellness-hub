@@ -62,12 +62,14 @@ function hasPhrase(padded: string, list: string[]): boolean {
 }
 
 /**
- * Same rule as the AI assistant: the Arabic site always answers in Arabic; the
- * English site answers in Arabic when the visitor writes any Arabic.
+ * Same main rule as the AI assistant: answer in the language the visitor
+ * writes. Any Arabic (also in a mixed message) means Arabic; only Latin
+ * letters means English; neither (numbers, emoji) keeps the site language.
  */
 export function replyLanguage(message: string, uiLanguage: "en" | "ar"): "en" | "ar" {
-  if (uiLanguage === "ar" || /[\u0600-\u06FF]/.test(message)) return "ar";
-  return "en";
+  if (/[\u0600-\u06FF]/.test(message)) return "ar";
+  if (/[a-z]/i.test(message)) return "en";
+  return uiLanguage;
 }
 
 // ---- vocabulary (formal Arabic, common dialect spellings, English) ----------

@@ -127,9 +127,9 @@ describe("language and cities", () => {
   it("replies in Arabic when the visitor writes Arabic on the English site", () => {
     expect(replyLanguage("ابي family doctor", "en")).toBe("ar");
   });
-  it("keeps Arabic on the Arabic site, like the AI assistant", () => {
-    expect(replyLanguage("family doctor", "ar")).toBe("ar");
-    expect(ask("family doctor in Kitchener", "ar")?.language).toBe("ar");
+  it("answers English questions in English, and numbers-only messages in the site language", () => {
+    expect(replyLanguage("family doctor", "ar")).toBe("en");
+    expect(replyLanguage("911?", "ar")).toBe("ar");
   });
   it("knows Arabic city spellings", () => {
     expect(findCity("مسيساغا")?.name).toBe("Mississauga");

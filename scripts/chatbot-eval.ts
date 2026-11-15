@@ -70,7 +70,8 @@ for (const c of CASES) {
   const want = replyLanguage(c.q, c.ui);
   const arabicShare = (text.match(/[\u0600-\u06FF]/g) ?? []).length / Math.max(1, text.replace(/\s|\[.*?\]\(.*?\)/g, "").length);
   if (want === "ar" && arabicShare < 0.4) problems.push("expected Arabic reply");
-  if (want === "en" && arabicShare > 0.3) problems.push("expected English reply");
+  // English questions on the Arabic site may be answered in either language.
+  if (want === "en" && c.ui === "en" && arabicShare > 0.3) problems.push("expected English reply");
   if (c.mustLink && !links.some((u) => c.mustLink!.test(u))) problems.push(`missing link ${c.mustLink}`);
   if (!text.trim()) problems.push("empty reply");
   if (problems.length) failures++;
