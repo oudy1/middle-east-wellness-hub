@@ -61,11 +61,13 @@ function hasPhrase(padded: string, list: string[]): boolean {
   return list.some((p) => padded.includes(p));
 }
 
-/** Arabic letters anywhere means the visitor wrote Arabic (also for mixed messages). */
+/**
+ * Same rule as the AI assistant: the Arabic site always answers in Arabic; the
+ * English site answers in Arabic when the visitor writes any Arabic.
+ */
 export function replyLanguage(message: string, uiLanguage: "en" | "ar"): "en" | "ar" {
-  if (/[\u0600-\u06FF]/.test(message)) return "ar";
-  if (/[a-z]/i.test(message)) return "en";
-  return uiLanguage;
+  if (uiLanguage === "ar" || /[\u0600-\u06FF]/.test(message)) return "ar";
+  return "en";
 }
 
 // ---- vocabulary (formal Arabic, common dialect spellings, English) ----------
@@ -144,7 +146,18 @@ export function findCity(message: string) {
 
 const KYR_PHRASES = phrases(["know your rights", "اعرف حقوقك", "إعرف حقوقك"]);
 const WEBINAR = words(["webinar", "webinars", "recording", "recordings", "video", "watch", "ندوه", "ندوات", "تسجيل", "تسجيلات", "فيديو", "شاهد", "اشوف"]);
-const RIGHTS = words(["rights", "حقوق", "حقوقي", "حقوقك", "dismissed", "ignored", "complaint", "complain", "شكوى", "تجاهل", "تجاهلني"]);
+const RIGHTS = words(["rights", "حقوق", "حقوقي", "حقوقك", "complaint", "complain", "شكوى", "تجاهلني"]);
+const RIGHTS_PHRASES = phrases([
+  "ignored me", "dismissed me", "didn t listen", "doesn t listen", "won t listen", "second opinion",
+  "رأي ثاني", "رأي طبي ثاني", "راي ثاني", "راي طبي ثاني", "رأي طبي آخر", "ما سمعني", "ما بيسمعني", "لم يستمع",
+]);
+/** Requests about private data or the assistant's rules: the AI answers (and declines). */
+const PRIVATE = words(["admin", "admins", "logs", "password", "prompt", "instructions", "مشرف", "سجلات", "كلمه"]);
+/** Words that show the visitor wants to find a doctor (not talk about one). */
+const FIND = words([
+  "find", "need", "looking", "search", "recommend", "list", "where", "nearby", "near",
+  "ابحث", "الاقي", "القى", "بدي", "اريد", "محتاج", "محتاجه", "عايز", "ابغى", "ابي", "وين", "فين", "اين", "قريب",
+]);
 const WORKSHOP = words(["workshop", "ورشه", "ورش", "scadding", "سكادينغ", "سكادنغ"]);
 const WORKSHOP_PHRASES = phrases(["november 19", "nov 19", "19 november", "19 نوفمبر", "١٩ نوفمبر", "newcomer event", "newcomer workshop"]);
 const MENTOR = words(["mentor", "mentors", "mentorship", "mentee", "ارشاد", "مرشد", "مرشده", "منتور", "منتورشب"]);
@@ -223,8 +236,9 @@ export function instantAnswer(
     return doctorInCity(lang, city, false);
   }
 
-  // 2. Everything else only for short, clear questions.
+  // 2. Everything else only for short, clear questions about public pages.
   if (w.length > MAX_WORDS_FOR_INSTANT) return null;
+  if (hasWord(w, PRIVATE)) return null;
 
   if (hasPhrase(padded, KYR_PHRASES) || (hasWord(w, RIGHTS) && hasWord(w, WEBINAR))) {
     return answer(
@@ -235,7 +249,7 @@ export function instantAnswer(
     );
   }
 
-  if (hasWord(w, RIGHTS)) {
+  if (hasWord(w, RIGHTS) || hasPhrase(padded, RIGHTS_PHRASES)) {
     return answer(
       "patient_rights",
       lang,
@@ -264,6 +278,7 @@ export function instantAnswer(
 
   if ((hasWord(w, DOCTOR) || hasPhrase(padded, DOCTOR_PHRASES)) && !hasWord(w, RESEARCH)) {
     if (city) return doctorInCity(lang, city, hasWord(w, FAMILY));
+    if (!hasWord(w, FIND) && w.length > 4) return null;
     return answer(
       "doctor_ask_city",
       lang,
