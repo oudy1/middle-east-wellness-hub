@@ -43,8 +43,19 @@ const MAX_WORDS_FOR_INSTANT = 14;
 const words = (list: string[]) => Array.from(new Set(list.flatMap(toWords)));
 const phrases = (list: string[]) => list.map((p) => ` ${normalizeText(p)} `);
 
+/**
+ * Keyword match that stays strict on short words, so "right" never counts as
+ * "rights" and "poster" never counts as "post": exact for short keywords,
+ * a short ending ("doctors", "دكتوره") for 5+ letters, one typo for 7+ letters.
+ */
 function hasWord(msgWords: string[], keywords: string[]): boolean {
-  return keywords.some((k) => matchWord(k, msgWords) !== null);
+  return keywords.some((k) =>
+    msgWords.some((m) => {
+      if (m === k) return true;
+      if (k.length >= 5 && m.startsWith(k) && m.length - k.length <= 2) return true;
+      return k.length >= 7 && matchWord(k, [m]) === "typo";
+    })
+  );
 }
 function hasPhrase(padded: string, list: string[]): boolean {
   return list.some((p) => padded.includes(p));
@@ -83,8 +94,12 @@ const MEDICATION_PHRASES = phrases([
 ]);
 
 const DOCTOR = words([
-  "doctor", "doctors", "physician", "physicians", "gp", "dr", "healthcare worker", "provider",
-  "طبيب", "اطباء", "دكتور", "دكتوره", "دكاتره", "حكيم", "مقدم رعايه",
+  "doctor", "doctors", "docter", "physician", "physicians", "gp", "dr", "provider", "providers",
+  "طبيب", "طبيبه", "لطبيب", "اطباء", "دكتور", "دكتوره", "لدكتور", "دكاتره", "حكيم",
+]);
+const DOCTOR_PHRASES = phrases([
+  "healthcare worker", "health care worker", "healthcare workers", "healthcare provider", "health care provider",
+  "مقدم رعايه", "مقدمي الرعايه", "مقدمي رعايه", "العاملين في الرعايه", "عامل في الرعايه",
 ]);
 const FAMILY = words(["family", "اسره", "عائله", "عيله", "عايله"]);
 
@@ -104,7 +119,7 @@ const CITIES: { name: string; province: string; aliases: string[] }[] = [
   { name: "Ottawa", province: "ON", aliases: ["ottawa", "اوتاوا", "أوتاوا"] },
   { name: "Windsor", province: "ON", aliases: ["windsor", "وندسور", "ويندسور"] },
   { name: "Markham", province: "ON", aliases: ["markham", "ماركهام"] },
-  { name: "Vaughan", province: "ON", aliases: ["vaughan", "فون"] },
+  { name: "Vaughan", province: "ON", aliases: ["vaughan", "فوهان"] },
   { name: "Scarborough", province: "ON", aliases: ["scarborough", "سكاربورو"] },
   { name: "North York", province: "ON", aliases: ["north york", "نورث يورك"] },
   { name: "Etobicoke", province: "ON", aliases: ["etobicoke", "اتوبيكو"] },
@@ -130,7 +145,7 @@ const MENTOR = words(["mentor", "mentors", "mentorship", "mentee", "ارشاد",
 const RESEARCH = words(["research", "study", "studies", "trial", "trials", "survey", "بحث", "ابحاث", "دراسه", "دراسات", "استبيان"]);
 const JOIN = words(["join", "participate", "participant", "enroll", "enrol", "sign", "part", "مشاركه", "اشارك", "شارك", "انضم", "انضمام", "اسجل", "التسجيل"]);
 const POST = words(["post", "submit", "recruit", "recruiting", "advertise", "انشر", "نشر", "اعلن", "ارسل"]);
-const RESOURCES = words(["resources", "resource", "materials", "information", "info", "pdf", "guides", "موارد", "مصادر", "معلومات", "مواد", "ادله"]);
+const RESOURCES = words(["resources", "resource", "materials", "pdf", "pdfs", "guides", "موارد", "مصادر", "مواد", "ادله"]);
 const ARABIC = words(["arabic", "عربي", "بالعربي", "بالعربيه", "العربيه"]);
 const VOLUNTEER = words(["volunteer", "volunteering", "تطوع", "متطوع", "اتطوع", "تطوعي"]);
 const CONTACT = words(["contact", "email", "reach", "تواصل", "اتواصل", "راسل", "اراسل", "ايميل"]);
@@ -241,7 +256,7 @@ export function instantAnswer(
     );
   }
 
-  if (hasWord(w, DOCTOR) && !hasWord(w, RESEARCH)) {
+  if ((hasWord(w, DOCTOR) || hasPhrase(padded, DOCTOR_PHRASES)) && !hasWord(w, RESEARCH)) {
     if (city) return doctorInCity(lang, city, hasWord(w, FAMILY));
     return answer(
       "doctor_ask_city",
