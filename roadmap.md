@@ -60,4 +60,5 @@
 
 ## Modernization 5.0 brief (uploaded Nov 15, planning only)
 - [x] Plan and assessment written (report in Files); no code changed.
-- [ ] Batch 1 (waiting on approval): saved 60-question chatbot test, quick fixes (chat preload error, youtube-nocookie, reduced motion, long dashes if approved), chat source cards, research study status labels (needs real statuses from user).
+- [ ] Batch 1 (waiting on approval): saved 60-question chatbot test, quick fixes (chat preload error, youtube-nocookie, long dashes if approved; reduced motion done), chat source cards, research study status labels (needs real statuses from user).
+- [x] Visual and interaction batch (Nov 15): header menus (keyboard, on-screen, overview links), card style, poster sliders (SAWA, research portfolio, convention), header search panel, phone tap sizes and overflow, reduced motion. Not published.
