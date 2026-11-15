@@ -71,6 +71,10 @@ export default {
         healthTeal: "#0E7A8A",       // Primary teal (was #1A9AAD — failed AA on white)
         healthTealLight: "#5BC8D8",  // Lighter teal for use on dark navy surfaces
         healthRed: "#A82B2B",        // Rich burgundy/red
+        sun: {
+          cream: 'hsl(var(--sun-cream))', peach: 'hsl(var(--sun-peach))', gold: 'hsl(var(--sun-gold))',
+          orange: 'hsl(var(--sun-orange))', blue: 'hsl(var(--sun-blue))', teal: 'hsl(var(--sun-teal))', sky: 'hsl(var(--sun-sky))',
+        },
         healthDarkBlue: "#1F4068",   // Deep navy blue
         healthLightGray: "#E5DCC7",  // Neutral beige
         healthGold: "#E6C095",       // Sand/desert gold

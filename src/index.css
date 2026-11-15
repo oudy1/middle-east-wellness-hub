@@ -17,6 +17,16 @@
 
 @layer base {
   :root {
+    /* SHAMS sunrise palette (homepage) */
+    --sun-cream: 34 100% 97%;
+    --sun-peach: 22 79% 88%;
+    --sun-gold: 40 100% 71%;
+    --sun-orange: 32 88% 62%;
+    --sun-blue: 206 59% 22%;
+    --sun-teal: 192 59% 22%;
+    --sun-sky: 205 45% 93%;
+    --gradient-sunrise: linear-gradient(160deg, hsl(var(--sun-cream)) 0%, hsl(var(--sun-peach)) 60%, hsl(var(--sun-gold) / 0.7) 100%);
+    --shadow-sun: 0 12px 32px -14px hsl(var(--sun-orange) / 0.45);
     --background: 36 20% 96%;
     --foreground: 24 13% 9%;
 
@@ -301,4 +311,18 @@ a[data-mp-card]:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Homepage sunrise motion. Everything rests in its final state when motion is reduced. */
+@keyframes sun-rise { from { transform: translateY(40%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes sun-rays { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.sun-rise { animation: sun-rise 800ms cubic-bezier(.2,.7,.2,1) both; }
+.sun-rays { transform-origin: 50% 50%; transform-box: fill-box; animation: sun-rays 900ms 300ms ease-out both; }
+.rise-in { animation: rise-in 600ms ease-out both; }
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease-out, transform 600ms ease-out; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sun-rise, .sun-rays, .rise-in { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
