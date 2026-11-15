@@ -566,5 +566,6 @@
   "team.noResults": "لا يوجد أعضاء يطابقون بحثك.",
   "team.clearSearch": "مسح البحث",
   "team.shamsTeam": "فريق شمس",
-  "team.affiliatedPhysicians": "الأطباء المنتسبون"
+  "team.affiliatedPhysicians": "الأطباء المنتسبون",
+  "chatbot.sources": "المصادر"
 }

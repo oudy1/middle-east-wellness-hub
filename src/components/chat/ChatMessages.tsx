@@ -9,13 +9,13 @@ import {
   isMailtoOrTel,
   isSafeExternalUrl,
   parentRoute,
+  sourceLabel,
 } from '@/lib/chatbotRoutes';
+import { isApprovedExternalUrl } from '@/lib/approvedExternalLinks';
+import type { ChatMessage as Message } from '@/hooks/useChatSession';
 
-interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-}
+/** Answers show at most this many action buttons, so the next step stays obvious. */
+export const MAX_ACTION_BUTTONS = 2;
 
 interface ChatMessagesProps {
   messages: Message[];
@@ -90,6 +90,17 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
     let match;
     let buttonCount = 0;
     const buttons: React.ReactElement[] = [];
+    const usedUrls = new Set<string>();
+    const sources: string[] = [];
+    const lang = language === 'ar' ? 'ar' : 'en';
+    /** Records one action; false when the answer already has enough buttons or this link is a repeat. */
+    const takeSlot = (url: string) => {
+      if (usedUrls.has(url) || buttons.length >= MAX_ACTION_BUTTONS) return false;
+      usedUrls.add(url);
+      const src = sourceLabel(url, lang);
+      if (!sources.includes(src)) sources.push(src);
+      return true;
+    };
 
     const internalClasses = "text-xs min-h-[44px] px-4 py-2 bg-white hover:bg-healthGold/20 border-healthGold/40 text-healthDarkBlue hover:border-healthGold transition-colors touch-manipulation active:scale-95 select-none cursor-pointer z-10";
     const externalClasses = "text-xs min-h-[44px] px-4 py-2 bg-white hover:bg-healthTeal/10 border-healthTeal/30 text-healthDarkBlue hover:border-healthTeal transition-colors touch-manipulation active:scale-95 select-none cursor-pointer z-10";
@@ -110,7 +121,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
         // Internal route: only render a button when the route is approved.
         if (isApprovedInternalUrl(linkUrl)) {
           const url = linkUrl;
-          buttons.push(
+          if (takeSlot(url)) buttons.push(
             <Button
               key={`nav-btn-${buttonCount++}`}
               type="button"
@@ -131,7 +142,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
           // Unverified route from the model: offer the nearest verified parent.
           console.warn('[chatbot] unapproved route in response, using parent:', linkUrl);
           const fallback = parentRoute(linkUrl);
-          buttons.push(
+          if (takeSlot(fallback)) buttons.push(
             <Button
               key={`nav-fallback-${buttonCount++}`}
               type="button"
@@ -151,7 +162,7 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
         }
       } else if (isMailtoOrTel(linkUrl)) {
         const url = linkUrl;
-        buttons.push(
+        if (takeSlot(url)) buttons.push(
           <Button
             key={`mail-btn-${buttonCount++}`}
             type="button"
@@ -168,9 +179,9 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
             {linkText}
           </Button>
         );
-      } else if (isSafeExternalUrl(linkUrl)) {
+      } else if (isApprovedExternalUrl(linkUrl)) {
         const url = linkUrl;
-        buttons.push(
+        if (takeSlot(url)) buttons.push(
           <Button
             key={`ext-btn-${buttonCount++}`}
             type="button"
@@ -188,7 +199,9 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
           </Button>
         );
       } else {
-        // javascript:, data:, vbscript: and anything else: render as plain text.
+        // Unapproved or expired outside links, javascript:, data: and anything
+        // else: show the words only, never a tappable link.
+        if (isSafeExternalUrl(linkUrl)) console.warn('[chatbot] blocked unapproved external link:', linkUrl);
         parts.push(linkText);
       }
       lastIndex = match.index + match[0].length;
@@ -215,6 +228,11 @@ export const ChatMessages: React.FC<ChatMessagesProps> = ({ messages, isLoading,
           <div className="flex flex-wrap gap-2" style={{ pointerEvents: 'auto' }}>
             {buttons}
           </div>
+          {sources.length > 0 && (
+            <p className="text-[11px] text-muted-foreground" data-testid="chat-sources">
+              {t('chatbot.sources')}: {sources.join(' · ')}
+            </p>
+          )}
         </div>
       );
     }

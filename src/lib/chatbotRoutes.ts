@@ -83,3 +83,38 @@ export function isSafeExternalUrl(url: string): boolean {
   const trimmed = url.trim().toLowerCase();
   return trimmed.startsWith("https://") || trimmed.startsWith("http://");
 }
+
+// Page names shown under chatbot answers as "Sources", keyed by base path.
+const SOURCE_NAMES: Record<string, { en: string; ar: string }> = {
+  "/": { en: "SHAMS home", ar: "الصفحة الرئيسية لشمس" },
+  "/about": { en: "About SHAMS", ar: "عن شمس" },
+  "/services": { en: "SHAMS Services", ar: "خدمات شمس" },
+  "/programs": { en: "SHAMS Programs", ar: "برامج شمس" },
+  "/programs/mentorship": { en: "Mentorship Program", ar: "برنامج الإرشاد" },
+  "/research": { en: "SHAMS Research", ar: "أبحاث شمس" },
+  "/recordings": { en: "Webinar recordings", ar: "تسجيلات الندوات" },
+  "/find-healthcare-workers": { en: "Healthcare worker directory", ar: "دليل العاملين في الرعاية الصحية" },
+  "/directory": { en: "Directory with map", ar: "الدليل مع الخريطة" },
+  "/contact": { en: "Contact SHAMS", ar: "تواصل مع شمس" },
+  "/volunteer": { en: "Volunteer", ar: "التطوع" },
+  "/faq": { en: "FAQ", ar: "الأسئلة الشائعة" },
+  "/glossary": { en: "Glossary", ar: "المسرد" },
+  "/physicians/apply": { en: "Directory application", ar: "طلب الانضمام إلى الدليل" },
+  "/post-opportunity": { en: "Submit an opportunity", ar: "إرسال فرصة" },
+};
+
+/** Short, human name of where a chatbot link comes from ("SHAMS Services", "ontario.ca"). */
+export function sourceLabel(url: string, language: "en" | "ar"): string {
+  if (url.startsWith("/")) {
+    const path = url.split("#")[0].split("?")[0];
+    const name = SOURCE_NAMES[path] ?? SOURCE_NAMES[parentRoute(url)] ?? SOURCE_NAMES["/"];
+    return name[language];
+  }
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    if (host === "forms.gle" || host === "docs.google.com") return "Google Forms";
+    return host;
+  } catch {
+    return url;
+  }
+}
