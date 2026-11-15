@@ -9,10 +9,45 @@ const EMBED_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F
 const VIEW_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F9sAcu8cOI4cMJBYPIeWPDLZ9lJiISM1B0HGzpYynMwWio6iXLBPdaFr-ixDcDbKJJG/pub?start=false&loop=false&delayms=3000";
 const PDF_URL = "https://docs.google.com/presentation/d/e/2PACX-1vQYHJsMEg2j8F9sAcu8cOI4cMJBYPIeWPDLZ9lJiISM1B0HGzpYynMwWio6iXLBPdaFr-ixDcDbKJJG/pub?start=false&loop=false&delayms=3000&output=pdf";
 
-const WebinarSlidesViewer = () => {
+/** `embedded` renders inside the Women's Health recording card (poster, slide buttons, viewer) without its own card. */
+const WebinarSlidesViewer = ({ embedded = false }: { embedded?: boolean }) => {
   const { language, t } = useLanguage();
   const isRTL = language === "ar" || language === "ku" || language === "fa";
   const [embedError, setEmbedError] = useState(false);
+
+  if (embedded) {
+    return (
+      <div className={`p-4 md:p-6 border-b border-border/50 ${isRTL ? "font-cairo" : ""}`} dir={isRTL ? "rtl" : "ltr"}>
+        <div className="flex flex-col sm:flex-row gap-4 sm:items-center mb-4">
+          <img
+            src={womensHealthPoster}
+            alt={t("slides.posterAlt")}
+            className="w-auto max-h-40 h-auto max-w-full rounded-lg object-contain self-center sm:self-auto"
+            loading="lazy"
+          />
+          <div className="flex flex-wrap gap-2">
+            <Button asChild className="min-h-[44px] gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+              <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                {t("common.viewSlides")}
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="min-h-[44px] gap-1.5">
+              <a href={PDF_URL} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                {t("slides.downloadDeck")}
+              </a>
+            </Button>
+          </div>
+        </div>
+        <div className="rounded-lg overflow-hidden border border-border/50">
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe className="absolute top-0 left-0 w-full h-full" src={EMBED_URL} title={t("slides.title")} allowFullScreen loading="lazy" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto mb-16">

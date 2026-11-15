@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { HERO_LINKS, homeRoute } from "@/lib/homeLinks";
+import { HERO_LINKS, HERO_QUICK_KEYS, homeRoute } from "@/lib/homeLinks";
 // SHAMS_LOGO_PRIMARY - Do not change this logo path
 const SHAMS_LOGO_PRIMARY = "/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png";
 
@@ -13,12 +13,16 @@ const copy = {
     sub: "Healthcare education, guidance and opportunity for Middle Eastern and North African societies across Canada.",
     primary: "Explore Health Resources",
     secondary: "Discover SHAMS",
+    quickLabel: "Main sections",
+    quick: ["Health Resources", "Programs and Mentorship", "Healthcare Workers", "Research"],
   },
   ar: {
     title: "طريق أكثر إشراقا نحو الصحة.",
     sub: "تثقيف صحي وإرشاد وفرص للمجتمعات الشرق أوسطية وشمال الأفريقية في جميع أنحاء كندا.",
     primary: "استكشف الموارد الصحية",
     secondary: "تعرّف على شمس",
+    quickLabel: "الأقسام الرئيسية",
+    quick: ["الموارد الصحية", "البرامج والإرشاد", "العاملون في الرعاية الصحية", "البحث"],
   },
 };
 
@@ -90,6 +94,20 @@ const HeroSection = forwardRef<HTMLElement>((_, ref) => {
               <Link to={homeRoute(HERO_LINKS.secondary)}>{c.secondary}</Link>
             </Button>
           </div>
+          <nav aria-label={c.quickLabel} data-testid="hero-quick-links" className="mt-4 rise-in" style={{ animationDelay: "500ms" }}>
+            <ul className="flex flex-wrap gap-2 justify-center md:justify-start">
+              {HERO_QUICK_KEYS.map((key, i) => (
+                <li key={key}>
+                  <Link
+                    to={homeRoute(key)}
+                    className="inline-flex items-center min-h-[44px] px-3.5 rounded-full border border-sun-blue/25 bg-sun-cream/80 text-sm font-medium text-sun-blue hover:bg-sun-cream hover:border-sun-orange/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange"
+                  >
+                    {c.quick[i]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-40 opacity-40 md:static md:h-72 md:opacity-100 pointer-events-none">
           <Sunrise />
