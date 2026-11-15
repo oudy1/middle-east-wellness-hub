@@ -9,7 +9,7 @@
 import { matchWord, normalizeText, toWords } from "./searchText";
 import { approvedRouteMap as R } from "./chatbotRoutes";
 import { OFFICIAL_SOURCES } from "./approvedExternalLinks";
-import { NEWCOMER_WORKSHOP, isNewcomerWorkshopUpcoming } from "./newcomerWorkshop";
+import { NEWCOMER_WORKSHOP, isNewcomerWorkshopUpcoming, newcomerWorkshopStatus } from "./newcomerWorkshop";
 
 export type InstantIntent =
   | "crisis"
@@ -268,6 +268,15 @@ export function instantAnswer(
         lang,
         `"${e.en.title}" is a free workshop on ${e.en.date}, ${e.en.time}, at ${e.en.place}.\n${link("Register", e.registerUrl)}\n${link("Workshop details", e.learnMorePath)}`,
         `"${e.ar.title}" ورشة مجانية يوم ${e.ar.date}، ${e.ar.time}، في ${e.ar.place}.\n${link("سجّل الآن", e.registerUrl)}\n${link("تفاصيل الورشة", e.learnMorePath)}`
+      );
+    }
+    // Say it "took place" only once SHAMS has confirmed it; a passed date alone means registration is closed.
+    if (newcomerWorkshopStatus(now) === "ended") {
+      return answer(
+        "newcomer_workshop",
+        lang,
+        `The date for the "${e.en.title}" workshop (${e.en.date}) has passed, so registration is closed. The Newcomer Initiative page has related resources.\n${link("Newcomer initiative", R.newcomer_initiative)}`,
+        `مضى موعد ورشة "${e.ar.title}" (${e.ar.date})، والتسجيل مغلق الآن. تجد موارد ذات صلة في صفحة مبادرة الوافدين الجدد.\n${link("مبادرة الوافدين الجدد", R.newcomer_initiative)}`
       );
     }
     return answer(
