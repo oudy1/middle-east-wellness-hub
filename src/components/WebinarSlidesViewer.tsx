@@ -18,13 +18,8 @@ const WebinarSlidesViewer = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
       <div className={`p-4 md:p-6 border-b border-border/50 ${isRTL ? "font-cairo" : ""}`} dir={isRTL ? "rtl" : "ltr"}>
-        <div className="flex flex-col sm:flex-row gap-4 sm:items-center mb-4">
-          <img
-            src={womensHealthPoster}
-            alt={t("slides.posterAlt")}
-            className="w-auto max-h-40 h-auto max-w-full rounded-lg object-contain self-center sm:self-auto"
-            loading="lazy"
-          />
+        {/* The deck opens on the poster slide, so the poster image is not repeated here. */}
+        <div className="mb-4">
           <div className="flex flex-wrap gap-2">
             <Button asChild className="min-h-[44px] gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
               <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
