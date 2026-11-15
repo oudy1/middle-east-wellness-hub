@@ -146,7 +146,7 @@ const curated: KnowledgeItem[] = [
     description_ar: "تعرف على الباحثين المنتسبين لشمس وأعمالهم.",
     category: "researchers",
     tags: ["researchers", "team"],
-    keywords: ["researcher", "researchers", "affiliated", "باحث", "باحثون", "الباحثون", ...RESEARCHERS.map((r) => r.name_en)],
+    keywords: ["researcher", "researchers", "affiliated", "باحث", "باحثون", "الباحثون"],
     language: "both",
     url: approvedRoutes.researchers,
   },
