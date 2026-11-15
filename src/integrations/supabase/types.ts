@@ -509,6 +509,36 @@ export type Database = {
         }
         Relationships: []
       }
+      webinar_topic_requests: {
+        Row: {
+          created_at: string
+          description: string | null
+          email: string
+          id: string
+          language: string
+          name: string
+          topic: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          email: string
+          id?: string
+          language?: string
+          name: string
+          topic: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          email?: string
+          id?: string
+          language?: string
+          name?: string
+          topic?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       topic_leaderboard: {
