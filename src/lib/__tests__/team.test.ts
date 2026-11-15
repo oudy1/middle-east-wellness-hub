@@ -19,16 +19,23 @@ describe("public SHAMS team", () => {
     expect(names(TEAM_MEMBERS)).toEqual([...ROSTER].sort());
   });
 
-  it("labels the founder and the five confirmed team leads, nobody else", () => {
+  it("labels the founder, project manager, mentorship lead and five team leads, nobody else", () => {
     const titles = Object.fromEntries(LEADERSHIP.map((m) => [m.name, m.title?.en]));
     expect(titles).toEqual({
       "Mahmoud Noweir": "Founder, SHAMS",
+      "Sofia Sarwary": "Project Manager",
+      "Yasameen Ihsan": "Mentorship Program Lead",
       "Mousa Sururi": "Research Team Lead",
       "Saif Arabiat": "Outreach Team Lead",
       "Marta Mhanna": "Social Media Research Team Lead",
       "Zeina Issa": "Social Media Content Creation Team Lead",
       "Haneen Al Jayashy": "Events Team Lead",
     });
+  });
+
+  it("lists Sofia Sarwary right after the founder and keeps her on the Research team", () => {
+    expect(LEADERSHIP.slice(0, 2).map((m) => m.name)).toEqual(["Mahmoud Noweir", "Sofia Sarwary"]);
+    expect(TEAM_MEMBERS.find((m) => m.name === "Sofia Sarwary")?.teams).toEqual(["research"]);
   });
 
   it("puts each team's members in its filter, lead first", () => {
