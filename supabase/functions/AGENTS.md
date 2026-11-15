@@ -1,0 +1,1 @@
+- Edge functions called from the browser must allow the `x-session-id` header in CORS (the shared client sends it), or the browser blocks the call.
