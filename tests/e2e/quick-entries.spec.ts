@@ -9,6 +9,7 @@ for (const lang of ["en", "ar"] as const) {
     for (let i = 0; i < expected.length; i++) {
       await page.goto("/");
       const links = page.getByTestId("quick-entries").getByRole("link");
+      for (let y = 0; y < 20 && !(await links.count()); y++) { await page.mouse.wheel(0, 600); await page.waitForTimeout(200); }
       await links.first().scrollIntoViewIfNeeded();
       await expect(links).toHaveCount(6);
       const box = await links.nth(i).boundingBox();
