@@ -142,6 +142,8 @@ const ChatWindow: React.FC<{ initiallyOpen?: boolean }> = ({ initiallyOpen = fal
           pointerEvents: 'auto',
         }}
         dir={language === 'ar' ? 'rtl' : 'ltr'}
+        role="dialog"
+        aria-label={t('chatbot.title')}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 bg-healthDarkBlue text-white shrink-0">

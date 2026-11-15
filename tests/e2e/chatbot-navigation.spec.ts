@@ -19,6 +19,10 @@ async function setup(page: Page, opts: { lang?: "en" | "ar"; now?: Date } = {}):
     calls: [],
     reply: (route) => route.fulfill({ status: 200, contentType: "text/event-stream", body: sse("OK") }),
   };
+  // Outside sites are never actually opened during tests.
+  await page.context().route(/^https:\/\/(forms\.gle|988\.ca)\//, (route) =>
+    route.fulfill({ status: 200, contentType: "text/html", body: "<p>outside</p>" })
+  );
   await page.route("**/functions/v1/shams-chat", async (route) => {
     if (route.request().method() === "OPTIONS") return route.fulfill({ status: 200 });
     fake.calls.push({ body: route.request().postDataJSON() });
@@ -72,7 +76,7 @@ test.describe("instant answers (no AI call)", () => {
     await ask(page, "What are my rights as a patient?");
     await page.getByRole("button", { name: "Patient rights", exact: true }).click();
     await expect(page).toHaveURL(/\/services#patient-rights$/);
-    await expect(page.locator("#patient-rights")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Patient Rights", exact: true })).toBeInViewport();
   });
 
   test("Know Your Rights recording lands on the recording", async ({ page }) => {
@@ -135,13 +139,15 @@ test.describe("AI answers", () => {
     expect(fake.calls).toHaveLength(1);
     expect(Array.isArray(fake.calls[0].body.context)).toBe(true);
     // Only two action buttons; outside and expired links are plain words.
-    await expect(page.getByRole("button", { name: "Bad section" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Research" , exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Evil site/ })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: /Old form/ })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Third" })).toHaveCount(0);
+    const chat = page.getByRole("dialog", { name: "SHAMS Guide" });
+    await expect(chat.getByRole("button", { name: "Bad section" })).toBeVisible();
+    await expect(chat.getByRole("button", { name: "Research", exact: true })).toBeVisible();
+    await expect(chat.getByText(/Evil site/)).toBeVisible();
+    await expect(chat.getByRole("button", { name: /Evil site/ })).toHaveCount(0);
+    await expect(chat.getByRole("button", { name: /Old form/ })).toHaveCount(0);
+    await expect(chat.getByRole("button", { name: "Third" })).toHaveCount(0);
     // The invented section falls back to its real parent page.
-    await page.getByRole("button", { name: "Bad section" }).click();
+    await chat.getByRole("button", { name: "Bad section" }).click();
     await expect(page).toHaveURL(/\/services$/);
   });
 
@@ -169,7 +175,7 @@ test.describe("AI answers", () => {
     await ask(page, "Tell me about the SHAMS mental health convention recap");
     const fallback = page.getByTestId("chat-sources").last();
     await expect(fallback).toBeVisible();
-    await page.getByRole("button", { name: /Convention/i }).first().click();
+    await page.getByRole("dialog", { name: "SHAMS Guide" }).getByRole("button", { name: /Convention/i }).first().click();
     await expect(page).toHaveURL(/\/programs#mental-health-convention$/);
   });
 });
