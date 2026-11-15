@@ -1,3 +1,4 @@
+import { MENTOR_FORM_URL, MENTEE_FORM_URL } from "@/lib/programLinks";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -67,10 +68,10 @@ const Programs = () => {
                   <Link to="/programs/mentorship">{t("programs.learnMoreApply")}</Link>
                 </Button>
                 <Button asChild variant="outline" className="gap-2">
-                  <a href="https://forms.gle/dCyMfPQH8DRSxsxb8" target="_blank" rel="noopener noreferrer">{t("programs.becomeMentor")} <ExternalLink size={14} /></a>
+                  <a href={MENTOR_FORM_URL} target="_blank" rel="noopener noreferrer">{t("programs.becomeMentor")} <ExternalLink size={14} /></a>
                 </Button>
                 <Button asChild variant="outline" className="gap-2">
-                  <a href="https://forms.gle/3Xw71e2Y3Hhqn7gF9" target="_blank" rel="noopener noreferrer">{t("programs.becomeMentee")} <ExternalLink size={14} /></a>
+                  <a href={MENTEE_FORM_URL} target="_blank" rel="noopener noreferrer">{t("programs.becomeMentee")} <ExternalLink size={14} /></a>
                 </Button>
               </div>
             </CardContent>
