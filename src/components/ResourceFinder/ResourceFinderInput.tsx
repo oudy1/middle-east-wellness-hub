@@ -65,10 +65,10 @@ const ResourceFinderInput: React.FC<ResourceFinderInputProps> = ({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
-      if (isOpen) {
-        e.preventDefault();
-        setIsOpen(false);
-      }
+      e.preventDefault();
+      // First Escape hides the results; a second one closes the surrounding panel.
+      if (isOpen && (ordered.length > 0 || showNoResults)) setIsOpen(false);
+      else onClose?.();
       return;
     }
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;

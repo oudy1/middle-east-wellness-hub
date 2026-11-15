@@ -232,6 +232,14 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const closeSearch = useCallback(() => {
+    setSearchOpen(false);
+    // Return focus to the search button only if focus was inside the panel.
+    requestAnimationFrame(() => {
+      if (!document.activeElement || document.activeElement === document.body) searchButtonRef.current?.focus();
+    });
+  }, []);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
   const isRTL = language === "ar";
@@ -456,8 +464,9 @@ const Header = () => {
             <div className="relative">
               <button
                 type="button"
+                ref={searchButtonRef}
                 onClick={() => setSearchOpen((v) => !v)}
-                className="text-white p-2 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center"
+                className="text-white p-2 hover:bg-healthTeal/20 rounded-md transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healthGold"
                 aria-label={isRTL ? "بحث" : "Search"}
                 aria-expanded={searchOpen}
               >
@@ -472,11 +481,12 @@ const Header = () => {
                   />
                   <div
                     className={cn(
-                      "absolute top-full mt-2 z-50 bg-white p-3 rounded-md shadow-lg border border-gray-200 w-80",
+                      "absolute top-full mt-2 z-50 bg-popover text-popover-foreground p-3 rounded-lg shadow-lg border border-border w-[22rem] max-w-[calc(100vw-1rem)] motion-safe:animate-in fade-in-0 slide-in-from-top-1 duration-150",
                       isRTL ? "left-0" : "right-0"
                     )}
+                    role="search"
                   >
-                    <HeaderSearchButton variant="desktop" />
+                    <HeaderSearchButton variant="desktop" onClose={closeSearch} />
                   </div>
                 </>
               )}

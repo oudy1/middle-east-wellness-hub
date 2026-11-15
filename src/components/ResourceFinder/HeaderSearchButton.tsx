@@ -6,17 +6,19 @@ import ResourceFinderInput from './ResourceFinderInput';
 
 interface HeaderSearchButtonProps {
   variant: 'desktop' | 'mobile';
+  /** Desktop only: called after a result is chosen or Escape is pressed twice. */
+  onClose?: () => void;
 }
 
-const HeaderSearchButton: React.FC<HeaderSearchButtonProps> = ({ variant }) => {
+const HeaderSearchButton: React.FC<HeaderSearchButtonProps> = ({ variant, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { language } = useLanguage();
   const isRTL = language === 'ar';
 
   if (variant === 'desktop') {
     return (
-      <div className="relative w-64">
-        <ResourceFinderInput variant="compact" />
+      <div className="relative w-full">
+        <ResourceFinderInput variant="compact" autoFocus onClose={onClose} />
       </div>
     );
   }
