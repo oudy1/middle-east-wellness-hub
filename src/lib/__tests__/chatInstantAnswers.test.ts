@@ -64,6 +64,12 @@ describe("November 19 newcomer workshop", () => {
     expect(a.text).toMatch(/registration is closed/);
     expect(links(a.text)).not.toContain(NEWCOMER_WORKSHOP_REGISTER_URL);
   });
+  it("does not say the workshop took place just because the date passed", () => {
+    const a = ask("Tell me about the November 19 workshop", "en", AFTER)!;
+    expect(a.text).not.toMatch(/took place/);
+    const ar = ask("متى ورشة سكادينغ كورت؟", "ar", AFTER)!;
+    expect(ar.text).not.toMatch(/أُقيمت/);
+  });
 });
 
 describe("safety replies come first and need no AI", () => {
