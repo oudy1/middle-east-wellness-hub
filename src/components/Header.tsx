@@ -272,6 +272,8 @@ const Header = () => {
     familyPhysicians: isRTL ? "أطباء الأسرة" : "Family Physicians",
     browseByCity: isRTL ? "التصفح حسب المدينة" : "Browse by City",
     directoryMap: isRTL ? "الدليل مع الخريطة" : "Directory & Map",
+    servicesOverview: isRTL ? "نظرة عامة على الخدمات" : "Services overview",
+    researchOverview: isRTL ? "نظرة عامة على البحث" : "Research overview",
   };
 
   // Unified nav structure used by both desktop and mobile
@@ -282,6 +284,7 @@ const Header = () => {
       label: L.services,
       to: "/services",
       children: [
+        { to: "/services", label: L.servicesOverview },
         { to: "/resources", label: L.resources },
         { to: "/programs", label: L.programs },
         { to: "/resources", label: L.patientRights },
@@ -292,6 +295,7 @@ const Header = () => {
       label: L.research,
       to: "/research",
       children: [
+        { to: "/research", label: L.researchOverview },
         { to: "/research#studies", label: L.researchStudies },
         { to: "/research#opportunities", label: L.researchOpps },
         { to: "/research#researchers", label: L.associatedResearchers },
@@ -609,7 +613,6 @@ const Header = () => {
                         <CollapsibleTrigger
                           className={cn(
                             "group w-full flex items-center justify-between py-3 px-4 rounded-md hover:bg-healthTeal/20 transition-colors font-medium min-h-[48px] touch-manipulation",
-                            isRTL && "flex-row-reverse"
                           )}
                         >
                           <span>{item.label}</span>
@@ -668,7 +671,7 @@ const Header = () => {
                         onClick={() => setLanguage(lang.code as any)}
                         className={cn(
                           "flex items-center gap-2 px-3 py-2.5 rounded-md text-sm transition-colors min-h-[44px] touch-manipulation",
-                          isRTL ? "flex-row-reverse text-right" : "text-left",
+                          isRTL ? "text-right" : "text-left",
                           language === lang.code
                             ? "bg-healthTeal text-white"
                             : "bg-white/5 hover:bg-white/10 text-white"
