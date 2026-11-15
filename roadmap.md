@@ -82,3 +82,10 @@
 - [x] Sunrise opening, six topic cards, "From Questions to Clarity" steps, "Learn with SHAMS", top progress line; duplicate blocks removed. Not published.
 - [x] Topic cards made compact on phones (rows instead of tall stacks; 749px section, cards 75-99px, all above the 44px tap size); new browser check tests/e2e/bento-compact.spec.ts.
 - [ ] Still open from the brief: restyle the weekly topic card and the convention recap card, smooth the header, move the "Start here" links into the new cards.
+
+## Final homepage cleanup brief (uploaded Nov 15)
+- [x] Convention recap as one compact card with one Instagram button; tighter past webinar and mentorship sections.
+- [x] Four main shortcuts under the homepage headline (Health Resources, Programs and Mentorship, Healthcare Workers, Research).
+- [x] Footer Quick Links: Home, About, Resources, Services, Programs, Research, Recordings, Contact (EN/AR).
+- [x] Women's Health slides merged into its recording entry (duplicate PDF button removed).
+- [ ] Publishing needs user approval.
