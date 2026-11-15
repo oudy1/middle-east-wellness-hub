@@ -28,6 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { SEOHead } from "@/components/SEOHead";
 import sickKidsLogo from "@/assets/sickkids-logo.svg";
 import { useHashScroll } from "@/hooks/useHashScroll";
+import HelpNavigator from "@/components/services/HelpNavigator";
 
 
 type FilterCategory = "all" | "mental-health" | "cancer" | "heart-diabetes" | "vaccines-safety" | "education" | "clinical";
@@ -407,6 +408,9 @@ const Services = () => {
             </div>
           </div>
         </section>
+
+        {/* Guided "How Can We Help You?" finder */}
+        <HelpNavigator isAr={language === "ar"} />
 
         {/* Search + Filter Buttons */}
         <section className="py-4 md:py-6 bg-white border-b sticky top-0 z-10">
