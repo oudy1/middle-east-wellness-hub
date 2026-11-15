@@ -297,6 +297,7 @@ const curated: KnowledgeItem[] = [
 
 interface StudyRaw {
   id: string;
+  status?: string;
   titleEn: string;
   titleAr: string;
   summaryEn: string;
