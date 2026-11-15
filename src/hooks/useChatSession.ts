@@ -1,12 +1,22 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { searchKnowledge } from '@/lib/knowledgeIndex';
+import { instantAnswer, offlineFallback, replyLanguage, type InstantIntent } from '@/lib/chatInstantAnswers';
+import { isApprovedInternalUrl } from '@/lib/chatbotRoutes';
 
-interface Message {
+export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
   content: string;
+  /**
+   * Where an assistant answer came from: the AI service, an instant answer
+   * worked out in the browser, or the offline fallback shown when the AI fails.
+   */
+  origin?: 'ai' | 'instant' | 'fallback';
+  instantIntent?: InstantIntent;
 }
+
+type Message = ChatMessage;
 
 export const useChatSession = () => {
   // Start fresh every time - no persistence
@@ -40,12 +50,29 @@ export const useChatSession = () => {
       content: content.trim()
     };
     
-    setMessages([...history, userMessage]);
     const assistantId = crypto.randomUUID();
+
+    // Simple questions (and every safety message) get an instant, verified
+    // answer without calling the AI service.
+    const last = history[history.length - 1];
+    const previousIntent = last?.role === 'assistant' ? last.instantIntent ?? null : null;
+    const instant = instantAnswer(userMessage.content, language === 'ar' ? 'ar' : 'en', previousIntent);
+    if (instant) {
+      setMessages([
+        ...history,
+        userMessage,
+        { id: assistantId, role: 'assistant', content: instant.text, origin: 'instant', instantIntent: instant.intent },
+      ]);
+      setIsLoading(false);
+      if (abortRef.current === controller) abortRef.current = null;
+      return;
+    }
+
+    setMessages([...history, userMessage]);
 
     try {
       // Prepare messages for API (include history from current session only)
-      const apiMessages = [...history, userMessage].map(m => ({
+      const apiMessages = [...history, userMessage].filter(m => m.origin !== 'fallback').map(m => ({
         role: m.role,
         content: m.content
       }));
@@ -107,7 +134,7 @@ export const useChatSession = () => {
           if (delta) {
             assistantContent += delta;
             setMessages(prev =>
-              prev.map(m => (m.id === assistantId ? { ...m, content: assistantContent } : m))
+              prev.map(m => (m.id === assistantId ? { ...m, content: assistantContent, origin: 'ai' } : m))
             );
           }
           return true;
@@ -140,6 +167,11 @@ export const useChatSession = () => {
 
     } catch (error) {
       const aborted = controller.signal.aborted;
+      const fbLang = replyLanguage(userMessage.content, language === 'ar' ? 'ar' : 'en');
+      const contextForFallback = searchKnowledge(userMessage.content, fbLang, 2).map(r => ({
+        title: fbLang === 'ar' ? r.item.title_ar : r.item.title_en,
+        url: r.item.url,
+      }));
       setMessages(prev => {
         // Drop an empty assistant bubble; keep whatever text already arrived.
         const cleaned = prev.filter(m => !(m.id === assistantId && !m.content.trim()));
@@ -147,8 +179,16 @@ export const useChatSession = () => {
       });
       if (!aborted) {
         console.error('Chat error:', error);
-        // Keep the question on screen and offer "Try again" instead of losing it.
-        setMessages(prev => prev.filter(m => m.id !== assistantId));
+        // Keep the question on screen, show the best matching verified pages,
+        // and offer "Try again" instead of losing it.
+        const fallbackLang = replyLanguage(userMessage.content, language === 'ar' ? 'ar' : 'en');
+        const fallbackLinks = contextForFallback
+          .filter(c => c.url && isApprovedInternalUrl(c.url))
+          .map(c => ({ label: c.title ?? c.url!, url: c.url! }));
+        setMessages(prev => [
+          ...prev.filter(m => m.id !== assistantId),
+          { id: crypto.randomUUID(), role: 'assistant', content: offlineFallback(fallbackLang, fallbackLinks), origin: 'fallback' },
+        ]);
         setFailedMessage(userMessage);
       }
     } finally {
@@ -165,7 +205,7 @@ export const useChatSession = () => {
   /** Re-asks the question whose answer failed. */
   const retry = useCallback(() => {
     if (!failedMessage) return;
-    const history = messagesRef.current.filter(m => m.id !== failedMessage.id);
+    const history = messagesRef.current.filter(m => m.id !== failedMessage.id && m.origin !== 'fallback');
     send(failedMessage.content, history);
   }, [failedMessage, send]);
 
