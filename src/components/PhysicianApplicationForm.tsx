@@ -216,7 +216,7 @@ const PhysicianApplicationForm = () => {
               `Newsletter: ${fd.signUpForNews ? "yes" : "no"}`,
               notes,
               "",
-              "Saved as Pending review. It stays hidden from the public until an admin publishes it at /admin/healthcare-workers.",
+              "Saved as Pending review. It stays hidden from the public until SHAMS asks for it to be published.",
             ].join("\n"),
           },
         });
