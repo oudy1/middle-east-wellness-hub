@@ -42,7 +42,7 @@ describe("affiliated researchers list", () => {
   });
 
   it("site search lists a researcher by name", () => {
-    const hits = searchSite("Delaney Glass", "en").map((r) => r.titleEn ?? r.title_en ?? r.title);
+    const hits = searchSite("Delaney Glass", "en").map((r) => r.title_en);
     expect(hits.join(" | ")).toContain("Delaney Glass");
   });
 });

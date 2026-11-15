@@ -37,9 +37,9 @@ export function searchSite(query: string, language: "en" | "ar"): SearchableReso
     if (score < MIN_KNOWLEDGE_SCORE || !isApprovedUrl(item.url)) continue;
     const titleKey = item.title_en.toLowerCase();
     if (seenTitles.has(titleKey)) continue;
-    // Several FAQ answers or studies may share one page; keep them, but never
+    // Several FAQ answers, studies or researchers may share one page; keep them, but never
     // repeat a page the curated list already offers.
-    const sharedPage = item.category === "faq" || item.category === "studies";
+    const sharedPage = item.category === "faq" || item.category === "studies" || item.category === "researchers";
     if (!sharedPage && seenUrls.has(urlKey(item.url))) continue;
     const count = perCategory[item.category] ?? 0;
     if (count >= MAX_PER_KNOWLEDGE_CATEGORY) continue;
