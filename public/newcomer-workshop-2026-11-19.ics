@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SHAMS//Newcomer Healthcare Workshop//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:newcomer-workshop-2026-11-19@projectshams.com
+DTSTAMP:20261115T120000Z
+DTSTART:20261119T200000Z
+DTEND:20261119T220000Z
+SUMMARY:Healthcare Coverage & Access: A Newcomer's Guide (SHAMS Workshop)
+DESCRIPTION:Navigating healthcare in a new country can be challenging. Join Project SHAMS and Scadding Court Community Centre for a free\, interactive workshop designed to help newcomers and refugees better understand Ontario's healthcare system\, learn about healthcare coverage\, and find essential health and community services. Free. Register: https://forms.gle/ipEVd8Np1tDy1GVD7
+LOCATION:Scadding Court Community Centre\, 707 Dundas Street West\, Toronto\, Ontario\, Canada
+URL:https://forms.gle/ipEVd8Np1tDy1GVD7
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

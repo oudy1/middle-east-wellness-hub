@@ -17,7 +17,7 @@
 - [x] Batch 2: "societies" sweep + official name in hero/footer; inquiry success message translated; hide expired opportunities.
 - [ ] User action: infoprojectshams@gmail.com creates an account at /admin/login and confirms the email (admin access is then automatic).
 - [x] Fixed admin sign-in loop (admin list rule checked itself, so every admin page said Not authorized); added forgot-password + /reset-password.
-- [ ] User review: Privacy page wording; Scadding Court workshop details and partner approval; newcomer initiative description.
+- [ ] User review: Privacy page wording; newcomer initiative description. (Scadding Court workshop details + partner branding confirmed by the Nov 15 brief.)
 - [x] Audit S1-S4: own title/description/canonical on 9 pages (EN+AR); 404 + admin pages hidden from search; sitemap cleaned (+find-healthcare-workers, physicians/apply, post-opportunity; -resources, -webinars); robots blocks /admin; English recordings heading "Webinars and Recordings" (Arabic kept as-is per user).
 - [x] Hide ku/fa/tr until fully translated (menu offers only complete languages; saved hidden choice falls back to English).
 - [x] Load pages on demand for phones (pages, lower homepage sections, chat window).
@@ -51,3 +51,9 @@
 - [x] Directory: language filter (from listed languages only).
 - [x] Report: GitHub 20 verdicts, audit findings, what was done, next batches.
 - [ ] Later batches (need go-ahead): homepage reorder, research status labels, webinar archive search, event calendar, site feedback form, content workflow, 60-scenario tests.
+
+## Nov 19 newcomer workshop brief (uploaded Nov 15)
+- [x] Update the existing homepage workshop card (no duplicate): final title, details, new registration form, official EN/AR posters in a slider, enlarged poster view, Learn More, Add to Calendar, Get Directions.
+- [x] Programs card shows Upcoming, then Completed (registration closed) after Nov 19; search + chatbot use the same record.
+- [x] QR codes checked: both posters use a different short link (J6Jsy...) that opens the same Google Form as the new link.
+- [ ] Publishing needs user approval.
