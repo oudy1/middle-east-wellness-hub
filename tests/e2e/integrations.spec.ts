@@ -45,18 +45,11 @@ test.describe("Research opportunities", () => {
 test.describe("Webinar topic request", () => {
   test("opens the visitor's email app instead of pretending it was sent", async ({ page }) => {
     await page.goto("/recordings#topic-request");
-    await page.evaluate(() => {
-      (window as unknown as { __mailto?: string }).__mailto = "";
-      // Capture the mailto address instead of leaving the page.
-      document.addEventListener("click", () => {}, true);
-    });
     const form = page.locator("#topic-request");
     await form.getByLabel("Name").fill("Test Visitor");
     await form.getByLabel("Email").fill("visitor@example.com");
     await form.getByLabel("Proposed Topic").fill("Sleep and shift work");
-    const nav = page.waitForEvent("request", { predicate: (r) => r.url().startsWith("mailto:") }).catch(() => null);
     await form.getByRole("button", { name: "Send Topic Request by Email" }).click();
-    await nav;
     await expect(form.getByText("One last step: press Send in your email")).toBeVisible();
     await expect(page.getByText("Topic Request Submitted")).toHaveCount(0);
   });
