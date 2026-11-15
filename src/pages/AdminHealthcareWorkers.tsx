@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContentStatusBadge from "@/components/ContentStatusBadge";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
@@ -272,9 +273,7 @@ const AdminHealthcareWorkers = () => {
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-1">
-                        <Badge variant={status === "published" ? "default" : status === "rejected" ? "destructive" : "secondary"}>
-                          {STATUS_LABELS[status] ?? w.status}
-                        </Badge>
+                        <ContentStatusBadge status={status} label={STATUS_LABELS[status] ?? w.status} />
                         {isDue(w) && <Badge variant="outline">Due for re-check</Badge>}
                       </div>
                     </div>

@@ -159,7 +159,8 @@ const TopicRequestForm = () => {
             <Textarea id="description" name="description" value={formData.description} onChange={handleChange} placeholder={L.descPh} rows={4} />
           </div>
 
-          <Button type="submit" className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white">
+          <p className="text-xs text-muted-foreground text-center">{L.sendNote}</p>
+          <Button type="submit" className="w-full min-h-[44px] bg-healthTeal hover:bg-healthTeal/90 text-white">
             {L.submit}
           </Button>
         </form>

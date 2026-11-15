@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContentStatusBadge from "@/components/ContentStatusBadge";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -236,17 +237,7 @@ const AdminOpportunities = () => {
                         {row.phone ? ` · ${row.phone}` : ""}
                       </p>
                     </div>
-                    <Badge
-                      variant={
-                        row.status === "approved"
-                          ? "default"
-                          : row.status === "rejected"
-                            ? "destructive"
-                            : "secondary"
-                      }
-                    >
-                      {row.status}
-                    </Badge>
+                    <ContentStatusBadge status={row.status === "approved" ? "published" : row.status} label={row.status === "approved" ? "Approved (public)" : undefined} />
                   </div>
 
                   <p className="text-sm whitespace-pre-wrap text-foreground/80">
