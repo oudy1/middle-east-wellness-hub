@@ -62,3 +62,8 @@
 - [x] Plan and assessment written (report in Files); no code changed.
 - [ ] Batch 1 (waiting on approval): saved 60-question chatbot test, quick fixes (chat preload error, youtube-nocookie, long dashes if approved; reduced motion done), chat source cards, research study status labels (needs real statuses from user).
 - [x] Visual and interaction batch (Nov 15): header menus (keyboard, on-screen, overview links), card style, poster sliders (SAWA, research portfolio, convention), header search panel, phone tap sizes and overflow, reduced motion. Not published.
+
+## AI Assistant smart navigation brief (uploaded Nov 15)
+- [x] Instant answers for common questions and safety messages (English, Arabic, dialect, mixed), offline fallback, two-button limit with sources, outside-link allowlist with event expiry, browser + live tests. Not published.
+- [ ] Server-side follow-ups waiting on approval (going live immediately when deployed): stop logging visitor IP addresses in the chat function; settle one reply-language rule for English questions on the Arabic site.
+

@@ -168,7 +168,10 @@ export const useChatSession = () => {
     } catch (error) {
       const aborted = controller.signal.aborted;
       const fbLang = replyLanguage(userMessage.content, language === 'ar' ? 'ar' : 'en');
-      const contextForFallback = searchKnowledge(userMessage.content, fbLang, 2).map(r => ({
+      const fbResults = searchKnowledge(userMessage.content, fbLang, 2);
+      // Only offer pages that match nearly as well as the best one.
+      const fbTop = fbResults[0]?.score ?? 0;
+      const contextForFallback = fbResults.filter(r => r.score >= fbTop * 0.6).map(r => ({
         title: fbLang === 'ar' ? r.item.title_ar : r.item.title_en,
         url: r.item.url,
       }));

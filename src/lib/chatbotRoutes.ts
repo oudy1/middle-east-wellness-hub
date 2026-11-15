@@ -111,7 +111,9 @@ export function sourceLabel(url: string, language: "en" | "ar"): string {
     return name[language];
   }
   try {
-    return new URL(url).hostname.replace(/^www\./, "");
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    if (host === "forms.gle" || host === "docs.google.com") return "Google Forms";
+    return host;
   } catch {
     return url;
   }
