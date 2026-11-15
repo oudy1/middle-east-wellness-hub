@@ -189,3 +189,10 @@ describe("outside links the chatbot may show", () => {
     expect(isApprovedInternalUrl("/doctors/123")).toBe(false);
   });
 });
+
+describe("replyLanguage follows the visitor's writing", () => {
+  it("English on the Arabic site gets English", () => expect(replyLanguage("Where can I find a doctor?", "ar")).toBe("en"));
+  it("Arabic on the English site gets Arabic", () => expect(replyLanguage("وين ألاقي دكتور؟", "en")).toBe("ar"));
+  it("mixed message follows the main script", () => expect(replyLanguage("بدي دكتور في Toronto قريب مني", "en")).toBe("ar"));
+  it("numbers only keep the site language", () => expect(replyLanguage("911?", "ar")).toBe("ar"));
+});

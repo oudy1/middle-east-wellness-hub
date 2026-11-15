@@ -127,7 +127,7 @@ SHAMS stands for Support for Health Advocacy in Middle Eastern Societies. It is 
 - Never use em dashes. Use commas or periods.
 
 ## Language
-- Reply in the language the visitor writes in. If they write Arabic, reply in Arabic even on the English site.
+- Always reply in the language of the visitor's latest message, whatever the site language. The exact reply language for each message is given at the end of these instructions; follow it.
 - If content is missing in a language, say "المحتوى قيد الترجمة" (AR) or "Content is being translated" (EN).
 
 ## Answer format (STRICT)
@@ -199,6 +199,15 @@ interface ContextItem {
   description?: string;
   category?: string;
   url?: string;
+}
+
+// Mirrors replyLanguage in src/lib/chatInstantAnswers.ts.
+function detectReplyLanguage(message: string, uiLanguage: 'en' | 'ar'): 'en' | 'ar' {
+  const ar = (message.match(/[\u0600-\u06FF]/g) || []).length;
+  const en = (message.match(/[a-z]/gi) || []).length;
+  if (ar > en) return 'ar';
+  if (en > ar) return 'en';
+  return uiLanguage;
 }
 
 function validatePayload(data: unknown): { messages: ChatMessage[]; language: string; context: ContextItem[] } | null {
@@ -303,9 +312,11 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const languageContext = language === 'ar'
-      ? "\n\nThe user's interface is Arabic. Respond in Arabic with RTL-friendly text."
-      : "\n\nThe user's interface is English. Respond in English unless the user writes in Arabic.";
+    const lastUser = [...messages].reverse().find((m) => m.role === 'user')?.content ?? '';
+    const replyLang = detectReplyLanguage(lastUser, language === 'ar' ? 'ar' : 'en');
+    const languageContext = replyLang === 'ar'
+      ? "\n\nREPLY LANGUAGE: The visitor's latest message is in Arabic. Reply only in Arabic (Modern Standard Arabic, RTL-friendly), even if the site is in English."
+      : "\n\nREPLY LANGUAGE: The visitor's latest message is in English. Reply only in English, even if the site is in Arabic.";
 
     let retrievalContext = "";
     if (context.length > 0) {
