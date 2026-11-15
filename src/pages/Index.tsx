@@ -11,20 +11,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import UpcomingEventFeature from "@/components/UpcomingEventFeature";
 import NewcomerWorkshopFeature from "@/components/NewcomerWorkshopFeature";
 import PastWebinarFeature from "@/components/PastWebinarFeature";
+import ScrollProgress from "@/components/home/ScrollProgress";
+const HelpBentoGrid = lazy(() => import("@/components/home/HelpBentoGrid"));
+const JourneySection = lazy(() => import("@/components/home/JourneySection"));
+const LearnWithShams = lazy(() => import("@/components/home/LearnWithShams"));
 
 // Below-the-fold sections — code-split so they don't block the hero paint.
 
 const FeaturedEventSection = lazy(() => import("@/components/FeaturedEventSection"));
 const MentorshipHighlight = lazy(() => import("@/components/MentorshipHighlight"));
-const FeaturedWebinarBanner = lazy(() => import("@/components/FeaturedWebinarBanner"));
 const ResearchWebinarCarousel = lazy(() => import("@/components/ResearchWebinarCarousel"));
 const ResourceFinderSection = lazy(() =>
   import("@/components/ResourceFinder").then((m) => ({ default: m.ResourceFinderSection }))
 );
-const WhatIsSHAMS = lazy(() => import("@/components/WhatIsSHAMS"));
-const WhatWeDoSection = lazy(() => import("@/components/WhatWeDoSection"));
-const UpcomingEventsSection = lazy(() => import("@/components/UpcomingEventsSection"));
-const MissionSection = lazy(() => import("@/components/MissionSection"));
 const TopicOfTheWeekSection = lazy(() => import("@/components/TopicOfTheWeekSection"));
 const ResearchTeaserSection = lazy(() => import("@/components/ResearchTeaserSection"));
 const FeaturedNewsSection = lazy(() => import("@/components/FeaturedNewsSection"));
@@ -78,12 +77,15 @@ const Index = () => {
       <Header />
       <main id="main-content" className="flex-grow relative z-10">
         {/* Hero stays eager — it contains LCP */}
+        <ScrollProgress />
         <HeroSection ref={heroRef} />
 
 
         <NewcomerWorkshopFeature />
         <UpcomingEventFeature />
-        <PastWebinarFeature />
+        <Suspense fallback={<SectionFallback />}>
+          <HelpBentoGrid />
+        </Suspense>
 
         <Suspense fallback={<SectionFallback />}>
           <ArabicChatPrompt />
@@ -93,21 +95,16 @@ const Index = () => {
           <Suspense fallback={<SectionFallback />}>
             <FeaturedEventSection />
             <MentorshipHighlight />
-            <FeaturedWebinarBanner />
           </Suspense>
         </LazySection>
         <LazySection>
           <Suspense fallback={<SectionFallback />}>
-            <ResearchWebinarCarousel />
+            <JourneySection />
+            <LearnWithShams>
+              <PastWebinarFeature />
+              <ResearchWebinarCarousel />
+            </LearnWithShams>
             <ResourceFinderSection />
-            <WhatIsSHAMS />
-          </Suspense>
-        </LazySection>
-        <LazySection>
-          <Suspense fallback={<SectionFallback />}>
-            <WhatWeDoSection />
-            <UpcomingEventsSection />
-            <MissionSection />
           </Suspense>
         </LazySection>
         <LazySection>
