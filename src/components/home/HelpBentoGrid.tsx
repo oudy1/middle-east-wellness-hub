@@ -34,7 +34,7 @@ export default function HelpBentoGrid() {
                 <Link
                   to={homeRoute(key)}
                   data-bento-key={key}
-                  className={`group relative flex h-full min-h-[44px] flex-col justify-between gap-4 overflow-hidden rounded-2xl border border-sun-orange/20 p-5 transition-[transform,box-shadow,border-color] duration-200 hover:border-sun-orange/60 hover:shadow-[var(--shadow-sun)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange focus-visible:ring-offset-2 ${big ? "text-sun-cream" : "bg-background text-sun-blue"}`}
+                  className={`group relative flex h-full min-h-[44px] flex-row items-center gap-3 p-3.5 md:flex-col md:justify-between md:gap-4 md:p-5 overflow-hidden rounded-2xl border border-sun-orange/20 transition-[transform,box-shadow,border-color] duration-200 hover:border-sun-orange/60 hover:shadow-[var(--shadow-sun)] motion-safe:hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange focus-visible:ring-offset-2 ${big ? "text-sun-cream" : "bg-background text-sun-blue"}`}
                   style={big ? { background: "linear-gradient(150deg, hsl(var(--sun-blue)), hsl(var(--sun-teal)))" } : undefined}
                 >
                   <span aria-hidden="true" className="pointer-events-none absolute -end-10 -top-10 h-32 w-32 rounded-full bg-sun-gold/20 blur-2xl transition-opacity opacity-60 group-hover:opacity-100" />
