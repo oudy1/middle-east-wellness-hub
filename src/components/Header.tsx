@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useId, useLayoutEffect } from 'react';
 import { Menu, Languages, ChevronDown, X, Search } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,6 +32,27 @@ const isGroup = (item: NavItem): item is NavGroup =>
   (item as NavGroup).children !== undefined;
 
 const CLOSE_DELAY_MS = 300;
+const MENU_WIDTH_PX = 240;
+const VIEWPORT_MARGIN_PX = 8;
+
+/** Moves focus between the items of an open menu (arrow keys, Home, End). */
+const focusMenuItem = (menu: HTMLElement | null, index: number | "first" | "last") => {
+  const items = Array.from(
+    menu?.querySelectorAll<HTMLElement>('[role="menuitem"], [role="menuitemradio"]') ?? []
+  );
+  if (!items.length) return;
+  const current = items.indexOf(document.activeElement as HTMLElement);
+  let i = index === "first" ? 0 : index === "last" ? items.length - 1 : current + index;
+  i = (i + items.length) % items.length;
+  items[i].focus();
+};
+
+const handleMenuArrowKeys = (e: React.KeyboardEvent, menu: HTMLElement | null) => {
+  if (e.key === "ArrowDown") { e.preventDefault(); focusMenuItem(menu, 1); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); focusMenuItem(menu, -1); }
+  else if (e.key === "Home") { e.preventDefault(); focusMenuItem(menu, "first"); }
+  else if (e.key === "End") { e.preventDefault(); focusMenuItem(menu, "last"); }
+};
 
 interface DesktopDropdownProps {
   item: NavGroup;
@@ -41,8 +62,15 @@ interface DesktopDropdownProps {
 
 const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) => {
   const [open, setOpen] = useState(false);
+  // When the panel would run off the screen edge, it lines up with the other side of the button.
+  const [alignEnd, setAlignEnd] = useState(false);
+  const [focusOnOpen, setFocusOnOpen] = useState<"first" | "last" | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openedByHover = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
 
   const clearTimer = () => {
     if (closeTimer.current) {
@@ -54,14 +82,36 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
     clearTimer();
     closeTimer.current = setTimeout(() => setOpen(false), CLOSE_DELAY_MS);
   };
-  const openNow = () => {
+  const openByHover = () => {
     clearTimer();
+    if (!open) openedByHover.current = true;
     setOpen(true);
+  };
+  const closeAndFocusButton = () => {
+    setOpen(false);
+    buttonRef.current?.focus();
   };
 
   useEffect(() => () => clearTimer(), []);
 
-  // Close on outside click
+  useLayoutEffect(() => {
+    if (!open || !buttonRef.current) return;
+    const r = buttonRef.current.getBoundingClientRect();
+    setAlignEnd(
+      isRTL
+        ? r.right - MENU_WIDTH_PX < VIEWPORT_MARGIN_PX
+        : r.left + MENU_WIDTH_PX > window.innerWidth - VIEWPORT_MARGIN_PX
+    );
+  }, [open, isRTL]);
+
+  useEffect(() => {
+    if (open && focusOnOpen) {
+      focusMenuItem(menuRef.current, focusOnOpen);
+      setFocusOnOpen(null);
+    }
+  }, [open, focusOnOpen]);
+
+  // Close on outside click / Escape (also when the menu was opened by hover).
   useEffect(() => {
     if (!open) return;
     const onDocClick = (e: MouseEvent) => {
@@ -70,7 +120,9 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
       }
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key !== "Escape") return;
+      if (containerRef.current?.contains(document.activeElement)) closeAndFocusButton();
+      else setOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     document.addEventListener("keydown", onKey);
@@ -88,38 +140,68 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
     <div
       ref={containerRef}
       className="relative"
-      onMouseEnter={openNow}
+      onMouseEnter={openByHover}
       onMouseLeave={scheduleClose}
+      onBlur={(e) => {
+        // Tabbing out of the menu closes it.
+        if (!containerRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
     >
       <button
+        ref={buttonRef}
         type="button"
-        onClick={openNow}
-        onFocus={openNow}
+        onClick={(e) => {
+          clearTimer();
+          // A click on a menu that only opened because the pointer is over it keeps it open.
+          if (open && !openedByHover.current) {
+            setOpen(false);
+            return;
+          }
+          openedByHover.current = false;
+          setOpen(true);
+          // Enter/Space (keyboard "click") moves focus into the menu.
+          if (e.detail === 0) setFocusOnOpen("first");
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+            e.preventDefault();
+            openedByHover.current = false;
+            setOpen(true);
+            setFocusOnOpen(e.key === "ArrowDown" ? "first" : "last");
+          }
+        }}
         className={cn(
-          "flex items-center gap-1 hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap py-2",
+          "flex items-center gap-1 rounded-md px-1 -mx-1 hover:text-healthTealLight transition-colors font-medium text-sm whitespace-nowrap py-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healthTealLight",
           isItemActive && "text-healthTealLight"
         )}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-controls={open ? menuId : undefined}
       >
         <span>{item.label}</span>
         <ChevronDown
           size={14}
+          aria-hidden="true"
           className={cn("transition-transform duration-200", open && "rotate-180")}
         />
       </button>
       {open && (
         <div
+          id={menuId}
+          ref={menuRef}
           role="menu"
-          onMouseEnter={openNow}
+          aria-label={item.label}
+          onMouseEnter={openByHover}
           onMouseLeave={scheduleClose}
+          onKeyDown={(e) => handleMenuArrowKeys(e, menuRef.current)}
           className={cn(
-            // small invisible bridge prevents hover gap
+            // pt-2 is an invisible bridge so the pointer can cross the gap without closing the menu
             "absolute top-full pt-2 w-60 z-50",
-            isRTL ? "right-0" : "left-0"
+            isRTL ? (alignEnd ? "left-0" : "right-0") : (alignEnd ? "right-0" : "left-0")
           )}
         >
-          <div className="bg-white rounded-md shadow-lg py-1 border border-gray-200">
+          <div className="bg-popover text-popover-foreground rounded-lg shadow-lg py-1 border border-border max-h-[calc(100dvh-6rem)] overflow-y-auto motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-1 motion-safe:duration-150">
             {item.children.map((l) => {
               const active = isActivePath(l.to);
               return (
@@ -130,8 +212,8 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
                   aria-current={active ? "location" : undefined}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-healthDarkBlue transition-colors border-l-2 border-transparent",
-                    isRTL ? "text-right border-l-0 border-r-2" : "text-left",
+                    "flex items-center min-h-[44px] px-4 py-2 text-sm text-foreground/80 hover:bg-muted hover:text-healthDarkBlue focus-visible:bg-muted focus-visible:text-healthDarkBlue focus-visible:outline-none transition-colors border-transparent",
+                    isRTL ? "text-right border-r-2" : "text-left border-l-2",
                     active && "bg-healthTeal/10 text-healthDarkBlue font-medium border-healthTeal"
                   )}
                 >
@@ -139,7 +221,6 @@ const DesktopDropdown = ({ item, isRTL, isActivePath }: DesktopDropdownProps) =>
                 </Link>
               );
             })}
-
           </div>
         </div>
       )}
@@ -258,6 +339,16 @@ const Header = () => {
     [location.pathname, activeSectionId]
   );
 
+
+  const languageButtonRef = useRef<HTMLButtonElement>(null);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+
+  // Opening the language menu moves focus to the current language.
+  useEffect(() => {
+    if (!languageMenuOpen) return;
+    const checked = languageMenuRef.current?.querySelector<HTMLElement>('[aria-checked="true"]');
+    (checked ?? languageMenuRef.current?.querySelector<HTMLElement>('[role="menuitemradio"]'))?.focus();
+  }, [languageMenuOpen]);
 
   // Close language dropdown on outside click / escape
   useEffect(() => {
@@ -389,9 +480,14 @@ const Header = () => {
 
             <div className="relative">
               <button
+                ref={languageButtonRef}
                 onClick={() => setLanguageMenuOpen((v) => !v)}
-                className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-healthTeal/30 transition-colors text-sm"
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") { e.preventDefault(); setLanguageMenuOpen(true); }
+                }}
+                className="flex items-center gap-2 px-3 py-2 min-h-[40px] rounded-md hover:bg-healthTeal/30 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healthTealLight"
                 aria-label={isRTL ? "اختيار اللغة" : "Select language"}
+                aria-haspopup="menu"
                 aria-expanded={languageMenuOpen}
               >
                 <Languages size={16} />
@@ -405,21 +501,41 @@ const Header = () => {
                     onClick={() => setLanguageMenuOpen(false)}
                     aria-hidden="true"
                   />
-                  <div className={cn(
-                    "absolute mt-2 w-44 bg-white rounded-md shadow-lg py-1 z-50 border",
-                    isRTL ? "left-0" : "right-0"
-                  )}>
+                  <div
+                    ref={languageMenuRef}
+                    role="menu"
+                    aria-label={isRTL ? "اختيار اللغة" : "Select language"}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape" || e.key === "Tab") {
+                        if (e.key === "Escape") e.preventDefault();
+                        setLanguageMenuOpen(false);
+                        if (e.key === "Escape") languageButtonRef.current?.focus();
+                        return;
+                      }
+                      handleMenuArrowKeys(e, languageMenuRef.current);
+                    }}
+                    className={cn(
+                      "absolute mt-2 w-44 bg-popover text-popover-foreground rounded-lg shadow-lg py-1 z-50 border border-border motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-1 motion-safe:duration-150",
+                      isRTL ? "left-0" : "right-0"
+                    )}
+                  >
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={language === lang.code}
                         onClick={() => {
                           setLanguage(lang.code as any);
                           setLanguageMenuOpen(false);
+                          languageButtonRef.current?.focus();
                         }}
                         className={cn(
-                          "w-full px-4 py-2 text-sm hover:bg-gray-100 flex items-center gap-2",
-                          isRTL ? "text-right flex-row-reverse" : "text-left",
-                          language === lang.code ? 'bg-healthTeal text-white' : 'text-gray-700'
+                          "w-full px-4 py-2 min-h-[44px] text-sm flex items-center gap-2 transition-colors focus-visible:outline-none",
+                          isRTL ? "text-right" : "text-left",
+                          language === lang.code
+                            ? "bg-healthTeal text-primary-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-healthDarkBlue"
+                            : "text-foreground/80 hover:bg-muted focus-visible:bg-muted"
                         )}
                       >
                         <span>{lang.flag}</span>
