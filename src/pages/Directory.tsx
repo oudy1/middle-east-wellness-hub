@@ -1,4 +1,3 @@
-import { listedLanguagesOf } from "@/lib/healthcareDirectory";
 import { useEffect, useMemo, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -29,7 +28,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
 import { ListingTrust, DirectoryDisclaimer } from "@/components/directory/ListingTrust";
-import { PUBLIC_WORKER_COLUMNS, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
+import { PUBLIC_WORKER_COLUMNS, listedLanguagesOf, type PublicHealthcareWorker } from "@/lib/healthcareDirectory";
 
 // Fix Leaflet's default marker icons (broken by bundlers)
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
