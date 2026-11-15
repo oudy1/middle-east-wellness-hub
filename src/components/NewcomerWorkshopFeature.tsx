@@ -37,7 +37,6 @@ const ui = {
     timeL: "Time",
     placeL: "Location",
     costL: "Cost",
-    formatL: "Format",
     register: "Register Now",
     learnMore: "Learn More",
     details: "Event details",
@@ -65,7 +64,6 @@ const ui = {
     timeL: "الوقت",
     placeL: "المكان",
     costL: "التكلفة",
-    formatL: "الصيغة",
     register: "سجّل الآن",
     learnMore: "اعرف المزيد",
     details: "تفاصيل الفعالية",
@@ -162,7 +160,7 @@ const NewcomerWorkshopFeature = () => {
       </div>
       <div className="flex items-start gap-2">
         <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" aria-hidden="true" />
-        <dt className="font-semibold shrink-0">{c.placeL}:</dt><dd>{w.venue}، {w.address}</dd>
+        <dt className="font-semibold shrink-0">{c.placeL}:</dt><dd>{w.venue}{isAr ? "، " : ", "}{w.address}</dd>
       </div>
       <div className="flex items-start gap-2">
         <Ticket className="h-4 w-4 mt-0.5 text-primary shrink-0" aria-hidden="true" />
