@@ -20,12 +20,12 @@ export default function HelpBentoGrid() {
   const isAr = language === "ar";
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section aria-labelledby="help-grid-title" className="bg-sun-cream py-10 md:py-14">
+    <section aria-labelledby="help-grid-title" className="bg-sun-cream py-6 md:py-14">
       <div ref={ref} className={`reveal container mx-auto px-4 ${isAr ? "font-cairo" : ""}`}>
-        <h2 id="help-grid-title" className="text-2xl md:text-3xl font-bold text-sun-blue mb-6 text-center md:text-start">
+        <h2 id="help-grid-title" className="text-2xl md:text-3xl font-bold text-sun-blue mb-4 md:mb-6 text-center md:text-start">
           {isAr ? "كيف يمكن لشمس أن تساعدك؟" : "What can SHAMS help you with?"}
         </h2>
-        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[minmax(150px,auto)]">
+        <ul className="grid gap-2.5 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[minmax(150px,auto)]">
           {ITEMS.map(({ key, icon: Icon, span, en, ar }, i) => {
             const [title, desc] = isAr ? ar : en;
             const big = i === 0;
