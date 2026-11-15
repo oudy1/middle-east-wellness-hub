@@ -63,8 +63,9 @@ function hasPhrase(padded: string, list: string[]): boolean {
 
 /**
  * Same main rule as the AI assistant: answer in the language the visitor
- * writes. Any Arabic (also in a mixed message) means Arabic; only Latin
+ * writes. Any Arabic (also mixed with English terms) means Arabic; only Latin
  * letters means English; neither (numbers, emoji) keeps the site language.
+ * Mirrored in supabase/functions/shams-chat/index.ts (detectReplyLanguage).
  */
 export function replyLanguage(message: string, uiLanguage: "en" | "ar"): "en" | "ar" {
   if (/[\u0600-\u06FF]/.test(message)) return "ar";
