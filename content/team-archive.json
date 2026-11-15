@@ -15,7 +15,5 @@
     { "old": "Mousa El-Sururi", "new": "Mousa Sururi" },
     { "old": "Sarah Durani", "new": "Sarah Durrani" }
   ],
-  "titlesDropped": [
-    { "name": "Sofia Sarwary", "oldTitle": "Project Manager", "reason": "Not among the confirmed leadership titles in the November 2026 brief" }
-  ]
+  "titlesDropped": []
 }

@@ -43,11 +43,13 @@ export const teamById = (id: TeamId) => TEAM_BY_ID[id];
 export const teamLabel = (id: TeamId, lang: Lang, short = true) =>
   short ? TEAM_BY_ID[id][lang === "ar" ? "short_ar" : "short_en"] : TEAM_BY_ID[id][lang === "ar" ? "label_ar" : "label_en"];
 
-/** Founder first, then team leads in team order, then everyone else A to Z. */
+const TITLE_ORDER = Object.keys(LEAD_TITLES);
+
+/** Founder first, then titled leaders in content/team.json order, then everyone else A to Z. */
 function rank(m: TeamMember): number {
   if (m.isFounder) return -1;
-  if (m.leads) return TEAMS.findIndex((t) => t.id === m.leads);
-  return TEAMS.length;
+  const i = TITLE_ORDER.indexOf(m.name);
+  return i >= 0 ? i : TITLE_ORDER.length;
 }
 const byRank = (a: TeamMember, b: TeamMember) => rank(a) - rank(b) || a.name.localeCompare(b.name);
 
@@ -89,8 +91,12 @@ export function filterTeam(team: TeamId | "all", query: string): TeamMember[] {
 
 /** Plain summary for site search and the chatbot, built from the same data. */
 export function teamSummary(lang: Lang): string {
-  const leads = TEAMS.map((t) => `${teamLabel(t.id, lang, false)}: ${t.lead}`).join(lang === "ar" ? "، " : "; ");
+  const sep = lang === "ar" ? "، " : "; ";
+  const leads = TEAMS.map((t) => `${teamLabel(t.id, lang, false)}: ${t.lead}`).join(sep);
+  const others = LEADERSHIP.filter((m) => !m.isFounder && !m.leads)
+    .map((m) => `${m.title![lang]}: ${m.name}`)
+    .join(sep);
   return lang === "ar"
-    ? `يضم فريق شمس ${TEAM_MEMBERS.length} عضوًا. المؤسس: ${data.founder.name}. قادة الفرق: ${leads}.`
-    : `The SHAMS team has ${TEAM_MEMBERS.length} members. Founder: ${data.founder.name}. Team leads: ${leads}.`;
+    ? `يضم فريق شمس ${TEAM_MEMBERS.length} عضوًا. المؤسس: ${data.founder.name}. ${others ? `القيادة: ${others}. ` : ""}قادة الفرق: ${leads}.`
+    : `The SHAMS team has ${TEAM_MEMBERS.length} members. Founder: ${data.founder.name}. ${others ? `Leadership: ${others}. ` : ""}Team leads: ${leads}.`;
 }

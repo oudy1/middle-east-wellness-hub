@@ -37,7 +37,7 @@ const TeamSection = () => {
   const results = useMemo(() => filterTeam(filter, query), [filter, query]);
 
   const tags = (m: TeamMember) =>
-    m.teams.length ? m.teams.map((id) => teamLabel(id, lang)) : m.isFounder ? [] : [t("team.shamsTeam")];
+    m.teams.length ? m.teams.map((id) => teamLabel(id, lang)) : m.title ? [] : [t("team.shamsTeam")];
 
   const filters: { id: Filter; label: string; count: number }[] = [
     { id: "all", label: t("team.allMembers"), count: TEAM_MEMBERS.length },

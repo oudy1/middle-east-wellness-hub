@@ -1,5 +1,5 @@
 {
-  "_note": "Single source for the public SHAMS team. Only name, team affiliation and confirmed leadership title. Never add phone numbers, personal emails, tasks or internal notes. Former members live in content/team-archive.json, which the site never loads.",
+  "_note": "Single source for the public SHAMS team. Only name, team affiliation and confirmed leadership title. leadTitles order is the order of the Leadership row after the founder. Never add phone numbers, personal emails, tasks or internal notes. Former members live in content/team-archive.json, which the site never loads.",
   "teams": [
     { "id": "research", "short_en": "Research", "short_ar": "البحث العلمي", "label_en": "Research Team", "label_ar": "فريق البحث العلمي", "lead": "Mousa Sururi" },
     { "id": "outreach", "short_en": "Outreach", "short_ar": "التواصل والشراكات", "label_en": "Outreach Team", "label_ar": "فريق التواصل والشراكات", "lead": "Saif Arabiat" },
@@ -39,11 +39,13 @@
     { "name": "Leen Dahlan", "teams": ["social-media-research", "events"] }
   ],
   "leadTitles": {
+    "Sofia Sarwary": { "en": "Project Manager", "ar": "مديرة المشاريع" },
     "Mousa Sururi": { "en": "Research Team Lead", "ar": "قائد فريق البحث العلمي" },
     "Saif Arabiat": { "en": "Outreach Team Lead", "ar": "قائد فريق التواصل والشراكات" },
     "Marta Mhanna": { "en": "Social Media Research Team Lead", "ar": "قائدة فريق البحث للمحتوى الرقمي" },
     "Zeina Issa": { "en": "Social Media Content Creation Team Lead", "ar": "قائدة فريق صناعة المحتوى ووسائل التواصل الاجتماعي" },
-    "Haneen Al Jayashy": { "en": "Events Team Lead", "ar": "قائدة فريق الفعاليات" }
+    "Haneen Al Jayashy": { "en": "Events Team Lead", "ar": "قائدة فريق الفعاليات" },
+    "Yasameen Ihsan": { "en": "Mentorship Program Lead", "ar": "قائدة برنامج الإرشاد" }
   },
   "affiliatedPhysicians": [
     {
