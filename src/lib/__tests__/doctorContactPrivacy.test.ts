@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { allPhysicians } from "@/lib/physicianData";
+import { PHYSICIANS_MASTER as allPhysicians } from "@/lib/physicianData";
 
 // Doctor lists show clinic contact details only. These are the only
 // shared clinic inboxes allowed; any other email address fails.
