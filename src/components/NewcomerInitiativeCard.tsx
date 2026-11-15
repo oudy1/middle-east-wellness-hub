@@ -4,14 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { NEWCOMER_WORKSHOP, isNewcomerWorkshopUpcoming } from "@/lib/newcomerWorkshop";
+import { NEWCOMER_WORKSHOP, newcomerWorkshopStatus } from "@/lib/newcomerWorkshop";
 
 const NewcomerInitiativeCard = () => {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const isRTL = language === "ar" || language === "ku" || language === "fa";
   const w = isAr ? NEWCOMER_WORKSHOP.ar : NEWCOMER_WORKSHOP.en;
-  const upcoming = isNewcomerWorkshopUpcoming();
+  const status = newcomerWorkshopStatus();
+  const upcoming = status === "upcoming";
 
   return (
     <Card
@@ -32,20 +33,30 @@ const NewcomerInitiativeCard = () => {
             : "SHAMS helps newcomers and refugees understand the Canadian healthcare system: health coverage (OHIP and IFHP), finding a family doctor, patient rights and resources in Arabic, through free community workshops."}
         </p>
 
-        {upcoming && (
-          <div className="rounded-lg border border-border bg-card p-4 space-y-3">
-            <p className="text-sm font-semibold text-healthDarkBlue">
-              {isAr ? "الورشة القادمة: " : "Next workshop: "}
-              {w.title}
-            </p>
-            <p className="text-sm text-muted-foreground">{w.summary}</p>
-            <ul className="space-y-1 text-sm">
-              <li className="flex items-start gap-2"><Calendar className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.date}</li>
-              <li className="flex items-start gap-2"><Clock className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.time}</li>
-              <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.place}</li>
-            </ul>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant={upcoming ? "default" : "secondary"} className="text-xs">
+              {upcoming ? (isAr ? "قادمة" : "Upcoming") : (isAr ? "انتهت" : "Completed")}
+            </Badge>
+            {upcoming && <Badge variant="secondary" className="text-xs">{isAr ? "مجاناً" : "Free"}</Badge>}
           </div>
-        )}
+          <p className="text-sm font-semibold text-healthDarkBlue">
+            {upcoming ? (isAr ? "الورشة القادمة: " : "Next workshop: ") : (isAr ? "ورشة سابقة: " : "Past workshop: ")}
+            {w.title}
+          </p>
+          {upcoming && <p className="text-sm text-muted-foreground">{w.summary}</p>}
+          <ul className="space-y-1 text-sm">
+            <li className="flex items-start gap-2"><Calendar className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.date}</li>
+            {upcoming && <li className="flex items-start gap-2"><Clock className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.time}</li>}
+            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-healthTeal shrink-0" aria-hidden="true" />{w.place}</li>
+          </ul>
+          <p className="text-xs text-muted-foreground">{w.organizer}</p>
+          {!upcoming && (
+            <p className="text-xs text-muted-foreground">
+              {isAr ? "انتهى موعد هذه الورشة وأُغلق التسجيل." : "This workshop date has passed and registration is closed."}
+            </p>
+          )}
+        </div>
 
         <div className="flex flex-wrap gap-3">
           {upcoming && (
