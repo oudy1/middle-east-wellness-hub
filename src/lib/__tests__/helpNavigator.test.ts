@@ -74,3 +74,10 @@ describe("directory language names", () => {
     expect(languageLabel("Tigrinya", true)).toBe("Tigrinya");
   });
 });
+
+import { QUICK_ENTRIES } from "../helpNavigator";
+import { approvedRouteMap as quickRoutes } from "../chatbotRoutes";
+describe("homepage quick entries", () => {
+  it("has the six requested entry points", () => expect(QUICK_ENTRIES.map((q) => q.id)).toEqual(["newcomer", "arabic-info", "family-doctors", "research", "programs", "recordings"]));
+  for (const q of QUICK_ENTRIES) it(`${q.id} opens an approved page with Arabic text`, () => { expect(quickRoutes[q.routeKey]).toBeTruthy(); expect(q.ar).toMatch(/[\u0600-\u06FF]/); });
+});
