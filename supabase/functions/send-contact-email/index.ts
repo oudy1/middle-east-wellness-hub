@@ -1,4 +1,10 @@
-import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
+import { corsHeaders as baseCors } from 'npm:@supabase/supabase-js@2/cors';
+
+// The site's client sends x-session-id on every call, so it must be allowed here too
+const corsHeaders = {
+  ...baseCors,
+  'Access-Control-Allow-Headers': `${baseCors['Access-Control-Allow-Headers']}, x-session-id`,
+};
 import { z } from 'npm:zod@3.23.8';
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
