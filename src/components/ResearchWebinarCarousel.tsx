@@ -23,12 +23,12 @@ const ResearchWebinarCarousel = () => {
               {t("researchWebinar.description")}
             </p>
           </div>
-          <a href={RECORDING_URL} target="_blank" rel="noopener noreferrer" className="shrink-0 w-full sm:w-auto">
-            <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button asChild className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shrink-0 w-full sm:w-auto">
+            <a href={RECORDING_URL} target="_blank" rel="noopener noreferrer">
               <Play className="h-4 w-4" />
               {t("common.watchRecording")}
-            </Button>
-          </a>
+            </a>
+          </Button>
         </div>
       </div>
     </section>

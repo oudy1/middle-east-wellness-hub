@@ -93,7 +93,7 @@ const ResearcherCard = ({
 }: ResearcherCardProps) => {
   const s = accentStyles[colorAccent] || accentStyles.healthTeal;
   return (
-  <Card className={`shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border ${s.border} ${s.borderHover} flex flex-col h-full`}>
+  <Card className={`shadow-md card-interactive overflow-hidden border ${s.border} ${s.borderHover} flex flex-col h-full`}>
     <div className={`bg-gradient-to-br ${s.gradFrom} ${s.gradTo} p-5 text-center`}>
       <div className={`w-20 h-20 bg-gradient-to-br ${s.circle} ${s.circleGrad} rounded-full mx-auto mb-2 flex items-center justify-center`}>
         {icon}
@@ -254,12 +254,12 @@ const Research = () => {
         </Card>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="https://dreamdeferred-egyptian-canadian.weebly.com/" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+          <a href="https://dreamdeferred-egyptian-canadian.weebly.com/" target="_blank" rel="noopener noreferrer">
             <ExternalLink className={`h-4 w-4 ${isAr ? 'ml-2' : 'mr-2'}`} />
             {isAr ? 'للمزيد من المعلومات أو للمشاركة' : 'Learn More or Participate'}
-          </Button>
-        </a>
+          </a>
+        </Button>
       </div>
       <p className="text-xs text-muted-foreground text-center italic">
         {isAr ? 'شمس تدعم عملية التوظيف لهذه الدراسة بالشراكة مع جامعة تورنتو.' : 'SHAMS is supporting recruitment for this study in partnership with the University of Toronto.'}
@@ -297,18 +297,18 @@ const Research = () => {
         </ul>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="https://uwo.eu.qualtrics.com/jfe/form/SV_a8BHB591h11CmUe" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+          <a href="https://uwo.eu.qualtrics.com/jfe/form/SV_a8BHB591h11CmUe" target="_blank" rel="noopener noreferrer">
             <ExternalLink className={`h-4 w-4 ${isAr ? 'ml-2' : 'mr-2'}`} />
             {isAr ? 'ابدأ استبيان التأهيل' : 'Take Pre-Screening'}
-          </Button>
-        </a>
-        <a href="/lovable-uploads/rise-c-flyer.pdf" target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+          </a>
+        </Button>
+        <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/10">
+          <a href="/lovable-uploads/rise-c-flyer.pdf" target="_blank" rel="noopener noreferrer">
             <FileDown className={`h-4 w-4 ${isAr ? 'ml-2' : 'mr-2'}`} />
             {isAr ? 'تنزيل الملصق' : 'Download Flyer'}
-          </Button>
-        </a>
+          </a>
+        </Button>
       </div>
       <p className="text-xs text-muted-foreground text-center">
         {isAr ? 'للاستفسار: rise-c.study@uwo.ca' : 'For questions: rise-c.study@uwo.ca'}
@@ -411,12 +411,12 @@ const Research = () => {
           : 'Approved by the University of Toronto Research Ethics Board — Protocol Number: RIS-47583'}
       </div>
       <div className="flex justify-center">
-        <a href="https://bit.ly/488lp3w" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+          <a href="https://bit.ly/488lp3w" target="_blank" rel="noopener noreferrer">
             {isAr ? 'تعرف على المزيد / سجّل الآن' : 'Learn More / Sign Up'}
             <ExternalLink className={`h-4 w-4 ${isAr ? 'mr-2' : 'ml-2'}`} />
-          </Button>
-        </a>
+          </a>
+        </Button>
       </div>
     </div>
   );

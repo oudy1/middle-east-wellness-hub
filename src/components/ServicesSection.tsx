@@ -66,11 +66,11 @@ const ServicesSection = () => {
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link to={service.link}>
-                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
+                <Button asChild variant="link" className="p-0 text-healthTeal hover:text-healthDarkBlue">
+                  <Link to={service.link}>
                     {t("services.learnMore")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           ))}

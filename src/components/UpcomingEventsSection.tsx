@@ -14,7 +14,7 @@ const UpcomingEventsSection = () => {
     <section className="py-12 bg-gradient-to-b from-muted/30 to-background">
       <div className="container mx-auto px-4">
         <div className="max-w-xl mx-auto">
-          <Card className="overflow-hidden border border-border/50 shadow-md hover:shadow-lg transition-shadow">
+          <Card className="overflow-hidden border border-border/50 shadow-md card-interactive">
             <CardContent className={`p-5 md:p-6 ${isRTL ? 'font-cairo' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
               <div className="text-center space-y-3">
                 <Badge variant="secondary" className="text-xs px-2 py-0.5">

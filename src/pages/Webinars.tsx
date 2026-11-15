@@ -158,20 +158,20 @@ const Webinars = () => {
                           </Button>
                         )}
                         {(webinar as any).slidesUrl && (
-                          <a href={(webinar as any).slidesUrl} target="_blank" rel="noopener noreferrer">
-                            <Button variant="outline" className="gap-1.5">
+                          <Button asChild variant="outline" className="gap-1.5">
+                            <a href={(webinar as any).slidesUrl} target="_blank" rel="noopener noreferrer">
                               <FileText className="h-4 w-4" />
                               {webinarLang === 'ar' ? 'عرض الشرائح' : 'View Slides'}
-                            </Button>
-                          </a>
+                            </a>
+                          </Button>
                         )}
                         {(webinar as any).resourcesUrl && (
-                          <a href={(webinar as any).resourcesUrl} target="_blank" rel="noopener noreferrer">
-                            <Button variant="outline" className="gap-1.5">
+                          <Button asChild variant="outline" className="gap-1.5">
+                            <a href={(webinar as any).resourcesUrl} target="_blank" rel="noopener noreferrer">
                               <ExternalLink className="h-4 w-4" />
                               {webinarLang === 'ar' ? 'عرض الموارد' : 'View Resources'}
-                            </Button>
-                          </a>
+                            </a>
+                          </Button>
                         )}
                       </div>
 

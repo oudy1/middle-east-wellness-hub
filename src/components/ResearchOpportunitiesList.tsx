@@ -79,7 +79,7 @@ const ResearchOpportunitiesList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto mb-8 text-start">
           {items.map((item) => (
-            <Card key={item.id} className="border-border hover:shadow-md transition-shadow">
+            <Card key={item.id} className="border-border card-interactive">
               <CardContent className="p-5 space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <h4 className="font-semibold text-foreground leading-snug">
@@ -112,22 +112,22 @@ const ResearchOpportunitiesList = () => {
                   </p>
                 )}
                 <div className="flex flex-wrap gap-2 pt-1">
-                  <a href={`mailto:${item.email}?subject=${encodeURIComponent(item.project_title)}`}>
-                    <Button size="sm" variant="outline" className="min-h-[44px]">
+                  <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+                    <a href={`mailto:${item.email}?subject=${encodeURIComponent(item.project_title)}`}>
                       {isAr ? "تواصل مع الباحث" : "Contact researcher"}
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                   {item.study_website && (
-                    <a
+                    <Button asChild size="sm" variant="ghost" className="min-h-[44px]">
+                      <a
                       href={item.study_website}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button size="sm" variant="ghost" className="min-h-[44px]">
                         {isAr ? "موقع الدراسة" : "Study website"}
                         <ExternalLink className="h-4 w-4 ms-2" />
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   )}
                 </div>
               </CardContent>
@@ -137,12 +137,12 @@ const ResearchOpportunitiesList = () => {
       )}
 
       <div className="text-center">
-        <Link to="/post-opportunity">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground min-h-[44px]">
+        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground min-h-[44px]">
+          <Link to="/post-opportunity">
             <Plus className="h-4 w-4 me-2" />
             {isAr ? "أرسل فرصة" : "Submit an Opportunity"}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
     </div>
   );

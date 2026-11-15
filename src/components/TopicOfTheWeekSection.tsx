@@ -34,7 +34,7 @@ const TopicOfTheWeekSection = () => {
 
         <div className="max-w-xl mx-auto mb-12">
           <Card 
-            className="overflow-hidden border border-border/50 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            className="overflow-hidden border border-border/50 card-interactive cursor-pointer group"
             onClick={handleCardClick}
             role="link"
             tabIndex={0}

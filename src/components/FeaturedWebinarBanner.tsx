@@ -27,25 +27,25 @@ const FeaturedWebinarBanner = () => {
           </p>
 
           <div className={`flex flex-wrap gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
-            <a href={SLIDES_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="gap-1.5">
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <a href={SLIDES_URL} target="_blank" rel="noopener noreferrer">
                 <FileText className="h-4 w-4" />
                 {t("common.viewSlides")}
-              </Button>
-            </a>
-            <a href={RESOURCES_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="gap-1.5">
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <a href={RESOURCES_URL} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" />
                 {t("common.viewResources")}
-              </Button>
-            </a>
+              </a>
+            </Button>
             {hasRecording && (
-              <a href={RECORDING_URL} target="_blank" rel="noopener noreferrer">
-                <Button size="sm" className="gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button asChild size="sm" className="gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+                <a href={RECORDING_URL} target="_blank" rel="noopener noreferrer">
                   <Play className="h-4 w-4" />
                   {t("common.watchRecording")}
-                </Button>
-              </a>
+                </a>
+              </Button>
             )}
           </div>
         </div>

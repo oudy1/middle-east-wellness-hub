@@ -33,7 +33,7 @@ const WhatWeDoSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {cards.map((card, index) => (
             <Link key={index} to={card.link}>
-              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer">
+              <Card className="h-full card-interactive cursor-pointer">
                 <CardContent className="pt-6 text-center">
                   <card.icon className="w-12 h-12 text-healthTeal mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-healthDarkBlue mb-3">

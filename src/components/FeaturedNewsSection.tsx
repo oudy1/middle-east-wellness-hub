@@ -92,7 +92,7 @@ const FeaturedNewsSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {featuredNews && (
             <div className="lg:col-span-2">
-              <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full cursor-pointer">
+              <Card className="overflow-hidden shadow-lg card-interactive h-full cursor-pointer">
                 <NewsLink url={featuredNews.url} className="block">
                   <div className="relative">
                     <img 
@@ -128,7 +128,7 @@ const FeaturedNewsSection = () => {
 
           <div className="space-y-6">
             {regularNews.map((item) => (
-              <Card key={item.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+              <Card key={item.id} className="overflow-hidden shadow-md card-interactive cursor-pointer">
                 <NewsLink url={item.url} className="block">
                   <div className="flex">
                     <img 

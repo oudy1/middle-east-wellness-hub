@@ -39,18 +39,18 @@ const WebinarSlidesViewer = () => {
 
             {/* Action Buttons */}
             <div className={`flex flex-wrap gap-2 mb-6 ${isRTL ? "flex-row-reverse" : ""}`}>
-              <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
-                <Button className="gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button asChild className="gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground">
+                <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
                   <FileText className="h-4 w-4" />
                   {t("common.viewSlides")}
-                </Button>
-              </a>
-              <a href={PDF_URL} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="gap-1.5">
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="gap-1.5">
+                <a href={PDF_URL} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4" />
                   {t("slides.downloadDeck")}
-                </Button>
-              </a>
+                </a>
+              </Button>
             </div>
 
             {/* Embedded Slides Viewer */}
@@ -70,12 +70,12 @@ const WebinarSlidesViewer = () => {
               <div className="rounded-lg border border-border/50 bg-muted/30 p-6 text-center">
                 <AlertCircle className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                 <p className="text-muted-foreground text-sm mb-3">{t("slides.embedFallback")}</p>
-                <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm" className="gap-1.5">
+                <Button asChild size="sm" className="gap-1.5">
+                  <a href={VIEW_URL} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4" />
                     {t("slides.openInNewTab")}
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </div>
             )}
           </div>

@@ -345,7 +345,7 @@ const Services = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a href="tel:911" className="block">
-                  <Card className="border-red-200 hover:shadow-md transition-shadow bg-white">
+                  <Card className="border-red-200 card-interactive bg-white">
                     <CardContent className="p-4 flex items-center gap-3">
                       <Phone className="h-5 w-5 text-red-600 flex-shrink-0" />
                       <div>
@@ -360,7 +360,7 @@ const Services = () => {
                   </Card>
                 </a>
                 <a href="tel:988" className="block">
-                  <Card className="border-red-200 hover:shadow-md transition-shadow bg-white">
+                  <Card className="border-red-200 card-interactive bg-white">
                     <CardContent className="p-4 flex items-center gap-3">
                       <Phone className="h-5 w-5 text-red-600 flex-shrink-0" />
                       <div>
@@ -375,7 +375,7 @@ const Services = () => {
                   </Card>
                 </a>
                 <a href="https://www.camh.ca/" target="_blank" rel="noopener noreferrer" className="block">
-                  <Card className="border-red-200 hover:shadow-md transition-shadow bg-white">
+                  <Card className="border-red-200 card-interactive bg-white">
                     <CardContent className="p-4 flex items-center gap-3">
                       <ExternalLink className="h-5 w-5 text-red-600 flex-shrink-0" />
                       <div>
@@ -390,7 +390,7 @@ const Services = () => {
                   </Card>
                 </a>
                 <Link to="/contact" className="block">
-                  <Card className="border-red-200 hover:shadow-md transition-shadow bg-white">
+                  <Card className="border-red-200 card-interactive bg-white">
                     <CardContent className="p-4 flex items-center gap-3">
                       <Mail className="h-5 w-5 text-red-600 flex-shrink-0" />
                       <div>
@@ -517,12 +517,12 @@ const Services = () => {
                       ? 'إذا كنت متخصصاً في الرعاية الصحية وترغب في الانضمام إلى منصة شمس أو التعاون معنا، يرجى مراسلتنا بمعلوماتك.'
                       : 'If you are a healthcare professional interested in being listed on the SHAMS platform or collaborating with us, please email us with your information.'}
                   </p>
-                  <a href="mailto:infoprojectshams@gmail.com?subject=Physician%20Listing%20Request%20%E2%80%93%20SHAMS">
-                    <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                    <a href="mailto:infoprojectshams@gmail.com?subject=Physician%20Listing%20Request%20%E2%80%93%20SHAMS">
                       <UserPlus className="h-6 w-6" />
                       {language === 'ar' ? 'انضم إلى شبكة أطباء شمس' : 'Join the SHAMS Physician Network'}
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                 </div>
               </div>
             </section>
@@ -541,12 +541,12 @@ const Services = () => {
                       'Become part of our mission to improve healthcare access for Middle Eastern societies.'
                     }
                   </p>
-                  <Link to="/volunteer">
-                    <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                  <Button asChild className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 mx-auto text-lg md:text-xl px-8 md:px-12 py-3 md:py-4">
+                    <Link to="/volunteer">
                       <Users className="h-6 w-6" />
                       {language === 'ar' ? 'تقديم طلب للانضمام إلينا' : 'Apply to Join Us'}
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </section>
@@ -575,7 +575,7 @@ const Services = () => {
                   : 'A plain-language guide to your rights as a patient in Ontario, including dignity, privacy, consent, and how to speak up.'}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="card-interactive">
                   <CardHeader className="pb-3">
                     <Badge variant="secondary" className="w-fit mb-2 text-xs">{language === 'ar' ? 'حقوق المرضى' : 'Patient Rights'}</Badge>
                     <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`}>
@@ -588,16 +588,16 @@ const Services = () => {
                         ? 'ميثاق حقوق المريض ومسؤولياته من Ontario Health atHome.'
                         : 'Patient Bill of Rights and Responsibilities from Ontario Health atHome.'}
                     </p>
-                    <a href="https://ontariohealthathome.ca/patient-bill-of-rights-responsibilities/" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <a href="https://ontariohealthathome.ca/patient-bill-of-rights-responsibilities/" target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-4 w-4" />
                         {language === 'ar' ? 'عرض حقوق المريض (إنجليزي)' : 'View Patient Rights (English)'}
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="card-interactive">
                   <CardHeader className="pb-3">
                     <Badge variant="secondary" className="w-fit mb-2 text-xs">{language === 'ar' ? 'حقوق المرضى' : 'Patient Rights'}</Badge>
                     <CardTitle className={`text-healthDarkBlue text-lg leading-tight ${language === 'ar' ? 'text-right font-cairo' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -610,12 +610,12 @@ const Services = () => {
                         ? 'النسخة العربية من ميثاق حقوق المريض ومسؤولياته.'
                         : 'Arabic translation of the Patient Bill of Rights and Responsibilities.'}
                     </p>
-                    <a href="https://www.ontariohealthathome.ca/blobohahprod4cd80afe1b/wp-content/uploads/2023/01/OHaH-Patient-Bill-Rights-Arabic.pdf" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <a href="https://www.ontariohealthathome.ca/blobohahprod4cd80afe1b/wp-content/uploads/2023/01/OHaH-Patient-Bill-Rights-Arabic.pdf" target="_blank" rel="noopener noreferrer">
                         <FileText className="h-4 w-4" />
                         {language === 'ar' ? 'عرض النسخة العربية (PDF)' : 'View عربي Version (PDF)'}
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -638,7 +638,7 @@ const Services = () => {
               </p>
               <div id="educational-materials" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 scroll-mt-24 md:scroll-mt-32">
                 {/* Alone in Canada Guide */}
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="card-interactive">
                   <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
                     <img src="/lovable-uploads/c221afaa-ecb5-4dda-9bc5-99fb5191312e.png" alt="Alone in Canada Guide" loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                   </div>
@@ -666,17 +666,17 @@ const Services = () => {
                     <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                       {language === 'ar' ? 'المصدر: CAMH – مركز الإدمان والصحة النفسية' : 'Source: CAMH – Centre for Addiction and Mental Health'}
                     </p>
-                    <a href="https://www.camh.ca/-/media/files/mi-index-other-languages/english-alone-in-canada.pdf" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <a href="https://www.camh.ca/-/media/files/mi-index-other-languages/english-alone-in-canada.pdf" target="_blank" rel="noopener noreferrer">
                         <BookOpen className="h-4 w-4" />
                         {language === 'ar' ? 'تنزيل PDF' : 'Download PDF'}
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
 
                 {/* Arabic-English Medical Terminology Guide */}
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="card-interactive">
                   <div className="aspect-video bg-healthTeal/10 flex items-center justify-center p-4">
                     <img src="/lovable-uploads/46453847-1b06-4288-b707-464176e53351.png" alt="Arabic-English Medical Terminology Guide" loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                   </div>
@@ -704,17 +704,17 @@ const Services = () => {
                     <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                       {language === 'ar' ? 'المصدر: مُقتبس بامتنان من مركز جامعة أوريغون الصحي' : 'Source: Adapted with gratitude from the University of Oregon Health Center'}
                     </p>
-                    <a href="https://health.uoregon.edu/sites/default/files/Translation-Arabic.pdf" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <a href="https://health.uoregon.edu/sites/default/files/Translation-Arabic.pdf" target="_blank" rel="noopener noreferrer">
                         <BookOpen className="h-4 w-4" />
                         {language === 'ar' ? 'تنزيل PDF' : 'Download PDF'}
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
 
                 {/* AboutKidsHealth Arabic Resource */}
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="card-interactive">
                   <div className="aspect-video bg-white flex items-center justify-center p-6">
                     <img src={sickKidsLogo} alt="SickKids Hospital Logo" loading="lazy" decoding="async" className="h-20 w-auto object-contain" />
                   </div>
@@ -742,12 +742,12 @@ const Services = () => {
                     <p className={`text-xs text-gray-500 mb-4 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
                       {language === 'ar' ? 'المصدر: مستشفى الأطفال المرضى (SickKids)' : 'Source: The Hospital for Sick Children (SickKids)'}
                     </p>
-                    <a href="https://www.aboutkidshealth.ca/ar/health-information-in-arabic/" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <a href="https://www.aboutkidshealth.ca/ar/health-information-in-arabic/" target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-4 w-4" />
                         {language === 'ar' ? 'زيارة الموقع' : 'Visit Website'}
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -786,7 +786,7 @@ const Services = () => {
                   { title: "التحدث مع طبيبك", desc: "نصائح عربية للتواصل الفعّال مع فريق الرعاية الصحية حول تشخيص السرطان والعلاج.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/talking-with-your-doctor.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
                   { title: "العلاج الهرموني للسرطان", desc: "معلومات عربية حول العلاج الهرموني للسرطان وكيفية عمله والآثار الجانبية المحتملة.", link: "https://www.cancer.org/content/dam/cancer-org/cancer-control/ar/booklets-flyers/hormone-therapy-for-cancer.pdf", source: "MedlinePlus / American Cancer Society", mp: true },
                 ].map((resource: any, idx) => (
-                  <Card key={idx} className="hover:shadow-lg transition-shadow border-pink-100">
+                  <Card key={idx} className="card-interactive border-pink-100">
                     <CardHeader className="pb-3">
                       <Badge variant="secondary" className="w-fit mb-2 text-xs bg-pink-100 text-pink-700">
                         {language === 'ar' ? 'وقاية من السرطان' : 'Cancer Prevention'}
@@ -801,12 +801,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">{resource.source ? `المصدر: ${resource.source}` : 'المصدر مذكور في الكتيب'}</p>
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-pink-500 hover:bg-pink-600 text-white flex items-center gap-2 w-full">
+                        <a href={resource.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">تحميل الكتيب</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -848,7 +848,7 @@ const Services = () => {
                   { title: "النوبة القلبية (Heart Attack)", desc: "ورقة عربية حول علامات النوبة القلبية وما يجب فعله فورًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartAttack_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                   { title: "قسطرة القلب وتوسيع الشرايين (Angioplasty)", desc: "شرح عربي لإجراء قسطرة القلب وتوسيع الشرايين وما يمكن توقعه.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/HeartCathAngioplasty_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                 ].map((resource: any, idx) => (
-                  <Card key={idx} className="hover:shadow-lg transition-shadow border-red-100">
+                  <Card key={idx} className="card-interactive border-red-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Heart className="h-5 w-5 text-red-500" />
@@ -863,12 +863,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'CardioSmart – American College of Cardiology'}</p>
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2 w-full">
+                        <a href={resource.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">تحميل الكتيب</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -907,7 +907,7 @@ const Services = () => {
                   { title: "طرق إدارة وزنك", desc: "نصائح عربية حول التغذية ونمط الحياة لإدارة الوزن والوقاية من السكري.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WaysManageWt_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                   { title: "السكري وأمراض الكلى", desc: "معلومات عربية حول تأثير السكري على الكلى وكيفية الوقاية من المضاعفات.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/DiabetesKidneyProblems_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                 ].map((resource: any, idx) => (
-                  <Card key={idx} className="hover:shadow-lg transition-shadow border-teal-100">
+                  <Card key={idx} className="card-interactive border-teal-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Activity className="h-5 w-5 text-healthTeal" />
@@ -922,12 +922,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Learning About Diabetes Organization'}</p>
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-healthTeal hover:bg-teal-700 text-white flex items-center gap-2 w-full">
+                        <a href={resource.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">تحميل الكتيب</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -966,7 +966,7 @@ const Services = () => {
                   { title: "ما يمكنك فعله للنوم بشكل أفضل", desc: "نصائح عربية عملية لتحسين نظافة النوم وجودته.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/WhatSleepBetter_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                   { title: "التوجيهات المسبقة للرعاية", desc: "معلومات عربية عن التوجيهات المسبقة وحقك في اتخاذ قرارات الرعاية الصحية مسبقًا.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AdvanceDirectives_ar.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                 ].map((resource: any, idx) => (
-                  <Card key={idx} className="hover:shadow-lg transition-shadow border-purple-100">
+                  <Card key={idx} className="card-interactive border-purple-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Brain className="h-5 w-5 text-[hsl(220,13%,48%)]" />
@@ -981,12 +981,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'Minds Matter Psychiatry – Resources'}</p>
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-[hsl(220,13%,48%)] hover:bg-[hsl(220,13%,40%)] text-white flex items-center gap-2 w-full">
+                        <a href={resource.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">تحميل الكتيب</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -1030,7 +1030,7 @@ const Services = () => {
                   { title: "لقاح المكورات الرئوية (PPSV23)", desc: "ورقة معلومات اللقاح (VIS) العربية حول لقاح المكورات الرئوية للبالغين والفئات المعرضة للخطر.", link: "https://www.immunize.org/wp-content/uploads/vis/arabic_ppsv.pdf", source: "MedlinePlus / Immunize.org (CDC VIS)", mp: true },
                   { title: "الجمرة الخبيثة: ما تحتاج معرفته", desc: "ورقة معلومات عربية عن الجمرة الخبيثة (Anthrax) وطرق الانتقال والوقاية والعلاج.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/AnthraxFactSheet_ARA.pdf", source: "MedlinePlus / Health Information Translations", mp: true },
                 ].map((resource: any, idx) => (
-                  <Card key={idx} className="hover:shadow-lg transition-shadow border-blue-100">
+                  <Card key={idx} className="card-interactive border-blue-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Syringe className="h-5 w-5 text-healthDarkBlue" />
@@ -1045,12 +1045,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{resource.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {resource.source ?? 'HealthLinkBC'}</p>
-                      <a href={resource.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white flex items-center gap-2 w-full">
+                        <a href={resource.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">تحميل الملف</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -1084,7 +1084,7 @@ const Services = () => {
                 }
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <Card className="hover:shadow-lg transition-shadow border-green-100">
+                <Card className="card-interactive border-green-100">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-2 justify-end">
                       <Shield className="h-5 w-5 text-green-600" />
@@ -1098,12 +1098,12 @@ const Services = () => {
                       دليل حول المخاطر الصحية في البرية وكيفية الوقاية من الإصابات والأمراض أثناء التواجد في الهواء الطلق.
                     </p>
                     <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: HealthLinkBC</p>
-                    <a href="https://www.healthlinkbc.ca/sites/default/files/documents/hfile24-A.pdf" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                      <a href="https://www.healthlinkbc.ca/sites/default/files/documents/hfile24-A.pdf" target="_blank" rel="noopener noreferrer">
                         <BookOpen className="h-4 w-4" />
                         <span className="font-cairo">تحميل الملف</span>
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
 
@@ -1113,7 +1113,7 @@ const Services = () => {
                   { title: "صحة وسلامة الظهر", desc: "نصائح عربية للوقاية من إصابات الظهر وأوضاع الجسم الصحيحة في العمل والمنزل.", link: "https://storage.googleapis.com/healthinfotranslations-pdfdocs/BackHealthSafety_AR.pdf", source: "MedlinePlus / Health Information Translations" },
                   { title: "التسمم بأول أكسيد الكربون", desc: "ورقة عربية من مراكز السيطرة على الأمراض (CDC) عن الوقاية من التسمم بأول أكسيد الكربون.", link: "https://www.cdc.gov/carbon-monoxide/media/pdfs/campaign_flyer_AR.pdf", source: "MedlinePlus / U.S. CDC" },
                 ].map((r, idx) => (
-                  <Card key={`mp-safety-${idx}`} className="hover:shadow-lg transition-shadow border-green-100">
+                  <Card key={`mp-safety-${idx}`} className="card-interactive border-green-100">
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-2 justify-end">
                         <Shield className="h-5 w-5 text-green-600" />
@@ -1126,12 +1126,12 @@ const Services = () => {
                     <CardContent className="pt-0">
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed text-right" dir="rtl">{r.desc}</p>
                       <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: {r.source}</p>
-                      <a href={r.link} target="_blank" rel="noopener noreferrer">
-                        <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full">
+                        <a href={r.link} target="_blank" rel="noopener noreferrer">
                           <BookOpen className="h-4 w-4" />
                           <span className="font-cairo">عرض المورد بالعربية</span>
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -1165,7 +1165,7 @@ const Services = () => {
                 }
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <Card className="hover:shadow-lg transition-shadow border-slate-100">
+                <Card className="card-interactive border-slate-100">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-2 justify-end">
                       <Wind className="h-5 w-5 text-slate-600" />
@@ -1179,12 +1179,12 @@ const Services = () => {
                       معلومات تساعد على الإقلاع عن التدخين وتحسين صحة الرئة مع نصائح عملية وأدوات دعم.
                     </p>
                     <p className="text-xs text-gray-500 mb-4 text-right" dir="rtl">المصدر: HealthLinkBC</p>
-                    <a href="https://www.healthlinkbc.ca/sites/default/files/documents/healthfiles/hfile30c-a.pdf" target="_blank" rel="noopener noreferrer">
-                      <Button className="bg-slate-600 hover:bg-slate-700 text-white flex items-center gap-2 w-full">
+                    <Button asChild className="bg-slate-600 hover:bg-slate-700 text-white flex items-center gap-2 w-full">
+                      <a href="https://www.healthlinkbc.ca/sites/default/files/documents/healthfiles/hfile30c-a.pdf" target="_blank" rel="noopener noreferrer">
                         <BookOpen className="h-4 w-4" />
                         <span className="font-cairo">تحميل الملف</span>
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -1217,7 +1217,7 @@ const Services = () => {
               </p>
               
               <div className="max-w-3xl mx-auto">
-                <Card className="hover:shadow-xl transition-shadow border-2 border-healthTeal/20">
+                <Card className="card-interactive border-2 border-healthTeal/20">
                   <CardHeader className="pb-4">
                     <div className="flex flex-wrap gap-2 mb-3">
                       <Badge variant="secondary" className="text-xs bg-healthTeal/10 text-healthTeal border-healthTeal/20">
@@ -1278,18 +1278,18 @@ const Services = () => {
                     </div>
                     
                     <div className="flex flex-col sm:flex-row gap-3 mb-4">
-                      <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer" className="flex-1">
-                        <Button className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full">
+                      <Button asChild className="bg-healthTeal hover:bg-healthTeal/90 text-white flex items-center gap-2 w-full flex-1">
+                        <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="h-4 w-4" />
                           {language === 'ar' ? 'افتح القوالب' : 'Open templates'}
-                        </Button>
-                      </a>
-                      <Link to="/contact" className="flex-1">
-                        <Button variant="outline" className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/10 flex items-center gap-2 w-full">
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline" className="border-healthDarkBlue text-healthDarkBlue hover:bg-healthDarkBlue/10 flex items-center gap-2 w-full flex-1">
+                        <Link to="/contact">
                           <Mail className="h-4 w-4" />
                           {language === 'ar' ? 'شارك مورداً مع SHAMS' : 'Share a resource with SHAMS'}
-                        </Button>
-                      </Link>
+                        </Link>
+                      </Button>
                     </div>
                     
                     <div className={`text-xs text-gray-500 space-y-1 pt-3 border-t border-gray-100 ${language === 'ar' ? 'text-right' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -1321,7 +1321,7 @@ const Services = () => {
               {language === 'ar' ? 'موارد للأطباء والمقيمين وطلاب الطب' : 'Resources for physicians, residents, and medical students'}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto mb-8">
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card className="text-center p-6 card-interactive">
                 <GraduationCap className="h-10 w-10 text-primary mx-auto mb-3" />
                 <h3 className="text-lg font-semibold mb-3">
                   {language === 'ar' ? 'مركز سيناي للتعليم المستمر' : 'Sinai Health CME'}
@@ -1329,14 +1329,14 @@ const Services = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {language === 'ar' ? 'برامج التعليم الطبي المستمر من مركز سيناي الصحي.' : 'Continuing medical education programs from Sinai Health.'}
                 </p>
-                <a href="https://www.sinaihealth.ca/education-and-training/continuing-education" target="_blank" rel="noopener noreferrer" className="inline-block">
-                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground inline-block">
+                  <a href="https://www.sinaihealth.ca/education-and-training/continuing-education" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     {language === 'ar' ? 'الوصول للتدريب' : 'Access Training'}
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </Card>
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card className="text-center p-6 card-interactive">
                 <GraduationCap className="h-10 w-10 text-destructive mx-auto mb-3" />
                 <h3 className="text-lg font-semibold mb-3">
                   {language === 'ar' ? 'التعليم الطبي المستمر - كالغاري' : 'Calgary CME'}
@@ -1344,18 +1344,18 @@ const Services = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   {language === 'ar' ? 'برامج التعليم الطبي المستمر من جامعة كالغاري.' : 'Continuing medical education programs from the University of Calgary.'}
                 </p>
-                <a href="https://cumming.ucalgary.ca/cme/about/strategy" target="_blank" rel="noopener noreferrer" className="inline-block">
-                  <Button className="bg-destructive hover:bg-destructive/90 text-destructive-foreground">
+                <Button asChild className="bg-destructive hover:bg-destructive/90 text-destructive-foreground inline-block">
+                  <a href="https://cumming.ucalgary.ca/cme/about/strategy" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     {language === 'ar' ? 'عرض البرامج' : 'View Programs'}
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </Card>
             </div>
 
             {/* Point-of-Care Templates */}
             <div className="max-w-2xl mx-auto">
-              <Card className="hover:shadow-xl transition-shadow border-2 border-primary/20">
+              <Card className="card-interactive border-2 border-primary/20">
                 <CardHeader className="pb-2">
                   <div className="flex flex-wrap gap-2 mb-1">
                     <Badge variant="secondary" className="text-xs bg-primary/10 text-primary">{language === 'ar' ? 'قوالب' : 'Templates'}</Badge>
@@ -1372,11 +1372,11 @@ const Services = () => {
                       ? 'قوالب للمشاكل السريرية الشائعة تشمل قوائم القبول، نماذج جمع التاريخ المرضي، التشخيص التفريقي، وعبارات التقييم والخطة.'
                       : 'Templates for common clinical problems including admission checklists, HPI intakes, differentials, and A&P dotphrases.'}
                   </p>
-                  <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer" className="inline-block">
-                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 text-sm">
+                  <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 text-sm inline-block">
+                    <a href="https://www.pointofcaremedicine.com/templates" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4" />{language === 'ar' ? 'افتح القوالب' : 'Open templates'}
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                   <p className={`text-xs text-muted-foreground mt-2 ${isRTL ? 'text-right' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
                     {language === 'ar' ? 'SHAMS ليست منتسبة لهذا الموقع.' : 'SHAMS is not affiliated with this website.'}
                   </p>

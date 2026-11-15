@@ -88,7 +88,7 @@ const SupportUs = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
               {supportOptions.map((option, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <Card key={index} className="card-interactive">
                   <CardHeader className="text-center">
                     <div className={`${option.color} rounded-full p-6 w-fit mx-auto mb-4`}>
                       {option.icon}
