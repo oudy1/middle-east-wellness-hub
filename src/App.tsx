@@ -34,13 +34,6 @@ const Programs = lazyWithRetry(() => import("@/pages/Programs"));
 const Mentorship = lazyWithRetry(() => import("@/pages/Mentorship"));
 const FAQ = lazyWithRetry(() => import("@/pages/FAQ"));
 const Glossary = lazyWithRetry(() => import("@/pages/Glossary"));
-const AdminLogin = lazyWithRetry(() => import("@/pages/AdminLogin"));
-const ResetPassword = lazyWithRetry(() => import("@/pages/ResetPassword"));
-const AdminFaqVotes = lazyWithRetry(() => import("@/pages/AdminFaqVotes"));
-const AdminOpportunities = lazyWithRetry(() => import("@/pages/AdminOpportunities"));
-const AdminTopicRequests = lazyWithRetry(() => import("@/pages/AdminTopicRequests"));
-const AdminVolunteers = lazyWithRetry(() => import("@/pages/AdminVolunteers"));
-const AdminHealthcareWorkers = lazyWithRetry(() => import("@/pages/AdminHealthcareWorkers"));
 const PostOpportunity = lazyWithRetry(() => import("@/pages/PostOpportunity"));
 const NotFound = lazyWithRetry(() => import("@/pages/NotFound"));
 
@@ -87,13 +80,6 @@ function App() {
             <Route path="/programs/mentorship" element={<Mentorship />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/glossary" element={<Glossary />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/admin/faq-votes" element={<AdminFaqVotes />} />
-            <Route path="/admin/opportunities" element={<AdminOpportunities />} />
-            <Route path="/admin/topic-requests" element={<AdminTopicRequests />} />
-            <Route path="/admin/volunteers" element={<AdminVolunteers />} />
-            <Route path="/admin/healthcare-workers" element={<AdminHealthcareWorkers />} />
             <Route path="/post-opportunity" element={<PostOpportunity />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,7 +1,7 @@
 - [x] Build the admin-only volunteer response table and secure sheet reader.
 - [x] Register `/admin/volunteers` without exposing the private page in the sitemap.
 - [x] Recording of Know Your Rights webinar on homepage + recordings page.
-- [ ] Volunteer sheet: both linked Google accounts (Mahmoud's, Noweir's) still get 403; reader tries both. Waiting on user to share the sheet with one of them, or connect the true owner account. Also needs at least one admin in app_admins to open the page.
+- [x] Volunteer sheet reader no longer used: admin volunteer page removed at user request; answers stay in Google Sheets.
 - [x] Batch 1: Programs convention turned into a recap (no sign-up).
 - [x] Batch 1: spam guard (hidden trap, fill-time check, 5 per 10 min per visitor) on all forms that send email.
 - [x] Batch 1: email errors no longer show provider details to visitors.
@@ -15,7 +15,7 @@
 - [x] Batch 2: newsletter replaced with Follow us on Instagram.
 - [x] Batch 2: bilingual Privacy & Terms page; fix footer links.
 - [x] Batch 2: "societies" sweep + official name in hero/footer; inquiry success message translated; hide expired opportunities.
-- [ ] User action: infoprojectshams@gmail.com creates an account at /admin/login and confirms the email (admin access is then automatic).
+- [x] Admin sign-up no longer needed: admin area removed at user request.
 - [x] Fixed admin sign-in loop (admin list rule checked itself, so every admin page said Not authorized); added forgot-password + /reset-password.
 - [ ] User review: Privacy page wording; newcomer initiative description. (Scadding Court workshop details + partner branding confirmed by the Nov 15 brief.)
 - [x] Audit S1-S4: own title/description/canonical on 9 pages (EN+AR); 404 + admin pages hidden from search; sitemap cleaned (+find-healthcare-workers, physicians/apply, post-opportunity; -resources, -webinars); robots blocks /admin; English recordings heading "Webinars and Recordings" (Arabic kept as-is per user).
@@ -37,7 +37,7 @@
 - [x] P0 Batch A: admin review page for listings; Report incorrect information link + "listing does not guarantee availability" note on directory pages.
 - [x] P0 Batch A: tests proving unapproved listings cannot be read or self-published through the public API.
 - [ ] Later batches (need go-ahead per brief): guided healthcare navigation, resource finder filters, glossary review status, webinar library filters, programs status, research tracker expiry, Get Involved hub, FAQ, page feedback, homepage reorder, chatbot intent/sources, 60-scenario test suite, privacy-conscious error monitoring.
-- [ ] User action: an admin account must exist (sign up at /admin/login with an allowlisted email) before anyone can publish new doctor listings.
+- [x] Doctor listings are now published by the agent on request (admin area removed).
 - [ ] User review: updated directory wording on the Privacy & Terms page (now says listings appear only after review).
 
 ## Team and About page brief (uploaded Nov 15)
@@ -76,4 +76,4 @@
 - [x] Shared status labels on admin review pages.
 - [ ] After Nov 19: confirm the workshop took place, and send any recording or recap link (waiting on user).
 - [ ] Real recruitment status of the 4 research studies (waiting on user).
-- [ ] An admin must sign up at /admin/login with an allowlisted email (no admin account exists yet).
+- [x] Removed the whole admin area (sign-in, password reset, all admin pages) at user request.
