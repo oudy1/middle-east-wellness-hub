@@ -7,7 +7,7 @@ const walk = (d: string) => readdirSync(d).forEach((n) => { const p = join(d, n)
 ["src", "content"].forEach(walk);
 const urls = new Set<string>();
 for (const f of files) for (const m of readFileSync(f, "utf8").matchAll(/https:\/\/[^\s"'`)<>\\]+/g)) urls.add(m[0].replace(/[.,;]+$/, ""));
-const skip = /supabase\.co|localhost|\$\{|fonts\.g|schema\.org|w3\.org/;
+const skip = /\{|spreadsheets\/d\/$|supabase\.co|localhost|\$\{|fonts\.g|schema\.org|w3\.org/;
 const list = [...urls].filter((u) => !skip.test(u));
 let bad = 0;
 await Promise.all(list.map(async (u) => {
