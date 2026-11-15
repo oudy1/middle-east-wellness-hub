@@ -2,30 +2,36 @@
 // Court Community Centre (Newcomer and Refugee Health Education Initiative).
 // This is the one shared record used by the homepage card, the Programs page,
 // site search and the chatbot. Promotion stops after the event day in Toronto.
+// Date, times, title, place and registration link come from content/events.json.
 
-export const NEWCOMER_WORKSHOP_REGISTER_URL = "https://forms.gle/ipEVd8Np1tDy1GVD7";
+import { eventPhase, getEvent } from "./events";
+
+export const NEWCOMER_WORKSHOP_EVENT = getEvent("newcomer-workshop-2026-11-19");
+const EV = NEWCOMER_WORKSHOP_EVENT;
+
+export const NEWCOMER_WORKSHOP_REGISTER_URL = EV.registrationUrl!;
 
 const ADDRESS_EN = "707 Dundas Street West, Toronto, Ontario, Canada";
 const VENUE_EN = "Scadding Court Community Centre";
 
 export const NEWCOMER_WORKSHOP = {
-  dateIso: "2026-11-19",
+  dateIso: EV.dateIso,
   // 3:00 to 5:00 PM in Toronto. Nov 19, 2026 is after the DST change, so EST (UTC-5).
-  startUtc: "20261119T200000Z",
-  endUtc: "20261119T220000Z",
+  startUtc: EV.startUtc!,
+  endUtc: EV.endUtc!,
   registerUrl: NEWCOMER_WORKSHOP_REGISTER_URL,
-  learnMorePath: "/programs#newcomer-initiative",
+  learnMorePath: EV.detailsPath,
   directionsUrl:
     "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(`${VENUE_EN}, ${ADDRESS_EN}`),
   en: {
-    title: "Healthcare Coverage & Access: A Newcomer's Guide",
+    title: EV.en.title,
     organizer: "Project SHAMS in collaboration with Scadding Court Community Centre",
-    date: "Thursday, November 19, 2026",
-    time: "3:00 PM to 5:00 PM Toronto time (EST)",
+    date: EV.en.date,
+    time: EV.en.time!,
     venue: VENUE_EN,
     address: ADDRESS_EN,
-    place: `${VENUE_EN}, 707 Dundas St W, Toronto`,
+    place: EV.en.place,
     cost: "Free",
     format: "In-person healthcare education workshop",
     audience:
@@ -45,13 +51,13 @@ export const NEWCOMER_WORKSHOP = {
     ],
   },
   ar: {
-    title: "الرعاية الصحية في كندا: دليل للوافدين الجدد",
+    title: EV.ar.title,
     organizer: "مشروع شمس بالتعاون مع مركز سكادينغ كورت المجتمعي",
-    date: "الخميس 19 نوفمبر 2026",
-    time: "من 3:00 إلى 5:00 مساءً بتوقيت تورونتو",
+    date: EV.ar.date,
+    time: EV.ar.time!,
     venue: "مركز سكادينغ كورت المجتمعي",
     address: "707 شارع دونداس الغربي، تورونتو، أونتاريو، كندا",
-    place: "مركز سكادينغ كورت المجتمعي، 707 شارع دونداس الغربي، تورونتو",
+    place: EV.ar.place,
     cost: "مجاناً",
     format: "ورشة تثقيف صحي حضورية",
     audience:
@@ -72,12 +78,18 @@ export const NEWCOMER_WORKSHOP = {
   },
 };
 
-export type NewcomerWorkshopStatus = "upcoming" | "completed";
+/**
+ * "upcoming" through the whole event day in Toronto. Afterwards "ended"
+ * (registration closed) until SHAMS confirms the workshop took place or adds
+ * a recording or recap, then "completed". The date passing alone never makes
+ * it "completed".
+ */
+export type NewcomerWorkshopStatus = "upcoming" | "completed" | "ended";
 
-/** Upcoming through the whole event day in Toronto, completed from the next Toronto day. */
 export const newcomerWorkshopStatus = (now: Date = new Date()): NewcomerWorkshopStatus => {
-  const torontoToday = now.toLocaleDateString("en-CA", { timeZone: "America/Toronto" });
-  return torontoToday <= NEWCOMER_WORKSHOP.dateIso ? "upcoming" : "completed";
+  const phase = eventPhase(EV, now);
+  if (phase === "upcoming") return "upcoming";
+  return phase === "ended" || phase === "hidden" ? "ended" : "completed";
 };
 
 export const isNewcomerWorkshopUpcoming = (now: Date = new Date()) =>
