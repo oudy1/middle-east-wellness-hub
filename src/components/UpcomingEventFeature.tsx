@@ -21,15 +21,18 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import posterEn from "@/assets/know-your-rights-en.webp.asset.json";
 import posterAr from "@/assets/know-your-rights-ar.webp.asset.json";
 
-export const REGISTER_URL = "https://forms.gle/XgzS5fjHRYmHN2k16";
-// End of Oct 21, 2026 in Toronto (EDT, UTC-4)
-export const EVENT_END = new Date("2026-10-22T04:00:00Z");
+import { eventPhase, getEvent } from "@/lib/events";
 
-export const isEventUpcoming = (now: Date = new Date()) => now < EVENT_END;
+// Date, times and registration link live in content/events.json.
+const EVENT = getEvent("know-your-rights-2026-10-21");
+export const REGISTER_URL = EVENT.registrationUrl!;
+
+/** Upcoming through the whole event day in Toronto. */
+export const isEventUpcoming = (now: Date = new Date()) => eventPhase(EVENT, now) === "upcoming";
 
 // 6:00-7:30 PM ET on Oct 21, 2026 (EDT, UTC-4)
-const EVENT_START_UTC = "20261021T220000Z";
-const EVENT_END_UTC = "20261021T233000Z";
+const EVENT_START_UTC = EVENT.startUtc!;
+const EVENT_END_UTC = EVENT.endUtc!;
 export const ICS_URL = "/know-your-rights-webinar.ics";
 export const GOOGLE_CALENDAR_URL =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +

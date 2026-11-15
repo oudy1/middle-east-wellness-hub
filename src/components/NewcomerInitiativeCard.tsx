@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { NEWCOMER_WORKSHOP, newcomerWorkshopStatus } from "@/lib/newcomerWorkshop";
+import { PHASE_LABELS } from "@/lib/events";
 
 const NewcomerInitiativeCard = () => {
   const { language } = useLanguage();
@@ -36,12 +37,12 @@ const NewcomerInitiativeCard = () => {
         <div className="rounded-lg border border-border bg-card p-4 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant={upcoming ? "default" : "secondary"} className="text-xs">
-              {upcoming ? (isAr ? "قادمة" : "Upcoming") : (isAr ? "انتهت" : "Completed")}
+              {PHASE_LABELS[status][isAr ? "ar" : "en"]}
             </Badge>
             {upcoming && <Badge variant="secondary" className="text-xs">{isAr ? "مجاناً" : "Free"}</Badge>}
           </div>
           <p className="text-sm font-semibold text-healthDarkBlue">
-            {upcoming ? (isAr ? "الورشة القادمة: " : "Next workshop: ") : (isAr ? "ورشة سابقة: " : "Past workshop: ")}
+            {upcoming ? (isAr ? "الورشة القادمة: " : "Next workshop: ") : (isAr ? "ورشة: " : "Workshop: ")}
             {w.title}
           </p>
           {upcoming && <p className="text-sm text-muted-foreground">{w.summary}</p>}
@@ -53,7 +54,9 @@ const NewcomerInitiativeCard = () => {
           <p className="text-xs text-muted-foreground">{w.organizer}</p>
           {!upcoming && (
             <p className="text-xs text-muted-foreground">
-              {isAr ? "انتهى موعد هذه الورشة وأُغلق التسجيل." : "This workshop date has passed and registration is closed."}
+              {status === "completed"
+                ? (isAr ? "أُقيمت هذه الورشة وأُغلق التسجيل." : "This workshop has taken place and registration is closed.")
+                : (isAr ? "مضى موعد هذه الورشة وأُغلق التسجيل." : "This workshop date has passed and registration is closed.")}
             </p>
           )}
         </div>

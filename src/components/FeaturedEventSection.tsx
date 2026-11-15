@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getEvent } from "@/lib/events";
 
-const REEL_URL =
-  "https://www.instagram.com/reel/DbCMtfkuVQK/?utm_source=ig_web_copy_link";
-const REEL_LINK = "https://www.instagram.com/reel/DbCMtfkuVQK/";
+// Recap link comes from the convention's record in content/events.json.
+const REEL_LINK = getEvent("mental-health-convention-2026-07-18").recapUrl ?? "https://www.instagram.com/projectshams/";
+const REEL_URL = REEL_LINK;
 
 declare global {
   interface Window {

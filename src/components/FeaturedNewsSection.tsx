@@ -4,9 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Newspaper, ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import kyrEn from "@/assets/know-your-rights-en.webp.asset.json";
-import kyrAr from "@/assets/know-your-rights-ar.webp.asset.json";
-import mhcPoster from "@/assets/mhc-poster.png.asset.json";
+import { eventPhase, getEvent, postersFor } from "@/lib/events";
 import mhcPanelists from "@/assets/mhc-panelists.png.asset.json";
 
 const FeaturedNewsSection = () => {
@@ -15,38 +13,47 @@ const FeaturedNewsSection = () => {
 
   const isAr = language === 'ar';
 
+  // Event news reads dates, posters, recordings and recaps from content/events.json,
+  // and an item only appears once its recording or recap really exists.
+  const kyr = getEvent("know-your-rights-2026-10-21");
+  const mhc = getEvent("mental-health-convention-2026-07-18");
+  const kyrPosters = { en: postersFor(kyr, "en")[0]?.url ?? "", ar: postersFor(kyr, "ar")[0]?.url ?? "" };
+  const mhcPoster = postersFor(mhc, "en")[0]?.url ?? "";
+
   // SHAMS updates (newest first). Internal links start with "/".
-  const newsItems = [
+  const allNews = [
     {
+      show: eventPhase(kyr) === "recording",
       id: 1,
       title: "Know Your Rights Webinar Recording Now Available",
       titleAr: "تسجيل ندوة اعرف حقوقك متاح الآن",
       excerpt: "Missed our October webinar on speaking up in healthcare? Watch the full recording with Dr. Ritika Goel, Dr. Tarek Abdelhalim and Haifa Staiti on patient rights, referrals and second opinions.",
       excerptAr: "فاتتك ندوتنا في أكتوبر حول التعبير عن احتياجاتك في الرعاية الصحية؟ شاهد التسجيل الكامل مع د. ريتيكا غويل ود. طارق عبد الحليم وهيفاء ستيتي حول حقوق المرضى والإحالات والرأي الطبي الثاني.",
-      date: "October 21, 2026",
-      dateAr: "21 أكتوبر 2026",
+      date: kyr.en.date,
+      dateAr: kyr.ar.date,
       category: "Webinar",
       categoryAr: "ندوة",
-      image: kyrEn.url,
-      imageAr: kyrAr.url,
-      url: "/recordings#webinar-know-your-rights",
-      featured: true
+      image: kyrPosters.en,
+      imageAr: kyrPosters.ar,
+      url: kyr.detailsPath,
     },
     {
+      show: eventPhase(mhc) === "recap",
       id: 2,
       title: "Mental Health Convention: Uncovering Stigma",
       titleAr: "مؤتمر الصحة النفسية: كشف الوصمة",
       excerpt: "Families, students and healthcare professionals joined SHAMS at the University of Toronto Mississauga to talk openly about mental health stigma. Watch the recap.",
       excerptAr: "انضمت العائلات والطلاب والعاملون في الرعاية الصحية إلى شمس في جامعة تورنتو ميسيساغا للحديث بصراحة عن وصمة الصحة النفسية. شاهد الملخص.",
-      date: "July 18, 2026",
-      dateAr: "18 يوليو 2026",
+      date: mhc.en.date,
+      dateAr: mhc.ar.date,
       category: "Event Recap",
       categoryAr: "ملخص فعالية",
-      image: mhcPoster.url,
-      imageAr: mhcPoster.url,
-      url: "https://www.instagram.com/reel/DbCMtfkuVQK/"
+      image: mhcPoster,
+      imageAr: mhcPoster,
+      url: mhc.recapUrl ?? mhc.detailsPath
     },
     {
+      show: true,
       id: 3,
       title: "New: Healthcare Directory with Map",
       titleAr: "جديد: دليل مقدمي الرعاية الصحية مع الخريطة",
@@ -69,8 +76,9 @@ const FeaturedNewsSection = () => {
       <a href={url} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
     );
 
-  const featuredNews = newsItems.find(item => item.featured);
-  const regularNews = newsItems.filter(item => !item.featured);
+  const newsItems = allNews.filter((item) => item.show);
+  const featuredNews = newsItems[0];
+  const regularNews = newsItems.slice(1);
 
   return (
     <section className="py-16 bg-white relative overflow-hidden">

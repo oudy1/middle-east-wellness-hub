@@ -27,11 +27,14 @@ const TopicRequestForm = () => {
     descPh: isAr
       ? "أخبرنا لماذا هذا الموضوع مهم لك ولمجتمعك..."
       : "Tell us more about why this topic is important to you and your community...",
-    submit: isAr ? "إرسال الاقتراح" : "Submit Topic Request",
-    thanksTitle: isAr ? "شكرًا على اقتراحك!" : "Thank you for your topic request!",
+    submit: isAr ? "أرسل الاقتراح عبر البريد الإلكتروني" : "Send Topic Request by Email",
+    sendNote: isAr
+      ? "سيفتح تطبيق البريد لديك ورسالتك جاهزة للإرسال إلى infoprojectshams@gmail.com."
+      : "Your email app will open with your request ready to send to infoprojectshams@gmail.com.",
+    thanksTitle: isAr ? "خطوة أخيرة: اضغط إرسال في بريدك" : "One last step: press Send in your email",
     thanksBody: isAr
-      ? "سنأخذ اقتراحك بعين الاعتبار في الندوات والفعاليات القادمة."
-      : "We'll consider your suggestion for future webinars and events.",
+      ? "فتحنا رسالتك في تطبيق البريد. لن يصلنا الاقتراح حتى ترسلها. إذا لم يفتح التطبيق، راسلنا على infoprojectshams@gmail.com."
+      : "We opened your message in your email app. We only receive it once you send it. If nothing opened, email infoprojectshams@gmail.com.",
     another: isAr ? "إرسال اقتراح آخر" : "Submit Another Request",
     invalidTitle: isAr ? "إدخال غير صالح" : "Invalid input",
     invalidField: (f: string) =>
@@ -39,10 +42,10 @@ const TopicRequestForm = () => {
     descTooLong: isAr
       ? "الوصف طويل جدًا أو يحتوي على رموز غير مسموح بها."
       : "Description is too long or contains invalid characters.",
-    successTitle: isAr ? "تم إرسال الاقتراح" : "Topic Request Submitted",
+    successTitle: isAr ? "تم فتح البريد الإلكتروني" : "Email opened",
     successBody: isAr
-      ? "شكرًا على اقتراحك! سنأخذه بعين الاعتبار للندوات القادمة."
-      : "Thank you for your suggestion! We'll consider your topic for future webinars.",
+      ? "اضغط إرسال في تطبيق البريد لإيصال اقتراحك إلينا."
+      : "Press Send in your email app so your suggestion reaches us.",
     fieldLabels: {
       name: isAr ? "الاسم" : "name",
       email: isAr ? "البريد الإلكتروني" : "email",
@@ -86,6 +89,17 @@ const TopicRequestForm = () => {
         return;
       }
     }
+
+    // The site does not store or send this itself: it opens the visitor's own
+    // email app with the request filled in, addressed to the SHAMS inbox.
+    const subject = `Webinar topic request: ${formData.topic.trim()}`;
+    const body = [
+      `Name: ${formData.name.trim()}`,
+      `Email: ${formData.email.trim()}`,
+      `Proposed topic: ${formData.topic.trim()}`,
+      formData.description.trim() ? `\nWhy it matters:\n${formData.description.trim()}` : "",
+    ].join("\n");
+    window.location.href = `mailto:infoprojectshams@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setFormData({ name: '', email: '', topic: '', description: '' });
     setSubmitted(true);
@@ -145,7 +159,8 @@ const TopicRequestForm = () => {
             <Textarea id="description" name="description" value={formData.description} onChange={handleChange} placeholder={L.descPh} rows={4} />
           </div>
 
-          <Button type="submit" className="w-full bg-healthTeal hover:bg-healthTeal/90 text-white">
+          <p className="text-xs text-muted-foreground text-center">{L.sendNote}</p>
+          <Button type="submit" className="w-full min-h-[44px] bg-healthTeal hover:bg-healthTeal/90 text-white">
             {L.submit}
           </Button>
         </form>

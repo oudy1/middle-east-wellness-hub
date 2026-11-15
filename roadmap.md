@@ -67,3 +67,13 @@
 - [x] Instant answers for common questions and safety messages (English, Arabic, dialect, mixed), offline fallback, two-button limit with sources, outside-link allowlist with event expiry, browser + live tests. Not published.
 - [ ] Server-side follow-ups waiting on approval (going live immediately when deployed): stop logging visitor IP addresses in the chat function; settle one reply-language rule for English questions on the Arabic site.
 
+
+## Easier integrations and content brief (uploaded Nov 15)
+- [x] One shared event record (Know Your Rights, Convention, Nov 19 workshop) used by homepage, Programs, Recordings, news, chatbot and approved links.
+- [x] Review statuses on events, recordings and studies; only published shown; tests flag missing Arabic.
+- [x] Lifecycle: after the date "Registration closed" until SHAMS confirms; recordings/recaps replace sign-up buttons.
+- [x] Lighter YouTube player with fallback link; research opportunities error + Try again; topic request form now opens email instead of faking success.
+- [x] Shared status labels on admin review pages.
+- [ ] After Nov 19: confirm the workshop took place, and send any recording or recap link (waiting on user).
+- [ ] Real recruitment status of the 4 research studies (waiting on user).
+- [ ] An admin must sign up at /admin/login with an allowlisted email (no admin account exists yet).

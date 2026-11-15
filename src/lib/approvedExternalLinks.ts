@@ -9,7 +9,8 @@
 
 import studies from "../../content/studies.json";
 import webinars from "../../content/webinars.json";
-import { NEWCOMER_WORKSHOP_REGISTER_URL, isNewcomerWorkshopUpcoming } from "./newcomerWorkshop";
+import { EVENTS, eventRecapUrls, isRegistrationOpen } from "./events";
+import { isPublished } from "./contentStatus";
 
 /** Official sources the assistant cites (mirrors OFFICIAL_SOURCES in the shams-chat function). */
 export const OFFICIAL_SOURCES = {
@@ -22,27 +23,26 @@ export const OFFICIAL_SOURCES = {
 /** Official domains; subdomains are allowed too (health811.ontario.ca). */
 const OFFICIAL_HOSTS = ["ontario.ca", "canada.ca", "988.ca", "medlineplus.gov"];
 
-const RECAP_REEL_URL = "https://www.instagram.com/reel/DbCMtfkuVQK/";
-
 const strip = (u: string) => u.trim().replace(/\/+$/, "");
 
 /** Exact links published on the site (no expiry). */
 const SITE_LINKS = new Set<string>(
   [
-    ...(studies as { linkUrl?: string }[]).map((s) => s.linkUrl).filter((u): u is string => !!u),
-    ...(webinars as { youtubeId?: string }[]).flatMap((w) =>
+    ...(studies as { linkUrl?: string; status?: string }[]).filter((s) => isPublished(s.status)).map((s) => s.linkUrl).filter((u): u is string => !!u),
+    ...(webinars as { youtubeId?: string; status?: string }[]).filter((w) => isPublished(w.status)).flatMap((w) =>
       w.youtubeId
         ? [`https://www.youtube.com/watch?v=${w.youtubeId}`, `https://youtu.be/${w.youtubeId}`]
         : []
     ),
-    RECAP_REEL_URL,
+    ...eventRecapUrls(),
   ].map(strip)
 );
 
 /** Registration links with the last Toronto day they may be offered. */
-const TIMED_LINKS: { url: string; isOpen: (now: Date) => boolean }[] = [
-  { url: NEWCOMER_WORKSHOP_REGISTER_URL, isOpen: (now) => isNewcomerWorkshopUpcoming(now) },
-];
+const TIMED_LINKS: { url: string; isOpen: (now: Date) => boolean }[] = EVENTS.filter((e) => e.registrationUrl).map((e) => ({
+  url: e.registrationUrl!,
+  isOpen: (now: Date) => isRegistrationOpen(e, now),
+}));
 
 export function isOfficialHost(url: string): boolean {
   try {

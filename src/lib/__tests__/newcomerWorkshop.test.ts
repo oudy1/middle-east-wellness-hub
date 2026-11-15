@@ -32,8 +32,8 @@ describe("November 19 newcomer workshop record", () => {
     expect(isNewcomerWorkshopUpcoming(new Date("2026-11-20T04:59:00Z"))).toBe(true);
   });
 
-  it("is completed from November 20, 2026 in Toronto", () => {
-    expect(newcomerWorkshopStatus(new Date("2026-11-20T05:00:00Z"))).toBe("completed");
+  it("shows registration closed (not completed) from November 20 until SHAMS confirms it took place", () => {
+    expect(newcomerWorkshopStatus(new Date("2026-11-20T05:00:00Z"))).toBe("ended");
   });
 
   it("puts 3:00 to 5:00 PM Toronto time (EST) in the calendar entry", () => {

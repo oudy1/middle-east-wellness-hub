@@ -1,0 +1,73 @@
+[
+  {
+    "id": "know-your-rights-2026-10-21",
+    "kind": "webinar",
+    "status": "published",
+    "dateIso": "2026-10-21",
+    "startUtc": "20261021T220000Z",
+    "endUtc": "20261021T233000Z",
+    "en": {
+      "title": "Know Your Rights: Speaking Up About Your Healthcare",
+      "date": "October 21, 2026",
+      "time": "6:00 PM ET",
+      "place": "Online via Zoom"
+    },
+    "ar": {
+      "title": "اعرف حقوقك: كيف تعبّر عن احتياجاتك في الرعاية الصحية",
+      "date": "21 أكتوبر 2026",
+      "time": "6:00 مساءً بتوقيت شرق كندا",
+      "place": "عبر الإنترنت باستخدام Zoom"
+    },
+    "posters": ["know-your-rights-en", "know-your-rights-ar"],
+    "registrationUrl": "https://forms.gle/XgzS5fjHRYmHN2k16",
+    "detailsPath": "/recordings#webinar-know-your-rights",
+    "heldConfirmed": true,
+    "recordingId": "know-your-rights"
+  },
+  {
+    "id": "mental-health-convention-2026-07-18",
+    "kind": "convention",
+    "status": "published",
+    "dateIso": "2026-07-18",
+    "en": {
+      "title": "SHAMS Mental Health Convention: Uncovering Stigma",
+      "date": "July 18, 2026",
+      "time": "1:00 PM to 5:00 PM",
+      "place": "University of Toronto Mississauga"
+    },
+    "ar": {
+      "title": "مؤتمر شمس للصحة النفسية: كشف الوصمة",
+      "date": "18 يوليو 2026",
+      "time": "1:00 إلى 5:00 مساءً",
+      "place": "جامعة تورنتو ميسيساغا"
+    },
+    "posters": ["mhc-poster"],
+    "detailsPath": "/programs#mental-health-convention",
+    "heldConfirmed": true,
+    "recapUrl": "https://www.instagram.com/reel/DbCMtfkuVQK/"
+  },
+  {
+    "id": "newcomer-workshop-2026-11-19",
+    "kind": "workshop",
+    "status": "published",
+    "dateIso": "2026-11-19",
+    "startUtc": "20261119T200000Z",
+    "endUtc": "20261119T220000Z",
+    "en": {
+      "title": "Healthcare Coverage & Access: A Newcomer's Guide",
+      "date": "Thursday, November 19, 2026",
+      "time": "3:00 PM to 5:00 PM Toronto time (EST)",
+      "place": "Scadding Court Community Centre, 707 Dundas St W, Toronto"
+    },
+    "ar": {
+      "title": "الرعاية الصحية في كندا: دليل للوافدين الجدد",
+      "date": "الخميس 19 نوفمبر 2026",
+      "time": "من 3:00 إلى 5:00 مساءً بتوقيت تورونتو",
+      "place": "مركز سكادينغ كورت المجتمعي، 707 شارع دونداس الغربي، تورونتو"
+    },
+    "posters": ["newcomer-workshop-en", "newcomer-workshop-ar"],
+    "registrationUrl": "https://forms.gle/ipEVd8Np1tDy1GVD7",
+    "detailsPath": "/programs#newcomer-initiative",
+    "heldConfirmed": false
+  }
+]

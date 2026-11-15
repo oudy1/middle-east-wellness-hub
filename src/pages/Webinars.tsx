@@ -11,7 +11,8 @@ import { Play, Calendar, Mail, Globe, FileText, ExternalLink } from "lucide-reac
 import { useLanguage } from "@/contexts/LanguageContext";
 import TopicRequestForm from "@/components/TopicRequestForm";
 import { useHashScroll } from "@/hooks/useHashScroll";
-import webinarsData from "../../content/webinars.json";
+import YouTubePlayer from "@/components/YouTubePlayer";
+import { RECORDINGS } from "@/lib/events";
 
 const Webinars = () => {
   const { language, t } = useLanguage();
@@ -21,7 +22,8 @@ const Webinars = () => {
   }, [language]);
   useHashScroll();
 
-  const webinars = webinarsData;
+  // Published recordings only; dates of event recordings come from content/events.json.
+  const webinars = RECORDINGS;
 
   return (
     <div className="flex flex-col min-h-screen bg-healthLightGray">
@@ -76,17 +78,7 @@ const Webinars = () => {
                   <CardContent className="p-0">
                     {/* YouTube Embed - only show if youtubeId exists */}
                     {webinar.youtubeId ? (
-                      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                        <iframe
-                          className="absolute top-0 left-0 w-full h-full"
-                          src={`https://www.youtube.com/embed/${webinar.youtubeId}`}
-                          title={webinar[webinarLang].title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          loading="lazy"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          allowFullScreen
-                        />
-                      </div>
+                      <YouTubePlayer videoId={webinar.youtubeId} title={webinar[webinarLang].title} lang={webinarLang} />
                     ) : null}
 
                     {/* Webinar Details */}
@@ -96,10 +88,10 @@ const Webinars = () => {
                       </h2>
 
                       {/* Date & Time (if available) */}
-                      {(webinarLang === 'ar' ? (webinar as any).dateAr ?? webinar.date : webinar.date) && (
+                      {(webinarLang === 'ar' ? webinar.dateAr ?? webinar.date : webinar.date) && (
                         <div className={`flex items-center gap-2 text-muted-foreground mb-6`}>
                           <Calendar className="h-5 w-5" />
-                          <span className="font-semibold">{webinarLang === 'ar' ? (webinar as any).dateAr ?? webinar.date : webinar.date}</span>
+                          <span className="font-semibold">{webinarLang === 'ar' ? webinar.dateAr ?? webinar.date : webinar.date}</span>
                         </div>
                       )}
 
@@ -149,12 +141,11 @@ const Webinars = () => {
                       {/* Action Buttons */}
                       <div className={`flex flex-wrap gap-2 mb-8`}>
                         {webinar.youtubeId && (
-                          <Button 
-                            className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white"
-                            onClick={() => window.open(`https://youtu.be/${webinar.youtubeId}`, '_blank')}
-                          >
-                            <Play className="me-2 h-4 w-4" />
-                            {webinar[webinarLang].watchButton}
+                          <Button asChild className="bg-healthDarkBlue hover:bg-healthDarkBlue/90 text-white min-h-[44px]">
+                            <a href={`https://www.youtube.com/watch?v=${webinar.youtubeId}`} target="_blank" rel="noopener noreferrer">
+                              <Play className="me-2 h-4 w-4" aria-hidden="true" />
+                              {webinar[webinarLang].watchButton}
+                            </a>
                           </Button>
                         )}
                         {(webinar as any).slidesUrl && (
