@@ -39,3 +39,8 @@
 - [ ] Later batches (need go-ahead per brief): guided healthcare navigation, resource finder filters, glossary review status, webinar library filters, programs status, research tracker expiry, Get Involved hub, FAQ, page feedback, homepage reorder, chatbot intent/sources, 60-scenario test suite, privacy-conscious error monitoring.
 - [ ] User action: an admin account must exist (sign up at /admin/login with an allowlisted email) before anyone can publish new doctor listings.
 - [ ] User review: updated directory wording on the Privacy & Terms page (now says listings appear only after review).
+
+## Team and About page brief (uploaded Nov 15)
+- [x] Replace public team with approved 28-person roster, subteams, leads, filters, search (EN/AR), Dr. Hawa kept
+- [ ] Owner approval of the new About page before publishing (waiting on user)
+- [ ] Confirm teams for Yasameen Ihsan, Zohra Ahmadzai, Barekah Vistro, Hanin Gamour (waiting on user)
