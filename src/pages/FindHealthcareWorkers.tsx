@@ -469,7 +469,7 @@ const FindHealthcareWorkers = () => {
               {workers.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {workers.map((worker) => (
-                    <Card key={worker.id} className="hover:shadow-lg transition-shadow">
+                    <Card key={worker.id} className="card-interactive">
                       <CardContent className="p-5">
                         <h3 className="font-bold text-lg text-foreground mb-1">
                           {worker.full_name}

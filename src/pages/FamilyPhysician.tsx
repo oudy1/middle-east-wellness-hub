@@ -157,7 +157,7 @@ const PhysicianDirectory = () => {
                 {filteredPhysicians.map((physician) => (
                   <Card 
                     key={physician.id}
-                    className={`cursor-pointer hover:shadow-lg transition-shadow ${
+                    className={`cursor-pointer card-interactive ${
                       selectedPhysician === physician.id ? "ring-2 ring-healthTeal" : ""
                     }`}
                     onClick={() => setSelectedPhysician(physician.id)}

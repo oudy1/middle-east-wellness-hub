@@ -104,7 +104,7 @@ const FamilyPhysicianCities = () => {
                   {groupedCities[letter].map(({ city, count }) => (
                     <Card 
                       key={city}
-                      className="hover:shadow-lg transition-shadow cursor-pointer"
+                      className="card-interactive cursor-pointer"
                       onClick={() => handleCityClick(city)}
                     >
                       <CardContent className="p-4">

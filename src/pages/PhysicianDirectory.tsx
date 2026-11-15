@@ -779,7 +779,7 @@ const HealthcareWorkersDirectory = () => {
 
   const PhysicianCard = ({ physician }: { physician: Physician }) => (
     <Card 
-      className={`cursor-pointer hover:shadow-lg transition-all duration-200 ${
+      className={`cursor-pointer card-interactive duration-200 ${
         selectedPhysician === physician.id ? "ring-2 ring-healthTeal shadow-lg" : ""
       }`}
       onClick={() => setSelectedPhysician(selectedPhysician === physician.id ? null : physician.id)}
@@ -898,7 +898,7 @@ const HealthcareWorkersDirectory = () => {
 
   const HealthcareWorkerCard = ({ worker }: { worker: HealthcareWorker }) => (
     <Card 
-      className={`cursor-pointer hover:shadow-lg transition-all duration-200 ${
+      className={`cursor-pointer card-interactive duration-200 ${
         selectedWorker === worker.id ? "ring-2 ring-healthTeal shadow-lg" : ""
       }`}
       onClick={() => setSelectedWorker(selectedWorker === worker.id ? null : worker.id)}

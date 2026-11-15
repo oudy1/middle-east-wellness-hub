@@ -63,15 +63,15 @@ const Programs = () => {
                 {t("programs.mentorshipDesc")}
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link to="/programs/mentorship">
-                  <Button>{t("programs.learnMoreApply")}</Button>
-                </Link>
-                <a href="https://forms.gle/dCyMfPQH8DRSxsxb8" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="gap-2">{t("programs.becomeMentor")} <ExternalLink size={14} /></Button>
-                </a>
-                <a href="https://forms.gle/3Xw71e2Y3Hhqn7gF9" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="gap-2">{t("programs.becomeMentee")} <ExternalLink size={14} /></Button>
-                </a>
+                <Button asChild>
+                  <Link to="/programs/mentorship">{t("programs.learnMoreApply")}</Link>
+                </Button>
+                <Button asChild variant="outline" className="gap-2">
+                  <a href="https://forms.gle/dCyMfPQH8DRSxsxb8" target="_blank" rel="noopener noreferrer">{t("programs.becomeMentor")} <ExternalLink size={14} /></a>
+                </Button>
+                <Button asChild variant="outline" className="gap-2">
+                  <a href="https://forms.gle/3Xw71e2Y3Hhqn7gF9" target="_blank" rel="noopener noreferrer">{t("programs.becomeMentee")} <ExternalLink size={14} /></a>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -99,11 +99,11 @@ const Programs = () => {
                     ? "يقدّمه مركز Better Life Counselling Centre (BLCC). تحقّق من موقعهم لمعرفة توفّر البرنامج حاليًا."
                     : "Offered by Better Life Counselling Centre (BLCC). Check their website for current availability."}
                 </p>
-                <a href={program.link} target="_blank" rel="noopener noreferrer">
-                  <Button className="gap-2 w-full sm:w-auto">
+                <Button asChild className="gap-2 w-full sm:w-auto">
+                  <a href={program.link} target="_blank" rel="noopener noreferrer">
                     {t("programs.learnMore")} <ExternalLink size={14} />
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -115,9 +115,9 @@ const Programs = () => {
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             {t("programs.calloutDesc")}
           </p>
-          <Link to="/contact">
-            <Button size="lg">{t("programs.contactShams")}</Button>
-          </Link>
+          <Button asChild size="lg">
+            <Link to="/contact">{t("programs.contactShams")}</Link>
+          </Button>
         </section>
       </main>
       <Footer />

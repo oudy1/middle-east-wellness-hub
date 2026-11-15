@@ -42,21 +42,21 @@ const MentorshipHighlight = () => {
             <p className="text-lg text-muted-foreground mb-6">{subtitle}</p>
             <p className="text-muted-foreground mb-6 leading-relaxed">{desc}</p>
             <div className="flex flex-wrap gap-3">
-              <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="gap-2">
+              <Button asChild size="lg" className="gap-2">
+                <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
                   <Users className="h-4 w-4" /> {isAr ? "كن مرشداً" : "Become a Mentor"}
-                </Button>
-              </a>
-              <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="gap-2">
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
+                <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
                   <GraduationCap className="h-4 w-4" /> {isAr ? "كن مستفيداً من الإرشاد" : "Become a Mentee"}
-                </Button>
-              </a>
-              <Link to="/programs/mentorship">
-                <Button size="lg" variant="ghost" className="gap-2">
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="gap-2">
+                <Link to="/programs/mentorship">
                   {isAr ? "اعرف المزيد" : "Learn more"} <ExternalLink size={14} />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
             <a
               href={LINKTREE}

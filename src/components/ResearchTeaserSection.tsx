@@ -28,11 +28,11 @@ const ResearchTeaserSection = () => {
         </div>
 
         <div className="text-center">
-          <Link to="/research">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+          <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/10">
+            <Link to="/research">
               {t("research.viewAllStudies")}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

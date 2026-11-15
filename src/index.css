@@ -277,3 +277,28 @@ a[data-mp-card]:focus-visible {
   display: block;
   margin: 0 auto;
 }
+
+/* Shared card hover/focus feedback for listing cards (events, resources, research,
+   webinars, programs, directory). Lift is skipped when reduced motion is requested. */
+@layer components {
+  .card-interactive {
+    @apply transition-[box-shadow,transform,border-color] duration-200 ease-out hover:shadow-lg focus-within:shadow-lg motion-safe:hover:-translate-y-0.5;
+  }
+}
+
+/* Keyboard focus fallback for links and buttons that set no focus style of their own.
+   :where() keeps specificity at zero so component focus rings still win. */
+:where(a, button, summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Respect the visitor's "reduce motion" setting across the whole site. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

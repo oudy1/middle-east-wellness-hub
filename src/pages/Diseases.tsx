@@ -100,14 +100,14 @@ const Diseases = () => {
                       {disease.description}
                     </p>
                     
-                    <Link to={disease.link} className="w-full">
-                      <Button 
+                    <Button asChild 
                         variant="outline" 
                         className={`w-full ${disease.borderColor} ${disease.textColor} hover:bg-opacity-10 transition-all duration-200 font-semibold border-2`}
                       >
+                      <Link to={disease.link} className="w-full">
                         {t("diseases.viewResources")}
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -127,11 +127,11 @@ const Diseases = () => {
                   </h3>
                   <p className="text-muted-foreground">{t("diseases.personalizedDescription")}</p>
                 </div>
-                <Link to="/physician-directory">
-                  <Button className="bg-[hsl(184,100%,29%)] hover:bg-[hsl(184,100%,25%)] text-white whitespace-nowrap">
+                <Button asChild className="bg-[hsl(184,100%,29%)] hover:bg-[hsl(184,100%,25%)] text-white whitespace-nowrap">
+                  <Link to="/physician-directory">
                     {t("diseases.contactSpecialist")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

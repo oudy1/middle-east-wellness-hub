@@ -53,7 +53,7 @@ const PartnersSection = () => {
   ];
 
   const renderPartnerCard = (item: typeof partners[0], index: number) => (
-    <Card key={index} className="overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <Card key={index} className="overflow-hidden border border-border/50 card-interactive hover:-translate-y-1">
       <CardContent className="p-6 flex flex-col items-center text-center">
         <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-200">
           <div className="mb-4">
@@ -68,7 +68,7 @@ const PartnersSection = () => {
 
   const renderClubCard = (item: typeof clubs[0], index: number) => (
     <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] md:flex-[0_0_33.333%] lg:flex-[0_0_25%] px-3">
-      <Card className="overflow-hidden border border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+      <Card className="overflow-hidden border border-border/50 card-interactive hover:-translate-y-1 h-full">
         <CardContent className="p-6 flex flex-col items-center text-center h-full">
           <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:scale-105 transition-transform duration-200">
             <div className="mb-4">

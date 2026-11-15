@@ -267,16 +267,16 @@ const Mentorship = () => {
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">{c.title}</h1>
             <p className="text-lg text-muted-foreground mb-6">{c.subtitle}</p>
             <div className="flex flex-wrap gap-3">
-              <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="gap-2">
+              <Button asChild size="lg" className="gap-2">
+                <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
                   <Users className="h-4 w-4" /> {isAr ? "كن مرشداً" : "Become a Mentor"}
-                </Button>
-              </a>
-              <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="gap-2">
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
+                <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
                   <GraduationCap className="h-4 w-4" /> {isAr ? "كن مستفيداً من الإرشاد" : "Become a Mentee"}
-                </Button>
-              </a>
+                </a>
+              </Button>
             </div>
             <a
               href={LINKTREE}
@@ -341,11 +341,11 @@ const Mentorship = () => {
                 ))}
               </div>
               <p className="text-sm font-semibold text-primary">{c.noExp}</p>
-              <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full gap-2">
+              <Button asChild className="w-full gap-2">
+                <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
                   {c.applyMentee} <ExternalLink size={14} />
-                </Button>
-              </a>
+                </a>
+              </Button>
             </CardContent>
           </Card>
 
@@ -361,11 +361,11 @@ const Mentorship = () => {
                 {c.mentorWho.map((w) => <li key={w}>{w}</li>)}
               </ul>
               <p className="text-sm text-muted-foreground italic">{c.mentorNote}</p>
-              <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full gap-2">
+              <Button asChild className="w-full gap-2">
+                <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
                   {c.applyMentor} <ExternalLink size={14} />
-                </Button>
-              </a>
+                </a>
+              </Button>
             </CardContent>
           </Card>
         </section>
@@ -443,16 +443,16 @@ const Mentorship = () => {
         <section className="rounded-xl border border-border bg-gradient-to-br from-primary/5 to-accent/10 p-8 text-center">
           <h2 className="text-2xl font-bold mb-4 text-foreground">{c.applyToday}</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-            <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="gap-2 w-full sm:w-auto">
+            <Button asChild size="lg" className="gap-2 w-full sm:w-auto">
+              <a href={MENTOR_FORM} target="_blank" rel="noopener noreferrer">
                 <Users className="h-4 w-4" /> {isAr ? "كن مرشداً" : "Become a Mentor"}
-              </Button>
-            </a>
-            <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+              <a href={MENTEE_FORM} target="_blank" rel="noopener noreferrer">
                 <GraduationCap className="h-4 w-4" /> {isAr ? "كن مستفيداً من الإرشاد" : "Become a Mentee"}
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
           <p className="text-sm text-muted-foreground mb-2">
             {c.questions}{" "}

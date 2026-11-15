@@ -43,16 +43,16 @@ const HeroSection = forwardRef<HTMLElement>((_, ref) => {
             {t("hero.subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <Link to="/about">
-              <Button className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-3 text-base">
+            <Button asChild className="bg-healthTeal hover:bg-teal-600 text-white px-8 py-3 text-base">
+              <Link to="/about">
                 {t("hero.learnMore")}
-              </Button>
-            </Link>
-            <Link to="/services">
-              <Button className="bg-white text-healthDarkBlue hover:bg-healthLightGray border-2 border-white px-8 py-3 text-base">
+              </Link>
+            </Button>
+            <Button asChild className="bg-white text-healthDarkBlue hover:bg-healthLightGray border-2 border-white px-8 py-3 text-base">
+              <Link to="/services">
                 {t("hero.servicesButton")}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

@@ -325,7 +325,7 @@ const FamilyPhysicianDirectory = () => {
                     return (
                       <Card 
                         key={physician.id} 
-                        className="hover:shadow-lg transition-shadow cursor-pointer"
+                        className="card-interactive cursor-pointer"
                         onClick={() => setSelectedPhysician(physician)}
                       >
                         <CardContent className="p-4">

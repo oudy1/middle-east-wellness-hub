@@ -57,11 +57,11 @@ const ResourcesSection = () => {
               <CardContent className="p-6">
                 <h3 className={`text-xl font-bold mb-3 ${isAr ? 'font-cairo' : ''}`}>{resource.title}</h3>
                 <p className={`text-muted-foreground mb-4 ${isAr ? 'font-cairo' : ''}`}>{resource.description}</p>
-                <Link to={resource.link}>
-                  <Button variant="link" className="p-0 text-healthTeal hover:text-healthTeal/80">
+                <Button asChild variant="link" className="p-0 text-healthTeal hover:text-healthTeal/80">
+                  <Link to={resource.link}>
                     {t("resources.accessResource")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           ))}

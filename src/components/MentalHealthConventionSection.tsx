@@ -58,6 +58,8 @@ const MentalHealthConventionSection = () => {
     contact: isAr ? "تواصل معنا" : "Contact SHAMS",
     prev: isAr ? "السابق" : "Previous slide",
     next: isAr ? "التالي" : "Next slide",
+    slide: isAr ? "الصورة" : "Slide",
+    gallery: isAr ? "صور المؤتمر" : "Convention photos",
   };
 
   return (
@@ -71,11 +73,13 @@ const MentalHealthConventionSection = () => {
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
           {/* Carousel */}
-          <div className="order-2 lg:order-1">
+          {/* Slides stay left-to-right in both languages so arrows, swipe and dots agree. */}
+          <div className="order-2 lg:order-1" dir="ltr">
             <Carousel
               setApi={setApi}
-              opts={{ loop: true, direction: isRTL ? "rtl" : "ltr" }}
+              opts={{ loop: true, direction: "ltr" }}
               className="w-full max-w-md mx-auto"
+              aria-label={t.gallery}
             >
               <CarouselContent>
                 {slides.map((s, i) => (
@@ -93,31 +97,37 @@ const MentalHealthConventionSection = () => {
               </CarouselContent>
               <CarouselPrevious
                 aria-label={t.prev}
-                className="left-2 bg-white/90 hover:bg-white border-healthDarkBlue/20"
+                className="left-2 h-11 w-11 bg-background/90 hover:bg-background border-healthDarkBlue/20"
               >
                 <ChevronLeft className="h-4 w-4" />
               </CarouselPrevious>
               <CarouselNext
                 aria-label={t.next}
-                className="right-2 bg-white/90 hover:bg-white border-healthDarkBlue/20"
+                className="right-2 h-11 w-11 bg-background/90 hover:bg-background border-healthDarkBlue/20"
               >
                 <ChevronRight className="h-4 w-4" />
               </CarouselNext>
             </Carousel>
 
             {/* Dots */}
-            <div className="flex justify-center gap-2 mt-4" dir="ltr">
+            <div className="flex justify-center mt-2" dir="ltr">
               {slides.map((_, i) => (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => api?.scrollTo(i)}
-                  aria-label={`Go to slide ${i + 1}`}
-                  className={`h-2 rounded-full transition-all ${
-                    current === i
-                      ? "w-8 bg-healthDarkBlue"
-                      : "w-2 bg-healthDarkBlue/30 hover:bg-healthDarkBlue/50"
-                  }`}
-                />
+                  aria-label={`${t.slide} ${i + 1}`}
+                  aria-current={current === i ? "true" : undefined}
+                  className="group inline-flex h-11 min-w-[28px] items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <span
+                    className={`block h-2 rounded-full transition-all ${
+                      current === i
+                        ? "w-8 bg-healthDarkBlue"
+                        : "w-2 bg-healthDarkBlue/30 group-hover:bg-healthDarkBlue/50"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

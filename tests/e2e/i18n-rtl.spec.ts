@@ -102,7 +102,7 @@ test.describe("Arabic RTL — desktop", () => {
     await page
       .getByRole("button", { name: "Select language", exact: true })
       .click();
-    await page.getByRole("button", { name: "العربية" }).click();
+    await page.getByRole("menuitemradio", { name: "العربية" }).click();
   });
 
   test("header flips to RTL with fully Arabic labels and no clipping", async ({
@@ -206,7 +206,7 @@ test.describe("Arabic RTL — desktop", () => {
     await page
       .getByRole("button", { name: "اختيار اللغة", exact: true })
       .click();
-    await page.getByRole("button", { name: "English" }).click();
+    await page.getByRole("menuitemradio", { name: "English" }).click();
 
     await expect(page.locator("header")).toHaveAttribute("dir", "ltr");
     const nav = page.getByRole("navigation", { name: "Primary" });
